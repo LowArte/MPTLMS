@@ -1,15 +1,15 @@
-vendor/
-node_modules/
-npm-debug.log
+Work/vendor/
+Work/node_modules/
+Work/npm-debug.log
 
 # Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+Work/bootstrap/compiled.php
+Work/app/storage/
 
 # Laravel 5 & Lumen specific
-public/storage
-public/hot
-storage/*.key
+Work/public/storage
+Work/public/hot
+Work/storage/*.key
 .env.*.php
 .env.php
 .env
