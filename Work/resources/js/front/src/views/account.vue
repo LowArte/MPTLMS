@@ -2,7 +2,7 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
-        <div class="login100-form-title" style="background-image: url(assers/bg-03.jpg);">
+        <div class="login100-form-title" :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}">
           <span class="font-title">Личный кабинет</span>
           <a class="txt2" href="http://www.mpt.ru">Московский приборостроительный техникум</a>
         </div>
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import Image from '../assets/bg-03.jpg'
+
 export default {
   name: "Welcome"
 };
