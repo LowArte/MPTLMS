@@ -33,18 +33,9 @@
   </div>
 </template>
 
-<script>
-import Image from '../assets/bg-03.jpg'
-
-export default {
-  name: "Welcome"
-};
-</script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /*[ RESTYLE TAG ]*/
-
 * {
   margin: 0px;
   padding: 0px;
