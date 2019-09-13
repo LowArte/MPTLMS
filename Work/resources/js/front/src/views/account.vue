@@ -19,9 +19,9 @@
           </div>
           <div class="flex-sb-m w-full p-b-30">
             <div>
-            <div class="container-login100-form-btn">
-              <button class="login100-form-btn">ВОЙТИ</button>
-            </div>
+              <div class="container-login100-form-btn">
+                <button class="login100-form-btn">ВОЙТИ</button>
+              </div>
             </div>
             <div>
               <p class="txt1"> Не можете войти? <a href="#" class="txt1">Восстановить</a></p>
@@ -508,8 +508,7 @@ input.input100 {
   height: 50px;
   background-color: #db5656;
   border-radius: 25px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: #fff;
   line-height: 1.2;
