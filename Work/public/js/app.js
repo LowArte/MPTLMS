@@ -17849,8 +17849,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\front\app.js */"./resources/js/front/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
 __webpack_require__(/*! C:\Users\artur\Documents\GitHub\MPTLMS\Work\resources\js\front\app.js */"./resources/js/front/app.js");
 module.exports = __webpack_require__(/*! C:\Users\artur\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> f6fbb60e6c7454e40389f1db4b08f6c9a3ad8452
 
 
 /***/ })
