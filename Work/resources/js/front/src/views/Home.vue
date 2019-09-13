@@ -8,13 +8,10 @@
         </div>
       </div>
     </header>
+    <aside class="main-menu"></aside>
     <section class="page">
-      <div class="main-menu">
-
-      </div>
-      <div class="contents">
-wsedfghjk
-      </div>
+      <!-- <div class="main-menu"></div> -->
+      <div class="contents">wsedfghjk</div>
     </section>
     <footer style="height: 1920px;">dklsjf</footer>
   </div>
@@ -87,7 +84,8 @@ a {
   border-radius: 10px;
   border-width: 0px;
   border-color: #303030;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: #fff;
   line-height: 1.2;
@@ -104,12 +102,12 @@ a {
   height: 100%;
   margin: 45px 0;
   position: fixed;
-  background: #EFF1F2
+  background: #eff1f2;
 }
 
 .contents {
-  margin: 45px 45px 0 0;
-  width: 100%;
+  padding: 45px 0 0 55px;
+  position: relative;
 }
 
 /* Triggers */
@@ -122,6 +120,8 @@ a {
 /* Madia qwery */
 
 @media (max-width: 320px) {
-  .title { font-size: 20px;}
+  .title {
+    font-size: 20px;
+  }
 }
 </style>
