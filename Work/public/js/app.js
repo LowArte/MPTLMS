@@ -17659,7 +17659,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/',
     name: '',
-    component: _views_home_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _views_account_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }]
 }));
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
