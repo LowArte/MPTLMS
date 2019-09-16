@@ -98,7 +98,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\n}\n#nav a {\r\n  font-weight: bold;\r\n  color: #2c3e50;\n}\n#nav a.router-link-exact-active {\r\n  color: #42b983;\n}\r\n", ""]);
+exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\n}\n.home {\r\n  height: 100%;\n}\n.maint-div {\r\n  height: 100%;\n}\n#nav a {\r\n  font-weight: bold;\r\n  color: #2c3e50;\n}\n#nav a.router-link-exact-active {\r\n  color: #42b983;\n}\r\n", ""]);
 
 // exports
 
@@ -136,7 +136,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n* {\r\n  margin: 0px;\r\n  padding: 0px;\n}\n*:before,\r\n*:after {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\n}\nbody,\r\nhtml {\r\n  background: #fafafa;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\nheader {\r\n  position: fixed;\r\n  z-index: 100;\r\n  width: 100%;\r\n  height: 45px;\r\n  background: #303030;\r\n  color: #fafafa;\n}\na {\r\n  text-decoration: none;\n}\n.home {\r\n  position: flex;\n}\n.page {\r\n  position: flex;\n}\n.title-menu {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\n}\n.title {\r\n  font-size: 16pt;\r\n  width: 100%;\r\n  height: 45px;\r\n  padding: 5px;\r\n  margin: 0 15px;\n}\n.container-login100-form-btn {\r\n  width: auto;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: nowrap;\r\n      flex-wrap: nowrap;\n}\n.login100-form-btn {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  margin: 10px;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 0px;\r\n  min-width: 90px;\r\n  height: 25px;\r\n  background-color: #303030;\r\n  border-radius: 10px;\r\n  border-width: 0px;\r\n  border-color: #303030;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 16px;\r\n  color: #fff;\r\n  line-height: 1.2;\r\n  -webkit-transition: all 0.4s;\r\n  transition: all 0.4s;\n}\n.main-menu {\r\n  float: left;\r\n  z-index: 99;\r\n  width: 50px;\r\n  height: 100%;\r\n  margin: 45px 0;\r\n  position: fixed;\r\n  background: #eff1f2;\n}\n.contents {\r\n  padding: 45px 0 0 55px;\r\n  position: relative;\n}\r\n\r\n/* Triggers */\n.login100-form-btn:hover {\r\n  background-color: #db5656;\r\n  border-color: #db5656;\n}\r\n\r\n/* Madia qwery */\n@media (max-width: 320px) {\n.title {\r\n    font-size: 20px;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\nbody,\r\nhtml {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  height: 100%;\r\n  background: #ffffff;\n}\ndiv.header {\r\n  position: fixed;\r\n  z-index: 100;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  width: 100%;\r\n  height: 45px;\r\n  background-color: #303030;\n}\ndiv.main-title > p {\r\n  width: 100%;\r\n  font-size: 16pt;\r\n  color: #ffffff;\r\n  -ms-flex-line-pack: center;\r\n      align-content: center;\r\n  padding: 5px 5px 5px 10px;\n}\r\n\r\n/* Wrepper content grid */\n.wrapper {\r\n  padding-top: 45px;\r\n  height: 100%;\r\n  display: grid;\r\n  grid-template-columns: 20% 80%;\n}\n.wrapper > div.menu {\r\n  background-color: #303030;\n}\n.wrapper > div.content {\r\n  background-color: #ffffff;\n}\r\n\r\n/* Input styles */\ndiv.main-title {\r\n  width: 100%;\n}\ninput,\r\nbutton {\r\n  outline: 0 !important;\n}\n.btn {\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 8px;\n}\n.exit {\r\n  width: 100px;\r\n  height: 25px;\r\n  background-color: #dd5858;\r\n  color: #ffffff;\r\n  font-size: 12pt;\r\n  border: none;\r\n  -webkit-box-shadow: none;\r\n          box-shadow: none;\r\n  border-radius: 5px;\r\n  box-sizing: unset;\r\n  -moz-box-sizing: unset;\r\n  -webkit-box-sizing: unset;\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n          box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  -webkit-transition-duration: 0.3s;\r\n  transition-duration: 0.3s;\r\n  -webkit-transition-property: transform;\r\n  -webkit-transition-property: -webkit-transform;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\n}\n.exit:hover,\r\n.exit:focus,\r\n.exit:active {\r\n  background-color: rgb(248, 58, 58);\r\n  font-size: 12pt;\r\n  -webkit-transform: scale(0.9);\r\n  transform: scale(0.9);\n}\r\n\r\n/* Media qwery for mobilephons */\r\n\r\n/* All for a mobilephons */\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.wrapper {\r\n    padding-top: 55px;\r\n    display: grid;\r\n    grid-template-columns: none;\r\n    grid-template-rows: 15% 85%;\n}\ndiv.header {\r\n    height: 55px;\n}\ndiv.main-title > p {\r\n    padding: 10px;\n}\n.btn {\r\n    padding: 14px;\n}\n}\n@media only screen and (min-width: 480px) and (max-width: 320px) {\n.wrapper {\r\n    padding-top: 55px;\r\n    display: grid;\r\n    grid-template-columns: none;\r\n    grid-template-rows: 15% 85%;\n}\ndiv.header {\r\n    height: 55px;\n}\ndiv.main-title > p {\r\n    padding: 10px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -1314,6 +1314,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "maint-div" },
     [
       _c(
         "div",
@@ -1466,25 +1467,21 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "home" }, [
-      _c("header", [
-        _c("div", { staticClass: "title-menu" }, [
-          _c("h1", { staticClass: "title" }, [_vm._v("Личный кабинет")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "container-login100-form-btn" }, [
-            _c("button", { staticClass: "login100-form-btn" }, [
-              _vm._v("ВЫЙТИ")
-            ])
-          ])
+      _c("div", { staticClass: "header" }, [
+        _c("div", { staticClass: "main-title" }, [
+          _c("p", [_vm._v("Личный кабинет")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn" }, [
+          _c("button", { staticClass: "exit" }, [_vm._v("ВЫЙТИ")])
         ])
       ]),
       _vm._v(" "),
-      _c("aside", { staticClass: "main-menu" }),
-      _vm._v(" "),
-      _c("section", { staticClass: "page" }, [
-        _c("div", { staticClass: "contents" }, [_vm._v("wsedfghjk")])
-      ]),
-      _vm._v(" "),
-      _c("footer", { staticStyle: { height: "1920px" } }, [_vm._v("dklsjf")])
+      _c("div", { staticClass: "wrapper" }, [
+        _c("div", { staticClass: "menu" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "content" })
+      ])
     ])
   }
 ]
@@ -17659,7 +17656,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/',
     name: '',
-    component: _views_account_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _views_home_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }]
 }));
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))

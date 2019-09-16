@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="maint-div">
     <div id="nav">
       <router-link to="/"></router-link>
     </div>
@@ -11,6 +11,12 @@
 * {
   padding: 0px;
   margin: 0px;
+}
+.home {
+  height: 100%;
+}
+.maint-div {
+  height: 100%;
 }
 #nav a {
   font-weight: bold;
