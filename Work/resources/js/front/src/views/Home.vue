@@ -81,6 +81,7 @@ button {
 }
 
 .btn {
+  justify-items: stretch;
   align-items: center;
   padding: 8px;
 }
