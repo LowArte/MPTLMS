@@ -1,13 +1,23 @@
 <template>
-  <div>
+  <div class="maint-div">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/"></router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.home {
+  height: 100%;
+}
+.maint-div {
+  height: 100%;
+}
 #nav a {
   font-weight: bold;
   color: #2c3e50;
