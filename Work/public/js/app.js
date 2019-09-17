@@ -98,7 +98,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\n}\n#nav a {\r\n  font-weight: bold;\r\n  color: #2c3e50;\n}\n#nav a.router-link-exact-active {\r\n  color: #42b983;\n}\r\n", ""]);
+exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\n}\n.home {\r\n  height: 100%;\n}\n.maint-div {\r\n  height: 100%;\n}\n#nav a {\r\n  font-weight: bold;\r\n  color: #2c3e50;\n}\n#nav a.router-link-exact-active {\r\n  color: #42b983;\n}\r\n", ""]);
 
 // exports
 
@@ -117,7 +117,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*[ RESTYLE TAG ]*/\n*[data-v-3e7b4cad] {\r\n  margin: 0px;\r\n  padding: 0px;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  text-decoration: none;\n}\nbody[data-v-3e7b4cad],\r\nhtml[data-v-3e7b4cad] {\r\n  height: 100%;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.font[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.font-title[data-v-3e7b4cad] {\r\n  color: #fff;\r\n  font-size: 24pt;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.flex-sb-m[data-v-3e7b4cad] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\r\n  -ms-align-items: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\n}\n.w-full[data-v-3e7b4cad] {\r\n  width: 100%;\n}\n.max-w-full[data-v-3e7b4cad] {\r\n  max-width: 100%;\n}\n.min-w-full[data-v-3e7b4cad] {\r\n  min-width: 100%;\n}\n.p-b-30[data-v-3e7b4cad] {\r\n  padding-bottom: 30px;\n}\n.m-b-26[data-v-3e7b4cad] {\r\n  margin-bottom: 26px;\n}\n.m-b-18[data-v-3e7b4cad] {\r\n  margin-bottom: 18px;\n}\r\n\r\n/*---------------------------------------------*/\na[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n  line-height: 1.7;\r\n  color: #666666;\r\n  margin: 0px;\r\n  transition: all 0.4s;\r\n  -webkit-transition: all 0.4s;\r\n  -o-transition: all 0.4s;\r\n  -moz-transition: all 0.4s;\n}\na[data-v-3e7b4cad]:focus {\r\n  outline: none !important;\n}\na[data-v-3e7b4cad]:hover {\r\n  text-decoration: none;\r\n  color: #db5656;\n}\r\n\r\n/*---------------------------------------------*/\nh1[data-v-3e7b4cad],\r\nh2[data-v-3e7b4cad],\r\nh3[data-v-3e7b4cad],\r\nh4[data-v-3e7b4cad],\r\nh5[data-v-3e7b4cad],\r\nh6[data-v-3e7b4cad] {\r\n  margin: 0px;\n}\np[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n  line-height: 1.7;\r\n  color: #666666;\r\n  margin: 0px;\n}\nul[data-v-3e7b4cad],\r\nli[data-v-3e7b4cad] {\r\n  margin: 0px;\r\n  list-style-type: none;\n}\r\n\r\n/*---------------------------------------------*/\ninput[data-v-3e7b4cad] {\r\n  outline: none;\r\n  border: none;\n}\ninput[type=\"number\"][data-v-3e7b4cad] {\r\n  -moz-appearance: textfield;\r\n  appearance: none;\r\n  -webkit-appearance: none;\n}\ninput[type=\"number\"][data-v-3e7b4cad]::-webkit-outer-spin-button,\r\ninput[type=\"number\"][data-v-3e7b4cad]::-webkit-inner-spin-button {\r\n  -webkit-appearance: none;\n}\ntextarea[data-v-3e7b4cad] {\r\n  outline: none;\r\n  border: none;\n}\ntextarea[data-v-3e7b4cad]:focus,\r\ninput[data-v-3e7b4cad]:focus {\r\n  border-color: transparent !important;\n}\ninput[data-v-3e7b4cad]:focus::-webkit-input-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]:focus:-moz-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]:focus::-moz-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]:focus:-ms-input-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus::-webkit-input-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus:-moz-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus::-moz-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus:-ms-input-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]::-webkit-input-placeholder {\r\n  color: #999999;\n}\ninput[data-v-3e7b4cad]:-moz-placeholder {\r\n  color: #999999;\n}\ninput[data-v-3e7b4cad]::-moz-placeholder {\r\n  color: #999999;\n}\ninput[data-v-3e7b4cad]:-ms-input-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]::-webkit-input-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]:-moz-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]::-moz-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]:-ms-input-placeholder {\r\n  color: #999999;\n}\nlabel[data-v-3e7b4cad] {\r\n  display: block;\r\n  margin: 0;\n}\r\n\r\n/*---------------------------------------------*/\nbutton[data-v-3e7b4cad] {\r\n  outline: none !important;\r\n  border: none;\r\n  background: transparent;\n}\nbutton[data-v-3e7b4cad]:hover {\r\n  cursor: pointer;\n}\niframe[data-v-3e7b4cad] {\r\n  border: none !important;\n}\r\n\r\n/*//////////////////////////////////////////////////////////////////\r\n[ Utility ]*/\n.txt1[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 13px;\r\n  line-height: 1.4;\r\n  color: #999999;\n}\n.txt2[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n  line-height: 1.4;\r\n  color: #fff;\n}\r\n\r\n/*//////////////////////////////////////////////////////////////////\r\n[ login ]*/\n.limiter[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  margin: 0 auto;\n}\n.container-login100[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  min-height: 100vh;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 15px;\r\n  background: #303030;\n}\n.wrap-login100[data-v-3e7b4cad] {\r\n  width: 670px;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  overflow: hidden;\r\n  position: relative;\n}\r\n\r\n/*[ Title form ]*/\n.login100-form-title[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  position: relative;\r\n  z-index: 1;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\r\n  background-position: center;\r\n  padding: 70px 15px 74px 15px;\n}\n.login100-form-title-1[data-v-3e7b4cad] {\r\n  font-family: Poppins-Bold;\r\n  font-size: 30px;\r\n  color: #fff;\r\n  text-transform: uppercase;\r\n  line-height: 1.2;\r\n  text-align: center;\n}\n.login100-form-title[data-v-3e7b4cad]::before {\r\n  content: \"\";\r\n  display: block;\r\n  position: absolute;\r\n  z-index: -1;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  background-color: rgba(54, 84, 99, 0.7);\n}\r\n\r\n/*[ Form ]*/\n.login100-form[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\r\n  padding: 43px 88px 93px 190px;\n}\r\n\r\n/*[ Input ]*/\n.wrap-input100[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  position: relative;\r\n  border-bottom: 1px solid #b2b2b2;\n}\n.label-input100[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 15px;\r\n  color: #808080;\r\n  line-height: 1.2;\r\n  text-align: right;\r\n  position: absolute;\r\n  top: 14px;\r\n  left: -105px;\r\n  width: 80px;\n}\r\n\r\n/*---------------------------------------------*/\n.input100[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 15px;\r\n  color: #555555;\r\n  line-height: 1.2;\r\n  display: block;\r\n  width: 100%;\r\n  background: transparent;\r\n  padding: 0 5px;\n}\n.focus-input100[data-v-3e7b4cad] {\r\n  position: absolute;\r\n  display: block;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  pointer-events: none;\n}\n.focus-input100[data-v-3e7b4cad]::before {\r\n  content: \"\";\r\n  display: block;\r\n  position: absolute;\r\n  bottom: -1px;\r\n  left: 0;\r\n  width: 0;\r\n  height: 1px;\r\n  -webkit-transition: all 0.6s;\r\n  transition: all 0.6s;\r\n  background: #db5656;\n}\r\n\r\n/*---------------------------------------------*/\ninput.input100[data-v-3e7b4cad] {\r\n  height: 45px;\n}\n.input100:focus + .focus-input100[data-v-3e7b4cad]::before {\r\n  width: 100%;\n}\n.has-val.input100 + .focus-input100[data-v-3e7b4cad]::before {\r\n  width: 100%;\n}\r\n\r\n/*[ Restyle Checkbox ]*/\n.input-checkbox100[data-v-3e7b4cad] {\r\n  display: none;\n}\n.label-checkbox100[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 13px;\r\n  color: #999999;\r\n  line-height: 1.4;\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 26px;\r\n  cursor: pointer;\n}\n.label-checkbox100[data-v-3e7b4cad]::before {\r\n  content: \"\\F00C\";\r\n  font-family: FontAwesome;\r\n  font-size: 13px;\r\n  color: transparent;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  position: absolute;\r\n  width: 18px;\r\n  height: 18px;\r\n  border-radius: 2px;\r\n  background: #fff;\r\n  border: 1px solid #e6e6e6;\r\n  left: 0;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n  transform: translateY(-50%);\n}\n.input-checkbox100:checked + .label-checkbox100[data-v-3e7b4cad]::before {\r\n  color: #57b846;\n}\r\n\r\n/*[ Button ]*/\n.container-login100-form-btn[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\n}\n.login100-form-btn[data-v-3e7b4cad] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 0 20px;\r\n  min-width: 160px;\r\n  height: 50px;\r\n  background-color: #db5656;\r\n  border-radius: 25px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 16px;\r\n  color: #fff;\r\n  line-height: 1.2;\r\n  -webkit-transition: all 0.4s;\r\n  transition: all 0.4s;\n}\n.login100-form-btn[data-v-3e7b4cad]:hover {\r\n  background-color: #333333;\n}\r\n\r\n/*[ Responsive ]*/\n@media (max-width: 576px) {\n.login100-form[data-v-3e7b4cad] {\r\n    padding: 43px 15px 57px 117px;\n}\n}\n@media (max-width: 480px) {\n.login100-form[data-v-3e7b4cad] {\r\n    padding: 43px 15px 57px 15px;\n}\n.label-input100[data-v-3e7b4cad] {\r\n    text-align: left;\r\n    position: unset;\r\n    top: unset;\r\n    left: unset;\r\n    width: 100%;\r\n    padding: 0 5px;\n}\n}\r\n\r\n/*[ Alert validate ]*/\n.validate-input[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n\r\n  position: relative;\n}\n.alert-validate[data-v-3e7b4cad]::before {\r\n  content: attr(data-validate);\r\n  position: absolute;\r\n  max-width: 70%;\r\n  background-color: #fff;\r\n  border: 1px solid #db5656;\r\n  border-radius: 2px;\r\n  padding: 4px 25px 4px 10px;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n  transform: translateY(-50%);\r\n  right: 2px;\r\n  pointer-events: none;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  color: #db5656;\r\n  font-size: 13px;\r\n  line-height: 1.4;\r\n  text-align: left;\r\n  visibility: hidden;\r\n  opacity: 0;\r\n  -webkit-transition: opacity 0.4s;\r\n  transition: opacity 0.4s;\n}\n.alert-validate[data-v-3e7b4cad]::after {\r\n  content: \"\\F06A\";\r\n  font-family: FontAwesome;\r\n  display: block;\r\n  position: absolute;\r\n  color: #db5656;\r\n  font-size: 15px;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n  transform: translateY(-50%);\r\n  right: 8px;\n}\n.alert-validate[data-v-3e7b4cad]:hover:before {\r\n  visibility: visible;\r\n  opacity: 1;\n}\n@media (max-width: 992px) {\n.alert-validate[data-v-3e7b4cad]::before {\r\n    visibility: visible;\r\n    opacity: 1;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*[ RESTYLE TAG ]*/\n*[data-v-3e7b4cad] {\r\n  margin: 0px;\r\n  padding: 0px;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  text-decoration: none;\n}\nbody[data-v-3e7b4cad],\r\nhtml[data-v-3e7b4cad] {\r\n  height: 100%;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.font[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.font-title[data-v-3e7b4cad] {\r\n  color: #fff;\r\n  font-size: 24pt;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.flex-sb-m[data-v-3e7b4cad] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\r\n  -ms-align-items: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\n}\n.w-full[data-v-3e7b4cad] {\r\n  width: 100%;\n}\n.max-w-full[data-v-3e7b4cad] {\r\n  max-width: 100%;\n}\n.min-w-full[data-v-3e7b4cad] {\r\n  min-width: 100%;\n}\n.p-b-30[data-v-3e7b4cad] {\r\n  padding-bottom: 30px;\n}\n.m-b-26[data-v-3e7b4cad] {\r\n  margin-bottom: 26px;\n}\n.m-b-18[data-v-3e7b4cad] {\r\n  margin-bottom: 18px;\n}\r\n\r\n/*---------------------------------------------*/\na[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n  line-height: 1.7;\r\n  color: #666666;\r\n  margin: 0px;\r\n  transition: all 0.4s;\r\n  -webkit-transition: all 0.4s;\r\n  -o-transition: all 0.4s;\r\n  -moz-transition: all 0.4s;\n}\na[data-v-3e7b4cad]:focus {\r\n  outline: none !important;\n}\na[data-v-3e7b4cad]:hover {\r\n  text-decoration: none;\r\n  color: #db5656;\n}\r\n\r\n/*---------------------------------------------*/\nh1[data-v-3e7b4cad],\r\nh2[data-v-3e7b4cad],\r\nh3[data-v-3e7b4cad],\r\nh4[data-v-3e7b4cad],\r\nh5[data-v-3e7b4cad],\r\nh6[data-v-3e7b4cad] {\r\n  margin: 0px;\n}\np[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n  line-height: 1.7;\r\n  color: #666666;\r\n  margin: 0px;\n}\nul[data-v-3e7b4cad],\r\nli[data-v-3e7b4cad] {\r\n  margin: 0px;\r\n  list-style-type: none;\n}\r\n\r\n/*---------------------------------------------*/\ninput[data-v-3e7b4cad] {\r\n  outline: none;\r\n  border: none;\n}\ninput[type=\"number\"][data-v-3e7b4cad] {\r\n  -moz-appearance: textfield;\r\n  appearance: none;\r\n  -webkit-appearance: none;\n}\ninput[type=\"number\"][data-v-3e7b4cad]::-webkit-outer-spin-button,\r\ninput[type=\"number\"][data-v-3e7b4cad]::-webkit-inner-spin-button {\r\n  -webkit-appearance: none;\n}\ntextarea[data-v-3e7b4cad] {\r\n  outline: none;\r\n  border: none;\n}\ntextarea[data-v-3e7b4cad]:focus,\r\ninput[data-v-3e7b4cad]:focus {\r\n  border-color: transparent !important;\n}\ninput[data-v-3e7b4cad]:focus::-webkit-input-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]:focus:-moz-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]:focus::-moz-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]:focus:-ms-input-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus::-webkit-input-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus:-moz-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus::-moz-placeholder {\r\n  color: transparent;\n}\ntextarea[data-v-3e7b4cad]:focus:-ms-input-placeholder {\r\n  color: transparent;\n}\ninput[data-v-3e7b4cad]::-webkit-input-placeholder {\r\n  color: #999999;\n}\ninput[data-v-3e7b4cad]:-moz-placeholder {\r\n  color: #999999;\n}\ninput[data-v-3e7b4cad]::-moz-placeholder {\r\n  color: #999999;\n}\ninput[data-v-3e7b4cad]:-ms-input-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]::-webkit-input-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]:-moz-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]::-moz-placeholder {\r\n  color: #999999;\n}\ntextarea[data-v-3e7b4cad]:-ms-input-placeholder {\r\n  color: #999999;\n}\nlabel[data-v-3e7b4cad] {\r\n  display: block;\r\n  margin: 0;\n}\r\n\r\n/*---------------------------------------------*/\nbutton[data-v-3e7b4cad] {\r\n  outline: none !important;\r\n  border: none;\r\n  background: transparent;\n}\nbutton[data-v-3e7b4cad]:hover {\r\n  cursor: pointer;\n}\niframe[data-v-3e7b4cad] {\r\n  border: none !important;\n}\r\n\r\n/*//////////////////////////////////////////////////////////////////\r\n[ Utility ]*/\n.txt1[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 13px;\r\n  line-height: 1.4;\r\n  color: #999999;\n}\n.txt2[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n  line-height: 1.4;\r\n  color: #fff;\n}\r\n\r\n/*//////////////////////////////////////////////////////////////////\r\n[ login ]*/\n.limiter[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  margin: 0 auto;\n}\n.container-login100[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  min-height: 100vh;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 15px;\r\n  background: #303030;\n}\n.wrap-login100[data-v-3e7b4cad] {\r\n  width: 670px;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  overflow: hidden;\r\n  position: relative;\n}\r\n\r\n/*[ Title form ]*/\n.login100-form-title[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  position: relative;\r\n  z-index: 1;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  background-repeat: no-repeat;\r\n  background-size: cover;\r\n  background-position: center;\r\n  padding: 70px 15px 74px 15px;\n}\n.login100-form-title-1[data-v-3e7b4cad] {\r\n  font-family: Poppins-Bold;\r\n  font-size: 30px;\r\n  color: #fff;\r\n  text-transform: uppercase;\r\n  line-height: 1.2;\r\n  text-align: center;\n}\n.login100-form-title[data-v-3e7b4cad]::before {\r\n  content: \"\";\r\n  display: block;\r\n  position: absolute;\r\n  z-index: -1;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  background-color: rgba(54, 84, 99, 0.7);\n}\r\n\r\n/*[ Form ]*/\n.login100-form[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\r\n  -webkit-box-pack: justify;\r\n      -ms-flex-pack: justify;\r\n          justify-content: space-between;\r\n  padding: 43px 88px 93px 190px;\n}\r\n\r\n/*[ Input ]*/\n.wrap-input100[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  position: relative;\r\n  border-bottom: 1px solid #b2b2b2;\n}\n.label-input100[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 15px;\r\n  color: #808080;\r\n  line-height: 1.2;\r\n  text-align: right;\r\n  position: absolute;\r\n  top: 14px;\r\n  left: -105px;\r\n  width: 80px;\n}\r\n\r\n/*---------------------------------------------*/\n.input100[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 15px;\r\n  color: #555555;\r\n  line-height: 1.2;\r\n  display: block;\r\n  width: 100%;\r\n  background: transparent;\r\n  padding: 0 5px;\n}\n.focus-input100[data-v-3e7b4cad] {\r\n  position: absolute;\r\n  display: block;\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n  pointer-events: none;\n}\n.focus-input100[data-v-3e7b4cad]::before {\r\n  content: \"\";\r\n  display: block;\r\n  position: absolute;\r\n  bottom: -1px;\r\n  left: 0;\r\n  width: 0;\r\n  height: 1px;\r\n  -webkit-transition: all 0.6s;\r\n  transition: all 0.6s;\r\n  background: #db5656;\n}\r\n\r\n/*---------------------------------------------*/\ninput.input100[data-v-3e7b4cad] {\r\n  height: 45px;\n}\n.input100:focus + .focus-input100[data-v-3e7b4cad]::before {\r\n  width: 100%;\n}\n.has-val.input100 + .focus-input100[data-v-3e7b4cad]::before {\r\n  width: 100%;\n}\r\n\r\n/*[ Restyle Checkbox ]*/\n.input-checkbox100[data-v-3e7b4cad] {\r\n  display: none;\n}\n.label-checkbox100[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 13px;\r\n  color: #999999;\r\n  line-height: 1.4;\r\n  display: block;\r\n  position: relative;\r\n  padding-left: 26px;\r\n  cursor: pointer;\n}\n.label-checkbox100[data-v-3e7b4cad]::before {\r\n  content: \"\\F00C\";\r\n  font-family: FontAwesome;\r\n  font-size: 13px;\r\n  color: transparent;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  position: absolute;\r\n  width: 18px;\r\n  height: 18px;\r\n  border-radius: 2px;\r\n  background: #fff;\r\n  border: 1px solid #e6e6e6;\r\n  left: 0;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n  transform: translateY(-50%);\n}\n.input-checkbox100:checked + .label-checkbox100[data-v-3e7b4cad]::before {\r\n  color: #57b846;\n}\r\n\r\n/*[ Button ]*/\n.container-login100-form-btn[data-v-3e7b4cad] {\r\n  width: 100%;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n      flex-wrap: wrap;\n}\n.login100-form-btn[data-v-3e7b4cad] {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 0 20px;\r\n  min-width: 160px;\r\n  height: 50px;\r\n  background-color: #db5656;\r\n  border-radius: 25px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-size: 16px;\r\n  color: #fff;\r\n  line-height: 1.2;\r\n  -webkit-transition: all 0.4s;\r\n  transition: all 0.4s;\n}\n.login100-form-btn[data-v-3e7b4cad]:hover {\r\n  background-color: #333333;\n}\r\n\r\n/*[ Responsive ]*/\n@media (max-width: 576px) {\n.login100-form[data-v-3e7b4cad] {\r\n    padding: 43px 15px 57px 117px;\n}\n}\n@media (max-width: 480px) {\n.login100-form[data-v-3e7b4cad] {\r\n    padding: 43px 15px 57px 15px;\n}\n.label-input100[data-v-3e7b4cad] {\r\n    text-align: left;\r\n    position: unset;\r\n    top: unset;\r\n    left: unset;\r\n    width: 100%;\r\n    padding: 0 5px;\n}\n}\r\n\r\n/*[ Alert validate ]*/\n.validate-input[data-v-3e7b4cad] {\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n\r\n  position: relative;\n}\n.alert-validate[data-v-3e7b4cad]::before {\r\n  content: attr(data-validate);\r\n  position: absolute;\r\n  max-width: 70%;\r\n  background-color: #fff;\r\n  border: 1px solid #db5656;\r\n  border-radius: 2px;\r\n  padding: 4px 25px 4px 10px;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n  transform: translateY(-50%);\r\n  right: 2px;\r\n  pointer-events: none;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  color: #db5656;\r\n  font-size: 13px;\r\n  line-height: 1.4;\r\n  text-align: left;\r\n  visibility: hidden;\r\n  opacity: 0;\r\n  -webkit-transition: opacity 0.4s;\r\n  transition: opacity 0.4s;\n}\n.alert-validate[data-v-3e7b4cad]::after {\r\n  content: \"\\F06A\";\r\n  font-family: FontAwesome;\r\n  display: block;\r\n  position: absolute;\r\n  color: #db5656;\r\n  font-size: 15px;\r\n  top: 50%;\r\n  -webkit-transform: translateY(-50%);\r\n  transform: translateY(-50%);\r\n  right: 8px;\n}\n.alert-validate[data-v-3e7b4cad]:hover:before {\r\n  visibility: visible;\r\n  opacity: 1;\n}\n@media (max-width: 992px) {\n.alert-validate[data-v-3e7b4cad]::before {\r\n    visibility: visible;\r\n    opacity: 1;\n}\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\nbody,\r\nhtml {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  height: 100%;\r\n  background: #ffffff;\n}\ndiv.header {\r\n  position: fixed;\r\n  z-index: 100;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  width: 100%;\r\n  height: 45px;\r\n  background-color: #303030;\n}\ndiv.main-title > p {\r\n  width: 100%;\r\n  font-size: 16pt;\r\n  color: #ffffff;\r\n  -ms-flex-line-pack: center;\r\n      align-content: center;\r\n  padding: 5px 5px 5px 10px;\n}\r\n\r\n/* Wrepper content grid */\n.wrapper {\r\n  padding-top: 45px;\r\n  height: 100%;\r\n  display: grid;\r\n  grid-template-columns: 20% 80%;\n}\n.wrapper > div.menu {\r\n  background-color: #303030;\n}\n.wrapper > div.content {\r\n  background-color: #ffffff;\n}\r\n\r\n/* Input styles */\ndiv.main-title {\r\n  width: 100%;\n}\ninput,\r\nbutton {\r\n  outline: 0 !important;\n}\n.btn {\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  padding: 8px;\n}\n.exit {\r\n  width: 100px;\r\n  height: 25px;\r\n  background-color: #dd5858;\r\n  color: #ffffff;\r\n  font-size: 12pt;\r\n  border: none;\r\n  -webkit-box-shadow: none;\r\n          box-shadow: none;\r\n  border-radius: 5px;\r\n  box-sizing: unset;\r\n  -moz-box-sizing: unset;\r\n  -webkit-box-sizing: unset;\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n          box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  -webkit-transition-duration: 0.3s;\r\n  transition-duration: 0.3s;\r\n  -webkit-transition-property: transform;\r\n  -webkit-transition-property: -webkit-transform;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\n}\n.exit:hover,\r\n.exit:focus,\r\n.exit:active {\r\n  background-color: rgb(248, 58, 58);\r\n  font-size: 12pt;\r\n  -webkit-transform: scale(0.9);\r\n  transform: scale(0.9);\n}\r\n\r\n/* Media qwery for mobilephons */\r\n\r\n/* All for a mobilephons */\n@media only screen and (min-width: 320px) and (max-width: 480px) {\n.wrapper {\r\n    padding-top: 55px;\r\n    display: grid;\r\n    grid-template-columns: none;\r\n    grid-template-rows: 15% 85%;\n}\ndiv.header {\r\n    height: 55px;\n}\ndiv.main-title > p {\r\n    padding: 10px;\n}\n.btn {\r\n    padding: 14px;\n}\n}\n@media only screen and (min-width: 480px) and (max-width: 320px) {\n.wrapper {\r\n    padding-top: 55px;\r\n    display: grid;\r\n    grid-template-columns: none;\r\n    grid-template-rows: 15% 85%;\n}\ndiv.header {\r\n    height: 55px;\n}\ndiv.main-title > p {\r\n    padding: 10px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -643,6 +662,36 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./account.vue?vue&type=style&index=0&id=3e7b4cad&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/account.vue?vue&type=style&index=0&id=3e7b4cad&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./home.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -1265,6 +1314,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "maint-div" },
     [
       _c(
         "div",
@@ -1384,6 +1434,53 @@ var staticRenderFns = [
             ])
           ])
         ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/home.vue?vue&type=template&id=67ad0a8f&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/front/src/views/home.vue?vue&type=template&id=67ad0a8f& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "home" }, [
+      _c("div", { staticClass: "header" }, [
+        _c("div", { staticClass: "main-title" }, [
+          _c("p", [_vm._v("Личный кабинет")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn" }, [
+          _c("button", { staticClass: "exit" }, [_vm._v("ВЫЙТИ")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "wrapper" }, [
+        _c("div", { staticClass: "menu" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "content" })
       ])
     ])
   }
@@ -17547,6 +17644,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./resources/js/front/node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _views_account_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/account.vue */ "./resources/js/front/src/views/account.vue");
+/* harmony import */ var _views_home_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/home.vue */ "./resources/js/front/src/views/home.vue");
+
 
 
 
@@ -17557,7 +17656,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   routes: [{
     path: '/',
     name: '',
-    component: _views_account_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _views_home_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }]
 }));
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -17658,6 +17757,77 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/front/src/views/home.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/front/src/views/home.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _home_vue_vue_type_template_id_67ad0a8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.vue?vue&type=template&id=67ad0a8f& */ "./resources/js/front/src/views/home.vue?vue&type=template&id=67ad0a8f&");
+/* harmony import */ var _home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.vue?vue&type=style&index=0&lang=css& */ "./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  script,
+  _home_vue_vue_type_template_id_67ad0a8f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _home_vue_vue_type_template_id_67ad0a8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/front/src/views/home.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./home.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/home.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/front/src/views/home.vue?vue&type=template&id=67ad0a8f&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/front/src/views/home.vue?vue&type=template&id=67ad0a8f& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_67ad0a8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./home.vue?vue&type=template&id=67ad0a8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/front/src/views/home.vue?vue&type=template&id=67ad0a8f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_67ad0a8f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_67ad0a8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -17677,12 +17847,12 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\front\app.js */"./resources/js/front/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\work\resources\js\front\app.js */"./resources/js/front/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\work\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
 __webpack_require__(/*! C:\Users\artur\Documents\GitHub\MPTLMS\Work\resources\js\front\app.js */"./resources/js/front/app.js");
 module.exports = __webpack_require__(/*! C:\Users\artur\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> f6fbb60e6c7454e40389f1db4b08f6c9a3ad8452
+>>>>>>> 35d74221da93c2dde651a44f0c72f659c6dc2dd0
 
 
 /***/ })
