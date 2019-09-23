@@ -1,43 +1,31 @@
 <template>
-  <div class="limiter">
+  <div class="wrapper">
     <div class="container-login100">
       <div class="wrap-login100">
-        <div class="login100-form-title":style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}" >
-          <span class="font-title">Личный кабинет</span>
-          <a class="txt2" href="http://www.mpt.ru">Московский приборостроительный техникум</a>
+        <div class="login100-form-title" :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}">
+          <span class="font-title non-selected">Личный кабинет</span>
+          <a class="txt2 non-selected" href="http://www.mpt.ru">Московский приборостроительный техникум</a>
         </div>
         <form class="login100-form validate-form">
           <div class="wrap-input100 m-b-26">
-            <span class="label-input100">Email</span>
-            <input
-              class="input100"
-              type="text"
-              name="username"
-              placeholder="Введите Email"
-              required
-            />
+            <span class="label-input100 non-selected">Email</span>
+            <input class="input100" type="text" v-model="form.email" placeholder="Введите Email" required/>
             <span class="focus-input100"></span>
           </div>
           <div class="wrap-input100 m-b-18">
-            <span class="label-input100">Пароль</span>
-            <input
-              class="input100"
-              type="password"
-              name="pass"
-              placeholder="Введите пароль"
-              required
-            />
+            <span class="label-input100 non-selected">Пароль</span>
+            <input class="input100" type="password" v-model="form.password" placeholder="Введите пароль" @keyup="onKeyup" required/>
             <span class="focus-input100"></span>
           </div>
           <div class="flex-sb-m w-full p-b-30">
             <div>
               <div class="container-login100-form-btn">
-                <button class="login100-form-btn">ВОЙТИ</button>
+                <button class="login100-form-btn" @click="onLogin">ВОЙТИ</button>
               </div>
             </div>
             <div>
               <p class="txt1">
-                <a href="#" class="txt1" style="padding: 0 0 0 5px;">Не можете войти?</a>
+                <a href="#" class="txt1 non-selected" style="padding: 0 0 0 5px;">Не можете войти?</a>
               </p>
             </div>
           </div>
@@ -47,7 +35,40 @@
   </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<script>
+export default {
+  data(){
+    return {
+      form: {
+        login_email: null,
+        password: null
+      },
+      errors:{}
+    };
+  },
+  methods: {
+    onLogin() {
+      this.errors = {};
+        Vue.axios.post("/api/login", this.form).then(response => {
+          if (response.data.success) {
+            debugger
+            Auth.login(response.data.user);
+            this.$router.push("/");
+          }
+        }).catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    },
+    checkError(field) {
+      return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
+    },
+    onKeyup(e) {
+      if (e.code === "Enter") {this.onLogin();}
+    }
+  }
+}
+</script>
+
 <style scoped>
 /*[ RESTYLE TAG ]*/
 * {
@@ -60,8 +81,6 @@
 body,
 html {
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .font {
@@ -254,7 +273,6 @@ label {
 }
 
 /*---------------------------------------------*/
-
 button {
   outline: none !important;
   border: none;
@@ -269,8 +287,7 @@ iframe {
   border: none !important;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
+/*[ Utility ]*/
 
 .txt1 {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -288,17 +305,16 @@ iframe {
   color: #fff;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
+/*[ login ]*/
 
-.limiter {
+.wrapper {
   width: 100%;
   margin: 0 auto;
 }
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -308,15 +324,16 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #000000;
+  background: #ffffff;
 }
 
 .wrap-login100 {
-  width: 670px;
+  width: auto;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 /*[ Title form ]*/
@@ -564,7 +581,6 @@ input.input100 {
 .validate-input {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
   position: relative;
 }
 
