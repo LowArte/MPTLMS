@@ -15,12 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->mediumText('login_email');
-            $table->mediumText('login_stud');
-            $table->mediumText('password');
+            $table->string('login_email')->unique();
+            $table->string('login_stud')->unique();
+            $table->string('password');
+            $table->string('api_token')->nullable();
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('users_posts');
             $table->timestamps();
+            $table->rememberToken();
             $table->softDeletes();
         });
     }
