@@ -9,12 +9,12 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [{
-      path: '/',
+      path: '/login',
       name: '',
       component: Account
     },
     {
-      path: '/up',
+      path: '/',
       name: '',
       component: UploadFile
     }
