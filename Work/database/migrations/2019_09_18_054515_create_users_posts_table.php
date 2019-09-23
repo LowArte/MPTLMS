@@ -16,7 +16,6 @@ class CreateUsersPostsTable extends Migration
         Schema::create('users_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->mediumText('name');
-            $table->string('api_token')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
