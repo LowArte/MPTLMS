@@ -5,7 +5,7 @@
         <div class="main-title">
           <p>Личный кабинет</p>
         </div>
-        <div class="btn" v-show="true" @click="onClick()">
+        <div class="btn" v-show="visible" @click="onClick()">
           <button class="exit">ВЫХОД</button>
         </div>
       </div>
@@ -19,9 +19,7 @@
         </div>
       </div>
     </div>
-    <transition name="content">
       <router-view></router-view>
-    </transition>
   </div>
 </template>
 
@@ -52,20 +50,6 @@ export default {
 </script>
 
 <style>
-
-/* Animation */
-
-.content-enter-active, .content-leave-active {
-  transition: all .5s;
-}
-
-.content-enter, .content-leave-to {
-  transform: translateX(50px);
-  opacity: 0;
-}
-
-/* End of animation block */
-
 * {
   padding: 0px;
   margin: 0px;

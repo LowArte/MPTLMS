@@ -6,31 +6,26 @@
             <div class="login100-form-title" :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}">
               <span class="font-title non-selected">Личный кабинет</span>
               <a class="txt2 non-selected" href="http://www.mpt.ru">Московский приборостроительный техникум</a>
-            </div>      
+            </div>
               <form class="login100-form validate-form">
                 <div class="wrap-input100 m-b-26">
                   <span class="label-input100 non-selected">Email</span>
                   <input class="input100" type="text" v-model="form.login_email" placeholder="Введите Email" required/>
                   <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 m-b-18">
-                  <span class="label-input100 non-selected">Пароль</span>
-                  <input class="input100" type="password" v-model="form.password" placeholder="Введите пароль" @keyup="onKeyup" required/>
-                  <span class="focus-input100"></span>
-                </div>
                 <div class="flex-sb-m w-full p-b-30">
                   <div>
                     <div class="container-login100-form-btn">
-                      <button class="login100-form-btn" @click="onLogin">ВОЙТИ</button>
+                      <button class="login100-form-btn" @click="onLogin">Отправит запрос</button>
                     </div>
                   </div>
                   <div>
                     <p class="txt1">
-                      <a href="#" class="txt1 non-selected" style="padding: 0 0 0 5px;" @click="onRestore">Не можете войти?</a>
+                      <a href="#" class="txt1 non-selected" style="padding: 0 0 0 5px;" @click="onBack">Войти</a>
                     </p>
                   </div>
                 </div>
-              </form>
+              </form>      
           </div>
         </div>
     </div>
@@ -71,8 +66,8 @@ export default {
         this.onLogin();
       }
     },
-    onRestore() {
-      this.$router.push("/restore");
+    onBack() {
+      this.$router.push("/");
     }
   }
 };
