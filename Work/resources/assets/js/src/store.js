@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    //в пизду ваш vue, я ушёл кушать и деградировать на html без плагинов ^^
   },
   mutations: {
 

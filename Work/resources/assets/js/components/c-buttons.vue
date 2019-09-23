@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /*[ Button ]*/
 
 .container-m-button {

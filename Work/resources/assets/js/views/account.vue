@@ -308,7 +308,7 @@ iframe {
 /*[ login ]*/
 
 .wrapper {
-  width: 100%;
+  width: 640px;
   margin: 0 auto;
 }
 
@@ -639,6 +639,12 @@ input.input100 {
   .alert-validate::before {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .wrapper {
+    width: 360px;
   }
 }
 </style>

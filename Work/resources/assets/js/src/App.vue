@@ -5,12 +5,13 @@
         <div class="main-title">
           <p>Личный кабинет</p>
         </div>
-        <div class="btn">
-          <button class="exit">ВОЙТИ</button>
+        <div class="btn" v-show="true" @click="onClick()">
+          <button class="exit">ВЫХОД</button>
         </div>
       </div>
+      <div class="back" :style="{'background-image': `url(${require('../assets/bg-02.jpg')})`}" />
       <div class="wrapper">
-        <div class="menu">
+        <div class="menu" v-show="visible">
           <!-- Area for buttons of users -->
           <cbutton v-for="(item) of buttons" :key="item.content" v-bind:item="item" />
         </div>
@@ -19,7 +20,7 @@
         </div>
       </div>
     </div>
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -28,6 +29,7 @@ import cbutton from "../components/c-buttons";
 export default {
   data() {
     return {
+      visible: false,
       buttons: [
         { content: "Расписание занятий" },
         { content: "Успеваемость" },
@@ -37,6 +39,12 @@ export default {
   },
   components: {
     cbutton
+  },
+  methods:{
+    onClick() {
+      this.$router.push("/up");
+      return true;
+    }    
   }
 };
 </script>
@@ -50,6 +58,16 @@ export default {
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+div.back {
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .non-selected {
@@ -126,7 +144,8 @@ button {
   height: 45px;
   background-color: #231f20;
   border: none;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: #ffffff;
   line-height: 1.2;
@@ -148,6 +167,14 @@ button {
   .wrapper {
     padding-top: 55px;
   }
+  .wrapper > div.menu {
+    display: block;
+    background-color: #231f20;
+  }
+  .m-button {
+    min-width: none;
+    width: 100%;
+  }
   div.header {
     height: 55px;
   }
@@ -156,6 +183,9 @@ button {
   }
   .btn {
     padding: 0px;
+  }
+  .exit {
+    height: 55px;
   }
 }
 
