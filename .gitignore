@@ -8,6 +8,7 @@ Work/app/storage/
 
 # Laravel 5 & Lumen specific
 Work/public/storage
+Work/public/js/app.js
 Work/public/hot
 Work/storage/*.key
 .env.*.php
