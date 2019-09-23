@@ -2,28 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use DB;
+use Debugbar;
 
-class Users extends Authenticatable
+class Users extends Model
 {
-    use Notifiable;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+
     protected $fillable = [
-        'login_email', 'login_stud', 'password', 'api_token', 'post_id'
+        'login_email', 'login_stud', 'password', 'api_token','post_id'
     ];
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+
     protected $hidden = [
         'password', 'remember_token', 'api_token'
     ];
+
+    public static function whereEmail($var = null)
+    {
+        $object = Users::all()->where('login_email',$var);
+        return $object;
+    }
 
     public function info() {
         return [
