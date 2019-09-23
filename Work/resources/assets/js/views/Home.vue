@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="student-page">
     <div class="header">
       <div class="main-title">
         <p>Личный кабинет</p>
@@ -11,6 +11,7 @@
     <div class="wrapper">
       <div class="menu">
         <!-- Area for buttons of users -->
+        <cbutton v-for="(item) of buttons" :key="item.content" v-bind:item="item"/>
       </div>
       <div class="content">
         <!-- Area for contents of users -->
@@ -19,14 +20,25 @@
   </div>
 </template>
 
-<style>
-* {
-  padding: 0px;
-  margin: 0px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
+<script>
+import cbutton from "../components/c-buttons"
+export default {
+  data() {
+    return {
+      buttons: [
+        {content: 'Расписание занятий'},
+        {content: 'Успеваемость'},
+        {content: 'Посещаемость'}
+      ]
+    }
+  },
+  components: {
+    cbutton
+  }
+};
+</script>
 
+<style scoped>
 div.header {
   position: fixed;
   z-index: 100;
@@ -56,6 +68,7 @@ div.main-title > p {
 }
 
 .wrapper > div.menu {
+  display: inline-flex;
   background-color: #231f20;
 }
 

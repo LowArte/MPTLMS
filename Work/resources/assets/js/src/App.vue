@@ -1,35 +1,23 @@
 <template>
-  <div class="maint-div">
-    <div id="nav">
-      <router-link to="/"></router-link>
-    </div>
-    <router-view />
+  <div id="app">
+    <router-view/>
   </div>
 </template>
 
 <style>
-* {
-  padding: 0px;
-  margin: 0px;
-}
-body,
-html {
-  padding: 0px;
-  margin: 0px;
-  background: #000000;
-}
-.home {
-  height: 100%;
-}
-.maint-div {
-  height: auto;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  #app {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+
+  .non-selected {
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  }
 </style>
