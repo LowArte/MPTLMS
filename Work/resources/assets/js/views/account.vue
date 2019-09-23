@@ -2,19 +2,31 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
-        <div class="login100-form-title" :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}">
+        <div class="login100-form-title":style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}" >
           <span class="font-title">Личный кабинет</span>
           <a class="txt2" href="http://www.mpt.ru">Московский приборостроительный техникум</a>
         </div>
         <form class="login100-form validate-form">
           <div class="wrap-input100 m-b-26">
             <span class="label-input100">Email</span>
-            <input class="input100" type="text" name="username" placeholder="Введите Email" required/>
+            <input
+              class="input100"
+              type="text"
+              name="username"
+              placeholder="Введите Email"
+              required
+            />
             <span class="focus-input100"></span>
           </div>
           <div class="wrap-input100 m-b-18">
             <span class="label-input100">Пароль</span>
-            <input class="input100" type="password" name="pass" placeholder="Введите пароль" required/>
+            <input
+              class="input100"
+              type="password"
+              name="pass"
+              placeholder="Введите пароль"
+              required
+            />
             <span class="focus-input100"></span>
           </div>
           <div class="flex-sb-m w-full p-b-30">
@@ -24,7 +36,9 @@
               </div>
             </div>
             <div>
-              <p class="txt1"> Не можете войти? <a href="#" class="txt1">Восстановить</a></p>
+              <p class="txt1">
+                <a href="#" class="txt1" style="padding: 0 0 0 5px;">Не можете войти?</a>
+              </p>
             </div>
           </div>
         </form>
@@ -294,7 +308,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #303030;
+  background: #000000;
 }
 
 .wrap-login100 {
@@ -508,7 +522,8 @@ input.input100 {
   height: 50px;
   background-color: #db5656;
   border-radius: 25px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: #fff;
   line-height: 1.2;

@@ -27,21 +27,15 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-body,
-html {
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-  background: #ffffff;
-}
-
 div.header {
   position: fixed;
   z-index: 100;
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   width: 100%;
   height: 45px;
-  background-color: #303030;
+  background-color: #231f20;
 }
 
 div.main-title > p {
@@ -58,14 +52,15 @@ div.main-title > p {
   padding-top: 45px;
   height: 100%;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-rows: 45px 100%;
 }
 
 .wrapper > div.menu {
-  background-color: #303030;
+  background-color: #231f20;
 }
 
 .wrapper > div.content {
+  height: auto;
   background-color: #ffffff;
 }
 
@@ -89,7 +84,7 @@ button {
 .exit {
   width: 100px;
   height: 25px;
-  background-color: #dd5858;
+  background-color: #7e7e7e;
   color: #ffffff;
   font-size: 12pt;
   border: none;
@@ -112,7 +107,7 @@ button {
 .exit:hover,
 .exit:focus,
 .exit:active {
-  background-color: rgb(248, 58, 58);
+  background-color: #696969;
   font-size: 12pt;
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
@@ -127,7 +122,7 @@ button {
     padding-top: 55px;
     display: grid;
     grid-template-columns: none;
-    grid-template-rows: 15% 85%;
+    grid-template-rows: auto 100%;
   }
   div.header {
     height: 55px;
@@ -145,7 +140,7 @@ button {
     padding-top: 55px;
     display: grid;
     grid-template-columns: none;
-    grid-template-rows: 15% 85%;
+    grid-template-rows: auto 100%;
   }
   div.header {
     height: 55px;
