@@ -9,7 +9,7 @@
         <form class="login100-form validate-form">
           <div class="wrap-input100 m-b-26">
             <span class="label-input100 non-selected">Email</span>
-            <input class="input100" type="text" v-model="form.email" placeholder="Введите Email" required/>
+            <input class="input100" type="text" v-model="form.login_email" placeholder="Введите Email" required/>
             <span class="focus-input100"></span>
           </div>
           <div class="wrap-input100 m-b-18">
@@ -51,11 +51,10 @@ export default {
       this.errors = {};
         Vue.axios.post("/api/login", this.form).then(response => {
           if (response.data.success) {
-            debugger
-            Auth.login(response.data.user);
-            this.$router.push("/");
+            console.log(response.data);
           }
         }).catch(error => {
+          console.log(error.response.data.errors);
           this.errors = error.response.data.errors;
         });
     },
