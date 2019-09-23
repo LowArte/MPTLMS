@@ -12,11 +12,17 @@
   padding: 0px;
   margin: 0px;
 }
+body,
+html {
+  padding: 0px;
+  margin: 0px;
+  background: #000000;
+}
 .home {
   height: 100%;
 }
 .maint-div {
-  height: 100%;
+  height: auto;
 }
 #nav a {
   font-weight: bold;
