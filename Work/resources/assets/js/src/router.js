@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Account from '../views/account.vue'
-import UploadFile from '../views/ff.vue'
+import Restore from '../views/account-res.vue'
 
 Vue.use(Router)
 
@@ -14,9 +14,9 @@ export default new Router({
       component: Account
     },
     {
-      path: '/up',
+      path: '/restore',
       name: '',
-      component: UploadFile
+      component: Restore
     }
   ]
 })

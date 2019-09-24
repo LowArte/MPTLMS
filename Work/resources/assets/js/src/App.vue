@@ -5,11 +5,10 @@
         <div class="main-title">
           <p>Личный кабинет</p>
         </div>
-        <div class="btn" v-show="true" @click="onClick()">
+        <div class="btn" v-show="visible" @click="onClick()">
           <button class="exit">ВЫХОД</button>
         </div>
       </div>
-      <div class="back" :style="{'background-image': `url(${require('../assets/bg-02.jpg')})`}" />
       <div class="wrapper">
         <div class="menu" v-show="visible">
           <!-- Area for buttons of users -->
@@ -20,7 +19,7 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -42,7 +41,8 @@ export default {
   },
   methods:{
     onClick() {
-      this.$router.push("/up");
+      this.$router.push("/login");
+      this.visible = false;
       return true;
     }    
   }
@@ -58,16 +58,6 @@ export default {
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-div.back {
-  margin: 0px;
-  padding: 0px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
 }
 
 .non-selected {
