@@ -28,7 +28,7 @@ import cbutton from "../components/c-buttons";
 export default {
   data() {
     return {
-      visible: false,
+      visible: true,
       buttons: [
         { content: "Расписание занятий" },
         { content: "Успеваемость" },
@@ -41,9 +41,7 @@ export default {
   },
   methods:{
     onClick() {
-      this.$router.push("/login");
-      this.visible = false;
-      return true;
+      console.log(this.$store.state.Auth)
     }    
   }
 };
