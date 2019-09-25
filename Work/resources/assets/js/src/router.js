@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Account from '../views/account.vue'
-import Restore from '../views/account-res.vue'
+import Restore from '../views/account-res'
+import Auth from '../views/account'
+import Account from '../views/student'
 
 Vue.use(Router)
 
@@ -10,13 +11,19 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [{
       path: '/',
-      name: '',
-      component: Account
+      name: 'Account',
+      component: Auth
     },
     {
       path: '/restore',
-      name: '',
+      name: 'restore',
       component: Restore
+    },
+    {
+      path: '/account:token',
+      name: 'account',
+      props: true,
+      component: Account
     }
   ]
 })

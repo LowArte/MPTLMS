@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-fade" mode="in-out">
-    <div class="wrapper" :key="wrapper">
+    <div class="wrapper">
         <div class="container-login100">
           <div class="wrap-login100">
             <div class="login100-form-title" :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}">
@@ -55,7 +55,8 @@ export default {
         .post("/api/login", this.form)
         .then(response => {
           if (response.data.success) {
-            console.log(response.data);
+            this.$store.dispatch('login',response.data.user)
+            $router.push('/account'+response.data.user.api_token);
           }
         })
         .catch(error => {

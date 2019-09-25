@@ -24,6 +24,12 @@ class Users extends Model
         return $object;
     }
 
+    public static function whereId($var = null)
+    {
+        $object = Users::all()->where('id',$var);
+        return $object;
+    }
+
     public function info() {
         return [
             'user_id' => $this->id,

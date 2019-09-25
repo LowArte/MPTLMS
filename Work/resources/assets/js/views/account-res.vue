@@ -45,21 +45,8 @@ export default {
   },
   methods: {
     onLogin() {
-      this.errors = {};
-      Vue.axios
-        .post("/api/login", this.form)
-        .then(response => {
-          if (response.data.success) {
-            console.log(response.data);
-          }
-        })
-        .catch(error => {
-          console.log(error.response.data.errors);
-          this.errors = error.response.data.errors;
-        });
     },
     checkError(field) {
-      return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
     },
     onKeyup(e) {
       if (e.code === "Enter") {

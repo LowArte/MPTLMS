@@ -5,12 +5,12 @@
         <div class="main-title">
           <p>Личный кабинет</p>
         </div>
-        <div class="btn" v-show="visible" @click="onClick()">
-          <button class="exit">ВЫХОД</button>
+        <div class="btn" v-show="Auth.login">
+          <button @click="logout" class="exit">ВЫХОД</button>
         </div>
       </div>
       <div class="wrapper">
-        <div class="menu" v-show="visible">
+        <div class="menu" v-show="Auth.login">
           <!-- Area for buttons of users -->
           <cbutton v-for="(item) of buttons" :key="item.content" v-bind:item="item" />
         </div>
@@ -19,16 +19,16 @@
         </div>
       </div>
     </div>
-      <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import cbutton from "../components/c-buttons";
+
 export default {
   data() {
     return {
-      visible: true,
       buttons: [
         { content: "Расписание занятий" },
         { content: "Успеваемость" },
@@ -36,13 +36,38 @@ export default {
       ]
     };
   },
+  computed: {
+    Auth: function() {
+      return this.$store.getters.getAuth;
+    }
+  },
+  beforeCreate() {
+    var Auth = this.$store.getters.getAuth;
+    if(Auth.api_token != null && Auth.user_id !=null)
+    {
+      Auth.login = true
+      this.$store.dispatch('login',Auth)
+      this.$router.push('/account'+Auth.api_token)
+    }
+  },
   components: {
     cbutton
   },
-  methods:{
-    onClick() {
-      console.log(this.$store.state.Auth)
-    }    
+  methods: {
+    logout(){
+        Vue.axios.post("/api/logout", this.Auth)
+        .then(response => {
+          var otvet = response.data
+          if (otvet.success) {
+            this.$store.dispatch('logout',null)
+            this.$router.push('/');
+          }
+        })
+        .catch(error => {
+          console.log(error.response.data.errors);
+          this.errors = error.response.data.errors;
+        });
+    }
   }
 };
 </script>

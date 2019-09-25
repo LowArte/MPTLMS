@@ -10,11 +10,6 @@ use Hash;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->only('logout');
-    }
-
     public function login(Request $request)
     {
         $user = Users::whereEmail($request->login_email)->first();
@@ -35,7 +30,9 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $user = $request->user();
+        Debugbar::info($request->user_id);
+        $user = Users::whereId($request->user_id)->first();
+        Debugbar::info($user);
         $user->api_token = null;
         $user->save();
         return response()->json([
