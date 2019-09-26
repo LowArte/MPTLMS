@@ -1,73 +1,33 @@
 <template>
   <div id="app">
     <div class="student-page">
-      <div class="header">
-        <div class="main-title">
-          <p>Личный кабинет</p>
-        </div>
-        <div class="btn" v-show="Auth.login">
-          <button @click="logout" class="exit">ВЫХОД</button>
-        </div>
-      </div>
-      <div class="wrapper">
-        <div class="menu" v-show="Auth.login">
-          <!-- Area for buttons of users -->
-          <cbutton v-for="(item) of buttons" :key="item.content" v-bind:item="item" />
-        </div>
-        <div class="content">
-          <!-- Area for contents of users -->
-        </div>
-      </div>
+     <bar></bar>
     </div>
-    <router-view></router-view>
+    <router-view ></router-view>
   </div>
 </template>
 
 <script>
-import cbutton from "../components/c-buttons";
+import bar from "../components/bar";
 
 export default {
+  name:'app',
   data() {
     return {
-      buttons: [
-        { content: "Расписание занятий" },
-        { content: "Успеваемость" },
-        { content: "Посещаемость" }
-      ]
     };
   },
-  computed: {
-    Auth: function() {
-      return this.$store.getters.getAuth;
-    }
+  mounted(){
+    this.init();
   },
-  beforeCreate() {
-    var Auth = this.$store.getters.getAuth;
-    if(Auth.api_token != null && Auth.user_id !=null)
-    {
-      Auth.login = true
-      this.$store.dispatch('login',Auth)
-      this.$router.push('/account')
+  methods:{
+    init(){
+      Vue.axios.get('auth/init').then(response=>{
+        this.$store.dispatch('login',{'user':response.data.user})
+      })
     }
   },
   components: {
-    cbutton
-  },
-  methods: {
-    logout(){
-        Vue.axios.post("/api/logout", this.Auth)
-        .then(response => {
-          var otvet = response.data
-          if (otvet.success) {
-            this.$store.dispatch('logout',null)
-            this.$router.push('/');
-          }
-        })
-        .catch(error => {
-          console.log(error.response.data.errors);
-          this.errors = error.response.data.errors;
-        });
-    }
+    bar
   }
 };
 </script>
