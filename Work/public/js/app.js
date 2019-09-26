@@ -14168,7 +14168,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
   mode: 'history',
-  base: Object({"NODE_ENV":"development"}).BASE_URL,
+  base: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BASE_URL,
   routes: [{
     path: '/',
     name: 'Home',
@@ -17243,7 +17243,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "slide-fade", mode: "in-out" } }, [
-    _c("div", { key: _vm.wrapper, staticClass: "wrapper" }, [
+    _c("div", { staticClass: "wrapper" }, [
       _c("div", { staticClass: "container-login100" }, [
         _c("div", { staticClass: "wrap-login100" }, [
           _c(
