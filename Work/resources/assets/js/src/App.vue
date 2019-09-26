@@ -47,7 +47,7 @@ export default {
     {
       Auth.login = true
       this.$store.dispatch('login',Auth)
-      this.$router.push('/account'+Auth.api_token)
+      this.$router.push('/account')
     }
   },
   components: {

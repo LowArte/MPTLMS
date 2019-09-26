@@ -20,9 +20,8 @@ export default new Router({
       component: Restore
     },
     {
-      path: '/account:token',
+      path: '/account',
       name: 'account',
-      props: true,
       component: Account
     }
   ]

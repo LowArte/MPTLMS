@@ -56,7 +56,7 @@ export default {
         .then(response => {
           if (response.data.success) {
             this.$store.dispatch('login',response.data.user)
-            $router.push('/account'+response.data.user.api_token);
+            $router.push('/account');
           }
         })
         .catch(error => {
