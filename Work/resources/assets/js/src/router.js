@@ -15,7 +15,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'Home',
-      component: Constructor_Schedule
+      component: Home
     },
     {
       path: '/restore',

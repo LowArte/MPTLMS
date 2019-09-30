@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class Schedule extends Controller
 {
     /*
-        Функция get запроса для получения рассписания
+        Функция get запроса для получения расписания
     */
     public function init()
     {
@@ -45,8 +45,8 @@ class Schedule extends Controller
         return json_encode($contents);
     }
     /*
-        Функция post запроса для сохранения рассписания
-        Рассписание находится в поле schedule
+        Функция post запроса для сохранения расписания
+        Расписание находится в поле schedule
     */
     public function save(Request $request){
         Storage::put('schedule/schedule.json',$request->schedule);
