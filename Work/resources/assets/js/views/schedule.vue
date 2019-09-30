@@ -81,7 +81,7 @@
 export default {
   data() {
     return {
-      message: 'Жопа',
+      message: 'Тест',
       typeMonth: 'type ecwd-selected-mode',
       typeList: 'type',
       typeWeek: 'type',
