@@ -1,50 +1,33 @@
 <template>
   <div id="app">
     <div class="student-page">
-      <div class="header">
-        <div class="main-title">
-          <p>Личный кабинет</p>
-        </div>
-        <div class="btn" v-show="visible" @click="onClick()">
-          <button class="exit">ВЫХОД</button>
-        </div>
-      </div>
-      <div class="wrapper">
-        <div class="menu" v-show="visible">
-          <!-- Area for buttons of users -->
-          <cbutton v-for="(item) of buttons" :key="item.content" v-bind:item="item" />
-        </div>
-        <div class="content">
-          <!-- Area for contents of users -->
-        </div>
-      </div>
+     <bar></bar>
     </div>
-      <router-view></router-view>
+    <router-view ></router-view>
   </div>
 </template>
 
 <script>
-import cbutton from "../components/c-buttons";
+import bar from "../components/bar";
+
 export default {
+  name:'app',
   data() {
     return {
-      visible: false,
-      buttons: [
-        { content: "Расписание занятий" },
-        { content: "Успеваемость" },
-        { content: "Посещаемость" }
-      ]
     };
   },
-  components: {
-    cbutton
+  mounted(){
+    this.init();
   },
   methods:{
-    onClick() {
-      this.$router.push("/login");
-      this.visible = false;
-      return true;
-    }    
+    init(){
+      Vue.axios.get('auth/init').then(response=>{
+        this.$store.dispatch('login',{'user':response.data.user})
+      })
+    }
+  },
+  components: {
+    bar
   }
 };
 </script>

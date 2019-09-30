@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |*/
 
-Route::post('/login', 'Auth\AuthController@login');
-Route::post('/logout', 'Auth\AuthController@logout');
+
+
+
 

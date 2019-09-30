@@ -1,38 +1,62 @@
 <template>
   <transition name="slide-fade" mode="in-out">
-    <div class="wrapper" :key="wrapper">
-        <div class="container-login100">
-          <div class="wrap-login100">
-            <div class="login100-form-title" :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}">
-              <span class="font-title non-selected">Личный кабинет</span>
-              <a class="txt2 non-selected" href="http://www.mpt.ru">Московский приборостроительный техникум</a>
-            </div>      
-              <form class="login100-form validate-form">
-                <div class="wrap-input100 m-b-26">
-                  <span class="label-input100 non-selected">Email</span>
-                  <input class="input100" type="text" v-model="form.login_email" placeholder="Введите Email" required/>
-                  <span class="focus-input100"></span>
-                </div>
-                <div class="wrap-input100 m-b-18">
-                  <span class="label-input100 non-selected">Пароль</span>
-                  <input class="input100" type="password" v-model="form.password" placeholder="Введите пароль" @keyup="onKeyup" required/>
-                  <span class="focus-input100"></span>
-                </div>
-                <div class="flex-sb-m w-full p-b-30">
-                  <div>
-                    <div class="container-login100-form-btn">
-                      <button class="login100-form-btn" @click="onLogin">ВОЙТИ</button>
-                    </div>
-                  </div>
-                  <div>
-                    <p class="txt1">
-                      <a href="#" class="txt1 non-selected" style="padding: 0 0 0 5px;" @click="onRestore">Не можете войти?</a>
-                    </p>
-                  </div>
-                </div>
-              </form>
+    <div class="wrapper">
+      <div class="container-login100">
+        <div class="wrap-login100">
+          <div
+            class="login100-form-title"
+            :style="{'background-image': `url(${require('../assets/bg-03.jpg')})`}"
+          >
+            <span class="font-title non-selected">Личный кабинет</span>
+            <a
+              class="txt2 non-selected"
+              href="http://www.mpt.ru"
+            >Московский приборостроительный техникум</a>
           </div>
+          <form @submit.prevent class="login100-form validate-form">
+            <div class="wrap-input100 m-b-26">
+              <span class="label-input100 non-selected">Email</span>
+              <input
+                class="input100"
+                type="text"
+                v-model="form.login_email"
+                placeholder="Введите Email"
+                required
+              />
+              <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 m-b-18">
+              <span class="label-input100 non-selected">Пароль</span>
+              <input
+                class="input100"
+                type="password"
+                v-model="form.password"
+                placeholder="Введите пароль"
+                @keyup="onKeyup"
+                required
+              />
+              <span class="focus-input100"></span>
+            </div>
+            <div class="flex-sb-m w-full p-b-30">
+              <div>
+                <div class="container-login100-form-btn">
+                  <button class="login100-form-btn" @click="onLogin">ВОЙТИ</button>
+                </div>
+              </div>
+              <div>
+                <p class="txt1">
+                  <a
+                    href="#"
+                    class="txt1 non-selected"
+                    style="padding: 0 0 0 5px;"
+                    @click="onRestore"
+                  >Не можете войти?</a>
+                </p>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
   </transition>
 </template>
@@ -42,29 +66,27 @@ export default {
   data() {
     return {
       form: {
-        login_email: null,
-        password: null
+        login_email: "",
+        password: ""
       },
       errors: {}
     };
   },
   methods: {
     onLogin() {
-      this.errors = {};
+      this.errors ={}
       Vue.axios
-        .post("/api/login", this.form)
-        .then(response => {
-          if (response.data.success) {
-            console.log(response.data);
-          }
+        .post("auth/login", this.form)
+        .then(responce => {
+          this.$store.dispatch("login", { user: responce.data.user });
+          this.$router.push("/");
         })
         .catch(error => {
-          console.log(error.response.data.errors);
-          this.errors = error.response.data.errors;
+          console.log(error)
         });
     },
     checkError(field) {
-      return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
+      //return this.errors.hasOwnProperty(field) ? this.errors[field] : [];
     },
     onKeyup(e) {
       if (e.code === "Enter") {
@@ -79,14 +101,13 @@ export default {
 </script>
 
 <style>
-
 /* Animation */
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active до версии 2.1.8 */ {

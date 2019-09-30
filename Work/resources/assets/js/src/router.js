@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Account from '../views/account.vue'
 import Schedule from '../views/schedule.vue'
 import Restore from '../views/account-res.vue'
+import Home from '../views/Home'
+import Login from '../views/account'
 
 Vue.use(Router)
 
@@ -11,13 +13,23 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [{
       path: '/',
-      name: '',
-      component: Schedule
+      name: 'Home',
+      component: Home
     },
     {
       path: '/restore',
-      name: '',
+      name: 'restore',
       component: Restore
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: Account
     }
   ]
 })
