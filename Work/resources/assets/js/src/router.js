@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Account from '../views/account.vue'
+import Schedule from '../views/schedule.vue'
 import Restore from '../views/account-res.vue'
 
 Vue.use(Router)
@@ -11,7 +12,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: '',
-      component: Account
+      component: Schedule
     },
     {
       path: '/restore',
