@@ -19,11 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('login_stud')->unique();
             $table->string('password');
             $table->string('password_notHash');
+            $table->string('name');
+            $table->string('secName');
+            $table->string('thirdName');
             $table->string('api_token')->nullable();
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('users_posts');
             $table->timestamps();
-            $table->rememberToken();
             $table->softDeletes();
         });
     }

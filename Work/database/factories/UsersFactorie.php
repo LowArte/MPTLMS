@@ -7,6 +7,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Users::class, function (Faker $faker) {
     $pass = $faker->password();
     return [
+        'name'=>$faker->firstName(),
+        'secName'=>$faker->lastName(),
+        'thirdName'=>$faker->lastName(),
         'login_email'=>$faker->email(),
         'login_stud'=>$faker->creditCardNumber(),
         'password' =>Hash::make($pass),
