@@ -18,21 +18,20 @@ class Users extends Model implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail,SoftDelete;
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, SoftDelete;
 
     protected $fillable = [
-        'login_email', 'login_stud', 'password', 'api_token', 'post_id'
+        'login_email', 'post_id'
     ];
 
-    protected $hidden = [
-        'password', 'remember_token', 'api_token'
+    protected $guarded  = [
+        'password', 'password_notHash', 'created_at', 'deleted_at', 'updated_at', 'login_stud', 'id'
     ];
 
-    public function __construct()
+    public function __construct($attributes = array())
     {
-        parent::__construct();
+        parent::__construct($attributes);
     }
-
     public static function whereEmail($var = null)
     {
         $object = Users::all()->where('login_email', $var);
@@ -43,13 +42,5 @@ class Users extends Model implements
     {
         $object = Users::all()->where('id', $var);
         return $object;
-    }
-
-    public function info()
-    {
-        return [
-            'user_id' => $this->id,
-            'api_token' => $this->api_token
-        ];
     }
 }

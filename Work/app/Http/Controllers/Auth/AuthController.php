@@ -11,12 +11,21 @@ use Hash;
 
 class AuthController extends Controller
 {
+    /*  
+        Функция get запроса для получения пользователя от системы, 
+        если он был авторизован 
+    */
     public function init()
     { 
         $user = Auth::user();
         return response()->json(['user'=>$user],200);
     }
-
+    /*
+        Функция post запроса для авторизации пользователя в системе
+        Поля: как в БД
+            login_email
+            password
+    */
     public function login(Request $request)
     {
         Debugbar::info($request);
@@ -36,8 +45,10 @@ class AuthController extends Controller
             ], 422);
         }
     }
-
-    public function logout(Request $request)
+    /*
+        Функция post запроса для выхода пользователя из системы
+    */
+    public function logout()
     {
         $user = Auth::user();
         $user->api_token = null;

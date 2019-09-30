@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UsersPost extends Model
+class Discipline extends Model
 {
     public function __construct($attributes = array())
     {

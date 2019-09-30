@@ -5,12 +5,12 @@
         <p>Личный кабинет</p>
       </div>
       <div class="btn">
-        <button v-if="user.user" @click="logout" class="exit">ВЫХОД</button>
+        <button v-if="auth.user" @click="logout" class="exit">ВЫХОД</button>
         <button v-else @click="login" class="exit">Войти</button>
       </div>
     </div>
     <div class="wrapper">
-      <div v-if="user.user" class="menu">
+      <div v-if="auth.user" class="menu">
         <!-- Area for buttons of users -->
         <cbutton v-for="(item) of buttons" :key="item.content" v-bind:item="item" />
       </div>
@@ -35,7 +35,7 @@ export default {
     };
   },
   computed:{
-    user(){
+    auth(){
       return this.$store.getters.getAuth
     }
   },

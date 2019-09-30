@@ -15,9 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('auth')->group(function(){
+Route::prefix('auth')->group(function () {
     Route::get('init', 'Auth\AuthController@init');
 
     Route::post('login', 'Auth\AuthController@login');
     Route::post('logout', 'Auth\AuthController@logout');
+});
+
+Route::prefix('schedule')->group(function () {
+    Route::get('init', 'Schedule\Schedule@init');
+
+    Route::post('save', 'Schedule\Schedule@save');
 });
