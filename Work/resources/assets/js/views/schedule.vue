@@ -1,5 +1,38 @@
 <template>
   <div class="wrapper">
+    <div class="mainbutton">
+      <input class="inputotdelenie" type="text" placeholder="Отделение">
+      <input class="inputgroup" type="text" placeholder="Отделение">
+      <input class="inputchislitel" type="button" value="Числитель">
+      <input class="inputtoday" type="button" value="Сегодня">
+    </div>
+    <hr />
+   
+  </div>
+</template>
+
+<script type="text/javascript">
+
+</script>
+
+<style scoped>
+/***General*/
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+.wrapper{
+  display: block;
+}
+</style>
+
+
+
+
+<!--<template>
+  <div class="wrapper">
     <div class="container-schedule">
       <div class="wrap-schedule">
 
@@ -360,7 +393,6 @@ element.style {
 /***Calendar Month***/
 
 
-
 /***Main***/
 .neve-main {
     margin-top: 0px!important;
@@ -394,4 +426,4 @@ html {
 .single-post-container  {
     margin-top: 30px;
 }
-</style>
+</style>-->
