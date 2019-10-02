@@ -23,7 +23,7 @@ class Schedule extends Controller
             $contents = $this->generateDefaultJSON();
             Storage::put('schedule/schedule.json',$contents);
         }
-        return response()->json(json_decode( $contents),200);
+        return response()->json(json_decode($contents),200);
     }
     /*
         Генерация стандартного json файла 
@@ -35,7 +35,7 @@ class Schedule extends Controller
         $contents = array();
         $les = array('Teacher'=>"",'Lesson'=>"");//Формат одной пары
         $lesons = array('1'=>$les,'2'=>$les,'3'=>$les,'4'=>$les,'5'=>$les,'6'=>$les,'7'=>$les);//Формат дня
-        $rasp = array('Place'=>"",'Monday'=>$lesons,'Tuesday'=>$lesons,'Wednes­day'=>$lesons,'Thursday'=>$lesons,'Friday'=>$lesons,'Saturday'=>$lesons); // Формат недели
+        $rasp = array('Place'=>"",'Понедельник'=>$lesons,'Вторник'=>$lesons,'Среда'=>$lesons,'Четверг'=>$lesons,'Пятница'=>$lesons,'Суббота'=>$lesons); // Формат недели
         foreach(Departament::get() as $departament){//Для всех специальностей
             $contents[$departament['dep_name']] = array();
             foreach(Group::where('departaments_id',$departament['id'])->get() as $group){   //Для каждой группы      
