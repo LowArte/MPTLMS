@@ -1,22 +1,94 @@
 <template>
   <div class="wrapper">
     <div class="mainbutton">
-      <input class="inputotdelenie" type="text" placeholder="Отделение">
-      <input class="inputgroup" type="text" placeholder="Отделение">
-      <input class="inputchislitel" type="button" value="Числитель">
-      <input class="inputtoday" type="button" value="Сегодня">
+      <input class="iotdelenie" type="text" placeholder="Отделение">
+      <input class="igroup" type="text" placeholder="Отделение">
+      <input class="ichislitel" type="button" value="Числитель">
+      <input class="itoday" type="button" value="Сегодня">
     </div>
     <hr />
-   
+    <div class="mainbody">
+      <div class="dleft">
+        <input class="iopenschedule" type="button" value="Открыть конструктор расписания">
+        <div class="divTable">
+          <div class="divTableBody">
+             <div class="divTableHead">
+                <p>Жопа</p>
+             </div>
+            <div class="divTableRow">
+              <div class="divTableCell">№</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+              <div class="divTableCell">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="vue" class="dright">
+        Правое говно
+        {{dayweek}}
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
-
+import cManyCombo from "../components/many-combobox.vue";
+export default {
+  data() {
+    return {
+      dayweek: 'Понедельник',
+      errors: {}
+    };
+  },
+  methods: {
+    getWeekDay:function() {
+        var date = new Date();
+        date = date || new Date();
+        var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+        var day = date.getDay();
+        return days[day];
+      }
+    }
+};
 </script>
 
 <style scoped>
-/***General*/
+/***Общее*/
 * {
   margin: 0px;
   padding: 0px;
@@ -25,6 +97,117 @@
 }
 .wrapper{
   display: block;
+}
+
+.mainbody:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/***Управляюшие кнопки*/
+.mainbutton{
+  padding: 10px;
+}
+/***Кнопка числитель*/
+.ichislitel{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  align-items: center;
+  text-align: center;
+  color: #FFFDFD;
+
+  width: 15%;
+  background: #2380D7;
+  border: 0.2px solid #7A7A7A;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+/***Кнопка сегодня */
+.itoday{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  align-items: center;
+  text-align: center;
+  color: #FFFDFD;
+
+  width: 15%;
+  background: #D72323;
+  border: 0.2px solid #7A7A7A;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+/***Левый div */
+.dleft{
+  width: 65%;
+  float: left;
+}
+/***Кнока открыть конструкто*/
+.iopenschedule{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 40px;
+  align-items: center;
+  text-align: center;
+
+  color: #FFFFFF;
+
+  width: 100%;
+  border: 0.2px solid #7A7A7A;
+  background: rgba(119, 185, 79, 0.62);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+/***Таблица расписания */
+.divTable{
+  margin-top: 10px;
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+  border: 1px solid #999999;
+	background-color: #EEE;
+	display: table-header-group;
+}
+.divTableHead {
+	border: 1px solid #999999;
+	display: table-header-group;
+	padding: 3px 10px;
+}
+.divTableCell{
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+/***Правый div */
+.dright{
+  width: 35%;
+  float: left;
 }
 </style>
 

@@ -7,6 +7,7 @@ import SurgeonTest from '../views/SurgeonTest.vue'
 import Restore from '../views/account-res.vue'
 import Home from '../views/Home'
 import Login from '../views/account'
+import Many_combobox from '../components/many-combobox'
 
 Vue.use(Router)
 
