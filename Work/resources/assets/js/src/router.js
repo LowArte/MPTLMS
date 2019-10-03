@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Account from '../views/account.vue'
 import Schedule from '../views/schedule.vue'
 import Constructor_Schedule from '../views/constructor_schedule.vue'
+import SurgeonTest from '../views/SurgeonTest.vue'
 import Restore from '../views/account-res.vue'
 import Home from '../views/Home'
 import Login from '../views/account'
@@ -15,7 +16,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'Home',
-      component: Constructor_Schedule
+      component: Schedule
     },
     {
       path: '/restore',

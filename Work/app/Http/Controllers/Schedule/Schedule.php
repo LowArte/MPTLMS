@@ -11,7 +11,7 @@ use DB;
 class Schedule extends Controller
 {
     /*
-        Функция get запроса для получения рассписания
+        Функция get запроса для получения расписания
     */
     public function get_schedule(Request $request)
     {
@@ -22,8 +22,8 @@ class Schedule extends Controller
         return response()->json($schedule[0],200);
     }
     /*
-        Функция post запроса для сохранения рассписания
-        Рассписание находится в поле schedule
+        Функция post запроса для сохранения расписания
+        Расписание находится в поле schedule
     */
     public function save(Request $request){
         Sch::join('groups', 'schedules.group_id', '=', 'groups.id')
