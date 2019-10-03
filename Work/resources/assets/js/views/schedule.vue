@@ -1,4 +1,27 @@
 <template>
+  <div class="schedule">
+    <div class="head">
+      <h2>Расписание занятий</h2>
+      <input class="bcalendar" type="button" value="Календарь">
+    </div>
+    <hr />
+  </div>
+</template>
+
+<script>
+export default {
+  
+}
+</script>
+
+<style>
+.schedule{
+  padding: 20px;
+}
+
+</style>
+
+<!--<template>
   <div class="wrapper">
     <div class="mainbutton">
       <input class="iotdelenie" type="text" placeholder="Отделение">
@@ -75,9 +98,12 @@ export default {
       errors: {}
     };
   },
+  created(){
+    var date = new Date();
+    this.dayweek = getWeekDay(date);
+  },
   methods: {
-    getWeekDay:function() {
-        var date = new Date();
+    getWeekDay:function(date) {
         date = date || new Date();
         var days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
         var day = date.getDay();
