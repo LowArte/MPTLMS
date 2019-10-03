@@ -23,7 +23,13 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('schedule')->group(function () {
-    Route::get('init', 'Schedule\Schedule@init');
+    Route::get('get_schedule', 'Schedule\Schedule@get_schedule');
 
     Route::post('save', 'Schedule\Schedule@save');
+});
+
+Route::prefix('get_data')->group(function () {
+    Route::get('get_all_groups', 'Getter\Getters@get_all_groups');
+    Route::get('get_groups_by_departament', 'Getter\Getters@get_groups_by_departament');
+    Route::get('get_all_departaments', 'Getter\Getters@get_all_departaments');
 });

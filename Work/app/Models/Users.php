@@ -19,7 +19,8 @@ class Users extends Model implements
     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, SoftDelete;
-
+    public $timestamps = true;
+    
     protected $fillable = [
         'login_email', 'post_id'
     ];
