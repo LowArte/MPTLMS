@@ -48,7 +48,8 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .non-selected {
@@ -63,10 +64,8 @@ body {
 /* All for a mobilephons */
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-
 }
 
 @media only screen and (min-width: 480px) and (max-width: 320px) {
-
 }
 </style>
