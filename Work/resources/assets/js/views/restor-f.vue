@@ -1,16 +1,12 @@
 <template>
-  <div class="wrapper">
-    <transition name="slide-fade" mode="in-out">
-      <div style="height: 100%; margin: auto auto;">
-        <div>
-          <div
-            class="logo"
-            :style="{'background': `url(${require('../assets/svg/warning.svg')}) no-repeat`}"
-          ></div>
+    <div v-show="true" class="wrapper">
+      <div v-show="true" style="height: 100%; margin: auto auto;">
+        <div v-show="true">
+          <div v-show="true" class="logo" :style="{'background': `url(${require('../assets/svg/warning.svg')}) no-repeat`}"></div>
         </div>
         <div>
-          <p class="main-text">ВНИМАНИЕ</p>
-          <p class="text">
+          <p v-show="true" class="main-text">ВНИМАНИЕ</p>
+          <p v-show="true" class="text">
             Для проведения процедуры смены пароля
             Вам на почту будет выслано письмо
             с дальнейшими инструкциями.
@@ -19,21 +15,14 @@
           </p>
         </div>
         <div>
-          <form>
-            <input
-              class="put"
-              type="text"
-              v-model="form.login_email"
-              placeholder="Введите Email"
-              required
-            />
-            <button class="send" @click="onLogin">ОТПРАВИТЬ</button>
+          <form v-show="true" @submit.prevent>
+            <input v-show="true" class="put" type="text" v-model="form.login_email" placeholder="Введите Email" required/>
+            <button v-show="true" class="send" @click="onLogin">ОТПРАВИТЬ</button>
           </form>
-          <a href class="back" @click="onBack">Авторизация</a>
+          <a v-show="true" href="#" class="back" @click="onBack">Авторизация</a>
         </div>
       </div>
-    </transition>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -63,22 +52,6 @@ export default {
 </script>
 
 <style scoped>
-/* Animation */
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
-}
-
-/* End of animation block */
-
 .wrapper {
   height: 100%;
   width: 375px;
@@ -127,13 +100,13 @@ export default {
   height: 35px;
   left: calc(50% - 326px / 2);
   top: calc(50% - 35px / 2 + 43.5px);
-  background: #868686;
-  border-radius: 5px;
+  background: #f7f7f7;
+  border-radius: 3px;
   border-width: 1px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
-  color: #ffffff;
+  color: #434343;
 }
 .send {
   position: absolute;
@@ -142,7 +115,7 @@ export default {
   left: calc(50% - 325px / 2 + 0.5px);
   top: calc(50% - 35px / 2 + 104.5px);
   background: #ffffff;
-  border-radius: 5px;
+  border-radius: 3px;
   border-width: 1px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -160,8 +133,12 @@ export default {
   font-size: 13px;
   line-height: 20px;
   text-align: center;
+  text-decoration: none;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.back:hover {
+  color: #F5C525;
 }
 </style>
