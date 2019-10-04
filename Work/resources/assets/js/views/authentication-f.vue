@@ -41,7 +41,7 @@ export default {
         .post("auth/login", this.form)
         .then(responce => {
           this.$store.dispatch("login", { user: responce.data.user });
-          this.$router.push("/");
+          this.$router.push("/main");
         })
         .catch(error => {
           console.log(error);
