@@ -4,40 +4,71 @@
         <nav class="nav">
             <label for="nav-toggle" class="nav-toggle" onclick></label>
             <h2 class="logo"> 
-                <a href="//dbmast.ru/">DBmast.ru</a> 
+                <a href="//mpt.ru/">МПТ</a> 
+                <br>
+                <a href="//mpt.ru/">http://mpt.ru</a> 
             </h2>
             <ul>
-                <li><a href="#1">Один</a></li>
-                <li><a href="#2">Два</a></li>
-                <li><a href="#3">Три</a></li>
+                <li><a href="#1" @click="offSchedule">Главная</a></li>
+                <li><a href="#2" @click="onSchedule">Расписание</a></li>
+                <!--<li><a href="#3">Три</a></li>
                 <li><a href="#4">Четыре</a></li>
                 <li><a href="#5">Пять</a></li>
                 <li><a href="#6">Шесть</a></li>
-                <li><a href="#7">Семь</a></li>
+                <li><a href="#7">Семь</a></li>-->
             </ul>
         </nav>
         <main role="main">
             <article>
                 <header>
                     <h1 class="header__title">Просто Демо:</h1>
-                    <h2>Выдвигающееся боковое меню на чистом CSS</h2> 
+                    <h2>Голова</h2> 
                 </header>
-                <footer>
+                <div class="maincontent">
+                    <cschedule v-if="schedule == true"></cschedule>
+                </div>
+                <!--<footer>
                     <p><a href="http://dbmast.ru/vydvigayushheesya-bokovoe-menyu-na-chistom-css">← Изучить Детали</a></p>
                     <p>сделано с любовью - <a href="https://twitter.com/dobrovoi">@dobrovoi</a></p>
-                </footer>
+                    <p>Подвал</p>
+                </footer>-->
             </article>
         </main>
     </div>
 </template>
 
 <script>
+import cschedule from '../views/schedule.vue';
 export default {
-    
+    data() {
+        return {
+            schedule: false,
+            errors: {}
+        };
+    },
+    methods:{
+        onSchedule(){
+            //if (this.schedule == false)
+            this.schedule = true;
+            // else
+            //  this.schedule = false;
+        },
+        offSchedule(){
+            this.schedule = false;
+        }
+    },
+    components: {
+        cschedule
+    }
 }
 </script>
 
 <style>
+.maincontent{
+    width: 100%;
+    float: left;
+}
+
 /**
  * Переключаемая боковая панель навигации
  * выдвигающаяся по клику слева
@@ -56,7 +87,7 @@ export default {
     /* сдвигаем (прячем) панель относительно левого края страницы */
     left: -320px;
     /* внутренние отступы */
-    padding: 15px 20px;
+    padding: 0px 20px;
     /* плавный переход смещения панели */
     -webkit-transition: left 0.3s;
     -moz-transition: left 0.3s;
@@ -73,13 +104,13 @@ export default {
  * тег <label>
  */
 
-.nav-toggle {
+.nav-toggle{
     /* абсолютно позиционируем */
     position: absolute;
     /* относительно левого края панели */
     left: 320px;
     /* отступ от верхнего края панели */
-    top: 1em;
+    top: 0em;
     /* внутренние отступы */
     padding: 0.5em;
     /* определяем цвет фона переключателя
@@ -548,7 +579,7 @@ a {
     margin: 6px;
     white-space: normal!important;
     word-wrap: break-word;
-		display: inline-block;
+	display: inline-block;
     line-height: 1.25;
     text-align: center;
     vertical-align: middle;

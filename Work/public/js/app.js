@@ -14306,6 +14306,9 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_authentication_f_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_authentication_f_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_home_vue__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_home_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_home_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_schedule_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_schedule_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_schedule_vue__);
+
 
 
 
@@ -17973,7 +17976,7 @@ exports = module.exports = __webpack_require__(2)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic);", ""]);
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/**\r\n * Переключаемая боковая панель навигации\r\n * выдвигающаяся по клику слева\r\n */\n.nav {\r\n    /*  ширна произвольная, не стесняйтесь экспериментировать */\r\n    width: 320px;\r\n    min-width: 320px;\r\n    /* фиксируем и выставляем высоту панели на максимум */\r\n    height: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    margin: 0;\r\n    /* сдвигаем (прячем) панель относительно левого края страницы */\r\n    left: -320px;\r\n    /* внутренние отступы */\r\n    padding: 15px 20px;\r\n    /* плавный переход смещения панели */\r\n    -webkit-transition: left 0.3s;\r\n    transition: left 0.3s;\r\n    /* определяем цвет фона панели */\r\n    background: #16a085;\r\n    /* поверх других элементов */\r\n    z-index: 2000;\n}\r\n\r\n\r\n/**\r\n * Кнопка переключения панели\r\n * тег <label>\r\n */\n.nav-toggle {\r\n    /* абсолютно позиционируем */\r\n    position: absolute;\r\n    /* относительно левого края панели */\r\n    left: 320px;\r\n    /* отступ от верхнего края панели */\r\n    top: 1em;\r\n    /* внутренние отступы */\r\n    padding: 0.5em;\r\n    /* определяем цвет фона переключателя\r\n     * чаще вчего в соответствии с цветом фона панели\r\n    */\r\n    background: inherit;\r\n    /* цвет текста */\r\n    color: #dadada;\r\n    /* вид курсора */\r\n    cursor: pointer;\r\n    /* размер шрифта */\r\n    font-size: 1.2em;\r\n    line-height: 1;\r\n    /* всегда поверх других элементов страницы */\r\n    z-index: 2001;\r\n    /* анимируем цвет текста при наведении */\r\n    -webkit-transition: color .25s ease-in-out;\r\n    transition: color .25s ease-in-out;\n}\r\n\r\n\r\n/* определяем текст кнопки \r\n * символ Unicode (TRIGRAM FOR HEAVEN)\r\n*/\n.nav-toggle:after {\r\n    content: '\\2630';\r\n    text-decoration: none;\n}\r\n\r\n\r\n/* цвет текста при наведении */\n.nav-toggle:hover {\r\n    color: #f4f4f4;\n}\r\n\r\n\r\n/**\r\n * Скрытый чекбокс (флажок)\r\n * невидим и недоступен :)\r\n * имя селектора атрибут флажка\r\n */\n[id='nav-toggle'] {\r\n    position: absolute;\r\n    display: none;\n}\r\n\r\n\r\n/**\r\n * изменение положения переключателя \r\n * при просмотре на мобильных устройствах\r\n * когда навигация раскрыта, распологаем внутри панели\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle {\r\n    left: auto;\r\n    right: 2px;\r\n    top: 1em;\n}\r\n\r\n\r\n/**\r\n * Когда флажок установлен, открывается панель\r\n * используем псевдокласс:checked\r\n */\n[id='nav-toggle']:checked ~ .nav {\r\n    left: 0;\r\n    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    overflow-y: auto;\n}\r\n\r\n\r\n/* \r\n * смещение контента страницы\r\n * на размер ширины панели,\r\n * фишка необязательная, на любителя\r\n*/\n[id='nav-toggle']:checked ~ main > article {\r\n    -webkit-transform: translateX(320px);\r\n    transform: translateX(320px);\n}\r\n\r\n\r\n/*\r\n * изменение символа переключателя,\r\n * привычный крестик (MULTIPLICATION X), \r\n * вы можете испльзовать любой другой значок\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle:after {\r\n    content: '\\2715';\n}\r\n\r\n\r\n/**\r\n * профиксим баг в Android <= 4.1.2\r\n * см: http://timpietrusky.com/advanced-checkbox-hack\r\n */\nbody {\r\n    -webkit-animation: bugfix infinite 1s;\n}\n@-webkit-keyframes bugfix {\nto {\r\n      padding: 0;\n}\n}\r\n\r\n\r\n/**\r\n * позаботьтимся о средних и маленьких экранах\r\n * мобильных устройств\r\n */\n@media screen and (min-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n}\n@media screen and (max-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n.nav {\r\n      width: 100%;\r\n      -webkit-box-shadow: none;\r\n              box-shadow: none\n}\n}\r\n\r\n\r\n/**\r\n * Формируем стиль заголовка (логотип) панели \r\n*/\n.nav h2 {\r\n    width: 90%;\r\n    padding: 0;\r\n    margin: 10px 0;\r\n    text-align: center;\r\n    text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;\r\n    font-size: 1.3em;\r\n    line-height: 1.3em;\r\n    opacity: 0;\r\n    transform: scale(0.1, 0.1);\r\n    -ms-transform: scale(0.1, 0.1);\r\n    -moz-transform: scale(0.1, 0.1);\r\n    -webkit-transform: scale(0.1, 0.1);\r\n    transform-origin: 0% 0%;\r\n    -ms-transform-origin: 0% 0%;\r\n    -moz-transform-origin: 0% 0%;\r\n    -webkit-transform-origin: 0% 0%;\r\n    transition: opacity 0.8s, -webkit-transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s, -webkit-transform 0.8s;\r\n    -ms-transition: opacity 0.8s, -ms-transform 0.8s;\r\n    -moz-transition: opacity 0.8s, -moz-transform 0.8s;\r\n    -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;\n}\n.nav h2 a {\r\n    color: #dadada;\r\n    text-decoration: none;\r\n    text-transform: uppercase;\n}\r\n\r\n\r\n/*плавное появление заголовка (логотипа) при раскрытии панели */\n[id='nav-toggle']:checked ~ .nav h2 {\r\n    opacity: 1;\r\n    transform: scale(1, 1);\r\n    -ms-transform: scale(1, 1);\r\n    -moz-transform: scale(1, 1);\r\n    -webkit-transform: scale(1, 1);\n}\r\n\r\n\r\n/**\r\n * формируем непосредственно само меню\r\n * используем неупорядоченный список для пунктов меню\r\n * прикрутим трансфомации и плавные переходы\r\n */\n.nav > ul {\r\n    display: block;\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.nav > ul > li {\r\n    line-height: 2.5;\r\n    opacity: 0;\r\n    -webkit-transform: translateX(-50%);\r\n    transform: translateX(-50%);\r\n    -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s, -webkit-transform .5s .1s;\n}\n[id='nav-toggle']:checked ~ .nav > ul > li {\r\n    opacity: 1;\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\n}\r\n\r\n\r\n/* определяем интервалы появления пунктов меню */\n.nav > ul > li:nth-child(2) {\r\n    -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s, -webkit-transform .5s .2s;\n}\n.nav > ul > li:nth-child(3) {\r\n    -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s, -webkit-transform .5s .3s;\n}\n.nav > ul > li:nth-child(4) {\r\n    -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s, -webkit-transform .5s .4s;\n}\n.nav > ul > li:nth-child(5) {\r\n    -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s, -webkit-transform .5s .5s;\n}\n.nav > ul > li:nth-child(6) {\r\n    -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s, -webkit-transform .5s .6s;\n}\n.nav > ul > li:nth-child(7) {\r\n    -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s, -webkit-transform .5s .7s;\n}\r\n\r\n\r\n/**\r\n * оформление ссылок пунктов меню\r\n */\n.nav > ul > li > a {\r\n    display: inline-block;\r\n    position: relative;\r\n    padding: 0;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 300;\r\n    font-size: 1.2em;\r\n    color: #dadada;\r\n    width: 100%;\r\n    text-decoration: none;\r\n    /* плавный переход */\r\n    -webkit-transition: color .5s ease, padding .5s ease;\r\n    transition: color .5s ease, padding .5s ease;\n}\r\n\r\n\r\n/**\r\n * состояние ссылок меню при наведении\r\n */\n.nav > ul > li > a:hover,\r\n.nav > ul > li > a:focus {\r\n    color: white;\r\n    padding-left: 15px;\n}\r\n\r\n\r\n/**\r\n * линия подчеркивания ссылок меню\r\n */\n.nav > ul > li > a:before {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    right: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\n.nav > ul > li > a:after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\r\n\r\n\r\n/**\r\n * анимируем линию подчеркивания \r\n * ссылок при наведении\r\n */\n.nav > ul > li > a:hover:before {\r\n    width: 0%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\n.nav > ul > li > a:hover:after {\r\n    width: 0%;\r\n    background: transparent;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\r\n\r\n\r\n/* фон затемнения на основной контент \r\n * при этом элементы блокируютя\r\n * спорная такая фича, если оно вам надо\r\n * просто раскомментируйте\r\n*/\n* {\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\n}\r\n\r\n/**\r\n * Максимальная высота базового контейнера\r\n */\nhtml {\r\n    font-size: 100%;\n}\nhtml,\r\nbody {\r\n    margin: 0;\r\n    padding: 0;\r\n    width: 100%;\r\n    height: 100%;\n}\nbody {\r\n    color: #333;\r\n    font: 1em 'Open Sans', sans-serif;\r\n    background-color: #f1f1f1;\n}\r\n\r\n\r\n/* изменяем полоcу прокрутки */\n::-webkit-scrollbar {\r\n    width: .65em;\n}\n::-webkit-scrollbar-track {\r\n    background-color: rgba(217, 217, 217, 0.75);\n}\n::-webkit-scrollbar-thumb {\r\n    background: rgba(170, 170, 170, 0.6);\r\n    border-radius: 5px;\r\n    -webkit-box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\r\n            box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\n}\nmain {\r\n    max-width: 1024px;\r\n    margin: 0 auto\n}\narticle {\r\n    margin: 0 1em;\r\n    padding: 0 22px;\r\n    -webkit-transition: -webkit-transform .3s;\r\n    transition: -webkit-transform .3s;\r\n    transition: transform .3s;\r\n    transition: transform .3s, -webkit-transform .3s;\n}\nheader {\r\n    margin: 0;\r\n    padding: 0;\r\n    text-align: center;\n}\nfooter {\r\n    font-size: 14px;\r\n    text-align: center\n}\np {\r\n    margin-bottom: 16px;\n}\nhr {\r\n    margin: 22px 0;\r\n    height: 1px;\r\n    border: 0;\r\n    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(rgba(0, 0, 0, 0.75)), to(rgba(0, 0, 0, 0)));\r\n    background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\n}\nh1,\r\nh2 {\r\n    margin-bottom: 22px;\r\n    color: #191919;\r\n    font-weight: 300;\n}\nh1 {\r\n    font-size: 32px;\r\n    line-height: 32px;\n}\nh2 {\r\n    color: #565d66;\r\n    font-size: 26px;\r\n    line-height: 26px;\n}\na {\r\n    color: #006b05;\r\n    text-decoration: none;\n}\n.btn {\r\n    border-radius: 10em;\r\n    border: 0;\r\n    color: #fff!important;\r\n    margin: 6px;\r\n    white-space: normal!important;\r\n    word-wrap: break-word;\r\n\t\tdisplay: inline-block;\r\n    line-height: 1.25;\r\n    text-align: center;\r\n    vertical-align: middle;\r\n    cursor: pointer;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    padding: .5rem 1rem;\r\n    font-size: 1rem;\r\n    font-weight: 400;\r\n    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\r\n    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\n}\n.btn {\r\n\t  -webkit-transition: box-shadow .2s ease-out;\r\n    -webkit-transition: -webkit-box-shadow .2s ease-out;\r\n    transition: -webkit-box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out;\n}\n.btn:hover {\r\n\t  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\r\n\t  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\n}\n.btn-primary {\r\n\t  border: 2px solid #2BBBAD;\r\n    color: #00695c!important;\r\n    background-color: transparent;\n}\n.btn-secondary {\r\n    border: 2px solid #00C851;\r\n    color: #007E33!important;\r\n    background-color: transparent;\n}\r\n", ""]);
+exports.push([module.i, "\n.maincontent{\r\n    width: 100%;\r\n    float: left;\n}\r\n\r\n/**\r\n * Переключаемая боковая панель навигации\r\n * выдвигающаяся по клику слева\r\n */\n.nav {\r\n    /*  ширна произвольная, не стесняйтесь экспериментировать */\r\n    width: 320px;\r\n    min-width: 320px;\r\n    /* фиксируем и выставляем высоту панели на максимум */\r\n    height: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    margin: 0;\r\n    /* сдвигаем (прячем) панель относительно левого края страницы */\r\n    left: -320px;\r\n    /* внутренние отступы */\r\n    padding: 0px 20px;\r\n    /* плавный переход смещения панели */\r\n    -webkit-transition: left 0.3s;\r\n    transition: left 0.3s;\r\n    /* определяем цвет фона панели */\r\n    background: #16a085;\r\n    /* поверх других элементов */\r\n    z-index: 2000;\n}\r\n\r\n\r\n/**\r\n * Кнопка переключения панели\r\n * тег <label>\r\n */\n.nav-toggle{\r\n    /* абсолютно позиционируем */\r\n    position: absolute;\r\n    /* относительно левого края панели */\r\n    left: 320px;\r\n    /* отступ от верхнего края панели */\r\n    top: 0em;\r\n    /* внутренние отступы */\r\n    padding: 0.5em;\r\n    /* определяем цвет фона переключателя\r\n     * чаще вчего в соответствии с цветом фона панели\r\n    */\r\n    background: inherit;\r\n    /* цвет текста */\r\n    color: #dadada;\r\n    /* вид курсора */\r\n    cursor: pointer;\r\n    /* размер шрифта */\r\n    font-size: 1.2em;\r\n    line-height: 1;\r\n    /* всегда поверх других элементов страницы */\r\n    z-index: 2001;\r\n    /* анимируем цвет текста при наведении */\r\n    -webkit-transition: color .25s ease-in-out;\r\n    transition: color .25s ease-in-out;\n}\r\n\r\n\r\n/* определяем текст кнопки \r\n * символ Unicode (TRIGRAM FOR HEAVEN)\r\n*/\n.nav-toggle:after {\r\n    content: '\\2630';\r\n    text-decoration: none;\n}\r\n\r\n\r\n/* цвет текста при наведении */\n.nav-toggle:hover {\r\n    color: #f4f4f4;\n}\r\n\r\n\r\n/**\r\n * Скрытый чекбокс (флажок)\r\n * невидим и недоступен :)\r\n * имя селектора атрибут флажка\r\n */\n[id='nav-toggle'] {\r\n    position: absolute;\r\n    display: none;\n}\r\n\r\n\r\n/**\r\n * изменение положения переключателя \r\n * при просмотре на мобильных устройствах\r\n * когда навигация раскрыта, распологаем внутри панели\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle {\r\n    left: auto;\r\n    right: 2px;\r\n    top: 1em;\n}\r\n\r\n\r\n/**\r\n * Когда флажок установлен, открывается панель\r\n * используем псевдокласс:checked\r\n */\n[id='nav-toggle']:checked ~ .nav {\r\n    left: 0;\r\n    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    overflow-y: auto;\n}\r\n\r\n\r\n/* \r\n * смещение контента страницы\r\n * на размер ширины панели,\r\n * фишка необязательная, на любителя\r\n*/\n[id='nav-toggle']:checked ~ main > article {\r\n    -webkit-transform: translateX(320px);\r\n    transform: translateX(320px);\n}\r\n\r\n\r\n/*\r\n * изменение символа переключателя,\r\n * привычный крестик (MULTIPLICATION X), \r\n * вы можете испльзовать любой другой значок\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle:after {\r\n    content: '\\2715';\n}\r\n\r\n\r\n/**\r\n * профиксим баг в Android <= 4.1.2\r\n * см: http://timpietrusky.com/advanced-checkbox-hack\r\n */\nbody {\r\n    -webkit-animation: bugfix infinite 1s;\n}\n@-webkit-keyframes bugfix {\nto {\r\n      padding: 0;\n}\n}\r\n\r\n\r\n/**\r\n * позаботьтимся о средних и маленьких экранах\r\n * мобильных устройств\r\n */\n@media screen and (min-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n}\n@media screen and (max-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n.nav {\r\n      width: 100%;\r\n      -webkit-box-shadow: none;\r\n              box-shadow: none\n}\n}\r\n\r\n\r\n/**\r\n * Формируем стиль заголовка (логотип) панели \r\n*/\n.nav h2 {\r\n    width: 90%;\r\n    padding: 0;\r\n    margin: 10px 0;\r\n    text-align: center;\r\n    text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;\r\n    font-size: 1.3em;\r\n    line-height: 1.3em;\r\n    opacity: 0;\r\n    transform: scale(0.1, 0.1);\r\n    -ms-transform: scale(0.1, 0.1);\r\n    -moz-transform: scale(0.1, 0.1);\r\n    -webkit-transform: scale(0.1, 0.1);\r\n    transform-origin: 0% 0%;\r\n    -ms-transform-origin: 0% 0%;\r\n    -moz-transform-origin: 0% 0%;\r\n    -webkit-transform-origin: 0% 0%;\r\n    transition: opacity 0.8s, -webkit-transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s, -webkit-transform 0.8s;\r\n    -ms-transition: opacity 0.8s, -ms-transform 0.8s;\r\n    -moz-transition: opacity 0.8s, -moz-transform 0.8s;\r\n    -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;\n}\n.nav h2 a {\r\n    color: #dadada;\r\n    text-decoration: none;\r\n    text-transform: uppercase;\n}\r\n\r\n\r\n/*плавное появление заголовка (логотипа) при раскрытии панели */\n[id='nav-toggle']:checked ~ .nav h2 {\r\n    opacity: 1;\r\n    transform: scale(1, 1);\r\n    -ms-transform: scale(1, 1);\r\n    -moz-transform: scale(1, 1);\r\n    -webkit-transform: scale(1, 1);\n}\r\n\r\n\r\n/**\r\n * формируем непосредственно само меню\r\n * используем неупорядоченный список для пунктов меню\r\n * прикрутим трансфомации и плавные переходы\r\n */\n.nav > ul {\r\n    display: block;\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.nav > ul > li {\r\n    line-height: 2.5;\r\n    opacity: 0;\r\n    -webkit-transform: translateX(-50%);\r\n    transform: translateX(-50%);\r\n    -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s, -webkit-transform .5s .1s;\n}\n[id='nav-toggle']:checked ~ .nav > ul > li {\r\n    opacity: 1;\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\n}\r\n\r\n\r\n/* определяем интервалы появления пунктов меню */\n.nav > ul > li:nth-child(2) {\r\n    -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s, -webkit-transform .5s .2s;\n}\n.nav > ul > li:nth-child(3) {\r\n    -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s, -webkit-transform .5s .3s;\n}\n.nav > ul > li:nth-child(4) {\r\n    -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s, -webkit-transform .5s .4s;\n}\n.nav > ul > li:nth-child(5) {\r\n    -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s, -webkit-transform .5s .5s;\n}\n.nav > ul > li:nth-child(6) {\r\n    -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s, -webkit-transform .5s .6s;\n}\n.nav > ul > li:nth-child(7) {\r\n    -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s, -webkit-transform .5s .7s;\n}\r\n\r\n\r\n/**\r\n * оформление ссылок пунктов меню\r\n */\n.nav > ul > li > a {\r\n    display: inline-block;\r\n    position: relative;\r\n    padding: 0;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 300;\r\n    font-size: 1.2em;\r\n    color: #dadada;\r\n    width: 100%;\r\n    text-decoration: none;\r\n    /* плавный переход */\r\n    -webkit-transition: color .5s ease, padding .5s ease;\r\n    transition: color .5s ease, padding .5s ease;\n}\r\n\r\n\r\n/**\r\n * состояние ссылок меню при наведении\r\n */\n.nav > ul > li > a:hover,\r\n.nav > ul > li > a:focus {\r\n    color: white;\r\n    padding-left: 15px;\n}\r\n\r\n\r\n/**\r\n * линия подчеркивания ссылок меню\r\n */\n.nav > ul > li > a:before {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    right: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\n.nav > ul > li > a:after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\r\n\r\n\r\n/**\r\n * анимируем линию подчеркивания \r\n * ссылок при наведении\r\n */\n.nav > ul > li > a:hover:before {\r\n    width: 0%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\n.nav > ul > li > a:hover:after {\r\n    width: 0%;\r\n    background: transparent;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\r\n\r\n\r\n/* фон затемнения на основной контент \r\n * при этом элементы блокируютя\r\n * спорная такая фича, если оно вам надо\r\n * просто раскомментируйте\r\n*/\n* {\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\n}\r\n\r\n/**\r\n * Максимальная высота базового контейнера\r\n */\nhtml {\r\n    font-size: 100%;\n}\nhtml,\r\nbody {\r\n    margin: 0;\r\n    padding: 0;\r\n    width: 100%;\r\n    height: 100%;\n}\nbody {\r\n    color: #333;\r\n    font: 1em 'Open Sans', sans-serif;\r\n    background-color: #f1f1f1;\n}\r\n\r\n\r\n/* изменяем полоcу прокрутки */\n::-webkit-scrollbar {\r\n    width: .65em;\n}\n::-webkit-scrollbar-track {\r\n    background-color: rgba(217, 217, 217, 0.75);\n}\n::-webkit-scrollbar-thumb {\r\n    background: rgba(170, 170, 170, 0.6);\r\n    border-radius: 5px;\r\n    -webkit-box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\r\n            box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\n}\nmain {\r\n    max-width: 1024px;\r\n    margin: 0 auto\n}\narticle {\r\n    margin: 0 1em;\r\n    padding: 0 22px;\r\n    -webkit-transition: -webkit-transform .3s;\r\n    transition: -webkit-transform .3s;\r\n    transition: transform .3s;\r\n    transition: transform .3s, -webkit-transform .3s;\n}\nheader {\r\n    margin: 0;\r\n    padding: 0;\r\n    text-align: center;\n}\nfooter {\r\n    font-size: 14px;\r\n    text-align: center\n}\np {\r\n    margin-bottom: 16px;\n}\nhr {\r\n    margin: 22px 0;\r\n    height: 1px;\r\n    border: 0;\r\n    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(rgba(0, 0, 0, 0.75)), to(rgba(0, 0, 0, 0)));\r\n    background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\n}\nh1,\r\nh2 {\r\n    margin-bottom: 22px;\r\n    color: #191919;\r\n    font-weight: 300;\n}\nh1 {\r\n    font-size: 32px;\r\n    line-height: 32px;\n}\nh2 {\r\n    color: #565d66;\r\n    font-size: 26px;\r\n    line-height: 26px;\n}\na {\r\n    color: #006b05;\r\n    text-decoration: none;\n}\n.btn {\r\n    border-radius: 10em;\r\n    border: 0;\r\n    color: #fff!important;\r\n    margin: 6px;\r\n    white-space: normal!important;\r\n    word-wrap: break-word;\r\n\tdisplay: inline-block;\r\n    line-height: 1.25;\r\n    text-align: center;\r\n    vertical-align: middle;\r\n    cursor: pointer;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    padding: .5rem 1rem;\r\n    font-size: 1rem;\r\n    font-weight: 400;\r\n    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\r\n    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\n}\n.btn {\r\n\t  -webkit-transition: box-shadow .2s ease-out;\r\n    -webkit-transition: -webkit-box-shadow .2s ease-out;\r\n    transition: -webkit-box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out;\n}\n.btn:hover {\r\n\t  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\r\n\t  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\n}\n.btn-primary {\r\n\t  border: 2px solid #2BBBAD;\r\n    color: #00695c!important;\r\n    background-color: transparent;\n}\n.btn-secondary {\r\n    border: 2px solid #00C851;\r\n    color: #007E33!important;\r\n    background-color: transparent;\n}\r\n", ""]);
 
 // exports
 
@@ -17984,6 +17987,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_schedule_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_schedule_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__views_schedule_vue__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18018,7 +18029,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            schedule: false,
+            errors: {}
+        };
+    },
+
+    methods: {
+        onSchedule: function onSchedule() {
+            //if (this.schedule == false)
+            this.schedule = true;
+            // else
+            //  this.schedule = false;
+        },
+        offSchedule: function offSchedule() {
+            this.schedule = false;
+        }
+    },
+    components: {
+        cschedule: __WEBPACK_IMPORTED_MODULE_0__views_schedule_vue___default.a
+    }
+});
 
 /***/ }),
 /* 52 */
@@ -18028,78 +18062,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "main-p" }, [
+    _c("input", { attrs: { type: "checkbox", id: "nav-toggle", hidden: "" } }),
+    _vm._v(" "),
+    _c("nav", { staticClass: "nav" }, [
+      _c("label", {
+        staticClass: "nav-toggle",
+        attrs: { for: "nav-toggle", onclick: "" }
+      }),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("ul", [
+        _c("li", [
+          _c("a", { attrs: { href: "#1" }, on: { click: _vm.offSchedule } }, [
+            _vm._v("Главная")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "#2" }, on: { click: _vm.onSchedule } }, [
+            _vm._v("Расписание")
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("main", { attrs: { role: "main" } }, [
+      _c("article", [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "maincontent" },
+          [_vm.schedule == true ? _c("cschedule") : _vm._e()],
+          1
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "main-p" }, [
-      _c("input", {
-        attrs: { type: "checkbox", id: "nav-toggle", hidden: "" }
-      }),
+    return _c("h2", { staticClass: "logo" }, [
+      _c("a", { attrs: { href: "//mpt.ru/" } }, [_vm._v("МПТ")]),
       _vm._v(" "),
-      _c("nav", { staticClass: "nav" }, [
-        _c("label", {
-          staticClass: "nav-toggle",
-          attrs: { for: "nav-toggle", onclick: "" }
-        }),
-        _vm._v(" "),
-        _c("h2", { staticClass: "logo" }, [
-          _c("a", { attrs: { href: "//dbmast.ru/" } }, [_vm._v("DBmast.ru")])
-        ]),
-        _vm._v(" "),
-        _c("ul", [
-          _c("li", [_c("a", { attrs: { href: "#1" } }, [_vm._v("Один")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#2" } }, [_vm._v("Два")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#3" } }, [_vm._v("Три")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#4" } }, [_vm._v("Четыре")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#5" } }, [_vm._v("Пять")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#6" } }, [_vm._v("Шесть")])]),
-          _vm._v(" "),
-          _c("li", [_c("a", { attrs: { href: "#7" } }, [_vm._v("Семь")])])
-        ])
-      ]),
+      _c("br"),
       _vm._v(" "),
-      _c("main", { attrs: { role: "main" } }, [
-        _c("article", [
-          _c("header", [
-            _c("h1", { staticClass: "header__title" }, [
-              _vm._v("Просто Демо:")
-            ]),
-            _vm._v(" "),
-            _c("h2", [_vm._v("Выдвигающееся боковое меню на чистом CSS")])
-          ]),
-          _vm._v(" "),
-          _c("footer", [
-            _c("p", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href:
-                      "http://dbmast.ru/vydvigayushheesya-bokovoe-menyu-na-chistom-css"
-                  }
-                },
-                [_vm._v("← Изучить Детали")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("сделано с любовью - "),
-              _c("a", { attrs: { href: "https://twitter.com/dobrovoi" } }, [
-                _vm._v("@dobrovoi")
-              ])
-            ])
-          ])
-        ])
-      ])
+      _c("a", { attrs: { href: "//mpt.ru/" } }, [_vm._v("http://mpt.ru")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", [
+      _c("h1", { staticClass: "header__title" }, [_vm._v("Просто Демо:")]),
+      _vm._v(" "),
+      _c("h2", [_vm._v("Голова")])
     ])
   }
 ]
@@ -19982,6 +20005,208 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(84)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(86)
+/* template */
+var __vue_template__ = __webpack_require__(87)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/schedule.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5f888bca", Component.options)
+  } else {
+    hotAPI.reload("data-v-5f888bca", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(85);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("75e340fe", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f888bca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./schedule.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f888bca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./schedule.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nhtml,\r\nbody {\r\n  background-color: #ffffff;\n}\n.dayweek{\r\n  float: left;\r\n  margin: 10px;\r\n  width: 15%;\r\n  border: 1px solid rgb(0, 0, 0);\n}\n.schedule{\r\n  padding: 20px;\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+      errors: {}
+    };
+  }
+});
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "schedule" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "schedulebody" },
+      [
+        _c(
+          "center",
+          _vm._l(_vm.num, function(n) {
+            return _c(
+              "div",
+              { staticClass: "dayweek" },
+              [
+                _c("p", [_vm._v(_vm._s(n))]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm._l(5, function(k) {
+                  return _c("div", { staticClass: "contdayweek" }, [
+                    _c("p", [_vm._v("Содержимое")]),
+                    _vm._v(" "),
+                    _c("hr")
+                  ])
+                })
+              ],
+              2
+            )
+          }),
+          0
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "head" }, [
+      _c("h2", [_vm._v("Расписание занятий")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5f888bca", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
