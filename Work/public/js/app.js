@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var bind = __webpack_require__(7);
-var isBuffer = __webpack_require__(57);
+var bind = __webpack_require__(8);
+var isBuffer = __webpack_require__(62);
 
 /*global toString:true*/
 
@@ -615,7 +615,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(23)
+var listToStyles = __webpack_require__(24)
 
 /*
 type StyleObject = {
@@ -857,7 +857,7 @@ module.exports = g;
 if (false) {
   module.exports = require('./vue.common.prod.js')
 } else {
-  module.exports = __webpack_require__(17)
+  module.exports = __webpack_require__(18)
 }
 
 
@@ -1055,6 +1055,57 @@ process.umask = function() { return 0; };
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(53)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/schedule.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5f888bca", Component.options)
+  } else {
+    hotAPI.reload("data-v-5f888bca", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -1070,7 +1121,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1148,7 +1199,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1160,14 +1211,14 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(62);
+var normalizeHeaderName = __webpack_require__(67);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -1184,10 +1235,10 @@ function getDefaultAdapter() {
   // Only Node.JS has a process variable that is of [[Class]] process
   if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(12);
   } else if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(12);
   }
   return adapter;
 }
@@ -1266,18 +1317,18 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(63);
-var buildURL = __webpack_require__(8);
-var parseHeaders = __webpack_require__(65);
-var isURLSameOrigin = __webpack_require__(66);
-var createError = __webpack_require__(12);
+var settle = __webpack_require__(68);
+var buildURL = __webpack_require__(9);
+var parseHeaders = __webpack_require__(70);
+var isURLSameOrigin = __webpack_require__(71);
+var createError = __webpack_require__(13);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1369,7 +1420,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(67);
+      var cookies = __webpack_require__(72);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1447,13 +1498,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(64);
+var enhanceError = __webpack_require__(69);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1472,7 +1523,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1530,7 +1581,7 @@ module.exports = function mergeConfig(config1, config2) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1556,28 +1607,28 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
-module.exports = __webpack_require__(73);
+__webpack_require__(17);
+module.exports = __webpack_require__(78);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_App_vue__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_App_vue__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__src_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_router__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_store__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_router__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_store__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_axios__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_axios__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_axios__);
 
 
@@ -1599,7 +1650,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 }).$mount('#app');
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13542,10 +13593,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(18).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(19).setImmediate))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -13601,7 +13652,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(19);
+__webpack_require__(20);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -13615,7 +13666,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -13808,19 +13859,19 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(6)))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(21)
+  __webpack_require__(22)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(24)
+var __vue_script__ = __webpack_require__(25)
 /* template */
-var __vue_template__ = __webpack_require__(33)
+var __vue_template__ = __webpack_require__(34)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -13859,13 +13910,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(22);
+var content = __webpack_require__(23);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -13885,7 +13936,7 @@ if(false) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -13899,7 +13950,7 @@ exports.push([module.i, "\n* {\r\n  padding: 0px;\r\n  margin: 0px;\r\n  margin-
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /**
@@ -13932,12 +13983,12 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_bar__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_bar__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_bar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_bar__);
 //
 //
@@ -13972,15 +14023,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(26)
+var __vue_script__ = __webpack_require__(27)
 /* template */
-var __vue_template__ = __webpack_require__(32)
+var __vue_template__ = __webpack_require__(33)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14019,12 +14070,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_c_buttons__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_c_buttons__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_c_buttons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_c_buttons__);
 //
 //
@@ -14083,19 +14134,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(28)
+  __webpack_require__(29)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(30)
+var __vue_script__ = __webpack_require__(31)
 /* template */
-var __vue_template__ = __webpack_require__(31)
+var __vue_template__ = __webpack_require__(32)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -14134,13 +14185,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(29);
+var content = __webpack_require__(30);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -14160,7 +14211,7 @@ if(false) {
 }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -14174,7 +14225,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*[ Button ]*/\n.container-
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14191,7 +14242,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -14215,7 +14266,7 @@ if (false) {
 }
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -14273,7 +14324,7 @@ if (false) {
 }
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -14293,20 +14344,20 @@ if (false) {
 }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_restor_f_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_restor_f_vue__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_restor_f_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_restor_f_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_authentication_f_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_authentication_f_vue__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_authentication_f_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_authentication_f_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_home_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_home_vue__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_home_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_home_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_schedule_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_schedule_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_schedule_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_schedule_vue__);
 
 
@@ -14340,7 +14391,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 }));
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17229,19 +17280,19 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(37)
+  __webpack_require__(38)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(39)
+var __vue_script__ = __webpack_require__(40)
 /* template */
-var __vue_template__ = __webpack_require__(40)
+var __vue_template__ = __webpack_require__(41)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17280,13 +17331,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(39);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17306,7 +17357,7 @@ if(false) {
 }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -17320,7 +17371,7 @@ exports.push([module.i, "\n.wrapper[data-v-1d51ad83] {\r\n  height: 100%;\r\n  w
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17379,7 +17430,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17430,7 +17481,7 @@ var render = function() {
                 style: {
                   background:
                     "url(" +
-                    __webpack_require__(41) +
+                    __webpack_require__(42) +
                     ") no-repeat"
                 }
               })
@@ -17579,25 +17630,25 @@ if (false) {
 }
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/warning.svg?691cca9d8fd2eefac1ef8339b5652f8b";
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(43)
+  __webpack_require__(44)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(45)
+var __vue_script__ = __webpack_require__(46)
 /* template */
-var __vue_template__ = __webpack_require__(46)
+var __vue_template__ = __webpack_require__(47)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17636,13 +17687,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(44);
+var content = __webpack_require__(45);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17662,7 +17713,7 @@ if(false) {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -17670,13 +17721,13 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.page-enter-active,\r\n.page-leave-active {\r\n  -webkit-transition: opacity 0.5s;\r\n  transition: opacity 0.5s;\n}\n.page-enter,\r\n.page-leave-active {\r\n  opacity: 0;\n}\n.wrapper {\r\n  height: 100%;\r\n  width: 375px;\r\n  margin: 0 auto;\n}\n.logo {\r\n  position: absolute;\r\n  width: 165px;\r\n  height: 142px;\r\n  left: calc(50% - 165px / 2 - 0.5px);\r\n  top: calc(50% - 142px / 2 - 160px);\n}\n.main-text {\r\n  position: absolute;\r\n  /* width: 326px; */\r\n  height: 42px;\r\n  left: calc(50% - 326px / 2);\r\n  top: calc(50% - 42px / 2 - 56px);\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-style: normal;\r\n  font-weight: 500;\r\n  font-size: 36px;\r\n  line-height: 42px;\r\n  text-align: center;\r\n  color: #ffffff;\n}\n.text {\r\n  position: absolute;\r\n  width: 366px;\r\n  height: 40px;\r\n  left: calc(50% - 366px / 2);\r\n  top: calc(50% - 40px / 2 - 15px);\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-size: 13px;\r\n  line-height: 20px;\r\n  text-align: center;\r\n  color: #ffffff;\n}\n.put {\r\n  position: absolute;\r\n  width: 326px;\r\n  height: 35px;\r\n  left: calc(50% - 326px / 2);\r\n  top: calc(50% - 35px / 2 + 40.5px);\r\n  background: #f7f7f7;\r\n  border-radius: 3px;\r\n  border-width: 1px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  text-align: center;\r\n  color: #434343;\n}\n.put-p {\r\n  position: absolute;\r\n  width: 326px;\r\n  height: 35px;\r\n  left: calc(50% - 326px / 2);\r\n  top: calc(50% - 35px / 2 + 93.5px);\r\n  background: #f7f7f7;\r\n  border-radius: 3px;\r\n  border-width: 1px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  text-align: center;\r\n  color: #434343;\n}\n.login {\r\n  position: absolute;\r\n  width: 100px;\r\n  height: 35px;\r\n  left: calc(50% - 100px / 2);\r\n  top: calc(50% - 35px / 2 + 153.5px);\r\n  background: #ffffff;\r\n  border-radius: 3px;\r\n  border-width: 1px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  text-align: center;\n}\n.wtf {\r\n  position: absolute;\r\n  width: 164px;\r\n  height: 20px;\r\n  left: calc(50% - 164px / 2);\r\n  top: calc(50% - 20px / 2 + 192px);\r\n  font-family: Roboto;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-size: 13px;\r\n  line-height: 20px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  color: #ffffff;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.wtf:hover {\r\n  color: #F5C525;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-enter-active,\r\n.page-leave-active {\r\n  -webkit-transition: opacity 0.5s;\r\n  transition: opacity 0.5s;\n}\n.page-enter,\r\n.page-leave-active {\r\n  opacity: 0;\n}\n.wrapper {\r\n  height: 100%;\r\n  width: 375px;\r\n  margin: 0 auto;\n}\n.logo {\r\n  position: absolute;\r\n  width: 165px;\r\n  height: 142px;\r\n  left: calc(50% - 165px / 2 - 0.5px);\r\n  top: calc(50% - 142px / 2 - 160px);\n}\n.main-text {\r\n  position: absolute;\r\n  /* width: 326px; */\r\n  height: 42px;\r\n  left: calc(50% - 326px / 2);\r\n  top: calc(50% - 42px / 2 - 56px);\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-style: normal;\r\n  font-weight: 500;\r\n  font-size: 36px;\r\n  line-height: 42px;\r\n  text-align: center;\r\n  color: #ffffff;\n}\n.text {\r\n  position: absolute;\r\n  width: 366px;\r\n  height: 40px;\r\n  left: calc(50% - 366px / 2);\r\n  top: calc(50% - 40px / 2 - 15px);\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-size: 13px;\r\n  line-height: 20px;\r\n  text-align: center;\r\n  color: #ffffff;\n}\n.put {\r\n  position: absolute;\r\n  width: 326px;\r\n  height: 35px;\r\n  left: calc(50% - 326px / 2);\r\n  top: calc(50% - 35px / 2 + 40.5px);\r\n  background: #f7f7f7;\r\n  border-radius: 3px;\r\n  border-width: 1px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  text-align: center;\r\n  color: #434343;\n}\n.put-p {\r\n  position: absolute;\r\n  width: 326px;\r\n  height: 35px;\r\n  left: calc(50% - 326px / 2);\r\n  top: calc(50% - 35px / 2 + 93.5px);\r\n  background: #f7f7f7;\r\n  border-radius: 3px;\r\n  border-width: 1px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  text-align: center;\r\n  color: #434343;\n}\n.login {\r\n  position: absolute;\r\n  width: 100px;\r\n  height: 35px;\r\n  cursor: pointer;\r\n  left: calc(50% - 100px / 2);\r\n  top: calc(50% - 35px / 2 + 153.5px);\r\n  background: #ffffff;\r\n  border-radius: 3px;\r\n  border-width: 1px;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\r\n  text-align: center;\n}\n.wtf {\r\n  position: absolute;\r\n  width: 164px;\r\n  height: 20px;\r\n  left: calc(50% - 164px / 2);\r\n  top: calc(50% - 20px / 2 + 192px);\r\n  font-family: Roboto;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-size: 13px;\r\n  line-height: 20px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  color: #ffffff;\r\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen,\r\n    Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif;\n}\n.wtf:hover {\r\n  color: #F5C525;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17745,7 +17796,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17760,7 +17811,7 @@ var render = function() {
           style: {
             background:
               "url(" +
-              __webpack_require__(47) +
+              __webpack_require__(48) +
               ") no-repeat"
           }
         })
@@ -17885,25 +17936,25 @@ if (false) {
 }
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/logo-mpt-light.svg?3db0222456d2153b0c1dd57b14bc4ff8";
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(49)
+  __webpack_require__(50)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(51)
+var __vue_script__ = __webpack_require__(52)
 /* template */
-var __vue_template__ = __webpack_require__(52)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17942,13 +17993,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17968,7 +18019,7 @@ if(false) {
 }
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -17976,19 +18027,22 @@ exports = module.exports = __webpack_require__(2)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic);", ""]);
 
 // module
-exports.push([module.i, "\n.maincontent{\r\n    width: 100%;\r\n    float: left;\n}\r\n\r\n/**\r\n * Переключаемая боковая панель навигации\r\n * выдвигающаяся по клику слева\r\n */\n.nav {\r\n    /*  ширна произвольная, не стесняйтесь экспериментировать */\r\n    width: 320px;\r\n    min-width: 320px;\r\n    /* фиксируем и выставляем высоту панели на максимум */\r\n    height: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    margin: 0;\r\n    /* сдвигаем (прячем) панель относительно левого края страницы */\r\n    left: -320px;\r\n    /* внутренние отступы */\r\n    padding: 0px 20px;\r\n    /* плавный переход смещения панели */\r\n    -webkit-transition: left 0.3s;\r\n    transition: left 0.3s;\r\n    /* определяем цвет фона панели */\r\n    background: #16a085;\r\n    /* поверх других элементов */\r\n    z-index: 2000;\n}\r\n\r\n\r\n/**\r\n * Кнопка переключения панели\r\n * тег <label>\r\n */\n.nav-toggle{\r\n    /* абсолютно позиционируем */\r\n    position: absolute;\r\n    /* относительно левого края панели */\r\n    left: 320px;\r\n    /* отступ от верхнего края панели */\r\n    top: 0em;\r\n    /* внутренние отступы */\r\n    padding: 0.5em;\r\n    /* определяем цвет фона переключателя\r\n     * чаще вчего в соответствии с цветом фона панели\r\n    */\r\n    background: inherit;\r\n    /* цвет текста */\r\n    color: #dadada;\r\n    /* вид курсора */\r\n    cursor: pointer;\r\n    /* размер шрифта */\r\n    font-size: 1.2em;\r\n    line-height: 1;\r\n    /* всегда поверх других элементов страницы */\r\n    z-index: 2001;\r\n    /* анимируем цвет текста при наведении */\r\n    -webkit-transition: color .25s ease-in-out;\r\n    transition: color .25s ease-in-out;\n}\r\n\r\n\r\n/* определяем текст кнопки \r\n * символ Unicode (TRIGRAM FOR HEAVEN)\r\n*/\n.nav-toggle:after {\r\n    content: '\\2630';\r\n    text-decoration: none;\n}\r\n\r\n\r\n/* цвет текста при наведении */\n.nav-toggle:hover {\r\n    color: #f4f4f4;\n}\r\n\r\n\r\n/**\r\n * Скрытый чекбокс (флажок)\r\n * невидим и недоступен :)\r\n * имя селектора атрибут флажка\r\n */\n[id='nav-toggle'] {\r\n    position: absolute;\r\n    display: none;\n}\r\n\r\n\r\n/**\r\n * изменение положения переключателя \r\n * при просмотре на мобильных устройствах\r\n * когда навигация раскрыта, распологаем внутри панели\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle {\r\n    left: auto;\r\n    right: 2px;\r\n    top: 1em;\n}\r\n\r\n\r\n/**\r\n * Когда флажок установлен, открывается панель\r\n * используем псевдокласс:checked\r\n */\n[id='nav-toggle']:checked ~ .nav {\r\n    left: 0;\r\n    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    overflow-y: auto;\n}\r\n\r\n\r\n/* \r\n * смещение контента страницы\r\n * на размер ширины панели,\r\n * фишка необязательная, на любителя\r\n*/\n[id='nav-toggle']:checked ~ main > article {\r\n    -webkit-transform: translateX(320px);\r\n    transform: translateX(320px);\n}\r\n\r\n\r\n/*\r\n * изменение символа переключателя,\r\n * привычный крестик (MULTIPLICATION X), \r\n * вы можете испльзовать любой другой значок\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle:after {\r\n    content: '\\2715';\n}\r\n\r\n\r\n/**\r\n * профиксим баг в Android <= 4.1.2\r\n * см: http://timpietrusky.com/advanced-checkbox-hack\r\n */\nbody {\r\n    -webkit-animation: bugfix infinite 1s;\n}\n@-webkit-keyframes bugfix {\nto {\r\n      padding: 0;\n}\n}\r\n\r\n\r\n/**\r\n * позаботьтимся о средних и маленьких экранах\r\n * мобильных устройств\r\n */\n@media screen and (min-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n}\n@media screen and (max-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n.nav {\r\n      width: 100%;\r\n      -webkit-box-shadow: none;\r\n              box-shadow: none\n}\n}\r\n\r\n\r\n/**\r\n * Формируем стиль заголовка (логотип) панели \r\n*/\n.nav h2 {\r\n    width: 90%;\r\n    padding: 0;\r\n    margin: 10px 0;\r\n    text-align: center;\r\n    text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;\r\n    font-size: 1.3em;\r\n    line-height: 1.3em;\r\n    opacity: 0;\r\n    transform: scale(0.1, 0.1);\r\n    -ms-transform: scale(0.1, 0.1);\r\n    -moz-transform: scale(0.1, 0.1);\r\n    -webkit-transform: scale(0.1, 0.1);\r\n    transform-origin: 0% 0%;\r\n    -ms-transform-origin: 0% 0%;\r\n    -moz-transform-origin: 0% 0%;\r\n    -webkit-transform-origin: 0% 0%;\r\n    transition: opacity 0.8s, -webkit-transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s, -webkit-transform 0.8s;\r\n    -ms-transition: opacity 0.8s, -ms-transform 0.8s;\r\n    -moz-transition: opacity 0.8s, -moz-transform 0.8s;\r\n    -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;\n}\n.nav h2 a {\r\n    color: #dadada;\r\n    text-decoration: none;\r\n    text-transform: uppercase;\n}\r\n\r\n\r\n/*плавное появление заголовка (логотипа) при раскрытии панели */\n[id='nav-toggle']:checked ~ .nav h2 {\r\n    opacity: 1;\r\n    transform: scale(1, 1);\r\n    -ms-transform: scale(1, 1);\r\n    -moz-transform: scale(1, 1);\r\n    -webkit-transform: scale(1, 1);\n}\r\n\r\n\r\n/**\r\n * формируем непосредственно само меню\r\n * используем неупорядоченный список для пунктов меню\r\n * прикрутим трансфомации и плавные переходы\r\n */\n.nav > ul {\r\n    display: block;\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.nav > ul > li {\r\n    line-height: 2.5;\r\n    opacity: 0;\r\n    -webkit-transform: translateX(-50%);\r\n    transform: translateX(-50%);\r\n    -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s, -webkit-transform .5s .1s;\n}\n[id='nav-toggle']:checked ~ .nav > ul > li {\r\n    opacity: 1;\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\n}\r\n\r\n\r\n/* определяем интервалы появления пунктов меню */\n.nav > ul > li:nth-child(2) {\r\n    -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s, -webkit-transform .5s .2s;\n}\n.nav > ul > li:nth-child(3) {\r\n    -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s, -webkit-transform .5s .3s;\n}\n.nav > ul > li:nth-child(4) {\r\n    -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s, -webkit-transform .5s .4s;\n}\n.nav > ul > li:nth-child(5) {\r\n    -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s, -webkit-transform .5s .5s;\n}\n.nav > ul > li:nth-child(6) {\r\n    -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s, -webkit-transform .5s .6s;\n}\n.nav > ul > li:nth-child(7) {\r\n    -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s, -webkit-transform .5s .7s;\n}\r\n\r\n\r\n/**\r\n * оформление ссылок пунктов меню\r\n */\n.nav > ul > li > a {\r\n    display: inline-block;\r\n    position: relative;\r\n    padding: 0;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 300;\r\n    font-size: 1.2em;\r\n    color: #dadada;\r\n    width: 100%;\r\n    text-decoration: none;\r\n    /* плавный переход */\r\n    -webkit-transition: color .5s ease, padding .5s ease;\r\n    transition: color .5s ease, padding .5s ease;\n}\r\n\r\n\r\n/**\r\n * состояние ссылок меню при наведении\r\n */\n.nav > ul > li > a:hover,\r\n.nav > ul > li > a:focus {\r\n    color: white;\r\n    padding-left: 15px;\n}\r\n\r\n\r\n/**\r\n * линия подчеркивания ссылок меню\r\n */\n.nav > ul > li > a:before {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    right: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\n.nav > ul > li > a:after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\r\n\r\n\r\n/**\r\n * анимируем линию подчеркивания \r\n * ссылок при наведении\r\n */\n.nav > ul > li > a:hover:before {\r\n    width: 0%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\n.nav > ul > li > a:hover:after {\r\n    width: 0%;\r\n    background: transparent;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\r\n\r\n\r\n/* фон затемнения на основной контент \r\n * при этом элементы блокируютя\r\n * спорная такая фича, если оно вам надо\r\n * просто раскомментируйте\r\n*/\n* {\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\n}\r\n\r\n/**\r\n * Максимальная высота базового контейнера\r\n */\nhtml {\r\n    font-size: 100%;\n}\nhtml,\r\nbody {\r\n    margin: 0;\r\n    padding: 0;\r\n    width: 100%;\r\n    height: 100%;\n}\nbody {\r\n    color: #333;\r\n    font: 1em 'Open Sans', sans-serif;\r\n    background-color: #f1f1f1;\n}\r\n\r\n\r\n/* изменяем полоcу прокрутки */\n::-webkit-scrollbar {\r\n    width: .65em;\n}\n::-webkit-scrollbar-track {\r\n    background-color: rgba(217, 217, 217, 0.75);\n}\n::-webkit-scrollbar-thumb {\r\n    background: rgba(170, 170, 170, 0.6);\r\n    border-radius: 5px;\r\n    -webkit-box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\r\n            box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\n}\nmain {\r\n    max-width: 1024px;\r\n    margin: 0 auto\n}\narticle {\r\n    margin: 0 1em;\r\n    padding: 0 22px;\r\n    -webkit-transition: -webkit-transform .3s;\r\n    transition: -webkit-transform .3s;\r\n    transition: transform .3s;\r\n    transition: transform .3s, -webkit-transform .3s;\n}\nheader {\r\n    margin: 0;\r\n    padding: 0;\r\n    text-align: center;\n}\nfooter {\r\n    font-size: 14px;\r\n    text-align: center\n}\np {\r\n    margin-bottom: 16px;\n}\nhr {\r\n    margin: 22px 0;\r\n    height: 1px;\r\n    border: 0;\r\n    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(rgba(0, 0, 0, 0.75)), to(rgba(0, 0, 0, 0)));\r\n    background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\n}\nh1,\r\nh2 {\r\n    margin-bottom: 22px;\r\n    color: #191919;\r\n    font-weight: 300;\n}\nh1 {\r\n    font-size: 32px;\r\n    line-height: 32px;\n}\nh2 {\r\n    color: #565d66;\r\n    font-size: 26px;\r\n    line-height: 26px;\n}\na {\r\n    color: #006b05;\r\n    text-decoration: none;\n}\n.btn {\r\n    border-radius: 10em;\r\n    border: 0;\r\n    color: #fff!important;\r\n    margin: 6px;\r\n    white-space: normal!important;\r\n    word-wrap: break-word;\r\n\tdisplay: inline-block;\r\n    line-height: 1.25;\r\n    text-align: center;\r\n    vertical-align: middle;\r\n    cursor: pointer;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    padding: .5rem 1rem;\r\n    font-size: 1rem;\r\n    font-weight: 400;\r\n    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\r\n    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\n}\n.btn {\r\n\t  -webkit-transition: box-shadow .2s ease-out;\r\n    -webkit-transition: -webkit-box-shadow .2s ease-out;\r\n    transition: -webkit-box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out;\n}\n.btn:hover {\r\n\t  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\r\n\t  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\n}\n.btn-primary {\r\n\t  border: 2px solid #2BBBAD;\r\n    color: #00695c!important;\r\n    background-color: transparent;\n}\n.btn-secondary {\r\n    border: 2px solid #00C851;\r\n    color: #007E33!important;\r\n    background-color: transparent;\n}\r\n", ""]);
+exports.push([module.i, "\n.maincontent{\r\n    width: 100%;\r\n    float: left;\n}\r\n\r\n/**\r\n * Переключаемая боковая панель навигации\r\n * выдвигающаяся по клику слева\r\n */\n.nav {\r\n    /*  ширна произвольная, не стесняйтесь экспериментировать */\r\n    width: 320px;\r\n    min-width: 320px;\r\n    /* фиксируем и выставляем высоту панели на максимум */\r\n    height: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    margin: 0;\r\n    /* сдвигаем (прячем) панель относительно левого края страницы */\r\n    left: -320px;\r\n    /* внутренние отступы */\r\n    padding: 0px 20px;\r\n    /* плавный переход смещения панели */\r\n    -webkit-transition: left 0.3s;\r\n    transition: left 0.3s;\r\n    /* определяем цвет фона панели \r\n    background: #16a085;*/\r\n    background: #434343;\r\n    /* поверх других элементов */\r\n    z-index: 2000;\n}\r\n/**\r\n * Кнопка переключения панели\r\n * тег <label>\r\n */\n.nav-toggle{\r\n    /* абсолютно позиционируем */\r\n    position: absolute;\r\n    /* относительно левого края панели */\r\n    left: 320px;\r\n    /* отступ от верхнего края панели */\r\n    top: 0em;\r\n    /* внутренние отступы */\r\n    padding: 0.5em;\r\n    /* определяем цвет фона переключателя\r\n     * чаще вчего в соответствии с цветом фона панели\r\n    */\r\n    background: inherit;\r\n    /* цвет текста */\r\n    color: #dadada;\r\n    /* вид курсора */\r\n    cursor: pointer;\r\n    /* размер шрифта */\r\n    font-size: 1.2em;\r\n    line-height: 1;\r\n    /* всегда поверх других элементов страницы */\r\n    z-index: 2001;\r\n    /* анимируем цвет текста при наведении */\r\n    -webkit-transition: color .25s ease-in-out;\r\n    transition: color .25s ease-in-out;\n}\r\n/* определяем текст кнопки \r\n * символ Unicode (TRIGRAM FOR HEAVEN)\r\n*/\n.nav-toggle:after {\r\n    content: '\\2630';\r\n    text-decoration: none;\n}\r\n/* цвет текста при наведении */\n.nav-toggle:hover {\r\n    color: #f4f4f4;\n}\r\n/**\r\n * Скрытый чекбокс (флажок)\r\n * невидим и недоступен :)\r\n * имя селектора атрибут флажка\r\n */\n[id='nav-toggle'] {\r\n    position: absolute;\r\n    display: none;\n}\r\n/**\r\n * изменение положения переключателя \r\n * при просмотре на мобильных устройствах\r\n * когда навигация раскрыта, распологаем внутри панели\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle {\r\n    left: auto;\r\n    right: 2px;\r\n    top: 0em;\n}\r\n/**\r\n * Когда флажок установлен, открывается панель\r\n * используем псевдокласс:checked\r\n */\n[id='nav-toggle']:checked ~ .nav {\r\n    left: 0;\r\n    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);\r\n    overflow-y: auto;\n}\r\n/* \r\n * смещение контента страницы\r\n * на размер ширины панели,\r\n * фишка необязательная, на любителя\r\n*/\n[id='nav-toggle']:checked ~ main > article {\r\n    -webkit-transform: translateX(320px);\r\n    transform: translateX(320px);\n}\r\n/*\r\n * изменение символа переключателя,\r\n * привычный крестик (MULTIPLICATION X), \r\n * вы можете испльзовать любой другой значок\r\n*/\n[id='nav-toggle']:checked ~ .nav > .nav-toggle:after {\r\n    content: '\\2715';\n}\r\n/**\r\n * профиксим баг в Android <= 4.1.2\r\n * см: http://timpietrusky.com/advanced-checkbox-hack\r\n */\nbody {\r\n    -webkit-animation: bugfix infinite 1s;\n}\n@-webkit-keyframes bugfix {\nto {\r\n      padding: 0;\n}\n}\r\n/**\r\n * позаботьтимся о средних и маленьких экранах\r\n * мобильных устройств\r\n */\n@media screen and (min-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n}\n@media screen and (max-width: 320px) {\nhtml,\r\n    body {\r\n      margin: 0;\r\n      overflow-x: hidden;\n}\n.nav {\r\n      width: 100%;\r\n      -webkit-box-shadow: none;\r\n              box-shadow: none\n}\n}\r\n/**\r\n * Формируем стиль заголовка (логотип) панели \r\n*/\n.nav h2 {\r\n    width: 90%;\r\n    padding: 0;\r\n    margin: 10px 0;\r\n    text-align: center;\r\n    text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;\r\n    font-size: 1.3em;\r\n    line-height: 1.3em;\r\n    opacity: 0;\r\n    transform: scale(0.1, 0.1);\r\n    -ms-transform: scale(0.1, 0.1);\r\n    -moz-transform: scale(0.1, 0.1);\r\n    -webkit-transform: scale(0.1, 0.1);\r\n    transform-origin: 0% 0%;\r\n    -ms-transform-origin: 0% 0%;\r\n    -moz-transform-origin: 0% 0%;\r\n    -webkit-transform-origin: 0% 0%;\r\n    transition: opacity 0.8s, -webkit-transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s;\r\n    transition: opacity 0.8s, transform 0.8s, -webkit-transform 0.8s;\r\n    -ms-transition: opacity 0.8s, -ms-transform 0.8s;\r\n    -moz-transition: opacity 0.8s, -moz-transform 0.8s;\r\n    -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;\n}\n.nav h2 a {\r\n    color: #dadada;\r\n    text-decoration: none;\r\n    text-transform: uppercase;\n}\r\n/*плавное появление заголовка (логотипа) при раскрытии панели */\n[id='nav-toggle']:checked ~ .nav h2 {\r\n    opacity: 1;\r\n    transform: scale(1, 1);\r\n    -ms-transform: scale(1, 1);\r\n    -moz-transform: scale(1, 1);\r\n    -webkit-transform: scale(1, 1);\n}\r\n/**\r\n * формируем непосредственно само меню\r\n * используем неупорядоченный список для пунктов меню\r\n * прикрутим трансфомации и плавные переходы\r\n */\n.nav > ul {\r\n    display: block;\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.nav > ul > li {\r\n    line-height: 2.5;\r\n    opacity: 0;\r\n    -webkit-transform: translateX(-50%);\r\n    transform: translateX(-50%);\r\n    -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, -webkit-transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s;\r\n    transition: opacity .5s .1s, transform .5s .1s, -webkit-transform .5s .1s;\n}\n[id='nav-toggle']:checked ~ .nav > ul > li {\r\n    opacity: 1;\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\n}\r\n/* определяем интервалы появления пунктов меню */\n.nav > ul > li:nth-child(2) {\r\n    -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, -webkit-transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s;\r\n    transition: opacity .5s .2s, transform .5s .2s, -webkit-transform .5s .2s;\n}\n.nav > ul > li:nth-child(3) {\r\n    -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, -webkit-transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s;\r\n    transition: opacity .5s .3s, transform .5s .3s, -webkit-transform .5s .3s;\n}\n.nav > ul > li:nth-child(4) {\r\n    -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, -webkit-transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s;\r\n    transition: opacity .5s .4s, transform .5s .4s, -webkit-transform .5s .4s;\n}\n.nav > ul > li:nth-child(5) {\r\n    -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, -webkit-transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s;\r\n    transition: opacity .5s .5s, transform .5s .5s, -webkit-transform .5s .5s;\n}\n.nav > ul > li:nth-child(6) {\r\n    -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, -webkit-transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s;\r\n    transition: opacity .5s .6s, transform .5s .6s, -webkit-transform .5s .6s;\n}\n.nav > ul > li:nth-child(7) {\r\n    -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, -webkit-transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s;\r\n    transition: opacity .5s .7s, transform .5s .7s, -webkit-transform .5s .7s;\n}\r\n/**\r\n * оформление ссылок пунктов меню\r\n */\n.nav > ul > li > a {\r\n    display: inline-block;\r\n    position: relative;\r\n    padding: 0;\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 300;\r\n    font-size: 1.2em;\r\n    color: #dadada;\r\n    width: 100%;\r\n    text-decoration: none;\r\n    /* плавный переход */\r\n    -webkit-transition: color .5s ease, padding .5s ease;\r\n    transition: color .5s ease, padding .5s ease;\n}\r\n/**\r\n * состояние ссылок меню при наведении\r\n */\n.nav > ul > li > a:hover,\r\n.nav > ul > li > a:focus {\r\n    color: white;\r\n    padding-left: 15px;\n}\r\n/**\r\n * линия подчеркивания ссылок меню\r\n */\n.nav > ul > li > a:before {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    right: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\r\n/***Линии */\n.nav > ul > li > a:after {\r\n    content: '';\r\n    display: block;\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    height: 1px;\r\n    width: 100%;\r\n    background: #3bc1a0;\r\n    /*background: #cddbd8;*/\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\r\n/**\r\n * анимируем линию подчеркивания \r\n * ссылок при наведении\r\n */\n.nav > ul > li > a:hover:before {\r\n    width: 0%;\r\n    background: #3bc1a0;\r\n    -webkit-transition: width .5s ease;\r\n    transition: width .5s ease;\n}\n.nav > ul > li > a:hover:after {\r\n    width: 0%;\r\n    background: transparent;\r\n    -webkit-transition: width 0s ease;\r\n    transition: width 0s ease;\n}\r\n/* фон затемнения на основной контент \r\n * при этом элементы блокируютя\r\n * спорная такая фича, если оно вам надо\r\n * просто раскомментируйте\r\n*/\n* {\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\n}\r\n/**\r\n * Максимальная высота базового контейнера\r\n */\nhtml {\r\n    font-size: 100%;\n}\nhtml,\r\nbody {\r\n    margin: 0;\r\n    padding: 0;\r\n    width: 100%;\r\n    height: 100%;\n}\nbody {\r\n    color: #333;\r\n    font: 1em 'Open Sans', sans-serif;\r\n    background-color: #f1f1f1;\n}\r\n/* изменяем полоcу прокрутки */\n::-webkit-scrollbar {\r\n    width: .65em;\n}\n::-webkit-scrollbar-track {\r\n    /*background-color: rgba(217, 217, 217, 0.75);*/\r\n    *background-color: #434343;\n}\n::-webkit-scrollbar-thumb {\r\n    /*background: rgba(170, 170, 170, 0.6);*/\r\n    *background-color: #434343;\r\n    border-radius: 5px;\r\n    -webkit-box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\r\n            box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);\n}\nmain {\r\n    max-width: 100%;\r\n    margin: 0 auto\n}\narticle {\r\n    margin-left: 1em;\r\n    padding: 0px;\r\n    -webkit-transition: -webkit-transform .3s;\r\n    transition: -webkit-transform .3s;\r\n    transition: transform .3s;\r\n    transition: transform .3s, -webkit-transform .3s;\n}\nheader {\r\n    margin-left: 2em;\r\n    padding: 0;\r\n    text-align: left;\n}\nfooter {\r\n    font-size: 14px;\r\n    text-align: center\n}\np {\r\n    margin-bottom: 16px;\n}\r\n\r\n/*hr {\r\n    margin: 22px 0;\r\n    height: 1px;\r\n    border: 1;\r\n    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\r\n    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\r\n    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\r\n    background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));\r\n}*/\nh1,\r\nh2 {\r\n    margin-bottom: 5px;\r\n    color: #191919;\r\n    font-weight: 300;\n}\nh1 {\r\n    font-size: 32px;\r\n    line-height: 32px;\n}\nh2 {\r\n    color: #565d66;\r\n    font-size: 26px;\r\n    line-height: 26px;\n}\na {\r\n    color: #006b05;\r\n    text-decoration: none;\n}\n.btn {\r\n    border-radius: 10em;\r\n    border: 0;\r\n    color: #fff!important;\r\n    margin: 6px;\r\n    white-space: normal!important;\r\n    word-wrap: break-word;\r\n\tdisplay: inline-block;\r\n    line-height: 1.25;\r\n    text-align: center;\r\n    vertical-align: middle;\r\n    cursor: pointer;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    padding: .5rem 1rem;\r\n    font-size: 1rem;\r\n    font-weight: 400;\r\n    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\r\n    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);\n}\n.btn {\r\n\t  -webkit-transition: box-shadow .2s ease-out;\r\n    -webkit-transition: -webkit-box-shadow .2s ease-out;\r\n    transition: -webkit-box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out;\r\n    transition: box-shadow .2s ease-out, -webkit-box-shadow .2s ease-out;\n}\n.btn:hover {\r\n\t  -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\r\n\t  box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);\n}\n.btn-primary {\r\n\t  border: 2px solid #2BBBAD;\r\n    color: #00695c!important;\r\n    background-color: transparent;\n}\n.btn-secondary {\r\n    border: 2px solid #00C851;\r\n    color: #007E33!important;\r\n    background-color: transparent;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_schedule_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_schedule_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_schedule_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__views_schedule_vue__);
+//
+//
+//
 //
 //
 //
@@ -18055,7 +18109,138 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 52 */
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(54);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("75e340fe", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f888bca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./schedule.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f888bca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./schedule.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nhtml,\r\nbody {\r\n  background-color: #ffffff;\n}\n* { \r\n  -webkit-box-sizing: border-box; \r\n          box-sizing: border-box;\n}\n.dayweek{\r\n  float: left;\r\n  margin: 5px;\r\n  width: 15%;\r\n  border: 1px solid rgb(0, 0, 0);\n}\n.schedule{\r\n  padding: 20px;\n}\n.schedulebody{\r\n  overflow: auto;\r\n  overflow-y: hidden;\r\n  margin: 0 auto;\r\n  white-space: nowrap;\n}\r\n\r\n/***Прокрутка div */\r\n\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+      errors: {}
+    };
+  }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "schedule" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "schedulebody" },
+      _vm._l(_vm.num, function(n) {
+        return _c(
+          "div",
+          { staticClass: "dayweek" },
+          [
+            _c("p", [_vm._v(_vm._s(n))]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._l(5, function(k) {
+              return _c("div", { staticClass: "contdayweek" }, [
+                _c("p", [_vm._v("Содержимое")]),
+                _vm._v(" "),
+                _c("hr")
+              ])
+            })
+          ],
+          2
+        )
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "head" }, [
+      _c("h2", [_vm._v("Расписание занятий")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5f888bca", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -18075,30 +18260,35 @@ var render = function() {
       _vm._v(" "),
       _c("ul", [
         _c("li", [
-          _c("a", { attrs: { href: "#1" }, on: { click: _vm.offSchedule } }, [
-            _vm._v("Главная")
-          ])
+          _c(
+            "a",
+            { attrs: { href: "#main" }, on: { click: _vm.offSchedule } },
+            [_vm._v("Главная")]
+          )
         ]),
         _vm._v(" "),
         _c("li", [
-          _c("a", { attrs: { href: "#2" }, on: { click: _vm.onSchedule } }, [
-            _vm._v("Расписание")
-          ])
+          _c(
+            "a",
+            { attrs: { href: "#shedule" }, on: { click: _vm.onSchedule } },
+            [_vm._v("Расписание")]
+          )
         ])
       ])
     ]),
     _vm._v(" "),
     _c("main", { attrs: { role: "main" } }, [
-      _c("article", [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "maincontent" },
-          [_vm.schedule == true ? _c("cschedule") : _vm._e()],
-          1
-        )
-      ])
+      _c(
+        "article",
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _vm.schedule == true ? _c("cschedule") : _vm._e()
+        ],
+        1
+      )
     ])
   ])
 }
@@ -18107,12 +18297,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "logo" }, [
-      _c("a", { attrs: { href: "//mpt.ru/" } }, [_vm._v("МПТ")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "//mpt.ru/" } }, [_vm._v("http://mpt.ru")])
+    return _c("h2", { staticClass: "logoMPT" }, [
+      _c("a", { attrs: { href: "//mpt.ru/" } }, [
+        _vm._v("МПТ"),
+        _c("br"),
+        _vm._v("http://mpt.ru")
+      ])
     ])
   },
   function() {
@@ -18120,9 +18310,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("header", [
-      _c("h1", { staticClass: "header__title" }, [_vm._v("Просто Демо:")]),
-      _vm._v(" "),
-      _c("h2", [_vm._v("Голова")])
+      _c("h1", { staticClass: "header__title" }, [_vm._v("Личный кабинет")])
     ])
   }
 ]
@@ -18136,13 +18324,13 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(59);
 
 
 
@@ -18178,7 +18366,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 }));
 
 /***/ }),
-/* 54 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19203,23 +19391,23 @@ var index_esm = {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
 
 /***/ }),
-/* 55 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(56);
+module.exports = __webpack_require__(61);
 
 /***/ }),
-/* 56 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(7);
-var Axios = __webpack_require__(58);
-var mergeConfig = __webpack_require__(13);
-var defaults = __webpack_require__(10);
+var bind = __webpack_require__(8);
+var Axios = __webpack_require__(63);
+var mergeConfig = __webpack_require__(14);
+var defaults = __webpack_require__(11);
 
 /**
  * Create an instance of Axios
@@ -19252,15 +19440,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(14);
-axios.CancelToken = __webpack_require__(70);
-axios.isCancel = __webpack_require__(9);
+axios.Cancel = __webpack_require__(15);
+axios.CancelToken = __webpack_require__(75);
+axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(71);
+axios.spread = __webpack_require__(76);
 
 module.exports = axios;
 
@@ -19269,7 +19457,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 57 */
+/* 62 */
 /***/ (function(module, exports) {
 
 /*!
@@ -19286,17 +19474,17 @@ module.exports = function isBuffer (obj) {
 
 
 /***/ }),
-/* 58 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var buildURL = __webpack_require__(8);
-var InterceptorManager = __webpack_require__(59);
-var dispatchRequest = __webpack_require__(60);
-var mergeConfig = __webpack_require__(13);
+var buildURL = __webpack_require__(9);
+var InterceptorManager = __webpack_require__(64);
+var dispatchRequest = __webpack_require__(65);
+var mergeConfig = __webpack_require__(14);
 
 /**
  * Create a new instance of Axios
@@ -19379,7 +19567,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 59 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19438,18 +19626,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 60 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(61);
-var isCancel = __webpack_require__(9);
-var defaults = __webpack_require__(10);
-var isAbsoluteURL = __webpack_require__(68);
-var combineURLs = __webpack_require__(69);
+var transformData = __webpack_require__(66);
+var isCancel = __webpack_require__(10);
+var defaults = __webpack_require__(11);
+var isAbsoluteURL = __webpack_require__(73);
+var combineURLs = __webpack_require__(74);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -19531,7 +19719,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 61 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19558,7 +19746,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 62 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19577,13 +19765,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 63 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(12);
+var createError = __webpack_require__(13);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -19609,7 +19797,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 64 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19658,7 +19846,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 65 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19718,7 +19906,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 66 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19793,7 +19981,7 @@ module.exports = (
 
 
 /***/ }),
-/* 67 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19853,7 +20041,7 @@ module.exports = (
 
 
 /***/ }),
-/* 68 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19874,7 +20062,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 69 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19895,13 +20083,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 70 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(14);
+var Cancel = __webpack_require__(15);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -19959,7 +20147,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 71 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19993,7 +20181,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 72 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20001,212 +20189,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):window.Vue&&window.axios&&Vue.use(o,window.axios)}();
 
 /***/ }),
-/* 73 */
+/* 78 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(84)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(86)
-/* template */
-var __vue_template__ = __webpack_require__(87)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/views/schedule.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5f888bca", Component.options)
-  } else {
-    hotAPI.reload("data-v-5f888bca", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(85);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("75e340fe", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f888bca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./schedule.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f888bca\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./schedule.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\nhtml,\r\nbody {\r\n  background-color: #ffffff;\n}\n.dayweek{\r\n  float: left;\r\n  margin: 10px;\r\n  width: 15%;\r\n  border: 1px solid rgb(0, 0, 0);\n}\n.schedule{\r\n  padding: 20px;\n}\r\n\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 86 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      errors: {}
-    };
-  }
-});
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "schedule" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "schedulebody" },
-      [
-        _c(
-          "center",
-          _vm._l(_vm.num, function(n) {
-            return _c(
-              "div",
-              { staticClass: "dayweek" },
-              [
-                _c("p", [_vm._v(_vm._s(n))]),
-                _vm._v(" "),
-                _c("hr"),
-                _vm._v(" "),
-                _vm._l(5, function(k) {
-                  return _c("div", { staticClass: "contdayweek" }, [
-                    _c("p", [_vm._v("Содержимое")]),
-                    _vm._v(" "),
-                    _c("hr")
-                  ])
-                })
-              ],
-              2
-            )
-          }),
-          0
-        )
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "head" }, [
-      _c("h2", [_vm._v("Расписание занятий")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5f888bca", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

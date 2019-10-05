@@ -3,9 +3,7 @@
     <div class="head">
       <h2>Расписание занятий</h2>
     </div>
-    <hr />
     <div class="schedulebody">
-      <center>
         <div class="dayweek" v-for="n in num"> 
           <p>{{ n }}</p>
           <hr />
@@ -14,7 +12,6 @@
             <hr />
           </div>
         </div>
-      </center>
     </div>
   </div>
 </template>
@@ -23,7 +20,7 @@
 export default {
   data() {
     return {
-      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
       errors: {}
     };
   },
@@ -36,9 +33,13 @@ body {
   background-color: #ffffff;
 }
 
+* { 
+  box-sizing: border-box; 
+}
+
 .dayweek{
   float: left;
-  margin: 10px;
+  margin: 5px;
   width: 15%;
   border: 1px solid rgb(0, 0, 0);
 }
@@ -46,6 +47,16 @@ body {
 .schedule{
   padding: 20px;
 }
+
+.schedulebody{
+  overflow: auto;
+  overflow-y: hidden;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+/***Прокрутка div */
+
 
 </style>
 

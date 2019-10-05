@@ -3,14 +3,12 @@
         <input type="checkbox" id="nav-toggle" hidden>
         <nav class="nav">
             <label for="nav-toggle" class="nav-toggle" onclick></label>
-            <h2 class="logo"> 
-                <a href="//mpt.ru/">МПТ</a> 
-                <br>
-                <a href="//mpt.ru/">http://mpt.ru</a> 
+            <h2 class="logoMPT"> 
+                <a href="//mpt.ru/">МПТ<br>http://mpt.ru</a> 
             </h2>
             <ul>
-                <li><a href="#1" @click="offSchedule">Главная</a></li>
-                <li><a href="#2" @click="onSchedule">Расписание</a></li>
+                <li><a href="#main" @click="offSchedule">Главная</a></li>
+                <li><a href="#shedule" @click="onSchedule">Расписание</a></li>
                 <!--<li><a href="#3">Три</a></li>
                 <li><a href="#4">Четыре</a></li>
                 <li><a href="#5">Пять</a></li>
@@ -21,13 +19,18 @@
         <main role="main">
             <article>
                 <header>
+                    <h1 class="header__title">Личный кабинет</h1>
+                </header>
+                <hr />
+                <cschedule v-if="schedule == true"></cschedule>
+                <!--<header>
                     <h1 class="header__title">Просто Демо:</h1>
                     <h2>Голова</h2> 
                 </header>
                 <div class="maincontent">
                     <cschedule v-if="schedule == true"></cschedule>
                 </div>
-                <!--<footer>
+                <footer>
                     <p><a href="http://dbmast.ru/vydvigayushheesya-bokovoe-menyu-na-chistom-css">← Изучить Детали</a></p>
                     <p>сделано с любовью - <a href="https://twitter.com/dobrovoi">@dobrovoi</a></p>
                     <p>Подвал</p>
@@ -92,18 +95,16 @@ export default {
     -webkit-transition: left 0.3s;
     -moz-transition: left 0.3s;
     transition: left 0.3s;
-    /* определяем цвет фона панели */
-    background: #16a085;
+    /* определяем цвет фона панели 
+    background: #16a085;*/
+    background: #434343;
     /* поверх других элементов */
     z-index: 2000;
 }
-
-
 /**
  * Кнопка переключения панели
  * тег <label>
  */
-
 .nav-toggle{
     /* абсолютно позиционируем */
     position: absolute;
@@ -131,55 +132,40 @@ export default {
     -moz-transition: color .25s ease-in-out;
     transition: color .25s ease-in-out;
 }
-
-
 /* определяем текст кнопки 
  * символ Unicode (TRIGRAM FOR HEAVEN)
 */
-
 .nav-toggle:after {
     content: '\2630';
     text-decoration: none;
 }
-
-
 /* цвет текста при наведении */
-
 .nav-toggle:hover {
     color: #f4f4f4;
 }
-
-
 /**
  * Скрытый чекбокс (флажок)
  * невидим и недоступен :)
  * имя селектора атрибут флажка
  */
-
 [id='nav-toggle'] {
     position: absolute;
     display: none;
 }
-
-
 /**
  * изменение положения переключателя 
  * при просмотре на мобильных устройствах
  * когда навигация раскрыта, распологаем внутри панели
 */
-
 [id='nav-toggle']:checked ~ .nav > .nav-toggle {
     left: auto;
     right: 2px;
-    top: 1em;
+    top: 0em;
 }
-
-
 /**
  * Когда флажок установлен, открывается панель
  * используем псевдокласс:checked
  */
-
 [id='nav-toggle']:checked ~ .nav {
     left: 0;
     box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
@@ -187,37 +173,28 @@ export default {
     -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
     overflow-y: auto;
 }
-
-
 /* 
  * смещение контента страницы
  * на размер ширины панели,
  * фишка необязательная, на любителя
 */
-
 [id='nav-toggle']:checked ~ main > article {
     -webkit-transform: translateX(320px);
     -moz-transform: translateX(320px);
     transform: translateX(320px);
 }
-
-
 /*
  * изменение символа переключателя,
  * привычный крестик (MULTIPLICATION X), 
  * вы можете испльзовать любой другой значок
 */
-
 [id='nav-toggle']:checked ~ .nav > .nav-toggle:after {
     content: '\2715';
 }
-
-
 /**
  * профиксим баг в Android <= 4.1.2
  * см: http://timpietrusky.com/advanced-checkbox-hack
  */
-
 body {
     -webkit-animation: bugfix infinite 1s;
 }
@@ -227,13 +204,10 @@ body {
       padding: 0;
     }
 }
-
-
 /**
  * позаботьтимся о средних и маленьких экранах
  * мобильных устройств
  */
-
 @media screen and (min-width: 320px) {
     html,
     body {
@@ -253,12 +227,9 @@ body {
       box-shadow: none
     }
 }
-
-
 /**
  * Формируем стиль заголовка (логотип) панели 
 */
-
 .nav h2 {
     width: 90%;
     padding: 0;
@@ -287,10 +258,7 @@ body {
     text-decoration: none;
     text-transform: uppercase;
 }
-
-
 /*плавное появление заголовка (логотипа) при раскрытии панели */
-
 [id='nav-toggle']:checked ~ .nav h2 {
     opacity: 1;
     transform: scale(1, 1);
@@ -298,14 +266,11 @@ body {
     -moz-transform: scale(1, 1);
     -webkit-transform: scale(1, 1);
 }
-
-
 /**
  * формируем непосредственно само меню
  * используем неупорядоченный список для пунктов меню
  * прикрутим трансфомации и плавные переходы
  */
-
 .nav > ul {
     display: block;
     margin: 0;
@@ -333,10 +298,7 @@ body {
     -ms-transform: translateX(0);
     transform: translateX(0);
 }
-
-
 /* определяем интервалы появления пунктов меню */
-
 .nav > ul > li:nth-child(2) {
     -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;
     transition: opacity .5s .2s, transform .5s .2s;
@@ -366,12 +328,9 @@ body {
     -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;
     transition: opacity .5s .7s, transform .5s .7s;
 }
-
-
 /**
  * оформление ссылок пунктов меню
  */
-
 .nav > ul > li > a {
     display: inline-block;
     position: relative;
@@ -387,23 +346,17 @@ body {
     -moz-transition: color .5s ease, padding .5s ease;
     transition: color .5s ease, padding .5s ease;
 }
-
-
 /**
  * состояние ссылок меню при наведении
  */
-
 .nav > ul > li > a:hover,
 .nav > ul > li > a:focus {
     color: white;
     padding-left: 15px;
 }
-
-
 /**
  * линия подчеркивания ссылок меню
  */
-
 .nav > ul > li > a:before {
     content: '';
     display: block;
@@ -415,7 +368,7 @@ body {
     -webkit-transition: width 0s ease;
     transition: width 0s ease;
 }
-
+/***Линии */
 .nav > ul > li > a:after {
     content: '';
     display: block;
@@ -425,16 +378,14 @@ body {
     height: 1px;
     width: 100%;
     background: #3bc1a0;
+    /*background: #cddbd8;*/
     -webkit-transition: width .5s ease;
     transition: width .5s ease;
 }
-
-
 /**
  * анимируем линию подчеркивания 
  * ссылок при наведении
  */
-
 .nav > ul > li > a:hover:before {
     width: 0%;
     background: #3bc1a0;
@@ -448,29 +399,15 @@ body {
     -webkit-transition: width 0s ease;
     transition: width 0s ease;
 }
-
-
 /* фон затемнения на основной контент 
  * при этом элементы блокируютя
  * спорная такая фича, если оно вам надо
  * просто раскомментируйте
 */
-
-
-
-
-
-
-
-
-
-
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic);
-
 * {
     box-sizing: border-box;
 }
-
 /**
  * Максимальная высота базового контейнера
  */
@@ -490,41 +427,40 @@ body {
     font: 1em 'Open Sans', sans-serif;
     background-color: #f1f1f1;
 }
-
-
 /* изменяем полоcу прокрутки */
-
 ::-webkit-scrollbar {
     width: .65em;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: rgba(217, 217, 217, 0.75);
+    /*background-color: rgba(217, 217, 217, 0.75);*/
+    *background-color: #434343;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(170, 170, 170, 0.6);
+    /*background: rgba(170, 170, 170, 0.6);*/
+    *background-color: #434343;
     border-radius: 5px;
     box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
 }
 
 main {
-    max-width: 1024px;
+    max-width: 100%;
     margin: 0 auto
 }
 
 article {
-    margin: 0 1em;
-    padding: 0 22px;
+    margin-left: 1em;
+    padding: 0px;
     -webkit-transition: -webkit-transform .3s;
     -moz-transition:  -moz-transform .3s;
     transition: transform .3s;
 }
 
 header {
-    margin: 0;
+    margin-left: 2em;
     padding: 0;
-    text-align: center;
+    text-align: left;
 }
 
 footer {
@@ -536,19 +472,18 @@ p {
     margin-bottom: 16px;
 }
 
-hr {
+/*hr {
     margin: 22px 0;
     height: 1px;
-    border: 0;
+    border: 1;
     background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     background-image: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
-
+}*/
 h1,
 h2 {
-    margin-bottom: 22px;
+    margin-bottom: 5px;
     color: #191919;
     font-weight: 300;
 }
