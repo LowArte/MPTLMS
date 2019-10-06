@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Restore from '../views/restor-f.vue'
 import Login from '../views/authentication-f.vue'
+import Home from '../views/home.vue'
+import Schedule from '../views/schedule.vue'
 
 
 Vue.use(Router)
@@ -12,7 +14,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'Home',
-      component: Login
+      component: Home
     },
     {
       path: '/restore',
@@ -23,6 +25,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/main',
+      name: 'main',
+      component: Home
     }
   ]
 })

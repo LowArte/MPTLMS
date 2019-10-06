@@ -41,7 +41,7 @@ export default {
         .post("auth/login", this.form)
         .then(responce => {
           this.$store.dispatch("login", { user: responce.data.user });
-          this.$router.push("/");
+          this.$router.push("/main");
         })
         .catch(error => {
           console.log(error);
@@ -145,6 +145,7 @@ export default {
   position: absolute;
   width: 100px;
   height: 35px;
+  cursor: pointer;
   left: calc(50% - 100px / 2);
   top: calc(50% - 35px / 2 + 153.5px);
   background: #ffffff;

@@ -2,22 +2,61 @@
   <div class="schedule">
     <div class="head">
       <h2>Расписание занятий</h2>
-      <input class="bcalendar" type="button" value="Календарь">
     </div>
-    <hr />
+    <div class="schedulebody">
+        <div class="dayweek" v-for="n in num"> 
+          <p>{{ n }}</p>
+          <hr />
+          <div class="contdayweek" v-for="k in 5"> 
+            <p>Содержимое</p> 
+            <hr />
+          </div>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  
+  data() {
+    return {
+      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+      errors: {}
+    };
+  },
 }
 </script>
 
 <style>
+html,
+body {
+  background-color: #ffffff;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+.dayweek{
+  float: left;
+  margin: 5px;
+  width: 15%;
+  border: 1px solid rgb(0, 0, 0);
+}
+
 .schedule{
   padding: 20px;
 }
+
+.schedulebody{
+  overflow: auto;
+  overflow-y: hidden;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+/***Прокрутка div */
+
 
 </style>
 
