@@ -25,11 +25,12 @@ export default {
       posts: [],
       errors: {}
   }),
-  created(){
-    Vue.axios.get ('schedule/get_schedule',{params: {'group': 'П-2-16'}})
+  mounted(){
+    Vue.axios.get ('schedule/get_schedule',{params: {'group': 'БИ50-1-17'}})
     //axios.get('schedule/get_schedule')
     .then(response => {
-      this.posts = response.data
+      this.posts = response.data.schedule
+      console.log(this.posts);
     })
     .catch(e => {
       this.error.push(e)

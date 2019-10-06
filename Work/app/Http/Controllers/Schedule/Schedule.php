@@ -21,7 +21,7 @@ class Schedule extends Controller
             ->where('groups.group_name','=',$request['group'])
             ->select('schedules.schedule')
             ->get();
-        return response()->json($schedule,200);
+        return response()->json($schedule[0],200);
     }
     /*
         Функция post запроса для сохранения расписания

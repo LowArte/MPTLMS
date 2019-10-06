@@ -30,6 +30,7 @@
                     <h1 class="header__title">Личный кабинет</h1>
                     <hr />
                 </header>
+                    
                 <cschedule v-if="schedule == true"></cschedule>
                 <!--<header>
                     <h1 class="header__title">Просто Демо:</h1>
@@ -442,22 +443,22 @@ body {
     background-color: #f1f1f1;
 }
 /* изменяем полоcу прокрутки */
-/*
+
 ::-webkit-scrollbar {
-    width: .65em;
+    width: .85em;
 }
 
 ::-webkit-scrollbar-track {
     background-color: rgba(217, 217, 217, 0.75);
-    *background-color: #434343;
+    background-color: #434343;
 }
 
 ::-webkit-scrollbar-thumb {
     background: rgba(170, 170, 170, 0.6);
-    background-color: #434343;
+    /*/background-color: #434343;*/
     border-radius: 5px;
     box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
-}*/
+}
 
 main {
     max-width: 100%;
