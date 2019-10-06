@@ -18156,7 +18156,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nhtml,\r\nbody {\r\n  background-color: #ffffff;\n}\n* { \r\n  -webkit-box-sizing: border-box; \r\n          box-sizing: border-box;\n}\n.dayweek{\r\n  float: left;\r\n  margin: 5px;\r\n  width: 15%;\r\n  border: 1px solid rgb(0, 0, 0);\n}\n.schedule{\r\n  padding: 20px;\n}\n.schedulebody{\r\n  overflow: auto;\r\n  overflow-y: hidden;\r\n  margin: 0 auto;\r\n  white-space: nowrap;\n}\r\n\r\n/***Прокрутка div */\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\nhtml,\r\nbody {\r\n  background-color: #ffffff;\n}\n* {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\n}\n.dayweek {\r\n  float: left;\r\n  margin: 5px;\r\n  width: 15%;\r\n  border: 1px solid rgb(0, 0, 0);\n}\n.schedule {\r\n  padding: 20px;\n}\n.schedulebody {\r\n  overflow: auto;\r\n  overflow-y: hidden;\r\n  margin: 0 auto;\r\n  white-space: nowrap;\n}\r\n\r\n/***Прокрутка div */\r\n", ""]);
 
 // exports
 
@@ -18187,13 +18187,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+      num: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
       posts: [],
       errors: {}
     };
@@ -18202,14 +18205,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
-    Vue.axios.get('schedule/get_schedule', { params: { 'group': 'БИ50-1-17' } })
+    Vue.axios.get("schedule/get_schedule", { params: { group: "БИ50-1-17" } })
     //axios.get('schedule/get_schedule')
     .then(function (response) {
-      _this.posts = response.data.schedule;
+      _this.posts = response.data;
       console.log(_this.posts);
     }).catch(function (e) {
       _this.error.push(e);
     });
+  },
+
+
+  methods: {
+    SaveJson: function SaveJson() {
+      var _this2 = this;
+
+      this.AddPara();
+      Vue.axios.post("schedule/save", { group: "БИ50-1-17", schedule: this.posts })
+      //axios.get('schedule/get_schedule')
+      .then(function (response) {
+        console.log(response.data.success);
+      }).catch(function (e) {
+        _this2.error.push(e);
+      });
+    },
+    AddPara: function AddPara() {
+      console.log(this.posts['Понедельник']);
+      this.posts['Понедельник']['1']['Teacher'] = 'Борисов';
+    }
   }
 });
 
@@ -18222,17 +18245,28 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "schedule" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "head" }, [
+      _c("h2", [_vm._v("Расписание занятий ")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "button", value: "Кликни" },
+        on: { click: _vm.SaveJson }
+      })
+    ]),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "schedulebody" },
-      _vm._l(_vm.posts, function(n) {
+      _vm._l(_vm.posts, function(n, i) {
         return _c(
           "div",
-          { key: n, staticClass: "dayweek" },
+          { key: i, staticClass: "dayweek" },
           [
-            _c("p", [_vm._v(_vm._s(n))]),
+            _vm._l(n, function(n1, i1) {
+              return _c("p", { key: "a" + i1 }, [
+                _vm._v("\n        " + _vm._s(n1.Teacher) + "\n      ")
+              ])
+            }),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -18251,16 +18285,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "head" }, [
-      _c("h2", [_vm._v("Расписание занятий")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
