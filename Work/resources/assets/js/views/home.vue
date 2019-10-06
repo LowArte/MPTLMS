@@ -12,14 +12,15 @@
                 <li><a class="abutton" @click="onLogout">Выход</a></li>
             </ul>
         </nav>-->
+        
         <main role="main">
             <article>
                 <header>
                     <input type="checkbox" id="nav-toggle" hidden>
                     <nav class="nav">
                         <label for="nav-toggle" class="nav-toggle" onclick></label>
-                        <h2 class="logoMPT"> 
-                            <a href="//mpt.ru/">МПТ<br>http://mpt.ru</a> 
+                        <h2 class="logoMPT">
+                            <a href="#">Панель управления<br></a> 
                         </h2>
                         <ul>
                             <li><a href="#main" @click="onMain">Главная</a></li>
@@ -30,7 +31,6 @@
                     <h1 class="header__title">Личный кабинет</h1>
                     <hr />
                 </header>
-                    
                 <cschedule v-if="schedule == true"></cschedule>
                 <!--<header>
                     <h1 class="header__title">Просто Демо:</h1>
