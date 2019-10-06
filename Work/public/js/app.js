@@ -19159,11 +19159,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "logoMPT" }, [
-      _c("a", { attrs: { href: "//mpt.ru/" } }, [
-        _vm._v("МПТ"),
-        _c("br"),
-        _vm._v("http://mpt.ru")
-      ])
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Панель управления"), _c("br")])
     ])
   }
 ]
