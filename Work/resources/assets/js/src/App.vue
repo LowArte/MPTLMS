@@ -19,6 +19,7 @@ export default {
     init() {
       Vue.axios.get("auth/init").then(response => {
         this.$store.dispatch("login", { user: response.data.user });
+        console.log(CSRF_TOKKEN);
       });
     }
   },

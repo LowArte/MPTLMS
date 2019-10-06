@@ -28,7 +28,6 @@ class AuthController extends Controller
     */
     public function login(Request $request)
     {
-        Debugbar::info($request);
         if (Auth::attempt(['login_email' => $request->login_email, 'password' => $request->password])) {
             $user = Auth::user();
             $user->api_token = str_random(60);

@@ -11,7 +11,7 @@
     <body>
        <div id="app"> </div>
        <script>
-           var BASE_URL = '{{ URL::to('/') }}'
+           var CSRF_TOKKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         </script>
         <script src="{{asset('js/app.js')}}" defer></script>
     </body>

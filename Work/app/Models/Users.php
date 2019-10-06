@@ -20,10 +20,6 @@ class Users extends Model implements
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, SoftDelete;
     public $timestamps = true;
-    
-    protected $fillable = [
-        'login_email', 'post_id'
-    ];
 
     protected $guarded  = [
         'password', 'password_notHash', 'created_at', 'deleted_at', 'updated_at', 'login_stud', 'id'
@@ -33,6 +29,7 @@ class Users extends Model implements
     {
         parent::__construct($attributes);
     }
+    
     public static function whereEmail($var = null)
     {
         $object = Users::all()->where('login_email', $var);

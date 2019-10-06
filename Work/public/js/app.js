@@ -14014,6 +14014,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       Vue.axios.get("auth/init").then(function (response) {
         _this.$store.dispatch("login", { user: response.data.user });
+        console.log(CSRF_TOKKEN);
       });
     }
   },
@@ -14370,7 +14371,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
   mode: 'history',
-  base: Object({"MIX_PUSHER_APP_CLUSTER":"mt1","MIX_PUSHER_APP_KEY":"","NODE_ENV":"development"}).BASE_URL,
+  base: Object({"NODE_ENV":"development"}).BASE_URL,
   routes: [{
     path: '/',
     name: 'Home',
