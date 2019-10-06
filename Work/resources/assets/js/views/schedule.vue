@@ -74,19 +74,17 @@ body {
   background-color: #ffffff;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .dayweek {
-  float: left;
   margin: 5px;
   width: 15%;
+  min-width: 150px;
+  display: inline-block;
   border: 1px solid rgb(0, 0, 0);
 }
 
 .schedule {
-  padding: 20px;
+  padding: 10px;
+  padding-top: 50px;
 }
 
 .schedulebody {

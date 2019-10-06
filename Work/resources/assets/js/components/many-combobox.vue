@@ -3,25 +3,24 @@
     <div class="ui-combobox">
         <div class="ui-value" placeholder="Отделение" multiple></div>
         <div class="ui-options">
-            <label><input type="checkbox" toggle /> Выбрать все</label>
-            <label><input type="checkbox" value="1" /> Option 1</label>
-            <label><input type="checkbox" value="2" /> Option 2</label>
-            <label><input type="checkbox" value="3" /> Option 3</label>
-            <label><input type="checkbox" value="1" /> Option 1</label>
-            <label><input type="checkbox" value="2" /> Option 2</label>
-            <label><input type="checkbox" value="3" /> Option 3</label>
-            <label><input type="checkbox" value="1" /> Option 1</label>
-            <label><input type="checkbox" value="2" /> Option 2</label>
-            <label><input type="checkbox" value="3" /> Option 3</label>
-            <label><input type="checkbox" value="1" /> Option 1</label>
-            <label><input type="checkbox" value="2" /> Option 2</label>
-            <label><input type="checkbox" value="3" /> Option 3</label>
+            <label><input type="radio" toggle /> Выбрать все</label>
+            <label><input type="radio" value="1" /> Option 1</label>
+            <label><input type="radio" value="2" /> Option 2</label>
+            <label><input type="radio" value="3" /> Option 3</label>
+            <label><input type="radio" value="1" /> Option 1</label>
+            <label><input type="radio" value="2" /> Option 2</label>
+            <label><input type="radio" value="3" /> Option 3</label>
+            <label><input type="radio" value="1" /> Option 1</label>
         </div>
     </div>
 </template>
 
 <script>
-
+export default {
+   data: {
+    value: 100
+  }
+}
 </script>
 
 <style>
