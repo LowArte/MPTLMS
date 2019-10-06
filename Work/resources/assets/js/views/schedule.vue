@@ -1,41 +1,87 @@
 <template>
   <div class="schedule">
     <div class="head">
-      <h2>Расписание занятий</h2>
+      <h2>Расписание занятий </h2>
+      <input type="button" value="Кликни" @click="SaveJson">
     </div>
     <div class="schedulebody">
-        <div v-bind:key="n" class="dayweek" v-for="n in posts"> 
-          <p>{{ n }}</p>
+      <div v-bind:key="i" class="dayweek" v-for="(n, i) in posts">
+        <p v-bind:key="'a'+i1" v-for="(n1, i1) in n">
+          {{n1.Teacher}}
+        </p>
+        <hr />
+        <div v-bind:key="k" class="contdayweek" v-for="k in 5">
+          <p>Содержимое</p>
           <hr />
-          <div v-bind:key="k" class="contdayweek" v-for="k in 5"> 
-            <p>Содержимое</p> 
-            <hr />
-          </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
+<<<<<<< HEAD
   data:() => ({
       num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
       posts: [],
       errors: {}
+=======
+  data: () => ({
+    num: [
+      "Понедельник",
+      "Вторник",
+      "Среда",
+      "Четверг",
+      "Пятница",
+      "Суббота",
+      "Понедельник",
+      "Вторник",
+      "Среда",
+      "Четверг",
+      "Пятница",
+      "Суббота"
+    ],
+    posts: [],
+    errors: {}
+>>>>>>> dcc5cd7e78547fe208baaba683d27c6a487bf7e2
   }),
-  created(){
-    Vue.axios.get ('schedule/get_schedule',{params: {group: 'БИ50-1-17'}})
-    //axios.get('schedule/get_schedule')
-    .then(response => {
-      this.posts = response.data
-    })
-    .catch(e => {
-      this.error.push(e)
-    })
+
+  mounted() {
+    Vue.axios
+      .get("schedule/get_schedule", { params: { group: "БИ50-1-17" } })
+      //axios.get('schedule/get_schedule')
+      .then(response => {
+        this.posts = response.data;
+        console.log(this.posts);
+        
+      })
+      .catch(e => {
+        this.error.push(e);
+      });
+      
+  },
+
+  methods: {
+    SaveJson() {
+      this.AddPara();
+      Vue.axios.post("schedule/save", { group: "БИ50-1-17", schedule: this.posts })
+        //axios.get('schedule/get_schedule')
+        .then(response => {
+          console.log(response.data.success);
+        })
+        .catch(e => {
+          this.error.push(e);
+        });
+    },
+    AddPara() {
+      console.log(this.posts['Понедельник']);
+      this.posts['Понедельник']['1']['Teacher'] = 'Борисов';
+    }
   }
-}
+};
 </script>
 
 <style>
@@ -44,22 +90,22 @@ body {
   background-color: #ffffff;
 }
 
-* { 
-  box-sizing: border-box; 
+* {
+  box-sizing: border-box;
 }
 
-.dayweek{
+.dayweek {
   float: left;
   margin: 5px;
   width: 15%;
   border: 1px solid rgb(0, 0, 0);
 }
 
-.schedule{
+.schedule {
   padding: 20px;
 }
 
-.schedulebody{
+.schedulebody {
   overflow: auto;
   overflow-y: hidden;
   margin: 0 auto;
@@ -67,8 +113,6 @@ body {
 }
 
 /***Прокрутка div */
-
-
 </style>
 
 <!--<template>
