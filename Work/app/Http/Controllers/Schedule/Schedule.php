@@ -16,12 +16,12 @@ class Schedule extends Controller
     */
     public function get_schedule(Request $request)
     {
-        Debugbar::info ($request);
+        Debugbar::info ($request['group']);
         $schedule = Sch::join('groups', 'schedules.group_id', '=', 'groups.id')
             ->where('groups.group_name','=',$request['group'])
             ->select('schedules.schedule')
-            ->get();
-        return response()->json($schedule,200);
+            ->get();       
+        return response()->json(json_decode($schedule[0]->schedule),200);
     }
     /*
         Функция post запроса для сохранения расписания

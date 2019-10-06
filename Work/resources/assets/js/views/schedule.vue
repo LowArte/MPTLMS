@@ -26,7 +26,7 @@ export default {
       errors: {}
   }),
   created(){
-    Vue.axios.get ('schedule/get_schedule',{params: {'group': 'П-2-16'}})
+    Vue.axios.get ('schedule/get_schedule',{params: {group: 'БИ50-1-17'}})
     //axios.get('schedule/get_schedule')
     .then(response => {
       this.posts = response.data
