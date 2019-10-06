@@ -4,10 +4,10 @@
       <h2>Расписание занятий</h2>
     </div>
     <div class="schedulebody">
-        <div class="dayweek" v-for="n in num"> 
+        <div v-bind:key="n" class="dayweek" v-for="n in posts"> 
           <p>{{ n }}</p>
           <hr />
-          <div class="contdayweek" v-for="k in 5"> 
+          <div v-bind:key="k" class="contdayweek" v-for="k in 5"> 
             <p>Содержимое</p> 
             <hr />
           </div>
@@ -17,13 +17,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  data() {
-    return {
+  data:() => ({
       num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+      posts: [],
       errors: {}
-    };
-  },
+  }),
+  created(){
+    Vue.axios.get ('schedule/get_schedule',{params: {'group': 'П-2-16'}})
+    //axios.get('schedule/get_schedule')
+    .then(response => {
+      this.posts = response.data
+    })
+    .catch(e => {
+      this.error.push(e)
+    })
+  }
 }
 </script>
 

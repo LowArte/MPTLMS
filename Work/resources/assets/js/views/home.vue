@@ -1,27 +1,35 @@
 <template>
     <div class="main-p">
-        <input type="checkbox" id="nav-toggle" hidden>
+        <!--<input type="checkbox" id="nav-toggle" hidden>
         <nav class="nav">
             <label for="nav-toggle" class="nav-toggle" onclick></label>
             <h2 class="logoMPT"> 
                 <a href="//mpt.ru/">МПТ<br>http://mpt.ru</a> 
             </h2>
             <ul>
-                <li><a href="#main" @click="offSchedule">Главная</a></li>
+                <li><a href="#main" @click="onMain">Главная</a></li>
                 <li><a href="#shedule" @click="onSchedule">Расписание</a></li>
-                <!--<li><a href="#3">Три</a></li>
-                <li><a href="#4">Четыре</a></li>
-                <li><a href="#5">Пять</a></li>
-                <li><a href="#6">Шесть</a></li>
-                <li><a href="#7">Семь</a></li>-->
+                <li><a class="abutton" @click="onLogout">Выход</a></li>
             </ul>
-        </nav>
+        </nav>-->
         <main role="main">
             <article>
                 <header>
+                    <input type="checkbox" id="nav-toggle" hidden>
+                    <nav class="nav">
+                        <label for="nav-toggle" class="nav-toggle" onclick></label>
+                        <h2 class="logoMPT"> 
+                            <a href="//mpt.ru/">МПТ<br>http://mpt.ru</a> 
+                        </h2>
+                        <ul>
+                            <li><a href="#main" @click="onMain">Главная</a></li>
+                            <li><a href="#shedule" @click="onSchedule">Расписание</a></li>
+                            <li><a class="abutton" @click="onLogout">Выход</a></li>
+                        </ul>
+                    </nav>
                     <h1 class="header__title">Личный кабинет</h1>
+                    <hr />
                 </header>
-                <hr />
                 <cschedule v-if="schedule == true"></cschedule>
                 <!--<header>
                     <h1 class="header__title">Просто Демо:</h1>
@@ -56,8 +64,11 @@ export default {
             // else
             //  this.schedule = false;
         },
-        offSchedule(){
+        onMain(){
             this.schedule = false;
+        },
+        onLogout(){
+            this.$router.push("/login");
         }
     },
     components: {
@@ -72,11 +83,13 @@ export default {
     float: left;
 }
 
+.abutton{
+    cursor: pointer;
+}
 /**
  * Переключаемая боковая панель навигации
  * выдвигающаяся по клику слева
  */
-
 .nav {
     /*  ширна произвольная, не стесняйтесь экспериментировать */
     width: 320px;
@@ -420,29 +433,31 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
+    background-color: #f1f1f1;
 }
 
 body {
     color: #333;
-    font: 1em 'Open Sans', sans-serif;
+    /*font: 1em 'Open Sans', sans-serif;*/
     background-color: #f1f1f1;
 }
 /* изменяем полоcу прокрутки */
+/*
 ::-webkit-scrollbar {
     width: .65em;
 }
 
 ::-webkit-scrollbar-track {
-    /*background-color: rgba(217, 217, 217, 0.75);*/
+    background-color: rgba(217, 217, 217, 0.75);
     *background-color: #434343;
 }
 
 ::-webkit-scrollbar-thumb {
-    /*background: rgba(170, 170, 170, 0.6);*/
-    *background-color: #434343;
+    background: rgba(170, 170, 170, 0.6);
+    background-color: #434343;
     border-radius: 5px;
     box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
-}
+}*/
 
 main {
     max-width: 100%;
@@ -460,7 +475,11 @@ article {
 header {
     margin-left: 2em;
     padding: 0;
+    background: #f1f1f1;
+    position: fixed;
     text-align: left;
+    right: 0px;
+    left: 0px;
 }
 
 footer {
@@ -491,6 +510,7 @@ h2 {
 h1 {
     font-size: 32px;
     line-height: 32px;
+    margin-left: 15px;
 }
 
 h2 {

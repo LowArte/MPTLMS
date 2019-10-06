@@ -63,6 +63,10 @@ export default {
 </script>
 
 <style>
+body {
+    background-color: #434343;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.5s;

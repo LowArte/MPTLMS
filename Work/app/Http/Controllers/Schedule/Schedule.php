@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Schedule as Sch;
 use Illuminate\Support\Facades\Storage;
 use DB;
+use Debugbar;
 
 class Schedule extends Controller
 {
@@ -15,6 +16,7 @@ class Schedule extends Controller
     */
     public function get_schedule(Request $request)
     {
+        Debugbar::info ($request);
         $schedule = Sch::join('groups', 'schedules.group_id', '=', 'groups.id')
             ->where('groups.group_name','=',$request['group'])
             ->select('schedules.schedule')
