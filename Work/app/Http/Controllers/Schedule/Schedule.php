@@ -28,9 +28,9 @@ class Schedule extends Controller
         Расписание находится в поле schedule
     */
     public function save(Request $request){
-        Sch::join('groups', 'schedules.group_id', '=', 'groups.id')
-            ->where('groups.group_name','=',$request['group'])
-            ->update(['schedules.schedule' => $request['schedule']]);
+        $schedule = Sch::join('groups', 'schedules.group_id', '=', 'groups.id')
+            ->where('groups.group_name','=',$request['group']);           
+        $schedule->update(['schedules.schedule' => $request['schedule']]);
         return response()->json([
             'success' => true], 200);
     }
