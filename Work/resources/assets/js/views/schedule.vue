@@ -5,11 +5,11 @@
       <input type="button" value="Кликни" @click="SaveJson">
     </div>
     <div class="schedulebody">
-      <div v-bind:key="i" class="dayweek" v-for="(n, i) in posts">
-        <p v-bind:key="'a'+i1" v-for="(n1, i1) in n">
-          {{n1.Teacher}}
+      <div v-bind:key="i" class="dayweek" v-for="(n, i) in posts " >
+        <p v-bind:key="'a'+i1" v-for="i1 in 7 ">
+          {{n[i1]['Teacher']}}
         </p>
-        <hr />
+        <hr/>
         <div v-bind:key="k" class="contdayweek" v-for="k in 5">
           <p>Содержимое</p>
           <hr />
@@ -23,20 +23,8 @@
 import axios from "axios";
 
 export default {
-<<<<<<< HEAD
-  data:() => ({
-      num: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      posts: [],
-      errors: {}
-=======
   data: () => ({
     num: [
-      "Понедельник",
-      "Вторник",
-      "Среда",
-      "Четверг",
-      "Пятница",
-      "Суббота",
       "Понедельник",
       "Вторник",
       "Среда",
@@ -46,17 +34,13 @@ export default {
     ],
     posts: [],
     errors: {}
->>>>>>> dcc5cd7e78547fe208baaba683d27c6a487bf7e2
   }),
-
   mounted() {
     Vue.axios
       .get("schedule/get_schedule", { params: { group: "БИ50-1-17" } })
       //axios.get('schedule/get_schedule')
       .then(response => {
-        this.posts = response.data;
-        console.log(this.posts);
-        
+        this.posts = response.data;     
       })
       .catch(e => {
         this.error.push(e);

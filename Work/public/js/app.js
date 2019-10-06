@@ -18169,9 +18169,76 @@ exports.push([module.i, "\nhtml,\r\nbody {\r\n  background-color: #ffffff;\n}\n*
 
 /***/ }),
 /* 56 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: D:\\FindInfo\\4 курс\\Диплом\\MPTLMS\\Work\\resources\\assets\\js\\views\\schedule.vue: Unexpected token (26:0)\n\n\u001b[0m \u001b[90m 24 | \u001b[39m\n \u001b[90m 25 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 27 | \u001b[39m  data\u001b[33m:\u001b[39m() \u001b[33m=>\u001b[39m ({\n \u001b[90m 28 | \u001b[39m      num\u001b[33m:\u001b[39m [\u001b[32m'Понедельник'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Вторник'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Среда'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Четверг'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Пятница'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Суббота'\u001b[39m]\u001b[33m,\u001b[39m\n \u001b[90m 29 | \u001b[39m      posts\u001b[33m:\u001b[39m []\u001b[33m,\u001b[39m\u001b[0m\n");
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      num: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+      posts: [],
+      errors: {}
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    Vue.axios.get("schedule/get_schedule", { params: { group: "БИ50-1-17" } })
+    //axios.get('schedule/get_schedule')
+    .then(function (response) {
+      _this.posts = response.data;
+    }).catch(function (e) {
+      _this.error.push(e);
+    });
+  },
+
+
+  methods: {
+    SaveJson: function SaveJson() {
+      var _this2 = this;
+
+      this.AddPara();
+      Vue.axios.post("schedule/save", { group: "БИ50-1-17", schedule: this.posts })
+      //axios.get('schedule/get_schedule')
+      .then(function (response) {
+        console.log(response.data.success);
+      }).catch(function (e) {
+        _this2.error.push(e);
+      });
+    },
+    AddPara: function AddPara() {
+      console.log(this.posts['Понедельник']);
+      this.posts['Понедельник']['1']['Teacher'] = 'Борисов';
+    }
+  }
+});
 
 /***/ }),
 /* 57 */
@@ -18983,9 +19050,9 @@ var render = function() {
           "div",
           { key: i, staticClass: "dayweek" },
           [
-            _vm._l(n, function(n1, i1) {
+            _vm._l(7, function(i1) {
               return _c("p", { key: "a" + i1 }, [
-                _vm._v("\n        " + _vm._s(n1.Teacher) + "\n      ")
+                _vm._v("\n        " + _vm._s(n[i1]["Teacher"]) + "\n      ")
               ])
             }),
             _vm._v(" "),
