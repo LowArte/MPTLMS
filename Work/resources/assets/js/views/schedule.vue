@@ -25,6 +25,7 @@ export default {
       posts: [],
       errors: {}
   }),
+
   mounted(){
     Vue.axios.get ('schedule/get_schedule',{params: {'group': 'БИ50-1-17'}})
     //axios.get('schedule/get_schedule')
