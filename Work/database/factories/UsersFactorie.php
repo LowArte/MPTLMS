@@ -4,14 +4,13 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Users::class, function (Faker $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     $pass = $faker->password();
     return [
         'name'=>$faker->firstName(),
         'secName'=>$faker->lastName(),
         'thirdName'=>$faker->lastName(),
-        'login_email'=>$faker->email(),
-        'login_stud'=>$faker->creditCardNumber(),
+        'email'=>$faker->email(),
         'password' =>Hash::make($pass),
         'password_notHash' =>$pass,
         'post_id' =>rand(1,6),

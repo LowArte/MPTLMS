@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+/**
+ * Class RegisterController.
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class RegisterController extends Controller
 {
     /*
@@ -55,6 +61,18 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('welcome', [
+            'action' => 'register'
+        ]);
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -65,7 +83,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
     }
 }
