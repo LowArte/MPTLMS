@@ -7,7 +7,7 @@
     >
         {{ snackbarText }}<br/>
         {{ snackbarSubtext }}
-        <v-btn dark text @click.native="close">Close</v-btn>
+        <v-btn dark text @click.native="close">Закрыть</v-btn>
     </v-snackbar>
 </template>
 
@@ -33,4 +33,10 @@
     }
   }
 </script>
+
+<style scoped>
+*{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+</style>
 

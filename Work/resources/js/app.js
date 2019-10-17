@@ -59,27 +59,58 @@ new Vue({
       user: 'user'
     }),
     items: function () {
-      console.log(this.user);
-      if (this.user['post'] === 1) {
-        return [{
-          icon: 'home',
-          text: 'Home',
-          href: '/home'
-        }]
+      switch (user.post_id) {
+        case 1: {
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          }, {
+            icon: 'portrait',
+            text: 'Учетная карточка',
+            href: '/home'
+          }, {
+            icon: 'info',
+            text: 'Персональная информация',
+            href: '/home'
+          }, {
+            icon: 'today',
+            text: 'Расписание',
+            href: '/home'
+          }, {
+            icon: 'show_chart',
+            text: 'Успеваемость',
+            href: '/home'
+          }, {
+            icon: 'business_center',
+            text: 'Дополнительное образование',
+            href: '/home'
+          }, {
+            icon: 'school',
+            text: 'Преподаватели',
+            href: '/home'
+          }, {
+            icon: 'group',
+            text: 'Одногруппники',
+            href: '/home'
+          }, {
+            icon: 'edit',
+            text: 'Справки',
+            href: '/home'
+          }, {
+            icon: 'storefront',
+            text: 'Портфолио',
+            href: '/home'
+          }, {
+            icon: 'layers',
+            text: 'Базы практики',
+            href: '/home'
+          }];
+        }
+        default: {
+          return null;
+        }
       }
-      else {
-        return [{
-          icon: 'home',
-          text: 'Home',
-          href: '/home'
-        },
-        {
-          icon: 'home',
-          text: 'Text',
-          href: '/home'
-        }]
-      }
-
     }
   },
   methods: {
@@ -90,9 +121,10 @@ new Vue({
     updateUser() {
       this.updatingUser = true
       this.$store.dispatch(actions.UPDATE_USER, this.user).then(response => {
-        this.showMessage('User modified ok!')
+        this.showMessage('Изменения сохранены!')
       }).catch(error => {
         console.dir(error)
+        /* this.showMessage('Вы пытаетесь созранить данные, не изменив их!') */
         this.showError(error)
       }).then(() => {
         this.editingUser = false

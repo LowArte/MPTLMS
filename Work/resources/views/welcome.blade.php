@@ -41,7 +41,7 @@
                 <remember-password action="{{ $action ?? null }}"></remember-password>
                 <reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"></reset-password>
                 @else
-                <v-btn color="secondary" dark href="\home">ВОЙТИ</v-btn>
+                <v-btn color="accent" dark href="\home">ВОЙТИ</v-btn>
                 @endif
             </v-app-bar>
             <v-content>

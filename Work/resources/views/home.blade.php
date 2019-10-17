@@ -6,7 +6,7 @@
         <v-layout row wrap>
             <v-flex xs12>
                 <v-card>
-                    <v-card-title class="blue darken-3 white--text"><h2>Home</h2></v-card-title>
+                    <v-card-title class="secondary info--text font-weight-light"><h2 class="font-weight-light">Главная</h2></v-card-title>
                     
                 </v-card>
             </v-flex>
