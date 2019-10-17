@@ -58,12 +58,28 @@ new Vue({
     ...mapGetters({
       user: 'user'
     }),
-    items:function(){
-      return [{
-        icon: 'home',
-        text: 'Home',
-        href: '/home'
-      }]
+    items: function () {
+      console.log(this.user);
+      if (this.user['post'] === 1) {
+        return [{
+          icon: 'home',
+          text: 'Home',
+          href: '/home'
+        }]
+      }
+      else {
+        return [{
+          icon: 'home',
+          text: 'Home',
+          href: '/home'
+        },
+        {
+          icon: 'home',
+          text: 'Text',
+          href: '/home'
+        }]
+      }
+
     }
   },
   methods: {

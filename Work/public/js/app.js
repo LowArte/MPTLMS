@@ -54504,11 +54504,25 @@ new Vue({
     user: 'user'
   }), {
     items: function items() {
-      return [{
-        icon: 'home',
-        text: 'Home',
-        href: '/home'
-      }];
+      console.log(this.user);
+
+      if (this.user['post'] === 1) {
+        return [{
+          icon: 'home',
+          text: 'Home',
+          href: '/home'
+        }];
+      } else {
+        return [{
+          icon: 'home',
+          text: 'Home',
+          href: '/home'
+        }, {
+          icon: 'home',
+          text: 'Text',
+          href: '/home'
+        }];
+      }
     }
   }),
   methods: {
@@ -55485,8 +55499,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\vuetifyTest\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\project\vuetifyTest\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
