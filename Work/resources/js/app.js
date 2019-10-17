@@ -59,51 +59,58 @@ new Vue({
       user: 'user'
     }),
     items: function () {
-      return [{
-        icon: 'home',
-        text: 'Главная',
-        href: '/home'
-      }, {
-        icon: 'portrait',
-        text: 'Учетная карточка',
-        href: '/home'
-      }, {
-        icon: 'info',
-        text: 'Персональная информация',
-        href: '/home'
-      }, {
-        icon: 'today',
-        text: 'Расписание',
-        href: '/home'
-      }, {
-        icon: 'show_chart',
-        text: 'Успеваемость',
-        href: '/home'
-      }, {
-        icon: 'business_center',
-        text: 'Дополнительное образование',
-        href: '/home'
-      }, {
-        icon: 'school',
-        text: 'Преподаватели',
-        href: '/home'
-      }, {
-        icon: 'group',
-        text: 'Одногруппники',
-        href: '/home'
-      }, {
-        icon: 'edit',
-        text: 'Справки',
-        href: '/home'
-      }, {
-        icon: 'storefront',
-        text: 'Портфолио',
-        href: '/home'
-      }, {
-        icon: 'layers',
-        text: 'Базы практики',
-        href: '/home'
-      }]
+      switch (user.post_id) {
+        case 1: {
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          }, {
+            icon: 'portrait',
+            text: 'Учетная карточка',
+            href: '/home'
+          }, {
+            icon: 'info',
+            text: 'Персональная информация',
+            href: '/home'
+          }, {
+            icon: 'today',
+            text: 'Расписание',
+            href: '/home'
+          }, {
+            icon: 'show_chart',
+            text: 'Успеваемость',
+            href: '/home'
+          }, {
+            icon: 'business_center',
+            text: 'Дополнительное образование',
+            href: '/home'
+          }, {
+            icon: 'school',
+            text: 'Преподаватели',
+            href: '/home'
+          }, {
+            icon: 'group',
+            text: 'Одногруппники',
+            href: '/home'
+          }, {
+            icon: 'edit',
+            text: 'Справки',
+            href: '/home'
+          }, {
+            icon: 'storefront',
+            text: 'Портфолио',
+            href: '/home'
+          }, {
+            icon: 'layers',
+            text: 'Базы практики',
+            href: '/home'
+          }];
+        }
+        default: {
+          return null;
+        }
+      }
     }
   },
   methods: {
