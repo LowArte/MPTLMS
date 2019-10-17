@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-corner-indicator.min.css" rel="stylesheet">
+  <!--   <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-corner-indicator.min.css" rel="stylesheet"> -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
@@ -64,7 +64,7 @@
                 </template>
             </v-list>
         </v-navigation-drawer>
-        <v-app-bar color="blue darken-3" dark app clipped-left clipped-right fixed>
+        <v-app-bar color="primary" dark app clipped-left clipped-right fixed>
             <div :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'" class="ml-0 pl-3">
                 <v-btn icon @click.stop="drawer = !drawer">
                     <v-icon>menu</v-icon>
@@ -85,32 +85,32 @@
                         </v-flex>
                     </v-layout>
                 </v-container>
-                <v-card-text class="px-0 grey lighten-3">
+                <v-card-text class="px-0 grey lighten-4">
                     <v-form class="pl-3 pr-1 ma-0">
-                        <v-text-field :readonly="!editingUser" label="Email" :value="user.email" ref="email" @input="updateEmail"></v-text-field>
-                        <v-text-field :readonly="!editingUser" label="User name" :value="user.name" @input="updateName"></v-text-field>
-                        <v-text-field readonly label="Created at" :value="user.created_at" readonly></v-text-field>
+                        <v-text-field :readonly="!editingUser" label="Почта" :value="user.email" ref="email" @input="updateEmail"></v-text-field>
+                        <v-text-field :readonly="!editingUser" label="Имя" :value="user.name" @input="updateName"></v-text-field>
+                        <v-text-field readonly label="Дата регистрации" :value="user.created_at" readonly></v-text-field>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn :loading="updatingUser" text color="green" @click="updateUser" v-if="editingUser">
                         <v-icon right dark>save</v-icon>
-                        Save
+                        Сохранить
                     </v-btn>
-                    <v-btn text color="orange" @click="editUser()" v-else>
+                    <v-btn text color="warning" @click="editUser()" v-else>
                         <v-icon right dark>edit</v-icon>
-                        Edit
+                        Изменить
                     </v-btn>
-                    <v-btn :loading="logoutLoading" @click="logout" text color="orange">
+                    <v-btn :loading="logoutLoading" @click="logout" text color="accent">
                         <v-icon right dark>exit_to_app</v-icon>
-                        Logout
+                        Выход
                     </v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn :loading="changingPassword" text color="red" @click="changePassword">Change Password</v-btn>
+                    <v-btn :loading="changingPassword" text color="accent" @click="changePassword">Смена пароля</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
             </v-card>

@@ -28,7 +28,7 @@
       </v-form>
       <v-card-actions class="text-right">
         <div class="flex-grow-1"></div>
-        <v-btn color="accent darken-1" text @click.native="showRememberPassword = false">Отмена</v-btn>
+        <v-btn color="accent" text @click.native="showRememberPassword = false">Отмена</v-btn>
         <v-btn
           :loading="loading"
           text

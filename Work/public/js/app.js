@@ -1897,9 +1897,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3441,7 +3438,7 @@ var render = function() {
             return [
               _c(
                 "v-btn",
-                _vm._g({ attrs: { color: "secondary", dark: "" } }, on),
+                _vm._g({ attrs: { color: "accent", dark: "" } }, on),
                 [_vm._v("ВОЙТИ")]
               )
             ]
@@ -3544,17 +3541,13 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("small", { staticClass: "text-left" }, [
-                _vm._v("*указатель заполнения поля")
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "flex-grow-1" }),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
                   attrs: {
-                    color: "accent darken-1 font-weight-light",
+                    color: "accent font-weight-light",
                     text: "",
                     href: "/password/reset"
                   }
@@ -3573,7 +3566,7 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "secondary darken-1", text: "" },
+                      attrs: { color: "accent", text: "" },
                       nativeOn: {
                         click: function($event) {
                           _vm.showLogin = false
@@ -3719,7 +3712,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "accent darken-1", text: "" },
+                  attrs: { color: "accent", text: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showRememberPassword = false
@@ -54506,7 +54499,47 @@ new Vue({
     items: function items() {
       return [{
         icon: 'home',
-        text: 'Home',
+        text: 'Главная',
+        href: '/home'
+      }, {
+        icon: 'portrait',
+        text: 'Учетная карточка',
+        href: '/home'
+      }, {
+        icon: 'info',
+        text: 'Персональная информация',
+        href: '/home'
+      }, {
+        icon: 'today',
+        text: 'Расписание',
+        href: '/home'
+      }, {
+        icon: 'show_chart',
+        text: 'Успеваемость',
+        href: '/home'
+      }, {
+        icon: 'business_center',
+        text: 'Дополнительное образование',
+        href: '/home'
+      }, {
+        icon: 'school',
+        text: 'Преподаватели',
+        href: '/home'
+      }, {
+        icon: 'group',
+        text: 'Одногруппники',
+        href: '/home'
+      }, {
+        icon: 'edit',
+        text: 'Справки',
+        href: '/home'
+      }, {
+        icon: 'storefront',
+        text: 'Портфолио',
+        href: '/home'
+      }, {
+        icon: 'layers',
+        text: 'Базы практики',
         href: '/home'
       }];
     }
@@ -54521,9 +54554,10 @@ new Vue({
 
       this.updatingUser = true;
       this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_5__["UPDATE_USER"], this.user).then(function (response) {
-        _this.showMessage('User modified ok!');
+        _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
+        /* this.showMessage('Вы пытаетесь созранить данные, не изменив их!') */
 
         _this.showError(error);
       }).then(function () {
@@ -55452,13 +55486,14 @@ var opts = {
   theme: {
     themes: {
       light: {
-        primary: '#4066FF',
-        secondary: '#434343',
+        primary: '#434343',
+        secondary: '#FFFFFF',
         accent: '#FF3D00',
-        error: '#FF5252',
-        info: '#2196F3',
-        success: '#4CAF50',
-        warning: '#FFC107'
+        error: '#FF3D00',
+        info: '#4066FF',
+        success: '#FF3D00',
+        warning: '#FFCA28',
+        subsidiary: '#C3E88D'
       }
     }
   }
@@ -55485,8 +55520,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\project\vuetifyTest\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\project\vuetifyTest\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

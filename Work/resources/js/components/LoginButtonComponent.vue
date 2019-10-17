@@ -7,7 +7,7 @@
     transition="dialog-transition"
   >
     <template v-slot:activator="{ on }">
-      <v-btn color="secondary" dark v-on="on">ВОЙТИ</v-btn>
+      <v-btn color="accent" dark v-on="on">ВОЙТИ</v-btn>
     </template>
     <v-card>
       <v-card-title>
@@ -40,17 +40,14 @@
             </v-row>
           </v-container>
         </v-form>
-        <small class="text-left">*указатель заполнения поля</small>
         <div class="flex-grow-1"></div>
-
-        <v-btn color="accent darken-1 font-weight-light" text href="/password/reset">
+        <v-btn color="accent font-weight-light" text href="/password/reset">
           <small>Не можете войти?</small>
         </v-btn>
-
         <div class="flex-grow-1"></div>
         <v-card-actions class="text-right">
           <div class="flex-grow-1"></div>
-          <v-btn color="secondary darken-1" text @click.native="showLogin = false">Отмена</v-btn>
+          <v-btn color="accent" text @click.native="showLogin = false">Отмена</v-btn>
           <v-btn @click.native="login" :loading="loginLoading" color="blue darken-1" text>ВОЙТИ</v-btn>
         </v-card-actions>
       </v-card-text>
@@ -138,5 +135,5 @@ export default {
       }
     }
   }
-}
+};
 </script>
