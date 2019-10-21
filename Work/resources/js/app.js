@@ -10,7 +10,7 @@ window.Vue = require('vue');
 import LoginButtonComponent from './components/authentication/LoginButtonComponent'
 import RememberPasswordComponent from './components/authentication/RememberPasswordComponent'
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
-import FeadbackComponent from './components/feedback/FeedbackComponent'
+import FeedbackComponent from './components/feedback/FeedbackComponent'
 import CertificateComponent from './components/certificate/CertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/Expention/Panel'
@@ -49,7 +49,7 @@ new Vue({
     'reset-password': ResetPasswordComponent,
     'snackbar': SnackBar,
     'panel' : Panel,
-    'feadback' : FeadbackComponent, 
+    'feedback' : FeedbackComponent, 
     'certificate' : CertificateComponent
 
   },

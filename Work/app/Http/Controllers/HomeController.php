@@ -26,12 +26,12 @@ class HomeController extends Controller
         $panel_array = array(
             array(
                 "header"  => "Test", 
-                "content" => "feadback/FeadbackComponent",
+                "content" => "feedback/FeedbackComponent",
                 "props"   => array()
             ), 
             array(
                 "header"  => "Test2", 
-                "content" => "feadback/FeadbackComponent",
+                "content" => "feedback/FeedbackComponent",
                 "props"   => array()
             ));
         return view('home', ["panel_array" => json_encode($panel_array)]);
