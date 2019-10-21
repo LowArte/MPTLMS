@@ -7,9 +7,10 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import LoginButtonComponent from './components/LoginButtonComponent'
-import RememberPasswordComponent from './components/RememberPasswordComponent'
-import ResetPasswordComponent from './components/ResetPasswordComponent'
+import LoginButtonComponent from './components/authentication/LoginButtonComponent'
+import RememberPasswordComponent from './components/authentication/RememberPasswordComponent'
+import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
+import FeadbackComponent from './components/feadback/FeadbackComponent'
 import SnackBar from './components/SnackBarComponent'
 
 //import vuetif from './plugins/vuetify'
@@ -44,7 +45,8 @@ new Vue({
     'login-button': LoginButtonComponent,
     'remember-password': RememberPasswordComponent,
     'reset-password': ResetPasswordComponent,
-    'snackbar': SnackBar
+    'snackbar': SnackBar,
+    'feadback' : FeadbackComponent
   },
   data: () => ({
     drawer: null,
@@ -52,21 +54,7 @@ new Vue({
     editingUser: false,
     logoutLoading: false,
     changingPassword: false,
-    updatingUser: false,
-    group: "П-2-16",
-    FIO: "Борисов Артём Игоревич",
-    email: "p_a.i.borisov@mpt.ru",
-
-    thematic: "Другое",
-    thematics: ["Проблемы с отображением", "Другое"],
-
-    modelmessage: "",
-    messageRules: [
-      v => v.length > 0 || "Текст сообщения не указан",
-      v =>
-        v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
-    ],
-    form: false
+    updatingUser: false
   }),
   computed: {
     ...mapGetters({
@@ -122,7 +110,7 @@ new Vue({
           }, {
             icon: 'feedback',
             text: 'Обратная связь',
-            href: '/card'
+            href: '/feedback'
           }];
         }
         default: {

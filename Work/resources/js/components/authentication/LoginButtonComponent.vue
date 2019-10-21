@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import * as actions from "../store/action-types";
-import withSnackbar from "./mixins/withSnackbar";
+import * as actions from "../../store/action-types";
+import withSnackbar from "../mixins/withSnackbar";
 export default {
   mixins: [withSnackbar],
   data() {

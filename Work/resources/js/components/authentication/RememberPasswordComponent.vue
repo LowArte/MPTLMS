@@ -45,9 +45,9 @@
 
 
 <script>
-import * as actions from "../store/action-types";
-import sleep from "../utils/sleep";
-import withSnackbar from "./mixins/withSnackbar";
+import * as actions from "../../store/action-types";
+import withSnackbar from "../mixins/withSnackbar";
+import sleep from "../../utils/sleep";
 
 export default {
   mixins: [withSnackbar],
