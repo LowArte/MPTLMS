@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/feedback', 'FeedbackController@index')->name('feedback');
 
 Route::get('/card', 'CardController@index')->name('card');
+
+Route::get('/certificate', 'CertificateController@index')->name('certificate');
