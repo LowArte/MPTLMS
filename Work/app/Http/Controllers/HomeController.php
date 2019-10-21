@@ -23,6 +23,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $panel_array = array(
+            array(
+                "header"  => "Test", 
+                "content" => "feadback/FeadbackComponent",
+                "props"   => array()
+            ), 
+            array(
+                "header"  => "Test2", 
+                "content" => "feadback/FeadbackComponent",
+                "props"   => array()
+            ));
+        return view('home', ["panel_array" => json_encode($panel_array)]);
     }
 }

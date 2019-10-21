@@ -12,6 +12,7 @@ import RememberPasswordComponent from './components/authentication/RememberPassw
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
 import FeadbackComponent from './components/feadback/FeadbackComponent'
 import SnackBar from './components/SnackBarComponent'
+import Panel from './components/Expention/Panel'
 
 //import vuetif from './plugins/vuetify'
 
@@ -46,7 +47,8 @@ new Vue({
     'remember-password': RememberPasswordComponent,
     'reset-password': ResetPasswordComponent,
     'snackbar': SnackBar,
-    'feadback' : FeadbackComponent
+    'feadback' : FeadbackComponent,
+    'panel' : Panel
   },
   data: () => ({
     drawer: null,
