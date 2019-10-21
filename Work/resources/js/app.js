@@ -10,7 +10,8 @@ window.Vue = require('vue');
 import LoginButtonComponent from './components/authentication/LoginButtonComponent'
 import RememberPasswordComponent from './components/authentication/RememberPasswordComponent'
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
-import FeadbackComponent from './components/feadback/FeadbackComponent'
+import FeadbackComponent from './components/feedback/FeedbackComponent'
+import CertificateComponent from './components/certificate/CertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 
 //import vuetif from './plugins/vuetify'
@@ -46,7 +47,8 @@ new Vue({
     'remember-password': RememberPasswordComponent,
     'reset-password': ResetPasswordComponent,
     'snackbar': SnackBar,
-    'feadback' : FeadbackComponent
+    'feadback' : FeadbackComponent, 
+    'certificate' : CertificateComponent
   },
   data: () => ({
     drawer: null,
@@ -98,7 +100,7 @@ new Vue({
           }, {
             icon: 'edit',
             text: 'Справки',
-            href: '/home'
+            href: '/certificate'
           }, {
             icon: 'storefront',
             text: 'Портфолио',

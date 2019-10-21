@@ -2299,9 +2299,363 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feadback/FeadbackComponent.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/CertificateComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/certificate/CertificateComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Components_Certificate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/Certificate */ "./resources/js/components/certificate/Components/Certificate.vue");
+/* harmony import */ var _Components_Characteristic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Characteristic */ "./resources/js/components/certificate/Components/Characteristic.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tab: null,
+      tabs: 2,
+      tabitem: [{
+        name: "Справка",
+        com: _Components_Certificate__WEBPACK_IMPORTED_MODULE_0__["default"]
+      }, {
+        name: "Характеристика",
+        com: _Components_Characteristic__WEBPACK_IMPORTED_MODULE_1__["default"]
+      }]
+    };
+  },
+  components: {
+    OrderCharacteristic: _Components_Characteristic__WEBPACK_IMPORTED_MODULE_1__["default"],
+    OrderCertificate: _Components_Certificate__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Certificate.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/certificate/Components/Certificate.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      model: "",
+      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
+      group: "П-2-16",
+      Surname: "Борисов",
+      Firstname: "Артём",
+      Lastname: "Игоревич",
+      email: "p_a.i.borisov@mpt.ru",
+      datebirth: "16-09-2000",
+      enabled: false,
+      orderRules: [function (v) {
+        return v.length > 0 || "Текст заявки не указан";
+      }, function (v) {
+        return v.length <= 255 || "Текст заявки должен быть не более 255 символов";
+      }],
+      policyRules: [function (v) {
+        return !!v || "Подтвердите!";
+      }],
+      form: false
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Characteristic.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/certificate/Components/Characteristic.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      modelorder: "",
+      modelprogress: "",
+      group: "П-2-16",
+      FIO: "Борисов Артём Игоревич",
+      itemss: ["09.02.03 - Программирование в компьютерных системах"],
+      special: "09.02.03 - Программирование в компьютерных системах",
+      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
+      school: "Школа №3",
+      datebirth: "16-09-2000",
+      dateendschool: "12-06-2016",
+      yearmpt: "2019",
+      email: "p_a.i.borisov@mpt.ru",
+      postofgroup: "Ответственый за успеваемость",
+      postofgroups: ["Староста", "Ответственый за успеваемость", "Ответственый за посещяемость", "Студент"],
+      progressRules: [function (v) {
+        return v.length > 0 || "Успеваемость не указана";
+      }, function (v) {
+        return v.length <= 255 || "Текст успеваемости должен быть не более 255 символов";
+      }],
+      orderRules: [function (v) {
+        return v.length > 0 || "Текст заявки не указан";
+      }, function (v) {
+        return v.length <= 255 || "Текст заявки должен быть не более 255 символов";
+      }],
+      form: false
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feedback/FeedbackComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/feadback/FeadbackComponent.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/feedback/FeedbackComponent.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -4088,9 +4442,942 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feadback/FeadbackComponent.vue?vue&type=template&id=b0d1e44e&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/CertificateComponent.vue?vue&type=template&id=3f319809&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/certificate/CertificateComponent.vue?vue&type=template&id=3f319809& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-tabs",
+    {
+      attrs: { "background-color": "transparent", color: "basil", grow: "" },
+      model: {
+        value: _vm.tab,
+        callback: function($$v) {
+          _vm.tab = $$v
+        },
+        expression: "tab"
+      }
+    },
+    [
+      _c("v-tab", { key: _vm.item }, [_vm._v("Справка")]),
+      _vm._v(" "),
+      _c("v-tab", { key: _vm.item }, [_vm._v("Характеристика")]),
+      _vm._v(" "),
+      _c("v-tab-item", { key: _vm.item }, [_c("OrderCertificate")], 1),
+      _vm._v(" "),
+      _c("v-tab-item", { key: _vm.item }, [_c("OrderCharacteristic")], 1)
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Certificate.vue?vue&type=template&id=07de6fbe&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/certificate/Components/Certificate.vue?vue&type=template&id=07de6fbe& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { attrs: { cols: "12" } },
+        [
+          _c("v-hover", {
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(ref) {
+                  var hover = ref.hover
+                  return [
+                    _c(
+                      "v-card",
+                      {
+                        staticClass: "mx-auto",
+                        attrs: {
+                          elevation: hover ? 12 : 2,
+                          height: "auto",
+                          width: "max"
+                        }
+                      },
+                      [
+                        _c(
+                          "v-form",
+                          {
+                            model: {
+                              value: _vm.form,
+                              callback: function($$v) {
+                                _vm.form = $$v
+                              },
+                              expression: "form"
+                            }
+                          },
+                          [
+                            _c(
+                              "v-container",
+                              [
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c(
+                                      "v-card-text",
+                                      {
+                                        staticClass:
+                                          "my-2 ma-0 pa-0 text-center title"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Канцелярия подготавливает только документы, подтверждающие факт обучения в техникуме обучающихся в настоящее время студентов техникума."
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("p", [
+                                      _c("b", [
+                                        _vm._v(
+                                          "1 заявка = 1 справка в одно место предоставления"
+                                        )
+                                      ]),
+                                      _vm._v(
+                                        ", если надо несколько справок в одно место писать кол-во штук. (Пример заявки если надо несколько штук: МФЦ – 2 шт)."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("b", [
+                                        _c("u", [
+                                          _vm._v(
+                                            "Заказ справки на работу родителю или студенту"
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(
+                                        " – писать «на работу родителя» или «по месту трудоустройства» без названия организации."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("b", [
+                                        _c("u", [
+                                          _vm._v(
+                                            "Заказ справки в гос. организации"
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(
+                                        " – писать только название организации, запрещено писать в заявке для чего нужна справка и т.п. лишнюю информацию (пример заявки: ПФ). При необходимости отдельная заявка создается"
+                                      ),
+                                      _c("b", [
+                                        _c("u", [
+                                          _vm._v(
+                                            " для заказа лицензии, аккредитации."
+                                          )
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("b", [
+                                        _c("u", [
+                                          _vm._v("Заказ справки в военкомат")
+                                        ])
+                                      ]),
+                                      _vm._v(
+                                        " – писать название военкомата, район, округ, город, область (пример заявки: Военкомат Бутовского района ЮЗАО г. Москва)."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("b", [
+                                        _c("u", [
+                                          _vm._v(
+                                            "Гербовая печать на справке в военкомат"
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(
+                                        " после получения справки в техникуме ставится студентом самостоятельно в РЭУ (Стремянный переулок, д. 36, 5 корп, 212 каб, с понедельника по пятницу с 8-30 до 17-00)."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "«По месту требования» справки не оформляются."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v("Срок подготовки справок "),
+                                      _c("b", [_vm._v("до 3 рабочих дней")]),
+                                      _vm._v(
+                                        ", отсчет срока начинается со следующего рабочего дня (с понедельника по пятницу) после заказа справки."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-text",
+                                      { staticClass: "my-2 ma-0 pa-0 title" },
+                                      [
+                                        _vm._v(
+                                          "Прием студентов ведется только по студенческому билету."
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "Получить справку можно с понедельника по пятницу в канцелярии техникума по адресу: "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          "ул. Нежинская, д. 7, кабинет 215 по расписанию работы со студентами:"
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _c("b", [
+                                        _vm._v(
+                                          "с 10-00 до 10-10; с 11-40 до 12-00; с 13-30 до 14-00; с 15-30 до 15-40."
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "О готовности справки и об отказе приема заявки в работу уведомления отправляются на электронную почту студента, указанную в заявке, автоматически."
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "Канцелярия не занимается подготовкой следующих документов:"
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("ul", [
+                                      _c("li", [
+                                        _c("p", [
+                                          _c("b", [
+                                            _c("u", [
+                                              _vm._v(
+                                                "Справка о периоде обучения (выписка оценок)"
+                                              )
+                                            ])
+                                          ]),
+                                          _vm._v(
+                                            " заказывается и получается:\n                    1 курс – педагог организатор отделения (тел. 8-925-800-10-97);\n                    2, 3, 4 курс – заведующий отделением Ключник Н.Е. (тел. 8-926-919-23-46, Нежинская ул., д.7, каб 223).\n                  "
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("li", [
+                                        _c("p", [
+                                          _c("b", [
+                                            _c("u", [_vm._v("Характеристика")])
+                                          ]),
+                                          _vm._v(
+                                            ", анкета для военкомата заказывается и получается: 1 курс – педагог организатор отделения (тел. 8-925-800-10-97); 2, 3, 4 курс – заведующий отделением Руденко Т.В. (тел. 8-495-800-12-00 доб. 2054, Нежинская ул., д.7, каб 242)."
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("li", [
+                                        _c("p", [
+                                          _c("b", [
+                                            _c("u", [
+                                              _vm._v(
+                                                "Все справки с денежными суммами (о размере стипендии и т.п.), справка на субсидию"
+                                              )
+                                            ])
+                                          ]),
+                                          _vm._v(
+                                            " – в бухгалтерии (Стремянный пер, д. 36, 5 корп, кабинеты 304 и 308, тел. для бюджета 8-495-958-26-17, для договора 8-499-237-94-77)."
+                                          )
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("li", [
+                                        _c("p", [
+                                          _c("b", [
+                                            _c("u", [_vm._v("Копия аттестата")])
+                                          ]),
+                                          _vm._v(
+                                            " – в отделе по работе со студентами (Стремянный пер, д. 36, 3 корп, каб 100 (7 и 8 комн.) тел. 8-499-237-81-04)."
+                                          )
+                                        ])
+                                      ])
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: { label: "Фамилия", readonly: "" },
+                                      model: {
+                                        value: _vm.Surname,
+                                        callback: function($$v) {
+                                          _vm.Surname = $$v
+                                        },
+                                        expression: "Surname"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: { label: "Имя", readonly: "" },
+                                      model: {
+                                        value: _vm.Firstname,
+                                        callback: function($$v) {
+                                          _vm.Firstname = $$v
+                                        },
+                                        expression: "Firstname"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Отчество",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.Lastname,
+                                        callback: function($$v) {
+                                          _vm.Lastname = $$v
+                                        },
+                                        expression: "Lastname"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.itemsg,
+                                        label: "Группа",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.group,
+                                        callback: function($$v) {
+                                          _vm.group = $$v
+                                        },
+                                        expression: "group"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        rules: _vm.emailRules,
+                                        label: "E-mail",
+                                        required: "",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.email,
+                                        callback: function($$v) {
+                                          _vm.email = $$v
+                                        },
+                                        expression: "email"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Дата рождения",
+                                        hint: "Формат День/Месяц/Год",
+                                        "persistent-hint": "",
+                                        readonly: ""
+                                      },
+                                      on: {
+                                        blur: function($event) {
+                                          _vm.date = _vm.parseDate(
+                                            _vm.dateFormatted
+                                          )
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.datebirth,
+                                        callback: function($$v) {
+                                          _vm.datebirth = $$v
+                                        },
+                                        expression: "datebirth"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-textarea", {
+                                      attrs: {
+                                        "auto-grow": true,
+                                        clearable: false,
+                                        counter: 255 ? 255 : undefined,
+                                        filled: false,
+                                        flat: true,
+                                        hint: "Не более 255 символов",
+                                        label: "Текст заявки",
+                                        loading: false,
+                                        "no-resize": false,
+                                        outlined: false,
+                                        "persistent-hint": false,
+                                        placeholder: "",
+                                        rounded: false,
+                                        "row-height": 24,
+                                        rows: 3,
+                                        shaped: false,
+                                        "single-line": false,
+                                        solo: false,
+                                        rules: _vm.orderRules
+                                      },
+                                      model: {
+                                        value: _vm.model,
+                                        callback: function($$v) {
+                                          _vm.model = $$v
+                                        },
+                                        expression: "model"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-checkbox", {
+                                      staticClass: "shrink mr-2 mt-0",
+                                      attrs: {
+                                        "hide-details": "",
+                                        rules: _vm.policyRules,
+                                        label:
+                                          "Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен"
+                                      },
+                                      model: {
+                                        value: _vm.enabled,
+                                        callback: function($$v) {
+                                          _vm.enabled = $$v
+                                        },
+                                        expression: "enabled"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2 justify-center" },
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        staticClass: "white--text",
+                                        attrs: {
+                                          disabled: !_vm.form,
+                                          color: "blue",
+                                          depressed: ""
+                                        }
+                                      },
+                                      [_vm._v("Заказать")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Characteristic.vue?vue&type=template&id=17362bfe&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/certificate/Components/Characteristic.vue?vue&type=template&id=17362bfe& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { attrs: { cols: "12" } },
+        [
+          _c("v-hover", {
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(ref) {
+                  var hover = ref.hover
+                  return [
+                    _c(
+                      "v-card",
+                      {
+                        staticClass: "mx-auto",
+                        attrs: {
+                          elevation: hover ? 12 : 2,
+                          height: "auto",
+                          width: "max"
+                        }
+                      },
+                      [
+                        _c(
+                          "v-form",
+                          {
+                            model: {
+                              value: _vm.form,
+                              callback: function($$v) {
+                                _vm.form = $$v
+                              },
+                              expression: "form"
+                            }
+                          },
+                          [
+                            _c(
+                              "v-container",
+                              [
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label:
+                                          "Фамилия, Имя, Отчество студента",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.FIO,
+                                        callback: function($$v) {
+                                          _vm.FIO = $$v
+                                        },
+                                        expression: "FIO"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.itemss,
+                                        label: "Специальность",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.special,
+                                        callback: function($$v) {
+                                          _vm.special = $$v
+                                        },
+                                        expression: "special"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.itemsg,
+                                        label: "Группа",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.group,
+                                        callback: function($$v) {
+                                          _vm.group = $$v
+                                        },
+                                        expression: "group"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Дата рождения",
+                                        hint: "Формат День/Месяц/Год",
+                                        "persistent-hint": "",
+                                        readonly: ""
+                                      },
+                                      on: {
+                                        blur: function($event) {
+                                          _vm.date = _vm.parseDate(
+                                            _vm.dateFormatted
+                                          )
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.datebirth,
+                                        callback: function($$v) {
+                                          _vm.datebirth = $$v
+                                        },
+                                        expression: "datebirth"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: { label: "Школа", readonly: "" },
+                                      model: {
+                                        value: _vm.school,
+                                        callback: function($$v) {
+                                          _vm.school = $$v
+                                        },
+                                        expression: "school"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Год оконачния школы",
+                                        hint: "Формат День/Месяц/Год",
+                                        "persistent-hint": "",
+                                        readonly: ""
+                                      },
+                                      on: {
+                                        blur: function($event) {
+                                          _vm.date = _vm.parseDate(
+                                            _vm.dateFormatted
+                                          )
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.dateendschool,
+                                        callback: function($$v) {
+                                          _vm.dateendschool = $$v
+                                        },
+                                        expression: "dateendschool"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Год поступления в МПТ",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.yearmpt,
+                                        callback: function($$v) {
+                                          _vm.yearmpt = $$v
+                                        },
+                                        expression: "yearmpt"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.postofgroup,
+                                        label: "Обязанности в группе",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.postofgroup,
+                                        callback: function($$v) {
+                                          _vm.postofgroup = $$v
+                                        },
+                                        expression: "postofgroup"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-textarea", {
+                                      attrs: {
+                                        "auto-grow": true,
+                                        clearable: false,
+                                        counter: 255 ? 255 : undefined,
+                                        filled: false,
+                                        flat: true,
+                                        hint: "Не более 255 символов",
+                                        label: "Успеваемость",
+                                        loading: false,
+                                        "no-resize": false,
+                                        outlined: false,
+                                        "persistent-hint": false,
+                                        placeholder: "",
+                                        rounded: false,
+                                        "row-height": 24,
+                                        rows: 1,
+                                        shaped: false,
+                                        "single-line": false,
+                                        solo: false,
+                                        rules: _vm.progressRules
+                                      },
+                                      model: {
+                                        value: _vm.modelprogress,
+                                        callback: function($$v) {
+                                          _vm.modelprogress = $$v
+                                        },
+                                        expression: "modelprogress"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "E-mail",
+                                        required: "",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.email,
+                                        callback: function($$v) {
+                                          _vm.email = $$v
+                                        },
+                                        expression: "email"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-textarea", {
+                                      attrs: {
+                                        "auto-grow": true,
+                                        clearable: false,
+                                        counter: 255 ? 255 : undefined,
+                                        filled: false,
+                                        flat: true,
+                                        hint: "Не более 255 символов",
+                                        label: "Куда нужна характеристика",
+                                        loading: false,
+                                        "no-resize": false,
+                                        outlined: false,
+                                        "persistent-hint": false,
+                                        placeholder: "",
+                                        rounded: false,
+                                        "row-height": 24,
+                                        rows: 3,
+                                        shaped: false,
+                                        "single-line": false,
+                                        solo: false,
+                                        rules: _vm.orderRules
+                                      },
+                                      model: {
+                                        value: _vm.modelorder,
+                                        callback: function($$v) {
+                                          _vm.modelorder = $$v
+                                        },
+                                        expression: "modelorder"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2 justify-center" },
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        staticClass: "white--text",
+                                        attrs: {
+                                          disabled: !_vm.form,
+                                          color: "blue",
+                                          depressed: ""
+                                        }
+                                      },
+                                      [_vm._v("Заказать")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feedback/FeedbackComponent.vue?vue&type=template&id=bcf69b4e&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/feadback/FeadbackComponent.vue?vue&type=template&id=b0d1e44e& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/feedback/FeedbackComponent.vue?vue&type=template&id=bcf69b4e& ***!
   \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -54794,14 +56081,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_authentication_LoginButtonComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/authentication/LoginButtonComponent */ "./resources/js/components/authentication/LoginButtonComponent.vue");
 /* harmony import */ var _components_authentication_RememberPasswordComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/authentication/RememberPasswordComponent */ "./resources/js/components/authentication/RememberPasswordComponent.vue");
 /* harmony import */ var _components_authentication_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/authentication/ResetPasswordComponent */ "./resources/js/components/authentication/ResetPasswordComponent.vue");
-/* harmony import */ var _components_feadback_FeadbackComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/feadback/FeadbackComponent */ "./resources/js/components/feadback/FeadbackComponent.vue");
-/* harmony import */ var _components_SnackBarComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/SnackBarComponent */ "./resources/js/components/SnackBarComponent.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
-/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _components_feedback_FeedbackComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/feedback/FeedbackComponent */ "./resources/js/components/feedback/FeedbackComponent.vue");
+/* harmony import */ var _components_certificate_CertificateComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/certificate/CertificateComponent */ "./resources/js/components/certificate/CertificateComponent.vue");
+/* harmony import */ var _components_SnackBarComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/SnackBarComponent */ "./resources/js/components/SnackBarComponent.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -54816,6 +56104,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 
@@ -54836,21 +56125,22 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 if (window.user) {
-  _store__WEBPACK_IMPORTED_MODULE_5__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_7__["USER"], user);
-  _store__WEBPACK_IMPORTED_MODULE_5__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_7__["LOGGED"], true);
+  _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_8__["USER"], user);
+  _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_8__["LOGGED"], true);
 }
 
 new Vue({
   el: '#app',
-  store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_8__["default"],
-  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_10__["default"]],
+  store: _store__WEBPACK_IMPORTED_MODULE_6__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_9__["default"],
+  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_11__["default"]],
   components: {
     'login-button': _components_authentication_LoginButtonComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     'remember-password': _components_authentication_RememberPasswordComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
     'reset-password': _components_authentication_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
-    'snackbar': _components_SnackBarComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
-    'feadback': _components_feadback_FeadbackComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
+    'snackbar': _components_SnackBarComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
+    'feadback': _components_feedback_FeedbackComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
+    'certificate': _components_certificate_CertificateComponent__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -54862,7 +56152,7 @@ new Vue({
       updatingUser: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_9__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_10__["mapGetters"])({
     user: 'user'
   }), {
     items: function items() {
@@ -54904,7 +56194,7 @@ new Vue({
             }, {
               icon: 'edit',
               text: 'Справки',
-              href: '/home'
+              href: '/certificate'
             }, {
               icon: 'storefront',
               text: 'Портфолио',
@@ -54936,7 +56226,7 @@ new Vue({
       var _this = this;
 
       this.updatingUser = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_6__["UPDATE_USER"], this.user).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_7__["UPDATE_USER"], this.user).then(function (response) {
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
@@ -54949,12 +56239,12 @@ new Vue({
       });
     },
     updateEmail: function updateEmail(email) {
-      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_7__["USER"], _objectSpread({}, this.user, {
+      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_8__["USER"], _objectSpread({}, this.user, {
         email: email
       }));
     },
     updateName: function updateName(name) {
-      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_7__["USER"], _objectSpread({}, this.user, {
+      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_8__["USER"], _objectSpread({}, this.user, {
         name: name
       }));
     },
@@ -54974,7 +56264,7 @@ new Vue({
       var _this2 = this;
 
       this.logoutLoading = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_6__["LOGOUT"]).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_7__["LOGOUT"]).then(function (response) {
         window.location = '/';
       })["catch"](function (error) {
         console.log(error);
@@ -54995,7 +56285,7 @@ new Vue({
       var _this3 = this;
 
       this.changingPassword = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_6__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_7__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
         _this3.showMessage("Email sent to change password");
       })["catch"](function (error) {
         console.dir(error);
@@ -55351,17 +56641,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/feadback/FeadbackComponent.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/feadback/FeadbackComponent.vue ***!
-  \****************************************************************/
+/***/ "./resources/js/components/certificate/CertificateComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/certificate/CertificateComponent.vue ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _FeadbackComponent_vue_vue_type_template_id_b0d1e44e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FeadbackComponent.vue?vue&type=template&id=b0d1e44e& */ "./resources/js/components/feadback/FeadbackComponent.vue?vue&type=template&id=b0d1e44e&");
-/* harmony import */ var _FeadbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FeadbackComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/feadback/FeadbackComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CertificateComponent_vue_vue_type_template_id_3f319809___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CertificateComponent.vue?vue&type=template&id=3f319809& */ "./resources/js/components/certificate/CertificateComponent.vue?vue&type=template&id=3f319809&");
+/* harmony import */ var _CertificateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CertificateComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/certificate/CertificateComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55371,9 +56661,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _FeadbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _FeadbackComponent_vue_vue_type_template_id_b0d1e44e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _FeadbackComponent_vue_vue_type_template_id_b0d1e44e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CertificateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CertificateComponent_vue_vue_type_template_id_3f319809___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CertificateComponent_vue_vue_type_template_id_3f319809___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -55383,38 +56673,245 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/feadback/FeadbackComponent.vue"
+component.options.__file = "resources/js/components/certificate/CertificateComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/feadback/FeadbackComponent.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/certificate/CertificateComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/certificate/CertificateComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CertificateComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/CertificateComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/CertificateComponent.vue?vue&type=template&id=3f319809&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/certificate/CertificateComponent.vue?vue&type=template&id=3f319809& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificateComponent_vue_vue_type_template_id_3f319809___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CertificateComponent.vue?vue&type=template&id=3f319809& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/CertificateComponent.vue?vue&type=template&id=3f319809&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificateComponent_vue_vue_type_template_id_3f319809___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificateComponent_vue_vue_type_template_id_3f319809___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/Components/Certificate.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/certificate/Components/Certificate.vue ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Certificate_vue_vue_type_template_id_07de6fbe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Certificate.vue?vue&type=template&id=07de6fbe& */ "./resources/js/components/certificate/Components/Certificate.vue?vue&type=template&id=07de6fbe&");
+/* harmony import */ var _Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Certificate.vue?vue&type=script&lang=js& */ "./resources/js/components/certificate/Components/Certificate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Certificate_vue_vue_type_template_id_07de6fbe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Certificate_vue_vue_type_template_id_07de6fbe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/certificate/Components/Certificate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/Components/Certificate.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/certificate/Components/Certificate.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Certificate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Certificate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/Components/Certificate.vue?vue&type=template&id=07de6fbe&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/certificate/Components/Certificate.vue?vue&type=template&id=07de6fbe& ***!
+  \*******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_template_id_07de6fbe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Certificate.vue?vue&type=template&id=07de6fbe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Certificate.vue?vue&type=template&id=07de6fbe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_template_id_07de6fbe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_template_id_07de6fbe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/Components/Characteristic.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/certificate/Components/Characteristic.vue ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Characteristic_vue_vue_type_template_id_17362bfe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Characteristic.vue?vue&type=template&id=17362bfe& */ "./resources/js/components/certificate/Components/Characteristic.vue?vue&type=template&id=17362bfe&");
+/* harmony import */ var _Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Characteristic.vue?vue&type=script&lang=js& */ "./resources/js/components/certificate/Components/Characteristic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Characteristic_vue_vue_type_template_id_17362bfe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Characteristic_vue_vue_type_template_id_17362bfe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/certificate/Components/Characteristic.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/Components/Characteristic.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/certificate/Components/Characteristic.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristic.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Characteristic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/certificate/Components/Characteristic.vue?vue&type=template&id=17362bfe&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/certificate/Components/Characteristic.vue?vue&type=template&id=17362bfe& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_template_id_17362bfe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristic.vue?vue&type=template&id=17362bfe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/certificate/Components/Characteristic.vue?vue&type=template&id=17362bfe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_template_id_17362bfe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_template_id_17362bfe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/feedback/FeedbackComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/feedback/FeedbackComponent.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FeedbackComponent_vue_vue_type_template_id_bcf69b4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FeedbackComponent.vue?vue&type=template&id=bcf69b4e& */ "./resources/js/components/feedback/FeedbackComponent.vue?vue&type=template&id=bcf69b4e&");
+/* harmony import */ var _FeedbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FeedbackComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/feedback/FeedbackComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FeedbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FeedbackComponent_vue_vue_type_template_id_bcf69b4e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FeedbackComponent_vue_vue_type_template_id_bcf69b4e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/feedback/FeedbackComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/feedback/FeedbackComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
-  !*** ./resources/js/components/feadback/FeadbackComponent.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/feedback/FeedbackComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FeadbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FeadbackComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feadback/FeadbackComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FeadbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FeedbackComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feedback/FeedbackComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedbackComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/feadback/FeadbackComponent.vue?vue&type=template&id=b0d1e44e&":
+/***/ "./resources/js/components/feedback/FeedbackComponent.vue?vue&type=template&id=bcf69b4e&":
 /*!***********************************************************************************************!*\
-  !*** ./resources/js/components/feadback/FeadbackComponent.vue?vue&type=template&id=b0d1e44e& ***!
+  !*** ./resources/js/components/feedback/FeedbackComponent.vue?vue&type=template&id=bcf69b4e& ***!
   \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeadbackComponent_vue_vue_type_template_id_b0d1e44e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FeadbackComponent.vue?vue&type=template&id=b0d1e44e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feadback/FeadbackComponent.vue?vue&type=template&id=b0d1e44e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeadbackComponent_vue_vue_type_template_id_b0d1e44e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedbackComponent_vue_vue_type_template_id_bcf69b4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FeedbackComponent.vue?vue&type=template&id=bcf69b4e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/feedback/FeedbackComponent.vue?vue&type=template&id=bcf69b4e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedbackComponent_vue_vue_type_template_id_bcf69b4e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeadbackComponent_vue_vue_type_template_id_b0d1e44e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeedbackComponent_vue_vue_type_template_id_bcf69b4e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -55990,8 +57487,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
