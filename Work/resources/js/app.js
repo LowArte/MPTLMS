@@ -53,6 +53,20 @@ new Vue({
     logoutLoading: false,
     changingPassword: false,
     updatingUser: false,
+    group: "П-2-16",
+    FIO: "Борисов Артём Игоревич",
+    email: "p_a.i.borisov@mpt.ru",
+
+    thematic: "Другое",
+    thematics: ["Проблемы с отображением", "Другое"],
+
+    modelmessage: "",
+    messageRules: [
+      v => v.length > 0 || "Текст сообщения не указан",
+      v =>
+        v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
+    ],
+    form: false
   }),
   computed: {
     ...mapGetters({
@@ -68,7 +82,7 @@ new Vue({
           }, {
             icon: 'portrait',
             text: 'Учетная карточка',
-            href: '/home'
+            href: '/card'
           }, {
             icon: 'info',
             text: 'Персональная информация',
@@ -105,6 +119,10 @@ new Vue({
             icon: 'layers',
             text: 'Базы практики',
             href: '/home'
+          }, {
+            icon: 'feedback',
+            text: 'Обратная связь',
+            href: '/card'
           }];
         }
         default: {

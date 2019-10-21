@@ -19,3 +19,6 @@ Auth::routes(['register'=>false,'verify'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/feedback', 'FeedbackController@index')->name('feedback');
+
+Route::get('/card', 'CardController@index')->name('card');

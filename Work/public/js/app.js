@@ -54539,7 +54539,19 @@ new Vue({
       editingUser: false,
       logoutLoading: false,
       changingPassword: false,
-      updatingUser: false
+      updatingUser: false,
+      group: "П-2-16",
+      FIO: "Борисов Артём Игоревич",
+      email: "p_a.i.borisov@mpt.ru",
+      thematic: "Другое",
+      thematics: ["Проблемы с отображением", "Другое"],
+      modelmessage: "",
+      messageRules: [function (v) {
+        return v.length > 0 || "Текст сообщения не указан";
+      }, function (v) {
+        return v.length <= 255 || "Текст сообщения должен быть не более 255 символов";
+      }],
+      form: false
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])({
@@ -54593,6 +54605,10 @@ new Vue({
               icon: 'layers',
               text: 'Базы практики',
               href: '/home'
+            }, {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/card'
             }];
           }
 
@@ -55597,8 +55613,9 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+
 
 /***/ })
 
