@@ -12,8 +12,9 @@ import RememberPasswordComponent from './components/authentication/RememberPassw
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
 import FeedbackComponent from './components/feedback/FeedbackComponent'
 import CertificateComponent from './components/certificate/CertificateComponent'
+import PersonalInformation from './components/personalinformation/PersonalInformation'
 import SnackBar from './components/SnackBarComponent'
-import Panel from './components/Expention/Panel'
+import Panel from './components/expention/Panel'
 
 //import vuetif from './plugins/vuetify'
 
@@ -50,7 +51,8 @@ new Vue({
     'snackbar': SnackBar,
     'panel' : Panel,
     'feedback' : FeedbackComponent, 
-    'certificate' : CertificateComponent
+    'certificate' : CertificateComponent,
+    'personalinformation' : PersonalInformation
 
   },
   data: () => ({
@@ -79,7 +81,7 @@ new Vue({
           }, {
             icon: 'info',
             text: 'Персональная информация',
-            href: '/home'
+            href: '/personalinformation'
           }, {
             icon: 'today',
             text: 'Расписание',

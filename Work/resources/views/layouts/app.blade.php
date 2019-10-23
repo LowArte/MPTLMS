@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
-  <!--   <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-corner-indicator.min.css" rel="stylesheet"> -->
+    <!--   <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-corner-indicator.min.css" rel="stylesheet"> -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
@@ -77,31 +77,9 @@
             </div>
         </v-app-bar>
         <v-navigation-drawer fixed v-model="drawerRight" right clipped app>
-            <v-card>
-                <v-container fluid grid-list-md class="grey lighten-4">
-                    <v-layout row wrap>
-                        <v-flex xs12>
-                            <h3>@{{ user.name }}</h3>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-                <v-card-text class="px-0 grey lighten-4">
-                    <v-form class="pl-3 pr-1 ma-0">
-                        <v-text-field :readonly="!editingUser" label="Почта" :value="user.email" ref="email" @input="updateEmail"></v-text-field>
-                        <v-text-field :readonly="!editingUser" label="Имя" :value="user.name" @input="updateName"></v-text-field>
-                        <v-text-field readonly label="Дата регистрации" :value="user.created_at" readonly></v-text-field>
-                    </v-form>
-                </v-card-text>
+            <v-card outlined style="border: none;" flat>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn :loading="updatingUser" text color="green" @click="updateUser" v-if="editingUser">
-                        <v-icon right dark>save</v-icon>
-                        Сохранить
-                    </v-btn>
-                    <v-btn text color="warning" @click="editUser()" v-else>
-                        <v-icon right dark>edit</v-icon>
-                        Изменить
-                    </v-btn>
                     <v-btn :loading="logoutLoading" @click="logout" text color="accent">
                         <v-icon right dark>exit_to_app</v-icon>
                         Выход

@@ -24,3 +24,5 @@ Route::get('/feedback', 'FeedbackController@index')->name('feedback');
 Route::get('/card', 'CardController@index')->name('card');
 
 Route::get('/certificate', 'CertificateController@index')->name('certificate');
+
+Route::get('/personalinformation', 'PersonalInformationController@index')->name('personalinformation');
