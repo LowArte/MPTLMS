@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"/js/app": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,67 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -78,6 +183,16 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -2358,6 +2473,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2473,16 +2595,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       model: "",
       itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
       group: "П-2-16",
-      Surname: "Борисов",
-      Firstname: "Артём",
-      Lastname: "Игоревич",
-      email: "p_a.i.borisov@mpt.ru",
+      // Surname: "Борисов",
+      // Firstname: "Артём",
+      // Lastname: "Игоревич",
+      Surname: user.secName,
+      Firstname: user.name,
+      Lastname: user.thirdName,
+      //email: "p_a.i.borisovmpt.ru";
+      email: user.email,
       datebirth: "16-09-2000",
       enabled: false,
       orderRules: [function (v) {
@@ -2495,7 +2665,16 @@ __webpack_require__.r(__webpack_exports__);
       }],
       form: false
     };
-  }
+  },
+  methods: {
+    sendQuery: function sendQuery() {
+      //Вписывай отправку
+      alert("Go Nahui!");
+    }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    user: "user"
+  }))
 });
 
 /***/ }),
@@ -4625,7 +4804,7 @@ var render = function() {
                                         )
                                       ]),
                                       _vm._v(
-                                        ", если надо несколько справок в одно место писать кол-во штук. (Пример заявки если надо несколько штук: МФЦ – 2 шт)."
+                                        ", если надо несколько справок в одно место писать кол-во штук. (Пример заявки если надо несколько штук: МФЦ – 2 шт).\n              "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -4638,7 +4817,7 @@ var render = function() {
                                         ])
                                       ]),
                                       _vm._v(
-                                        " – писать «на работу родителя» или «по месту трудоустройства» без названия организации."
+                                        " – писать «на работу родителя» или «по месту трудоустройства» без названия организации.\n              "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -4651,12 +4830,12 @@ var render = function() {
                                         ])
                                       ]),
                                       _vm._v(
-                                        " – писать только название организации, запрещено писать в заявке для чего нужна справка и т.п. лишнюю информацию (пример заявки: ПФ). При необходимости отдельная заявка создается"
+                                        " – писать только название организации, запрещено писать в заявке для чего нужна справка и т.п. лишнюю информацию (пример заявки: ПФ). При необходимости отдельная заявка создается\n                "
                                       ),
                                       _c("b", [
                                         _c("u", [
                                           _vm._v(
-                                            " для заказа лицензии, аккредитации."
+                                            "для заказа лицензии, аккредитации."
                                           )
                                         ])
                                       ])
@@ -4669,7 +4848,7 @@ var render = function() {
                                         ])
                                       ]),
                                       _vm._v(
-                                        " – писать название военкомата, район, округ, город, область (пример заявки: Военкомат Бутовского района ЮЗАО г. Москва)."
+                                        " – писать название военкомата, район, округ, город, область (пример заявки: Военкомат Бутовского района ЮЗАО г. Москва).\n              "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -4682,7 +4861,7 @@ var render = function() {
                                         ])
                                       ]),
                                       _vm._v(
-                                        " после получения справки в техникуме ставится студентом самостоятельно в РЭУ (Стремянный переулок, д. 36, 5 корп, 212 каб, с понедельника по пятницу с 8-30 до 17-00)."
+                                        " после получения справки в техникуме ставится студентом самостоятельно в РЭУ (Стремянный переулок, д. 36, 5 корп, 212 каб, с понедельника по пятницу с 8-30 до 17-00).\n              "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -4693,10 +4872,12 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("p", [
-                                      _vm._v("Срок подготовки справок "),
+                                      _vm._v(
+                                        "\n                Срок подготовки справок\n                "
+                                      ),
                                       _c("b", [_vm._v("до 3 рабочих дней")]),
                                       _vm._v(
-                                        ", отсчет срока начинается со следующего рабочего дня (с понедельника по пятницу) после заказа справки."
+                                        ", отсчет срока начинается со следующего рабочего дня (с понедельника по пятницу) после заказа справки.\n              "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -4712,7 +4893,7 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("p", [
                                       _vm._v(
-                                        "Получить справку можно с понедельника по пятницу в канцелярии техникума по адресу: "
+                                        "\n                Получить справку можно с понедельника по пятницу в канцелярии техникума по адресу:\n                "
                                       ),
                                       _c("b", [
                                         _vm._v(
@@ -4763,7 +4944,7 @@ var render = function() {
                                             _c("u", [_vm._v("Характеристика")])
                                           ]),
                                           _vm._v(
-                                            ", анкета для военкомата заказывается и получается: 1 курс – педагог организатор отделения (тел. 8-925-800-10-97); 2, 3, 4 курс – заведующий отделением Руденко Т.В. (тел. 8-495-800-12-00 доб. 2054, Нежинская ул., д.7, каб 242)."
+                                            ", анкета для военкомата заказывается и получается: 1 курс – педагог организатор отделения (тел. 8-925-800-10-97); 2, 3, 4 курс – заведующий отделением Руденко Т.В. (тел. 8-495-800-12-00 доб. 2054, Нежинская ул., д.7, каб 242).\n                  "
                                           )
                                         ])
                                       ]),
@@ -4778,7 +4959,7 @@ var render = function() {
                                             ])
                                           ]),
                                           _vm._v(
-                                            " – в бухгалтерии (Стремянный пер, д. 36, 5 корп, кабинеты 304 и 308, тел. для бюджета 8-495-958-26-17, для договора 8-499-237-94-77)."
+                                            " – в бухгалтерии (Стремянный пер, д. 36, 5 корп, кабинеты 304 и 308, тел. для бюджета 8-495-958-26-17, для договора 8-499-237-94-77).\n                  "
                                           )
                                         ])
                                       ]),
@@ -4789,7 +4970,7 @@ var render = function() {
                                             _c("u", [_vm._v("Копия аттестата")])
                                           ]),
                                           _vm._v(
-                                            " – в отделе по работе со студентами (Стремянный пер, д. 36, 3 корп, каб 100 (7 и 8 комн.) тел. 8-499-237-81-04)."
+                                            " – в отделе по работе со студентами (Стремянный пер, д. 36, 3 корп, каб 100 (7 и 8 комн.) тел. 8-499-237-81-04).\n                  "
                                           )
                                         ])
                                       ])
@@ -5004,7 +5185,8 @@ var render = function() {
                                           disabled: !_vm.form,
                                           color: "blue",
                                           depressed: ""
-                                        }
+                                        },
+                                        on: { click: _vm.sendQuery }
                                       },
                                       [_vm._v("Заказать")]
                                     )
@@ -56531,33 +56713,114 @@ new Vue({
               icon: 'show_chart',
               text: 'Успеваемость',
               href: '/home'
-            }, {
-              icon: 'business_center',
-              text: 'Дополнительное образование',
-              href: '/home'
-            }, {
+            },,
+            /*{?
+            icon: 'business_center',
+            text: 'Дополнительное образование',
+            href: '/home'
+            }*/
+            {
               icon: 'school',
               text: 'Преподаватели',
               href: '/home'
-            }, {
-              icon: 'group',
-              text: 'Одногруппники',
-              href: '/home'
-            }, {
+            },
+            /*{
+            icon: 'group',
+            text: 'Одногруппники',
+            href: '/home'
+            },*/
+            {
               icon: 'edit',
               text: 'Справки',
               href: '/certificate'
             }, {
-              icon: 'storefront',
-              text: 'Портфолио',
+              icon: 'home',
+              text: 'Домашнее задание',
+              href: '/home'
+            },
+            /*{
+            icon: 'storefront',
+            text: 'Портфолио',
+            href: '/home'
+            }, {
+            icon: 'layers',
+            text: 'Базы практики',
+            href: '/home'
+            },*/
+            {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/feedback'
+            }];
+          }
+
+        case 2:
+          {
+            //Преподы
+            return [{
+              icon: 'home',
+              text: 'Главная',
               href: '/home'
             }, {
-              icon: 'layers',
-              text: 'Базы практики',
+              icon: 'home',
+              text: 'Расписание',
+              href: '/home'
+            }, {
+              icon: 'home',
+              text: 'Домашнее задание',
+              href: '/home'
+            }, {
+              icon: 'home',
+              text: 'Ведомости',
+              href: '/home'
+            }, {
+              icon: 'home',
+              text: 'Электронный журнал',
               href: '/home'
             }, {
               icon: 'feedback',
               text: 'Обратная связь',
+              href: '/feedback'
+            }];
+          }
+
+        case 3:
+          {
+            //Учебная часть
+            return [{
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            }, {
+              icon: 'home',
+              text: 'Расписание',
+              href: '/home'
+            }, {
+              icon: 'home',
+              text: 'Замены',
+              href: '/home'
+            }, {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/feedback'
+            }];
+          }
+
+        case 4:
+          {
+            //Администраторы
+            return [{
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            }, {
+              icon: 'home',
+              text: 'Панель управления',
+              //Замены, расписание, перевод в режим профилактики, редактирование пользователей
+              href: '/home'
+            }, {
+              icon: 'feedback',
+              text: 'Обращение пользователей',
               href: '/feedback'
             }];
           }
@@ -56681,7 +56944,7 @@ module.exports = "/images/group.svg?b38ace64ed9de1b443237d723388ad18";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/man.svg?a4726cf77ae73b3aeffcdf1d05b1e7f6";
+module.exports = "/images/man.svg?93ef09bc7c0695fa9171505df5edc68b";
 
 /***/ }),
 
@@ -56751,39 +57014,86 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./SnackBarComponent": "./resources/js/components/SnackBarComponent.vue",
-	"./SnackBarComponent.vue": "./resources/js/components/SnackBarComponent.vue",
-	"./authentication/LoginButtonComponent": "./resources/js/components/authentication/LoginButtonComponent.vue",
-	"./authentication/LoginButtonComponent.vue": "./resources/js/components/authentication/LoginButtonComponent.vue",
-	"./authentication/RememberPasswordComponent": "./resources/js/components/authentication/RememberPasswordComponent.vue",
-	"./authentication/RememberPasswordComponent.vue": "./resources/js/components/authentication/RememberPasswordComponent.vue",
-	"./authentication/ResetPasswordComponent": "./resources/js/components/authentication/ResetPasswordComponent.vue",
-	"./authentication/ResetPasswordComponent.vue": "./resources/js/components/authentication/ResetPasswordComponent.vue",
-	"./certificate/CertificateComponent": "./resources/js/components/certificate/CertificateComponent.vue",
-	"./certificate/CertificateComponent.vue": "./resources/js/components/certificate/CertificateComponent.vue",
-	"./certificate/Components/Certificate": "./resources/js/components/certificate/Components/Certificate.vue",
-	"./certificate/Components/Certificate.vue": "./resources/js/components/certificate/Components/Certificate.vue",
-	"./certificate/Components/Characteristic": "./resources/js/components/certificate/Components/Characteristic.vue",
-	"./certificate/Components/Characteristic.vue": "./resources/js/components/certificate/Components/Characteristic.vue",
-	"./expention/Panel": "./resources/js/components/expention/Panel.vue",
-	"./expention/Panel.vue": "./resources/js/components/expention/Panel.vue",
-	"./feedback/FeedbackComponent": "./resources/js/components/feedback/FeedbackComponent.vue",
-	"./feedback/FeedbackComponent.vue": "./resources/js/components/feedback/FeedbackComponent.vue",
-	"./mixins/withSnackbar": "./resources/js/components/mixins/withSnackbar.js",
-	"./mixins/withSnackbar.js": "./resources/js/components/mixins/withSnackbar.js",
-	"./personalinformation/PersonalInformation": "./resources/js/components/personalinformation/PersonalInformation.vue",
-	"./personalinformation/PersonalInformation.vue": "./resources/js/components/personalinformation/PersonalInformation.vue"
+	"./Expention/Panel": [
+		"./resources/js/components/Expention/Panel.vue",
+		0
+	],
+	"./Expention/Panel.vue": [
+		"./resources/js/components/Expention/Panel.vue",
+		0
+	],
+	"./SnackBarComponent": [
+		"./resources/js/components/SnackBarComponent.vue"
+	],
+	"./SnackBarComponent.vue": [
+		"./resources/js/components/SnackBarComponent.vue"
+	],
+	"./authentication/LoginButtonComponent": [
+		"./resources/js/components/authentication/LoginButtonComponent.vue"
+	],
+	"./authentication/LoginButtonComponent.vue": [
+		"./resources/js/components/authentication/LoginButtonComponent.vue"
+	],
+	"./authentication/RememberPasswordComponent": [
+		"./resources/js/components/authentication/RememberPasswordComponent.vue"
+	],
+	"./authentication/RememberPasswordComponent.vue": [
+		"./resources/js/components/authentication/RememberPasswordComponent.vue"
+	],
+	"./authentication/ResetPasswordComponent": [
+		"./resources/js/components/authentication/ResetPasswordComponent.vue"
+	],
+	"./authentication/ResetPasswordComponent.vue": [
+		"./resources/js/components/authentication/ResetPasswordComponent.vue"
+	],
+	"./certificate/CertificateComponent": [
+		"./resources/js/components/certificate/CertificateComponent.vue"
+	],
+	"./certificate/CertificateComponent.vue": [
+		"./resources/js/components/certificate/CertificateComponent.vue"
+	],
+	"./certificate/Components/Certificate": [
+		"./resources/js/components/certificate/Components/Certificate.vue"
+	],
+	"./certificate/Components/Certificate.vue": [
+		"./resources/js/components/certificate/Components/Certificate.vue"
+	],
+	"./certificate/Components/Characteristic": [
+		"./resources/js/components/certificate/Components/Characteristic.vue"
+	],
+	"./certificate/Components/Characteristic.vue": [
+		"./resources/js/components/certificate/Components/Characteristic.vue"
+	],
+	"./feedback/FeedbackComponent": [
+		"./resources/js/components/feedback/FeedbackComponent.vue"
+	],
+	"./feedback/FeedbackComponent.vue": [
+		"./resources/js/components/feedback/FeedbackComponent.vue"
+	],
+	"./mixins/withSnackbar": [
+		"./resources/js/components/mixins/withSnackbar.js"
+	],
+	"./mixins/withSnackbar.js": [
+		"./resources/js/components/mixins/withSnackbar.js"
+	],
+	"./personalinformation/PersonalInformation": [
+		"./resources/js/components/personalinformation/PersonalInformation.vue"
+	],
+	"./personalinformation/PersonalInformation.vue": [
+		"./resources/js/components/personalinformation/PersonalInformation.vue"
+	]
 };
-
 function webpackAsyncContext(req) {
-	return Promise.resolve().then(function() {
-		if(!__webpack_require__.o(map, req)) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
 			var e = new Error("Cannot find module '" + req + "'");
 			e.code = 'MODULE_NOT_FOUND';
 			throw e;
-		}
+		});
+	}
 
-		var id = map[req];
+	var ids = map[req], id = ids[0];
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(id);
 	});
 }
@@ -58074,8 +58384,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

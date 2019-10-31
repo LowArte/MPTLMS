@@ -146,7 +146,7 @@
                 ></v-checkbox>
               </v-row>
               <v-row class="pa-2 justify-center">
-                <v-btn :disabled="!form" class="white--text" color="blue" depressed>Заказать</v-btn>
+                <v-btn :disabled="!form" class="white--text" color="blue" depressed @click="sendQuery">Заказать</v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -180,6 +180,12 @@ export default {
     policyRules: [v => !!v || "Подтвердите!"],
     form: false
   }),
+  methods: {
+    sendQuery() {
+      //Вписывай отправку
+      alert("Go Nahui!");
+    }
+  },
   computed: {
     ...mapGetters({
       user: "user" 

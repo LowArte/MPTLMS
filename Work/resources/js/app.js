@@ -78,7 +78,7 @@ new Vue({
             icon: 'portrait',
             text: 'Учетная карточка',
             href: '/card'
-          }, {
+          },{
             icon: 'info',
             text: 'Персональная информация',
             href: '/personalinformation'
@@ -90,23 +90,28 @@ new Vue({
             icon: 'show_chart',
             text: 'Успеваемость',
             href: '/home'
-          }, {
+          }, /*{?
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
-          }, {
+          }*/, {
             icon: 'school',
             text: 'Преподаватели',
             href: '/home'
-          }, {
+          }, /*{
             icon: 'group',
             text: 'Одногруппники',
             href: '/home'
-          }, {
+          },*/ {
             icon: 'edit',
             text: 'Справки',
             href: '/certificate'
-          }, {
+          },
+          {
+            icon: 'home',
+            text: 'Домашнее задание',
+            href: '/home'
+          }, /*{
             icon: 'storefront',
             text: 'Портфолио',
             href: '/home'
@@ -114,11 +119,81 @@ new Vue({
             icon: 'layers',
             text: 'Базы практики',
             href: '/home'
-          }, {
+          },*/ {
             icon: 'feedback',
             text: 'Обратная связь',
             href: '/feedback'
           }];
+        }
+        case 2: { //Преподы
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          },
+          {
+            icon: 'home',
+            text: 'Расписание',
+            href: '/home'
+          },
+          {
+            icon: 'home',
+            text: 'Домашнее задание',
+            href: '/home'
+          }, 
+          {
+            icon: 'home',
+            text: 'Ведомости',
+            href: '/home'
+          },
+          {
+            icon: 'home',
+            text: 'Электронный журнал',
+            href: '/home'
+          },{
+            icon: 'feedback',
+            text: 'Обратная связь',
+            href: '/feedback'
+          }]
+        }
+        case 3: { //Учебная часть
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          },
+          {
+            icon: 'home',
+            text: 'Расписание',
+            href: '/home'
+          }, 
+          {
+            icon: 'home',
+            text: 'Замены',
+            href: '/home'
+          },
+          {
+            icon: 'feedback',
+            text: 'Обратная связь',
+            href: '/feedback'
+          }]
+        }
+        case 4: { //Администраторы
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          }, 
+          {
+            icon: 'home',
+            text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
+            href: '/home'
+          },
+          {
+            icon: 'feedback',
+            text: 'Обращение пользователей',
+            href: '/feedback'
+          }]
         }
         default: {
           return null;
