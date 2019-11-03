@@ -78,6 +78,23 @@ new Vue({
     }),
     items: function () {
       switch (user.post_id) {
+        case 1: { //Администраторы
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          }, 
+          {
+            icon: 'edit',
+            text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
+            href: '/home'
+          },
+          {
+            icon: 'feedback',
+            text: 'Обращение пользователей',
+            href: '/feedback'
+          }];
+        }
         case 2: { //Студент
           return [{
             icon: 'home',
@@ -192,23 +209,6 @@ new Vue({
           {
             icon: 'feedback',
             text: 'Обратная связь',
-            href: '/feedback'
-          }];
-        }
-        case 1: { //Администраторы
-          return [{
-            icon: 'home',
-            text: 'Главная',
-            href: '/home'
-          }, 
-          {
-            icon: 'edit',
-            text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
-            href: '/home'
-          },
-          {
-            icon: 'feedback',
-            text: 'Обращение пользователей',
             href: '/feedback'
           }];
         }
