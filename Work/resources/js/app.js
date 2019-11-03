@@ -15,6 +15,11 @@ import CertificateComponent from './components/certificate/CertificateComponent'
 import PersonalInformation from './components/personalinformation/PersonalInformation'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
+import TimetableComponent from './components/timetable/TimetableComponent'
+import TeacherTimetableComponent from './components/teachertimetable/TeacherTimetableComponent'
+import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
+import ConTimeTable from './components/constructortimetable/ContimetableComponent'
+import ConReplacements from './components/constructorreplacements/ConreplacementsComponent'
 
 //import vuetif from './plugins/vuetify'
 
@@ -52,8 +57,12 @@ new Vue({
     'panel' : Panel,
     'feedback' : FeedbackComponent, 
     'certificate' : CertificateComponent,
-    'personalinformation' : PersonalInformation
-
+    'personalinformation' : PersonalInformation,
+    'timetable' : TimetableComponent,
+    'teachertimetable' : TeacherTimetableComponent,
+    'teacherhomework' : TeacherHomeworkComponent,
+    'contimetable' : ConTimeTable,
+    'conreplacements' : ConReplacements,
   },
   data: () => ({
     drawer: null,
@@ -69,24 +78,28 @@ new Vue({
     }),
     items: function () {
       switch (user.post_id) {
-        case 1: {
+        case 2: { //Студент
           return [{
             icon: 'home',
             text: 'Главная',
             href: '/home'
-          }, {
+          }, 
+          {
             icon: 'portrait',
             text: 'Учетная карточка',
             href: '/card'
-          },{
+          },
+          {
             icon: 'info',
             text: 'Персональная информация',
             href: '/personalinformation'
-          }, {
+          }, 
+          {
             icon: 'today',
             text: 'Расписание',
-            href: '/home'
-          }, {
+            href: '/timetable'
+          }, 
+          {
             icon: 'show_chart',
             text: 'Успеваемость',
             href: '/home'
@@ -94,7 +107,8 @@ new Vue({
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
-          }*/, {
+          }*/
+          {
             icon: 'school',
             text: 'Преподаватели',
             href: '/home'
@@ -102,7 +116,8 @@ new Vue({
             icon: 'group',
             text: 'Одногруппники',
             href: '/home'
-          },*/ {
+          },*/ 
+          {
             icon: 'edit',
             text: 'Справки',
             href: '/certificate'
@@ -111,7 +126,8 @@ new Vue({
             icon: 'home',
             text: 'Домашнее задание',
             href: '/home'
-          }, /*{
+          }, 
+          /*{
             icon: 'storefront',
             text: 'Портфолио',
             href: '/home'
@@ -119,30 +135,31 @@ new Vue({
             icon: 'layers',
             text: 'Базы практики',
             href: '/home'
-          },*/ {
+          },*/ 
+          {
             icon: 'feedback',
             text: 'Обратная связь',
             href: '/feedback'
           }];
         }
-        case 2: { //Преподы
+        case 3: { //Преподы
           return [{
             icon: 'home',
             text: 'Главная',
             href: '/home'
           },
           {
-            icon: 'home',
+            icon: 'today',
             text: 'Расписание',
-            href: '/home'
+            href: '/teachertimetable'
           },
           {
             icon: 'home',
             text: 'Домашнее задание',
-            href: '/home'
+            href: '/teacherhomework'
           }, 
           {
-            icon: 'home',
+            icon: 'layers',
             text: 'Ведомости',
             href: '/home'
           },
@@ -154,9 +171,9 @@ new Vue({
             icon: 'feedback',
             text: 'Обратная связь',
             href: '/feedback'
-          }]
+          }];
         }
-        case 3: { //Учебная часть
+        case 4: { //Учебная часть
           return [{
             icon: 'home',
             text: 'Главная',
@@ -165,20 +182,20 @@ new Vue({
           {
             icon: 'home',
             text: 'Расписание',
-            href: '/home'
+            href: '/contimetable'
           }, 
           {
             icon: 'home',
             text: 'Замены',
-            href: '/home'
+            href: '/conreplacements'
           },
           {
             icon: 'feedback',
             text: 'Обратная связь',
             href: '/feedback'
-          }]
+          }];
         }
-        case 4: { //Администраторы
+        case 1: { //Администраторы
           return [{
             icon: 'home',
             text: 'Главная',
@@ -193,7 +210,7 @@ new Vue({
             icon: 'feedback',
             text: 'Обращение пользователей',
             href: '/feedback'
-          }]
+          }];
         }
         default: {
           return null;

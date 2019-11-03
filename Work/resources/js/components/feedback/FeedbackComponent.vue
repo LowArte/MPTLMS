@@ -48,7 +48,7 @@
                 ></v-textarea>
               </v-row>
               <v-row class="pa-2 justify-center">
-                <v-btn :disabled="!form" class="white--text" color="blue" depressed>Отправить</v-btn>
+                <v-btn :disabled="!form" class="white--text" color="blue" depressed @click="sendQuery">Отправить</v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -59,5 +59,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    group: "П-2-16",
+    FIO: "Борисов Артём Игоревич",
+    email: "p_a.i.borisov@mpt.ru",
+
+    thematic: "Другое",
+    thematics: ["Проблемы с отображением", "Другое"],
+
+    modelmessage: "",
+    messageRules: [
+      v => v.length > 0 || "Текст сообщения не указан",
+      v =>
+        v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
+    ],
+    form: false
+  }),
+  methods: {
+    sendQuery() {
+      //Вписывай отправку
+      alert("Отправлено обращение!");
+    }
+  },
+};
 </script>

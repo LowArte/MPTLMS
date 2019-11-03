@@ -25,4 +25,14 @@ Route::get('/card', 'CardController@index')->name('card');
 
 Route::get('/certificate', 'CertificateController@index')->name('certificate');
 
+Route::get('/timetable', 'TimetableController@index')->name('timetable');
+
+Route::get('/teachertimetable', 'TeacherTimetableController@index')->name('teachertimetable');
+
+Route::get('/teacherhomework', 'TeacherHomeworkController@index')->name('teacherhomework');
+
+Route::get('/contimetable', 'ConstructorTimeTableController@index')->name('contimetable');
+
+Route::get('/conreplacements', 'ConstructorReplacementsController@index')->name('conreplacements');
+
 Route::get('/personalinformation', 'PersonalInformationController@index')->name('personalinformation');
