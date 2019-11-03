@@ -100,7 +100,7 @@
                 ></v-textarea>
               </v-row>
               <v-row class="pa-2 justify-center">
-                <v-btn :disabled="!form" class="white--text" color="blue" depressed>Заказать</v-btn>
+                <v-btn :disabled="!form" class="white--text" color="blue" depressed @click="sendQuery">Заказать</v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -144,6 +144,12 @@ export default {
       v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
     ],
     form: false
-  })
+  }),
+   methods: {
+    sendQuery() {
+      //Вписывай отправку
+      alert("Отправлен запрос на получение характеристики!");
+    }
+  },
 };
 </script>

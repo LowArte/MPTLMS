@@ -183,7 +183,7 @@ export default {
   methods: {
     sendQuery() {
       //Вписывай отправку
-      alert("Go Nahui!");
+      alert("Отправлен запрос на получение справки!");
     }
   },
   computed: {

@@ -2669,7 +2669,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     sendQuery: function sendQuery() {
       //Вписывай отправку
-      alert("Go Nahui!");
+      alert("Отправлен запрос на получение справки!");
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
@@ -2829,6 +2829,12 @@ __webpack_require__.r(__webpack_exports__);
       }],
       form: false
     };
+  },
+  methods: {
+    sendQuery: function sendQuery() {
+      //Вписывай отправку
+      alert("Отправлен запрос на получение характеристики!");
+    }
   }
 });
 
@@ -5573,7 +5579,8 @@ var render = function() {
                                           disabled: !_vm.form,
                                           color: "blue",
                                           depressed: ""
-                                        }
+                                        },
+                                        on: { click: _vm.sendQuery }
                                       },
                                       [_vm._v("Заказать")]
                                     )
@@ -56814,7 +56821,7 @@ new Vue({
               text: 'Главная',
               href: '/home'
             }, {
-              icon: 'home',
+              icon: 'edit',
               text: 'Панель управления',
               //Замены, расписание, перевод в режим профилактики, редактирование пользователей
               href: '/home'
