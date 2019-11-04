@@ -1,148 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -176,49 +44,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  directives: {
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
+  },
   data: function data() {
     return {
-      model: "",
-      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-      group: "П-2-16",
-      // Surname: "Борисов",
-      // Firstname: "Артём",
-      // Lastname: "Игоревич",
-      Surname: user.secName,
-      Firstname: user.name,
-      Lastname: user.thirdName,
-      //email: "p_a.i.borisovmpt.ru";
-      email: user.email,
-      datebirth: "16-09-2000",
-      enabled: false,
-      orderRules: [function (v) {
-        return v.length > 0 || "Текст заявки не указан";
-      }, function (v) {
-        return v.length <= 255 || "Текст заявки должен быть не более 255 символов";
-      }],
-      policyRules: [function (v) {
-        return !!v || "Подтвердите!";
-      }],
-      form: false
+      time1: [null, null, null, null, null, null, null],
+      time2: [null, null, null, null, null, null, null],
+      menu1: [false, false, false, false, false, false, false],
+      menu2: [false, false, false, false, false, false, false],
+      modal1: [false, false, false, false, false, false, false],
+      modal2: [false, false, false, false, false, false, false],
+      mask: "##:##-##:##",
+      hidden: false,
+      items: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
+      place: ["Нахимовский", "Неженская"],
+      date: new Date().toISOString().substr(0, 10),
+      modal: false,
+      lesson: ["Технология разработки и защиты баз данных", "Операционные системы", ""],
+      teacher: ["Токарчук А.С.", "Горбунов А.Д.", ""],
+      tab1: [null, null, null, null, null, null, null],
+      tabs: ["1 пара", "2 пара"]
     };
-  },
-  methods: {
-    sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос на получение справки!");
-    }
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    user: "user"
-  }))
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=template&id=5e07ad1d&":
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=template&id=5e07ad1d& ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=template&id=11318fc5&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=template&id=11318fc5& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -231,479 +87,147 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-row",
+    "v-container",
+    { attrs: { fluid: "" } },
     [
       _c(
-        "v-col",
-        { attrs: { cols: "12" } },
+        "v-row",
         [
-          _c("v-hover", {
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(ref) {
-                  var hover = ref.hover
-                  return [
-                    _c(
-                      "v-card",
-                      {
-                        staticClass: "mx-auto",
-                        attrs: {
-                          elevation: hover ? 12 : 2,
-                          height: "auto",
-                          width: "max"
-                        }
-                      },
-                      [
+          _c(
+            "v-col",
+            [
+              _c("v-hover", {
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(ref) {
+                      var hover = ref.hover
+                      return [
                         _c(
-                          "v-form",
+                          "v-card",
                           {
-                            model: {
-                              value: _vm.form,
-                              callback: function($$v) {
-                                _vm.form = $$v
-                              },
-                              expression: "form"
+                            staticClass: "mx-auto",
+                            attrs: {
+                              elevation: hover ? 10 : 5,
+                              height: "auto",
+                              width: "90%"
                             }
                           },
                           [
                             _c(
-                              "v-container",
+                              "v-card-text",
+                              { staticClass: "text-center title" },
                               [
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c(
-                                      "v-card-text",
-                                      {
-                                        staticClass:
-                                          "my-2 ma-0 pa-0 text-center title"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "Канцелярия подготавливает только документы, подтверждающие факт обучения в техникуме обучающихся в настоящее время студентов техникума."
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
+                                _vm._v(
+                                  "\n            Расписание звонков\n            "
                                 ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("p", [
-                                      _c("b", [
-                                        _vm._v(
-                                          "1 заявка = 1 справка в одно место предоставления"
-                                        )
-                                      ]),
-                                      _vm._v(
-                                        ", если надо несколько справок в одно место писать кол-во штук. (Пример заявки если надо несколько штук: МФЦ – 2 шт).\n              "
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _c("b", [
-                                        _c("u", [
-                                          _vm._v(
-                                            "Заказ справки на работу родителю или студенту"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(
-                                        " – писать «на работу родителя» или «по месту трудоустройства» без названия организации.\n              "
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _c("b", [
-                                        _c("u", [
-                                          _vm._v(
-                                            "Заказ справки в гос. организации"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(
-                                        " – писать только название организации, запрещено писать в заявке для чего нужна справка и т.п. лишнюю информацию (пример заявки: ПФ). При необходимости отдельная заявка создается\n                "
-                                      ),
-                                      _c("b", [
-                                        _c("u", [
-                                          _vm._v(
-                                            "для заказа лицензии, аккредитации."
-                                          )
-                                        ])
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _c("b", [
-                                        _c("u", [
-                                          _vm._v("Заказ справки в военкомат")
-                                        ])
-                                      ]),
-                                      _vm._v(
-                                        " – писать название военкомата, район, округ, город, область (пример заявки: Военкомат Бутовского района ЮЗАО г. Москва).\n              "
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _c("b", [
-                                        _c("u", [
-                                          _vm._v(
-                                            "Гербовая печать на справке в военкомат"
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(
-                                        " после получения справки в техникуме ставится студентом самостоятельно в РЭУ (Стремянный переулок, д. 36, 5 корп, 212 каб, с понедельника по пятницу с 8-30 до 17-00).\n              "
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _vm._v(
-                                        "«По месту требования» справки не оформляются."
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _vm._v(
-                                        "\n                Срок подготовки справок\n                "
-                                      ),
-                                      _c("b", [_vm._v("до 3 рабочих дней")]),
-                                      _vm._v(
-                                        ", отсчет срока начинается со следующего рабочего дня (с понедельника по пятницу) после заказа справки.\n              "
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-card-text",
-                                      { staticClass: "my-2 ma-0 pa-0 title" },
-                                      [
-                                        _vm._v(
-                                          "Прием студентов ведется только по студенческому билету."
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _vm._v(
-                                        "\n                Получить справку можно с понедельника по пятницу в канцелярии техникума по адресу:\n                "
-                                      ),
-                                      _c("b", [
-                                        _vm._v(
-                                          "ул. Нежинская, д. 7, кабинет 215 по расписанию работы со студентами:"
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _c("b", [
-                                        _vm._v(
-                                          "с 10-00 до 10-10; с 11-40 до 12-00; с 13-30 до 14-00; с 15-30 до 15-40."
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _vm._v(
-                                        "О готовности справки и об отказе приема заявки в работу уведомления отправляются на электронную почту студента, указанную в заявке, автоматически."
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", [
-                                      _vm._v(
-                                        "Канцелярия не занимается подготовкой следующих документов:"
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("ul", [
-                                      _c("li", [
-                                        _c("p", [
-                                          _c("b", [
-                                            _c("u", [
+                                _c("v-select", {
+                                  staticClass: "pa-0 mb-0 mt-4",
+                                  attrs: {
+                                    items: _vm.place,
+                                    label: "Место проведения"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-container",
+                              {
+                                staticClass: "grey lighten-5 pt-0",
+                                attrs: { fluid: "" }
+                              },
+                              [
+                                _vm._l(7, function(n) {
+                                  return _c(
+                                    "v-row",
+                                    {
+                                      key: n,
+                                      attrs: {
+                                        "no-gutters": "",
+                                        sm: "6",
+                                        md: "4",
+                                        lg: "3"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-col",
+                                        [
+                                          _c(
+                                            "v-card",
+                                            {
+                                              staticClass: "pa-2",
+                                              attrs: { outlined: "", tile: "" }
+                                            },
+                                            [
                                               _vm._v(
-                                                "Справка о периоде обучения (выписка оценок)"
-                                              )
-                                            ])
-                                          ]),
-                                          _vm._v(
-                                            " заказывается и получается:\n                    1 курс – педагог организатор отделения (тел. 8-925-800-10-97);\n                    2, 3, 4 курс – заведующий отделением Ключник Н.Е. (тел. 8-926-919-23-46, Нежинская ул., д.7, каб 223).\n                  "
+                                                "\n                  " +
+                                                  _vm._s(n) +
+                                                  " пара\n                  "
+                                              ),
+                                              _c("v-text-field", {
+                                                directives: [
+                                                  {
+                                                    name: "mask",
+                                                    rawName: "v-mask",
+                                                    value: _vm.mask,
+                                                    expression: "mask"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  label:
+                                                    "Начало/конец пары (00:00-00:00)"
+                                                },
+                                                model: {
+                                                  value: _vm.time1[n],
+                                                  callback: function($$v) {
+                                                    _vm.$set(_vm.time1, n, $$v)
+                                                  },
+                                                  expression: "time1[n]"
+                                                }
+                                              })
+                                            ],
+                                            1
                                           )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _c("p", [
-                                          _c("b", [
-                                            _c("u", [_vm._v("Характеристика")])
-                                          ]),
-                                          _vm._v(
-                                            ", анкета для военкомата заказывается и получается: 1 курс – педагог организатор отделения (тел. 8-925-800-10-97); 2, 3, 4 курс – заведующий отделением Руденко Т.В. (тел. 8-495-800-12-00 доб. 2054, Нежинская ул., д.7, каб 242).\n                  "
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _c("p", [
-                                          _c("b", [
-                                            _c("u", [
-                                              _vm._v(
-                                                "Все справки с денежными суммами (о размере стипендии и т.п.), справка на субсидию"
-                                              )
-                                            ])
-                                          ]),
-                                          _vm._v(
-                                            " – в бухгалтерии (Стремянный пер, д. 36, 5 корп, кабинеты 304 и 308, тел. для бюджета 8-495-958-26-17, для договора 8-499-237-94-77).\n                  "
-                                          )
-                                        ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _c("p", [
-                                          _c("b", [
-                                            _c("u", [_vm._v("Копия аттестата")])
-                                          ]),
-                                          _vm._v(
-                                            " – в отделе по работе со студентами (Стремянный пер, д. 36, 3 корп, каб 100 (7 и 8 комн.) тел. 8-499-237-81-04).\n                  "
-                                          )
-                                        ])
-                                      ])
-                                    ])
-                                  ],
-                                  1
-                                ),
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                }),
                                 _vm._v(" "),
                                 _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: { label: "Фамилия", readonly: "" },
-                                      model: {
-                                        value: _vm.Surname,
-                                        callback: function($$v) {
-                                          _vm.Surname = $$v
-                                        },
-                                        expression: "Surname"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: { label: "Имя", readonly: "" },
-                                      model: {
-                                        value: _vm.Firstname,
-                                        callback: function($$v) {
-                                          _vm.Firstname = $$v
-                                        },
-                                        expression: "Firstname"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "Отчество",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.Lastname,
-                                        callback: function($$v) {
-                                          _vm.Lastname = $$v
-                                        },
-                                        expression: "Lastname"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-select", {
-                                      attrs: {
-                                        items: _vm.itemsg,
-                                        label: "Группа",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.group,
-                                        callback: function($$v) {
-                                          _vm.group = $$v
-                                        },
-                                        expression: "group"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        rules: _vm.emailRules,
-                                        label: "E-mail",
-                                        required: "",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.email,
-                                        callback: function($$v) {
-                                          _vm.email = $$v
-                                        },
-                                        expression: "email"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "Дата рождения",
-                                        hint: "Формат День/Месяц/Год",
-                                        "persistent-hint": "",
-                                        readonly: ""
-                                      },
-                                      on: {
-                                        blur: function($event) {
-                                          _vm.date = _vm.parseDate(
-                                            _vm.dateFormatted
-                                          )
-                                        }
-                                      },
-                                      model: {
-                                        value: _vm.datebirth,
-                                        callback: function($$v) {
-                                          _vm.datebirth = $$v
-                                        },
-                                        expression: "datebirth"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-textarea", {
-                                      attrs: {
-                                        "auto-grow": true,
-                                        clearable: false,
-                                        counter: 255 ? 255 : undefined,
-                                        filled: false,
-                                        flat: true,
-                                        hint: "Не более 255 символов",
-                                        label: "Текст заявки",
-                                        loading: false,
-                                        "no-resize": false,
-                                        outlined: false,
-                                        "persistent-hint": false,
-                                        placeholder: "",
-                                        rounded: false,
-                                        "row-height": 24,
-                                        rows: 3,
-                                        shaped: false,
-                                        "single-line": false,
-                                        solo: false,
-                                        rules: _vm.orderRules
-                                      },
-                                      model: {
-                                        value: _vm.model,
-                                        callback: function($$v) {
-                                          _vm.model = $$v
-                                        },
-                                        expression: "model"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-checkbox", {
-                                      staticClass: "shrink mr-2 mt-0",
-                                      attrs: {
-                                        "hide-details": "",
-                                        rules: _vm.policyRules,
-                                        label:
-                                          "Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен"
-                                      },
-                                      model: {
-                                        value: _vm.enabled,
-                                        callback: function($$v) {
-                                          _vm.enabled = $$v
-                                        },
-                                        expression: "enabled"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2 justify-center" },
+                                  "v-card-text",
+                                  { staticClass: "text-center title" },
                                   [
                                     _c(
                                       "v-btn",
                                       {
-                                        staticClass: "white--text",
-                                        attrs: {
-                                          disabled: !_vm.form,
-                                          color: "blue",
-                                          depressed: ""
-                                        },
-                                        on: { click: _vm.sendQuery }
+                                        staticClass: "align-self-end",
+                                        attrs: { color: "accent", dark: "" }
                                       },
-                                      [_vm._v("Заказать")]
+                                      [_vm._v("Принять")]
                                     )
                                   ],
                                   1
                                 )
                               ],
-                              1
+                              2
                             )
                           ],
                           1
                         )
-                      ],
-                      1
-                    )
-                  ]
-                }
-              }
-            ])
-          })
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -718,18 +242,29 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/constructorreplacements/Components/Certificate.vue":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/constructorreplacements/Components/Certificate.vue ***!
-  \************************************************************************************/
+/***/ "./node_modules/vue-the-mask/dist/vue-the-mask.js":
+/*!********************************************************!*\
+  !*** ./node_modules/vue-the-mask/dist/vue-the-mask.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(e,t){ true?module.exports=t():undefined})(this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var a=n[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,t),a.l=!0,a.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p=".",t(t.s=10)}([function(e,t){e.exports={"#":{pattern:/\d/},X:{pattern:/[0-9a-zA-Z]/},S:{pattern:/[a-zA-Z]/},A:{pattern:/[a-zA-Z]/,transform:function(e){return e.toLocaleUpperCase()}},a:{pattern:/[a-zA-Z]/,transform:function(e){return e.toLocaleLowerCase()}},"!":{escape:!0}}},function(e,t,n){"use strict";function r(e){var t=document.createEvent("Event");return t.initEvent(e,!0,!0),t}var a=n(2),o=n(0),i=n.n(o);t.a=function(e,t){var o=t.value;if((Array.isArray(o)||"string"==typeof o)&&(o={mask:o,tokens:i.a}),"INPUT"!==e.tagName.toLocaleUpperCase()){var u=e.getElementsByTagName("input");if(1!==u.length)throw new Error("v-mask directive requires 1 input, found "+u.length);e=u[0]}e.oninput=function(t){if(t.isTrusted){var i=e.selectionEnd,u=e.value[i-1];for(e.value=n.i(a.a)(e.value,o.mask,!0,o.tokens);i<e.value.length&&e.value.charAt(i-1)!==u;)i++;e===document.activeElement&&(e.setSelectionRange(i,i),setTimeout(function(){e.setSelectionRange(i,i)},0)),e.dispatchEvent(r("input"))}};var s=n.i(a.a)(e.value,o.mask,!0,o.tokens);s!==e.value&&(e.value=s,e.dispatchEvent(r("input")))}},function(e,t,n){"use strict";var r=n(6),a=n(5);t.a=function(e,t){var o=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],i=arguments[3];return Array.isArray(t)?n.i(a.a)(r.a,t,i)(e,t,o,i):n.i(r.a)(e,t,o,i)}},function(e,t,n){"use strict";function r(e){e.component(s.a.name,s.a),e.directive("mask",i.a)}Object.defineProperty(t,"__esModule",{value:!0});var a=n(0),o=n.n(a),i=n(1),u=n(7),s=n.n(u);n.d(t,"TheMask",function(){return s.a}),n.d(t,"mask",function(){return i.a}),n.d(t,"tokens",function(){return o.a}),n.d(t,"version",function(){return c});var c="0.11.1";t.default=r,"undefined"!=typeof window&&window.Vue&&window.Vue.use(r)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(1),a=n(0),o=n.n(a),i=n(2);t.default={name:"TheMask",props:{value:[String,Number],mask:{type:[String,Array],required:!0},masked:{type:Boolean,default:!1},tokens:{type:Object,default:function(){return o.a}}},directives:{mask:r.a},data:function(){return{lastValue:null,display:this.value}},watch:{value:function(e){e!==this.lastValue&&(this.display=e)},masked:function(){this.refresh(this.display)}},computed:{config:function(){return{mask:this.mask,tokens:this.tokens,masked:this.masked}}},methods:{onInput:function(e){e.isTrusted||this.refresh(e.target.value)},refresh:function(e){this.display=e;var e=n.i(i.a)(e,this.mask,this.masked,this.tokens);e!==this.lastValue&&(this.lastValue=e,this.$emit("input",e))}}}},function(e,t,n){"use strict";function r(e,t,n){return t=t.sort(function(e,t){return e.length-t.length}),function(r,a){for(var o=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],i=0;i<t.length;){var u=t[i];i++;var s=t[i];if(!(s&&e(r,s,!0,n).length>u.length))return e(r,u,o,n)}return""}}t.a=r},function(e,t,n){"use strict";function r(e,t){var n=!(arguments.length>2&&void 0!==arguments[2])||arguments[2],r=arguments[3];e=e||"",t=t||"";for(var a=0,o=0,i="";a<t.length&&o<e.length;){var u=t[a],s=r[u],c=e[o];s&&!s.escape?(s.pattern.test(c)&&(i+=s.transform?s.transform(c):c,a++),o++):(s&&s.escape&&(a++,u=t[a]),n&&(i+=u),c===u&&o++,a++)}for(var f="";a<t.length&&n;){var u=t[a];if(r[u]){f="";break}f+=u,a++}return i+f}t.a=r},function(e,t,n){var r=n(8)(n(4),n(9),null,null);e.exports=r.exports},function(e,t){e.exports=function(e,t,n,r){var a,o=e=e||{},i=typeof e.default;"object"!==i&&"function"!==i||(a=e,o=e.default);var u="function"==typeof o?o.options:o;if(t&&(u.render=t.render,u.staticRenderFns=t.staticRenderFns),n&&(u._scopeId=n),r){var s=u.computed||(u.computed={});Object.keys(r).forEach(function(e){var t=r[e];s[e]=function(){return t}})}return{esModule:a,exports:o,options:u}}},function(e,t){e.exports={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("input",{directives:[{name:"mask",rawName:"v-mask",value:e.config,expression:"config"}],attrs:{type:"text"},domProps:{value:e.display},on:{input:e.onInput}})},staticRenderFns:[]}},function(e,t,n){e.exports=n(3)}])});
+
+/***/ }),
+
+/***/ "./resources/js/components/callschedule/ConCallScheduleComponent.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/callschedule/ConCallScheduleComponent.vue ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Certificate_vue_vue_type_template_id_5e07ad1d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Certificate.vue?vue&type=template&id=5e07ad1d& */ "./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=template&id=5e07ad1d&");
-/* harmony import */ var _Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Certificate.vue?vue&type=script&lang=js& */ "./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ConCallScheduleComponent_vue_vue_type_template_id_11318fc5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConCallScheduleComponent.vue?vue&type=template&id=11318fc5& */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=template&id=11318fc5&");
+/* harmony import */ var _ConCallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConCallScheduleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -738,9 +273,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Certificate_vue_vue_type_template_id_5e07ad1d___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Certificate_vue_vue_type_template_id_5e07ad1d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ConCallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ConCallScheduleComponent_vue_vue_type_template_id_11318fc5___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ConCallScheduleComponent_vue_vue_type_template_id_11318fc5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -750,38 +285,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/constructorreplacements/Components/Certificate.vue"
+component.options.__file = "resources/js/components/callschedule/ConCallScheduleComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************/
+/***/ "./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Certificate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConCallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ConCallScheduleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConCallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=template&id=5e07ad1d&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=template&id=5e07ad1d& ***!
-  \*******************************************************************************************************************/
+/***/ "./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=template&id=11318fc5&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=template&id=11318fc5& ***!
+  \**********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_template_id_5e07ad1d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Certificate.vue?vue&type=template&id=5e07ad1d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Certificate.vue?vue&type=template&id=5e07ad1d&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_template_id_5e07ad1d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConCallScheduleComponent_vue_vue_type_template_id_11318fc5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ConCallScheduleComponent.vue?vue&type=template&id=11318fc5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/ConCallScheduleComponent.vue?vue&type=template&id=11318fc5&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConCallScheduleComponent_vue_vue_type_template_id_11318fc5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Certificate_vue_vue_type_template_id_5e07ad1d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConCallScheduleComponent_vue_vue_type_template_id_11318fc5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -1,37 +1,37 @@
 <template>
   <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-    <v-tab :key="item">Справка</v-tab>
-    <v-tab :key="item">Характеристика</v-tab>
+    <v-tab :key="item">Расписание</v-tab>
+    <v-tab :key="item">Конструктор</v-tab>
     <v-tab-item :key="item">
-      <OrderCertificate />
+      <Timetable />
     </v-tab-item>
     <v-tab-item :key="item">
-      <OrderCharacteristic />
+      <Constructor />
     </v-tab-item>
   </v-tabs>
 </template>
 
 <script>
-import OrderCertificate from "./Components/Certificate";
-import OrderCharacteristic from "./Components/Characteristic";
+import Constructor from "./Components/Constructor";
+import Timetable from "./Components/Timetable";
 export default {
   data: () => ({
     tab: null,
     tabs: 2,
     tabitem: [
       {
-        name: "Справка",
-        com: OrderCertificate
+        name: "Расписание",
+        com: Timetable
       },
       {
-        name: "Характеристика",
-        com: OrderCharacteristic
+        name: "Конструктор",
+        com: Constructor
       }
     ]
   }),
   components: {
-    OrderCharacteristic,
-    OrderCertificate
+    Timetable,
+    Constructor
   }
 };
 </script>

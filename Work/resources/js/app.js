@@ -20,6 +20,8 @@ import TeacherTimetableComponent from './components/teachertimetable/TeacherTime
 import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
 import ConTimeTable from './components/constructortimetable/ContimetableComponent'
 import ConReplacements from './components/constructorreplacements/ConreplacementsComponent'
+import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
+import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 
 //import vuetif from './plugins/vuetify'
 
@@ -63,6 +65,8 @@ new Vue({
     'teacherhomework' : TeacherHomeworkComponent,
     'contimetable' : ConTimeTable,
     'conreplacements' : ConReplacements,
+    'teacheracademicperfomance' : TeacherAcademicPerfomance, 
+    'concallschedule' : ConCallSchedule,
   },
   data: () => ({
     drawer: null,
@@ -183,7 +187,7 @@ new Vue({
           {
             icon: 'home',
             text: 'Электронный журнал',
-            href: '/home'
+            href: '/teacheracademicperfomance'
           },{
             icon: 'feedback',
             text: 'Обратная связь',
@@ -205,6 +209,11 @@ new Vue({
             icon: 'home',
             text: 'Замены',
             href: '/conreplacements'
+          },
+          {
+            icon: 'today',
+            text: 'Расписание звонков',
+            href: '/concallschedule'
           },
           {
             icon: 'feedback',

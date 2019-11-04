@@ -35,4 +35,8 @@ Route::get('/contimetable', 'ConstructorTimeTableController@index')->name('conti
 
 Route::get('/conreplacements', 'ConstructorReplacementsController@index')->name('conreplacements');
 
+Route::get('/teacheracademicperfomance', 'TeacherAcadimicPerfomanceController@index')->name('teacheracademicperfomance');
+
 Route::get('/personalinformation', 'PersonalInformationController@index')->name('personalinformation');
+
+Route::get('/concallschedule', 'ConCallScheduleController@index')->name('concallschedule');
