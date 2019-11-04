@@ -15,10 +15,10 @@ import CertificateComponent from './components/certificate/CertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
 import TimetableComponent from './components/timetable/TimetableComponent'
-import TeacherTimetableComponent from './components/teachertimetable/TeacherTimetableComponent'
+import TeacherTimetableComponent from './components/timetable/TeacherTimetableComponent'
 import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
-import ConTimeTable from './components/constructortimetable/ContimetableComponent'
-import ConReplacements from './components/constructorreplacements/ConreplacementsComponent'
+import ConTimeTable from './components/timetable/ContimetableComponent'
+import ConReplacements from './components/timetable/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 import Card from './components/card/CardComponent'
@@ -172,11 +172,11 @@ new Vue({
             text: 'Домашнее задание',
             href: '/teacherhomework'
           },
-          {
+          /*{
             icon: 'layers',
             text: 'Ведомости',
             href: '/home'
-          },
+          },*/
           {
             icon: 'home',
             text: 'Электронный журнал',

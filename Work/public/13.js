@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -109,7 +109,6 @@ __webpack_require__.r(__webpack_exports__);
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: '00.00.0000',
       timeitems: {
         p1: "8:30 - 10:00",
         p2: "10:10 - 11:40",
@@ -121,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       items: {
         "П-2-16": [{
-          name: "Пн",
+          name: "Понедельник",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -137,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Вт",
+          name: "Вторник",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -153,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Ср",
+          name: "Среда",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -169,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Чт",
+          name: "Четверг",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -185,7 +184,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Пт",
+          name: "Пятница",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -201,7 +200,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Сб",
+          name: "Суббота",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -218,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
           t7: "Токарчук А.С."
         }],
         "П-1-16": [{
-          name: "Пн",
+          name: "Понедельник",
           p1: "Информационные системы и технологии",
           t1: "Токарчук А.С.",
           p2: "Информационные системы и технологии",
@@ -234,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Вт",
+          name: "Вторник",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -250,7 +249,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Ср",
+          name: "Среда",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -266,7 +265,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Чт",
+          name: "Четверг",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -282,7 +281,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Пт",
+          name: "Пятница",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -298,7 +297,7 @@ __webpack_require__.r(__webpack_exports__);
           p7: "Технология разработки и защиты баз данных",
           t7: "Токарчук А.С."
         }, {
-          name: "Сб",
+          name: "Суббота",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -321,10 +320,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&":
-/*!***********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653& ***!
-  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=template&id=3421c356&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=template&id=3421c356& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -444,34 +443,21 @@ var render = function() {
                         _c(
                           "v-card",
                           [
-                            _c(
-                              "v-card-title",
-                              {
-                                staticClass: "subtitle-1",
-                                staticStyle: { color: "#FF3D00" }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(item.name) +
-                                    " - " +
-                                    _vm._s(_vm.Datetime)
-                                )
-                              ]
-                            ),
+                            _c("v-card-title", [_vm._v(_vm._s(item.name))]),
                             _vm._v(" "),
                             _c(
                               "v-list",
                               { attrs: { dense: "" } },
                               [
                                 _c("v-list-item", [
-                                  _vm._v("Здание: " + _vm._s(_vm.Building))
+                                  _vm._v("Место проведения: Неженская")
                                 ]),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
+                                _c("v-divider"),
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                1. " +
                                       _vm._s(_vm.timeitems.p1) +
                                       "\n                "
                                   ),
@@ -489,11 +475,11 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
+                                _c("v-divider"),
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                2. " +
                                       _vm._s(_vm.timeitems.p2) +
                                       "\n                "
                                   ),
@@ -511,11 +497,11 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
+                                _c("v-divider"),
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                3. " +
                                       _vm._s(_vm.timeitems.p3) +
                                       "\n                "
                                   ),
@@ -533,11 +519,11 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
+                                _c("v-divider"),
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                4. " +
                                       _vm._s(_vm.timeitems.p4) +
                                       "\n                "
                                   ),
@@ -555,11 +541,11 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
+                                _c("v-divider"),
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                5. " +
                                       _vm._s(_vm.timeitems.p5) +
                                       "\n                "
                                   ),
@@ -577,11 +563,11 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
+                                _c("v-divider"),
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                6. " +
                                       _vm._s(_vm.timeitems.p6) +
                                       "\n                "
                                   ),
@@ -601,7 +587,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("v-list-item", [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                7. " +
                                       _vm._s(_vm.timeitems.p7) +
                                       "\n                "
                                   ),
@@ -646,17 +632,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/constructortimetable/Components/Timetable.vue":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/constructortimetable/Components/Timetable.vue ***!
+  \*******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeacherTimeTable.vue?vue&type=template&id=3991e653& */ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&");
-/* harmony import */ var _TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TeacherTimeTable.vue?vue&type=script&lang=js& */ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Timetable_vue_vue_type_template_id_3421c356___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timetable.vue?vue&type=template&id=3421c356& */ "./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=template&id=3421c356&");
+/* harmony import */ var _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timetable.vue?vue&type=script&lang=js& */ "./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -666,9 +652,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Timetable_vue_vue_type_template_id_3421c356___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Timetable_vue_vue_type_template_id_3421c356___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -678,38 +664,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/teachertimetable/Components/TeacherTimeTable.vue"
+component.options.__file = "resources/js/components/constructortimetable/Components/Timetable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherTimeTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&":
-/*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653& ***!
-  \*****************************************************************************************************************/
+/***/ "./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=template&id=3421c356&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=template&id=3421c356& ***!
+  \**************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherTimeTable.vue?vue&type=template&id=3991e653& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_3421c356___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=template&id=3421c356& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructortimetable/Components/Timetable.vue?vue&type=template&id=3421c356&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_3421c356___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_3421c356___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
