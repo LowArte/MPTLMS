@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $panel_array = array(
+        /* $panel_array = array(
             array(
                 "header"  => "Test", 
                 "content" => "feedback/FeedbackComponent",
@@ -34,6 +34,7 @@ class HomeController extends Controller
                 "content" => "feedback/FeedbackComponent",
                 "props"   => array()
             ));
-        return view('home', ["panel_array" => json_encode($panel_array)]);
+        return view('home', ["panel_array" => json_encode($panel_array)]); */
+        return view('home');
     }
 }

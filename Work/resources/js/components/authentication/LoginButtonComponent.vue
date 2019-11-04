@@ -22,7 +22,7 @@
                   v-model="email"
                   :error-messages="errors['email']"
                   :rules="emailRules"
-                  label="Email*"
+                  label="Email"
                   required
                 ></v-text-field>
               </v-col>
@@ -32,7 +32,7 @@
                   min="6"
                   v-model="password"
                   :rules="passwordRules"
-                  label="Пароль*"
+                  label="Пароль"
                   type="password"
                   required
                 ></v-text-field>

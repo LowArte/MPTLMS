@@ -37,6 +37,4 @@ Route::get('/conreplacements', 'ConstructorReplacementsController@index')->name(
 
 Route::get('/teacheracademicperfomance', 'TeacherAcadimicPerfomanceController@index')->name('teacheracademicperfomance');
 
-Route::get('/personalinformation', 'PersonalInformationController@index')->name('personalinformation');
-
 Route::get('/concallschedule', 'ConCallScheduleController@index')->name('concallschedule');

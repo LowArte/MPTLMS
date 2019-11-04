@@ -6,11 +6,7 @@
         <v-container class="pa-0 align-self-center" d-flex>
           <v-row sm="2" md="0" class="pa-0 justify-center">
             <v-col class="pa-0 d-flex justify-center" sm="2" md="0">
-              <v-btn
-                color="accent"
-                dark
-                @click="hidden = !hidden"
-              >{{ hidden ? 'Числитель' : 'Знаменатель' }}</v-btn>
+              <v-btn color="accent" dark @click="hidden = !hidden">{{ hidden ? 'Числитель' : 'Знаменатель' }}</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -22,59 +18,59 @@
         <v-row>
           <v-col v-for="item in props.items" :key="item.name" cols="12" sm="6" md="2" lg="2">
             <v-card>
-              <v-card-title>{{ item.name }}</v-card-title>
+              <v-card-title class="subtitle-1" style="color: #FF3D00;">{{ item.name }} - {{Datetime}}</v-card-title>
               <v-list dense>
-                <v-list-item>Место проведения: Неженская</v-list-item>
-                <v-divider></v-divider>
+                <v-list-item>Здание: {{Building}}</v-list-item>
+                <v-divider class="my-2"></v-divider>
                 <v-list-item>
-                  1. {{timeitems.p1}}
+                  {{timeitems.p1}}
                   <br />
                   {{ item.p1 }}
                   <br />
                   {{ item.t1 }}
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider class="my-2"></v-divider>
                 <v-list-item>
-                  2. {{timeitems.p2}}
+                  {{timeitems.p2}}
                   <br />
                   {{ item.p2 }}
                   <br />
                   {{ item.t2 }}
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider class="my-2"></v-divider>
                 <v-list-item>
-                  3. {{timeitems.p3}}
+                  {{timeitems.p3}}
                   <br />
                   {{ item.p3 }}
                   <br />
                   {{ item.t3 }}
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider class="my-2"></v-divider>
                 <v-list-item>
-                  4. {{timeitems.p4}}
+                  {{timeitems.p4}}
                   <br />
                   {{ item.p4 }}
                   <br />
                   {{ item.t4 }}
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider class="my-2"></v-divider>
                 <v-list-item>
-                  5. {{timeitems.p5}}
+                  {{timeitems.p5}}
                   <br />
                   {{ item.p5 }}
                   <br />
                   {{ item.t5 }}
                 </v-list-item>
-                <v-divider></v-divider>
+                <v-divider class="my-2"></v-divider>
                 <v-list-item>
-                  6. {{timeitems.p6}}
+                  {{timeitems.p6}}
                   <br />
                   {{ item.p6 }}
                   <br />
                   {{ item.t6 }}
                 </v-list-item>
                 <v-list-item>
-                  7. {{timeitems.p7}}
+                  {{timeitems.p7}}
                   <br />
                   {{ item.p7 }}
                   <br />
@@ -98,6 +94,7 @@ export default {
     hidden: false,
     itemsPerPageOptions: [6],
     itemsPerPage: 6,
+    Datetime: '00.00.0000',
     timeitems: {
       p1: "8:30 - 10:00",
       p2: "10:10 - 11:40",
@@ -110,7 +107,7 @@ export default {
     items: {
       "П-2-16": [
         {
-          name: "Понедельник",
+          name: "Пн",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -127,7 +124,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Вторник",
+          name: "Вт",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -144,7 +141,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Среда",
+          name: "Ср",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -161,7 +158,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Четверг",
+          name: "Чт",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -178,7 +175,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Пятница",
+          name: "Пт",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -195,7 +192,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Суббота",
+          name: "Сб",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -214,7 +211,7 @@ export default {
       ],
       "П-1-16": [
         {
-          name: "Понедельник",
+          name: "Пн",
           p1: "Информационные системы и технологии",
           t1: "Токарчук А.С.",
           p2: "Информационные системы и технологии",
@@ -231,7 +228,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Вторник",
+          name: "Вт",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -248,7 +245,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Среда",
+          name: "Ср",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -265,7 +262,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Четверг",
+          name: "Чт",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -282,7 +279,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Пятница",
+          name: "Пт",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -299,7 +296,7 @@ export default {
           t7: "Токарчук А.С."
         },
         {
-          name: "Суббота",
+          name: "Сб",
           p1: "Технология разработки и защиты баз данных",
           t1: "Токарчук А.С.",
           p2: "Технология разработки и защиты баз данных",
@@ -317,6 +314,12 @@ export default {
         }
       ]
     }
-  })
+  }),
+  methods: {
+    loader: function() {
+      //Получить массив описанный выше и забиндить его во vue 
+      return;
+    }
+  }
 };
 </script>

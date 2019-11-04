@@ -12,7 +12,6 @@ import RememberPasswordComponent from './components/authentication/RememberPassw
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
 import FeedbackComponent from './components/feedback/FeedbackComponent'
 import CertificateComponent from './components/certificate/CertificateComponent'
-import PersonalInformation from './components/personalinformation/PersonalInformation'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
 import TimetableComponent from './components/timetable/TimetableComponent'
@@ -22,6 +21,8 @@ import ConTimeTable from './components/constructortimetable/ContimetableComponen
 import ConReplacements from './components/constructorreplacements/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
+import Card from './components/card/CardComponent'
+import Main from './components/main/MainPageComponent'
 
 //import vuetif from './plugins/vuetify'
 
@@ -56,17 +57,18 @@ new Vue({
     'remember-password': RememberPasswordComponent,
     'reset-password': ResetPasswordComponent,
     'snackbar': SnackBar,
-    'panel' : Panel,
-    'feedback' : FeedbackComponent, 
-    'certificate' : CertificateComponent,
-    'personalinformation' : PersonalInformation,
-    'timetable' : TimetableComponent,
-    'teachertimetable' : TeacherTimetableComponent,
-    'teacherhomework' : TeacherHomeworkComponent,
-    'contimetable' : ConTimeTable,
-    'conreplacements' : ConReplacements,
-    'teacheracademicperfomance' : TeacherAcademicPerfomance, 
-    'concallschedule' : ConCallSchedule,
+    'panel': Panel,
+    'feedback': FeedbackComponent,
+    'certificate': CertificateComponent,
+    'timetable': TimetableComponent,
+    'teachertimetable': TeacherTimetableComponent,
+    'teacherhomework': TeacherHomeworkComponent,
+    'contimetable': ConTimeTable,
+    'conreplacements': ConReplacements,
+    'teacheracademicperfomance': TeacherAcademicPerfomance,
+    'concallschedule': ConCallSchedule,
+    'card': Card,
+    'main': Main
   },
   data: () => ({
     drawer: null,
@@ -87,7 +89,7 @@ new Vue({
             icon: 'home',
             text: 'Главная',
             href: '/home'
-          }, 
+          },
           {
             icon: 'edit',
             text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
@@ -103,51 +105,42 @@ new Vue({
           return [{
             icon: 'home',
             text: 'Главная',
-            href: '/home'
-          }, 
-          {
-            icon: 'portrait',
-            text: 'Учетная карточка',
-            href: '/card'
+            href: '/main'
           },
           {
-            icon: 'info',
-            text: 'Персональная информация',
-            href: '/personalinformation'
-          }, 
+            icon: 'portrait',
+            text: 'Студенческая карточка',
+            href: '/card'
+          },
           {
             icon: 'today',
             text: 'Расписание',
             href: '/timetable'
-          }, 
+          },/* 
           {
             icon: 'show_chart',
             text: 'Успеваемость',
             href: '/home'
-          }, /*{?
+          }, */ {
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
-          }*/
+          },/* 
           {
             icon: 'school',
             text: 'Преподаватели',
             href: '/home'
-          }, /*{
-            icon: 'group',
-            text: 'Одногруппники',
-            href: '/home'
-          },*/ 
+          }, */
           {
             icon: 'edit',
             text: 'Справки',
             href: '/certificate'
-          },
+          },/* 
           {
             icon: 'home',
             text: 'Домашнее задание',
             href: '/home'
-          }, 
+          }, */
           /*{
             icon: 'storefront',
             text: 'Портфолио',
@@ -156,7 +149,7 @@ new Vue({
             icon: 'layers',
             text: 'Базы практики',
             href: '/home'
-          },*/ 
+          },*/
           {
             icon: 'feedback',
             text: 'Обратная связь',
@@ -178,7 +171,7 @@ new Vue({
             icon: 'home',
             text: 'Домашнее задание',
             href: '/teacherhomework'
-          }, 
+          },
           {
             icon: 'layers',
             text: 'Ведомости',
@@ -188,7 +181,7 @@ new Vue({
             icon: 'home',
             text: 'Электронный журнал',
             href: '/teacheracademicperfomance'
-          },{
+          }, {
             icon: 'feedback',
             text: 'Обратная связь',
             href: '/feedback'
@@ -204,7 +197,7 @@ new Vue({
             icon: 'home',
             text: 'Расписание',
             href: '/contimetable'
-          }, 
+          },
           {
             icon: 'home',
             text: 'Замены',
