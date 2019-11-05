@@ -23,6 +23,8 @@ import TeacherAcademicPerfomance from './components/academicperformance/TeacherA
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 import Card from './components/card/CardComponent'
 import Main from './components/main/MainPageComponent'
+import RequestsUsers from './components/feedback/RequestsUsersComponent'
+import PanelControl from './components/PanelControlComponent'
 
 //import vuetif from './plugins/vuetify'
 
@@ -68,7 +70,9 @@ new Vue({
     'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': ConCallSchedule,
     'card': Card,
-    'main': Main
+    'main': Main,
+    'requestsusers' : RequestsUsers,
+    'panelcontrol' : PanelControl
   },
   data: () => ({
     drawer: null,
@@ -93,12 +97,12 @@ new Vue({
           {
             icon: 'edit',
             text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
-            href: '/home'
+            href: '/panelcontrol'
           },
           {
             icon: 'feedback',
             text: 'Обращение пользователей',
-            href: '/feedback'
+            href: '/requestsusers'
           }];
         }
         case 2: { //Студент

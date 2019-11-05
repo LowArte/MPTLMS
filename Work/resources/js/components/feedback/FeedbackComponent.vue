@@ -15,9 +15,6 @@
                 <v-text-field v-model="FIO" label="ФИО" readonly></v-text-field>
               </v-row>
               <v-row>
-                <v-text-field v-model="group" label="Группа" required readonly></v-text-field>
-              </v-row>
-              <v-row>
                 <v-text-field v-model="email" label="E-mail" required readonly></v-text-field>
               </v-row>
               <v-row>

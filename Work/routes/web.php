@@ -38,3 +38,8 @@ Route::get('/conreplacements', 'ConstructorReplacementsController@index')->name(
 Route::get('/teacheracademicperfomance', 'TeacherAcadimicPerfomanceController@index')->name('teacheracademicperfomance');
 
 Route::get('/concallschedule', 'ConCallScheduleController@index')->name('concallschedule');
+
+Route::get('/requestsusers', 'RequestsUsersController@index')->name('requestsusers');
+
+Route::get('/panelcontrol', 'PanelControlController@index')->name('panelcontrol');
+
