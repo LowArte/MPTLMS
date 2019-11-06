@@ -3004,6 +3004,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/action-types */ "./resources/js/store/action-types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3033,24 +3041,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      FIO: 'Анпилогов Артём Олегович',
-      Post: 'Студент',
-      Gender: 'Мужчина',
-      Birthday: '02.02.2001',
-      Email: 'p_a.o.anpilogov@mpt.ru',
-      Specialty: 'Программирование в компьютерных системах',
-      Course: '4',
-      Group: 'П-3-16',
-      Specialization: 'Техник-программист',
-      TrainingForm: 'Очная',
-      FinancingType: 'Бюджет',
-      TrainingPeriod: '3 года 10 месяцев'
-    };
-  }
+    return {};
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["student", "group", "departament"]), {
+    FIO: function FIO() {
+      return user.name + " " + user.secName + " " + user.thirdName;
+    },
+    Gender: function Gender() {
+      if (this.student != null) return this.student.gender;
+    },
+    Birthday: function Birthday() {
+      if (this.student != null) return this.student.birthday;
+    },
+    Email: function Email() {
+      return user.email;
+    },
+    Specialty: function Specialty() {
+      if (this.departament != null) return this.departament.dep_name_full;
+    },
+    Course: function Course() {
+      if (this.group != null) return this.group.сurs;
+    },
+    Group: function Group() {
+      if (this.group != null) return this.group.group_name;
+    },
+    Specialization: function Specialization() {
+      if (this.departament != null) return this.departament.specialization;
+    },
+    TrainingForm: function TrainingForm() {
+      if (this.group != null) return this.group.type_of_study;
+    },
+    FinancingType: function FinancingType() {
+      if (this.student != null) return this.student.type_of_financing;
+    },
+    TrainingPeriod: function TrainingPeriod() {
+      if (this.group != null) return this.group.study_period;
+    }
+  })
 });
 
 /***/ }),
@@ -3284,13 +3315,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       model: "",
       itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
       group: "П-2-16",
-      // Surname: "Борисов",
-      // Firstname: "Артём",
-      // Lastname: "Игоревич",
       Surname: user.secName,
       Firstname: user.name,
       Lastname: user.thirdName,
-      //email: "p_a.i.borisovmpt.ru";
       email: user.email,
       datebirth: "16-09-2000",
       enabled: false,
@@ -8463,12 +8490,6 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("v-divider"),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "black--text" }, [
-                              _c("br"),
-                              _c("b", [_vm._v("Должность: ")]),
-                              _vm._v(_vm._s(_vm.Post))
-                            ]),
                             _vm._v(" "),
                             _c("p", { staticClass: "black--text" }, [
                               _c("br"),
@@ -64115,14 +64136,6 @@ __webpack_require__.r(__webpack_exports__);
   logout: function logout() {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/logout');
   },
-  register: function register(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/register', {
-      'name': user.name,
-      'email': user.email,
-      'password': user.password,
-      'password_confirmation': user.password_confirmation
-    });
-  },
   remember: function remember(email) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/password/email', {
       'email': email
@@ -64134,6 +64147,28 @@ __webpack_require__.r(__webpack_exports__);
       'password': user.password,
       'password_confirmation': user.password_confirmation,
       'token': user.token
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/student.js":
+/*!*************************************!*\
+  !*** ./resources/js/api/student.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  get_student: function get_student(userId) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/get_student', {
+      "user_id": userId
     });
   }
 });
@@ -64247,6 +64282,15 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 if (window.user) {
   _store__WEBPACK_IMPORTED_MODULE_18__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["USER"], user);
+
+  switch (user.post_id) {
+    case 2:
+      {
+        _store__WEBPACK_IMPORTED_MODULE_18__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["GET_STUDENT"], user.id).then(function (response) {})["catch"](function (e) {});
+        break;
+      }
+  }
+
   _store__WEBPACK_IMPORTED_MODULE_18__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["LOGGED"], true);
 }
 
@@ -64271,7 +64315,7 @@ new Vue({
     'teacheracademicperfomance': _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
     'concallschedule': _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
     'card': _components_card_CardComponent__WEBPACK_IMPORTED_MODULE_14__["default"],
-    'main': _components_main_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
+    'mainPage': _components_main_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
     'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
     'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
@@ -64455,16 +64499,6 @@ new Vue({
         _this.editingUser = false;
         _this.updatingUser = false;
       });
-    },
-    updateEmail: function updateEmail(email) {
-      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["USER"], _objectSpread({}, this.user, {
-        email: email
-      }));
-    },
-    updateName: function updateName(name) {
-      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["USER"], _objectSpread({}, this.user, {
-        name: name
-      }));
     },
     toogleRightDrawer: function toogleRightDrawer() {
       this.drawerRight = !this.drawerRight;
@@ -66872,7 +66906,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./resources/js/store/action-types.js ***!
   \********************************************/
-/*! exports provided: LOGIN, LOGOUT, REGISTER, REMEMBER_PASSWORD, RESET_PASSWORD, FETCH_USERS, UPDATE_USER, SELECTED_USER */
+/*! exports provided: LOGIN, LOGOUT, REGISTER, REMEMBER_PASSWORD, RESET_PASSWORD, FETCH_USERS, UPDATE_USER, SELECTED_USER, GET_STUDENT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -66885,6 +66919,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_USERS", function() { return FETCH_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_USER", function() { return UPDATE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECTED_USER", function() { return SELECTED_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_STUDENT", function() { return GET_STUDENT; });
 // AUTH MODULE
 var LOGIN = 'LOGIN';
 var LOGOUT = 'LOGOUT';
@@ -66895,6 +66930,7 @@ var RESET_PASSWORD = 'RESET_PASSWORD'; // USERS MODULE
 var FETCH_USERS = 'FETCH_USERS';
 var UPDATE_USER = 'UPDATE_USER';
 var SELECTED_USER = 'SELECTED_USER';
+var GET_STUDENT = 'GET_STUDENT';
 
 /***/ }),
 
@@ -66913,6 +66949,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth/index.js");
 /* harmony import */ var _modules_snackbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/snackbar */ "./resources/js/store/modules/snackbar/index.js");
 /* harmony import */ var _modules_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/users */ "./resources/js/store/modules/users/index.js");
+/* harmony import */ var _modules_student__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/student */ "./resources/js/store/modules/student/index.js");
+
 
 
 
@@ -66924,7 +66962,8 @@ var debug = "development" !== 'production';
   modules: {
     auth: _modules_auth__WEBPACK_IMPORTED_MODULE_2__["default"],
     snackbar: _modules_snackbar__WEBPACK_IMPORTED_MODULE_3__["default"],
-    users: _modules_users__WEBPACK_IMPORTED_MODULE_4__["default"]
+    users: _modules_users__WEBPACK_IMPORTED_MODULE_4__["default"],
+    student: _modules_student__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   strict: debug
 }));
@@ -66963,15 +67002,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   return new Promise(function (resolve, reject) {
     _api_auth__WEBPACK_IMPORTED_MODULE_2__["default"].logout().then(function (response) {
       context.commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["LOGGED"], false);
-      resolve(response);
-    })["catch"](function (error) {
-      reject(error);
-    });
-  });
-}), _defineProperty(_actions$LOGIN$action, _action_types__WEBPACK_IMPORTED_MODULE_1__["REGISTER"], function (context, user) {
-  return new Promise(function (resolve, reject) {
-    _api_auth__WEBPACK_IMPORTED_MODULE_2__["default"].register(user).then(function (response) {
-      context.commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["LOGGED"], false);
+      if (context.student != null) context.commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_STUDENT"]);
       resolve(response);
     })["catch"](function (error) {
       reject(error);
@@ -67017,7 +67048,7 @@ __webpack_require__.r(__webpack_exports__);
     return state.user;
   },
   roles: function roles(state) {
-    return state.user ? state.user.roles : [];
+    return state.user ? state.user.post_id : [];
   }
 });
 
@@ -67161,6 +67192,115 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/student/actions.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/store/modules/student/actions.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _api_student__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/student */ "./resources/js/api/student.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_1__["GET_STUDENT"], function (context, userId) {
+  return new Promise(function (resolve, reject) {
+    _api_student__WEBPACK_IMPORTED_MODULE_2__["default"].get_student(userId).then(function (response) {
+      context.commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["SELECT_STUDENT"], response.data);
+      resolve(response);
+    })["catch"](function (error) {
+      reject(error);
+    });
+  });
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/student/getters.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/store/modules/student/getters.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  student: function student(state) {
+    return state.student;
+  },
+  group: function group(state) {
+    return state.group;
+  },
+  departament: function departament(state) {
+    return state.departament;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/student/index.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/store/modules/student/index.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getters */ "./resources/js/store/modules/student/getters.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./resources/js/store/modules/student/actions.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/modules/student/mutations.js");
+
+
+
+var state = {
+  student: null,
+  group: null,
+  departament: null
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  getters: _getters__WEBPACK_IMPORTED_MODULE_0__["default"],
+  actions: _actions__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/student/mutations.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/store/modules/student/mutations.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mutation-types */ "./resources/js/store/mutation-types.js");
+var _types$SELECT_STUDENT;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_types$SELECT_STUDENT = {}, _defineProperty(_types$SELECT_STUDENT, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["SELECT_STUDENT"], function (state, data) {
+  state.student = data.student;
+  state.group = data.group;
+  state.departament = data.departament;
+}), _defineProperty(_types$SELECT_STUDENT, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_STUDENT"], function (state) {
+  state.student = null;
+  state.group = null;
+  state.departament = null;
+}), _types$SELECT_STUDENT);
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/users/actions.js":
 /*!*****************************************************!*\
   !*** ./resources/js/store/modules/users/actions.js ***!
@@ -67279,7 +67419,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*!**********************************************!*\
   !*** ./resources/js/store/mutation-types.js ***!
   \**********************************************/
-/*! exports provided: LOGGED, USER, SET_SNACKBAR_SHOW, SET_SNACKBAR_COLOR, SET_SNACKBAR_TEXT, SET_SNACKBAR_SUBTEXT, SET_SNACKBAR_TIMEOUT, SELECTED_USER, SET_USERS */
+/*! exports provided: LOGGED, USER, SET_SNACKBAR_SHOW, SET_SNACKBAR_COLOR, SET_SNACKBAR_TEXT, SET_SNACKBAR_SUBTEXT, SET_SNACKBAR_TIMEOUT, SELECTED_USER, SET_USERS, SELECT_STUDENT, SELECT_GROUP */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67293,6 +67433,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SNACKBAR_TIMEOUT", function() { return SET_SNACKBAR_TIMEOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECTED_USER", function() { return SELECTED_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_USERS", function() { return SET_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECT_STUDENT", function() { return SELECT_STUDENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECT_GROUP", function() { return SELECT_GROUP; });
 // AUTH
 var LOGGED = 'LOGGED';
 var USER = 'USER'; // SNACKBAR
@@ -67304,7 +67446,10 @@ var SET_SNACKBAR_SUBTEXT = 'SET_SNACKBAR_SUBTEXT';
 var SET_SNACKBAR_TIMEOUT = 'SET_SNACKBAR_TIMEOUT'; // USERS
 
 var SELECTED_USER = 'SELECTED_USER';
-var SET_USERS = 'SET_USERS';
+var SET_USERS = 'SET_USERS'; //STUDENTS
+
+var SELECT_STUDENT = 'SELECTED_STUDENT';
+var SELECT_GROUP = 'SELECT_GROUP';
 
 /***/ }),
 
@@ -67384,8 +67529,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

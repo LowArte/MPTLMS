@@ -11,35 +11,40 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/', 
+    function () {
+        return view('welcome');
+    }
+);
 
 Auth::routes(['register'=>false,'verify'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/feedback', 'FeedbackController@index')->name('feedback');
+Route::get('/main', 'HomeController@index')->name('home');
 
-Route::get('/card', 'CardController@index')->name('card');
+Route::get('/feedback', 'RouteControllers\FeedbackController@index')->name('feedback');
 
-Route::get('/certificate', 'CertificateController@index')->name('certificate');
+Route::get('/card', 'RouteControllers\CardController@index')->name('card');
 
-Route::get('/timetable', 'TimetableController@index')->name('timetable');
+Route::get('/certificate', 'RouteControllers\CertificateController@index')->name('certificate');
 
-Route::get('/teachertimetable', 'TeacherTimetableController@index')->name('teachertimetable');
+Route::get('/timetable', 'RouteControllers\TimetableController@index')->name('timetable');
 
-Route::get('/teacherhomework', 'TeacherHomeworkController@index')->name('teacherhomework');
+Route::get('/teachertimetable', 'RouteControllers\TeacherTimetableController@index')->name('teachertimetable');
 
-Route::get('/contimetable', 'ConstructorTimeTableController@index')->name('contimetable');
+Route::get('/teacherhomework', 'RouteControllers\TeacherHomeworkController@index')->name('teacherhomework');
 
-Route::get('/conreplacements', 'ConstructorReplacementsController@index')->name('conreplacements');
+Route::get('/contimetable', 'RouteControllers\ConstructorTimeTableController@index')->name('contimetable');
 
-Route::get('/teacheracademicperfomance', 'TeacherAcadimicPerfomanceController@index')->name('teacheracademicperfomance');
+Route::get('/conreplacements', 'RouteControllers\ConstructorReplacementsController@index')->name('conreplacements');
 
-Route::get('/concallschedule', 'ConCallScheduleController@index')->name('concallschedule');
+Route::get('/teacheracademicperfomance', 'RouteControllers\TeacherAcadimicPerfomanceController@index')->name('teacheracademicperfomance');
 
-Route::get('/requestsusers', 'RequestsUsersController@index')->name('requestsusers');
+Route::get('/concallschedule', 'RouteControllers\ConCallScheduleController@index')->name('concallschedule');
 
-Route::get('/panelcontrol', 'PanelControlController@index')->name('panelcontrol');
+Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->name('requestsusers');
+
+Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('panelcontrol');
 

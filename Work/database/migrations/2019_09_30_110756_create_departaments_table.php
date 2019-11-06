@@ -13,13 +13,17 @@ class CreateDepartamentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departaments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('dep_name');
-            $table->string('dep_name_full');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::create(
+            'departaments',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('dep_name');
+                $table->string('specialization');
+                $table->string('dep_name_full');
+                $table->timestamps();
+                $table->softDeletes();
+            }
+        );
     }
 
     /**

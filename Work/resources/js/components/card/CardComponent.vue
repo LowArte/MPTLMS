@@ -8,7 +8,6 @@
                     <v-container class="ma-0 pa-2">
                         <p class="font-weight-black headline">{{FIO}}</p>
                         <v-divider></v-divider>
-                        <p class="black--text"><br><b>Должность: </b>{{Post}}</p>
                         <p class="black--text"><br><b>Гендерная принадлежность: </b>{{Gender}}</p>
                         <p class="black--text"><br><b>Дата рождения: </b>{{Birthday}}</p>
                         <v-divider></v-divider>
@@ -29,20 +28,60 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import * as actions from "../../store/action-types";
 export default {
     data: () => ({
-        FIO: 'Анпилогов Артём Олегович',
-        Post: 'Студент',
-        Gender: 'Мужчина',
-        Birthday: '02.02.2001',
-        Email: 'p_a.o.anpilogov@mpt.ru',
-        Specialty: 'Программирование в компьютерных системах',
-        Course: '4',
-        Group: 'П-3-16',
-        Specialization: 'Техник-программист',
-        TrainingForm: 'Очная',
-        FinancingType: 'Бюджет',
-        TrainingPeriod: '3 года 10 месяцев'
-    })
+
+    }),
+    computed: {
+        ...mapGetters([   
+            "student",    
+            "group",
+            "departament"
+        ]),
+        FIO:function(){
+            return user.name +" "+user.secName+" "+user.thirdName
+        },
+        Gender: function(){
+             if(this.student != null)
+                return this.student.gender
+        },
+        Birthday: function(){
+             if(this.student != null)
+                return this.student.birthday
+        },
+        Email:function(){
+            return user.email
+        },
+        Specialty:function(){
+            if(this.departament != null)
+                return this.departament.dep_name_full
+        } ,
+        Course: function(){
+            if(this.group != null)
+                return this.group.сurs
+        },
+        Group: function(){
+            if(this.group != null)
+                return this.group.group_name
+        },
+        Specialization: function(){
+            if(this.departament != null)
+                return this.departament.specialization
+        },
+        TrainingForm: function(){
+            if(this.group != null)
+                return this.group.type_of_study
+        },
+        FinancingType: function(){
+            if(this.student != null)
+                return this.student.type_of_financing
+        },
+        TrainingPeriod: function(){
+            if(this.group != null)
+                return this.group.study_period
+        },
+  }
 }
 </script>

@@ -46,6 +46,15 @@ import withSnackbar from './components/mixins/withSnackbar'
 
 if (window.user) {
   store.commit(mutations.USER, user)
+  switch(user.post_id){
+    case 2:{
+      store.dispatch(actions.GET_STUDENT, user.id)
+          .then(response => {
+          }).catch( e=>{
+          })
+      break;
+    }
+  }
   store.commit(mutations.LOGGED, true)
 }
 
@@ -70,7 +79,7 @@ new Vue({
     'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': ConCallSchedule,
     'card': Card,
-    'main': Main,
+    'mainPage': Main,
     'requestsusers' : RequestsUsers,
     'panelcontrol' : PanelControl
   },
@@ -84,7 +93,7 @@ new Vue({
   }),
   computed: {
     ...mapGetters({
-      user: 'user'
+      user: 'user',  
     }),
     items: function () {
       switch (user.post_id) {
@@ -240,18 +249,6 @@ new Vue({
       }).then(() => {
         this.editingUser = false
         this.updatingUser = false
-      })
-    },
-    updateEmail(email) {
-      this.$store.commit(mutations.USER, {
-        ...this.user,
-        email
-      })
-    },
-    updateName(name) {
-      this.$store.commit(mutations.USER, {
-        ...this.user,
-        name
       })
     },
     toogleRightDrawer() {

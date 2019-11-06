@@ -1,14 +1,40 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homework/StudentViewHomework.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/homework/StudentViewHomework.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -98,50 +124,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      hw: [{
-        lesson: "Технология разработки программного обеспечения",
-        teacher: "Шимбирёв Андрей Андреевич",
-        group: "П-2-16",
-        name: "Подготовка к опросу",
-        body: "Опрос по лекции 5",
-        datestart: "2019-10-10",
-        dateend: "2019-12-10",
-        answer: true,
-        files: [{
-          name: "Файл1",
-          file: "Файл1"
-        }, {
-          name: "Файл2",
-          file: "Файл2"
-        }]
-      }, {
-        lesson: "Операционные системы",
-        teacher: "Горбунов А.Д.",
-        group: "П-2-16",
-        name: "Практическая работа 1",
-        body: "Установка Windows 7 на Virtual Box",
-        datestart: "2019-10-10",
-        dateend: "",
-        answer: false,
-        files: []
-      }],
-      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
+      modelorder: "",
+      modelprogress: "",
       group: "П-2-16",
-      lesson: "Все дисциплины",
-      lessons: ["Технология разработки программного обеспечения", "Операционные системы", "Все дисциплины"],
-      loadfiles: [],
-      datestart: new Date().toISOString().substr(0, 10),
-      modal: false
+      FIO: "Борисов Артём Игоревич",
+      itemss: ["09.02.03 - Программирование в компьютерных системах"],
+      special: "09.02.03 - Программирование в компьютерных системах",
+      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
+      school: "Школа №3",
+      datebirth: "16-09-2000",
+      dateendschool: "12-06-2016",
+      yearmpt: "2019",
+      email: "p_a.i.borisov@mpt.ru",
+      postofgroup: "Ответственый за успеваемость",
+      postofgroups: ["Староста", "Ответственый за успеваемость", "Ответственый за посещяемость", "Студент"],
+      progressRules: [function (v) {
+        return v.length > 0 || "Успеваемость не указана";
+      }, function (v) {
+        return v.length <= 255 || "Текст успеваемости должен быть не более 255 символов";
+      }],
+      orderRules: [function (v) {
+        return v.length > 0 || "Текст заявки не указан";
+      }, function (v) {
+        return v.length <= 255 || "Текст заявки должен быть не более 255 символов";
+      }],
+      form: false
     };
+  },
+  methods: {
+    sendQuery: function sendQuery() {
+      //Вписывай отправку
+      alert("Отправлен запрос на получение характеристики!");
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homework/StudentViewHomework.vue?vue&type=template&id=6012e5c8&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/homework/StudentViewHomework.vue?vue&type=template&id=6012e5c8& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=template&id=2ec61385&":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=template&id=2ec61385& ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -154,472 +177,348 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { fluid: "" } },
+    "v-row",
     [
       _c(
-        "v-row",
-        { attrs: { align: "center" } },
+        "v-col",
+        { attrs: { cols: "12" } },
         [
-          _c(
-            "v-col",
-            [
-              _c("v-hover", {
-                staticClass: "pa-5",
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var hover = ref.hover
-                      return [
+          _c("v-hover", {
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(ref) {
+                  var hover = ref.hover
+                  return [
+                    _c(
+                      "v-card",
+                      {
+                        staticClass: "mx-auto",
+                        attrs: {
+                          elevation: hover ? 12 : 2,
+                          height: "auto",
+                          width: "max"
+                        }
+                      },
+                      [
                         _c(
-                          "v-card",
+                          "v-form",
                           {
-                            staticClass: "mx-auto",
-                            attrs: {
-                              elevation: hover ? 12 : 2,
-                              height: "auto",
-                              width: "90%"
+                            model: {
+                              value: _vm.form,
+                              callback: function($$v) {
+                                _vm.form = $$v
+                              },
+                              expression: "form"
                             }
                           },
                           [
                             _c(
-                              "v-card-text",
-                              {
-                                staticClass:
-                                  "my-1 ma-0 pt-2 pb-2 text-center title"
-                              },
-                              [_vm._v("Домашние задания")]
-                            ),
-                            _vm._v(" "),
-                            _c(
                               "v-container",
-                              {
-                                staticClass: "pa-0 pb-2",
-                                attrs: { fluid: "" }
-                              },
                               [
                                 _c(
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
+                                    _c("v-text-field", {
                                       attrs: {
-                                        items: _vm.lessons,
-                                        label: "Дисциплина",
-                                        solo: ""
+                                        label:
+                                          "Фамилия, Имя, Отчество студента",
+                                        readonly: ""
                                       },
                                       model: {
-                                        value: _vm.lesson,
+                                        value: _vm.FIO,
                                         callback: function($$v) {
-                                          _vm.lesson = $$v
+                                          _vm.FIO = $$v
                                         },
-                                        expression: "lesson"
+                                        expression: "FIO"
                                       }
                                     })
                                   ],
                                   1
                                 ),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "ma-0" }),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.itemss,
+                                        label: "Специальность",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.special,
+                                        callback: function($$v) {
+                                          _vm.special = $$v
+                                        },
+                                        expression: "special"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
                                 _vm._v(" "),
                                 _c(
-                                  "v-expansion-panels",
-                                  _vm._l(_vm.hw, function(item, i) {
-                                    return _c(
-                                      "v-expansion-panel",
-                                      { key: i },
-                                      [
-                                        item.lesson == _vm.lesson ||
-                                        _vm.lesson == "Все дисциплины"
-                                          ? _c(
-                                              "v-expansion-panel",
-                                              [
-                                                _c(
-                                                  "v-expansion-panel-header",
-                                                  [
-                                                    _c(
-                                                      "v-row",
-                                                      [
-                                                        _c(
-                                                          "v-card-text",
-                                                          {
-                                                            staticClass:
-                                                              "my-1 ma-0 pa-0 text"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                item.teacher
-                                                              )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "v-card-text",
-                                                          {
-                                                            staticClass:
-                                                              "my-1 ma-0 pa-0 text"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                item.lesson
-                                                              )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "v-card-text",
-                                                          {
-                                                            staticClass:
-                                                              "my-1 ma-0 pa-0 text"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "Дата выдачи: " +
-                                                                _vm._s(
-                                                                  item.datestart
-                                                                )
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        item.dateend != ""
-                                                          ? _c(
-                                                              "v-card-text",
-                                                              {
-                                                                staticClass:
-                                                                  "my-1 ma-0 pa-0 text"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Крайний срок сдачи: " +
-                                                                    _vm._s(
-                                                                      item.dateend
-                                                                    )
-                                                                )
-                                                              ]
-                                                            )
-                                                          : _vm._e(),
-                                                        _vm._v(" "),
-                                                        item.answer == true
-                                                          ? _c(
-                                                              "v-card-text",
-                                                              {
-                                                                staticClass:
-                                                                  "my-1 ma-0 pa-0 text"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Требуется отправить преподователю файлы"
-                                                                )
-                                                              ]
-                                                            )
-                                                          : _vm._e()
-                                                      ],
-                                                      1
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c("v-divider", {
-                                                  staticClass: "ma-0"
-                                                }),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-expansion-panel-content",
-                                                  [
-                                                    _c(
-                                                      "v-row",
-                                                      { staticClass: "pa-2" },
-                                                      [
-                                                        _vm._v(
-                                                          "Название: " +
-                                                            _vm._s(item.name)
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-row",
-                                                      { staticClass: "pa-2" },
-                                                      [
-                                                        _vm._v(
-                                                          "Описание: " +
-                                                            _vm._s(item.body)
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    item.files.length > 0
-                                                      ? _c(
-                                                          "div",
-                                                          [
-                                                            _c(
-                                                              "v-row",
-                                                              {
-                                                                staticClass:
-                                                                  "pa-2"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "Есть приложенные файлы!"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _vm._l(
-                                                              item.files,
-                                                              function(
-                                                                item2,
-                                                                i2
-                                                              ) {
-                                                                return _c(
-                                                                  "div",
-                                                                  { key: i2 },
-                                                                  [
-                                                                    _c(
-                                                                      "v-row",
-                                                                      {
-                                                                        staticClass:
-                                                                          "pa-2"
-                                                                      },
-                                                                      [
-                                                                        _vm._v(
-                                                                          "Файл " +
-                                                                            _vm._s(
-                                                                              i2 +
-                                                                                1
-                                                                            ) +
-                                                                            ": " +
-                                                                            _vm._s(
-                                                                              item2.name
-                                                                            )
-                                                                        )
-                                                                      ]
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "v-row",
-                                                                      {
-                                                                        staticClass:
-                                                                          "pa-2"
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "v-btn",
-                                                                          {
-                                                                            staticClass:
-                                                                              "white--text",
-                                                                            attrs: {
-                                                                              color:
-                                                                                "blue",
-                                                                              depressed:
-                                                                                ""
-                                                                            }
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              "Скачать файл"
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              }
-                                                            ),
-                                                            _vm._v(" "),
-                                                            item.files.length >
-                                                            1
-                                                              ? _c(
-                                                                  "v-row",
-                                                                  {
-                                                                    staticClass:
-                                                                      "pa-2"
-                                                                  },
-                                                                  [
-                                                                    _c(
-                                                                      "v-btn",
-                                                                      {
-                                                                        staticClass:
-                                                                          "white--text",
-                                                                        attrs: {
-                                                                          color:
-                                                                            "blue",
-                                                                          depressed:
-                                                                            ""
-                                                                        }
-                                                                      },
-                                                                      [
-                                                                        _vm._v(
-                                                                          "Скачать все файлы"
-                                                                        )
-                                                                      ]
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e()
-                                                          ],
-                                                          2
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    item.answer == true
-                                                      ? _c(
-                                                          "div",
-                                                          [
-                                                            _c("v-divider", {
-                                                              staticClass:
-                                                                "ma-0"
-                                                            }),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "v-row",
-                                                              [
-                                                                _c(
-                                                                  "v-card-text",
-                                                                  {
-                                                                    staticClass:
-                                                                      "my-1 ma-0 pa-2 mt-5 title"
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "Преподавателю требуется отправить файлы для выполнения домашнего задания"
-                                                                    )
-                                                                  ]
-                                                                )
-                                                              ],
-                                                              1
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "v-row",
-                                                              {
-                                                                staticClass:
-                                                                  "pa-2"
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "v-file-input",
-                                                                  {
-                                                                    attrs: {
-                                                                      label:
-                                                                        "Загрузка файлов",
-                                                                      multiple:
-                                                                        "",
-                                                                      "prepend-icon":
-                                                                        "mdi-paperclip"
-                                                                    },
-                                                                    scopedSlots: _vm._u(
-                                                                      [
-                                                                        {
-                                                                          key:
-                                                                            "selection",
-                                                                          fn: function(
-                                                                            ref
-                                                                          ) {
-                                                                            var text =
-                                                                              ref.text
-                                                                            return [
-                                                                              _c(
-                                                                                "v-chip",
-                                                                                {
-                                                                                  attrs: {
-                                                                                    small:
-                                                                                      "",
-                                                                                    label:
-                                                                                      "",
-                                                                                    color:
-                                                                                      "primary"
-                                                                                  }
-                                                                                },
-                                                                                [
-                                                                                  _vm._v(
-                                                                                    _vm._s(
-                                                                                      text
-                                                                                    )
-                                                                                  )
-                                                                                ]
-                                                                              )
-                                                                            ]
-                                                                          }
-                                                                        }
-                                                                      ],
-                                                                      null,
-                                                                      true
-                                                                    ),
-                                                                    model: {
-                                                                      value:
-                                                                        _vm.loadfiles,
-                                                                      callback: function(
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.loadfiles = $$v
-                                                                      },
-                                                                      expression:
-                                                                        "loadfiles"
-                                                                    }
-                                                                  }
-                                                                )
-                                                              ],
-                                                              1
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "v-row",
-                                                              {
-                                                                staticClass:
-                                                                  "pa-2 justify-center"
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "v-btn",
-                                                                  {
-                                                                    staticClass:
-                                                                      "white--text",
-                                                                    attrs: {
-                                                                      disabled: !_vm
-                                                                        .loadfiles
-                                                                        .length,
-                                                                      color:
-                                                                        "blue",
-                                                                      depressed:
-                                                                        ""
-                                                                    }
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "Отправить"
-                                                                    )
-                                                                  ]
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      : _vm._e()
-                                                  ],
-                                                  1
-                                                )
-                                              ],
-                                              1
-                                            )
-                                          : _vm._e()
-                                      ],
-                                      1
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.itemsg,
+                                        label: "Группа",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.group,
+                                        callback: function($$v) {
+                                          _vm.group = $$v
+                                        },
+                                        expression: "group"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Дата рождения",
+                                        hint: "Формат День/Месяц/Год",
+                                        "persistent-hint": "",
+                                        readonly: ""
+                                      },
+                                      on: {
+                                        blur: function($event) {
+                                          _vm.date = _vm.parseDate(
+                                            _vm.dateFormatted
+                                          )
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.datebirth,
+                                        callback: function($$v) {
+                                          _vm.datebirth = $$v
+                                        },
+                                        expression: "datebirth"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: { label: "Школа", readonly: "" },
+                                      model: {
+                                        value: _vm.school,
+                                        callback: function($$v) {
+                                          _vm.school = $$v
+                                        },
+                                        expression: "school"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Год оконачния школы",
+                                        hint: "Формат День/Месяц/Год",
+                                        "persistent-hint": "",
+                                        readonly: ""
+                                      },
+                                      on: {
+                                        blur: function($event) {
+                                          _vm.date = _vm.parseDate(
+                                            _vm.dateFormatted
+                                          )
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.dateendschool,
+                                        callback: function($$v) {
+                                          _vm.dateendschool = $$v
+                                        },
+                                        expression: "dateendschool"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Год поступления в МПТ",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.yearmpt,
+                                        callback: function($$v) {
+                                          _vm.yearmpt = $$v
+                                        },
+                                        expression: "yearmpt"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-select", {
+                                      attrs: {
+                                        items: _vm.postofgroup,
+                                        label: "Обязанности в группе",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.postofgroup,
+                                        callback: function($$v) {
+                                          _vm.postofgroup = $$v
+                                        },
+                                        expression: "postofgroup"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-textarea", {
+                                      attrs: {
+                                        "auto-grow": true,
+                                        clearable: false,
+                                        counter: 255 ? 255 : undefined,
+                                        filled: false,
+                                        flat: true,
+                                        hint: "Не более 255 символов",
+                                        label: "Успеваемость",
+                                        loading: false,
+                                        "no-resize": false,
+                                        outlined: false,
+                                        "persistent-hint": false,
+                                        placeholder: "",
+                                        rounded: false,
+                                        "row-height": 24,
+                                        rows: 1,
+                                        shaped: false,
+                                        "single-line": false,
+                                        solo: false,
+                                        rules: _vm.progressRules
+                                      },
+                                      model: {
+                                        value: _vm.modelprogress,
+                                        callback: function($$v) {
+                                          _vm.modelprogress = $$v
+                                        },
+                                        expression: "modelprogress"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "E-mail",
+                                        required: "",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.email,
+                                        callback: function($$v) {
+                                          _vm.email = $$v
+                                        },
+                                        expression: "email"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-textarea", {
+                                      attrs: {
+                                        "auto-grow": true,
+                                        clearable: false,
+                                        counter: 255 ? 255 : undefined,
+                                        filled: false,
+                                        flat: true,
+                                        hint: "Не более 255 символов",
+                                        label: "Куда нужна характеристика",
+                                        loading: false,
+                                        "no-resize": false,
+                                        outlined: false,
+                                        "persistent-hint": false,
+                                        placeholder: "",
+                                        rounded: false,
+                                        "row-height": 24,
+                                        rows: 3,
+                                        shaped: false,
+                                        "single-line": false,
+                                        solo: false,
+                                        rules: _vm.orderRules
+                                      },
+                                      model: {
+                                        value: _vm.modelorder,
+                                        callback: function($$v) {
+                                          _vm.modelorder = $$v
+                                        },
+                                        expression: "modelorder"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2 justify-center" },
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        staticClass: "white--text",
+                                        attrs: {
+                                          disabled: !_vm.form,
+                                          color: "blue",
+                                          depressed: ""
+                                        },
+                                        on: { click: _vm.sendQuery }
+                                      },
+                                      [_vm._v("Заказать")]
                                     )
-                                  }),
+                                  ],
                                   1
                                 )
                               ],
@@ -628,14 +527,14 @@ var render = function() {
                           ],
                           1
                         )
-                      ]
-                    }
-                  }
-                ])
-              })
-            ],
-            1
-          )
+                      ],
+                      1
+                    )
+                  ]
+                }
+              }
+            ])
+          })
         ],
         1
       )
@@ -650,18 +549,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/homework/StudentViewHomework.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/homework/StudentViewHomework.vue ***!
-  \******************************************************************/
+/***/ "./resources/js/components/constructorreplacements/Components/Characteristic.vue":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/constructorreplacements/Components/Characteristic.vue ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StudentViewHomework_vue_vue_type_template_id_6012e5c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentViewHomework.vue?vue&type=template&id=6012e5c8& */ "./resources/js/components/homework/StudentViewHomework.vue?vue&type=template&id=6012e5c8&");
-/* harmony import */ var _StudentViewHomework_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentViewHomework.vue?vue&type=script&lang=js& */ "./resources/js/components/homework/StudentViewHomework.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Characteristic_vue_vue_type_template_id_2ec61385___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Characteristic.vue?vue&type=template&id=2ec61385& */ "./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=template&id=2ec61385&");
+/* harmony import */ var _Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Characteristic.vue?vue&type=script&lang=js& */ "./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -670,9 +569,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _StudentViewHomework_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _StudentViewHomework_vue_vue_type_template_id_6012e5c8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _StudentViewHomework_vue_vue_type_template_id_6012e5c8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Characteristic_vue_vue_type_template_id_2ec61385___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Characteristic_vue_vue_type_template_id_2ec61385___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -682,38 +581,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/homework/StudentViewHomework.vue"
+component.options.__file = "resources/js/components/constructorreplacements/Components/Characteristic.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/homework/StudentViewHomework.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/homework/StudentViewHomework.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentViewHomework_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentViewHomework.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homework/StudentViewHomework.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentViewHomework_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristic.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/homework/StudentViewHomework.vue?vue&type=template&id=6012e5c8&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/homework/StudentViewHomework.vue?vue&type=template&id=6012e5c8& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=template&id=2ec61385&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=template&id=2ec61385& ***!
+  \**********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentViewHomework_vue_vue_type_template_id_6012e5c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentViewHomework.vue?vue&type=template&id=6012e5c8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/homework/StudentViewHomework.vue?vue&type=template&id=6012e5c8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentViewHomework_vue_vue_type_template_id_6012e5c8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_template_id_2ec61385___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Characteristic.vue?vue&type=template&id=2ec61385& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/constructorreplacements/Components/Characteristic.vue?vue&type=template&id=2ec61385&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_template_id_2ec61385___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentViewHomework_vue_vue_type_template_id_6012e5c8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Characteristic_vue_vue_type_template_id_2ec61385___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

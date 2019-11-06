@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RouteControllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ConstructorReplacementsController extends Controller
+class ConCallScheduleController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +24,6 @@ class ConstructorReplacementsController extends Controller
      */
     public function index()
     {
-        return view('conreplacements');
+        return view('components/concallschedule');
     }
 }

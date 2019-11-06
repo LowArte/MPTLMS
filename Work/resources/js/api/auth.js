@@ -7,14 +7,6 @@ export default {
   logout () {
     return axios.post('/logout')
   },
-  register (user) {
-    return axios.post('/register', {
-      'name': user.name,
-      'email': user.email,
-      'password': user.password,
-      'password_confirmation': user.password_confirmation,
-    })
-  },
   remember (email) {
     return axios.post('/password/email', { 'email': email })
   },

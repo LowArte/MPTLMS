@@ -1,0 +1,16 @@
+import getters from './getters'
+import actions from './actions'
+import mutations from './mutations'
+
+const state = {
+  student: null,
+  group : null,
+  departament: null
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+}

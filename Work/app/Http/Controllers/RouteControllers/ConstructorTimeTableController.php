@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RouteControllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CertificateController extends Controller
+class ConstructorTimeTableController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +24,6 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        return view('certificate');
+        return view('components/contimetable');
     }
 }

@@ -163,13 +163,9 @@ export default {
     model: "",
     itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
     group: "П-2-16",
-    // Surname: "Борисов",
-    // Firstname: "Артём",
-    // Lastname: "Игоревич",
     Surname: user.secName,
     Firstname: user.name,
     Lastname: user.thirdName,
-    //email: "p_a.i.borisovmpt.ru";
     email: user.email,
     datebirth: "16-09-2000",
     enabled: false,

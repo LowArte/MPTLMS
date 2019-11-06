@@ -13,15 +13,21 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::create(
+            'students', 
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('user_id');
+                $table->unsignedBigInteger('group_id');
+                $table->string('birthday');
+                $table->string('gender');
+                $table->string('type_of_financing');
+                $table->foreign('group_id')->references('id')->on('groups');
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->timestamps();
+                $table->softDeletes();
+            }
+        );
     }
 
     /**
