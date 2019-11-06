@@ -47,18 +47,36 @@
                 Замена
                 <v-divider></v-divider>
               </v-card-text>
-              <v-row no-gutters v-for="n in 7" :key="n">
-                <v-tabs v-model="tab1[n]" grow>
-                  <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                  <v-tab-item v-for="item in tabs" :key="item" grow>
-                    <v-card class="pa-2" outlined tile grow>
-                      {{n}} пара
-                      <v-select :items="lesson" label="Дисциплина" grow></v-select>
-                      <v-select :items="teacher" label="Преподаватель" grow></v-select>
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs>
-              </v-row>
+
+              <div v-for="n in 7" :key="n">
+                <div class="ma-2 mb-0 pa-2">
+                  <v-row>{{n}} пара</v-row>
+                  <v-row>
+                    <v-autocomplete width="100%" label="Дисциплина" solo :items="lesson" grow></v-autocomplete>
+                  </v-row>
+                  <v-row>
+                    <v-autocomplete width="100%" label="Преподаватель" solo :items="teacher" grow></v-autocomplete>
+                  </v-row>
+                  <v-row>
+                    <v-switch
+                      color="primary"
+                      value="primary"
+                      v-model="tab1[n]"
+                      class="ma-0 pa-0"
+                      flat
+                      grow
+                      label="Дополнительная пара"
+                    ></v-switch>
+                  </v-row>
+                  <v-row v-if="tab1[n]">
+                    <v-autocomplete label="Дисциплина" solo :items="lesson" grow></v-autocomplete>
+                  </v-row>
+                  <v-row v-if="tab1[n]">
+                    <v-autocomplete label="Преподаватель" solo :items="teacher" grow></v-autocomplete>
+                  </v-row>
+                </div>
+                <v-divider class="ma-0 pa-0"></v-divider>
+              </div>
             </v-container>
           </v-card>
         </v-hover>
@@ -76,10 +94,9 @@ export default {
     modal: false,
     lesson: [
       "Технология разработки и защиты баз данных",
-      "Операционные системы",
-      ""
+      "Операционные системы"
     ],
-    teacher: ["Токарчук А.С.", "Горбунов А.Д.", ""],
+    teacher: ["Токарчук А.С.", "Горбунов А.Д."],
     tab1: [null, null, null, null, null, null, null],
 
     tabs: ["1 пара", "2 пара"]

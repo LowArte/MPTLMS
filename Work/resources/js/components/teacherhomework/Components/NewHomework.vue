@@ -11,10 +11,12 @@
                 <v-text-field v-model="TFIO" label="Преподаватель" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-select v-model="group" :items="itemsg" label="Группа"></v-select>
+                <v-autocomplete v-model="group" label="Группа" solo :items="itemsg"></v-autocomplete>
+                <!-- <v-select v-model="group" :items="itemsg" label="Группа"></v-select> -->
               </v-row>
               <v-row class="pa-2">
-                <v-select v-model="lesson" :items="lessons" label="Дисциплина"></v-select>
+                <v-autocomplete v-model="lesson" label="Дисциплина" solo :items="lessons"></v-autocomplete>
+                <!-- <v-select v-model="lesson" :items="lessons" label="Дисциплина"></v-select> -->
               </v-row>
               <v-row class="pa-2">
                 <v-checkbox

@@ -1953,13 +1953,69 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _timetable_ContimetableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./timetable/ContimetableComponent */ "./resources/js/components/timetable/ContimetableComponent.vue");
+/* harmony import */ var _timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./timetable/ConreplacementsComponent */ "./resources/js/components/timetable/ConreplacementsComponent.vue");
+/* harmony import */ var _callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./callschedule/ConCallScheduleComponent */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue");
 //
 //
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      operatingMode: ["Полный функционал", "Профилактика"],
+      oMode: "Профилактика"
+    };
+  },
+  components: {
+    Timetable: _timetable_ContimetableComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Replacements: _timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Concallschedule: _callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  methods: {
+    sendQuery: function sendQuery() {
+      //Вписывай отправку
+      alert("Отправлен запрос изменения режима работы сайта!");
+    }
+  }
+});
 
 /***/ }),
 
@@ -3968,6 +4024,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4337,6 +4395,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4344,8 +4420,8 @@ __webpack_require__.r(__webpack_exports__);
       items: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
       date: new Date().toISOString().substr(0, 10),
       modal: false,
-      lesson: ["Технология разработки и защиты баз данных", "Операционные системы", ""],
-      teacher: ["Токарчук А.С.", "Горбунов А.Д.", ""],
+      lesson: ["Технология разработки и защиты баз данных", "Операционные системы"],
+      teacher: ["Токарчук А.С.", "Горбунов А.Д."],
       tab1: [null, null, null, null, null, null, null],
       tabs: ["1 пара", "2 пара"]
     };
@@ -4363,6 +4439,108 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4572,8 +4750,8 @@ __webpack_require__.r(__webpack_exports__);
         p6: "17:20 - 18:50",
         p7: "19:00 - 19:30"
       },
-      lesson: ["Технология разработки и защиты баз данных", "Операционные системы", ""],
-      teacher: ["Токарчук А.С.", "Горбунов А.Д.", ""],
+      lesson: ["Технология разработки и защиты баз данных", "Операционные системы"],
+      teacher: ["Токарчук А.С.", "Горбунов А.Д."],
       items: [{
         name: "Понедельник"
       }, {
@@ -6838,9 +7016,164 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-container", { attrs: { fruit: "" } }, [
-    _vm._v("\n    Панель управления\n")
-  ])
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { attrs: { cols: "12" } },
+        [
+          _c("v-hover", {
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(ref) {
+                  var hover = ref.hover
+                  return [
+                    _c(
+                      "v-card",
+                      {
+                        staticClass: "mx-auto pa-0",
+                        attrs: {
+                          elevation: hover ? 12 : 2,
+                          height: "auto",
+                          width: "max"
+                        }
+                      },
+                      [
+                        _c(
+                          "v-container",
+                          { staticClass: "pa-0 ma-0" },
+                          [
+                            _c(
+                              "v-row",
+                              { staticClass: "pa-2 ma-0" },
+                              [
+                                _c(
+                                  "v-card-text",
+                                  {
+                                    staticClass:
+                                      "my-2 ma-0 pa-0 text-center title"
+                                  },
+                                  [_vm._v("Панель управления")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("v-divider"),
+                            _vm._v(" "),
+                            _c(
+                              "v-row",
+                              { staticClass: "pa-2 ma-0" },
+                              [
+                                _c("v-autocomplete", {
+                                  attrs: {
+                                    label: "Режим работы",
+                                    solo: "",
+                                    items: _vm.operatingMode
+                                  },
+                                  model: {
+                                    value: _vm.oMode,
+                                    callback: function($$v) {
+                                      _vm.oMode = $$v
+                                    },
+                                    expression: "oMode"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "ma-2",
+                                    attrs: { color: "accent", dark: "" },
+                                    on: { click: _vm.sendQuery }
+                                  },
+                                  [_vm._v("Применить")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("v-divider"),
+                            _vm._v(" "),
+                            _c(
+                              "v-row",
+                              { staticClass: "pa-2 ma-0" },
+                              [
+                                _c(
+                                  "v-expansion-panels",
+                                  [
+                                    _c(
+                                      "v-expansion-panel",
+                                      [
+                                        _c("v-expansion-panel-header", [
+                                          _vm._v("Расписание дисциплин")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-expansion-panel-content",
+                                          [_c("Timetable")],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-expansion-panel",
+                                      [
+                                        _c("v-expansion-panel-header", [
+                                          _vm._v("Замены")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-expansion-panel-content",
+                                          [_c("Replacements")],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-expansion-panel",
+                                      [
+                                        _c("v-expansion-panel-header", [
+                                          _vm._v("Расписание звонков")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-expansion-panel-content",
+                                          [_c("Concallschedule")],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10295,10 +10628,11 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
+                                    _c("v-autocomplete", {
                                       attrs: {
-                                        items: _vm.itemsg,
-                                        label: "Группа"
+                                        label: "Группа",
+                                        solo: "",
+                                        items: _vm.itemsg
                                       },
                                       model: {
                                         value: _vm.group,
@@ -10316,10 +10650,11 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
+                                    _c("v-autocomplete", {
                                       attrs: {
-                                        items: _vm.lessons,
-                                        label: "Дисциплина"
+                                        label: "Дисциплина",
+                                        solo: "",
+                                        items: _vm.lessons
                                       },
                                       model: {
                                         value: _vm.lesson,
@@ -11702,77 +12037,113 @@ var render = function() {
                                 _vm._v(" "),
                                 _vm._l(7, function(n) {
                                   return _c(
-                                    "v-row",
-                                    { key: n, attrs: { "no-gutters": "" } },
+                                    "div",
+                                    { key: n },
                                     [
                                       _c(
-                                        "v-tabs",
-                                        {
-                                          attrs: { grow: "" },
-                                          model: {
-                                            value: _vm.tab1[n],
-                                            callback: function($$v) {
-                                              _vm.$set(_vm.tab1, n, $$v)
-                                            },
-                                            expression: "tab1[n]"
-                                          }
-                                        },
+                                        "div",
+                                        { staticClass: "ma-2 mb-0 pa-2" },
                                         [
-                                          _vm._l(_vm.tabs, function(item) {
-                                            return _c("v-tab", { key: item }, [
-                                              _vm._v(_vm._s(item))
-                                            ])
-                                          }),
+                                          _c("v-row", [
+                                            _vm._v(_vm._s(n) + " пара")
+                                          ]),
                                           _vm._v(" "),
-                                          _vm._l(_vm.tabs, function(item) {
-                                            return _c(
-                                              "v-tab-item",
-                                              {
-                                                key: item,
-                                                attrs: { grow: "" }
-                                              },
-                                              [
-                                                _c(
-                                                  "v-card",
-                                                  {
-                                                    staticClass: "pa-2",
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c("v-autocomplete", {
+                                                attrs: {
+                                                  width: "100%",
+                                                  label: "Дисциплина",
+                                                  solo: "",
+                                                  items: _vm.lesson,
+                                                  grow: ""
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c("v-autocomplete", {
+                                                attrs: {
+                                                  width: "100%",
+                                                  label: "Преподаватель",
+                                                  solo: "",
+                                                  items: _vm.teacher,
+                                                  grow: ""
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c("v-switch", {
+                                                staticClass: "ma-0 pa-0",
+                                                attrs: {
+                                                  color: "primary",
+                                                  value: "primary",
+                                                  flat: "",
+                                                  grow: "",
+                                                  label: "Дополнительная пара"
+                                                },
+                                                model: {
+                                                  value: _vm.tab1[n],
+                                                  callback: function($$v) {
+                                                    _vm.$set(_vm.tab1, n, $$v)
+                                                  },
+                                                  expression: "tab1[n]"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.tab1[n]
+                                            ? _c(
+                                                "v-row",
+                                                [
+                                                  _c("v-autocomplete", {
                                                     attrs: {
-                                                      outlined: "",
-                                                      tile: "",
+                                                      label: "Дисциплина",
+                                                      solo: "",
+                                                      items: _vm.lesson,
                                                       grow: ""
                                                     }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                    " +
-                                                        _vm._s(n) +
-                                                        " пара\n                    "
-                                                    ),
-                                                    _c("v-select", {
-                                                      attrs: {
-                                                        items: _vm.lesson,
-                                                        label: "Дисциплина",
-                                                        grow: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c("v-select", {
-                                                      attrs: {
-                                                        items: _vm.teacher,
-                                                        label: "Преподаватель",
-                                                        grow: ""
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                )
-                                              ],
-                                              1
-                                            )
-                                          })
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.tab1[n]
+                                            ? _c(
+                                                "v-row",
+                                                [
+                                                  _c("v-autocomplete", {
+                                                    attrs: {
+                                                      label: "Преподаватель",
+                                                      solo: "",
+                                                      items: _vm.teacher,
+                                                      grow: ""
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e()
                                         ],
-                                        2
-                                      )
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-divider", {
+                                        staticClass: "ma-0 pa-0"
+                                      })
                                     ],
                                     1
                                   )
@@ -11982,71 +12353,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab1[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab1,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab1[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    1. " +
+                                                _vm._s(_vm.timeitems.p1) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        1. " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p1
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab1[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab1,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab1[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab1[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab1[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -12058,71 +12429,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab2[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab2,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab2[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    2 " +
+                                                _vm._s(_vm.timeitems.p2) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        2 " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p2
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab2[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab2,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab2[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab2[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab2[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -12134,71 +12505,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab3[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab3,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab3[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    3. " +
+                                                _vm._s(_vm.timeitems.p3) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        3. " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p3
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab3[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab3,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab3[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab3[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab3[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -12210,71 +12581,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab4[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab4,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab4[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    4. " +
+                                                _vm._s(_vm.timeitems.p4) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        4. " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p4
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab4[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab4,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab4[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab4[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab4[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -12286,71 +12657,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab5[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab5,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab5[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    5. " +
+                                                _vm._s(_vm.timeitems.p5) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        5. " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p5
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab5[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab5,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab5[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab5[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab5[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -12362,71 +12733,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab6[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab6,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab6[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    6. " +
+                                                _vm._s(_vm.timeitems.p6) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        6. " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p6
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab6[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab6,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab6[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab6[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab6[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -12438,71 +12809,71 @@ var render = function() {
                                       "v-list-item",
                                       [
                                         _c(
-                                          "v-tabs",
-                                          {
-                                            attrs: { grow: "" },
-                                            model: {
-                                              value: _vm.tab7[item.name],
-                                              callback: function($$v) {
-                                                _vm.$set(
-                                                  _vm.tab7,
-                                                  item.name,
-                                                  $$v
-                                                )
-                                              },
-                                              expression: "tab7[item.name]"
-                                            }
-                                          },
+                                          "v-col",
+                                          { staticClass: "pa-1" },
                                           [
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab",
-                                                { key: item },
-                                                [_vm._v(_vm._s(item))]
-                                              )
+                                            _vm._v(
+                                              "\n                    7. " +
+                                                _vm._s(_vm.timeitems.p7) +
+                                                "\n                    "
+                                            ),
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Дисциплина",
+                                                solo: "",
+                                                items: _vm.lesson
+                                              }
                                             }),
                                             _vm._v(" "),
-                                            _vm._l(_vm.tabs, function(item) {
-                                              return _c(
-                                                "v-tab-item",
-                                                {
-                                                  key: item,
-                                                  attrs: { grow: "" }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-col",
-                                                    { staticClass: "pa-1" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                        7. " +
-                                                          _vm._s(
-                                                            _vm.timeitems.p7
-                                                          ) +
-                                                          "\n                        "
-                                                      ),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.lesson,
-                                                          label: "Дисциплина"
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          items: _vm.teacher,
-                                                          label: "Преподаватель"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
+                                            _c("v-autocomplete", {
+                                              attrs: {
+                                                label: "Преподаватель",
+                                                solo: "",
+                                                items: _vm.teacher
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-switch", {
+                                              attrs: {
+                                                color: "primary",
+                                                value: "primary",
+                                                flat: "",
+                                                label: "Дополнительная пара"
+                                              },
+                                              model: {
+                                                value: _vm.tab7[item.name],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.tab7,
+                                                    item.name,
+                                                    $$v
                                                   )
-                                                ],
-                                                1
-                                              )
-                                            })
+                                                },
+                                                expression: "tab7[item.name]"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.tab7[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Дисциплина",
+                                                    solo: "",
+                                                    items: _vm.lesson
+                                                  }
+                                                })
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.tab7[item.name]
+                                              ? _c("v-autocomplete", {
+                                                  attrs: {
+                                                    label: "Преподаватель",
+                                                    solo: "",
+                                                    items: _vm.teacher
+                                                  }
+                                                })
+                                              : _vm._e()
                                           ],
-                                          2
+                                          1
                                         )
                                       ],
                                       1
@@ -67529,8 +67900,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

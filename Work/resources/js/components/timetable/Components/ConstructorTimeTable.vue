@@ -9,7 +9,11 @@
               <v-btn color="primary" dark>Применить</v-btn>
             </v-col>
             <v-col class="pa-0 d-flex justify-center" sm="2" md="0">
-              <v-btn color="accent" dark @click="hidden = !hidden">{{ hidden ? 'Числитель' : 'Знаменатель' }}</v-btn>
+              <v-btn
+                color="accent"
+                dark
+                @click="hidden = !hidden"
+              >{{ hidden ? 'Числитель' : 'Знаменатель' }}</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -22,103 +26,201 @@
           <v-col v-for="item in props.items" :key="item.name" cols="12" sm="12" md="2" lg="4">
             <v-card>
               <v-container fluid>
-                <v-card-title  class="ma-2">{{ item.name }}</v-card-title>
+                <v-card-title class="ma-2">{{ item.name }}</v-card-title>
                 <v-list dense>
                   <v-list-item>
-                    <v-row align="center"  class="pa-2">
+                    <v-row align="center" class="pa-2">
                       <v-select :items="place" label="Место проведения"></v-select>
                     </v-row>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab1[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          1. {{timeitems.p1}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      1. {{timeitems.p1}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        color="primary"
+                        value="primary"
+                        v-model="tab1[item.name]"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab1[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab1[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab2[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          2 {{timeitems.p2}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      2 {{timeitems.p2}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        color="primary"
+                        value="primary"
+                        v-model="tab2[item.name]"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab2[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab2[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab3[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          3. {{timeitems.p3}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      3. {{timeitems.p3}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        color="primary"
+                        value="primary"
+                        v-model="tab3[item.name]"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab3[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab3[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab4[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          4. {{timeitems.p4}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      4. {{timeitems.p4}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        color="primary"
+                        value="primary"
+                        v-model="tab4[item.name]"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab4[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab4[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab5[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          5. {{timeitems.p5}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      5. {{timeitems.p5}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        color="primary"
+                        value="primary"
+                        v-model="tab5[item.name]"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab5[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab5[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab6[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          6. {{timeitems.p6}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      6. {{timeitems.p6}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        color="primary"
+                        value="primary"
+                        v-model="tab6[item.name]"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab6[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab6[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                   <v-divider></v-divider>
                   <v-list-item>
-                    <v-tabs v-model="tab7[item.name]" grow>
-                      <v-tab v-for="item in tabs" :key="item">{{ item }}</v-tab>
-                      <v-tab-item v-for="item in tabs" :key="item" grow>
-                        <v-col class="pa-1">
-                          7. {{timeitems.p7}}
-                          <v-select :items="lesson" label="Дисциплина"></v-select>
-                          <v-select :items="teacher" label="Преподаватель"></v-select>
-                        </v-col>
-                      </v-tab-item>
-                    </v-tabs>
+                    <v-col class="pa-1">
+                      7. {{timeitems.p7}}
+                      <v-autocomplete label="Дисциплина" solo :items="lesson"></v-autocomplete>
+                      <v-autocomplete label="Преподаватель" solo :items="teacher"></v-autocomplete>
+                      <v-switch
+                        v-model="tab7[item.name]"
+                        color="primary"
+                        value="primary"
+                        flat
+                        label="Дополнительная пара"
+                      ></v-switch>
+                      <v-autocomplete
+                        v-if="tab7[item.name]"
+                        label="Дисциплина"
+                        solo
+                        :items="lesson"
+                      ></v-autocomplete>
+                      <v-autocomplete
+                        v-if="tab7[item.name]"
+                        label="Преподаватель"
+                        solo
+                        :items="teacher"
+                      ></v-autocomplete>
+                    </v-col>
                   </v-list-item>
                 </v-list>
               </v-container>
@@ -224,10 +326,9 @@ export default {
     },
     lesson: [
       "Технология разработки и защиты баз данных",
-      "Операционные системы",
-      ""
+      "Операционные системы"
     ],
-    teacher: ["Токарчук А.С.", "Горбунов А.Д.", ""],
+    teacher: ["Токарчук А.С.", "Горбунов А.Д."],
     items: [
       {
         name: "Понедельник"
