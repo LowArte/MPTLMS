@@ -3049,37 +3049,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["student", "group", "departament"]), {
     FIO: function FIO() {
-      return user.name + " " + user.secName + " " + user.thirdName;
+      if (this.student != null) return user.name + " " + user.secName + " " + user.thirdName;else return "Загрузка данных";
     },
     Gender: function Gender() {
-      if (this.student != null) return this.student.gender;
+      if (this.student != null) return this.student.gender;else return "Загрузка данных";
     },
     Birthday: function Birthday() {
-      if (this.student != null) return this.student.birthday;
+      if (this.student != null) return this.student.birthday;else return "Загрузка данных";
     },
     Email: function Email() {
-      return user.email;
+      if (this.student != null) return user.email;else return "Загрузка данных";
     },
     Specialty: function Specialty() {
-      if (this.departament != null) return this.departament.dep_name_full;
+      if (this.departament != null) return this.departament.dep_name_full;else return "Загрузка данных";
     },
     Course: function Course() {
-      if (this.group != null) return this.group.сurs;
+      if (this.group != null) return this.group.сurs;else return "Загрузка данных";
     },
     Group: function Group() {
-      if (this.group != null) return this.group.group_name;
+      if (this.group != null) return this.group.group_name;else return "Загрузка данных";
     },
     Specialization: function Specialization() {
-      if (this.departament != null) return this.departament.specialization;
+      if (this.departament != null) return this.departament.specialization;else return "Загрузка данных";
     },
     TrainingForm: function TrainingForm() {
-      if (this.group != null) return this.group.type_of_study;
+      if (this.group != null) return this.group.type_of_study;else return "Загрузка данных";
     },
     FinancingType: function FinancingType() {
-      if (this.student != null) return this.student.type_of_financing;
+      if (this.student != null) return this.student.type_of_financing;else return "Загрузка данных";
     },
     TrainingPeriod: function TrainingPeriod() {
-      if (this.group != null) return this.group.study_period;
+      if (this.group != null) return this.group.study_period;else return "Загрузка данных";
     }
   })
 });

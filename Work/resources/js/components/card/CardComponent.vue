@@ -41,46 +41,70 @@ export default {
             "departament"
         ]),
         FIO:function(){
-            return user.name +" "+user.secName+" "+user.thirdName
+            if(this.student != null)
+                return user.name +" "+user.secName+" "+user.thirdName
+            else   
+                return "Загрузка данных"
         },
         Gender: function(){
              if(this.student != null)
                 return this.student.gender
+            else   
+                return "Загрузка данных"
         },
         Birthday: function(){
              if(this.student != null)
                 return this.student.birthday
+            else   
+                return "Загрузка данных"
         },
         Email:function(){
-            return user.email
+            if(this.student != null)
+                return user.email
+            else   
+                return "Загрузка данных"
         },
         Specialty:function(){
             if(this.departament != null)
                 return this.departament.dep_name_full
+            else   
+                return "Загрузка данных"
         } ,
         Course: function(){
             if(this.group != null)
                 return this.group.сurs
+            else   
+                return "Загрузка данных"
         },
         Group: function(){
             if(this.group != null)
                 return this.group.group_name
+            else   
+                return "Загрузка данных"
         },
         Specialization: function(){
             if(this.departament != null)
                 return this.departament.specialization
+            else   
+                return "Загрузка данных"
         },
         TrainingForm: function(){
             if(this.group != null)
                 return this.group.type_of_study
+            else   
+                return "Загрузка данных"
         },
         FinancingType: function(){
             if(this.student != null)
                 return this.student.type_of_financing
+            else   
+                return "Загрузка данных"
         },
         TrainingPeriod: function(){
             if(this.group != null)
                 return this.group.study_period
+            else   
+                return "Загрузка данных"
         },
   }
 }
