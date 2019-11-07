@@ -20,6 +20,17 @@ class ConCallScheduleController extends Controller
         $this->middleware('auth');
     }
 
+
+    public function save(Request $request){
+        for($i = 0;$i<count($request['data']);$i++){
+            CallSchedule::where('id',$request['data'][$i]['id'])
+            ->update(['call_schedule'=>json_encode($request['data'][$i]['call_schedule'])]);
+        }
+        response()->json([
+            "success"=>true
+        ]);
+        //CallSchedule::where('id',$request['id']);
+    }
     /**
      * Show the application dashboard.
      *

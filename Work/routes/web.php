@@ -48,3 +48,5 @@ Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->
 
 Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('panelcontrol');
 
+Route::post('/save_concallschedule', 'RouteControllers\ConCallScheduleController@save');
+

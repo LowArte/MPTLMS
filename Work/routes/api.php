@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::middleware('auth:api')->get(
         return $request->user();
     }
 );
+
+
 
 Route::group(
     ['prefix'=>'v1','middleware' => 'auth:api'], 

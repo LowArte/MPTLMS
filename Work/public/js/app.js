@@ -3069,6 +3069,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api_callSchedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/callSchedule */ "./resources/js/api/callSchedule.js");
 //
 //
 //
@@ -3119,6 +3120,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
@@ -3164,13 +3167,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Расписание звонков принято!");
+      _api_callSchedule__WEBPACK_IMPORTED_MODULE_1__["default"].save({
+        "data": this.timeTable
+      }).then(function (res) {
+        alert("Расписание звонков принято!");
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
     },
     getIndex: function getIndex() {
       for (var i = 0; i < this.places.length; i++) {
         if (this.places[i] == this.mplace) {
           this.rendererTime = this.timeTable[i].call_schedule;
+          console.log(this.timeTable[i]);
         }
       }
     }
@@ -64320,6 +64329,26 @@ __webpack_require__.r(__webpack_exports__);
       'password_confirmation': user.password_confirmation,
       'token': user.token
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/callSchedule.js":
+/*!******************************************!*\
+  !*** ./resources/js/api/callSchedule.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  save: function save(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_concallschedule', credentials);
   }
 });
 

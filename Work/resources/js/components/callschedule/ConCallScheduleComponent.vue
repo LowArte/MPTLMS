@@ -50,6 +50,8 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import callScedule from '../../api/callSchedule'
+import callSchedule from '../../api/callSchedule';
 export default {
   directives: {
     mask
@@ -88,13 +90,17 @@ export default {
   },
   methods: {
     sendQuery() {
-      //Вписывай отправку
-      alert("Расписание звонков принято!");
+      callSchedule.save({"data":this.timeTable}).then(res=>{
+        alert("Расписание звонков принято!");
+      }).catch(ex=>{
+        console.log(ex);
+      });
     },
     getIndex() {
       for (var i = 0; i < this.places.length; i++)
         if (this.places[i] == this.mplace) {
           this.rendererTime = this.timeTable[i].call_schedule
+          console.log(this.timeTable[i])
         }
     }
   }
