@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-hover v-slot:default="{ hover }">
           <v-card :elevation="hover ? 10 : 5" class="mx-auto" height="auto" width="max">
             <v-card-text class="text-center title">
@@ -27,7 +27,7 @@
               >
                 <v-col>
                   <v-card class="pa-2" outlined tile>
-                    {{value}} пара 
+                    {{value}} пара
                     <v-text-field
                       hint="(ЧЧ:ММ-ЧЧ:ММ)"
                       v-model="rendererTime[value]"
@@ -50,18 +50,19 @@
 
 <script>
 import { mask } from "vue-the-mask";
-import callScedule from '../../api/callSchedule'
-import callSchedule from '../../api/callSchedule';
+import callScedule from "../../api/callSchedule";
+import callSchedule from "../../api/callSchedule";
 export default {
   directives: {
     mask
   },
   data: () => ({
     places: [],
-    rendererTime:null,
+    rendererTime: null,
     mask: "##:##-##:##",
     mplace: null,
-    timeTable: null
+    timeTable: null,
+    date: null
   }),
   props: {
     place: {
@@ -76,31 +77,33 @@ export default {
   created: function() {
     var arr = JSON.parse(this.place);
     this.places = [];
-    for (var i = 0; i < arr.length; i++) 
-      this.places.push(arr[i].place_name);
+    for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
 
     this.timeTable = JSON.parse(this.time);
     for (var i = 0; i < this.timeTable.length; i++)
-      this.timeTable[i].call_schedule = JSON.parse(this.timeTable[i].call_schedule);
+      this.timeTable[i].call_schedule = JSON.parse(
+        this.timeTable[i].call_schedule
+      );
     this.mplace = this.places[0];
 
-    this.timeTable[1].call_schedule["1"] = "00:00-00:00";
-    console.log(this.timeTable[0].call_schedule);
     this.rendererTime = this.timeTable[0].call_schedule;
   },
   methods: {
     sendQuery() {
-      callSchedule.save({"data":this.timeTable}).then(res=>{
-        alert("Расписание звонков принято!");
-      }).catch(ex=>{
-        console.log(ex);
-      });
+      callSchedule
+        .save({ data: this.timeTable })
+        .then(res => {
+          alert("Расписание звонков принято!");
+        })
+        .catch(ex => {
+          console.log(ex);
+        });
     },
     getIndex() {
       for (var i = 0; i < this.places.length; i++)
         if (this.places[i] == this.mplace) {
-          this.rendererTime = this.timeTable[i].call_schedule
-          console.log(this.timeTable[i])
+          this.rendererTime = this.timeTable[i].call_schedule;
+          console.log(this.timeTable[i]);
         }
     }
   }

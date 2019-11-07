@@ -44,6 +44,8 @@ Route::get('/teacheracademicperfomance', 'RouteControllers\TeacherAcadimicPerfom
 
 Route::get('/concallschedule', 'RouteControllers\ConCallScheduleController@index')->name('concallschedule');
 
+Route::get('/callschedule', 'RouteControllers\ConCallScheduleController@index2')->name('callschedule');
+
 Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->name('requestsusers');
 
 Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('panelcontrol');

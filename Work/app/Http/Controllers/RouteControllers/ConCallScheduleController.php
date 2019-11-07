@@ -42,4 +42,15 @@ class ConCallScheduleController extends Controller
         $callSchedule = CallSchedule::get();
         return view('components/concallschedule', ["place" => json_encode($places), "callSch" => json_encode($callSchedule)]);
     }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index2()
+    {
+        $places = Places::get();
+        $callSchedule = CallSchedule::get();
+        return view('components/callschedule', ["place" => json_encode($places), "callSch" => json_encode($callSchedule)]);
+    }
 }

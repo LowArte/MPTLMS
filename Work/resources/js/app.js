@@ -21,6 +21,7 @@ import ConTimeTable from './components/timetable/ContimetableComponent'
 import ConReplacements from './components/timetable/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
+import CallSchedule from './components/callschedule/CallScheduleComponent'
 import Main from './components/main/MainPageComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
@@ -71,7 +72,8 @@ new Vue({
     'concallschedule': ConCallSchedule,
     'mainPage': Main,
     'requestsusers' : RequestsUsers,
-    'panelcontrol' : PanelControl
+    'panelcontrol' : PanelControl,
+    'callschedule' : CallSchedule
   },
   data: () => ({
     drawer: null,
@@ -119,7 +121,13 @@ new Vue({
             icon: 'today',
             text: 'Расписание',
             href: '/timetable'
-          },/* 
+          },
+          {
+            icon: 'today',
+            text: 'Расписание звонков',
+            href: '/callschedule'
+          },
+          /* 
           {
             icon: 'show_chart',
             text: 'Успеваемость',
