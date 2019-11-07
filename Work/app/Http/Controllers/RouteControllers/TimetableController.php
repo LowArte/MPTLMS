@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\CallSchedule;
 use App\Models\Group;
+use App\Models\Places;
 use App\Models\Departament;
 use App\Models\Student;
 use Debugbar;
@@ -34,6 +35,7 @@ class TimetableController extends Controller
     {
         $user = Auth::user();
         $call = CallSchedule::get();
+        $places = Places::get();
         if ($user['post_id'] == 2) {
             $student = Student::where('user_id', $user['id'])->get()[0];
 
@@ -47,6 +49,7 @@ class TimetableController extends Controller
                 "schedule" => json_encode($schedule),
                 "call" => json_encode($call),
                 "groups" => json_encode($group),
+                "place" => json_encode($places),
                 "dep" => json_encode([
                     "departaments" => json_encode($dep),
                     "cur_departament" => json_encode($curDep)
@@ -59,6 +62,7 @@ class TimetableController extends Controller
             return view('components/timetable', [
                 "call" => json_encode($call),
                 "groups" => json_encode($groups),
+                "places" => json_encode($places),
                 "dep" => json_encode([
                     "departaments" => json_encode($deps),
                     "cur_departament" => -1

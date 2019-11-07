@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row align="center">
       <v-container>
-        <v-autocomplete v-model="departamet" label="Отделения" solo :items="arrdepartaments"></v-autocomplete>
+        <v-autocomplete v-model="departament" label="Отделения" solo :items="arrdepartaments"></v-autocomplete>
         <v-autocomplete v-model="group" label="Группа" solo :items="groups.group_name"></v-autocomplete>
         <!-- <v-container class="pa-0 align-self-center" d-flex>
           <v-row sm="2" md="0" class="pa-0 justify-center">
@@ -33,14 +33,14 @@
                 >
                   <v-list-item
                     class="mt-0 mb-0 pt-0 pb-0"
-                  >{{n}} пара - {{callSchedule[0].call_schedule[n]}}</v-list-item>
+                  >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Lesson}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Teacher }}</v-list-item>
                 </v-list>
                 <v-list class="ma-0 pa-0" v-else>
                   <v-list-item
                     class="mt-0 mb-0 pt-0 pb-0"
-                  >{{n}} пара - {{callSchedule[0].call_schedule[n]}}</v-list-item>
+                  >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">Свободная пара</v-list-item>
                 </v-list>
 
@@ -51,84 +51,10 @@
         </v-col>
       </v-row>
     </v-data>
-    <!-- <v-data :items="items[group]" :items-per-page.sync="itemsPerPage">
-      <template v-slot:default="props">
-        <v-row>
-          <v-col v-for="item in props.items" :key="item.name" cols="12" sm="6" md="2" lg="2">
-            <v-card>
-              <v-card-title
-                class="subtitle-1"
-                style="color: #FF3D00;"
-              >{{ item.name }} - {{Datetime}}</v-card-title>
-              <v-list dense>
-                <v-list-item>Здание: {{item.place}}</v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p1}}
-                  <br />
-                  {{ item.p1 }}
-                  <br />
-                  {{ item.t1 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p2}}
-                  <br />
-                  {{ item.p2 }}
-                  <br />
-                  {{ item.t2 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p3}}
-                  <br />
-                  {{ item.p3 }}
-                  <br />
-                  {{ item.t3 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p4}}
-                  <br />
-                  {{ item.p4 }}
-                  <br />
-                  {{ item.t4 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p5}}
-                  <br />
-                  {{ item.p5 }}
-                  <br />
-                  {{ item.t5 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p6}}
-                  <br />
-                  {{ item.p6 }}
-                  <br />
-                  {{ item.t6 }}
-                </v-list-item>
-                <v-list-item>
-                  {{timeitems.p7}}
-                  <br />
-                  {{ item.p7 }}
-                  <br />
-                  {{ item.t7 }}
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-col>
-        </v-row>
-      </template>
-    </v-data>-->
-    <!-- {{this.groups}} -->
+    {{places}}
     <br />
-    {{this.callSchedule}}
-    <br />
-    {{this.schedule}}
-    <br />
+    {{callSchedule}}
+    
   </v-container>
 </template>
 
@@ -147,10 +73,14 @@ export default {
     departament: null,
 
     group: null,
-
+    places: [],
     day: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
   }),
   props: {
+    place: {
+      type: String,
+      default: null
+    },
     schedule: {
       type: String,
       default: null
@@ -194,8 +124,17 @@ export default {
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments));
 
+    //Место
+    this.places = JSON.parse(this.place);
+    //var arr = JSON.parse(this.place);
+    //this.places = [];
+    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
+
     //Отделения
     this.departaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(
+      this.departaments.cur_departament
+    )[0].dep_name_full;
     this.departaments = JSON.parse(this.departaments.departaments);
     this.arrdepartaments = [];
     for (var i = 0; i < this.departaments.length; i++)
@@ -222,6 +161,6 @@ export default {
       // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
     }
   }
-  //Непонятно где приходят отделения и где приходят группы
+  //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
 };
 </script>
