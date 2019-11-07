@@ -17,7 +17,7 @@
                         <v-divider></v-divider>
                         <p class="black--text"><br><b>Email: </b>{{$user->email}}</p>
                         <p class="black--text"><br><b>Специальность: </b>{{$dep->dep_name_full}}</p>
-                        <p class="black--text"><br><b>Курс: </b>{{$group->curs}}</p>
+                        <p class="black--text"><br><b>Курс: </b>{{$group->сurs}}</p>
                         <p class="black--text"><br><b>Группа: </b>{{$group->group_name}}</p>
                         <p class="black--text"><br><b>Специализация: </b>{{$dep->specialization}}</p>
                         <v-divider></v-divider>
