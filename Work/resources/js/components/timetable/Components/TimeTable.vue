@@ -110,7 +110,7 @@ export default {
     },
     callSchedule:{
       type: String,
-      default:"xyi"
+      default:null
     },
     groups:{
       type: String,
@@ -143,10 +143,17 @@ export default {
         seconds = "0" + seconds
       }
       this.Datetime = hours + ":" + minutes + ":" + seconds
+      if(this.schedule=="")
+      {
+        console.log("Current schedule is empty")
+      }
+      else{
+        console.log(JSON.parse(this.schedule))
+      }
       console.log(JSON.parse(this.groups))
       console.log(JSON.parse(this.callSchedule))
       console.log(JSON.parse(this.departaments))
-      console.log(JSON.parse(this.schedule))
+
   }
 };
 </script>

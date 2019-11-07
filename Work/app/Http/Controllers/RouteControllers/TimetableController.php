@@ -8,7 +8,10 @@ use App\Models\Schedule;
 use App\Models\CallSchedule;
 use App\Models\Group;
 use App\Models\Departament;
+use App\Models\Student;
 use Debugbar;
+
+use Illuminate\Support\Facades\Auth;
 
 class TimetableController extends Controller
 {
@@ -29,16 +32,38 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        $schedule = Schedule::get();
+        $user = Auth::user();
         $call = CallSchedule::get();
-        Debugbar::info($call);
-        $groups = Group::get();
-        $dep = Departament::get();
-        return view('components/timetable',[
-            "schedule"=>json_encode($schedule),
-            "call"=> json_encode($call),
-            "groups"=>json_encode($groups),
-            "dep"=>json_encode($dep),
-        ]);
+        if ($user['post_id'] == 2) {
+            $student = Student::where('user_id', $user['id'])->get()[0];
+
+            $group = Group::where('id', $student['group_id'])->get()[0];
+            $schedule = Schedule::where('group_id', $group['id'])->get()[0];
+ 
+            $dep = Departament::get();
+            $curDep = Departament::where("id",$group['departaments_id'])->get();
+
+            return view('components/timetable', [
+                "schedule" => json_encode($schedule),
+                "call" => json_encode($call),
+                "groups" => json_encode($group),
+                "dep" => json_encode([
+                    "departaments" => json_encode($dep),
+                    "cur_departament" => json_encode($curDep)
+                ]),
+            ]);
+        }
+        else{
+            $groups = Group::get();
+            $deps = Departament::get();
+            return view('components/timetable', [
+                "call" => json_encode($call),
+                "groups" => json_encode($groups),
+                "dep" => json_encode([
+                    "departaments" => json_encode($deps),
+                    "cur_departament" => -1
+                ]),
+            ]);
+        }
     }
 }

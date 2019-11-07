@@ -176,7 +176,7 @@ new Vue({
           {
             icon: 'today',
             text: 'Расписание',
-            href: '/teachertimetable'
+            href: '/timetable'
           },
           {
             icon: 'home',
