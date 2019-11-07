@@ -16,16 +16,21 @@
                 @change="getIndex"
               ></v-select>
             </v-card-text>
-            {{indexplace}}
             <v-container class="grey lighten-5 pt-0">
-              <v-row no-gutters v-for="n in time[indexplace].call_schedule" :key="n" sm="6" md="4" lg="3">
+              <v-row
+                no-gutters
+                v-for="(value) in Object.keys(rendererTime)"
+                :key="value"
+                sm="6"
+                md="4"
+                lg="3"
+              >
                 <v-col>
                   <v-card class="pa-2" outlined tile>
-                    {{n}} пара
-                    {{indexplace}}
+                    {{value}} пара 
                     <v-text-field
                       hint="(ЧЧ:ММ-ЧЧ:ММ)"
-                      v-model="time[indexplace].call_schedule[n]"
+                      v-model="rendererTime[value]"
                       v-mask="mask"
                       label="Начало/конец пары"
                     ></v-text-field>
@@ -40,7 +45,6 @@
         </v-hover>
       </v-col>
     </v-row>
-    {{indexplace}}
   </v-container>
 </template>
 
@@ -52,10 +56,10 @@ export default {
   },
   data: () => ({
     places: [],
+    rendererTime:null,
     mask: "##:##-##:##",
     mplace: null,
-    time: null,
-    indexplace: 0
+    timeTable: null
   }),
   props: {
     place: {
@@ -68,18 +72,19 @@ export default {
     }
   },
   created: function() {
-    console.log(JSON.parse(JSON.parse(this.time)[0].call_schedule));
-
     var arr = JSON.parse(this.place);
     this.places = [];
-    for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
+    for (var i = 0; i < arr.length; i++) 
+      this.places.push(arr[i].place_name);
 
-    this.time = JSON.parse(this.time);
-    for (var i = 0; i < this.time.length; i++)
-      this.time[i].call_schedule = JSON.parse(this.time[i].call_schedule);
+    this.timeTable = JSON.parse(this.time);
+    for (var i = 0; i < this.timeTable.length; i++)
+      this.timeTable[i].call_schedule = JSON.parse(this.timeTable[i].call_schedule);
     this.mplace = this.places[0];
 
-    this.time[1].call_schedule[1] = "00:00-00:00";
+    this.timeTable[1].call_schedule["1"] = "00:00-00:00";
+    console.log(this.timeTable[0].call_schedule);
+    this.rendererTime = this.timeTable[0].call_schedule;
   },
   methods: {
     sendQuery() {
@@ -88,7 +93,9 @@ export default {
     },
     getIndex() {
       for (var i = 0; i < this.places.length; i++)
-        if (this.places[i] == this.mplace) this.indexplace = i;
+        if (this.places[i] == this.mplace) {
+          this.rendererTime = this.timeTable[i].call_schedule
+        }
     }
   }
 };

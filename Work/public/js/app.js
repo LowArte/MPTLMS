@@ -3115,6 +3115,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
@@ -3123,10 +3127,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       places: [],
+      rendererTime: null,
       mask: "##:##-##:##",
       mplace: null,
-      time: null,
-      indexplace: 0
+      timeTable: null
     };
   },
   props: {
@@ -3140,7 +3144,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    console.log(JSON.parse(JSON.parse(this.time)[0].call_schedule));
     var arr = JSON.parse(this.place);
     this.places = [];
 
@@ -3148,14 +3151,16 @@ __webpack_require__.r(__webpack_exports__);
       this.places.push(arr[i].place_name);
     }
 
-    this.time = JSON.parse(this.time);
+    this.timeTable = JSON.parse(this.time);
 
-    for (var i = 0; i < this.time.length; i++) {
-      this.time[i].call_schedule = JSON.parse(this.time[i].call_schedule);
+    for (var i = 0; i < this.timeTable.length; i++) {
+      this.timeTable[i].call_schedule = JSON.parse(this.timeTable[i].call_schedule);
     }
 
     this.mplace = this.places[0];
-    this.time[1].call_schedule[1] = "00:00-00:00";
+    this.timeTable[1].call_schedule["1"] = "00:00-00:00";
+    console.log(this.timeTable[0].call_schedule);
+    this.rendererTime = this.timeTable[0].call_schedule;
   },
   methods: {
     sendQuery: function sendQuery() {
@@ -3164,7 +3169,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getIndex: function getIndex() {
       for (var i = 0; i < this.places.length; i++) {
-        if (this.places[i] == this.mplace) this.indexplace = i;
+        if (this.places[i] == this.mplace) {
+          this.rendererTime = this.timeTable[i].call_schedule;
+        }
       }
     }
   }
@@ -8369,90 +8376,78 @@ var render = function() {
                               ],
                               1
                             ),
-                            _vm._v(
-                              "\n          " +
-                                _vm._s(_vm.indexplace) +
-                                "\n          "
-                            ),
+                            _vm._v(" "),
                             _c(
                               "v-container",
                               { staticClass: "grey lighten-5 pt-0" },
                               [
-                                _vm._l(
-                                  _vm.time[_vm.indexplace].call_schedule,
-                                  function(n) {
-                                    return _c(
-                                      "v-row",
-                                      {
-                                        key: n,
-                                        attrs: {
-                                          "no-gutters": "",
-                                          sm: "6",
-                                          md: "4",
-                                          lg: "3"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "v-col",
-                                          [
-                                            _c(
-                                              "v-card",
-                                              {
-                                                staticClass: "pa-2",
-                                                attrs: {
-                                                  outlined: "",
-                                                  tile: ""
-                                                }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                  " +
-                                                    _vm._s(n) +
-                                                    " пара\n                  " +
-                                                    _vm._s(_vm.indexplace) +
-                                                    "\n                  "
-                                                ),
-                                                _c("v-text-field", {
-                                                  directives: [
-                                                    {
-                                                      name: "mask",
-                                                      rawName: "v-mask",
-                                                      value: _vm.mask,
-                                                      expression: "mask"
-                                                    }
-                                                  ],
-                                                  attrs: {
-                                                    hint: "(ЧЧ:ММ-ЧЧ:ММ)",
-                                                    label: "Начало/конец пары"
-                                                  },
-                                                  model: {
-                                                    value:
-                                                      _vm.time[_vm.indexplace]
-                                                        .call_schedule[n],
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.time[_vm.indexplace]
-                                                          .call_schedule,
-                                                        n,
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "time[indexplace].call_schedule[n]"
+                                _vm._l(Object.keys(_vm.rendererTime), function(
+                                  value
+                                ) {
+                                  return _c(
+                                    "v-row",
+                                    {
+                                      key: value,
+                                      attrs: {
+                                        "no-gutters": "",
+                                        sm: "6",
+                                        md: "4",
+                                        lg: "3"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-col",
+                                        [
+                                          _c(
+                                            "v-card",
+                                            {
+                                              staticClass: "pa-2",
+                                              attrs: { outlined: "", tile: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                  " +
+                                                  _vm._s(value) +
+                                                  " пара \n                  "
+                                              ),
+                                              _c("v-text-field", {
+                                                directives: [
+                                                  {
+                                                    name: "mask",
+                                                    rawName: "v-mask",
+                                                    value: _vm.mask,
+                                                    expression: "mask"
                                                   }
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  }
-                                ),
+                                                ],
+                                                attrs: {
+                                                  hint: "(ЧЧ:ММ-ЧЧ:ММ)",
+                                                  label: "Начало/конец пары"
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.rendererTime[value],
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.rendererTime,
+                                                      value,
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "rendererTime[value]"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                }),
                                 _vm._v(" "),
                                 _c(
                                   "v-card-text",
@@ -8486,8 +8481,7 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v("\n  " + _vm._s(_vm.indexplace) + "\n")
+      )
     ],
     1
   )
@@ -64751,14 +64745,6 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./Expention/Panel": [
-		"./resources/js/components/Expention/Panel.vue",
-		6
-	],
-	"./Expention/Panel.vue": [
-		"./resources/js/components/Expention/Panel.vue",
-		6
-	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -64773,11 +64759,11 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		7
+		6
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		7
+		6
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
@@ -64847,13 +64833,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		8
+		7
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		8
+		7
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -64875,13 +64861,19 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		9
+		8
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		9
+		8
+	],
+	"./expention/Panel": [
+		"./resources/js/components/expention/Panel.vue"
+	],
+	"./expention/Panel.vue": [
+		"./resources/js/components/expention/Panel.vue"
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -64897,11 +64889,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		10
+		9
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		10
+		9
 	],
 	"./main/MainPageComponent": [
 		"./resources/js/components/main/MainPageComponent.vue"
@@ -64935,11 +64927,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		11
+		10
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		11
+		10
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -67484,8 +67476,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
