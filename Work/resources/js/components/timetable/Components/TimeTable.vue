@@ -52,6 +52,7 @@
       </v-row>
     </v-data>
     {{places}}
+    
     <br />
     {{callSchedule}}
     
