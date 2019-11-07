@@ -6,7 +6,7 @@
           <v-data-table
             :headers="headers"
             :items="items"
-            :single-expand="singleExpand"
+            :single-expand="false"
             :expanded.sync="expanded"
             item-key="id"
             show-expand
@@ -22,7 +22,6 @@
                 <v-toolbar flat color="white" class="ma-0 ml-2 mr-2 pa-0">
                   <v-toolbar-title>Обращение пользователей</v-toolbar-title>
                   <v-spacer></v-spacer>
-                  <!-- <v-switch v-model="singleExpand" label="Раскрывать тольку одну строку" class="mt-2"></v-switch> -->
                 </v-toolbar>
                 <v-card-title class="ma-0 ml-4 mr-4 pa-0">
                   <v-text-field
@@ -122,7 +121,7 @@ export default {
         { text: "Тематика", value: "name" },
         { text: "Почта", value: "email" },
         { text: "Дата обращения", value: "date" },
-        { text: "v", value: "data-table-expand" }
+        { text: "", value: "data-table-expand" }
       ],
       items: [
         {

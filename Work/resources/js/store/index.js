@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import snackbar from './modules/snackbar'
 import users from './modules/users'
-import student from './modules/student'
 
 Vue.use(Vuex)
 
@@ -14,7 +13,6 @@ export default new Vuex.Store({
     auth,
     snackbar,
     users,
-    student
   },
   strict: debug
 })

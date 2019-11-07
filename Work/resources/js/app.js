@@ -21,7 +21,6 @@ import ConTimeTable from './components/timetable/ContimetableComponent'
 import ConReplacements from './components/timetable/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
-import Card from './components/card/CardComponent'
 import Main from './components/main/MainPageComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
@@ -46,15 +45,6 @@ import withSnackbar from './components/mixins/withSnackbar'
 
 if (window.user) {
   store.commit(mutations.USER, user)
-  switch(user.post_id){
-    case 2:{
-      store.dispatch(actions.GET_STUDENT, user.id)
-          .then(response => {
-          }).catch( e=>{
-          })
-      break;
-    }
-  }
   store.commit(mutations.LOGGED, true)
 }
 
@@ -78,7 +68,6 @@ new Vue({
     'conreplacements': ConReplacements,
     'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': ConCallSchedule,
-    'card': Card,
     'mainPage': Main,
     'requestsusers' : RequestsUsers,
     'panelcontrol' : PanelControl
