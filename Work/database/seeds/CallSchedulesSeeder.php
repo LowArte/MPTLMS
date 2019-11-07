@@ -15,7 +15,7 @@ class CallSchedulesSeeder extends Seeder
             [
                 'place_id' => "1",
                 'call_schedule' => json_encode([
-                    "1" => "8:30-10:00",
+                    "1" => "08:30-10:00",
                     "2" => "10:10-11:40",
                     "3" => "12:00-13:30",
                     "4" => "14:00-15:30",
@@ -27,7 +27,7 @@ class CallSchedulesSeeder extends Seeder
             [
                 'place_id' => "2",
                 'call_schedule' => json_encode([
-                    "1" => "8:30-10:00",
+                    "1" => "08:30-10:00",
                     "2" => "10:10-11:40",
                     "3" => "12:00-13:30",
                     "4" => "14:00-15:30",
