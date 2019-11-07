@@ -3273,6 +3273,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -9151,11 +9159,13 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-checkbox", {
+                                    _c("v-switch", {
                                       staticClass: "shrink mr-2 mt-0",
                                       attrs: {
-                                        "hide-details": "",
+                                        color: "primary",
+                                        value: "primary",
                                         rules: _vm.policyRules,
+                                        inset: "",
                                         label:
                                           "Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен"
                                       },
@@ -64759,14 +64769,6 @@ var map = {
 	],
 	"./callschedule/ConCallScheduleComponent.vue": [
 		"./resources/js/components/callschedule/ConCallScheduleComponent.vue"
-	],
-	"./card/CardComponent": [
-		"./resources/js/components/card/CardComponent.vue",
-		8
-	],
-	"./card/CardComponent.vue": [
-		"./resources/js/components/card/CardComponent.vue",
-		8
 	],
 	"./certificate/CertificateComponent": [
 		"./resources/js/components/certificate/CertificateComponent.vue"
