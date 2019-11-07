@@ -36,13 +36,6 @@ export default {
     mask
   },
   data: () => ({
-    time1: [null, null, null, null, null, null, null],
-    time2: [null, null, null, null, null, null, null],
-    menu1: [false, false, false, false, false, false, false],
-    menu2: [false, false, false, false, false, false, false],
-    modal1: [false, false, false, false, false, false, false],
-    modal2: [false, false, false, false, false, false, false],
-
     mask: "##:##-##:##",
 
     hidden: false,

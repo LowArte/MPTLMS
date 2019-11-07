@@ -3022,12 +3022,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      time1: [null, null, null, null, null, null, null],
-      time2: [null, null, null, null, null, null, null],
-      menu1: [false, false, false, false, false, false, false],
-      menu2: [false, false, false, false, false, false, false],
-      modal1: [false, false, false, false, false, false, false],
-      modal2: [false, false, false, false, false, false, false],
       mask: "##:##-##:##",
       hidden: false,
       items: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
@@ -10467,7 +10461,7 @@ var render = function() {
                                 value: _vm.itemsPerPage,
                                 label: "Количество отображаемых обращений",
                                 type: "number",
-                                min: "-1",
+                                min: "1",
                                 max: "15"
                               },
                               on: {
