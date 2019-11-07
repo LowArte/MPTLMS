@@ -3,7 +3,7 @@
     <v-tab :key="item">Расписание</v-tab>
     <v-tab :key="item">Замены</v-tab>
     <v-tab-item :key="item">
-      <TimeTable />
+      <TimeTable v-bind:schedule="schedule"  v-bind:callSchedule="this.call" v-bind:groups="groups" v-bind:departaments="departaments"/>
     </v-tab-item>
     <v-tab-item :key="item">
       <Replacements />
@@ -29,6 +29,28 @@ export default {
       }
     ]
   }),
+  props:{
+    schedule:{
+      type: String,
+      default:null
+    },
+    call:{
+      type: String,
+      default:"123"
+    },
+    groups:{
+      type: String,
+      default:null
+    },
+    departaments:{
+      type:String,
+      default:null
+    }
+  },
+  mounted:function(){
+    console.log("pidor");
+    console.log(this.call);
+  },
   components: {
     TimeTable,
     Replacements
