@@ -21,6 +21,7 @@ class CallSchedulesSeeder extends Seeder
                     "4" => "14:00-15:30",
                     "5" => "15:40-17:10",
                     "6" => "",
+                    "7" => "",
                 ])
 
             ],
@@ -33,6 +34,7 @@ class CallSchedulesSeeder extends Seeder
                     "4" => "14:00-15:30",
                     "5" => "15:40-17:10",
                     "6" => "",
+                    "7" => "",
                 ])
             ]
         );
