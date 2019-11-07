@@ -15,9 +15,7 @@ class DatabaseSeeder  extends Seeder
             PostUserSeeder::class,
             DepartamentSeeder::class,
             GroupSeeder::class,
-            ScheduleSeeder::class,
-            PlacesSeeder::class,
-            CallSchedulesSeeder::class
+            ScheduleSeeder::class
         ]);
         factory(\App\User::class ,100)->create();
         factory(\App\Models\Student::class ,100)->create();
