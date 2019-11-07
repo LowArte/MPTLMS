@@ -132,7 +132,8 @@ new Vue({
             icon: 'show_chart',
             text: 'Успеваемость',
             href: '/home'
-          }, */ {
+          }, */ 
+          {
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
