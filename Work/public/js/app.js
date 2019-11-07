@@ -3100,6 +3100,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
@@ -3107,9 +3122,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      places: null,
+      places: [],
       mask: "##:##-##:##",
-      mplace: null
+      mplace: null,
+      time: null,
+      indexplace: 0
     };
   },
   props: {
@@ -3123,16 +3140,32 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    console.log("Place");
-    console.log(JSON.parse(this.time));
-    this.places = JSON.parse(this.place);
-    console.log(this.places);
+    console.log(JSON.parse(JSON.parse(this.time)[0].call_schedule));
+    var arr = JSON.parse(this.place);
+    this.places = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      this.places.push(arr[i].place_name);
+    }
+
+    this.time = JSON.parse(this.time);
+
+    for (var i = 0; i < this.time.length; i++) {
+      this.time[i].call_schedule = JSON.parse(this.time[i].call_schedule);
+    }
+
     this.mplace = this.places[0];
+    this.time[1].call_schedule[1] = "00:00-00:00";
   },
   methods: {
     sendQuery: function sendQuery() {
       //Вписывай отправку
       alert("Расписание звонков принято!");
+    },
+    getIndex: function getIndex() {
+      for (var i = 0; i < this.places.length; i++) {
+        if (this.places[i] == this.mplace) this.indexplace = i;
+      }
     }
   }
 });
@@ -8687,8 +8720,10 @@ var render = function() {
                                   attrs: {
                                     label: "Место проведения",
                                     solo: "",
-                                    items: _vm.places
+                                    items: _vm.places,
+                                    "return-object": ""
                                   },
+                                  on: { change: _vm.getIndex },
                                   model: {
                                     value: _vm.mplace,
                                     callback: function($$v) {
@@ -8700,15 +8735,16 @@ var render = function() {
                               ],
                               1
                             ),
-                            _vm._v(" "),
+                            _vm._v(
+                              "\n          " +
+                                _vm._s(_vm.indexplace) +
+                                "\n          "
+                            ),
                             _c(
                               "v-container",
-                              {
-                                staticClass: "grey lighten-5 pt-0",
-                                attrs: { fluid: "" }
-                              },
+                              { staticClass: "grey lighten-5 pt-0" },
                               [
-                                _vm._l(7, function(n) {
+                                _vm._l(6, function(n) {
                                   return _c(
                                     "v-row",
                                     {
@@ -8734,7 +8770,9 @@ var render = function() {
                                               _vm._v(
                                                 "\n                  " +
                                                   _vm._s(n) +
-                                                  " пара\n                  "
+                                                  " пара\n                  " +
+                                                  _vm._s(_vm.indexplace) +
+                                                  "\n                  "
                                               ),
                                               _c("v-text-field", {
                                                 directives: [
@@ -8747,14 +8785,22 @@ var render = function() {
                                                 ],
                                                 attrs: {
                                                   hint: "(ЧЧ:ММ-ЧЧ:ММ)",
-                                                  label: "Начало/конец пары "
+                                                  label: "Начало/конец пары"
                                                 },
                                                 model: {
-                                                  value: _vm.time[n],
+                                                  value:
+                                                    _vm.time[_vm.indexplace]
+                                                      .call_schedule[n],
                                                   callback: function($$v) {
-                                                    _vm.$set(_vm.time, n, $$v)
+                                                    _vm.$set(
+                                                      _vm.time[_vm.indexplace]
+                                                        .call_schedule,
+                                                      n,
+                                                      $$v
+                                                    )
                                                   },
-                                                  expression: "time[n]"
+                                                  expression:
+                                                    "time[indexplace].call_schedule[n]"
                                                 }
                                               })
                                             ],
@@ -8800,7 +8846,8 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v("\n  " + _vm._s(_vm.indexplace) + "\n")
     ],
     1
   )
@@ -65020,6 +65067,14 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./Expention/Panel": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
+	"./Expention/Panel.vue": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -65108,13 +65163,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		9
+		8
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		9
+		8
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -65136,19 +65191,13 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		10
+		9
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		10
-	],
-	"./expention/Panel": [
-		"./resources/js/components/expention/Panel.vue"
-	],
-	"./expention/Panel.vue": [
-		"./resources/js/components/expention/Panel.vue"
+		9
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -65164,11 +65213,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		11
+		10
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		11
+		10
 	],
 	"./main/MainPageComponent": [
 		"./resources/js/components/main/MainPageComponent.vue"
@@ -65202,11 +65251,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		12
+		11
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		12
+		11
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -67751,8 +67800,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
