@@ -6,7 +6,7 @@
           <v-card :elevation="hover ? 10 : 5" class="mx-auto" height="auto" width="max">
             <v-card-text class="text-center title">
               Расписание звонков
-              <v-select class="pa-0 mb-0 mt-2" v-model="mplace" label="Место проведения" solo :items="place"></v-select>
+              <v-select class="pa-0 mb-0 mt-2" v-model="mplace" label="Место проведения" solo :items="places"></v-select>
             </v-card-text>
 
             <v-container class="grey lighten-5 pt-0" fluid>
@@ -36,11 +36,27 @@ export default {
     mask
   },
   data: () => ({
+    places:null,
     mask: "##:##-##:##",
-    place: ["Нахимовский", "Неженская"],
-    mplace: "",
-    time: [null, null, null, null, null, null, null],
+    mplace: null,
   }),
+  props:{
+    place:{
+      type:String,
+      default:null
+    },
+    time: {
+      type:String,
+      default:null
+    },
+  },
+  created:function(){
+    console.log("Place");
+    console.log(JSON.parse(this.time));
+    this.places = JSON.parse(this.place);
+    console.log(this.places);
+    this.mplace = this.places[0]
+  },
   methods: {
     sendQuery() {
       //Вписывай отправку
