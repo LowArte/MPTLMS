@@ -3107,11 +3107,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      places: null,
       mask: "##:##-##:##",
-      place: ["Нахимовский", "Неженская"],
-      mplace: "",
-      time: [null, null, null, null, null, null, null]
+      mplace: null
     };
+  },
+  props: {
+    place: {
+      type: String,
+      "default": null
+    },
+    time: {
+      type: String,
+      "default": null
+    }
+  },
+  created: function created() {
+    console.log("Place");
+    console.log(JSON.parse(this.time));
+    this.places = JSON.parse(this.place);
+    console.log(this.places);
+    this.mplace = this.places[0];
   },
   methods: {
     sendQuery: function sendQuery() {
@@ -8671,7 +8687,7 @@ var render = function() {
                                   attrs: {
                                     label: "Место проведения",
                                     solo: "",
-                                    items: _vm.place
+                                    items: _vm.places
                                   },
                                   model: {
                                     value: _vm.mplace,

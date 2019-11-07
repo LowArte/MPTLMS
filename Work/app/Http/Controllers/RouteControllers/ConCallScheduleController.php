@@ -4,6 +4,9 @@ namespace App\Http\Controllers\RouteControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Places;
+use App\Models\CallSchedule;
+use Debugbar;
 
 class ConCallScheduleController extends Controller
 {
@@ -24,6 +27,8 @@ class ConCallScheduleController extends Controller
      */
     public function index()
     {
-        return view('components/concallschedule');
+        $places = Places::get();
+        $callSchedule = CallSchedule::get();
+        return view('components/concallschedule', ["place" => json_encode($places), "callSch" => json_encode($callSchedule)]);
     }
 }
