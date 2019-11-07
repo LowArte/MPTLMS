@@ -101,7 +101,7 @@ export default {
     hidden: false,
     itemsPerPageOptions: [6],
     itemsPerPage: 6,
-    Datetime: "00.00.0000"
+    Datetime: "00.00.0000",
   }),
   props:{
     schedule:{
@@ -128,7 +128,6 @@ export default {
     }
   },
   mounted:function() {
-      console.log("sdad")
       var currDate = new Date()
       var hours = currDate.getHours()
       var minutes = currDate.getMinutes()
