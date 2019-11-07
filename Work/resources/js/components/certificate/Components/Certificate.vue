@@ -137,16 +137,24 @@
                 ></v-textarea>
               </v-row>
               <v-row class="pa-2">
-                <v-checkbox
+                <v-switch
                   v-model="enabled"
-                  hide-details
+                  color="primary"
+                  value="primary"
                   :rules="policyRules"
-                  label="Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен"
                   class="shrink mr-2 mt-0"
-                ></v-checkbox>
+                  inset
+                  label="Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен"
+                ></v-switch>
               </v-row>
               <v-row class="pa-2 justify-center">
-                <v-btn :disabled="!form" class="white--text" color="blue" depressed @click="sendQuery">Заказать</v-btn>
+                <v-btn
+                  :disabled="!form"
+                  class="white--text"
+                  color="blue"
+                  depressed
+                  @click="sendQuery"
+                >Заказать</v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -184,7 +192,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "user" 
+      user: "user"
     })
   }
 };
