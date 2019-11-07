@@ -3210,6 +3210,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3220,8 +3223,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       places: [],
+      valid: false,
       rendererTime: null,
       mask: "##:##-##:##",
+      inputRules: [function (v) {
+        return /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) || "Не соответствует формату времени";
+      }],
       mplace: null,
       timeTable: null,
       date: null
@@ -3256,13 +3263,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendQuery: function sendQuery() {
-      _api_callSchedule__WEBPACK_IMPORTED_MODULE_1__["default"].save({
-        data: this.timeTable
-      }).then(function (res) {
-        alert("Расписание звонков принято!");
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
+      if (this.$refs.CallSchedule.validate()) {
+        _api_callSchedule__WEBPACK_IMPORTED_MODULE_1__["default"].save({
+          data: this.timeTable
+        }).then(function (res) {
+          alert("Расписание звонков принято!");
+        })["catch"](function (ex) {
+          console.log(ex);
+        });
+      }
     },
     getIndex: function getIndex() {
       for (var i = 0; i < this.places.length; i++) {
@@ -8580,134 +8589,163 @@ var render = function() {
                       var hover = ref.hover
                       return [
                         _c(
-                          "v-card",
+                          "v-form",
                           {
-                            staticClass: "mx-auto",
-                            attrs: {
-                              elevation: hover ? 10 : 5,
-                              height: "auto",
-                              width: "max"
+                            ref: "CallSchedule",
+                            model: {
+                              value: _vm.valid,
+                              callback: function($$v) {
+                                _vm.valid = $$v
+                              },
+                              expression: "valid"
                             }
                           },
                           [
                             _c(
-                              "v-card-text",
-                              { staticClass: "text-center title" },
+                              "v-card",
+                              {
+                                staticClass: "mx-auto",
+                                attrs: {
+                                  elevation: hover ? 10 : 5,
+                                  height: "auto",
+                                  width: "max"
+                                }
+                              },
                               [
-                                _vm._v(
-                                  "\n            Расписание звонков\n            "
-                                ),
-                                _c("v-select", {
-                                  staticClass: "pa-0 mb-0 mt-2",
-                                  attrs: {
-                                    label: "Место проведения",
-                                    solo: "",
-                                    items: _vm.places,
-                                    "return-object": ""
-                                  },
-                                  on: { change: _vm.getIndex },
-                                  model: {
-                                    value: _vm.mplace,
-                                    callback: function($$v) {
-                                      _vm.mplace = $$v
-                                    },
-                                    expression: "mplace"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-container",
-                              { staticClass: "grey lighten-5 pt-0" },
-                              [
-                                _vm._l(Object.keys(_vm.rendererTime), function(
-                                  value
-                                ) {
-                                  return _c(
-                                    "v-row",
-                                    {
-                                      key: value,
-                                      attrs: {
-                                        "no-gutters": "",
-                                        sm: "6",
-                                        md: "4",
-                                        lg: "3"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "v-col",
-                                        [
-                                          _c(
-                                            "v-card",
-                                            {
-                                              staticClass: "pa-2",
-                                              attrs: { outlined: "", tile: "" }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                  " +
-                                                  _vm._s(value) +
-                                                  " пара\n                  "
-                                              ),
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "mask",
-                                                    rawName: "v-mask",
-                                                    value: _vm.mask,
-                                                    expression: "mask"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  hint: "(ЧЧ:ММ-ЧЧ:ММ)",
-                                                  label: "Начало/конец пары"
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.rendererTime[value],
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.rendererTime,
-                                                      value,
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "rendererTime[value]"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                }),
-                                _vm._v(" "),
                                 _c(
                                   "v-card-text",
                                   { staticClass: "text-center title" },
                                   [
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        staticClass: "align-self-end",
-                                        attrs: { color: "accent", dark: "" },
-                                        on: { click: _vm.sendQuery }
+                                    _vm._v(
+                                      "\n              Расписание звонков\n              "
+                                    ),
+                                    _c("v-select", {
+                                      staticClass: "pa-0 mb-0 mt-2",
+                                      attrs: {
+                                        label: "Место проведения",
+                                        solo: "",
+                                        items: _vm.places,
+                                        "return-object": ""
                                       },
-                                      [_vm._v("Принять")]
-                                    )
+                                      on: { change: _vm.getIndex },
+                                      model: {
+                                        value: _vm.mplace,
+                                        callback: function($$v) {
+                                          _vm.mplace = $$v
+                                        },
+                                        expression: "mplace"
+                                      }
+                                    })
                                   ],
                                   1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-container",
+                                  { staticClass: "grey lighten-5 pt-0" },
+                                  [
+                                    _vm._l(
+                                      Object.keys(_vm.rendererTime),
+                                      function(value) {
+                                        return _c(
+                                          "v-row",
+                                          {
+                                            key: value,
+                                            attrs: {
+                                              "no-gutters": "",
+                                              sm: "6",
+                                              md: "4",
+                                              lg: "3"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "v-col",
+                                              [
+                                                _c(
+                                                  "v-card",
+                                                  {
+                                                    staticClass: "pa-2",
+                                                    attrs: {
+                                                      outlined: "",
+                                                      tile: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                    " +
+                                                        _vm._s(value) +
+                                                        " пара\n                    "
+                                                    ),
+                                                    _c("v-text-field", {
+                                                      directives: [
+                                                        {
+                                                          name: "mask",
+                                                          rawName: "v-mask",
+                                                          value: _vm.mask,
+                                                          expression: "mask"
+                                                        }
+                                                      ],
+                                                      attrs: {
+                                                        hint: "(ЧЧ:ММ-ЧЧ:ММ)",
+                                                        rules: _vm.inputRules,
+                                                        label:
+                                                          "Начало/конец пары"
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.rendererTime[
+                                                            value
+                                                          ],
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.rendererTime,
+                                                            value,
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "rendererTime[value]"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      }
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-text",
+                                      { staticClass: "text-center title" },
+                                      [
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            staticClass: "align-self-end",
+                                            attrs: {
+                                              color: "accent",
+                                              dark: ""
+                                            },
+                                            on: { click: _vm.sendQuery }
+                                          },
+                                          [_vm._v("Принять")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  2
                                 )
                               ],
-                              2
+                              1
                             )
                           ],
                           1
