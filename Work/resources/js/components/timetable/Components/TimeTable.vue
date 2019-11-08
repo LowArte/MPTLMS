@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row align="center">
       <v-container>
-        <v-autocomplete v-model="departament" label="Отделения" solo :items="arrdepartaments"></v-autocomplete>
+        <v-autocomplete v-model="departament" label="Отделения" solo :items="arrdepartaments" @change="getGroups(departament)"></v-autocomplete>
         <v-autocomplete v-model="group" label="Группа" solo :items="groups.group_name"></v-autocomplete>
         <!-- <v-container class="pa-0 align-self-center" d-flex>
           <v-row sm="2" md="0" class="pa-0 justify-center">
@@ -24,7 +24,7 @@
           <v-card>
             <v-card-title class="subtitle-1 mb-0 pb-0" style="color: #FF3D00;">{{item}}</v-card-title>
             <v-list dense>
-              <v-list-item>Здание: {{schedule[item].Place}}</v-list-item>
+              <v-list-item>Здание: {{places[schedule[item].Place].place_name}}</v-list-item>
               <v-divider class="my-2"></v-divider>
               <div v-for="(n,i) in 7" :key="i" class="ma-0 pa-0">
                 <v-list
@@ -33,7 +33,7 @@
                 >
                   <v-list-item
                     class="mt-0 mb-0 pt-0 pb-0"
-                  >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
+                   v-if="callSchedule[schedule[item].Place].call_schedule[n] != null && callSchedule[schedule[item].Place].call_schedule[n] != ''">{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Lesson}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Teacher }}</v-list-item>
                 </v-list>
@@ -100,6 +100,10 @@ export default {
     loader: function() {
       //Получить массив описанный выше и забиндить его во vue
       return;
+    },
+    getGroups: function()
+    {
+
     }
   },
   mounted: function() {
