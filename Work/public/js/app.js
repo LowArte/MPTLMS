@@ -3874,10 +3874,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3894,7 +3894,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      show: false,
+      items: [{
+        href: 'https://mpt.ru/upload/iblock/bfe/1.jpg',
+        title: 'Программирование в компьютерных системах',
+        text: 'В цикле профессиональных дисциплин студенты изучают безопасность информационных систем, техническое обслуживание и ремонт компьютеров, администрирование сетей, диагностику и системное программирование, WEB-дизайн и графическое моделирование объектов.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/33d/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg',
+        title: 'Информационные системы (по отраслям)',
+        text: 'Студенты изучают функционирование вычислительных систем, операционные системы, компьютерные сети, метрологию, стандартизацию, сертификацию и техническое документоведение. Среди профессиональных модулей — эксплуатация и модификация информационных систем (куда входят методы и средства их проектирования), участие в разработке информационных систем.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/886/1.jpg',
+        title: 'Прикладная информатика (по отраслям)',
+        text: 'Будущему технику-программисту нужно знать языки программирования, уметь создавать веб-страницы, владеть иностранным языком (английским как минимум). Студентов учат разрабатывать программы для различных целей и задач.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/f65/3.jpg',
+        title: 'Право и организация социального обеспечения',
+        text: 'Важные предметы, которые предстоит изучить будущим юристам, — право социального обеспечения, финансовое, семейное, трудовое, экологическое, конституционное право, страховое дело, гражданский процесс.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/88b/2.jpg',
+        title: 'Компьютерные сети',
+        text: 'Студенты изучают устройство и обслуживание локальных компьютерных сетей, установку и настройку аппаратных и программных средств доступа в сеть Интернет, информационную безопасность компьютеров и сетей, подключение и настройку сетевого оборудования, проведение диагностики и устранение неисправностей сетевого оборудования.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/a16/4.jpg',
+        title: 'Информационная безопасность автоматизированных систем',
+        text: 'В профессиональном цикле дисциплин будущие специалисты по защите информации практикуются в языках программирования, проходят технологии и методы программирования, безопасность операционных систем и сетей.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/aee/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg',
+        title: 'Компьютерные системы и комплексы',
+        text: 'Программа обучения предусматривает изучение архитектуры ЭВМ, периферийных устройств, системного, прикладного ПО, микропроцессорных цифровых устройств, средств обеспечения информационной безопасности в компьютерных системах, принципов построения компьютерных сетей, администрирования Windows, Unix.'
+      }]
+    };
+  }
+});
 
 /***/ }),
 
@@ -10491,10 +10532,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10507,26 +10548,324 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-parallax",
-    { attrs: { dark: "", src: "require('../../assets/head.jpg" } },
+    "v-row",
     [
       _c(
-        "v-row",
-        { attrs: { align: "center", justify: "center" } },
+        "v-col",
         [
-          _c("v-col", { staticClass: "text-center", attrs: { cols: "12" } }, [
-            _c("h1", { staticClass: "display-1 font-weight-thin mb-4" }, [
-              _vm._v("Московский приборостроительный техникум")
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "subheading" }, [
-              _vm._v("Имени Г.В. Плеханова РЭУ")
-            ])
-          ])
+          _c(
+            "v-card",
+            { attrs: { elevation: 0 } },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [
+                  _c("h2", { staticClass: "font-weight-light" }, [
+                    _vm._v("Объявление")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _c("b", [
+                  _vm._v(
+                    'Автошкола объявляет набор слушателей на курсы профессиональной подготовки водителей категории "В" на ОКТЯБРЬ с 01.10.2019 года.'
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [_vm._v("Дни занятий по теории:")]),
+              _vm._v(" "),
+              _c("v-container", [
+                _c("ul", [
+                  _c("li", [_vm._v("Вторник (с 18:15 до 21:00)")]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("Четверг (с 18:15 до 21:00)")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v("График вождения устанавливается индивидуально.")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n        Стоимость обучения за весь курс обучения:\n        "
+                ),
+                _c("b", [_vm._v("24 000")]),
+                _vm._v(" рублей\n      ")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n        Более подробную информацию можно получить по телефону:\n        "
+                ),
+                _c("b", [_vm._v("+7(495) 792-83-02")])
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c("center", [
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: "https://mpt.ru/avtoshkola/files/заключение гаи.pdf"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "Заключение Управления ГИБДД ГУ МВД России по г. Москве"
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [
+                  _c("h2", { staticClass: "font-weight-light" }, [
+                    _vm._v(
+                      'Программа профессионального обучения "Подготовка водителей транспортных средств категории В"'
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Преимуществом автошколы является работа опытных сотрудников – профессионалов, а так же реализована своя площадка в 30 метрах от учебного класса – автоподготовки. Обучение в городе происходит около здания."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "В результате обучения вы получите грамотные наставления учителей и мастеров производственного обучения. Так же вас научат теоретическим и практическим навыкам вождения в городском режиме."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "На основании полученных навыков вы получаете номерной сертификат об окончании автошколы."
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [_vm._v("ОБУЧАЮЩАЯ ПРОГРАММА И ЦЕНА")]
+              ),
+              _vm._v(" "),
+              _c("v-container", [
+                _c("ul", [
+                  _c("li", [
+                    _vm._v(
+                      "Общее кол-во часов по программе составляет 188 (автоматическая трансмиссия)/190 (Механическая трансмиссия) часов, из них практика 54 (автоматическая трансмиссия)/56 (механическая трансмиссия) часов практика;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Сроки обучения составляют 3,0 - 3,5 месяца;")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Стоимость обучения 24 000 рублей с возможностью поблочной оплаты. Дополнительные занятия помимо базовых практических часов стоят 1500 Р. и составляют 2 академических часа;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Возможность приобрести комплект литературы;")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("Предоставление медицинской комиссии;")]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "После прохождения обучения по данной учебной программе сдача экзамена в ГИБДД не составит для Вас проблем;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Наш опыт работы более 19 лет и мы выработали свою специфику работы с каждым слушателем;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Остались вопросы? У нас есть недорогие дополнительные занятия помимо базовых практических часов."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [_vm._v("ПОДГОТОВКА ОСУЩЕСТВЛЯЕТСЯ В ОБЛАСТИ")]
+              ),
+              _vm._v(" "),
+              _c("v-container", [
+                _c("ul", [
+                  _c("li", [
+                    _vm._v("Правил дорожного движения Российской Федерации;")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Основных положений по допуску транспортных средств к эксплуатации и обязанностей должностных лиц по обеспечению безопасности дорожного движения;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Законодательства Российской Федерации в части, касающейся обеспечения безопасности дорожного движения, а также уголовной, административной и иной ответственности водителей транспортных средств;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Технических аспектов безопасного управления транспортным средством;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Факторов, способствующих возникновению дорожно-транспортных происшествий;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Элементов конструкции транспортного средства, состояние которых влияет на безопасность дорожного движения;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Методов оказания первой помощи лицам, пострадавшим при дорожно-транспортном происшествии."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [_vm._v("ПРАКТИКА")]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Курсы автовождения проводят спокойные, опытные, понимающие, адекватные автоинструктора. Как мужчины, так и женщины с большим стажем работы."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Наши авто оснащены вторыми педалями и зеркалами, что позволяет контролировать процесс вождения. Обучение проводятся индивидуально для каждого ученика, как на механической коробке переключения передач, так и на «автомате»."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "С учетом новой дорожной обстановки и интенсивности транспортных потоков в городе, в корне, изменилось обучение безопасному управлению автомобилем."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Получение водительских прав – это только первый шаг на пути к захватывающему миру управлением автомобилем."
+                )
+              ])
+            ],
+            1
+          )
         ],
         1
       )
     ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    { staticClass: "pa-6" },
+    _vm._l(_vm.items, function(item, index) {
+      return _c(
+        "v-card",
+        {
+          key: index,
+          staticClass: "mx-auto my-2",
+          attrs: { "max-width": "300" }
+        },
+        [
+          _c("v-img", { attrs: { src: item.href, height: "200px" } }),
+          _vm._v(" "),
+          _c("p", { staticClass: "title text--primary ma-2 text-center" }, [
+            _vm._v(_vm._s(item.title))
+          ]),
+          _vm._v(" "),
+          _c("v-expand-transition", [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: true,
+                    expression: "true"
+                  }
+                ]
+              },
+              [
+                _c("v-divider"),
+                _vm._v(" "),
+                _c("v-card-text", [_vm._v(_vm._s(item.text))])
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      )
+    }),
     1
   )
 }
@@ -64596,15 +64935,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/academicperformance/TeacherAPComponent */ "./resources/js/components/academicperformance/TeacherAPComponent.vue");
 /* harmony import */ var _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/callschedule/ConCallScheduleComponent */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue");
 /* harmony import */ var _components_card_CardComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/card/CardComponent */ "./resources/js/components/card/CardComponent.vue");
-/* harmony import */ var _components_main_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/main/MainPageComponent */ "./resources/js/components/main/MainPageComponent.vue");
-/* harmony import */ var _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/feedback/RequestsUsersComponent */ "./resources/js/components/feedback/RequestsUsersComponent.vue");
-/* harmony import */ var _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/PanelControlComponent */ "./resources/js/components/PanelControlComponent.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
-/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/mainpage/SpecialtyPageComponent */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue");
+/* harmony import */ var _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/mainpage/MainPageComponent */ "./resources/js/components/mainpage/MainPageComponent.vue");
+/* harmony import */ var _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/feedback/RequestsUsersComponent */ "./resources/js/components/feedback/RequestsUsersComponent.vue");
+/* harmony import */ var _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/PanelControlComponent */ "./resources/js/components/PanelControlComponent.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -64619,6 +64959,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 
@@ -64652,24 +64993,24 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 if (window.user) {
-  _store__WEBPACK_IMPORTED_MODULE_18__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["USER"], user);
+  _store__WEBPACK_IMPORTED_MODULE_19__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_21__["USER"], user);
 
   switch (user.post_id) {
     case 2:
       {
-        _store__WEBPACK_IMPORTED_MODULE_18__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["GET_STUDENT"], user.id).then(function (response) {})["catch"](function (e) {});
+        _store__WEBPACK_IMPORTED_MODULE_19__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["GET_STUDENT"], user.id).then(function (response) {})["catch"](function (e) {});
         break;
       }
   }
 
-  _store__WEBPACK_IMPORTED_MODULE_18__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["LOGGED"], true);
+  _store__WEBPACK_IMPORTED_MODULE_19__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_21__["LOGGED"], true);
 }
 
 new Vue({
   el: '#app',
-  store: _store__WEBPACK_IMPORTED_MODULE_18__["default"],
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_21__["default"],
-  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_23__["default"]],
+  store: _store__WEBPACK_IMPORTED_MODULE_19__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_22__["default"],
+  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_24__["default"]],
   components: {
     'login-button': _components_authentication_LoginButtonComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     'remember-password': _components_authentication_RememberPasswordComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -64686,9 +65027,10 @@ new Vue({
     'teacheracademicperfomance': _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
     'concallschedule': _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
     'card': _components_card_CardComponent__WEBPACK_IMPORTED_MODULE_14__["default"],
-    'mainPage': _components_main_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
-    'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
-    'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_17__["default"]
+    'subtitle': _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
+    'maintitle': _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
+    'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_17__["default"],
+    'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_18__["default"]
   },
   data: function data() {
     return {
@@ -64700,7 +65042,7 @@ new Vue({
       updatingUser: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_22__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_23__["mapGetters"])({
     user: 'user'
   }), {
     items: function items() {
@@ -64730,7 +65072,7 @@ new Vue({
             return [{
               icon: 'home',
               text: 'Главная',
-              href: '/main'
+              href: '/home'
             }, {
               icon: 'portrait',
               text: 'Студенческая карточка',
@@ -64859,7 +65201,7 @@ new Vue({
       var _this = this;
 
       this.updatingUser = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["UPDATE_USER"], this.user).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["UPDATE_USER"], this.user).then(function (response) {
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
@@ -64887,7 +65229,7 @@ new Vue({
       var _this2 = this;
 
       this.logoutLoading = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["LOGOUT"]).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["LOGOUT"]).then(function (response) {
         window.location = '/';
       })["catch"](function (error) {
         console.log(error);
@@ -64908,7 +65250,7 @@ new Vue({
       var _this3 = this;
 
       this.changingPassword = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
         _this3.showMessage("Email sent to change password");
       })["catch"](function (error) {
         console.dir(error);
@@ -65136,11 +65478,17 @@ var map = {
 		"./resources/js/components/homework/StudentViewHomework.vue",
 		10
 	],
-	"./main/MainPageComponent": [
-		"./resources/js/components/main/MainPageComponent.vue"
+	"./mainpage/MainPageComponent": [
+		"./resources/js/components/mainpage/MainPageComponent.vue"
 	],
-	"./main/MainPageComponent.vue": [
-		"./resources/js/components/main/MainPageComponent.vue"
+	"./mainpage/MainPageComponent.vue": [
+		"./resources/js/components/mainpage/MainPageComponent.vue"
+	],
+	"./mainpage/SpecialtyPageComponent": [
+		"./resources/js/components/mainpage/SpecialtyPageComponent.vue"
+	],
+	"./mainpage/SpecialtyPageComponent.vue": [
+		"./resources/js/components/mainpage/SpecialtyPageComponent.vue"
 	],
 	"./mixins/withSnackbar": [
 		"./resources/js/components/mixins/withSnackbar.js"
@@ -66253,29 +66601,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/main/MainPageComponent.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/main/MainPageComponent.vue ***!
-  \************************************************************/
+/***/ "./resources/js/components/mainpage/MainPageComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/mainpage/MainPageComponent.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainPageComponent.vue?vue&type=template&id=2a926b8a& */ "./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&");
-/* harmony import */ var _MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainPageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainPageComponent.vue?vue&type=template&id=5c78d2d9& */ "./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-
-
+var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -66285,38 +66631,93 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/main/MainPageComponent.vue"
+component.options.__file = "resources/js/components/mainpage/MainPageComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MainPageComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MainPageComponent.vue?vue&type=template&id=2a926b8a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MainPageComponent.vue?vue&type=template&id=5c78d2d9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/mainpage/SpecialtyPageComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/mainpage/SpecialtyPageComponent.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpecialtyPageComponent.vue?vue&type=template&id=0327941c& */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&");
+/* harmony import */ var _SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SpecialtyPageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/mainpage/SpecialtyPageComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SpecialtyPageComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SpecialtyPageComponent.vue?vue&type=template&id=0327941c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -67900,8 +68301,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -22,7 +22,8 @@ import ConReplacements from './components/timetable/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 import Card from './components/card/CardComponent'
-import Main from './components/main/MainPageComponent'
+import TitlePage from './components/mainpage/SpecialtyPageComponent'
+import InfoPage from './components/mainpage/MainPageComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
 
@@ -79,7 +80,8 @@ new Vue({
     'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': ConCallSchedule,
     'card': Card,
-    'mainPage': Main,
+    'subtitle': TitlePage,
+    'maintitle': InfoPage,
     'requestsusers' : RequestsUsers,
     'panelcontrol' : PanelControl
   },
@@ -118,7 +120,7 @@ new Vue({
           return [{
             icon: 'home',
             text: 'Главная',
-            href: '/main'
+            href: '/home'
           },
           {
             icon: 'portrait',
