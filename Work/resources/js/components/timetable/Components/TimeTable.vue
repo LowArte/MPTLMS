@@ -70,6 +70,9 @@
         </v-col>
       </v-row>
     </v-data>
+    {{arrdepartaments}}
+    <br />
+    {{arrgroups}}
   </v-container>
 </template>
 
@@ -118,10 +121,6 @@ export default {
     }
   },
   methods: {
-    loader: function() {
-      //Получить массив описанный выше и забиндить его во vue
-      return;
-    },
     getGroups: function(departament) {
      // alert("Отеделение " + departament);
       apigroup
@@ -179,7 +178,8 @@ export default {
     this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
 
     //Группы
-    this.arrgroups = JSON.parse(this.groups);
+    this.arrgroups = [];
+    this.arrgroups.push(JSON.parse(this.groups));
     this.casegroup = this.arrgroups.group_name;
     this.getGroups(this.departament.id);
 

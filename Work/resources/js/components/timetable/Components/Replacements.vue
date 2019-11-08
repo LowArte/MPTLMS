@@ -12,7 +12,7 @@
       </v-row>
     </v-container>
     <v-divider></v-divider>
-    <v-row v-for="item in items" :key="item" align="center" justify="center">
+    <v-row v-for="(item, j) in items" :key="j" align="center" justify="center">
       <v-col cols="12">
         <v-hover v-if="(item.group == group && hidden==true) || hidden==false" v-slot:default="{ hover }">
           <v-card :elevation="hover ? 10 : 5" class="mx-auto" height="auto" width="auto">

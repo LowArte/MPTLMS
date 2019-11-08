@@ -5279,6 +5279,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
+/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -5348,22 +5349,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return _ref = {
-      group: "П-2-16",
+      arrgroups: null,
+      casegroup: "П-2-16",
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: "00.00.0000",
-      arrgroups: [],
-      arrdepartaments: [],
-      departament: null
-    }, _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
+      Datetime: "00.00.0000"
+    }, _defineProperty(_ref, "arrgroups", []), _defineProperty(_ref, "arrdepartaments", []), _defineProperty(_ref, "departament", null), _defineProperty(_ref, "callschedule", null), _defineProperty(_ref, "arrschedule", null), _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
   },
   props: {
     place: {
@@ -5388,13 +5399,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    loader: function loader() {
-      //Получить массив описанный выше и забиндить его во vue
-      return;
-    },
     getGroups: function getGroups(departament) {
+      var _this = this;
+
+      // alert("Отеделение " + departament);
       _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
-        console.log(reg.data.group);
+        _this.arrgroups = reg.data.group;
+
+        if (_this.arrgroups.length > 0) {
+          _this.casegroup = _this.arrgroups[0].group_name;
+          getSchedule(_this.arrgroups[0].id);
+        }
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    getSchedule: function getSchedule(group) {
+      var _this2 = this;
+
+      //alert("Группа " + group);
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
+        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
       })["catch"](function (ex) {
         console.log(ex);
       });
@@ -5424,32 +5449,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments)); //Место
 
-    this.places = JSON.parse(this.place); //var arr = JSON.parse(this.place);
-    //this.places = [];
-    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
-    //Отделения
-    //debugger;
+    this.places = JSON.parse(this.place); //Отделения
 
     this.arrdepartaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0].dep_name_full;
-    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
-    /*this.departaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(
-      this.departaments.cur_departament
-    )[0].dep_name_full;
-    this.departaments = JSON.parse(this.departaments.departaments);
-    this.arrdepartaments = [];
-    for (var i = 0; i < this.departaments.length; i++)
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);*/
-    //Группы
+    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0];
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments); //Группы
 
-    this.groups = JSON.parse(this.groups);
-    this.group = this.groups.group_name; //Расписание звонков
+    this.arrgroups = [];
+    this.arrgroups.push(JSON.parse(this.groups));
+    this.casegroup = this.arrgroups.group_name;
+    this.getGroups(this.departament.id); //Расписание звонков
 
-    this.callSchedule = JSON.parse(this.callSchedule);
+    this.callschedule = JSON.parse(this.callSchedule);
 
-    for (var i = 0; i < this.callSchedule.length; i++) {
-      this.callSchedule[i].call_schedule = JSON.parse(this.callSchedule[i].call_schedule);
+    for (var i = 0; i < this.callschedule.length; i++) {
+      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
     } //Расписание занятий
 
 
@@ -5457,11 +5471,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log("Current schedule is empty");
     } else {
       console.log(JSON.parse(this.schedule));
-      this.schedule = JSON.parse(this.schedule);
-      this.schedule = JSON.parse(this.schedule.schedule); // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
+      this.arrschedule = JSON.parse(this.schedule);
+      this.arrschedule = JSON.parse(this.arrschedule.schedule);
     }
-  } //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
-
+  }
 });
 
 /***/ }),
@@ -5476,6 +5489,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
+/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -5545,22 +5559,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return _ref = {
-      group: "П-2-16",
+      arrgroups: null,
+      casegroup: "П-2-16",
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: "00.00.0000",
-      arrgroups: [],
-      arrdepartaments: [],
-      departament: null
-    }, _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
+      Datetime: "00.00.0000"
+    }, _defineProperty(_ref, "arrgroups", []), _defineProperty(_ref, "arrdepartaments", []), _defineProperty(_ref, "departament", null), _defineProperty(_ref, "callschedule", null), _defineProperty(_ref, "arrschedule", null), _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
   },
   props: {
     place: {
@@ -5585,13 +5609,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    loader: function loader() {
-      //Получить массив описанный выше и забиндить его во vue
-      return;
-    },
     getGroups: function getGroups(departament) {
+      var _this = this;
+
+      // alert("Отеделение " + departament);
       _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
-        console.log(reg.data.group);
+        _this.arrgroups = reg.data.group;
+
+        if (_this.arrgroups.length > 0) {
+          _this.casegroup = _this.arrgroups[0].group_name;
+          getSchedule(_this.arrgroups[0].id);
+        }
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    getSchedule: function getSchedule(group) {
+      var _this2 = this;
+
+      //alert("Группа " + group);
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
+        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
       })["catch"](function (ex) {
         console.log(ex);
       });
@@ -5621,32 +5659,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments)); //Место
 
-    this.places = JSON.parse(this.place); //var arr = JSON.parse(this.place);
-    //this.places = [];
-    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
-    //Отделения
-    //debugger;
+    this.places = JSON.parse(this.place); //Отделения
 
     this.arrdepartaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0].dep_name_full;
-    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
-    /*this.departaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(
-      this.departaments.cur_departament
-    )[0].dep_name_full;
-    this.departaments = JSON.parse(this.departaments.departaments);
-    this.arrdepartaments = [];
-    for (var i = 0; i < this.departaments.length; i++)
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);*/
-    //Группы
+    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0];
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments); //Группы
 
-    this.groups = JSON.parse(this.groups);
-    this.group = this.groups.group_name; //Расписание звонков
+    this.arrgroups = [];
+    this.arrgroups.push(JSON.parse(this.groups));
+    this.casegroup = this.arrgroups.group_name;
+    this.getGroups(this.departament.id); //Расписание звонков
 
-    this.callSchedule = JSON.parse(this.callSchedule);
+    this.callschedule = JSON.parse(this.callSchedule);
 
-    for (var i = 0; i < this.callSchedule.length; i++) {
-      this.callSchedule[i].call_schedule = JSON.parse(this.callSchedule[i].call_schedule);
+    for (var i = 0; i < this.callschedule.length; i++) {
+      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
     } //Расписание занятий
 
 
@@ -5654,11 +5681,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log("Current schedule is empty");
     } else {
       console.log(JSON.parse(this.schedule));
-      this.schedule = JSON.parse(this.schedule);
-      this.schedule = JSON.parse(this.schedule.schedule); // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
+      this.arrschedule = JSON.parse(this.schedule);
+      this.arrschedule = JSON.parse(this.arrschedule.schedule);
     }
-  } //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
-
+  }
 });
 
 /***/ }),
@@ -13667,10 +13693,10 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider"),
       _vm._v(" "),
-      _vm._l(_vm.items, function(item) {
+      _vm._l(_vm.items, function(item, j) {
         return _c(
           "v-row",
-          { key: item, attrs: { align: "center", justify: "center" } },
+          { key: j, attrs: { align: "center", justify: "center" } },
           [
             _c(
               "v-col",
@@ -14015,14 +14041,21 @@ var render = function() {
                 attrs: {
                   label: "Группа",
                   solo: "",
-                  items: _vm.groups.group_name
+                  items: _vm.arrgroups,
+                  "item-text": "group_name",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getSchedule(_vm.casegroup.id)
+                  }
                 },
                 model: {
-                  value: _vm.group,
+                  value: _vm.casegroup,
                   callback: function($$v) {
-                    _vm.group = $$v
+                    _vm.casegroup = $$v
                   },
-                  expression: "group"
+                  expression: "casegroup"
                 }
               })
             ],
@@ -14034,76 +14067,104 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider", { staticClass: "ma-0" }),
       _vm._v(" "),
-      _c(
-        "v-data",
-        {
-          attrs: {
-            items: _vm.schedule.schedule,
-            "items-per-page": _vm.itemsPerPage
-          },
-          on: {
-            "update:itemsPerPage": function($event) {
-              _vm.itemsPerPage = $event
+      _vm.arrschedule
+        ? _c(
+            "v-data",
+            {
+              attrs: { "items-per-page": _vm.itemsPerPage },
+              on: {
+                "update:itemsPerPage": function($event) {
+                  _vm.itemsPerPage = $event
+                },
+                "update:items-per-page": function($event) {
+                  _vm.itemsPerPage = $event
+                }
+              }
             },
-            "update:items-per-page": function($event) {
-              _vm.itemsPerPage = $event
-            }
-          }
-        },
-        [
-          _c(
-            "v-row",
-            _vm._l(_vm.day, function(item) {
-              return _c(
-                "v-col",
-                { key: item, attrs: { cols: "12", sm: "6", md: "2", lg: "2" } },
-                [
-                  _c(
-                    "v-card",
+            [
+              _c(
+                "v-row",
+                _vm._l(_vm.day, function(item) {
+                  return _c(
+                    "v-col",
+                    {
+                      key: item,
+                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
+                    },
                     [
                       _c(
-                        "v-card-title",
-                        {
-                          staticClass: "subtitle-1 mb-0 pb-0",
-                          staticStyle: { color: "#FF3D00" }
-                        },
-                        [_vm._v(_vm._s(item))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { dense: "" } },
+                        "v-card",
                         [
-                          _c("v-list-item", [
-                            _vm._v(
-                              "Здание: " +
-                                _vm._s(
-                                  _vm.places[_vm.schedule[item].Place]
-                                    .place_name
+                          _c(
+                            "v-card-title",
+                            {
+                              staticClass: "subtitle-1 mb-0 pb-0",
+                              staticStyle: { color: "#FF3D00" }
+                            },
+                            [_vm._v(_vm._s(item))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list",
+                            { staticClass: "ma-0 pa-0", attrs: { dense: "" } },
+                            [
+                              _c("v-list-item", [
+                                _vm._v(
+                                  "Здание: " +
+                                    _vm._s(
+                                      _vm.places[_vm.arrschedule[item].Place]
+                                        .place_name
+                                    )
                                 )
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("v-divider", { staticClass: "my-2" }),
-                          _vm._v(" "),
-                          _vm._l(7, function(n, i) {
-                            return _c(
-                              "div",
-                              { key: i, staticClass: "ma-0 pa-0" },
-                              [
-                                _vm.schedule[item][n].Lesson != null &&
-                                _vm.schedule[item][n].Lesson != ""
-                                  ? _c(
-                                      "v-list",
-                                      { staticClass: "ma-2 pa-0" },
-                                      [
-                                        _vm.callSchedule[
-                                          _vm.schedule[item].Place
-                                        ].call_schedule[n] != null &&
-                                        _vm.callSchedule[
-                                          _vm.schedule[item].Place
-                                        ].call_schedule[n] != ""
-                                          ? _c(
+                              ]),
+                              _vm._v(" "),
+                              _c("v-divider", { staticClass: "my-2" }),
+                              _vm._v(" "),
+                              _vm._l(7, function(n, i) {
+                                return _c(
+                                  "div",
+                                  { key: i, staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm.arrschedule[item][n].Lesson != null &&
+                                    _vm.arrschedule[item][n].Lesson != ""
+                                      ? _c(
+                                          "v-list",
+                                          { staticClass: "ma-2 pa-0" },
+                                          [
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
                                               "v-list-item",
                                               {
                                                 staticClass:
@@ -14111,103 +14172,107 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  _vm._s(n) +
-                                                    " пара - " +
-                                                    _vm._s(
-                                                      _vm.callSchedule[
-                                                        _vm.schedule[item].Place
-                                                      ].call_schedule[n]
-                                                    )
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Lesson
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Teacher
+                                                  )
                                                 )
                                               ]
                                             )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Lesson
-                                              )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Teacher
-                                              )
-                                            )
-                                          ]
+                                          ],
+                                          1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  : _c(
-                                      "v-list",
-                                      { staticClass: "ma-0 pa-0" },
-                                      [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
+                                      : _c(
+                                          "v-list",
+                                          { staticClass: "ma-0 pa-0" },
                                           [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
                                                 )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [_vm._v("Свободная пара")]
                                             )
-                                          ]
+                                          ],
+                                          1
                                         ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [_vm._v("Свободная пара")]
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" })
-                              ],
-                              1
-                            )
-                          })
+                                    _vm._v(" "),
+                                    _c("v-divider", {
+                                      staticClass: "my-2 ma-0 pa-0"
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            ],
+                            2
+                          )
                         ],
-                        2
+                        1
                       )
                     ],
                     1
                   )
-                ],
+                }),
                 1
               )
-            }),
+            ],
             1
           )
-        ],
-        1
-      ),
-      _vm._v("\n  " + _vm._s(_vm.places) + "\n  "),
-      _c("br")
+        : _vm._e(),
+      _vm._v("\n  " + _vm._s(_vm.arrdepartaments) + "\n  "),
+      _c("br"),
+      _vm._v("\n  " + _vm._s(_vm.arrgroups) + "\n")
     ],
     1
   )
@@ -14271,14 +14336,21 @@ var render = function() {
                 attrs: {
                   label: "Группа",
                   solo: "",
-                  items: _vm.groups.group_name
+                  items: _vm.arrgroups,
+                  "item-text": "group_name",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getSchedule(_vm.casegroup.id)
+                  }
                 },
                 model: {
-                  value: _vm.group,
+                  value: _vm.casegroup,
                   callback: function($$v) {
-                    _vm.group = $$v
+                    _vm.casegroup = $$v
                   },
-                  expression: "group"
+                  expression: "casegroup"
                 }
               })
             ],
@@ -14290,76 +14362,104 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider", { staticClass: "ma-0" }),
       _vm._v(" "),
-      _c(
-        "v-data",
-        {
-          attrs: {
-            items: _vm.schedule.schedule,
-            "items-per-page": _vm.itemsPerPage
-          },
-          on: {
-            "update:itemsPerPage": function($event) {
-              _vm.itemsPerPage = $event
+      _vm.arrschedule
+        ? _c(
+            "v-data",
+            {
+              attrs: { "items-per-page": _vm.itemsPerPage },
+              on: {
+                "update:itemsPerPage": function($event) {
+                  _vm.itemsPerPage = $event
+                },
+                "update:items-per-page": function($event) {
+                  _vm.itemsPerPage = $event
+                }
+              }
             },
-            "update:items-per-page": function($event) {
-              _vm.itemsPerPage = $event
-            }
-          }
-        },
-        [
-          _c(
-            "v-row",
-            _vm._l(_vm.day, function(item) {
-              return _c(
-                "v-col",
-                { key: item, attrs: { cols: "12", sm: "6", md: "2", lg: "2" } },
-                [
-                  _c(
-                    "v-card",
+            [
+              _c(
+                "v-row",
+                _vm._l(_vm.day, function(item) {
+                  return _c(
+                    "v-col",
+                    {
+                      key: item,
+                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
+                    },
                     [
                       _c(
-                        "v-card-title",
-                        {
-                          staticClass: "subtitle-1 mb-0 pb-0",
-                          staticStyle: { color: "#FF3D00" }
-                        },
-                        [_vm._v(_vm._s(item))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { dense: "" } },
+                        "v-card",
                         [
-                          _c("v-list-item", [
-                            _vm._v(
-                              "Здание: " +
-                                _vm._s(
-                                  _vm.places[_vm.schedule[item].Place]
-                                    .place_name
+                          _c(
+                            "v-card-title",
+                            {
+                              staticClass: "subtitle-1 mb-0 pb-0",
+                              staticStyle: { color: "#FF3D00" }
+                            },
+                            [_vm._v(_vm._s(item))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list",
+                            { staticClass: "ma-0 pa-0", attrs: { dense: "" } },
+                            [
+                              _c("v-list-item", [
+                                _vm._v(
+                                  "Здание: " +
+                                    _vm._s(
+                                      _vm.places[_vm.arrschedule[item].Place]
+                                        .place_name
+                                    )
                                 )
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("v-divider", { staticClass: "my-2" }),
-                          _vm._v(" "),
-                          _vm._l(7, function(n, i) {
-                            return _c(
-                              "div",
-                              { key: i, staticClass: "ma-0 pa-0" },
-                              [
-                                _vm.schedule[item][n].Lesson != null &&
-                                _vm.schedule[item][n].Lesson != ""
-                                  ? _c(
-                                      "v-list",
-                                      { staticClass: "ma-2 pa-0" },
-                                      [
-                                        _vm.callSchedule[
-                                          _vm.schedule[item].Place
-                                        ].call_schedule[n] != null &&
-                                        _vm.callSchedule[
-                                          _vm.schedule[item].Place
-                                        ].call_schedule[n] != ""
-                                          ? _c(
+                              ]),
+                              _vm._v(" "),
+                              _c("v-divider", { staticClass: "my-2" }),
+                              _vm._v(" "),
+                              _vm._l(7, function(n, i) {
+                                return _c(
+                                  "div",
+                                  { key: i, staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm.arrschedule[item][n].Lesson != null &&
+                                    _vm.arrschedule[item][n].Lesson != ""
+                                      ? _c(
+                                          "v-list",
+                                          { staticClass: "ma-2 pa-0" },
+                                          [
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
                                               "v-list-item",
                                               {
                                                 staticClass:
@@ -14367,103 +14467,107 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  _vm._s(n) +
-                                                    " пара - " +
-                                                    _vm._s(
-                                                      _vm.callSchedule[
-                                                        _vm.schedule[item].Place
-                                                      ].call_schedule[n]
-                                                    )
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Lesson
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Teacher
+                                                  )
                                                 )
                                               ]
                                             )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Lesson
-                                              )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Teacher
-                                              )
-                                            )
-                                          ]
+                                          ],
+                                          1
                                         )
-                                      ],
-                                      1
-                                    )
-                                  : _c(
-                                      "v-list",
-                                      { staticClass: "ma-0 pa-0" },
-                                      [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
+                                      : _c(
+                                          "v-list",
+                                          { staticClass: "ma-0 pa-0" },
                                           [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
                                                 )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [_vm._v("Свободная пара")]
                                             )
-                                          ]
+                                          ],
+                                          1
                                         ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [_vm._v("Свободная пара")]
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" })
-                              ],
-                              1
-                            )
-                          })
+                                    _vm._v(" "),
+                                    _c("v-divider", {
+                                      staticClass: "my-2 ma-0 pa-0"
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            ],
+                            2
+                          )
                         ],
-                        2
+                        1
                       )
                     ],
                     1
                   )
-                ],
+                }),
                 1
               )
-            }),
+            ],
             1
           )
-        ],
-        1
-      ),
-      _vm._v("\n  " + _vm._s(_vm.places) + "\n  "),
-      _c("br")
+        : _vm._e(),
+      _vm._v("\n  " + _vm._s(_vm.arrdepartaments) + "\n  "),
+      _c("br"),
+      _vm._v("\n  " + _vm._s(_vm.arrgroups) + "\n")
     ],
     1
   )
@@ -14641,13 +14745,12 @@ var render = function() {
       }
     },
     [
-      _c("v-tab", { key: _vm.item }, [_vm._v("Расписание")]),
+      _c("v-tab", [_vm._v("Расписание")]),
       _vm._v(" "),
-      _c("v-tab", { key: _vm.item }, [_vm._v("Замены")]),
+      _c("v-tab", [_vm._v("Замены")]),
       _vm._v(" "),
       _c(
         "v-tab-item",
-        { key: _vm.item },
         [
           _c("TimeTable", {
             attrs: {
@@ -14662,7 +14765,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("Replacements")], 1)
+      _c("v-tab-item", [_c("Replacements")], 1)
     ],
     1
   )
@@ -65317,6 +65420,28 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/schedule.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/schedule.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getSchedule: function getSchedule(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_schedule_by_group_id', {
+      "group_id": credentials
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/users.js":
 /*!***********************************!*\
   !*** ./resources/js/api/users.js ***!
@@ -68692,8 +68817,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
