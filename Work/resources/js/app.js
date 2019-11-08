@@ -21,10 +21,9 @@ import ConTimeTable from './components/timetable/ContimetableComponent'
 import ConReplacements from './components/timetable/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
-import Card from './components/card/CardComponent'
 import TitlePage from './components/mainpage/SpecialtyPageComponent'
 import InfoPage from './components/mainpage/MainPageComponent'
-//import CallSchedule from './components/callschedule/CallScheduleComponent'
+import CallSchedule from './components/callschedule/CallScheduleComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
 
@@ -72,12 +71,11 @@ new Vue({
     'conreplacements': ConReplacements,
     'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': ConCallSchedule,
-    'card': Card,
     'subtitle': TitlePage,
     'maintitle': InfoPage,
-    'requestsusers' : RequestsUsers,
-    'panelcontrol' : PanelControl,
-    'callschedule' : CallSchedule
+    'requestsusers': RequestsUsers,
+    'panelcontrol': PanelControl,
+    'callschedule': CallSchedule
   },
   data: () => ({
     drawer: null,
@@ -89,7 +87,7 @@ new Vue({
   }),
   computed: {
     ...mapGetters({
-      user: 'user',  
+      user: 'user',
     }),
     items: function () {
       switch (user.post_id) {
@@ -136,7 +134,7 @@ new Vue({
             icon: 'show_chart',
             text: 'Успеваемость',
             href: '/home'
-          }, */ 
+          }, */
           {
             icon: 'business_center',
             text: 'Дополнительное образование',
