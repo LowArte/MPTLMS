@@ -23,18 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /* $panel_array = array(
+        $panel_array = array(
             array(
-                "header"  => "Test", 
-                "content" => "feedback/FeedbackComponent",
+                "header"  => "Подробная информация",
+                "content" => "mainpage/MainPageComponent",
                 "props"   => array()
-            ), 
-            array(
-                "header"  => "Test2", 
-                "content" => "feedback/FeedbackComponent",
-                "props"   => array()
-            ));
-        return view('home', ["panel_array" => json_encode($panel_array)]); */
-        return view('home');
+            )
+        );
+        return view('home', ["panel_array" => json_encode($panel_array)]);
     }
 }

@@ -1,17 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _api_callSchedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/callSchedule */ "./resources/js/api/callSchedule.js");
 //
 //
 //
@@ -45,76 +42,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  directives: {
-    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
-  },
   data: function data() {
     return {
-      places: [],
-      rendererTime: null,
-      mplace: null,
-      timeTable: null,
-      date: null
+      items: [{
+        group: "П-1-16",
+        date: "11.10.2019"
+      }, {
+        group: "П-2-16",
+        date: "12.10.2019"
+      }, {
+        group: "П-3-16",
+        date: "13.10.2019"
+      }],
+      z: [{
+        number: "1",
+        original: "Технология разработки и защита баз данных",
+        originalt: "Токарчук А.С.",
+        newp: "Операционные системы",
+        newpt: "Горбунов А.Д.",
+        date: "08.10.2019"
+      }]
     };
-  },
-  props: {
-    place: {
-      type: String,
-      "default": null
-    },
-    time: {
-      type: String,
-      "default": null
-    }
-  },
-  created: function created() {
-    var arr = JSON.parse(this.place);
-    this.places = [];
-
-    for (var i = 0; i < arr.length; i++) {
-      this.places.push(arr[i].place_name);
-    }
-
-    this.timeTable = JSON.parse(this.time);
-
-    for (var i = 0; i < this.timeTable.length; i++) {
-      this.timeTable[i].call_schedule = JSON.parse(this.timeTable[i].call_schedule);
-    }
-
-    this.mplace = this.places[0];
-    this.rendererTime = this.timeTable[0].call_schedule;
-  },
-  methods: {
-    getIndex: function getIndex() {
-      for (var i = 0; i < this.places.length; i++) {
-        if (this.places[i] == this.mplace) {
-          this.rendererTime = this.timeTable[i].call_schedule;
-          console.log(this.timeTable[i]);
-        }
-      }
-    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=template&id=3d80ae39&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=template&id=3d80ae39& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=template&id=a1fefd82&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=template&id=a1fefd82& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -129,116 +87,113 @@ var render = function() {
   return _c(
     "v-container",
     { attrs: { fluid: "" } },
-    [
-      _c(
+    _vm._l(_vm.items, function(item) {
+      return _c(
         "v-row",
+        { key: item, attrs: { align: "center", justify: "center" } },
         [
           _c(
             "v-col",
+            { attrs: { cols: "12" } },
             [
               _c("v-hover", {
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(ref) {
-                      var hover = ref.hover
-                      return [
-                        _c(
-                          "v-card",
-                          {
-                            staticClass: "mx-auto",
-                            attrs: {
-                              elevation: hover ? 10 : 5,
-                              height: "auto",
-                              width: "max"
-                            }
-                          },
-                          [
-                            _c(
-                              "v-card-text",
-                              { staticClass: "text-center title" },
-                              [
-                                _vm._v(
-                                  "\n            Расписание звонков\n            "
-                                ),
-                                _c("v-select", {
-                                  staticClass: "pa-0 mb-0 mt-2",
-                                  attrs: {
-                                    label: "Место проведения",
-                                    solo: "",
-                                    items: _vm.places,
-                                    "return-object": ""
-                                  },
-                                  on: { change: _vm.getIndex },
-                                  model: {
-                                    value: _vm.mplace,
-                                    callback: function($$v) {
-                                      _vm.mplace = $$v
-                                    },
-                                    expression: "mplace"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-container",
-                              { staticClass: "grey lighten-5 pt-0" },
-                              _vm._l(Object.keys(_vm.rendererTime), function(
-                                value
-                              ) {
-                                return _c(
-                                  "v-row",
-                                  {
-                                    key: value,
-                                    attrs: {
-                                      "no-gutters": "",
-                                      sm: "6",
-                                      md: "4",
-                                      lg: "3"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "v-col",
-                                      [
-                                        _c(
-                                          "v-card",
-                                          {
-                                            staticClass: "pa-2",
-                                            attrs: { outlined: "", tile: "" }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                  " +
-                                                _vm._s(value) +
-                                                " пара\n                  "
-                                            ),
-                                            _c("v-card-text", [
-                                              _vm._v(
-                                                _vm._s(_vm.rendererTime[value])
-                                              )
-                                            ])
-                                          ],
-                                          1
+                scopedSlots: _vm._u(
+                  [
+                    {
+                      key: "default",
+                      fn: function(ref) {
+                        var hover = ref.hover
+                        return [
+                          _c(
+                            "v-card",
+                            {
+                              staticClass: "mx-auto",
+                              attrs: {
+                                elevation: hover ? 10 : 5,
+                                height: "auto",
+                                width: "auto"
+                              }
+                            },
+                            [
+                              _c(
+                                "v-card-title",
+                                {
+                                  staticClass: "subtitle-1",
+                                  staticStyle: { color: "#FF3D00" }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(item.group) +
+                                      " - " +
+                                      _vm._s(item.date)
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider", { staticClass: "my-0" }),
+                              _vm._v(" "),
+                              _c("v-simple-table", [
+                                _c("thead", [
+                                  _c("tr", [
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("№")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Что заменяют")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("На что заменяют")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Дата")
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  { attrs: { grow: "" } },
+                                  _vm._l(_vm.z, function(z1) {
+                                    return _c("tr", { key: z1.number }, [
+                                      _c("td", [_vm._v(_vm._s(z1.number))]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          _vm._s(z1.original) +
+                                            " (" +
+                                            _vm._s(z1.originalt) +
+                                            ")"
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          _vm._s(z1.newp) +
+                                            " (" +
+                                            _vm._s(z1.newpt) +
+                                            ")"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [_vm._v(_vm._s(z1.date))])
+                                    ])
+                                  }),
+                                  0
                                 )
-                              }),
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ]
+                              ])
+                            ],
+                            1
+                          )
+                        ]
+                      }
                     }
-                  }
-                ])
+                  ],
+                  null,
+                  true
+                )
               })
             ],
             1
@@ -246,7 +201,7 @@ var render = function() {
         ],
         1
       )
-    ],
+    }),
     1
   )
 }
@@ -257,18 +212,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/callschedule/CallScheduleComponent.vue":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/callschedule/CallScheduleComponent.vue ***!
-  \************************************************************************/
+/***/ "./resources/js/components/teachertimetable/Components/TeacherReplacements.vue":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/teachertimetable/Components/TeacherReplacements.vue ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CallScheduleComponent_vue_vue_type_template_id_3d80ae39___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CallScheduleComponent.vue?vue&type=template&id=3d80ae39& */ "./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=template&id=3d80ae39&");
-/* harmony import */ var _CallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CallScheduleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _TeacherReplacements_vue_vue_type_template_id_a1fefd82___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeacherReplacements.vue?vue&type=template&id=a1fefd82& */ "./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=template&id=a1fefd82&");
+/* harmony import */ var _TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TeacherReplacements.vue?vue&type=script&lang=js& */ "./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -277,9 +232,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CallScheduleComponent_vue_vue_type_template_id_3d80ae39___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CallScheduleComponent_vue_vue_type_template_id_3d80ae39___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TeacherReplacements_vue_vue_type_template_id_a1fefd82___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TeacherReplacements_vue_vue_type_template_id_a1fefd82___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -289,38 +244,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/callschedule/CallScheduleComponent.vue"
+component.options.__file = "resources/js/components/teachertimetable/Components/TeacherReplacements.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CallScheduleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CallScheduleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherReplacements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=template&id=3d80ae39&":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=template&id=3d80ae39& ***!
-  \*******************************************************************************************************/
+/***/ "./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=template&id=a1fefd82&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=template&id=a1fefd82& ***!
+  \********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CallScheduleComponent_vue_vue_type_template_id_3d80ae39___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CallScheduleComponent.vue?vue&type=template&id=3d80ae39& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/callschedule/CallScheduleComponent.vue?vue&type=template&id=3d80ae39&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CallScheduleComponent_vue_vue_type_template_id_3d80ae39___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_template_id_a1fefd82___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherReplacements.vue?vue&type=template&id=a1fefd82& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherReplacements.vue?vue&type=template&id=a1fefd82&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_template_id_a1fefd82___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CallScheduleComponent_vue_vue_type_template_id_3d80ae39___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_template_id_a1fefd82___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

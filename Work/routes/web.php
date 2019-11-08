@@ -12,17 +12,22 @@
 */
 
 Route::get(
-    '/', 
+    '/',
     function () {
-        return view('welcome');
+        $panel_array = array(
+            array(
+                "header"  => "Подробная информация",
+                "content" => "mainpage/MainPageComponent",
+                "props"   => array()
+            )
+        );
+        return view('welcome', ["panel_array" => json_encode($panel_array)]);
     }
 );
 
-Auth::routes(['register'=>false,'verify'=>false]);
+Auth::routes(['register' => false, 'verify' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/main', 'HomeController@index')->name('home');
 
 Route::get('/feedback', 'RouteControllers\FeedbackController@index')->name('feedback');
 
@@ -53,4 +58,5 @@ Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->na
 Route::post('/save_concallschedule', 'RouteControllers\ConCallScheduleController@save');
 
 Route::post('/get_group_by_departament_id', 'RouteControllers\TimeTableController@groupByDepartamentId');
+
 
