@@ -18,8 +18,6 @@ export default {
     return new Promise((resolve, reject) => {
       auth.logout().then(response => {
         context.commit(mutations.LOGGED, false)
-        if(context.student != null)
-          context.commit(mutations.DELETE_STUDENT)
         resolve(response)
       }).catch(error => {
         reject(error)

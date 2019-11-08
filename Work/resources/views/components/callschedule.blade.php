@@ -3,7 +3,7 @@
 @section('content')
 
 <v-container fluid grid-list-md text-xs-center>
-    <concallschedule place="{{$place ?? null }}" time="{{$callSch ?? null}}"></concallschedule>
+    <callschedule place="{{$place ?? null }}" time="{{$callSch ?? null}}"></callschedule>
 </v-container>
 
 @endsection

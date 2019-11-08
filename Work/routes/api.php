@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::middleware('auth:api')->get(
     }
 );
 
-Route::post('/get_student', 'Data\StudentController@getStudent')->name('get_student');
+
 
 Route::group(
     ['prefix'=>'v1','middleware' => 'auth:api'], 

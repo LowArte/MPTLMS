@@ -2,8 +2,9 @@
   <v-container fluid>
     <v-row align="center">
       <v-container>
-        <v-autocomplete v-model="group" label="Группа" solo :items="groups"></v-autocomplete>
-        <v-container class="pa-0 align-self-center" d-flex>
+        <v-autocomplete v-model="departament" label="Отделения" solo :items="arrdepartaments"></v-autocomplete>
+        <v-autocomplete v-model="group" label="Группа" solo :items="groups.group_name"></v-autocomplete>
+        <!-- <v-container class="pa-0 align-self-center" d-flex>
           <v-row sm="2" md="0" class="pa-0 justify-center">
             <v-col class="pa-0 d-flex justify-center" sm="2" md="0">
               <v-btn
@@ -13,348 +14,154 @@
               >{{ hidden ? 'Числитель' : 'Знаменатель' }}</v-btn>
             </v-col>
           </v-row>
-        </v-container>
+        </v-container>-->
       </v-container>
     </v-row>
     <v-divider class="ma-0"></v-divider>
-    <v-data :items="items[group]" :items-per-page.sync="itemsPerPage">
-      <template v-slot:default="props">
-        <v-row>
-          <v-col v-for="item in props.items" :key="item.name" cols="12" sm="6" md="2" lg="2">
-            <v-card>
-              <v-card-title
-                class="subtitle-1"
-                style="color: #FF3D00;"
-              >{{ item.name }} - {{Datetime}}</v-card-title>
-              <v-list dense>
-                <v-list-item>Здание: {{item.place}}</v-list-item>
+    <v-data :items="schedule.schedule" :items-per-page.sync="itemsPerPage">
+      <v-row>
+        <v-col v-for="item in day" :key="item" cols="12" sm="6" md="2" lg="2">
+          <v-card>
+            <v-card-title class="subtitle-1 mb-0 pb-0" style="color: #FF3D00;">{{item}}</v-card-title>
+            <v-list dense>
+              <v-list-item>Здание: {{schedule[item].Place}}</v-list-item>
+              <v-divider class="my-2"></v-divider>
+              <div v-for="(n,i) in 7" :key="i" class="ma-0 pa-0">
+                <v-list
+                  class="ma-2 pa-0"
+                  v-if="schedule[item][n].Lesson != null && schedule[item][n].Lesson != ''"
+                >
+                  <v-list-item
+                    class="mt-0 mb-0 pt-0 pb-0"
+                  >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
+                  <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Lesson}}</v-list-item>
+                  <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Teacher }}</v-list-item>
+                </v-list>
+                <v-list class="ma-0 pa-0" v-else>
+                  <v-list-item
+                    class="mt-0 mb-0 pt-0 pb-0"
+                  >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
+                  <v-list-item class="mt-0 mb-0 pt-0 pb-0">Свободная пара</v-list-item>
+                </v-list>
+
                 <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p1}}
-                  <br />
-                  {{ item.p1 }}
-                  <br />
-                  {{ item.t1 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p2}}
-                  <br />
-                  {{ item.p2 }}
-                  <br />
-                  {{ item.t2 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p3}}
-                  <br />
-                  {{ item.p3 }}
-                  <br />
-                  {{ item.t3 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p4}}
-                  <br />
-                  {{ item.p4 }}
-                  <br />
-                  {{ item.t4 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p5}}
-                  <br />
-                  {{ item.p5 }}
-                  <br />
-                  {{ item.t5 }}
-                </v-list-item>
-                <v-divider class="my-2"></v-divider>
-                <v-list-item>
-                  {{timeitems.p6}}
-                  <br />
-                  {{ item.p6 }}
-                  <br />
-                  {{ item.t6 }}
-                </v-list-item>
-                <v-list-item>
-                  {{timeitems.p7}}
-                  <br />
-                  {{ item.p7 }}
-                  <br />
-                  {{ item.t7 }}
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-col>
-        </v-row>
-      </template>
+              </div>
+            </v-list>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-data>
+    {{places}}
+    
+    <br />
+    {{callSchedule}}
+    
   </v-container>
 </template>
 
 <script>
 export default {
   data: () => ({
-    groups: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
     group: "П-2-16",
     model: null,
     hidden: false,
     itemsPerPageOptions: [6],
     itemsPerPage: 6,
     Datetime: "00.00.0000",
-    timeitems: {
-      p1: "8:30 - 10:00",
-      p2: "10:10 - 11:40",
-      p3: "12:00 - 13:30",
-      p4: "14:00 - 15:30",
-      p5: "15:40 - 17:10",
-      p6: "17:20 - 18:50",
-      p7: "19:00 - 19:30"
-    },
-    items: {
-      "П-2-16": [
-        {
-          name: "Пн",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Вт",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Ср",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Чт",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Пт",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Сб",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        }
-      ],
-      "П-1-16": [
-        {
-          name: "Пн",
-          p1: "Информационные системы и технологии",
-          t1: "Токарчук А.С.",
-          p2: "Информационные системы и технологии",
-          t2: "Токарчук А.С.",
-          p3: "Информационные системы и технологии",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Вт",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Ср",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Чт",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Пт",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        },
-        {
-          name: "Сб",
-          p1: "Технология разработки и защиты баз данных",
-          t1: "Токарчук А.С.",
-          p2: "Технология разработки и защиты баз данных",
-          t2: "Токарчук А.С.",
-          p3: "Технология разработки и защиты баз данных",
-          t3: "Токарчук А.С.",
-          p4: "Технология разработки и защиты баз данных",
-          t4: "Токарчук А.С.",
-          p5: "Технология разработки и защиты баз данных",
-          t5: "Токарчук А.С.",
-          p6: "Технология разработки и защиты баз данных",
-          t6: "Токарчук А.С.",
-          p7: "Технология разработки и защиты баз данных",
-          t7: "Токарчук А.С.",
-          place: "Нежинская"
-        }
-      ]
-    }
+
+    arrgroups: [],
+    arrdepartaments: [],
+    departament: null,
+
+    group: null,
+    places: [],
+    day: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
   }),
+  props: {
+    place: {
+      type: String,
+      default: null
+    },
+    schedule: {
+      type: String,
+      default: null
+    },
+    callSchedule: {
+      type: String,
+      default: null
+    },
+    groups: {
+      type: String,
+      default: null
+    },
+    departaments: {
+      type: String,
+      default: null
+    }
+  },
   methods: {
     loader: function() {
       //Получить массив описанный выше и забиндить его во vue
       return;
     }
   },
-  mounted() {
+  mounted: function() {
     var currDate = new Date();
-      var hours = currDate.getHours();
-      var minutes = currDate.getMinutes();
-      var seconds = currDate.getSeconds();
-      if (hours <= 9) {
-        hours = "0" + hours;
-      }
-      if (minutes <= 9) {
-        minutes = "0" + minutes;
-      }
-      if (seconds <= 9) {
-        seconds = "0" + seconds;
-      }
-      this.Datetime = hours + ":" + minutes + ":" + seconds;
+    var hours = currDate.getHours();
+    var minutes = currDate.getMinutes();
+    var seconds = currDate.getSeconds();
+    if (hours <= 9) {
+      hours = "0" + hours;
+    }
+    if (minutes <= 9) {
+      minutes = "0" + minutes;
+    }
+    if (seconds <= 9) {
+      seconds = "0" + seconds;
+    }
+    this.Datetime = hours + ":" + minutes + ":" + seconds;
+
+    console.log(JSON.parse(this.groups));
+    console.log(JSON.parse(this.callSchedule));
+    console.log(JSON.parse(this.departaments));
+
+    //Место
+    this.places = JSON.parse(this.place);
+    //var arr = JSON.parse(this.place);
+    //this.places = [];
+    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
+
+    //Отделения
+    this.departaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(
+      this.departaments.cur_departament
+    )[0].dep_name_full;
+    this.departaments = JSON.parse(this.departaments.departaments);
+    this.arrdepartaments = [];
+    for (var i = 0; i < this.departaments.length; i++)
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);
+
+    //Группы
+    this.groups = JSON.parse(this.groups);
+    this.group = this.groups.group_name;
+
+    //Расписание звонков
+    this.callSchedule = JSON.parse(this.callSchedule);
+    for (var i = 0; i < this.callSchedule.length; i++)
+      this.callSchedule[i].call_schedule = JSON.parse(
+        this.callSchedule[i].call_schedule
+      );
+
+    //Расписание занятий
+    if (this.schedule == "") {
+      console.log("Current schedule is empty");
+    } else {
+      console.log(JSON.parse(this.schedule));
+      this.schedule = JSON.parse(this.schedule);
+      this.schedule = JSON.parse(this.schedule.schedule);
+      // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
+    }
   }
+  //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
 };
 </script>

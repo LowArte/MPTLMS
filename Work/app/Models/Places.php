@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class Places extends Model
 {
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at', 'departaments_id'
+        'created_at', 'deleted_at', 'updated_at'
     ];
 
     public function __construct($attributes = array())

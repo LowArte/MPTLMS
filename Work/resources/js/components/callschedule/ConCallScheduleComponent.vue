@@ -1,28 +1,50 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-hover v-slot:default="{ hover }">
-          <v-card :elevation="hover ? 10 : 5" class="mx-auto" height="auto" width="max">
-            <v-card-text class="text-center title">
-              Расписание звонков
-              <v-autocomplete class="pa-0 mb-0 mt-2" v-model="mplace" label="Место проведения" solo :items="place"></v-autocomplete>
-            </v-card-text>
-
-            <v-container class="grey lighten-5 pt-0" fluid>
-              <v-row no-gutters v-for="n in 7" :key="n" sm="6" md="4" lg="3">
-                <v-col>
-                  <v-card class="pa-2" outlined tile>
-                    {{n}} пара
-                    <v-text-field v-model="time1[n]" v-mask="mask" label="Начало/конец пары (00:00-00:00)"></v-text-field>
-                  </v-card>
-                </v-col>
-              </v-row>
+          <v-form ref="CallSchedule" v-model="valid">
+            <v-card :elevation="hover ? 10 : 5" class="mx-auto" height="auto" width="max">
               <v-card-text class="text-center title">
-                <v-btn color="accent" dark class="align-self-end" @click="sendQuery">Принять</v-btn>
+                Расписание звонков
+                <v-select
+                  class="pa-0 mb-0 mt-2"
+                  v-model="mplace"
+                  label="Место проведения"
+                  solo
+                  :items="places"
+                  return-object
+                  @change="getIndex"
+                ></v-select>
               </v-card-text>
-            </v-container>
-          </v-card>
+              <v-container class="grey lighten-5 pt-0">
+                <v-row
+                  no-gutters
+                  v-for="(value) in Object.keys(rendererTime)"
+                  :key="value"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                >
+                  <v-col>
+                    <v-card class="pa-2" outlined tile>
+                      {{value}} пара
+                      <v-text-field
+                        hint="(ЧЧ:ММ-ЧЧ:ММ)"
+                        v-model="rendererTime[value]"
+                        v-mask="mask"
+                        :rules="inputRules"
+                        label="Начало/конец пары"
+                      ></v-text-field>
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-card-text class="text-center title">
+                  <v-btn color="accent" dark class="align-self-end" @click="sendQuery">Принять</v-btn>
+                </v-card-text>
+              </v-container>
+            </v-card>
+          </v-form>
         </v-hover>
       </v-col>
     </v-row>
@@ -31,41 +53,69 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import callScedule from "../../api/callSchedule";
+import callSchedule from "../../api/callSchedule";
 export default {
   directives: {
     mask
   },
   data: () => ({
-    time1: [null, null, null, null, null, null, null],
-    time2: [null, null, null, null, null, null, null],
-    menu1: [false, false, false, false, false, false, false],
-    menu2: [false, false, false, false, false, false, false],
-    modal1: [false, false, false, false, false, false, false],
-    modal2: [false, false, false, false, false, false, false],
-
+    places: [],
+    valid: false,
+    rendererTime: null,
     mask: "##:##-##:##",
-
-    hidden: false,
-    items: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-    place: ["Нахимовский", "Неженская"],
-    mplace: "",
-    date: new Date().toISOString().substr(0, 10),
-    modal: false,
-    lesson: [
-      "Технология разработки и защиты баз данных",
-      "Операционные системы",
-      ""
-    ],
-    teacher: ["Токарчук А.С.", "Горбунов А.Д.", ""],
-    tab1: [null, null, null, null, null, null, null],
-
-    tabs: ["1 пара", "2 пара"]
+    inputRules: [
+        v =>/^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) ||
+          "Не соответствует формату времени"
+      ],
+    mplace: null,
+    timeTable: null,
+    date: null
   }),
-  methods: {
-    sendQuery() {
-      //Вписывай отправку
-      alert("Расписание звонков принято!");
+  props: {
+    place: {
+      type: String,
+      default: null
+    },
+    time: {
+      type: String,
+      default: null
     }
   },
+  created: function() {
+    var arr = JSON.parse(this.place);
+    this.places = [];
+    for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
+
+    this.timeTable = JSON.parse(this.time);
+    for (var i = 0; i < this.timeTable.length; i++)
+      this.timeTable[i].call_schedule = JSON.parse(
+        this.timeTable[i].call_schedule
+      );
+    this.mplace = this.places[0];
+
+    this.rendererTime = this.timeTable[0].call_schedule;
+  },
+  methods: {
+    sendQuery() {
+      if (this.$refs.CallSchedule.validate()) {
+        callSchedule
+          .save({ data: this.timeTable })
+          .then(res => {
+            alert("Расписание звонков принято!");
+          })
+          .catch(ex => {
+            console.log(ex);
+          });
+      }
+    },
+    getIndex() {
+      for (var i = 0; i < this.places.length; i++)
+        if (this.places[i] == this.mplace) {
+          this.rendererTime = this.timeTable[i].call_schedule;
+          console.log(this.timeTable[i]);
+        }
+    }
+  }
 };
 </script>

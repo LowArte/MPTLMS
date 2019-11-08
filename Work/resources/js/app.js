@@ -24,6 +24,7 @@ import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 import Card from './components/card/CardComponent'
 import TitlePage from './components/mainpage/SpecialtyPageComponent'
 import InfoPage from './components/mainpage/MainPageComponent'
+//import CallSchedule from './components/callschedule/CallScheduleComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
 
@@ -40,6 +41,7 @@ import * as actions from './store/action-types'
 import * as mutations from './store/mutation-types'
 import vuetify from './vuetify'
 
+
 import {
   mapGetters
 } from 'vuex'
@@ -47,15 +49,6 @@ import withSnackbar from './components/mixins/withSnackbar'
 
 if (window.user) {
   store.commit(mutations.USER, user)
-  switch(user.post_id){
-    case 2:{
-      store.dispatch(actions.GET_STUDENT, user.id)
-          .then(response => {
-          }).catch( e=>{
-          })
-      break;
-    }
-  }
   store.commit(mutations.LOGGED, true)
 }
 
@@ -83,7 +76,8 @@ new Vue({
     'subtitle': TitlePage,
     'maintitle': InfoPage,
     'requestsusers' : RequestsUsers,
-    'panelcontrol' : PanelControl
+    'panelcontrol' : PanelControl,
+    'callschedule' : CallSchedule
   },
   data: () => ({
     drawer: null,
@@ -131,12 +125,19 @@ new Vue({
             icon: 'today',
             text: 'Расписание',
             href: '/timetable'
-          },/* 
+          },
+          {
+            icon: 'today',
+            text: 'Расписание звонков',
+            href: '/callschedule'
+          },
+          /* 
           {
             icon: 'show_chart',
             text: 'Успеваемость',
             href: '/home'
-          }, */ {
+          }, */ 
+          {
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
@@ -180,7 +181,7 @@ new Vue({
           {
             icon: 'today',
             text: 'Расписание',
-            href: '/teachertimetable'
+            href: '/timetable'
           },
           {
             icon: 'home',
