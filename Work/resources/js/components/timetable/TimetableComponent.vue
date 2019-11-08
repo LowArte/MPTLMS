@@ -12,8 +12,10 @@
 </template>
 
 <script>
-import TimeTable from "./Components/TimeTable";
-import Replacements from "./Components/Replacements";
+import TimeTable from "./Components/TimeTable"
+import Replacements from "./Components/Replacements"
+import axios from 'axios'
+
 export default {
   data: () => ({
     tab: null,
@@ -48,7 +50,6 @@ export default {
     }
   },
   mounted:function(){
-    console.log("pidor");
   },
   components: {
     TimeTable,

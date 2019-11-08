@@ -5091,40 +5091,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5188,16 +5156,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       group: "П-2-16",
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: "00.00.0000"
-    };
+      Datetime: "00.00.0000",
+      arrgroups: [],
+      arrdepartaments: [],
+      departament: null
+    }, _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
   },
   props: {
+    place: {
+      type: String,
+      "default": null
+    },
     schedule: {
       type: String,
       "default": null
@@ -5222,7 +5199,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log("sdad");
     var currDate = new Date();
     var hours = currDate.getHours();
     var minutes = currDate.getMinutes();
@@ -5241,17 +5217,44 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.Datetime = hours + ":" + minutes + ":" + seconds;
+    console.log(JSON.parse(this.groups));
+    console.log(JSON.parse(this.callSchedule));
+    console.log(JSON.parse(this.departaments)); //Место
+
+    this.places = JSON.parse(this.place); //var arr = JSON.parse(this.place);
+    //this.places = [];
+    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
+    //Отделения
+
+    this.departaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(this.departaments.cur_departament)[0].dep_name_full;
+    this.departaments = JSON.parse(this.departaments.departaments);
+    this.arrdepartaments = [];
+
+    for (var i = 0; i < this.departaments.length; i++) {
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);
+    } //Группы
+
+
+    this.groups = JSON.parse(this.groups);
+    this.group = this.groups.group_name; //Расписание звонков
+
+    this.callSchedule = JSON.parse(this.callSchedule);
+
+    for (var i = 0; i < this.callSchedule.length; i++) {
+      this.callSchedule[i].call_schedule = JSON.parse(this.callSchedule[i].call_schedule);
+    } //Расписание занятий
+
 
     if (this.schedule == "") {
       console.log("Current schedule is empty");
     } else {
       console.log(JSON.parse(this.schedule));
+      this.schedule = JSON.parse(this.schedule);
+      this.schedule = JSON.parse(this.schedule.schedule); // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
     }
+  } //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
 
-    console.log(JSON.parse(this.groups));
-    console.log(JSON.parse(this.callSchedule));
-    console.log(JSON.parse(this.departaments));
-  }
 });
 
 /***/ }),
@@ -5265,40 +5268,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5362,16 +5333,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       group: "П-2-16",
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: "00.00.0000"
-    };
+      Datetime: "00.00.0000",
+      arrgroups: [],
+      arrdepartaments: [],
+      departament: null
+    }, _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
   },
   props: {
+    place: {
+      type: String,
+      "default": null
+    },
     schedule: {
       type: String,
       "default": null
@@ -5396,7 +5376,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log("sdad");
     var currDate = new Date();
     var hours = currDate.getHours();
     var minutes = currDate.getMinutes();
@@ -5415,17 +5394,44 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.Datetime = hours + ":" + minutes + ":" + seconds;
+    console.log(JSON.parse(this.groups));
+    console.log(JSON.parse(this.callSchedule));
+    console.log(JSON.parse(this.departaments)); //Место
+
+    this.places = JSON.parse(this.place); //var arr = JSON.parse(this.place);
+    //this.places = [];
+    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
+    //Отделения
+
+    this.departaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(this.departaments.cur_departament)[0].dep_name_full;
+    this.departaments = JSON.parse(this.departaments.departaments);
+    this.arrdepartaments = [];
+
+    for (var i = 0; i < this.departaments.length; i++) {
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);
+    } //Группы
+
+
+    this.groups = JSON.parse(this.groups);
+    this.group = this.groups.group_name; //Расписание звонков
+
+    this.callSchedule = JSON.parse(this.callSchedule);
+
+    for (var i = 0; i < this.callSchedule.length; i++) {
+      this.callSchedule[i].call_schedule = JSON.parse(this.callSchedule[i].call_schedule);
+    } //Расписание занятий
+
 
     if (this.schedule == "") {
       console.log("Current schedule is empty");
     } else {
       console.log(JSON.parse(this.schedule));
+      this.schedule = JSON.parse(this.schedule);
+      this.schedule = JSON.parse(this.schedule.schedule); // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
     }
+  } //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
 
-    console.log(JSON.parse(this.groups));
-    console.log(JSON.parse(this.callSchedule));
-    console.log(JSON.parse(this.departaments));
-  }
 });
 
 /***/ }),
@@ -5585,6 +5591,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/TimeTable */ "./resources/js/components/timetable/Components/TimeTable.vue");
 /* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timetable/Components/Replacements.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -5598,6 +5606,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5632,9 +5641,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     }
   },
-  mounted: function mounted() {
-    console.log("pidor");
-  },
+  mounted: function mounted() {},
   components: {
     TimeTable: _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__["default"],
     Replacements: _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -13166,19 +13173,23 @@ var render = function() {
                 attrs: {
                   label: "Отделения",
                   solo: "",
-                  items: _vm.departaments
+                  items: _vm.arrdepartaments
                 },
                 model: {
-                  value: _vm.departamet,
+                  value: _vm.departament,
                   callback: function($$v) {
-                    _vm.departamet = $$v
+                    _vm.departament = $$v
                   },
-                  expression: "departamet"
+                  expression: "departament"
                 }
               }),
               _vm._v(" "),
               _c("v-autocomplete", {
-                attrs: { label: "Группа", solo: "", items: _vm.groups },
+                attrs: {
+                  label: "Группа",
+                  solo: "",
+                  items: _vm.groups.group_name
+                },
                 model: {
                   value: _vm.group,
                   callback: function($$v) {
@@ -13186,54 +13197,7 @@ var render = function() {
                   },
                   expression: "group"
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                {
-                  staticClass: "pa-0 align-self-center",
-                  attrs: { "d-flex": "" }
-                },
-                [
-                  _c(
-                    "v-row",
-                    {
-                      staticClass: "pa-0 justify-center",
-                      attrs: { sm: "2", md: "0" }
-                    },
-                    [
-                      _c(
-                        "v-col",
-                        {
-                          staticClass: "pa-0 d-flex justify-center",
-                          attrs: { sm: "2", md: "0" }
-                        },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "accent", dark: "" },
-                              on: {
-                                click: function($event) {
-                                  _vm.hidden = !_vm.hidden
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.hidden ? "Числитель" : "Знаменатель")
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -13243,228 +13207,169 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider", { staticClass: "ma-0" }),
       _vm._v(" "),
-      _c("v-data", {
-        attrs: {
-          items: _vm.items[_vm.group],
-          "items-per-page": _vm.itemsPerPage
-        },
-        on: {
-          "update:itemsPerPage": function($event) {
-            _vm.itemsPerPage = $event
+      _c(
+        "v-data",
+        {
+          attrs: {
+            items: _vm.schedule.schedule,
+            "items-per-page": _vm.itemsPerPage
           },
-          "update:items-per-page": function($event) {
-            _vm.itemsPerPage = $event
+          on: {
+            "update:itemsPerPage": function($event) {
+              _vm.itemsPerPage = $event
+            },
+            "update:items-per-page": function($event) {
+              _vm.itemsPerPage = $event
+            }
           }
         },
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(props) {
-              return [
-                _c(
-                  "v-row",
-                  _vm._l(props.items, function(item) {
-                    return _c(
-                      "v-col",
-                      {
-                        key: item.name,
-                        attrs: { cols: "12", sm: "6", md: "2", lg: "2" }
-                      },
-                      [
-                        _c(
-                          "v-card",
-                          [
-                            _c(
-                              "v-card-title",
-                              {
-                                staticClass: "subtitle-1",
-                                staticStyle: { color: "#FF3D00" }
-                              },
+        [
+          _c(
+            "v-row",
+            _vm._l(_vm.day, function(item) {
+              return _c(
+                "v-col",
+                { key: item, attrs: { cols: "12", sm: "6", md: "2", lg: "2" } },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-card-title",
+                        {
+                          staticClass: "subtitle-1 mb-0 pb-0",
+                          staticStyle: { color: "#FF3D00" }
+                        },
+                        [_vm._v(_vm._s(item))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list",
+                        { attrs: { dense: "" } },
+                        [
+                          _c("v-list-item", [
+                            _vm._v(
+                              "Здание: " + _vm._s(_vm.schedule[item].Place)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("v-divider", { staticClass: "my-2" }),
+                          _vm._v(" "),
+                          _vm._l(7, function(n, i) {
+                            return _c(
+                              "div",
+                              { key: i, staticClass: "ma-0 pa-0" },
                               [
-                                _vm._v(
-                                  _vm._s(item.name) +
-                                    " - " +
-                                    _vm._s(_vm.Datetime)
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-list",
-                              { attrs: { dense: "" } },
-                              [
-                                _c("v-list-item", [
-                                  _vm._v("Здание: " + _vm._s(item.place))
-                                ]),
+                                _vm.schedule[item][n].Lesson != null &&
+                                _vm.schedule[item][n].Lesson != ""
+                                  ? _c(
+                                      "v-list",
+                                      { staticClass: "ma-2 pa-0" },
+                                      [
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(n) +
+                                                " пара - " +
+                                                _vm._s(
+                                                  _vm.callSchedule[
+                                                    _vm.schedule[item].Place
+                                                  ].call_schedule[n]
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.schedule[item][n].Lesson
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.schedule[item][n].Teacher
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _c(
+                                      "v-list",
+                                      { staticClass: "ma-0 pa-0" },
+                                      [
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(n) +
+                                                " пара - " +
+                                                _vm._s(
+                                                  _vm.callSchedule[
+                                                    _vm.schedule[item].Place
+                                                  ].call_schedule[n]
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [_vm._v("Свободная пара")]
+                                        )
+                                      ],
+                                      1
+                                    ),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p1) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p1) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t1) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p2) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p2) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t2) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p3) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p3) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t3) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p4) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p4) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t4) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p5) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p5) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t5) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p6) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p6) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t6) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p7) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p7) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t7) +
-                                      "\n              "
-                                  )
-                                ])
+                                _c("v-divider", { staticClass: "my-2" })
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  }),
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      })
+                          })
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v("\n  " + _vm._s(_vm.places) + "\n  \n  "),
+      _c("br"),
+      _vm._v("\n  " + _vm._s(_vm.callSchedule) + "\n  \n")
     ],
     1
   )
@@ -13506,19 +13411,23 @@ var render = function() {
                 attrs: {
                   label: "Отделения",
                   solo: "",
-                  items: _vm.departaments
+                  items: _vm.arrdepartaments
                 },
                 model: {
-                  value: _vm.departamet,
+                  value: _vm.departament,
                   callback: function($$v) {
-                    _vm.departamet = $$v
+                    _vm.departament = $$v
                   },
-                  expression: "departamet"
+                  expression: "departament"
                 }
               }),
               _vm._v(" "),
               _c("v-autocomplete", {
-                attrs: { label: "Группа", solo: "", items: _vm.groups },
+                attrs: {
+                  label: "Группа",
+                  solo: "",
+                  items: _vm.groups.group_name
+                },
                 model: {
                   value: _vm.group,
                   callback: function($$v) {
@@ -13526,54 +13435,7 @@ var render = function() {
                   },
                   expression: "group"
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                {
-                  staticClass: "pa-0 align-self-center",
-                  attrs: { "d-flex": "" }
-                },
-                [
-                  _c(
-                    "v-row",
-                    {
-                      staticClass: "pa-0 justify-center",
-                      attrs: { sm: "2", md: "0" }
-                    },
-                    [
-                      _c(
-                        "v-col",
-                        {
-                          staticClass: "pa-0 d-flex justify-center",
-                          attrs: { sm: "2", md: "0" }
-                        },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "accent", dark: "" },
-                              on: {
-                                click: function($event) {
-                                  _vm.hidden = !_vm.hidden
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.hidden ? "Числитель" : "Знаменатель")
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              })
             ],
             1
           )
@@ -13583,228 +13445,169 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider", { staticClass: "ma-0" }),
       _vm._v(" "),
-      _c("v-data", {
-        attrs: {
-          items: _vm.items[_vm.group],
-          "items-per-page": _vm.itemsPerPage
-        },
-        on: {
-          "update:itemsPerPage": function($event) {
-            _vm.itemsPerPage = $event
+      _c(
+        "v-data",
+        {
+          attrs: {
+            items: _vm.schedule.schedule,
+            "items-per-page": _vm.itemsPerPage
           },
-          "update:items-per-page": function($event) {
-            _vm.itemsPerPage = $event
+          on: {
+            "update:itemsPerPage": function($event) {
+              _vm.itemsPerPage = $event
+            },
+            "update:items-per-page": function($event) {
+              _vm.itemsPerPage = $event
+            }
           }
         },
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(props) {
-              return [
-                _c(
-                  "v-row",
-                  _vm._l(props.items, function(item) {
-                    return _c(
-                      "v-col",
-                      {
-                        key: item.name,
-                        attrs: { cols: "12", sm: "6", md: "2", lg: "2" }
-                      },
-                      [
-                        _c(
-                          "v-card",
-                          [
-                            _c(
-                              "v-card-title",
-                              {
-                                staticClass: "subtitle-1",
-                                staticStyle: { color: "#FF3D00" }
-                              },
+        [
+          _c(
+            "v-row",
+            _vm._l(_vm.day, function(item) {
+              return _c(
+                "v-col",
+                { key: item, attrs: { cols: "12", sm: "6", md: "2", lg: "2" } },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-card-title",
+                        {
+                          staticClass: "subtitle-1 mb-0 pb-0",
+                          staticStyle: { color: "#FF3D00" }
+                        },
+                        [_vm._v(_vm._s(item))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list",
+                        { attrs: { dense: "" } },
+                        [
+                          _c("v-list-item", [
+                            _vm._v(
+                              "Здание: " + _vm._s(_vm.schedule[item].Place)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("v-divider", { staticClass: "my-2" }),
+                          _vm._v(" "),
+                          _vm._l(7, function(n, i) {
+                            return _c(
+                              "div",
+                              { key: i, staticClass: "ma-0 pa-0" },
                               [
-                                _vm._v(
-                                  _vm._s(item.name) +
-                                    " - " +
-                                    _vm._s(_vm.Datetime)
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-list",
-                              { attrs: { dense: "" } },
-                              [
-                                _c("v-list-item", [
-                                  _vm._v("Здание: " + _vm._s(item.place))
-                                ]),
+                                _vm.schedule[item][n].Lesson != null &&
+                                _vm.schedule[item][n].Lesson != ""
+                                  ? _c(
+                                      "v-list",
+                                      { staticClass: "ma-2 pa-0" },
+                                      [
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(n) +
+                                                " пара - " +
+                                                _vm._s(
+                                                  _vm.callSchedule[
+                                                    _vm.schedule[item].Place
+                                                  ].call_schedule[n]
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.schedule[item][n].Lesson
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.schedule[item][n].Teacher
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _c(
+                                      "v-list",
+                                      { staticClass: "ma-0 pa-0" },
+                                      [
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(n) +
+                                                " пара - " +
+                                                _vm._s(
+                                                  _vm.callSchedule[
+                                                    _vm.schedule[item].Place
+                                                  ].call_schedule[n]
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
+                                          },
+                                          [_vm._v("Свободная пара")]
+                                        )
+                                      ],
+                                      1
+                                    ),
                                 _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p1) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p1) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t1) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p2) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p2) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t2) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p3) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p3) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t3) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p4) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p4) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t4) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p5) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p5) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t5) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p6) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p6) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t6) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p7) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p7) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t7) +
-                                      "\n              "
-                                  )
-                                ])
+                                _c("v-divider", { staticClass: "my-2" })
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  }),
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      })
+                          })
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v("\n  " + _vm._s(_vm.places) + "\n  \n  "),
+      _c("br"),
+      _vm._v("\n  " + _vm._s(_vm.callSchedule) + "\n  \n")
     ],
     1
   )

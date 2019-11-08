@@ -52,3 +52,5 @@ Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->na
 
 Route::post('/save_concallschedule', 'RouteControllers\ConCallScheduleController@save');
 
+Route::post('/get_group_by_departament_id', 'RouteControllers\TimeTableController@groupByDepartamentId');
+
