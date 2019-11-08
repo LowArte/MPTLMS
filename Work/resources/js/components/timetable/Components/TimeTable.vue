@@ -53,8 +53,6 @@
     </v-data>
     {{places}}
     <br />
-    {{callSchedule}}
-    
   </v-container>
 </template>
 
@@ -119,7 +117,7 @@ export default {
       seconds = "0" + seconds;
     }
     this.Datetime = hours + ":" + minutes + ":" + seconds;
-
+    console.log(JSON.parse(this.place));
     console.log(JSON.parse(this.groups));
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments));

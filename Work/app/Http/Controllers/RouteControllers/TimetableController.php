@@ -62,7 +62,7 @@ class TimetableController extends Controller
             return view('components/timetable', [
                 "call" => json_encode($call),
                 "groups" => json_encode($groups),
-                "places" => json_encode($places),
+                "place" => json_encode($places),
                 "dep" => json_encode([
                     "departaments" => json_encode($deps),
                     "cur_departament" => -1
