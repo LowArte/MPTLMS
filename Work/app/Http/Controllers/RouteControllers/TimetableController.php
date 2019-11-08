@@ -10,6 +10,7 @@ use App\Models\Group;
 use App\Models\Places;
 use App\Models\Departament;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\ModelNotFoundException as MNF;
 use Debugbar;
 
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,21 @@ class TimetableController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function groupByDepartamentId (Request $request)
+    {
+        
+        try{
+            Departament::where('id',$request['dep_id'])->firstOrFail();       
+            $group = Group::where('departaments_id',$request['dep_id'])->get();
+            return response()->json(['group'=>$group],200);
+        }
+        catch(MNF $e)
+        {
+            Debugbar::info("departament_not_found");
+            return response()->json(['error'=>$e],400);
+        }
     }
 
     /**
@@ -57,11 +73,9 @@ class TimetableController extends Controller
             ]);
         }
         else{
-            $groups = Group::get();
             $deps = Departament::get();
             return view('components/timetable', [
                 "call" => json_encode($call),
-                "groups" => json_encode($groups),
                 "place" => json_encode($places),
                 "dep" => json_encode([
                     "departaments" => json_encode($deps),
