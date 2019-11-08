@@ -68,6 +68,17 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
+                    <v-layout row wrap>
+                        <v-flex xs12>
+                            <v-card>
+                                <v-card-title class="secondary info--text font-weight-light">
+                                    <h2 class="font-weight-light">Дополнительное образование</h2>
+                                </v-card-title>
+                                <v-divider class="ma-2"></v-divider>
+                                <retraining></retraining>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
                 </v-container>
             </v-content>
         </v-app>
