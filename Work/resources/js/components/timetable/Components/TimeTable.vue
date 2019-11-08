@@ -2,7 +2,15 @@
   <v-container fluid>
     <v-row align="center">
       <v-container>
-        <v-autocomplete v-model="departament" label="Отделения" solo :items="arrdepartaments" @change="getGroups(departament)"></v-autocomplete>
+        <v-autocomplete
+          v-model="departament"
+          label="Отделения"
+          solo
+          :items="arrdepartaments"
+          item-text="dep_name_full"
+          return-object  
+          @change="getGroups(departament.id)"
+        ></v-autocomplete>
         <v-autocomplete v-model="group" label="Группа" solo :items="groups.group_name"></v-autocomplete>
         <!-- <v-container class="pa-0 align-self-center" d-flex>
           <v-row sm="2" md="0" class="pa-0 justify-center">
@@ -33,7 +41,8 @@
                 >
                   <v-list-item
                     class="mt-0 mb-0 pt-0 pb-0"
-                   v-if="callSchedule[schedule[item].Place].call_schedule[n] != null && callSchedule[schedule[item].Place].call_schedule[n] != ''">{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
+                    v-if="callSchedule[schedule[item].Place].call_schedule[n] != null && callSchedule[schedule[item].Place].call_schedule[n] != ''"
+                  >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Lesson}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Teacher }}</v-list-item>
                 </v-list>
@@ -57,6 +66,7 @@
 </template>
 
 <script>
+import group from "../../../api/group"
 export default {
   data: () => ({
     group: "П-2-16",
@@ -101,8 +111,14 @@ export default {
       //Получить массив описанный выше и забиндить его во vue
       return;
     },
-    getGroups: function()
-    {
+    getGroups: function(departament ) {
+      group.getGroup(departament)
+      .then(reg=>{
+        console.log(reg.data.group) 
+      })
+      .catch(ex=>{
+        console.log(ex) 
+      })
 
     }
   },
@@ -133,14 +149,22 @@ export default {
     //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
 
     //Отделения
-    this.departaments = JSON.parse(this.departaments);
+  //debugger;
+
+    this.arrdepartaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(
+      this.arrdepartaments.cur_departament
+    )[0].dep_name_full;
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
+
+    /*this.departaments = JSON.parse(this.departaments);
     this.departament = JSON.parse(
       this.departaments.cur_departament
     )[0].dep_name_full;
     this.departaments = JSON.parse(this.departaments.departaments);
     this.arrdepartaments = [];
     for (var i = 0; i < this.departaments.length; i++)
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);*/
 
     //Группы
     this.groups = JSON.parse(this.groups);
