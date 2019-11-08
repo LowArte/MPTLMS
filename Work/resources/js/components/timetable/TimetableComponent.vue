@@ -3,7 +3,7 @@
     <v-tab :key="item">Расписание</v-tab>
     <v-tab :key="item">Замены</v-tab>
     <v-tab-item :key="item">
-      <TimeTable v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
+      <TimeTable v-bind:place="place" v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
     </v-tab-item>
     <v-tab-item :key="item">
       <Replacements />
@@ -12,8 +12,10 @@
 </template>
 
 <script>
-import TimeTable from "./Components/TimeTable";
-import Replacements from "./Components/Replacements";
+import TimeTable from "./Components/TimeTable"
+import Replacements from "./Components/Replacements"
+import axios from 'axios'
+
 export default {
   data: () => ({
     tab: null,
@@ -30,6 +32,10 @@ export default {
     ]
   }),
   props:{
+    place:{
+      type: String,
+      default:null
+    },
     schedule:{
       type: String,
       default:null
@@ -47,8 +53,8 @@ export default {
       default:null
     }
   },
-  mounted:function(){
-    console.log("pidor");
+  mounted:function(){ 
+
   },
   components: {
     TimeTable,

@@ -5278,6 +5278,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -5340,6 +5341,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
@@ -5382,6 +5391,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loader: function loader() {
       //Получить массив описанный выше и забиндить его во vue
       return;
+    },
+    getGroups: function getGroups(departament) {
+      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
+        console.log(reg.data.group);
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
     }
   },
   mounted: function mounted() {
@@ -5403,6 +5419,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     this.Datetime = hours + ":" + minutes + ":" + seconds;
+    console.log(JSON.parse(this.place));
     console.log(JSON.parse(this.groups));
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments)); //Место
@@ -5411,16 +5428,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //this.places = [];
     //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
     //Отделения
+    //debugger;
 
-    this.departaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.departaments.cur_departament)[0].dep_name_full;
+    this.arrdepartaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0].dep_name_full;
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
+    /*this.departaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(
+      this.departaments.cur_departament
+    )[0].dep_name_full;
     this.departaments = JSON.parse(this.departaments.departaments);
     this.arrdepartaments = [];
-
-    for (var i = 0; i < this.departaments.length; i++) {
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);
-    } //Группы
-
+    for (var i = 0; i < this.departaments.length; i++)
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);*/
+    //Группы
 
     this.groups = JSON.parse(this.groups);
     this.group = this.groups.group_name; //Расписание звонков
@@ -5454,6 +5475,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -5516,6 +5538,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
@@ -5558,6 +5588,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     loader: function loader() {
       //Получить массив описанный выше и забиндить его во vue
       return;
+    },
+    getGroups: function getGroups(departament) {
+      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
+        console.log(reg.data.group);
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
     }
   },
   mounted: function mounted() {
@@ -5579,6 +5616,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     this.Datetime = hours + ":" + minutes + ":" + seconds;
+    console.log(JSON.parse(this.place));
     console.log(JSON.parse(this.groups));
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments)); //Место
@@ -5587,16 +5625,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //this.places = [];
     //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
     //Отделения
+    //debugger;
 
-    this.departaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.departaments.cur_departament)[0].dep_name_full;
+    this.arrdepartaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0].dep_name_full;
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
+    /*this.departaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(
+      this.departaments.cur_departament
+    )[0].dep_name_full;
     this.departaments = JSON.parse(this.departaments.departaments);
     this.arrdepartaments = [];
-
-    for (var i = 0; i < this.departaments.length; i++) {
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);
-    } //Группы
-
+    for (var i = 0; i < this.departaments.length; i++)
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);*/
+    //Группы
 
     this.groups = JSON.parse(this.groups);
     this.group = this.groups.group_name; //Расписание звонков
@@ -5776,6 +5818,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/TimeTable */ "./resources/js/components/timetable/Components/TimeTable.vue");
 /* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timetable/Components/Replacements.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -5789,6 +5833,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5806,6 +5851,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
+    place: {
+      type: String,
+      "default": null
+    },
     schedule: {
       type: String,
       "default": null
@@ -5823,9 +5872,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     }
   },
-  mounted: function mounted() {
-    console.log("pidor");
-  },
+  mounted: function mounted() {},
   components: {
     TimeTable: _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__["default"],
     Replacements: _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -13946,7 +13993,14 @@ var render = function() {
                 attrs: {
                   label: "Отделения",
                   solo: "",
-                  items: _vm.arrdepartaments
+                  items: _vm.arrdepartaments,
+                  "item-text": "dep_name_full",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getGroups(_vm.departament.id)
+                  }
                 },
                 model: {
                   value: _vm.departament,
@@ -14022,7 +14076,11 @@ var render = function() {
                         [
                           _c("v-list-item", [
                             _vm._v(
-                              "Здание: " + _vm._s(_vm.schedule[item].Place)
+                              "Здание: " +
+                                _vm._s(
+                                  _vm.places[_vm.schedule[item].Place]
+                                    .place_name
+                                )
                             )
                           ]),
                           _vm._v(" "),
@@ -14039,23 +14097,31 @@ var render = function() {
                                       "v-list",
                                       { staticClass: "ma-2 pa-0" },
                                       [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
+                                        _vm.callSchedule[
+                                          _vm.schedule[item].Place
+                                        ].call_schedule[n] != null &&
+                                        _vm.callSchedule[
+                                          _vm.schedule[item].Place
+                                        ].call_schedule[n] != ""
+                                          ? _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(n) +
+                                                    " пара - " +
+                                                    _vm._s(
+                                                      _vm.callSchedule[
+                                                        _vm.schedule[item].Place
+                                                      ].call_schedule[n]
+                                                    )
                                                 )
+                                              ]
                                             )
-                                          ]
-                                        ),
+                                          : _vm._e(),
                                         _vm._v(" "),
                                         _c(
                                           "v-list-item",
@@ -14141,8 +14207,7 @@ var render = function() {
         1
       ),
       _vm._v("\n  " + _vm._s(_vm.places) + "\n  "),
-      _c("br"),
-      _vm._v("\n  " + _vm._s(_vm.callSchedule) + "\n  \n")
+      _c("br")
     ],
     1
   )
@@ -14184,7 +14249,14 @@ var render = function() {
                 attrs: {
                   label: "Отделения",
                   solo: "",
-                  items: _vm.arrdepartaments
+                  items: _vm.arrdepartaments,
+                  "item-text": "dep_name_full",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getGroups(_vm.departament.id)
+                  }
                 },
                 model: {
                   value: _vm.departament,
@@ -14260,7 +14332,11 @@ var render = function() {
                         [
                           _c("v-list-item", [
                             _vm._v(
-                              "Здание: " + _vm._s(_vm.schedule[item].Place)
+                              "Здание: " +
+                                _vm._s(
+                                  _vm.places[_vm.schedule[item].Place]
+                                    .place_name
+                                )
                             )
                           ]),
                           _vm._v(" "),
@@ -14277,23 +14353,31 @@ var render = function() {
                                       "v-list",
                                       { staticClass: "ma-2 pa-0" },
                                       [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
+                                        _vm.callSchedule[
+                                          _vm.schedule[item].Place
+                                        ].call_schedule[n] != null &&
+                                        _vm.callSchedule[
+                                          _vm.schedule[item].Place
+                                        ].call_schedule[n] != ""
+                                          ? _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(n) +
+                                                    " пара - " +
+                                                    _vm._s(
+                                                      _vm.callSchedule[
+                                                        _vm.schedule[item].Place
+                                                      ].call_schedule[n]
+                                                    )
                                                 )
+                                              ]
                                             )
-                                          ]
-                                        ),
+                                          : _vm._e(),
                                         _vm._v(" "),
                                         _c(
                                           "v-list-item",
@@ -14379,8 +14463,7 @@ var render = function() {
         1
       ),
       _vm._v("\n  " + _vm._s(_vm.places) + "\n  "),
-      _c("br"),
-      _vm._v("\n  " + _vm._s(_vm.callSchedule) + "\n  \n")
+      _c("br")
     ],
     1
   )
@@ -14568,6 +14651,7 @@ var render = function() {
         [
           _c("TimeTable", {
             attrs: {
+              place: _vm.place,
               schedule: _vm.schedule,
               callSchedule: _vm.call,
               groups: _vm.groups,
@@ -65206,6 +65290,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   save: function save(credentials) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_concallschedule', credentials);
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/group.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/group.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getGroup: function getGroup(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_group_by_departament_id', {
+      "dep_id": credentials
+    });
   }
 });
 

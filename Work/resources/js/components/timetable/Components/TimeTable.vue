@@ -2,7 +2,15 @@
   <v-container fluid>
     <v-row align="center">
       <v-container>
-        <v-autocomplete v-model="departament" label="Отделения" solo :items="arrdepartaments"></v-autocomplete>
+        <v-autocomplete
+          v-model="departament"
+          label="Отделения"
+          solo
+          :items="arrdepartaments"
+          item-text="dep_name_full"
+          return-object  
+          @change="getGroups(departament.id)"
+        ></v-autocomplete>
         <v-autocomplete v-model="group" label="Группа" solo :items="groups.group_name"></v-autocomplete>
         <!-- <v-container class="pa-0 align-self-center" d-flex>
           <v-row sm="2" md="0" class="pa-0 justify-center">
@@ -24,7 +32,7 @@
           <v-card>
             <v-card-title class="subtitle-1 mb-0 pb-0" style="color: #FF3D00;">{{item}}</v-card-title>
             <v-list dense>
-              <v-list-item>Здание: {{schedule[item].Place}}</v-list-item>
+              <v-list-item>Здание: {{places[schedule[item].Place].place_name}}</v-list-item>
               <v-divider class="my-2"></v-divider>
               <div v-for="(n,i) in 7" :key="i" class="ma-0 pa-0">
                 <v-list
@@ -33,6 +41,7 @@
                 >
                   <v-list-item
                     class="mt-0 mb-0 pt-0 pb-0"
+                    v-if="callSchedule[schedule[item].Place].call_schedule[n] != null && callSchedule[schedule[item].Place].call_schedule[n] != ''"
                   >{{n}} пара - {{callSchedule[schedule[item].Place].call_schedule[n]}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Lesson}}</v-list-item>
                   <v-list-item class="mt-0 mb-0 pt-0 pb-0">{{schedule[item][n].Teacher }}</v-list-item>
@@ -53,12 +62,11 @@
     </v-data>
     {{places}}
     <br />
-    {{callSchedule}}
-    
   </v-container>
 </template>
 
 <script>
+import group from "../../../api/group"
 export default {
   data: () => ({
     group: "П-2-16",
@@ -102,6 +110,16 @@ export default {
     loader: function() {
       //Получить массив описанный выше и забиндить его во vue
       return;
+    },
+    getGroups: function(departament ) {
+      group.getGroup(departament)
+      .then(reg=>{
+        console.log(reg.data.group) 
+      })
+      .catch(ex=>{
+        console.log(ex) 
+      })
+
     }
   },
   mounted: function() {
@@ -119,7 +137,7 @@ export default {
       seconds = "0" + seconds;
     }
     this.Datetime = hours + ":" + minutes + ":" + seconds;
-
+    console.log(JSON.parse(this.place));
     console.log(JSON.parse(this.groups));
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments));
@@ -131,14 +149,22 @@ export default {
     //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
 
     //Отделения
-    this.departaments = JSON.parse(this.departaments);
+  //debugger;
+
+    this.arrdepartaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(
+      this.arrdepartaments.cur_departament
+    )[0].dep_name_full;
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments);
+
+    /*this.departaments = JSON.parse(this.departaments);
     this.departament = JSON.parse(
       this.departaments.cur_departament
     )[0].dep_name_full;
     this.departaments = JSON.parse(this.departaments.departaments);
     this.arrdepartaments = [];
     for (var i = 0; i < this.departaments.length; i++)
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);
+      this.arrdepartaments.push(this.departaments[i].dep_name_full);*/
 
     //Группы
     this.groups = JSON.parse(this.groups);
