@@ -54,10 +54,18 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('welcome')->with([
+        $panel_array = array(
+            array(
+                "header"  => "Подробная информация",
+                "content" => "mainpage/MainPageComponent",
+                "props"   => array()
+            )
+        );
+        return view('welcome', [
+            "panel_array" => json_encode($panel_array), 
             'token' => $token,
             'email' => $request->email,
-            'action' => 'reset_password',
+            'action' => 'reset_password'
         ]);
     }
 }
