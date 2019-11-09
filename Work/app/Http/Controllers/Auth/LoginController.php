@@ -49,11 +49,13 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view(
-            'welcome',
-            [
-                'action' => 'login'
-            ]
+        $panel_array = array(
+            array(
+                "header"  => "Подробная информация",
+                "content" => "mainpage/MainPageComponent",
+                "props"   => array()
+            )
         );
+        return view('welcome', ["panel_array" => json_encode($panel_array),'action' => 'login']);
     }
 }

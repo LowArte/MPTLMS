@@ -7,7 +7,7 @@ Work/bootstrap/compiled.php
 Work/app/storage/
 
 # Laravel 5 & Lumen specific
-Work/public/
+Work/public/*
 Work/storage/*.key
 .env.*.php
 .env.php
@@ -20,6 +20,5 @@ Homestead.json
 Work/public/css/app.css
 Work/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg
 Work/public/mix-manifest.json
-Work/public/js/app.js
 Work/package-lock.json
 Work/package.json

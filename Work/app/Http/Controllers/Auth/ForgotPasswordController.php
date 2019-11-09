@@ -33,10 +33,14 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view(
-            'welcome', [
-            'action' => 'request_new_password']
+        $panel_array = array(
+            array(
+                "header"  => "Подробная информация",
+                "content" => "mainpage/MainPageComponent",
+                "props"   => array()
+            )
         );
+        return view('welcome', ["panel_array" => json_encode($panel_array),'action' => 'request_new_password']);
     }
 
 }

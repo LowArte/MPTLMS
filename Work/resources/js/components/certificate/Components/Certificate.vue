@@ -88,27 +88,18 @@
                 </ul>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field v-model="Surname" label="Фамилия" readonly></v-text-field>
+                <v-text-field v-model="FIO" label="Фамилия, Имя, Отчество студента" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field v-model="Firstname" label="Имя" readonly></v-text-field>
+                <v-text-field v-model="group" :items="itemsg" label="Группа" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field v-model="Lastname" label="Отчество" readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-select v-model="group" :items="itemsg" label="Группа" readonly></v-select>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required readonly></v-text-field>
+                <v-text-field v-model="email" label="E-mail" required readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-text-field
                   v-model="datebirth"
                   label="Дата рождения"
-                  hint="Формат День/Месяц/Год"
-                  persistent-hint
-                  @blur="date = parseDate(dateFormatted)"
                   readonly
                 ></v-text-field>
               </v-row>
@@ -166,14 +157,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+import dataFormater from "../../../utils/dataFormater"
 export default {
   data: () => ({
     model: "",
     itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
     group: "П-2-16",
-    Surname: user.secName,
-    Firstname: user.name,
-    Lastname: user.thirdName,
+    FIO: user.secName +" "+ user.name+" " + user.thirdName,
     email: user.email,
     datebirth: "16-09-2000",
     enabled: false,
@@ -190,10 +180,16 @@ export default {
       alert("Отправлен запрос на получение справки!");
     }
   },
-  computed: {
-    ...mapGetters({
-      user: "user"
-    })
+  mounted(){
+    let info = JSON.parse(this.info)
+    this.datebirth = dataFormater(new Date(info.student.birthday))
+    this.group = info.group.group_name
+  },
+  props:{
+    info:{
+      data:String,
+      default:null
+    }
   }
 };
 </script>

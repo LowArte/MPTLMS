@@ -3472,6 +3472,12 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  props: {
+    info: {
+      data: String,
+      "default": null
+    }
+  },
   components: {
     OrderCharacteristic: _Components_Characteristic__WEBPACK_IMPORTED_MODULE_1__["default"],
     OrderCertificate: _Components_Certificate__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -3490,178 +3496,165 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/dataFormater */ "./resources/js/utils/dataFormater.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3669,9 +3662,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       model: "",
       itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
       group: "П-2-16",
-      Surname: user.secName,
-      Firstname: user.name,
-      Lastname: user.thirdName,
+      FIO: user.secName + " " + user.name + " " + user.thirdName,
       email: user.email,
       datebirth: "16-09-2000",
       enabled: false,
@@ -3692,9 +3683,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       alert("Отправлен запрос на получение справки!");
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    user: "user"
-  }))
+  mounted: function mounted() {
+    var info = JSON.parse(this.info);
+    this.datebirth = Object(_utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(info.student.birthday));
+    this.group = info.group.group_name;
+  },
+  props: {
+    info: {
+      data: String,
+      "default": null
+    }
+  }
 });
 
 /***/ }),
@@ -3708,6 +3707,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/dataFormater */ "./resources/js/utils/dataFormater.js");
 //
 //
 //
@@ -3814,33 +3816,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
+  directives: {
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
+  },
+  data: function data(vm) {
     return {
-      modelorder: "",
+      mask: "####",
+      menu: false,
+      group: "",
+      FIO: user.secName + " " + user.name + " " + user.thirdName,
       modelprogress: "",
-      group: "П-2-16",
-      FIO: "Борисов Артём Игоревич",
-      itemss: ["09.02.03 - Программирование в компьютерных системах"],
-      special: "09.02.03 - Программирование в компьютерных системах",
-      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-      school: "Школа №3",
-      datebirth: "16-09-2000",
-      dateendschool: "12-06-2016",
-      yearmpt: "2019",
-      email: "p_a.i.borisov@mpt.ru",
-      postofgroup: "Ответственый за успеваемость",
-      postofgroups: ["Староста", "Ответственый за успеваемость", "Ответственый за посещяемость", "Студент"],
+      modelorder: "",
+      special: "",
+      school: "",
+      datebirth: "",
+      dateendschool: "",
+      yearmpt: new Date().getFullYear(),
+      email: user.email,
+      postofgroup: "",
+      notEmtyRules: [function (v) {
+        return v.length > 0 || "Поле не заполнено";
+      }],
       progressRules: [function (v) {
         return v.length > 0 || "Успеваемость не указана";
       }, function (v) {
         return v.length <= 255 || "Текст успеваемости должен быть не более 255 символов";
+      }],
+      yearMptRules: [function (v) {
+        return v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4 || "Ошибка даты";
+      }, function (v) {
+        return v.length > 0 || "Поле не заполнено";
       }],
       orderRules: [function (v) {
         return v.length > 0 || "Текст заявки не указан";
@@ -3849,6 +3857,27 @@ __webpack_require__.r(__webpack_exports__);
       }],
       form: false
     };
+  },
+  mounted: function mounted() {
+    var info = JSON.parse(this.info);
+    this.special = info.dep.dep_name_full;
+    this.group = info.group.group_name;
+    this.datebirth = Object(_utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(info.student.birthday));
+  },
+  props: {
+    info: {
+      data: String,
+      "default": null
+    }
+  },
+  watch: {
+    menu: function menu(val) {
+      var _this = this;
+
+      val && setTimeout(function () {
+        return _this.$refs.picker.activePicker = "YEAR";
+      });
+    }
   },
   methods: {
     sendQuery: function sendQuery() {
@@ -9560,13 +9589,21 @@ var render = function() {
       }
     },
     [
-      _c("v-tab", { key: _vm.item }, [_vm._v("Справка")]),
+      _c("v-tab", [_vm._v("Справка")]),
       _vm._v(" "),
-      _c("v-tab", { key: _vm.item }, [_vm._v("Характеристика")]),
+      _c("v-tab", [_vm._v("Характеристика")]),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("OrderCertificate")], 1),
+      _c(
+        "v-tab-item",
+        [_c("OrderCertificate", { attrs: { info: _vm.info } })],
+        1
+      ),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("OrderCharacteristic")], 1)
+      _c(
+        "v-tab-item",
+        [_c("OrderCharacteristic", { attrs: { info: _vm.info } })],
+        1
+      )
     ],
     1
   )
@@ -9844,52 +9881,17 @@ var render = function() {
                                   { staticClass: "pa-2" },
                                   [
                                     _c("v-text-field", {
-                                      attrs: { label: "Фамилия", readonly: "" },
-                                      model: {
-                                        value: _vm.Surname,
-                                        callback: function($$v) {
-                                          _vm.Surname = $$v
-                                        },
-                                        expression: "Surname"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: { label: "Имя", readonly: "" },
-                                      model: {
-                                        value: _vm.Firstname,
-                                        callback: function($$v) {
-                                          _vm.Firstname = $$v
-                                        },
-                                        expression: "Firstname"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
                                       attrs: {
-                                        label: "Отчество",
+                                        label:
+                                          "Фамилия, Имя, Отчество студента",
                                         readonly: ""
                                       },
                                       model: {
-                                        value: _vm.Lastname,
+                                        value: _vm.FIO,
                                         callback: function($$v) {
-                                          _vm.Lastname = $$v
+                                          _vm.FIO = $$v
                                         },
-                                        expression: "Lastname"
+                                        expression: "FIO"
                                       }
                                     })
                                   ],
@@ -9900,7 +9902,7 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
+                                    _c("v-text-field", {
                                       attrs: {
                                         items: _vm.itemsg,
                                         label: "Группа",
@@ -9924,7 +9926,6 @@ var render = function() {
                                   [
                                     _c("v-text-field", {
                                       attrs: {
-                                        rules: _vm.emailRules,
                                         label: "E-mail",
                                         required: "",
                                         readonly: ""
@@ -9948,16 +9949,7 @@ var render = function() {
                                     _c("v-text-field", {
                                       attrs: {
                                         label: "Дата рождения",
-                                        hint: "Формат День/Месяц/Год",
-                                        "persistent-hint": "",
                                         readonly: ""
-                                      },
-                                      on: {
-                                        blur: function($event) {
-                                          _vm.date = _vm.parseDate(
-                                            _vm.dateFormatted
-                                          )
-                                        }
                                       },
                                       model: {
                                         value: _vm.datebirth,
@@ -10164,9 +10156,8 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
+                                    _c("v-text-field", {
                                       attrs: {
-                                        items: _vm.itemss,
                                         label: "Специальность",
                                         readonly: ""
                                       },
@@ -10186,12 +10177,8 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
-                                      attrs: {
-                                        items: _vm.itemsg,
-                                        label: "Группа",
-                                        readonly: ""
-                                      },
+                                    _c("v-text-field", {
+                                      attrs: { label: "Группа", readonly: "" },
                                       model: {
                                         value: _vm.group,
                                         callback: function($$v) {
@@ -10211,16 +10198,8 @@ var render = function() {
                                     _c("v-text-field", {
                                       attrs: {
                                         label: "Дата рождения",
-                                        hint: "Формат День/Месяц/Год",
                                         "persistent-hint": "",
                                         readonly: ""
-                                      },
-                                      on: {
-                                        blur: function($event) {
-                                          _vm.date = _vm.parseDate(
-                                            _vm.dateFormatted
-                                          )
-                                        }
                                       },
                                       model: {
                                         value: _vm.datebirth,
@@ -10239,7 +10218,10 @@ var render = function() {
                                   { staticClass: "pa-2" },
                                   [
                                     _c("v-text-field", {
-                                      attrs: { label: "Школа", readonly: "" },
+                                      attrs: {
+                                        rules: _vm.notEmtyRules,
+                                        label: "Школа"
+                                      },
                                       model: {
                                         value: _vm.school,
                                         callback: function($$v) {
@@ -10257,39 +10239,18 @@ var render = function() {
                                   { staticClass: "pa-2" },
                                   [
                                     _c("v-text-field", {
-                                      attrs: {
-                                        label: "Год оконачния школы",
-                                        hint: "Формат День/Месяц/Год",
-                                        "persistent-hint": "",
-                                        readonly: ""
-                                      },
-                                      on: {
-                                        blur: function($event) {
-                                          _vm.date = _vm.parseDate(
-                                            _vm.dateFormatted
-                                          )
+                                      directives: [
+                                        {
+                                          name: "mask",
+                                          rawName: "v-mask",
+                                          value: _vm.mask,
+                                          expression: "mask"
                                         }
-                                      },
-                                      model: {
-                                        value: _vm.dateendschool,
-                                        callback: function($$v) {
-                                          _vm.dateendschool = $$v
-                                        },
-                                        expression: "dateendschool"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
+                                      ],
                                       attrs: {
-                                        label: "Год поступления в МПТ",
-                                        readonly: ""
+                                        rules: _vm.yearMptRules,
+                                        label:
+                                          "Год поступления в учебное заведение"
                                       },
                                       model: {
                                         value: _vm.yearmpt,
@@ -10307,11 +10268,10 @@ var render = function() {
                                   "v-row",
                                   { staticClass: "pa-2" },
                                   [
-                                    _c("v-select", {
+                                    _c("v-text-field", {
                                       attrs: {
-                                        items: _vm.postofgroup,
-                                        label: "Обязанности в группе",
-                                        readonly: ""
+                                        rules: _vm.notEmtyRules,
+                                        label: "Обязанности в группе"
                                       },
                                       model: {
                                         value: _vm.postofgroup,
@@ -67391,14 +67351,6 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./Expention/Panel": [
-		"./resources/js/components/Expention/Panel.vue",
-		6
-	],
-	"./Expention/Panel.vue": [
-		"./resources/js/components/Expention/Panel.vue",
-		6
-	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -67413,11 +67365,11 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		7
+		6
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		7
+		6
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
@@ -67499,13 +67451,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		8
+		7
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		8
+		7
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -67527,13 +67479,19 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		9
+		8
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		9
+		8
+	],
+	"./expention/Panel": [
+		"./resources/js/components/expention/Panel.vue"
+	],
+	"./expention/Panel.vue": [
+		"./resources/js/components/expention/Panel.vue"
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -67549,11 +67507,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		10
+		9
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		10
+		9
 	],
 	"./mainpage/MainPageComponent": [
 		"./resources/js/components/mainpage/MainPageComponent.vue"
@@ -67593,11 +67551,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		11
+		10
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		11
+		10
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -70253,6 +70211,24 @@ var SET_USERS = 'SET_USERS';
 
 /***/ }),
 
+/***/ "./resources/js/utils/dataFormater.js":
+/*!********************************************!*\
+  !*** ./resources/js/utils/dataFormater.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function (date) {
+  var day = date.getDay();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  return day + "/" + month + "/" + year;
+});
+
+/***/ }),
+
 /***/ "./resources/js/utils/sleep.js":
 /*!*************************************!*\
   !*** ./resources/js/utils/sleep.js ***!
@@ -70333,8 +70309,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
