@@ -3458,14 +3458,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tab: null,
-      tabs: 2,
-      tabitem: [{
-        name: "Справка",
-        com: _Components_Certificate__WEBPACK_IMPORTED_MODULE_0__["default"]
-      }, {
-        name: "Характеристика",
-        com: _Components_Characteristic__WEBPACK_IMPORTED_MODULE_1__["default"]
-      }]
+      tabs: 2
     };
   },
   props: {
@@ -67429,6 +67422,14 @@ var map = {
 	],
 	"./certificate/Components/Characteristic.vue": [
 		"./resources/js/components/certificate/Components/Characteristic.vue"
+	],
+	"./certificate/ListCertificateComponent": [
+		"./resources/js/components/certificate/ListCertificateComponent.vue",
+		13
+	],
+	"./certificate/ListCertificateComponent.vue": [
+		"./resources/js/components/certificate/ListCertificateComponent.vue",
+		13
 	],
 	"./constructorreplacements/Components/Certificate": [
 		"./resources/js/components/constructorreplacements/Components/Certificate.vue",
