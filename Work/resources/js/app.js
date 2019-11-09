@@ -230,6 +230,23 @@ new Vue({
             href: '/feedback'
           }];
         }
+        case 5: { //Лапшина (Канцелярия)
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          },
+          {
+            icon: 'home',
+            text: 'Заказ справок',
+            href: '/contimetable'
+          },
+          {
+            icon: 'feedback',
+            text: 'Обратная связь',
+            href: '/feedback'
+          }];
+        }
         default: {
           return null;
         }

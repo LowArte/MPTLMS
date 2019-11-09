@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\RouteControllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\CallSchedule;
+use App\Models\Places;
+use App\Models\Departament;
 
 class ConstructorTimeTableController extends Controller
 {
@@ -24,6 +26,17 @@ class ConstructorTimeTableController extends Controller
      */
     public function index()
     {
-        return view('components/contimetable');
+        $call = CallSchedule::get();
+        $places = Places::get();
+
+        $deps = Departament::get();
+        return view('components/contimetable', [
+            "call" => json_encode($call),
+            "place" => json_encode($places),
+            "dep" => json_encode([
+                "departaments" => json_encode($deps),
+                "cur_departament" => -1
+            ]),
+        ]);
     }
 }
