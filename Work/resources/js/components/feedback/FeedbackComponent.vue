@@ -45,7 +45,13 @@
                 ></v-textarea>
               </v-row>
               <v-row class="pa-2 justify-center">
-                <v-btn :disabled="!form" class="white--text" color="blue" depressed @click="sendQuery">Отправить</v-btn>
+                <v-btn
+                  :disabled="!form"
+                  class="white--text"
+                  color="blue"
+                  depressed
+                  @click="sendQuery"
+                >Отправить</v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -56,14 +62,18 @@
 </template>
 
 <script>
+import feedbackApi from "../../api/feedback";
+import withSnackbar from "../mixins/withSnackbar";
+
 export default {
+  mixins: [withSnackbar],
   data: () => ({
     group: "П-2-16",
-    FIO: "Борисов Артём Игоревич",
-    email: "p_a.i.borisov@mpt.ru",
+    FIO: user.secName + " " + user.name + " " + user.thirdName,
+    email: user.email,
 
     thematic: "Другое",
-    thematics: ["Проблемы с отображением", "Другое"],
+    thematics: ["Проблемы с отображением", "Проблема с данными", "Другое"],
 
     modelmessage: "",
     messageRules: [
@@ -75,9 +85,16 @@ export default {
   }),
   methods: {
     sendQuery() {
-      //Вписывай отправку
-      alert("Отправлено обращение!");
+      feedbackApi
+        .save({ type: this.thematic, text: this.modelmessage })
+        .then(res => {
+          this.showMessage("Жалоба принята на рассмотрение");
+        })
+        .catch(ex => {
+          this.showError("Произошла ошибка");
+        });
+      this.modelmessage = "";
     }
-  },
+  }
 };
 </script>

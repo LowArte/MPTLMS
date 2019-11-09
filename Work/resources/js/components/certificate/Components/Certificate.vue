@@ -91,17 +91,13 @@
                 <v-text-field v-model="FIO" label="Фамилия, Имя, Отчество студента" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field v-model="group" :items="itemsg" label="Группа" readonly></v-text-field>
+                <v-text-field v-model="group" label="Группа" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-text-field v-model="email" label="E-mail" required readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field
-                  v-model="datebirth"
-                  label="Дата рождения"
-                  readonly
-                ></v-text-field>
+                <v-text-field v-model="datebirth" label="Дата рождения" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-textarea
@@ -157,15 +153,18 @@
 
 <script>
 import { mapGetters } from "vuex";
-import dataFormater from "../../../utils/dataFormater"
+import dataFormater from "../../../utils/dataFormater";
+import cerificateApi from "../../../api/certificate";
+import withSnackbar from "../../mixins/withSnackbar";
+
 export default {
+  mixins: [withSnackbar],
   data: () => ({
     model: "",
-    itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-    group: "П-2-16",
-    FIO: user.secName +" "+ user.name+" " + user.thirdName,
+    group: "",
+    FIO: user.secName + " " + user.name + " " + user.thirdName,
     email: user.email,
-    datebirth: "16-09-2000",
+    datebirth: "",
     enabled: false,
     orderRules: [
       v => v.length > 0 || "Текст заявки не указан",
@@ -176,19 +175,30 @@ export default {
   }),
   methods: {
     sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос на получение справки!");
+      cerificateApi
+        .save({ data: this.model, type: "Справка" })
+        .then(res => {
+          this.showMessage("Справка отправленна");
+          this.cleardata();
+        })
+        .catch(exp => {
+          this.showError("Произошла ошибка");
+          this.cleardata();
+        });
+    },
+    cleardata() {
+      this.model = "";
     }
   },
-  mounted(){
-    let info = JSON.parse(this.info)
-    this.datebirth = dataFormater(new Date(info.student.birthday))
-    this.group = info.group.group_name
+  mounted() {
+    let info = JSON.parse(this.info);
+    this.datebirth = dataFormater(new Date(info.student.birthday));
+    this.group = info.group.group_name;
   },
-  props:{
-    info:{
-      data:String,
-      default:null
+  props: {
+    info: {
+      data: String,
+      default: null
     }
   }
 };

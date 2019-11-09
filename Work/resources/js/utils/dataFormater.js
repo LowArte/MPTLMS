@@ -1,7 +1,4 @@
 export default 
 (date) => {
-    let day = date.getDay()
-    let month = date.getMonth()
-    let year = date.getFullYear()
-    return day + "/" + month + "/" + year
+    return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear()
   }

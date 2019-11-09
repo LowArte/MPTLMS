@@ -55,7 +55,13 @@ Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->
 
 Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('panelcontrol');
 
+Route::post('/send_email', 'RouteControllers\RequestsUsersController@sendEmail');
+
+Route::post('/save_feedback', 'RouteControllers\FeedbackController@savefeedback');
+
 Route::post('/save_concallschedule', 'RouteControllers\ConCallScheduleController@save');
+
+Route::post('/save_certificate', 'RouteControllers\CertificateController@saveCertificate');
 
 Route::post('/get_group_by_departament_id', 'RouteControllers\TimeTableController@groupByDepartamentId');
 

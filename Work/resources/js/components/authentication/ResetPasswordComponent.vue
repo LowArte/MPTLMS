@@ -96,7 +96,6 @@ export default {
         this.$store
           .dispatch(actions.RESET_PASSWORD, user)
           .then(response => {
-            console.log("end");
             this.loading = false;
             this.done = true;
             sleep(4000).then(() => {
