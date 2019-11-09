@@ -5474,6 +5474,106 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5481,8 +5581,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _ref;
 
     return _ref = {
+      nullDis: "Свободная пара",
       arrgroups: null,
-      casegroup: "П-2-16",
+      casegroup: null,
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
@@ -5512,23 +5613,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": null
     }
   },
+  watch: {
+    casegroup: function casegroup(val, oldval) {
+      if (this.groups == "") this.changeSchedule(val.id);else {
+        if (oldval != null) this.changeSchedule(val.id);
+      }
+    }
+  },
   methods: {
-    getGroups: function getGroups(departament) {
+    changeGroups: function changeGroups(departament) {
       var _this = this;
 
-      // alert("Отеделение " + departament);
+      //alert("Отеделение " + departament);
       _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
         _this.arrgroups = reg.data.group;
-
-        if (_this.arrgroups.length > 0) {
-          _this.casegroup = _this.arrgroups[0].group_name;
-          getSchedule(_this.arrgroups[0].id);
-        }
+        _this.casegroup = _this.arrgroups[0];
       })["catch"](function (ex) {
         console.log(ex);
       });
     },
-    getSchedule: function getSchedule(group) {
+    changeSchedule: function changeSchedule(group) {
       var _this2 = this;
 
       //alert("Группа " + group);
@@ -5557,36 +5661,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       seconds = "0" + seconds;
     }
 
-    this.Datetime = hours + ":" + minutes + ":" + seconds;
-    console.log(JSON.parse(this.place));
-    console.log(JSON.parse(this.groups));
-    console.log(JSON.parse(this.callSchedule));
-    console.log(JSON.parse(this.departaments)); //Место
+    this.Datetime = hours + ":" + minutes + ":" + seconds; //Место
 
-    this.places = JSON.parse(this.place); //Отделения
-
-    this.arrdepartaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0];
-    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments); //Группы
-
-    this.arrgroups = [];
-    this.arrgroups.push(JSON.parse(this.groups));
-    this.casegroup = this.arrgroups.group_name;
-    this.getGroups(this.departament.id); //Расписание звонков
+    this.places = JSON.parse(this.place); //Расписание звонков
 
     this.callschedule = JSON.parse(this.callSchedule);
 
     for (var i = 0; i < this.callschedule.length; i++) {
       this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
-    } //Расписание занятий
+    }
 
+    var arrd = JSON.parse(this.departaments);
+    this.arrdepartaments = JSON.parse(arrd.departaments);
 
-    if (this.schedule == "") {
-      console.log("Current schedule is empty");
+    if (this.groups == null || this.groups == "") {
+      //Отделения
+      this.departament = this.arrdepartaments[0];
+      this.changeGroups(this.departament.id);
     } else {
-      console.log(JSON.parse(this.schedule));
-      this.arrschedule = JSON.parse(this.schedule);
-      this.arrschedule = JSON.parse(this.arrschedule.schedule);
+      //Отделения
+      this.departament = JSON.parse(arrd.cur_departament); //Группы
+
+      this.changeGroups(this.departament.id);
+      this.casegroup = JSON.parse(this.groups);
     }
   }
 });
@@ -5684,6 +5781,106 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5691,8 +5888,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _ref;
 
     return _ref = {
+      nullDis: "Свободная пара",
       arrgroups: null,
-      casegroup: "П-2-16",
+      casegroup: null,
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
@@ -5722,23 +5920,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": null
     }
   },
+  watch: {
+    casegroup: function casegroup(val, oldval) {
+      if (this.groups == "") this.changeSchedule(val.id);else {
+        if (oldval != null) this.changeSchedule(val.id);
+      }
+    }
+  },
   methods: {
-    getGroups: function getGroups(departament) {
+    changeGroups: function changeGroups(departament) {
       var _this = this;
 
-      // alert("Отеделение " + departament);
+      //alert("Отеделение " + departament);
       _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
         _this.arrgroups = reg.data.group;
-
-        if (_this.arrgroups.length > 0) {
-          _this.casegroup = _this.arrgroups[0].group_name;
-          getSchedule(_this.arrgroups[0].id);
-        }
+        _this.casegroup = _this.arrgroups[0];
       })["catch"](function (ex) {
         console.log(ex);
       });
     },
-    getSchedule: function getSchedule(group) {
+    changeSchedule: function changeSchedule(group) {
       var _this2 = this;
 
       //alert("Группа " + group);
@@ -5767,36 +5968,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       seconds = "0" + seconds;
     }
 
-    this.Datetime = hours + ":" + minutes + ":" + seconds;
-    console.log(JSON.parse(this.place));
-    console.log(JSON.parse(this.groups));
-    console.log(JSON.parse(this.callSchedule));
-    console.log(JSON.parse(this.departaments)); //Место
+    this.Datetime = hours + ":" + minutes + ":" + seconds; //Место
 
-    this.places = JSON.parse(this.place); //Отделения
-
-    this.arrdepartaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0];
-    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments); //Группы
-
-    this.arrgroups = [];
-    this.arrgroups.push(JSON.parse(this.groups));
-    this.casegroup = this.arrgroups.group_name;
-    this.getGroups(this.departament.id); //Расписание звонков
+    this.places = JSON.parse(this.place); //Расписание звонков
 
     this.callschedule = JSON.parse(this.callSchedule);
 
     for (var i = 0; i < this.callschedule.length; i++) {
       this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
-    } //Расписание занятий
+    }
 
+    var arrd = JSON.parse(this.departaments);
+    this.arrdepartaments = JSON.parse(arrd.departaments);
 
-    if (this.schedule == "") {
-      console.log("Current schedule is empty");
+    if (this.groups == null || this.groups == "") {
+      //Отделения
+      this.departament = this.arrdepartaments[0];
+      this.changeGroups(this.departament.id);
     } else {
-      console.log(JSON.parse(this.schedule));
-      this.arrschedule = JSON.parse(this.schedule);
-      this.arrschedule = JSON.parse(this.arrschedule.schedule);
+      //Отделения
+      this.departament = JSON.parse(arrd.cur_departament); //Группы
+
+      this.changeGroups(this.departament.id);
+      this.casegroup = JSON.parse(this.groups);
     }
   }
 });
@@ -14071,7 +14265,7 @@ var render = function() {
                 },
                 on: {
                   change: function($event) {
-                    return _vm.getGroups(_vm.departament.id)
+                    return _vm.changeGroups(_vm.departament.id)
                   }
                 },
                 model: {
@@ -14090,11 +14284,6 @@ var render = function() {
                   items: _vm.arrgroups,
                   "item-text": "group_name",
                   "return-object": ""
-                },
-                on: {
-                  change: function($event) {
-                    return _vm.getSchedule(_vm.casegroup.id)
-                  }
                 },
                 model: {
                   value: _vm.casegroup,
@@ -14140,11 +14329,12 @@ var render = function() {
                     [
                       _c(
                         "v-card",
+                        { attrs: { outlined: "" } },
                         [
                           _c(
                             "v-card-title",
                             {
-                              staticClass: "subtitle-1 mb-0 pb-0",
+                              staticClass: "mb-0 pb-0",
                               staticStyle: { color: "#FF3D00" }
                             },
                             [_vm._v(_vm._s(item))]
@@ -14164,9 +14354,12 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _c("v-divider", { staticClass: "my-2" }),
+                              _c("v-divider", {
+                                staticClass: "my-2",
+                                attrs: { color: "Black" }
+                              }),
                               _vm._v(" "),
-                              _vm._l(7, function(n, i) {
+                              _vm._l(8, function(n, i) {
                                 return _c(
                                   "div",
                                   { key: i, staticClass: "ma-0 pa-0" },
@@ -14175,78 +14368,730 @@ var render = function() {
                                     _vm.arrschedule[item][n].Lesson != ""
                                       ? _c(
                                           "v-list",
-                                          { staticClass: "ma-2 pa-0" },
+                                          {
+                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
+                                          },
                                           [
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != null &&
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != ""
+                                            typeof _vm.arrschedule[item][n]
+                                              .Lesson == "object" &&
+                                            _vm.arrschedule[item][n].Lesson !=
+                                              null
                                               ? _c(
-                                                  "v-list-item",
-                                                  {
-                                                    staticClass:
-                                                      "mt-0 mb-0 pt-0 pb-0"
-                                                  },
+                                                  "v-list",
+                                                  { staticClass: "ma-0 pa-0" },
                                                   [
-                                                    _vm._v(
-                                                      _vm._s(n) +
-                                                        " пара - " +
-                                                        _vm._s(
-                                                          _vm.callschedule[
-                                                            _vm.arrschedule[
-                                                              item
-                                                            ].Place
-                                                          ].call_schedule[n]
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - " +
+                                                            _vm._s(
+                                                              _vm.callschedule[
+                                                                _vm.arrschedule[
+                                                                  item
+                                                                ].Place
+                                                              ].call_schedule[n]
+                                                            )
                                                         )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.arrschedule[item][n]
+                                                        .Lesson,
+                                                      function(Lesson, l1) {
+                                                        return _c(
+                                                          "v-list",
+                                                          {
+                                                            key: l1,
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            typeof Lesson ==
+                                                            "object"
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    Lesson !=
+                                                                    null
+                                                                      ? _c(
+                                                                          "v-list",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            l1 ==
+                                                                            0
+                                                                              ? _c(
+                                                                                  "v-list-item",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _c(
+                                                                                      "div",
+                                                                                      {
+                                                                                        staticClass:
+                                                                                          "ma-0 pa-0"
+                                                                                      },
+                                                                                      [
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Lesson
+                                                                                          .length >
+                                                                                        1
+                                                                                          ? _c(
+                                                                                              "v-card-title",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "subtitle-1 ma-0 pa-0",
+                                                                                                staticStyle: {
+                                                                                                  color:
+                                                                                                    "#FF3D00"
+                                                                                                }
+                                                                                              },
+                                                                                              [
+                                                                                                _vm._v(
+                                                                                                  "Числитель:"
+                                                                                                )
+                                                                                              ]
+                                                                                            )
+                                                                                          : _vm._e(),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "p",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _vm._v(
+                                                                                              _vm._s(
+                                                                                                Lesson[0]
+                                                                                              ) +
+                                                                                                "/" +
+                                                                                                _vm._s(
+                                                                                                  Lesson[1]
+                                                                                                )
+                                                                                            )
+                                                                                          ]
+                                                                                        ),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "p",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _vm._v(
+                                                                                              _vm._s(
+                                                                                                _vm
+                                                                                                  .arrschedule[
+                                                                                                  item
+                                                                                                ][
+                                                                                                  n
+                                                                                                ]
+                                                                                                  .Teacher[
+                                                                                                  l1
+                                                                                                ][0]
+                                                                                              ) +
+                                                                                                "/" +
+                                                                                                _vm._s(
+                                                                                                  _vm
+                                                                                                    .arrschedule[
+                                                                                                    item
+                                                                                                  ][
+                                                                                                    n
+                                                                                                  ]
+                                                                                                    .Teacher[
+                                                                                                    l1
+                                                                                                  ][1]
+                                                                                                )
+                                                                                            )
+                                                                                          ]
+                                                                                        )
+                                                                                      ],
+                                                                                      1
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              : _vm._e(),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            Lesson !=
+                                                                            null
+                                                                              ? _c(
+                                                                                  "v-list",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    l1 ==
+                                                                                    1
+                                                                                      ? _c(
+                                                                                          "v-list-item",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _c(
+                                                                                              "div",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "ma-0 pa-0"
+                                                                                              },
+                                                                                              [
+                                                                                                _c(
+                                                                                                  "v-card-title",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                                    staticStyle: {
+                                                                                                      color:
+                                                                                                        "#FF3D00"
+                                                                                                    }
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      "Знаменатель:"
+                                                                                                    )
+                                                                                                  ]
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "p",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "ma-0 pa-0"
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      _vm._s(
+                                                                                                        Lesson[0]
+                                                                                                      ) +
+                                                                                                        "/" +
+                                                                                                        _vm._s(
+                                                                                                          Lesson[1]
+                                                                                                        )
+                                                                                                    )
+                                                                                                  ]
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "p",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "ma-0 pa-0"
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      _vm._s(
+                                                                                                        _vm
+                                                                                                          .arrschedule[
+                                                                                                          item
+                                                                                                        ][
+                                                                                                          n
+                                                                                                        ]
+                                                                                                          .Teacher[
+                                                                                                          l1
+                                                                                                        ][0]
+                                                                                                      ) +
+                                                                                                        "/" +
+                                                                                                        _vm._s(
+                                                                                                          _vm
+                                                                                                            .arrschedule[
+                                                                                                            item
+                                                                                                          ][
+                                                                                                            n
+                                                                                                          ]
+                                                                                                            .Teacher[
+                                                                                                            l1
+                                                                                                          ][1]
+                                                                                                        )
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ],
+                                                                                              1
+                                                                                            )
+                                                                                          ]
+                                                                                        )
+                                                                                      : _vm._e()
+                                                                                  ],
+                                                                                  1
+                                                                                )
+                                                                              : _vm._e()
+                                                                          ],
+                                                                          1
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            Lesson == null
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    l1 == 0
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Числитель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm.nullDis
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    l1 == 1
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Знаменатель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm.nullDis
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            typeof Lesson !=
+                                                            "object"
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    l1 == 0
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Числитель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        Lesson
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Teacher[
+                                                                                          l1
+                                                                                        ]
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    l1 == 1
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Знаменатель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        Lesson
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Teacher[
+                                                                                          l1
+                                                                                        ]
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e()
+                                                          ],
+                                                          1
+                                                        )
+                                                      }
                                                     )
-                                                  ]
+                                                  ],
+                                                  2
                                                 )
-                                              : _c("v-list-item", [
-                                                  _vm._v(
-                                                    _vm._s(n) +
-                                                      " пара - расписание звонка отсутствует!"
-                                                  )
-                                                ]),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              {
-                                                staticClass:
-                                                  "mt-0 mb-0 pt-0 pb-0"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.arrschedule[item][n]
-                                                      .Lesson
-                                                  )
+                                              : _c(
+                                                  "v-list",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _vm.callschedule[
+                                                      _vm.arrschedule[item]
+                                                        .Place
+                                                    ].call_schedule[n] !=
+                                                      null &&
+                                                    _vm.callschedule[
+                                                      _vm.arrschedule[item]
+                                                        .Place
+                                                    ].call_schedule[n] != ""
+                                                      ? _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-card-title",
+                                                              {
+                                                                staticClass:
+                                                                  "subtitle-1 ma-0 pa-0",
+                                                                staticStyle: {
+                                                                  color:
+                                                                    "#FF3D00"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(n) +
+                                                                    " пара - " +
+                                                                    _vm._s(
+                                                                      _vm
+                                                                        .callschedule[
+                                                                        _vm
+                                                                          .arrschedule[
+                                                                          item
+                                                                        ].Place
+                                                                      ]
+                                                                        .call_schedule[
+                                                                        n
+                                                                      ]
+                                                                    )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      : _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(n) +
+                                                                " пара - расписание звонка отсутствует!"
+                                                            )
+                                                          ]
+                                                        ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-list-item",
+                                                      {
+                                                        staticClass: "ma-0 pa-0"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Lesson
+                                                                  )
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Teacher
+                                                                  )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
                                                 )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              {
-                                                staticClass:
-                                                  "mt-0 mb-0 pt-0 pb-0"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.arrschedule[item][n]
-                                                      .Teacher
-                                                  )
-                                                )
-                                              ]
-                                            )
                                           ],
                                           1
                                         )
                                       : _c(
                                           "v-list",
-                                          { staticClass: "ma-0 pa-0" },
+                                          {
+                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
+                                          },
                                           [
                                             _vm.callschedule[
                                               _vm.arrschedule[item].Place
@@ -14256,45 +15101,70 @@ var render = function() {
                                             ].call_schedule[n] != ""
                                               ? _c(
                                                   "v-list-item",
-                                                  {
-                                                    staticClass:
-                                                      "mt-0 mb-0 pt-0 pb-0"
-                                                  },
+                                                  { staticClass: "ma-0 pa-0" },
                                                   [
-                                                    _vm._v(
-                                                      _vm._s(n) +
-                                                        " пара - " +
-                                                        _vm._s(
-                                                          _vm.callschedule[
-                                                            _vm.arrschedule[
-                                                              item
-                                                            ].Place
-                                                          ].call_schedule[n]
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - " +
+                                                            _vm._s(
+                                                              _vm.callschedule[
+                                                                _vm.arrschedule[
+                                                                  item
+                                                                ].Place
+                                                              ].call_schedule[n]
+                                                            )
                                                         )
+                                                      ]
                                                     )
-                                                  ]
+                                                  ],
+                                                  1
                                                 )
-                                              : _c("v-list-item", [
-                                                  _vm._v(
-                                                    _vm._s(n) +
-                                                      " пара - расписание звонка отсутствует!"
-                                                  )
-                                                ]),
+                                              : _c(
+                                                  "v-list-item",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - пара - расписание звонка отсутствует!"
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
                                             _vm._v(" "),
                                             _c(
                                               "v-list-item",
-                                              {
-                                                staticClass:
-                                                  "mt-0 mb-0 pt-0 pb-0"
-                                              },
-                                              [_vm._v("Свободная пара")]
+                                              { staticClass: "ma-0 pa-0" },
+                                              [_vm._v(_vm._s(_vm.nullDis))]
                                             )
                                           ],
                                           1
                                         ),
                                     _vm._v(" "),
                                     _c("v-divider", {
-                                      staticClass: "my-2 ma-0 pa-0"
+                                      staticClass: "my-1 ma-0 pa-0",
+                                      attrs: { color: "Black" }
                                     })
                                   ],
                                   1
@@ -14315,10 +15185,7 @@ var render = function() {
             ],
             1
           )
-        : _vm._e(),
-      _vm._v("\n  " + _vm._s(_vm.arrdepartaments) + "\n  "),
-      _c("br"),
-      _vm._v("\n  " + _vm._s(_vm.arrgroups) + "\n")
+        : _vm._e()
     ],
     1
   )
@@ -14366,7 +15233,7 @@ var render = function() {
                 },
                 on: {
                   change: function($event) {
-                    return _vm.getGroups(_vm.departament.id)
+                    return _vm.changeGroups(_vm.departament.id)
                   }
                 },
                 model: {
@@ -14385,11 +15252,6 @@ var render = function() {
                   items: _vm.arrgroups,
                   "item-text": "group_name",
                   "return-object": ""
-                },
-                on: {
-                  change: function($event) {
-                    return _vm.getSchedule(_vm.casegroup.id)
-                  }
                 },
                 model: {
                   value: _vm.casegroup,
@@ -14435,11 +15297,12 @@ var render = function() {
                     [
                       _c(
                         "v-card",
+                        { attrs: { outlined: "" } },
                         [
                           _c(
                             "v-card-title",
                             {
-                              staticClass: "subtitle-1 mb-0 pb-0",
+                              staticClass: "mb-0 pb-0",
                               staticStyle: { color: "#FF3D00" }
                             },
                             [_vm._v(_vm._s(item))]
@@ -14459,9 +15322,12 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _c("v-divider", { staticClass: "my-2" }),
+                              _c("v-divider", {
+                                staticClass: "my-2",
+                                attrs: { color: "Black" }
+                              }),
                               _vm._v(" "),
-                              _vm._l(7, function(n, i) {
+                              _vm._l(8, function(n, i) {
                                 return _c(
                                   "div",
                                   { key: i, staticClass: "ma-0 pa-0" },
@@ -14470,78 +15336,730 @@ var render = function() {
                                     _vm.arrschedule[item][n].Lesson != ""
                                       ? _c(
                                           "v-list",
-                                          { staticClass: "ma-2 pa-0" },
+                                          {
+                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
+                                          },
                                           [
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != null &&
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != ""
+                                            typeof _vm.arrschedule[item][n]
+                                              .Lesson == "object" &&
+                                            _vm.arrschedule[item][n].Lesson !=
+                                              null
                                               ? _c(
-                                                  "v-list-item",
-                                                  {
-                                                    staticClass:
-                                                      "mt-0 mb-0 pt-0 pb-0"
-                                                  },
+                                                  "v-list",
+                                                  { staticClass: "ma-0 pa-0" },
                                                   [
-                                                    _vm._v(
-                                                      _vm._s(n) +
-                                                        " пара - " +
-                                                        _vm._s(
-                                                          _vm.callschedule[
-                                                            _vm.arrschedule[
-                                                              item
-                                                            ].Place
-                                                          ].call_schedule[n]
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - " +
+                                                            _vm._s(
+                                                              _vm.callschedule[
+                                                                _vm.arrschedule[
+                                                                  item
+                                                                ].Place
+                                                              ].call_schedule[n]
+                                                            )
                                                         )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.arrschedule[item][n]
+                                                        .Lesson,
+                                                      function(Lesson, l1) {
+                                                        return _c(
+                                                          "v-list",
+                                                          {
+                                                            key: l1,
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            typeof Lesson ==
+                                                            "object"
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    Lesson !=
+                                                                    null
+                                                                      ? _c(
+                                                                          "v-list",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            l1 ==
+                                                                            0
+                                                                              ? _c(
+                                                                                  "v-list-item",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _c(
+                                                                                      "div",
+                                                                                      {
+                                                                                        staticClass:
+                                                                                          "ma-0 pa-0"
+                                                                                      },
+                                                                                      [
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Lesson
+                                                                                          .length >
+                                                                                        1
+                                                                                          ? _c(
+                                                                                              "v-card-title",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "subtitle-1 ma-0 pa-0",
+                                                                                                staticStyle: {
+                                                                                                  color:
+                                                                                                    "#FF3D00"
+                                                                                                }
+                                                                                              },
+                                                                                              [
+                                                                                                _vm._v(
+                                                                                                  "Числитель:"
+                                                                                                )
+                                                                                              ]
+                                                                                            )
+                                                                                          : _vm._e(),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "p",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _vm._v(
+                                                                                              _vm._s(
+                                                                                                Lesson[0]
+                                                                                              ) +
+                                                                                                "/" +
+                                                                                                _vm._s(
+                                                                                                  Lesson[1]
+                                                                                                )
+                                                                                            )
+                                                                                          ]
+                                                                                        ),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "p",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _vm._v(
+                                                                                              _vm._s(
+                                                                                                _vm
+                                                                                                  .arrschedule[
+                                                                                                  item
+                                                                                                ][
+                                                                                                  n
+                                                                                                ]
+                                                                                                  .Teacher[
+                                                                                                  l1
+                                                                                                ][0]
+                                                                                              ) +
+                                                                                                "/" +
+                                                                                                _vm._s(
+                                                                                                  _vm
+                                                                                                    .arrschedule[
+                                                                                                    item
+                                                                                                  ][
+                                                                                                    n
+                                                                                                  ]
+                                                                                                    .Teacher[
+                                                                                                    l1
+                                                                                                  ][1]
+                                                                                                )
+                                                                                            )
+                                                                                          ]
+                                                                                        )
+                                                                                      ],
+                                                                                      1
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              : _vm._e(),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            Lesson !=
+                                                                            null
+                                                                              ? _c(
+                                                                                  "v-list",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    l1 ==
+                                                                                    1
+                                                                                      ? _c(
+                                                                                          "v-list-item",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _c(
+                                                                                              "div",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "ma-0 pa-0"
+                                                                                              },
+                                                                                              [
+                                                                                                _c(
+                                                                                                  "v-card-title",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                                    staticStyle: {
+                                                                                                      color:
+                                                                                                        "#FF3D00"
+                                                                                                    }
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      "Знаменатель:"
+                                                                                                    )
+                                                                                                  ]
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "p",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "ma-0 pa-0"
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      _vm._s(
+                                                                                                        Lesson[0]
+                                                                                                      ) +
+                                                                                                        "/" +
+                                                                                                        _vm._s(
+                                                                                                          Lesson[1]
+                                                                                                        )
+                                                                                                    )
+                                                                                                  ]
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "p",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "ma-0 pa-0"
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      _vm._s(
+                                                                                                        _vm
+                                                                                                          .arrschedule[
+                                                                                                          item
+                                                                                                        ][
+                                                                                                          n
+                                                                                                        ]
+                                                                                                          .Teacher[
+                                                                                                          l1
+                                                                                                        ][0]
+                                                                                                      ) +
+                                                                                                        "/" +
+                                                                                                        _vm._s(
+                                                                                                          _vm
+                                                                                                            .arrschedule[
+                                                                                                            item
+                                                                                                          ][
+                                                                                                            n
+                                                                                                          ]
+                                                                                                            .Teacher[
+                                                                                                            l1
+                                                                                                          ][1]
+                                                                                                        )
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ],
+                                                                                              1
+                                                                                            )
+                                                                                          ]
+                                                                                        )
+                                                                                      : _vm._e()
+                                                                                  ],
+                                                                                  1
+                                                                                )
+                                                                              : _vm._e()
+                                                                          ],
+                                                                          1
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            Lesson == null
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    l1 == 0
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Числитель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm.nullDis
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    l1 == 1
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Знаменатель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm.nullDis
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            typeof Lesson !=
+                                                            "object"
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    l1 == 0
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Числитель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        Lesson
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Teacher[
+                                                                                          l1
+                                                                                        ]
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    l1 == 1
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Знаменатель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        Lesson
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Teacher[
+                                                                                          l1
+                                                                                        ]
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e()
+                                                          ],
+                                                          1
+                                                        )
+                                                      }
                                                     )
-                                                  ]
+                                                  ],
+                                                  2
                                                 )
-                                              : _c("v-list-item", [
-                                                  _vm._v(
-                                                    _vm._s(n) +
-                                                      " пара - расписание звонка отсутствует!"
-                                                  )
-                                                ]),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              {
-                                                staticClass:
-                                                  "mt-0 mb-0 pt-0 pb-0"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.arrschedule[item][n]
-                                                      .Lesson
-                                                  )
+                                              : _c(
+                                                  "v-list",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _vm.callschedule[
+                                                      _vm.arrschedule[item]
+                                                        .Place
+                                                    ].call_schedule[n] !=
+                                                      null &&
+                                                    _vm.callschedule[
+                                                      _vm.arrschedule[item]
+                                                        .Place
+                                                    ].call_schedule[n] != ""
+                                                      ? _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-card-title",
+                                                              {
+                                                                staticClass:
+                                                                  "subtitle-1 ma-0 pa-0",
+                                                                staticStyle: {
+                                                                  color:
+                                                                    "#FF3D00"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(n) +
+                                                                    " пара - " +
+                                                                    _vm._s(
+                                                                      _vm
+                                                                        .callschedule[
+                                                                        _vm
+                                                                          .arrschedule[
+                                                                          item
+                                                                        ].Place
+                                                                      ]
+                                                                        .call_schedule[
+                                                                        n
+                                                                      ]
+                                                                    )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      : _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(n) +
+                                                                " пара - расписание звонка отсутствует!"
+                                                            )
+                                                          ]
+                                                        ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-list-item",
+                                                      {
+                                                        staticClass: "ma-0 pa-0"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Lesson
+                                                                  )
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Teacher
+                                                                  )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
                                                 )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              {
-                                                staticClass:
-                                                  "mt-0 mb-0 pt-0 pb-0"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.arrschedule[item][n]
-                                                      .Teacher
-                                                  )
-                                                )
-                                              ]
-                                            )
                                           ],
                                           1
                                         )
                                       : _c(
                                           "v-list",
-                                          { staticClass: "ma-0 pa-0" },
+                                          {
+                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
+                                          },
                                           [
                                             _vm.callschedule[
                                               _vm.arrschedule[item].Place
@@ -14551,45 +16069,70 @@ var render = function() {
                                             ].call_schedule[n] != ""
                                               ? _c(
                                                   "v-list-item",
-                                                  {
-                                                    staticClass:
-                                                      "mt-0 mb-0 pt-0 pb-0"
-                                                  },
+                                                  { staticClass: "ma-0 pa-0" },
                                                   [
-                                                    _vm._v(
-                                                      _vm._s(n) +
-                                                        " пара - " +
-                                                        _vm._s(
-                                                          _vm.callschedule[
-                                                            _vm.arrschedule[
-                                                              item
-                                                            ].Place
-                                                          ].call_schedule[n]
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - " +
+                                                            _vm._s(
+                                                              _vm.callschedule[
+                                                                _vm.arrschedule[
+                                                                  item
+                                                                ].Place
+                                                              ].call_schedule[n]
+                                                            )
                                                         )
+                                                      ]
                                                     )
-                                                  ]
+                                                  ],
+                                                  1
                                                 )
-                                              : _c("v-list-item", [
-                                                  _vm._v(
-                                                    _vm._s(n) +
-                                                      " пара - расписание звонка отсутствует!"
-                                                  )
-                                                ]),
+                                              : _c(
+                                                  "v-list-item",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - пара - расписание звонка отсутствует!"
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
                                             _vm._v(" "),
                                             _c(
                                               "v-list-item",
-                                              {
-                                                staticClass:
-                                                  "mt-0 mb-0 pt-0 pb-0"
-                                              },
-                                              [_vm._v("Свободная пара")]
+                                              { staticClass: "ma-0 pa-0" },
+                                              [_vm._v(_vm._s(_vm.nullDis))]
                                             )
                                           ],
                                           1
                                         ),
                                     _vm._v(" "),
                                     _c("v-divider", {
-                                      staticClass: "my-2 ma-0 pa-0"
+                                      staticClass: "my-1 ma-0 pa-0",
+                                      attrs: { color: "Black" }
                                     })
                                   ],
                                   1
@@ -14610,10 +16153,7 @@ var render = function() {
             ],
             1
           )
-        : _vm._e(),
-      _vm._v("\n  " + _vm._s(_vm.arrdepartaments) + "\n  "),
-      _c("br"),
-      _vm._v("\n  " + _vm._s(_vm.arrgroups) + "\n")
+        : _vm._e()
     ],
     1
   )
@@ -65974,6 +67514,14 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./Expention/Panel": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
+	"./Expention/Panel.vue": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -65988,11 +67536,11 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		7
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		7
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
@@ -66074,13 +67622,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		7
+		8
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		7
+		8
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -66102,19 +67650,13 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		8
+		9
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		8
-	],
-	"./expention/Panel": [
-		"./resources/js/components/expention/Panel.vue"
-	],
-	"./expention/Panel.vue": [
-		"./resources/js/components/expention/Panel.vue"
+		9
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -66130,11 +67672,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		10
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		10
 	],
 	"./mainpage/MainPageComponent": [
 		"./resources/js/components/mainpage/MainPageComponent.vue"
@@ -66174,11 +67716,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		11
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		11
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -68929,8 +70471,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
