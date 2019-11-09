@@ -41,13 +41,15 @@ class ResetPassword extends ResetPasswordNotification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-public function toMail($notifiable)
+    public function toMail($notifiable)
     {
-        return (new MailMessage)->from('p_a.n.pikalov@mpt.ru',"Востановление пароля")
+        return (new MailMessage)
+            ->markdown('vendor.notifications.email')
+            ->from('p_a.n.pikalov@mpt.ru', "Востановление пароля")
             ->subject('Восстановление пароля от аккаунта: ' . config('app.name'))
             ->line('По вашему требованию мы выслали ссылку на восстановления пароля. Что бы продолжить нажмите "Восстановить".')
-            ->action('Восстановить',url(config('app.url').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
-            ->line(Lang::getFromJson('Ссылка на вотсановление пароля будет доступна :count минут.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->action('Восстановить', url(config('app.url') . route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
+            ->line(Lang::getFromJson('Ссылка на вотсановление пароля будет доступна :count минут.', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]))
             ->line('Если Вы не отправляли запрос на восстановление пароля, проигнорируйте это сообщение.');
     }
 

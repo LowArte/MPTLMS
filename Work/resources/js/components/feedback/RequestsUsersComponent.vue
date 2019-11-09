@@ -6,7 +6,7 @@
           <v-data-table
             :headers="headers"
             :items="items"
-            :single-expand="false"
+            :single-expand="true"
             :expanded.sync="expanded"
             item-key="id"
             show-expand
@@ -44,7 +44,7 @@
                     <v-container class="mt-0 pt-0">
                       <v-row class="mt-0 pt-0">
                         <v-textarea
-                        class="mt-0 pt-0"
+                          class="mt-0 pt-0"
                           v-model="modelmessage"
                           :auto-grow="true"
                           :clearable="false"
@@ -73,7 +73,7 @@
                           class="white--text"
                           color="blue"
                           depressed
-                          @click="sendQuery(expanded[0].id)"
+                          @click="sendQuery(expanded[0].email)"
                         >Отправить</v-btn>
                       </v-row>
                     </v-container>
@@ -87,10 +87,8 @@
             <v-text-field
               :value="itemsPerPage"
               label="Количество отображаемых обращений"
-              type="number"
-              min="1"
-              max="15"
-              @input="itemsPerPage = parseInt($event, 10)"
+              v-mask="mask"
+              @input="itemsPerPage = parseIntLoc($event)"
             ></v-text-field>
           </div>
         </v-card>
@@ -100,7 +98,15 @@
 </template>
 
 <script>
+import feedbackApi from "../../api/feedback";
+import { mask } from "vue-the-mask";
+import withSnackbar from "../mixins/withSnackbar";
+
 export default {
+  mixins: [withSnackbar],
+  directives: {
+    mask
+  },
   data() {
     return {
       modelmessage: "",
@@ -111,11 +117,12 @@ export default {
       ],
       form: false,
       search: "",
+      mask: "####",
       expanded: [],
       singleExpand: true,
       page: 1,
       pageCount: 0,
-      itemsPerPage: 5,
+      itemsPerPage: 100,
       headers: [
         { text: "Номер обращения", value: "id" },
         { text: "Тематика", value: "name" },
@@ -123,31 +130,38 @@ export default {
         { text: "Дата обращения", value: "date" },
         { text: "", value: "data-table-expand" }
       ],
-      items: [
-        {
-          id: 1,
-          name: "Баг1",
-          email: "p_a.i.borisov@mpt.ru",
-          date: new Date().toISOString().substr(0, 10),
-          fio: "Борисов Артём Игоревич",
-          body: "Текст запроса1"
-        },
-        {
-          id: 2,
-          name: "Баг2",
-          email: "p_a.i.borisov@mpt.ru",
-          date: new Date().toISOString().substr(0, 10),
-          fio: "Борисов Артём Игоревич",
-          body: "Текст запроса2"
-        }
-      ]
+      items:[]
     };
   },
-   methods: {
-    sendQuery(id) {
-      //Вписывай отправку
-      alert("Отправлен ответ!"+id);
+  props: {
+    requests: {
+      data: String,
+      default: ""
     }
   },
+  mounted() {
+    this.items = JSON.parse(this.requests);
+    console.log(this.items);
+  },
+  methods: {
+    sendQuery(email) {   
+      feedbackApi
+        .sendEmail({mail:email,text:this.modelmessage,id:this.expanded[0].id})
+        .then(res => {
+          this.showMessage("Ответ отправлен");
+          this.items.splice(this.expanded[0])
+        })
+        .catch(exp => {
+          this.showError("Произошла ошибка");
+        });
+      this.modelmessage = "";
+    },
+    parseIntLoc(val) {
+      if (val == "" || val == null || val == "0") {
+        return 1;
+      }
+      return parseInt(val);
+    }
+  }
 };
 </script>

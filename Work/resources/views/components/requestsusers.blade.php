@@ -3,7 +3,7 @@
 @section('content')
 
 <v-container fluid grid-list-md text-xs-center>
-    <requestsusers></requestsusers>
+    <requestsusers requests="{{json_encode($requests) ?? null}}"></requestsusers>
 </v-container>
 
 @endsection

@@ -15,15 +15,13 @@
                 <v-text-field v-model="group" label="Группа" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field
-                  v-model="datebirth"
-                  label="Дата рождения"
-                  persistent-hint
-                  readonly
-                ></v-text-field>
+                <v-text-field v-model="datebirth" label="Дата рождения" persistent-hint readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field :rules = "notEmtyRules" v-model="school" label="Школа"></v-text-field>
+                <v-text-field v-model="email" label="E-mail" required readonly></v-text-field>
+              </v-row>
+              <v-row class="pa-2">
+                <v-text-field :rules="notEmtyRules" v-model="school" label="Школа"></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-text-field
@@ -34,7 +32,11 @@
                 ></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field  :rules = "notEmtyRules" v-model="postofgroup" label="Обязанности в группе"></v-text-field>
+                <v-text-field
+                  :rules="notEmtyRules"
+                  v-model="postofgroup"
+                  label="Обязанности в группе"
+                ></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-textarea
@@ -59,9 +61,6 @@
                   :solo="false"
                   :rules="progressRules"
                 ></v-textarea>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field v-model="email" label="E-mail" required readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-textarea
@@ -106,28 +105,30 @@
 
 <script>
 import { mask } from "vue-the-mask";
-import dataFormater from "../../../utils/dataFormater"
+import dataFormater from "../../../utils/dataFormater";
+import cerificateApi from "../../../api/certificate";
+import withSnackbar from "../../mixins/withSnackbar";
+
 export default {
   directives: {
     mask
   },
+  mixins: [withSnackbar],
   data: vm => ({
     mask: "####",
     menu: false,
     group: "",
     FIO: user.secName + " " + user.name + " " + user.thirdName,
-    modelprogress:"",
-    modelorder:"",
+    modelprogress: "",
+    modelorder: "",
     special: "",
     school: "",
     datebirth: "",
     dateendschool: "",
-    yearmpt: new Date().getFullYear(),
+    yearmpt: new Date().getFullYear().toString(),
     email: user.email,
     postofgroup: "",
-    notEmtyRules:[
-      v=>v.length > 0 || "Поле не заполнено"
-    ],
+    notEmtyRules: [v => v.length > 0 || "Поле не заполнено"],
     progressRules: [
       v => v.length > 0 || "Успеваемость не указана",
       v =>
@@ -135,8 +136,10 @@ export default {
         "Текст успеваемости должен быть не более 255 символов"
     ],
     yearMptRules: [
-      v =>(v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) ||"Ошибка даты",
-      v=>v.length > 0  ||"Поле не заполнено"
+      v =>
+        (v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) ||
+        "Ошибка даты",
+      v => v.length > 0 || "Поле не заполнено"
     ],
     orderRules: [
       v => v.length > 0 || "Текст заявки не указан",
@@ -145,10 +148,10 @@ export default {
     form: false
   }),
   mounted() {
-    let info = JSON.parse(this.info)
-    this.special = info.dep.dep_name_full
-    this.group = info.group.group_name
-    this.datebirth = dataFormater(new Date(info.student.birthday))
+    let info = JSON.parse(this.info);
+    this.special = info.dep.dep_name_full;
+    this.group = info.group.group_name;
+    this.datebirth = dataFormater(new Date(info.student.birthday));
   },
   props: {
     info: {
@@ -163,8 +166,32 @@ export default {
   },
   methods: {
     sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос на получение характеристики!");
+      cerificateApi
+        .save({
+          data: {
+            year: this.yearmpt,
+            school: this.school,
+            postofgroup: this.postofgroup,
+            modelprogress: this.modelprogress,
+            modelorder: this.modelorder
+          },
+          type: "Характеристика"
+        })
+        .then(res => {
+          this.showMessage("Характеристика сохранена");
+          this.cleardata();
+        })
+        .catch(exp => {
+          this.showError("Произошла ошибка");
+          this.cleardata();
+        });
+    },
+    cleardata() {
+      this.yearmpt = new Date().getFullYear().toString();
+      this.school = "";
+      this.postofgroup = "";
+      this.modelprogress = "";
+      this.modelorder = "";
     }
   }
 };

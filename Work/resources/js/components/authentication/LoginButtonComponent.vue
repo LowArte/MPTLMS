@@ -56,9 +56,10 @@
 </template>
 
 <script>
-import a from "../feedback/FeedbackComponent"
+import a from "../feedback/FeedbackComponent";
 import * as actions from "../../store/action-types";
 import withSnackbar from "../mixins/withSnackbar";
+
 export default {
   mixins: [withSnackbar],
   data() {
@@ -119,13 +120,12 @@ export default {
             window.location = "/home";
           })
           .catch(error => {
-            console.log("HEY:");
-            console.log(error.response.data);
             if (error.response && error.response.status === 422) {
               this.showError({
                 message: "Не верные данные"
               });
-            } else {
+            } 
+            else {
               this.showError(error);
             }
             this.errors = error.response.data.errors;

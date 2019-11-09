@@ -2906,9 +2906,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.showLogin = false;
           window.location = "/home";
         })["catch"](function (error) {
-          console.log("HEY:");
-          console.log(error.response.data);
-
           if (error.response && error.response.status === 422) {
             _this.showError({
               message: "Не верные данные"
@@ -3165,7 +3162,6 @@ __webpack_require__.r(__webpack_exports__);
         };
         this.loading = true;
         this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_0__["RESET_PASSWORD"], user).then(function (response) {
-          console.log("end");
           _this.loading = false;
           _this.done = true;
           Object(_utils_sleep__WEBPACK_IMPORTED_MODULE_2__["default"])(4000).then(function () {
@@ -3497,6 +3493,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/dataFormater */ "./resources/js/utils/dataFormater.js");
+/* harmony import */ var _api_certificate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/certificate */ "./resources/js/api/certificate.js");
+/* harmony import */ var _mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 //
 //
 //
@@ -3650,21 +3648,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_3__["default"]],
   data: function data() {
     return {
       model: "",
-      itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-      group: "П-2-16",
+      group: "",
       FIO: user.secName + " " + user.name + " " + user.thirdName,
       email: user.email,
-      datebirth: "16-09-2000",
+      datebirth: "",
       enabled: false,
       orderRules: [function (v) {
         return v.length > 0 || "Текст заявки не указан";
@@ -3679,8 +3675,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос на получение справки!");
+      var _this = this;
+
+      _api_certificate__WEBPACK_IMPORTED_MODULE_2__["default"].save({
+        data: this.model,
+        type: "Справка"
+      }).then(function (res) {
+        _this.showMessage("Справка отправленна");
+
+        _this.cleardata();
+      })["catch"](function (exp) {
+        _this.showError("Произошла ошибка");
+
+        _this.cleardata();
+      });
+    },
+    cleardata: function cleardata() {
+      this.model = "";
     }
   },
   mounted: function mounted() {
@@ -3710,6 +3721,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/dataFormater */ "./resources/js/utils/dataFormater.js");
+/* harmony import */ var _api_certificate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/certificate */ "./resources/js/api/certificate.js");
+/* harmony import */ var _mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 //
 //
 //
@@ -3815,13 +3828,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
     mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
   },
+  mixins: [_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_3__["default"]],
   data: function data(vm) {
     return {
       mask: "####",
@@ -3834,7 +3849,7 @@ __webpack_require__.r(__webpack_exports__);
       school: "",
       datebirth: "",
       dateendschool: "",
-      yearmpt: new Date().getFullYear(),
+      yearmpt: new Date().getFullYear().toString(),
       email: user.email,
       postofgroup: "",
       notEmtyRules: [function (v) {
@@ -3881,8 +3896,33 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос на получение характеристики!");
+      var _this2 = this;
+
+      _api_certificate__WEBPACK_IMPORTED_MODULE_2__["default"].save({
+        data: {
+          year: this.yearmpt,
+          school: this.school,
+          postofgroup: this.postofgroup,
+          modelprogress: this.modelprogress,
+          modelorder: this.modelorder
+        },
+        type: "Характеристика"
+      }).then(function (res) {
+        _this2.showMessage("Характеристика сохранена");
+
+        _this2.cleardata();
+      })["catch"](function (exp) {
+        _this2.showError("Произошла ошибка");
+
+        _this2.cleardata();
+      });
+    },
+    cleardata: function cleardata() {
+      this.yearmpt = new Date().getFullYear().toString();
+      this.school = "";
+      this.postofgroup = "";
+      this.modelprogress = "";
+      this.modelorder = "";
     }
   }
 });
@@ -3947,6 +3987,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_feedback__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/feedback */ "./resources/js/api/feedback.js");
+/* harmony import */ var _mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 //
 //
 //
@@ -4004,14 +4046,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
       group: "П-2-16",
-      FIO: "Борисов Артём Игоревич",
-      email: "p_a.i.borisov@mpt.ru",
+      FIO: user.secName + " " + user.name + " " + user.thirdName,
+      email: user.email,
       thematic: "Другое",
-      thematics: ["Проблемы с отображением", "Другое"],
+      thematics: ["Проблемы с отображением", "Проблема с данными", "Другое"],
       modelmessage: "",
       messageRules: [function (v) {
         return v.length > 0 || "Текст сообщения не указан";
@@ -4023,8 +4074,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Отправлено обращение!");
+      var _this = this;
+
+      _api_feedback__WEBPACK_IMPORTED_MODULE_0__["default"].save({
+        type: this.thematic,
+        text: this.modelmessage
+      }).then(function (res) {
+        _this.showMessage("Жалоба принята на рассмотрение");
+      })["catch"](function (ex) {
+        _this.showError("Произошла ошибка");
+      });
+      this.modelmessage = "";
     }
   }
 });
@@ -4040,6 +4100,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_feedback__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/feedback */ "./resources/js/api/feedback.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 //
 //
 //
@@ -4139,9 +4203,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  directives: {
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_1__["mask"]
+  },
   data: function data() {
     return {
       modelmessage: "",
@@ -4152,11 +4221,12 @@ __webpack_require__.r(__webpack_exports__);
       }],
       form: false,
       search: "",
+      mask: "####",
       expanded: [],
       singleExpand: true,
       page: 1,
       pageCount: 0,
-      itemsPerPage: 5,
+      itemsPerPage: 100,
       headers: [{
         text: "Номер обращения",
         value: "id"
@@ -4173,27 +4243,42 @@ __webpack_require__.r(__webpack_exports__);
         text: "",
         value: "data-table-expand"
       }],
-      items: [{
-        id: 1,
-        name: "Баг1",
-        email: "p_a.i.borisov@mpt.ru",
-        date: new Date().toISOString().substr(0, 10),
-        fio: "Борисов Артём Игоревич",
-        body: "Текст запроса1"
-      }, {
-        id: 2,
-        name: "Баг2",
-        email: "p_a.i.borisov@mpt.ru",
-        date: new Date().toISOString().substr(0, 10),
-        fio: "Борисов Артём Игоревич",
-        body: "Текст запроса2"
-      }]
+      items: []
     };
   },
+  props: {
+    requests: {
+      data: String,
+      "default": ""
+    }
+  },
+  mounted: function mounted() {
+    this.items = JSON.parse(this.requests);
+    console.log(this.items);
+  },
   methods: {
-    sendQuery: function sendQuery(id) {
-      //Вписывай отправку
-      alert("Отправлен ответ!" + id);
+    sendQuery: function sendQuery(email) {
+      var _this = this;
+
+      _api_feedback__WEBPACK_IMPORTED_MODULE_0__["default"].sendEmail({
+        mail: email,
+        text: this.modelmessage,
+        id: this.expanded[0].id
+      }).then(function (res) {
+        _this.showMessage("Ответ отправлен");
+
+        _this.items.splice(_this.expanded[0]);
+      })["catch"](function (exp) {
+        _this.showError("Произошла ошибка");
+      });
+      this.modelmessage = "";
+    },
+    parseIntLoc: function parseIntLoc(val) {
+      if (val == "" || val == null || val == "0") {
+        return 1;
+      }
+
+      return parseInt(val);
     }
   }
 });
@@ -9709,11 +9794,7 @@ var render = function() {
                                   { staticClass: "pa-2" },
                                   [
                                     _c("v-text-field", {
-                                      attrs: {
-                                        items: _vm.itemsg,
-                                        label: "Группа",
-                                        readonly: ""
-                                      },
+                                      attrs: { label: "Группа", readonly: "" },
                                       model: {
                                         value: _vm.group,
                                         callback: function($$v) {
@@ -10025,6 +10106,28 @@ var render = function() {
                                   [
                                     _c("v-text-field", {
                                       attrs: {
+                                        label: "E-mail",
+                                        required: "",
+                                        readonly: ""
+                                      },
+                                      model: {
+                                        value: _vm.email,
+                                        callback: function($$v) {
+                                          _vm.email = $$v
+                                        },
+                                        expression: "email"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-row",
+                                  { staticClass: "pa-2" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
                                         rules: _vm.notEmtyRules,
                                         label: "Школа"
                                       },
@@ -10123,28 +10226,6 @@ var render = function() {
                                           _vm.modelprogress = $$v
                                         },
                                         expression: "modelprogress"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "E-mail",
-                                        required: "",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.email,
-                                        callback: function($$v) {
-                                          _vm.email = $$v
-                                        },
-                                        expression: "email"
                                       }
                                     })
                                   ],
@@ -10570,7 +10651,7 @@ var render = function() {
                           attrs: {
                             headers: _vm.headers,
                             items: _vm.items,
-                            "single-expand": false,
+                            "single-expand": true,
                             expanded: _vm.expanded,
                             "item-key": "id",
                             "show-expand": "",
@@ -10790,7 +10871,7 @@ var render = function() {
                                                                     return _vm.sendQuery(
                                                                       _vm
                                                                         .expanded[0]
-                                                                        .id
+                                                                        .email
                                                                     )
                                                                   }
                                                                 }
@@ -10841,16 +10922,21 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("v-text-field", {
+                              directives: [
+                                {
+                                  name: "mask",
+                                  rawName: "v-mask",
+                                  value: _vm.mask,
+                                  expression: "mask"
+                                }
+                              ],
                               attrs: {
                                 value: _vm.itemsPerPage,
-                                label: "Количество отображаемых обращений",
-                                type: "number",
-                                min: "1",
-                                max: "15"
+                                label: "Количество отображаемых обращений"
                               },
                               on: {
                                 input: function($event) {
-                                  _vm.itemsPerPage = parseInt($event, 10)
+                                  _vm.itemsPerPage = _vm.parseIntLoc($event)
                                 }
                               }
                             })
@@ -65358,6 +65444,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/certificate.js":
+/*!*****************************************!*\
+  !*** ./resources/js/api/certificate.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  save: function save(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_certificate', {
+      "cer_dat": credentials.data,
+      "type": credentials.type
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/feedback.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/feedback.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  save: function save(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_feedback', {
+      "text": credentials.text,
+      "type": credentials.type
+    });
+  },
+  sendEmail: function sendEmail(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/send_email', {
+      "text": credentials.text,
+      "to": credentials.mail,
+      'id': credentials.id
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/group.js":
 /*!***********************************!*\
   !*** ./resources/js/api/group.js ***!
@@ -68705,10 +68844,7 @@ var SET_USERS = 'SET_USERS';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (date) {
-  var day = date.getDay();
-  var month = date.getMonth();
-  var year = date.getFullYear();
-  return day + "/" + month + "/" + year;
+  return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear();
 });
 
 /***/ }),

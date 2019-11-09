@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\RouteControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
@@ -15,6 +17,23 @@ class FeedbackController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Add new feedback to database
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function savefeedback(Request $request)
+    {
+        $feed = new Feedback();
+        $feed['user_id'] = Auth::user()['id'];
+        $feed['type'] = $request['type'];
+        $feed['text'] = $request['text'];
+        $feed['answered'] = 0;
+        $feed->update();
+
+        return response()->json(['success'=>true]);
     }
 
     /**
