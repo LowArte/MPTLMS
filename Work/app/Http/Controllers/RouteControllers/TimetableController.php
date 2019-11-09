@@ -73,7 +73,7 @@ class TimetableController extends Controller
             $schedule = Schedule::where('group_id', $group['id'])->get()[0];
  
             $dep = Departament::get();
-            $curDep = Departament::where("id",$group['departaments_id'])->get();
+            $curDep = Departament::where("id",$group['departaments_id'])->first();
 
             return view('components/timetable', [
                 "schedule" => json_encode($schedule),
