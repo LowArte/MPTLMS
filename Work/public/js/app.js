@@ -2630,6 +2630,152 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      show: false,
+      dialog: false,
+      items: [{
+        href: "https://avatars.mds.yandex.net/get-zen_doc/1895227/pub_5cdc919cdee36d00b47e3b8b_5cdc91b81d586800b38792f5/scale_1200",
+        title: "FrontEnd разработка и WEB-дизайн​",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.035 «Разработчик WEB и мультимедийных приложений». Вид профессиональной деятельности «Проектирование, разработка и интеграция информационных ресурсов в локальной сети и информационно-телекоммуникационной сети «Интернет»"
+      }, {
+        href: "https://brandmaker.ru/statics/zapis/56387036b1fb8.jpg",
+        title: "Разработка мобильных приложений",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.001 «Программист». Вид профессиональной деятельности «Разработка программного обеспечения»"
+      }, {
+        href: "https://thecommunity.ru/uploads/posts/2018-05/1525723853_net.png",
+        title: "Программирование на платформе .Net",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.001 «Программист». Вид профессиональной деятельности «Разработка программного обеспечения»"
+      }, {
+        href: "https://i0.wp.com/academdpo.ru/wp-content/uploads/2018/03/sis_admin.jpg?zoom=2.625&resize=539%2C359",
+        title: "Системное администрирование информационно-коммуникационных систем",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.026 «Специалист по администрированию сетевых устройств информационно-коммуникационных систем». Вид профессиональной деятельности «Администрирование информационно-коммуникационных (инфокоммуникационных) систем»"
+      }, {
+        href: "https://techrocks.ru/wp-content/uploads/2019/01/learn-major-programming-languages-840x500.jpg",
+        title: "BackEnd разработка",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.035 «Разработчик WEB и мультимедийных приложений». Вид профессиональной деятельности «Проектирование, разработка и интеграция информационных ресурсов в локальной сети и информационно-телекоммуникационной сети «Интернет»"
+      }, {
+        href: "http://sstu.ru/upload/iblock/589/3_java_theme_12_09.1ee91676df034216919b0affee7d3c1e.jpg",
+        title: "Разработка баз данных и клиент-серверных приложений",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.015 «Специалист по информационным системам». Вид профессиональной деятельности «Поддержание эффективной работы баз данных, обеспечивающих функционирование информационных систем в организации»"
+      }, {
+        href: "http://nenovost.com/wp-content/uploads/2019/02/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D1%8B%D1%85-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9.jpg",
+        title: "Разработка игровых приложений",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.001 «Программист». Вид профессиональной деятельности «Разработка программного обеспечения»"
+      }, {
+        href: "https://fb.ru/misc/i/thumb/a/2/4/7/7/2/4/1/2477241.jpg",
+        title: "Информационная безопасность компьютерных сетей",
+        cost: "38 600",
+        time: "250 ак. часов",
+        text: "Программа соответствует профессиональному стандарту 06.032 «Специалист по безопасности компьютерных систем и сетей». Вид профессиональной деятельности «Защита информации в компьютерных системах и сетях»"
+      }]
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/authentication/LoginButtonComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/authentication/LoginButtonComponent.vue?vue&type=script&lang=js& ***!
@@ -4025,10 +4171,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4045,7 +4191,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      show: false,
+      items: [{
+        href: 'https://mpt.ru/upload/iblock/bfe/1.jpg',
+        title: 'Программирование в компьютерных системах',
+        text: 'В цикле профессиональных дисциплин студенты изучают безопасность информационных систем, техническое обслуживание и ремонт компьютеров, администрирование сетей, диагностику и системное программирование, WEB-дизайн и графическое моделирование объектов.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/33d/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg',
+        title: 'Информационные системы (по отраслям)',
+        text: 'Студенты изучают функционирование вычислительных систем, операционные системы, компьютерные сети, метрологию, стандартизацию, сертификацию и техническое документоведение. Среди профессиональных модулей — эксплуатация и модификация информационных систем (куда входят методы и средства их проектирования), участие в разработке информационных систем.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/886/1.jpg',
+        title: 'Прикладная информатика (по отраслям)',
+        text: 'Будущему технику-программисту нужно знать языки программирования, уметь создавать веб-страницы, владеть иностранным языком (английским как минимум). Студентов учат разрабатывать программы для различных целей и задач.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/f65/3.jpg',
+        title: 'Право и организация социального обеспечения',
+        text: 'Важные предметы, которые предстоит изучить будущим юристам, — право социального обеспечения, финансовое, семейное, трудовое, экологическое, конституционное право, страховое дело, гражданский процесс.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/88b/2.jpg',
+        title: 'Компьютерные сети',
+        text: 'Студенты изучают устройство и обслуживание локальных компьютерных сетей, установку и настройку аппаратных и программных средств доступа в сеть Интернет, информационную безопасность компьютеров и сетей, подключение и настройку сетевого оборудования, проведение диагностики и устранение неисправностей сетевого оборудования.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/a16/4.jpg',
+        title: 'Информационная безопасность автоматизированных систем',
+        text: 'В профессиональном цикле дисциплин будущие специалисты по защите информации практикуются в языках программирования, проходят технологии и методы программирования, безопасность операционных систем и сетей.'
+      }, {
+        href: 'https://mpt.ru/upload/iblock/aee/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg',
+        title: 'Компьютерные системы и комплексы',
+        text: 'Программа обучения предусматривает изучение архитектуры ЭВМ, периферийных устройств, системного, прикладного ПО, микропроцессорных цифровых устройств, средств обеспечения информационной безопасности в компьютерных системах, принципов построения компьютерных сетей, администрирования Windows, Unix.'
+      }]
+    };
+  }
+});
 
 /***/ }),
 
@@ -5091,6 +5278,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
+/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -5154,21 +5343,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return _ref = {
-      group: "П-2-16",
+      arrgroups: null,
+      casegroup: "П-2-16",
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: "00.00.0000",
-      arrgroups: [],
-      arrdepartaments: [],
-      departament: null
-    }, _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
+      Datetime: "00.00.0000"
+    }, _defineProperty(_ref, "arrgroups", []), _defineProperty(_ref, "arrdepartaments", []), _defineProperty(_ref, "departament", null), _defineProperty(_ref, "callschedule", null), _defineProperty(_ref, "arrschedule", null), _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
   },
   props: {
     place: {
@@ -5193,9 +5399,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    loader: function loader() {
-      //Получить массив описанный выше и забиндить его во vue
-      return;
+    getGroups: function getGroups(departament) {
+      var _this = this;
+
+      // alert("Отеделение " + departament);
+      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
+        _this.arrgroups = reg.data.group;
+
+        if (_this.arrgroups.length > 0) {
+          _this.casegroup = _this.arrgroups[0].group_name;
+          getSchedule(_this.arrgroups[0].id);
+        }
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    getSchedule: function getSchedule(group) {
+      var _this2 = this;
+
+      //alert("Группа " + group);
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
+        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
     }
   },
   mounted: function mounted() {
@@ -5217,32 +5444,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     this.Datetime = hours + ":" + minutes + ":" + seconds;
+    console.log(JSON.parse(this.place));
     console.log(JSON.parse(this.groups));
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments)); //Место
 
-    this.places = JSON.parse(this.place); //var arr = JSON.parse(this.place);
-    //this.places = [];
-    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
-    //Отделения
+    this.places = JSON.parse(this.place); //Отделения
 
-    this.departaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.departaments.cur_departament)[0].dep_name_full;
-    this.departaments = JSON.parse(this.departaments.departaments);
-    this.arrdepartaments = [];
+    this.arrdepartaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0];
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments); //Группы
 
-    for (var i = 0; i < this.departaments.length; i++) {
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);
-    } //Группы
+    this.arrgroups = [];
+    this.arrgroups.push(JSON.parse(this.groups));
+    this.casegroup = this.arrgroups.group_name;
+    this.getGroups(this.departament.id); //Расписание звонков
 
+    this.callschedule = JSON.parse(this.callSchedule);
 
-    this.groups = JSON.parse(this.groups);
-    this.group = this.groups.group_name; //Расписание звонков
-
-    this.callSchedule = JSON.parse(this.callSchedule);
-
-    for (var i = 0; i < this.callSchedule.length; i++) {
-      this.callSchedule[i].call_schedule = JSON.parse(this.callSchedule[i].call_schedule);
+    for (var i = 0; i < this.callschedule.length; i++) {
+      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
     } //Расписание занятий
 
 
@@ -5250,11 +5471,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log("Current schedule is empty");
     } else {
       console.log(JSON.parse(this.schedule));
-      this.schedule = JSON.parse(this.schedule);
-      this.schedule = JSON.parse(this.schedule.schedule); // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
+      this.arrschedule = JSON.parse(this.schedule);
+      this.arrschedule = JSON.parse(this.arrschedule.schedule);
     }
-  } //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
-
+  }
 });
 
 /***/ }),
@@ -5268,6 +5488,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
+/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -5331,21 +5553,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return _ref = {
-      group: "П-2-16",
+      arrgroups: null,
+      casegroup: "П-2-16",
       model: null,
       hidden: false,
       itemsPerPageOptions: [6],
       itemsPerPage: 6,
-      Datetime: "00.00.0000",
-      arrgroups: [],
-      arrdepartaments: [],
-      departament: null
-    }, _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
+      Datetime: "00.00.0000"
+    }, _defineProperty(_ref, "arrgroups", []), _defineProperty(_ref, "arrdepartaments", []), _defineProperty(_ref, "departament", null), _defineProperty(_ref, "callschedule", null), _defineProperty(_ref, "arrschedule", null), _defineProperty(_ref, "group", null), _defineProperty(_ref, "places", []), _defineProperty(_ref, "day", ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]), _ref;
   },
   props: {
     place: {
@@ -5370,9 +5609,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    loader: function loader() {
-      //Получить массив описанный выше и забиндить его во vue
-      return;
+    getGroups: function getGroups(departament) {
+      var _this = this;
+
+      // alert("Отеделение " + departament);
+      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
+        _this.arrgroups = reg.data.group;
+
+        if (_this.arrgroups.length > 0) {
+          _this.casegroup = _this.arrgroups[0].group_name;
+          getSchedule(_this.arrgroups[0].id);
+        }
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    getSchedule: function getSchedule(group) {
+      var _this2 = this;
+
+      //alert("Группа " + group);
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
+        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
     }
   },
   mounted: function mounted() {
@@ -5394,32 +5654,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     this.Datetime = hours + ":" + minutes + ":" + seconds;
+    console.log(JSON.parse(this.place));
     console.log(JSON.parse(this.groups));
     console.log(JSON.parse(this.callSchedule));
     console.log(JSON.parse(this.departaments)); //Место
 
-    this.places = JSON.parse(this.place); //var arr = JSON.parse(this.place);
-    //this.places = [];
-    //for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
-    //Отделения
+    this.places = JSON.parse(this.place); //Отделения
 
-    this.departaments = JSON.parse(this.departaments);
-    this.departament = JSON.parse(this.departaments.cur_departament)[0].dep_name_full;
-    this.departaments = JSON.parse(this.departaments.departaments);
-    this.arrdepartaments = [];
+    this.arrdepartaments = JSON.parse(this.departaments);
+    this.departament = JSON.parse(this.arrdepartaments.cur_departament)[0];
+    this.arrdepartaments = JSON.parse(this.arrdepartaments.departaments); //Группы
 
-    for (var i = 0; i < this.departaments.length; i++) {
-      this.arrdepartaments.push(this.departaments[i].dep_name_full);
-    } //Группы
+    this.arrgroups = [];
+    this.arrgroups.push(JSON.parse(this.groups));
+    this.casegroup = this.arrgroups.group_name;
+    this.getGroups(this.departament.id); //Расписание звонков
 
+    this.callschedule = JSON.parse(this.callSchedule);
 
-    this.groups = JSON.parse(this.groups);
-    this.group = this.groups.group_name; //Расписание звонков
-
-    this.callSchedule = JSON.parse(this.callSchedule);
-
-    for (var i = 0; i < this.callSchedule.length; i++) {
-      this.callSchedule[i].call_schedule = JSON.parse(this.callSchedule[i].call_schedule);
+    for (var i = 0; i < this.callschedule.length; i++) {
+      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
     } //Расписание занятий
 
 
@@ -5427,11 +5681,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log("Current schedule is empty");
     } else {
       console.log(JSON.parse(this.schedule));
-      this.schedule = JSON.parse(this.schedule);
-      this.schedule = JSON.parse(this.schedule.schedule); // this.schedule['Понедельник']["1"].Lesson = ["1","2"];
+      this.arrschedule = JSON.parse(this.schedule);
+      this.arrschedule = JSON.parse(this.arrschedule.schedule);
     }
-  } //Требутся получить полный список групп при смене отделения. При первом заходе получаем свою группу и отделения. Но потом требуется уже добавить возможность выбирать другие отделения и другие группы, соответственно и расписание
-
+  }
 });
 
 /***/ }),
@@ -5624,6 +5877,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
+    place: {
+      type: String,
+      "default": null
+    },
     schedule: {
       type: String,
       "default": null
@@ -7917,6 +8174,297 @@ var render = function() {
         ])
       })
     ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=template&id=1a7cefb2&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=template&id=1a7cefb2& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    { staticClass: "pa-6" },
+    _vm._l(_vm.items, function(item, index) {
+      return _c(
+        "v-card",
+        {
+          key: index,
+          staticClass: "mx-auto my-12",
+          attrs: { loading: _vm.loading, "max-width": "374" }
+        },
+        [
+          _c("v-img", { attrs: { height: "250", src: item.href } }),
+          _vm._v(" "),
+          _c("v-card-title", [_vm._v(_vm._s(item.title))]),
+          _vm._v(" "),
+          _c("v-card-text", [
+            _c("div", { staticClass: "my-4 subtitle-1 black--text" }, [
+              _vm._v("₽ • " + _vm._s(item.cost))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-4 subtitle-1 black--text" }, [
+              _vm._v("Продолжительность • " + _vm._s(item.time))
+            ]),
+            _vm._v(" "),
+            _c("div", [_vm._v(_vm._s(item.text))])
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c(
+                "v-dialog",
+                {
+                  attrs: { persistent: "", "max-width": "600px" },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "activator",
+                        fn: function(ref) {
+                          var on = ref.on
+                          return [
+                            _c(
+                              "v-btn",
+                              _vm._g(
+                                {
+                                  attrs: {
+                                    color: "deep-purple accent-4",
+                                    text: "",
+                                    dark: ""
+                                  },
+                                  on: { click: _vm.reserve }
+                                },
+                                on
+                              ),
+                              [_vm._v("Подать заявку")]
+                            )
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    true
+                  ),
+                  model: {
+                    value: _vm.dialog,
+                    callback: function($$v) {
+                      _vm.dialog = $$v
+                    },
+                    expression: "dialog"
+                  }
+                },
+                [
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v("User Profile")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c(
+                            "v-container",
+                            [
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", sm: "6", md: "4" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Legal first name*",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", sm: "6", md: "4" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Legal middle name",
+                                          hint:
+                                            "example of helper text only on focus"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", sm: "6", md: "4" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Legal last name*",
+                                          hint:
+                                            "example of persistent helper text",
+                                          "persistent-hint": "",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Email*", required: "" }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Password*",
+                                          type: "password",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", sm: "6" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: [
+                                            "0-17",
+                                            "18-29",
+                                            "30-54",
+                                            "54+"
+                                          ],
+                                          label: "Age*",
+                                          required: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", sm: "6" } },
+                                    [
+                                      _c("v-autocomplete", {
+                                        attrs: {
+                                          items: [
+                                            "Skiing",
+                                            "Ice hockey",
+                                            "Soccer",
+                                            "Basketball",
+                                            "Hockey",
+                                            "Reading",
+                                            "Writing",
+                                            "Coding",
+                                            "Basejump"
+                                          ],
+                                          label: "Interests",
+                                          multiple: ""
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("small", [_vm._v("*indicates required field")])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", text: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Close")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", text: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Save")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    }),
     1
   )
 }
@@ -10371,10 +10919,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10387,26 +10935,324 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-parallax",
-    { attrs: { dark: "", src: "require('../../assets/head.jpg" } },
+    "v-row",
     [
       _c(
-        "v-row",
-        { attrs: { align: "center", justify: "center" } },
+        "v-col",
         [
-          _c("v-col", { staticClass: "text-center", attrs: { cols: "12" } }, [
-            _c("h1", { staticClass: "display-1 font-weight-thin mb-4" }, [
-              _vm._v("Московский приборостроительный техникум")
-            ]),
-            _vm._v(" "),
-            _c("h4", { staticClass: "subheading" }, [
-              _vm._v("Имени Г.В. Плеханова РЭУ")
-            ])
-          ])
+          _c(
+            "v-card",
+            { attrs: { elevation: 0 } },
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [
+                  _c("h2", { staticClass: "font-weight-light" }, [
+                    _vm._v("Объявление")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _c("b", [
+                  _vm._v(
+                    'Автошкола объявляет набор слушателей на курсы профессиональной подготовки водителей категории "В" на ОКТЯБРЬ с 01.10.2019 года.'
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [_vm._v("Дни занятий по теории:")]),
+              _vm._v(" "),
+              _c("v-container", [
+                _c("ul", [
+                  _c("li", [_vm._v("Вторник (с 18:15 до 21:00)")]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("Четверг (с 18:15 до 21:00)")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v("График вождения устанавливается индивидуально.")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n        Стоимость обучения за весь курс обучения:\n        "
+                ),
+                _c("b", [_vm._v("24 000")]),
+                _vm._v(" рублей\n      ")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n        Более подробную информацию можно получить по телефону:\n        "
+                ),
+                _c("b", [_vm._v("+7(495) 792-83-02")])
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c("center", [
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: "https://mpt.ru/avtoshkola/files/заключение гаи.pdf"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "Заключение Управления ГИБДД ГУ МВД России по г. Москве"
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [
+                  _c("h2", { staticClass: "font-weight-light" }, [
+                    _vm._v(
+                      'Программа профессионального обучения "Подготовка водителей транспортных средств категории В"'
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Преимуществом автошколы является работа опытных сотрудников – профессионалов, а так же реализована своя площадка в 30 метрах от учебного класса – автоподготовки. Обучение в городе происходит около здания."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "В результате обучения вы получите грамотные наставления учителей и мастеров производственного обучения. Так же вас научат теоретическим и практическим навыкам вождения в городском режиме."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "На основании полученных навыков вы получаете номерной сертификат об окончании автошколы."
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [_vm._v("ОБУЧАЮЩАЯ ПРОГРАММА И ЦЕНА")]
+              ),
+              _vm._v(" "),
+              _c("v-container", [
+                _c("ul", [
+                  _c("li", [
+                    _vm._v(
+                      "Общее кол-во часов по программе составляет 188 (автоматическая трансмиссия)/190 (Механическая трансмиссия) часов, из них практика 54 (автоматическая трансмиссия)/56 (механическая трансмиссия) часов практика;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Сроки обучения составляют 3,0 - 3,5 месяца;")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Стоимость обучения 24 000 рублей с возможностью поблочной оплаты. Дополнительные занятия помимо базовых практических часов стоят 1500 Р. и составляют 2 академических часа;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Возможность приобрести комплект литературы;")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("Предоставление медицинской комиссии;")]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "После прохождения обучения по данной учебной программе сдача экзамена в ГИБДД не составит для Вас проблем;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Наш опыт работы более 19 лет и мы выработали свою специфику работы с каждым слушателем;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Остались вопросы? У нас есть недорогие дополнительные занятия помимо базовых практических часов."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [_vm._v("ПОДГОТОВКА ОСУЩЕСТВЛЯЕТСЯ В ОБЛАСТИ")]
+              ),
+              _vm._v(" "),
+              _c("v-container", [
+                _c("ul", [
+                  _c("li", [
+                    _vm._v("Правил дорожного движения Российской Федерации;")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Основных положений по допуску транспортных средств к эксплуатации и обязанностей должностных лиц по обеспечению безопасности дорожного движения;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Законодательства Российской Федерации в части, касающейся обеспечения безопасности дорожного движения, а также уголовной, административной и иной ответственности водителей транспортных средств;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Технических аспектов безопасного управления транспортным средством;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Факторов, способствующих возникновению дорожно-транспортных происшествий;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Элементов конструкции транспортного средства, состояние которых влияет на безопасность дорожного движения;"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Методов оказания первой помощи лицам, пострадавшим при дорожно-транспортном происшествии."
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "ma-2" }),
+              _vm._v(" "),
+              _c(
+                "v-card-title",
+                { staticClass: "info--text font-weight-light" },
+                [_vm._v("ПРАКТИКА")]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Курсы автовождения проводят спокойные, опытные, понимающие, адекватные автоинструктора. Как мужчины, так и женщины с большим стажем работы."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Наши авто оснащены вторыми педалями и зеркалами, что позволяет контролировать процесс вождения. Обучение проводятся индивидуально для каждого ученика, как на механической коробке переключения передач, так и на «автомате»."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "С учетом новой дорожной обстановки и интенсивности транспортных потоков в городе, в корне, изменилось обучение безопасному управлению автомобилем."
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "Получение водительских прав – это только первый шаг на пути к захватывающему миру управлением автомобилем."
+                )
+              ])
+            ],
+            1
+          )
         ],
         1
       )
     ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    { staticClass: "pa-6" },
+    _vm._l(_vm.items, function(item, index) {
+      return _c(
+        "v-card",
+        {
+          key: index,
+          staticClass: "mx-auto my-12",
+          attrs: { "max-width": "374" }
+        },
+        [
+          _c("v-img", { attrs: { src: item.href, height: "200px" } }),
+          _vm._v(" "),
+          _c("p", { staticClass: "title text--primary ma-2 text-center" }, [
+            _vm._v(_vm._s(item.title))
+          ]),
+          _vm._v(" "),
+          _c("v-expand-transition", [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: true,
+                    expression: "true"
+                  }
+                ]
+              },
+              [
+                _c("v-divider"),
+                _vm._v(" "),
+                _c("v-card-text", [_vm._v(_vm._s(item.text))])
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      )
+    }),
     1
   )
 }
@@ -12847,10 +13693,10 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider"),
       _vm._v(" "),
-      _vm._l(_vm.items, function(item) {
+      _vm._l(_vm.items, function(item, j) {
         return _c(
           "v-row",
-          { key: item, attrs: { align: "center", justify: "center" } },
+          { key: j, attrs: { align: "center", justify: "center" } },
           [
             _c(
               "v-col",
@@ -13173,7 +14019,14 @@ var render = function() {
                 attrs: {
                   label: "Отделения",
                   solo: "",
-                  items: _vm.arrdepartaments
+                  items: _vm.arrdepartaments,
+                  "item-text": "dep_name_full",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getGroups(_vm.departament.id)
+                  }
                 },
                 model: {
                   value: _vm.departament,
@@ -13188,14 +14041,21 @@ var render = function() {
                 attrs: {
                   label: "Группа",
                   solo: "",
-                  items: _vm.groups.group_name
+                  items: _vm.arrgroups,
+                  "item-text": "group_name",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getSchedule(_vm.casegroup.id)
+                  }
                 },
                 model: {
-                  value: _vm.group,
+                  value: _vm.casegroup,
                   callback: function($$v) {
-                    _vm.group = $$v
+                    _vm.casegroup = $$v
                   },
-                  expression: "group"
+                  expression: "casegroup"
                 }
               })
             ],
@@ -13207,169 +14067,212 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider", { staticClass: "ma-0" }),
       _vm._v(" "),
-      _c(
-        "v-data",
-        {
-          attrs: {
-            items: _vm.schedule.schedule,
-            "items-per-page": _vm.itemsPerPage
-          },
-          on: {
-            "update:itemsPerPage": function($event) {
-              _vm.itemsPerPage = $event
+      _vm.arrschedule
+        ? _c(
+            "v-data",
+            {
+              attrs: { "items-per-page": _vm.itemsPerPage },
+              on: {
+                "update:itemsPerPage": function($event) {
+                  _vm.itemsPerPage = $event
+                },
+                "update:items-per-page": function($event) {
+                  _vm.itemsPerPage = $event
+                }
+              }
             },
-            "update:items-per-page": function($event) {
-              _vm.itemsPerPage = $event
-            }
-          }
-        },
-        [
-          _c(
-            "v-row",
-            _vm._l(_vm.day, function(item) {
-              return _c(
-                "v-col",
-                { key: item, attrs: { cols: "12", sm: "6", md: "2", lg: "2" } },
-                [
-                  _c(
-                    "v-card",
+            [
+              _c(
+                "v-row",
+                _vm._l(_vm.day, function(item) {
+                  return _c(
+                    "v-col",
+                    {
+                      key: item,
+                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
+                    },
                     [
                       _c(
-                        "v-card-title",
-                        {
-                          staticClass: "subtitle-1 mb-0 pb-0",
-                          staticStyle: { color: "#FF3D00" }
-                        },
-                        [_vm._v(_vm._s(item))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { dense: "" } },
+                        "v-card",
                         [
-                          _c("v-list-item", [
-                            _vm._v(
-                              "Здание: " + _vm._s(_vm.schedule[item].Place)
-                            )
-                          ]),
+                          _c(
+                            "v-card-title",
+                            {
+                              staticClass: "subtitle-1 mb-0 pb-0",
+                              staticStyle: { color: "#FF3D00" }
+                            },
+                            [_vm._v(_vm._s(item))]
+                          ),
                           _vm._v(" "),
-                          _c("v-divider", { staticClass: "my-2" }),
-                          _vm._v(" "),
-                          _vm._l(7, function(n, i) {
-                            return _c(
-                              "div",
-                              { key: i, staticClass: "ma-0 pa-0" },
-                              [
-                                _vm.schedule[item][n].Lesson != null &&
-                                _vm.schedule[item][n].Lesson != ""
-                                  ? _c(
-                                      "v-list",
-                                      { staticClass: "ma-2 pa-0" },
-                                      [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
-                                                )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Lesson
-                                              )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Teacher
-                                              )
-                                            )
-                                          ]
-                                        )
-                                      ],
-                                      1
+                          _c(
+                            "v-list",
+                            { staticClass: "ma-0 pa-0", attrs: { dense: "" } },
+                            [
+                              _c("v-list-item", [
+                                _vm._v(
+                                  "Здание: " +
+                                    _vm._s(
+                                      _vm.places[_vm.arrschedule[item].Place]
+                                        .place_name
                                     )
-                                  : _c(
-                                      "v-list",
-                                      { staticClass: "ma-0 pa-0" },
-                                      [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-divider", { staticClass: "my-2" }),
+                              _vm._v(" "),
+                              _vm._l(7, function(n, i) {
+                                return _c(
+                                  "div",
+                                  { key: i, staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm.arrschedule[item][n].Lesson != null &&
+                                    _vm.arrschedule[item][n].Lesson != ""
+                                      ? _c(
+                                          "v-list",
+                                          { staticClass: "ma-2 pa-0" },
                                           [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
                                                 )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Lesson
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Teacher
+                                                  )
+                                                )
+                                              ]
                                             )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [_vm._v("Свободная пара")]
+                                          ],
+                                          1
                                         )
-                                      ],
-                                      1
-                                    ),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" })
-                              ],
-                              1
-                            )
-                          })
+                                      : _c(
+                                          "v-list",
+                                          { staticClass: "ma-0 pa-0" },
+                                          [
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [_vm._v("Свободная пара")]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                    _vm._v(" "),
+                                    _c("v-divider", {
+                                      staticClass: "my-2 ma-0 pa-0"
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            ],
+                            2
+                          )
                         ],
-                        2
+                        1
                       )
                     ],
                     1
                   )
-                ],
+                }),
                 1
               )
-            }),
+            ],
             1
           )
-        ],
-        1
-      ),
-      _vm._v("\n  " + _vm._s(_vm.places) + "\n  \n  "),
+        : _vm._e(),
+      _vm._v("\n  " + _vm._s(_vm.arrdepartaments) + "\n  "),
       _c("br"),
-      _vm._v("\n  " + _vm._s(_vm.callSchedule) + "\n  \n")
+      _vm._v("\n  " + _vm._s(_vm.arrgroups) + "\n")
     ],
     1
   )
@@ -13411,7 +14314,14 @@ var render = function() {
                 attrs: {
                   label: "Отделения",
                   solo: "",
-                  items: _vm.arrdepartaments
+                  items: _vm.arrdepartaments,
+                  "item-text": "dep_name_full",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getGroups(_vm.departament.id)
+                  }
                 },
                 model: {
                   value: _vm.departament,
@@ -13426,14 +14336,21 @@ var render = function() {
                 attrs: {
                   label: "Группа",
                   solo: "",
-                  items: _vm.groups.group_name
+                  items: _vm.arrgroups,
+                  "item-text": "group_name",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.getSchedule(_vm.casegroup.id)
+                  }
                 },
                 model: {
-                  value: _vm.group,
+                  value: _vm.casegroup,
                   callback: function($$v) {
-                    _vm.group = $$v
+                    _vm.casegroup = $$v
                   },
-                  expression: "group"
+                  expression: "casegroup"
                 }
               })
             ],
@@ -13445,169 +14362,212 @@ var render = function() {
       _vm._v(" "),
       _c("v-divider", { staticClass: "ma-0" }),
       _vm._v(" "),
-      _c(
-        "v-data",
-        {
-          attrs: {
-            items: _vm.schedule.schedule,
-            "items-per-page": _vm.itemsPerPage
-          },
-          on: {
-            "update:itemsPerPage": function($event) {
-              _vm.itemsPerPage = $event
+      _vm.arrschedule
+        ? _c(
+            "v-data",
+            {
+              attrs: { "items-per-page": _vm.itemsPerPage },
+              on: {
+                "update:itemsPerPage": function($event) {
+                  _vm.itemsPerPage = $event
+                },
+                "update:items-per-page": function($event) {
+                  _vm.itemsPerPage = $event
+                }
+              }
             },
-            "update:items-per-page": function($event) {
-              _vm.itemsPerPage = $event
-            }
-          }
-        },
-        [
-          _c(
-            "v-row",
-            _vm._l(_vm.day, function(item) {
-              return _c(
-                "v-col",
-                { key: item, attrs: { cols: "12", sm: "6", md: "2", lg: "2" } },
-                [
-                  _c(
-                    "v-card",
+            [
+              _c(
+                "v-row",
+                _vm._l(_vm.day, function(item) {
+                  return _c(
+                    "v-col",
+                    {
+                      key: item,
+                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
+                    },
                     [
                       _c(
-                        "v-card-title",
-                        {
-                          staticClass: "subtitle-1 mb-0 pb-0",
-                          staticStyle: { color: "#FF3D00" }
-                        },
-                        [_vm._v(_vm._s(item))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { dense: "" } },
+                        "v-card",
                         [
-                          _c("v-list-item", [
-                            _vm._v(
-                              "Здание: " + _vm._s(_vm.schedule[item].Place)
-                            )
-                          ]),
+                          _c(
+                            "v-card-title",
+                            {
+                              staticClass: "subtitle-1 mb-0 pb-0",
+                              staticStyle: { color: "#FF3D00" }
+                            },
+                            [_vm._v(_vm._s(item))]
+                          ),
                           _vm._v(" "),
-                          _c("v-divider", { staticClass: "my-2" }),
-                          _vm._v(" "),
-                          _vm._l(7, function(n, i) {
-                            return _c(
-                              "div",
-                              { key: i, staticClass: "ma-0 pa-0" },
-                              [
-                                _vm.schedule[item][n].Lesson != null &&
-                                _vm.schedule[item][n].Lesson != ""
-                                  ? _c(
-                                      "v-list",
-                                      { staticClass: "ma-2 pa-0" },
-                                      [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
-                                                )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Lesson
-                                              )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.schedule[item][n].Teacher
-                                              )
-                                            )
-                                          ]
-                                        )
-                                      ],
-                                      1
+                          _c(
+                            "v-list",
+                            { staticClass: "ma-0 pa-0", attrs: { dense: "" } },
+                            [
+                              _c("v-list-item", [
+                                _vm._v(
+                                  "Здание: " +
+                                    _vm._s(
+                                      _vm.places[_vm.arrschedule[item].Place]
+                                        .place_name
                                     )
-                                  : _c(
-                                      "v-list",
-                                      { staticClass: "ma-0 pa-0" },
-                                      [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-divider", { staticClass: "my-2" }),
+                              _vm._v(" "),
+                              _vm._l(7, function(n, i) {
+                                return _c(
+                                  "div",
+                                  { key: i, staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm.arrschedule[item][n].Lesson != null &&
+                                    _vm.arrschedule[item][n].Lesson != ""
+                                      ? _c(
+                                          "v-list",
+                                          { staticClass: "ma-2 pa-0" },
                                           [
-                                            _vm._v(
-                                              _vm._s(n) +
-                                                " пара - " +
-                                                _vm._s(
-                                                  _vm.callSchedule[
-                                                    _vm.schedule[item].Place
-                                                  ].call_schedule[n]
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
                                                 )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Lesson
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.arrschedule[item][n]
+                                                      .Teacher
+                                                  )
+                                                )
+                                              ]
                                             )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "mt-0 mb-0 pt-0 pb-0"
-                                          },
-                                          [_vm._v("Свободная пара")]
+                                          ],
+                                          1
                                         )
-                                      ],
-                                      1
-                                    ),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" })
-                              ],
-                              1
-                            )
-                          })
+                                      : _c(
+                                          "v-list",
+                                          { staticClass: "ma-0 pa-0" },
+                                          [
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  {
+                                                    staticClass:
+                                                      "mt-0 mb-0 pt-0 pb-0"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(n) +
+                                                        " пара - " +
+                                                        _vm._s(
+                                                          _vm.callschedule[
+                                                            _vm.arrschedule[
+                                                              item
+                                                            ].Place
+                                                          ].call_schedule[n]
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _c("v-list-item", [
+                                                  _vm._v(
+                                                    _vm._s(n) +
+                                                      " пара - расписание звонка отсутствует!"
+                                                  )
+                                                ]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                staticClass:
+                                                  "mt-0 mb-0 pt-0 pb-0"
+                                              },
+                                              [_vm._v("Свободная пара")]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                    _vm._v(" "),
+                                    _c("v-divider", {
+                                      staticClass: "my-2 ma-0 pa-0"
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            ],
+                            2
+                          )
                         ],
-                        2
+                        1
                       )
                     ],
                     1
                   )
-                ],
+                }),
                 1
               )
-            }),
+            ],
             1
           )
-        ],
-        1
-      ),
-      _vm._v("\n  " + _vm._s(_vm.places) + "\n  \n  "),
+        : _vm._e(),
+      _vm._v("\n  " + _vm._s(_vm.arrdepartaments) + "\n  "),
       _c("br"),
-      _vm._v("\n  " + _vm._s(_vm.callSchedule) + "\n  \n")
+      _vm._v("\n  " + _vm._s(_vm.arrgroups) + "\n")
     ],
     1
   )
@@ -13785,16 +14745,16 @@ var render = function() {
       }
     },
     [
-      _c("v-tab", { key: _vm.item }, [_vm._v("Расписание")]),
+      _c("v-tab", [_vm._v("Расписание")]),
       _vm._v(" "),
-      _c("v-tab", { key: _vm.item }, [_vm._v("Замены")]),
+      _c("v-tab", [_vm._v("Замены")]),
       _vm._v(" "),
       _c(
         "v-tab-item",
-        { key: _vm.item },
         [
           _c("TimeTable", {
             attrs: {
+              place: _vm.place,
               schedule: _vm.schedule,
               callSchedule: _vm.call,
               groups: _vm.groups,
@@ -13805,7 +14765,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("Replacements")], 1)
+      _c("v-tab-item", [_c("Replacements")], 1)
     ],
     1
   )
@@ -64438,6 +65398,50 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/group.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/group.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getGroup: function getGroup(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_group_by_departament_id', {
+      "dep_id": credentials
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/schedule.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/schedule.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getSchedule: function getSchedule(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_schedule_by_group_id', {
+      "group_id": credentials
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/users.js":
 /*!***********************************!*\
   !*** ./resources/js/api/users.js ***!
@@ -64487,16 +65491,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/timetable/ConreplacementsComponent */ "./resources/js/components/timetable/ConreplacementsComponent.vue");
 /* harmony import */ var _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/academicperformance/TeacherAPComponent */ "./resources/js/components/academicperformance/TeacherAPComponent.vue");
 /* harmony import */ var _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/callschedule/ConCallScheduleComponent */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue");
-/* harmony import */ var _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/callschedule/CallScheduleComponent */ "./resources/js/components/callschedule/CallScheduleComponent.vue");
-/* harmony import */ var _components_main_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/main/MainPageComponent */ "./resources/js/components/main/MainPageComponent.vue");
-/* harmony import */ var _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/feedback/RequestsUsersComponent */ "./resources/js/components/feedback/RequestsUsersComponent.vue");
-/* harmony import */ var _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/PanelControlComponent */ "./resources/js/components/PanelControlComponent.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
-/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/mainpage/SpecialtyPageComponent */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue");
+/* harmony import */ var _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/mainpage/MainPageComponent */ "./resources/js/components/mainpage/MainPageComponent.vue");
+/* harmony import */ var _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/callschedule/CallScheduleComponent */ "./resources/js/components/callschedule/CallScheduleComponent.vue");
+/* harmony import */ var _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/feedback/RequestsUsersComponent */ "./resources/js/components/feedback/RequestsUsersComponent.vue");
+/* harmony import */ var _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/PanelControlComponent */ "./resources/js/components/PanelControlComponent.vue");
+/* harmony import */ var _components_additionaleducation_RetrainingComponent__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/additionaleducation/RetrainingComponent */ "./resources/js/components/additionaleducation/RetrainingComponent.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -64511,6 +65517,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+
 
 
 
@@ -64544,15 +65552,15 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 if (window.user) {
-  _store__WEBPACK_IMPORTED_MODULE_18__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["USER"], user);
-  _store__WEBPACK_IMPORTED_MODULE_18__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_20__["LOGGED"], true);
+  _store__WEBPACK_IMPORTED_MODULE_20__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_22__["USER"], user);
+  _store__WEBPACK_IMPORTED_MODULE_20__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_22__["LOGGED"], true);
 }
 
 new Vue({
   el: '#app',
-  store: _store__WEBPACK_IMPORTED_MODULE_18__["default"],
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_21__["default"],
-  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_23__["default"]],
+  store: _store__WEBPACK_IMPORTED_MODULE_20__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_23__["default"],
+  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_25__["default"]],
   components: {
     'login-button': _components_authentication_LoginButtonComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     'remember-password': _components_authentication_RememberPasswordComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -64568,10 +65576,12 @@ new Vue({
     'conreplacements': _components_timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
     'teacheracademicperfomance': _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
     'concallschedule': _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
-    'mainPage': _components_main_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
-    'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
-    'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_17__["default"],
-    'callschedule': _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_14__["default"]
+    'subtitle': _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_14__["default"],
+    'maintitle': _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
+    'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_17__["default"],
+    'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_18__["default"],
+    'callschedule': _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
+    'retraining': _components_additionaleducation_RetrainingComponent__WEBPACK_IMPORTED_MODULE_19__["default"]
   },
   data: function data() {
     return {
@@ -64583,7 +65593,7 @@ new Vue({
       updatingUser: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_22__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_24__["mapGetters"])({
     user: 'user'
   }), {
     items: function items() {
@@ -64613,7 +65623,7 @@ new Vue({
             return [{
               icon: 'home',
               text: 'Главная',
-              href: '/main'
+              href: '/home'
             }, {
               icon: 'portrait',
               text: 'Студенческая карточка',
@@ -64633,16 +65643,16 @@ new Vue({
               text: 'Успеваемость',
               href: '/home'
             }, */
-            {
+
+            /* {
               icon: 'business_center',
               text: 'Дополнительное образование',
               href: '/home'
-            },
-            /* 
+            }, 
             {
-            icon: 'school',
-            text: 'Преподаватели',
-            href: '/home'
+              icon: 'school',
+              text: 'Преподаватели',
+              href: '/home'
             }, */
             {
               icon: 'edit',
@@ -64746,7 +65756,7 @@ new Vue({
       var _this = this;
 
       this.updatingUser = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["UPDATE_USER"], this.user).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_21__["UPDATE_USER"], this.user).then(function (response) {
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
@@ -64774,7 +65784,7 @@ new Vue({
       var _this2 = this;
 
       this.logoutLoading = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["LOGOUT"]).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_21__["LOGOUT"]).then(function (response) {
         window.location = '/';
       })["catch"](function (error) {
         console.log(error);
@@ -64795,7 +65805,7 @@ new Vue({
       var _this3 = this;
 
       this.changingPassword = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_19__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_21__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
         _this3.showMessage("Email sent to change password");
       })["catch"](function (error) {
         console.dir(error);
@@ -64865,6 +65875,14 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./Expention/Panel": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
+	"./Expention/Panel.vue": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -64879,17 +65897,23 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		7
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		7
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
 	],
 	"./academicperformance/TeacherAPComponent.vue": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
+	],
+	"./additionaleducation/RetrainingComponent": [
+		"./resources/js/components/additionaleducation/RetrainingComponent.vue"
+	],
+	"./additionaleducation/RetrainingComponent.vue": [
+		"./resources/js/components/additionaleducation/RetrainingComponent.vue"
 	],
 	"./authentication/LoginButtonComponent": [
 		"./resources/js/components/authentication/LoginButtonComponent.vue"
@@ -64959,13 +65983,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		7
+		8
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		7
+		8
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -64987,19 +66011,13 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		8
+		9
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		8
-	],
-	"./expention/Panel": [
-		"./resources/js/components/expention/Panel.vue"
-	],
-	"./expention/Panel.vue": [
-		"./resources/js/components/expention/Panel.vue"
+		9
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -65015,17 +66033,23 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		10
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		10
 	],
-	"./main/MainPageComponent": [
-		"./resources/js/components/main/MainPageComponent.vue"
+	"./mainpage/MainPageComponent": [
+		"./resources/js/components/mainpage/MainPageComponent.vue"
 	],
-	"./main/MainPageComponent.vue": [
-		"./resources/js/components/main/MainPageComponent.vue"
+	"./mainpage/MainPageComponent.vue": [
+		"./resources/js/components/mainpage/MainPageComponent.vue"
+	],
+	"./mainpage/SpecialtyPageComponent": [
+		"./resources/js/components/mainpage/SpecialtyPageComponent.vue"
+	],
+	"./mainpage/SpecialtyPageComponent.vue": [
+		"./resources/js/components/mainpage/SpecialtyPageComponent.vue"
 	],
 	"./mixins/withSnackbar": [
 		"./resources/js/components/mixins/withSnackbar.js"
@@ -65053,11 +66077,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		11
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		11
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -65374,6 +66398,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherAPComponent_vue_vue_type_template_id_af387ec6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherAPComponent_vue_vue_type_template_id_af387ec6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/additionaleducation/RetrainingComponent.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/additionaleducation/RetrainingComponent.vue ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RetrainingComponent_vue_vue_type_template_id_1a7cefb2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RetrainingComponent.vue?vue&type=template&id=1a7cefb2& */ "./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=template&id=1a7cefb2&");
+/* harmony import */ var _RetrainingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RetrainingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RetrainingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RetrainingComponent_vue_vue_type_template_id_1a7cefb2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RetrainingComponent_vue_vue_type_template_id_1a7cefb2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/additionaleducation/RetrainingComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RetrainingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./RetrainingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RetrainingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=template&id=1a7cefb2&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=template&id=1a7cefb2& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RetrainingComponent_vue_vue_type_template_id_1a7cefb2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./RetrainingComponent.vue?vue&type=template&id=1a7cefb2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/additionaleducation/RetrainingComponent.vue?vue&type=template&id=1a7cefb2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RetrainingComponent_vue_vue_type_template_id_1a7cefb2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RetrainingComponent_vue_vue_type_template_id_1a7cefb2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -66138,29 +67231,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/main/MainPageComponent.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/main/MainPageComponent.vue ***!
-  \************************************************************/
+/***/ "./resources/js/components/mainpage/MainPageComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/mainpage/MainPageComponent.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainPageComponent.vue?vue&type=template&id=2a926b8a& */ "./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&");
-/* harmony import */ var _MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainPageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainPageComponent.vue?vue&type=template&id=5c78d2d9& */ "./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-
-
+var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -66170,38 +67261,93 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/main/MainPageComponent.vue"
+component.options.__file = "resources/js/components/mainpage/MainPageComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MainPageComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MainPageComponent.vue?vue&type=template&id=2a926b8a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/main/MainPageComponent.vue?vue&type=template&id=2a926b8a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MainPageComponent.vue?vue&type=template&id=5c78d2d9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/MainPageComponent.vue?vue&type=template&id=5c78d2d9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_2a926b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainPageComponent_vue_vue_type_template_id_5c78d2d9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/mainpage/SpecialtyPageComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/mainpage/SpecialtyPageComponent.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpecialtyPageComponent.vue?vue&type=template&id=0327941c& */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&");
+/* harmony import */ var _SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SpecialtyPageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/mainpage/SpecialtyPageComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SpecialtyPageComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SpecialtyPageComponent.vue?vue&type=template&id=0327941c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mainpage/SpecialtyPageComponent.vue?vue&type=template&id=0327941c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpecialtyPageComponent_vue_vue_type_template_id_0327941c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -67671,8 +68817,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

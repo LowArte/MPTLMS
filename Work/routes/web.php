@@ -59,4 +59,7 @@ Route::post('/save_concallschedule', 'RouteControllers\ConCallScheduleController
 
 Route::post('/get_group_by_departament_id', 'RouteControllers\TimeTableController@groupByDepartamentId');
 
+Route::post('/get_schedule_by_group_id', 'RouteControllers\TimeTableController@scheduleByGroupId');
+
+
 

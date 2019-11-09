@@ -26,6 +26,7 @@ import InfoPage from './components/mainpage/MainPageComponent'
 import CallSchedule from './components/callschedule/CallScheduleComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
+import Retraining from './components/additionaleducation/RetrainingComponent'
 
 //import vuetif from './plugins/vuetify'
 
@@ -75,7 +76,8 @@ new Vue({
     'maintitle': InfoPage,
     'requestsusers': RequestsUsers,
     'panelcontrol': PanelControl,
-    'callschedule': CallSchedule
+    'callschedule': CallSchedule,
+    'retraining': Retraining
   },
   data: () => ({
     drawer: null,
@@ -135,11 +137,11 @@ new Vue({
             text: 'Успеваемость',
             href: '/home'
           }, */
-          {
+          /* {
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
-          },/* 
+          }, 
           {
             icon: 'school',
             text: 'Преподаватели',

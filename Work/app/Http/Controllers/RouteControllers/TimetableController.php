@@ -42,6 +42,20 @@ class TimetableController extends Controller
         }
     }
 
+    public function scheduleByGroupId (Request $request)
+    {
+        try{
+            Group::where('id',$request['group_id'])->firstOrFail();       
+            $schedule = Schedule::where('group_id',$request['group_id'])->get();
+            return response()->json(['schedule'=>$schedule],200);
+        }
+        catch(MNF $e)
+        {
+            Debugbar::info("schedule_not_found");
+            return response()->json(['error'=>$e],400);
+        }
+    }
+
     /**
      * Show the application dashboard.
      *

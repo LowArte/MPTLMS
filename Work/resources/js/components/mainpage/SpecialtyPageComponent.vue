@@ -1,7 +1,7 @@
 
 <template>
   <v-row class="pa-6">
-    <v-card v-for="(item, index) in items" :key="index" class="mx-auto my-2" max-width="300">
+    <v-card v-for="(item, index) in items" :key="index" class="mx-auto my-12" max-width="374">
       <v-img v-bind:src="item.href" height="200px"></v-img>
       <p class="title text--primary ma-2 text-center">{{item.title}}</p>
       <v-expand-transition>
