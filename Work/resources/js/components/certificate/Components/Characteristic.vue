@@ -9,44 +9,32 @@
                 <v-text-field v-model="FIO" label="Фамилия, Имя, Отчество студента" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-select v-model="special" :items="itemss" label="Специальность" readonly></v-select>
+                <v-text-field v-model="special" label="Специальность" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-select v-model="group" :items="itemsg" label="Группа" readonly></v-select>
+                <v-text-field v-model="group" label="Группа" readonly></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-text-field
                   v-model="datebirth"
                   label="Дата рождения"
-                  hint="Формат День/Месяц/Год"
                   persistent-hint
-                  @blur="date = parseDate(dateFormatted)"
                   readonly
                 ></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field v-model="school" label="Школа" readonly></v-text-field>
+                <v-text-field :rules = "notEmtyRules" v-model="school" label="Школа"></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-text-field
-                  v-model="dateendschool"
-                  label="Год оконачния школы"
-                  hint="Формат День/Месяц/Год"
-                  persistent-hint
-                  @blur="date = parseDate(dateFormatted)"
-                  readonly
+                  :rules="yearMptRules"
+                  v-model="yearmpt"
+                  v-mask="mask"
+                  label="Год поступления в учебное заведение"
                 ></v-text-field>
               </v-row>
               <v-row class="pa-2">
-                <v-text-field v-model="yearmpt" label="Год поступления в МПТ" readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-select
-                  v-model="postofgroup"
-                  :items="postofgroup"
-                  label="Обязанности в группе"
-                  readonly
-                ></v-select>
+                <v-text-field  :rules = "notEmtyRules" v-model="postofgroup" label="Обязанности в группе"></v-text-field>
               </v-row>
               <v-row class="pa-2">
                 <v-textarea
@@ -100,7 +88,13 @@
                 ></v-textarea>
               </v-row>
               <v-row class="pa-2 justify-center">
-                <v-btn :disabled="!form" class="white--text" color="blue" depressed @click="sendQuery">Заказать</v-btn>
+                <v-btn
+                  :disabled="!form"
+                  class="white--text"
+                  color="blue"
+                  depressed
+                  @click="sendQuery"
+                >Заказать</v-btn>
               </v-row>
             </v-container>
           </v-form>
@@ -111,27 +105,28 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
+import dataFormater from "../../../utils/dataFormater"
 export default {
-  data: () => ({
-    modelorder: "",
-    modelprogress: "",
-  
-    group: "П-2-16",
-    FIO: "Борисов Артём Игоревич",
-    itemss: ["09.02.03 - Программирование в компьютерных системах"],
-    special: "09.02.03 - Программирование в компьютерных системах",
-    itemsg: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-    school: "Школа №3",
-    datebirth: "16-09-2000",
-    dateendschool: "12-06-2016",
-    yearmpt: "2019",
-    email: "p_a.i.borisov@mpt.ru",
-    postofgroup: "Ответственый за успеваемость",
-    postofgroups: [
-      "Староста",
-      "Ответственый за успеваемость",
-      "Ответственый за посещяемость",
-      "Студент"
+  directives: {
+    mask
+  },
+  data: vm => ({
+    mask: "####",
+    menu: false,
+    group: "",
+    FIO: user.secName + " " + user.name + " " + user.thirdName,
+    modelprogress:"",
+    modelorder:"",
+    special: "",
+    school: "",
+    datebirth: "",
+    dateendschool: "",
+    yearmpt: new Date().getFullYear(),
+    email: user.email,
+    postofgroup: "",
+    notEmtyRules:[
+      v=>v.length > 0 || "Поле не заполнено"
     ],
     progressRules: [
       v => v.length > 0 || "Успеваемость не указана",
@@ -139,17 +134,38 @@ export default {
         v.length <= 255 ||
         "Текст успеваемости должен быть не более 255 символов"
     ],
+    yearMptRules: [
+      v =>(v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) ||"Ошибка даты",
+      v=>v.length > 0  ||"Поле не заполнено"
+    ],
     orderRules: [
       v => v.length > 0 || "Текст заявки не указан",
       v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
     ],
     form: false
   }),
-   methods: {
+  mounted() {
+    let info = JSON.parse(this.info)
+    this.special = info.dep.dep_name_full
+    this.group = info.group.group_name
+    this.datebirth = dataFormater(new Date(info.student.birthday))
+  },
+  props: {
+    info: {
+      data: String,
+      default: null
+    }
+  },
+  watch: {
+    menu(val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
+    }
+  },
+  methods: {
     sendQuery() {
       //Вписывай отправку
       alert("Отправлен запрос на получение характеристики!");
     }
-  },
+  }
 };
 </script>

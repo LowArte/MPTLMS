@@ -1,12 +1,12 @@
 <template>
   <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-    <v-tab :key="item">Справка</v-tab>
-    <v-tab :key="item">Характеристика</v-tab>
-    <v-tab-item :key="item">
-      <OrderCertificate />
+    <v-tab>Справка</v-tab>
+    <v-tab>Характеристика</v-tab>
+    <v-tab-item>
+      <OrderCertificate v-bind:info="info"/>
     </v-tab-item>
-    <v-tab-item :key="item">
-      <OrderCharacteristic />
+    <v-tab-item>
+      <OrderCharacteristic v-bind:info="info"/>
     </v-tab-item>
   </v-tabs>
 </template>
@@ -29,6 +29,12 @@ export default {
       }
     ]
   }),
+  props:{
+    info:{
+      data:String,
+      default:null
+    }
+  },
   components: {
     OrderCharacteristic,
     OrderCertificate
