@@ -14370,11 +14370,9 @@ var render = function() {
                                                                                         ][
                                                                                           n
                                                                                         ]
-                                                                                          .Lesson[
-                                                                                          l1 +
-                                                                                            1
-                                                                                        ] !=
-                                                                                        null
+                                                                                          .Lesson
+                                                                                          .length >
+                                                                                        1
                                                                                           ? _c(
                                                                                               "v-card-title",
                                                                                               {
@@ -14931,12 +14929,19 @@ var render = function() {
                                                           ],
                                                           1
                                                         )
-                                                      : _c("v-list-item", [
-                                                          _vm._v(
-                                                            _vm._s(n) +
-                                                              " пара - расписание звонка отсутствует!"
-                                                          )
-                                                        ]),
+                                                      : _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(n) +
+                                                                " пара - расписание звонка отсутствует!"
+                                                            )
+                                                          ]
+                                                        ),
                                                     _vm._v(" "),
                                                     _c(
                                                       "v-list-item",
@@ -14944,43 +14949,50 @@ var render = function() {
                                                         staticClass: "ma-0 pa-0"
                                                       },
                                                       [
-                                                        _c("div", [
-                                                          _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "ma-0 pa-0"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  _vm
-                                                                    .arrschedule[
-                                                                    item
-                                                                  ][n].Lesson
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Lesson
+                                                                  )
                                                                 )
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "ma-0 pa-0"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  _vm
-                                                                    .arrschedule[
-                                                                    item
-                                                                  ][n].Teacher
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Teacher
+                                                                  )
                                                                 )
-                                                              )
-                                                            ]
-                                                          )
-                                                        ])
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
                                                       ]
                                                     )
                                                   ],
@@ -15326,11 +15338,9 @@ var render = function() {
                                                                                         ][
                                                                                           n
                                                                                         ]
-                                                                                          .Lesson[
-                                                                                          l1 +
-                                                                                            1
-                                                                                        ] !=
-                                                                                        null
+                                                                                          .Lesson
+                                                                                          .length >
+                                                                                        1
                                                                                           ? _c(
                                                                                               "v-card-title",
                                                                                               {
@@ -15887,12 +15897,19 @@ var render = function() {
                                                           ],
                                                           1
                                                         )
-                                                      : _c("v-list-item", [
-                                                          _vm._v(
-                                                            _vm._s(n) +
-                                                              " пара - расписание звонка отсутствует!"
-                                                          )
-                                                        ]),
+                                                      : _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(n) +
+                                                                " пара - расписание звонка отсутствует!"
+                                                            )
+                                                          ]
+                                                        ),
                                                     _vm._v(" "),
                                                     _c(
                                                       "v-list-item",
@@ -15900,43 +15917,50 @@ var render = function() {
                                                         staticClass: "ma-0 pa-0"
                                                       },
                                                       [
-                                                        _c("div", [
-                                                          _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "ma-0 pa-0"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  _vm
-                                                                    .arrschedule[
-                                                                    item
-                                                                  ][n].Lesson
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Lesson
+                                                                  )
                                                                 )
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "ma-0 pa-0"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  _vm
-                                                                    .arrschedule[
-                                                                    item
-                                                                  ][n].Teacher
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Teacher
+                                                                  )
                                                                 )
-                                                              )
-                                                            ]
-                                                          )
-                                                        ])
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
                                                       ]
                                                     )
                                                   ],
@@ -67351,6 +67375,14 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./Expention/Panel": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
+	"./Expention/Panel.vue": [
+		"./resources/js/components/Expention/Panel.vue",
+		6
+	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -67365,11 +67397,11 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		7
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		7
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
@@ -67451,13 +67483,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		7
+		8
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		7
+		8
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -67479,19 +67511,13 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		8
+		9
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		8
-	],
-	"./expention/Panel": [
-		"./resources/js/components/expention/Panel.vue"
-	],
-	"./expention/Panel.vue": [
-		"./resources/js/components/expention/Panel.vue"
+		9
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -67507,11 +67533,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		10
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		10
 	],
 	"./mainpage/MainPageComponent": [
 		"./resources/js/components/mainpage/MainPageComponent.vue"
@@ -67551,11 +67577,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		11
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		11
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -70309,8 +70335,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

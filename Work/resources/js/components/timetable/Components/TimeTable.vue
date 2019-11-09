@@ -55,7 +55,7 @@
                               <v-card-title
                                 style="color: #FF3D00;"
                                 class="subtitle-1 ma-0 pa-0"
-                                v-if="arrschedule[item][n].Lesson[l1+1] != null"
+                                v-if="arrschedule[item][n].Lesson.length > 1"
                               >Числитель:</v-card-title>
                               <p class="ma-0 pa-0">{{Lesson[0]}}/{{Lesson[1]}}</p>
                               <p
@@ -138,9 +138,9 @@
                         class="subtitle-1 ma-0 pa-0"
                       >{{n}} пара - {{callschedule[arrschedule[item].Place].call_schedule[n]}}</v-card-title>
                     </v-list-item>
-                    <v-list-item v-else>{{n}} пара - расписание звонка отсутствует!</v-list-item>
+                    <v-list-item v-else class="ma-0 pa-0">{{n}} пара - расписание звонка отсутствует!</v-list-item>
                     <v-list-item class="ma-0 pa-0">
-                      <div>
+                      <div class="ma-0 pa-0">
                         <p class="ma-0 pa-0">{{arrschedule[item][n].Lesson}}</p>
                         <p class="ma-0 pa-0">{{arrschedule[item][n].Teacher}}</p>
                       </div>
