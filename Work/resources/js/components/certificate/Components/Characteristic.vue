@@ -169,11 +169,11 @@ export default {
       cerificateApi
         .save({
           data: {
-            year: this.yearmpt,
-            school: this.school,
-            postofgroup: this.postofgroup,
-            modelprogress: this.modelprogress,
-            modelorder: this.modelorder
+            "Год поступления": this.yearmpt,
+            "Школа": this.school,
+            "Обязанности в группе": this.postofgroup,
+            "Успеваемость": this.modelprogress,
+            "Куда нужна характеристика": this.modelorder
           },
           type: "Характеристика"
         })

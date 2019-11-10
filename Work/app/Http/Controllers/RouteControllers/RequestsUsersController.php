@@ -53,7 +53,6 @@ class RequestsUsersController extends Controller
                 "body"=>$feed[$i]['text'],
                 "fio"=>$user['name'].' '.$user['secName'].' '.$user['thirdName'],
                 "email"=>$user['email'],
-                "answered"=>$feed[$i]['answered'],
                 ]);
         }
         return view('components/requestsusers', ["requests" => $data]);
