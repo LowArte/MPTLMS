@@ -2,7 +2,23 @@
   <v-container fluid>
     <v-row sm="2" md="0" class="d-flex">
       <v-col>
-        <v-select :items="items" label="Группа" solo></v-select>
+        <v-autocomplete
+          v-model="departament"
+          label="Отделения"
+          solo
+          :items="arrdepartaments"
+          item-text="dep_name_full"
+          return-object
+          @change="changeGroups(departament.id)"
+        ></v-autocomplete>
+        <v-autocomplete
+          v-model="casegroup"
+          label="Группа"
+          solo
+          :items="arrgroups"
+          item-text="group_name"
+          return-object
+        ></v-autocomplete>
         <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent width="290px">
           <template v-slot:activator="{ on }">
             <v-text-field v-model="date" label="Дата" readonly v-on="on"></v-text-field>
@@ -13,7 +29,15 @@
             <v-btn text color="primary" @click="$refs.dialog.save(date)">Принять</v-btn>
           </v-date-picker>
         </v-dialog>
-        <v-btn color="accent" dark class="align-self-end">Принять</v-btn>
+        <v-autocomplete
+          v-model="caseday"
+          label="День недели"
+          solo
+          :items="arrday"
+        ></v-autocomplete>
+        <v-row sm="2" md="0" class="pa-0 align-self-center justify-center">
+          <v-btn color="primary" dark @click="sendNewReplacements">Применить</v-btn>
+        </v-row>
       </v-col>
     </v-row>
     <v-divider class="my-1"></v-divider>
@@ -61,17 +85,17 @@
                     <v-switch
                       color="primary"
                       value="primary"
-                      v-model="tab1[n]"
+                      v-model="tab[n]"
                       class="ma-0 pa-0"
                       flat
                       grow
                       label="Дополнительная пара"
                     ></v-switch>
                   </v-row>
-                  <v-row v-if="tab1[n]">
+                  <v-row v-if="tab[n]">
                     <v-autocomplete label="Дисциплина" solo :items="lesson" grow></v-autocomplete>
                   </v-row>
-                  <v-row v-if="tab1[n]">
+                  <v-row v-if="tab[n]">
                     <v-autocomplete label="Преподаватель" solo :items="teacher" grow></v-autocomplete>
                   </v-row>
                 </div>
@@ -88,7 +112,6 @@
 <script>
 export default {
   data: () => ({
-    hidden: false,
     items: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
     date: new Date().toISOString().substr(0, 10),
     modal: false,
@@ -97,9 +120,42 @@ export default {
       "Операционные системы"
     ],
     teacher: ["Токарчук А.С.", "Горбунов А.Д."],
-    tab1: [null, null, null, null, null, null, null],
-
-    tabs: ["1 пара", "2 пара"]
-  })
+    tab: [null, null, null, null, null, null, null],
+     arrday: [
+      "Понедельник",
+      "Вторник",
+      "Среда",
+      "Четверг",
+      "Пятница",
+      "Суббота"
+    ],
+  }),
+  props: {
+    place: {
+      type: String,
+      default: null
+    },
+    schedule: {
+      type: String,
+      default: null
+    },
+    callSchedule: {
+      type: String,
+      default: null
+    },
+    groups: {
+      type: String,
+      default: null
+    },
+    departaments: {
+      type: String,
+      default: null
+    }
+  },
+  methods: {
+    sendNewReplacements(){
+      alert("Замена принята!");
+    }
+  }
 };
 </script>

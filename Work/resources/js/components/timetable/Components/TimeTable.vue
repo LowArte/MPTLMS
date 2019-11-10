@@ -22,7 +22,7 @@
       </v-container>
     </v-row>
     <v-divider class="ma-0"></v-divider>
-    <v-data v-cloak v-if="arrschedule" :items-per-page.sync="itemsPerPage">
+    <v-data v-if="arrschedule != null && load == false" :items-per-page.sync="itemsPerPage">
       <v-row>
         <v-col v-for="item in arrday" :key="item" cols="12" sm="6" md="2" lg="4">
           <v-card dark class="pa-0 pb-0">
@@ -179,6 +179,9 @@
         </v-col>
       </v-row>
     </v-data>
+    <v-row v-if="load==true" sm="2" md="0" class="pa-0 ml-5 align-self-center justify-center">
+      <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
+    </v-row>
   </v-container>
 </template>
 
@@ -187,6 +190,7 @@ import apigroup from "../../../api/group";
 import apischedule from "../../../api/schedule";
 export default {
   data: () => ({
+    load: true,
     nullDis: "Свободная пара",
     casegroup: null,
     model: null,
@@ -237,6 +241,7 @@ export default {
   methods: {
     changeGroups: function(departament) {
       //alert("Отеделение " + departament);
+      this.load = true;
       apigroup
         .getGroup(departament)
         .then(reg => {
@@ -246,9 +251,11 @@ export default {
         .catch(ex => {
           console.log(ex);
         });
+        this.load = false;
     },
     changeSchedule: function(group) {
       //alert("Группа " + group);
+      this.load = true;
       apischedule
         .getSchedule(group)
         .then(reg => {
@@ -257,9 +264,11 @@ export default {
         .catch(ex => {
           console.log(ex);
         });
+      this.load = false;
     }
   },
   mounted: function() {
+    this.load = true;
     var currDate = new Date();
     var hours = currDate.getHours();
     var minutes = currDate.getMinutes();
@@ -300,6 +309,7 @@ export default {
       this.changeGroups(this.departament.id);
       this.casegroup = JSON.parse(this.groups);
     }
+    this.load = false;
   }
 };
 </script>
