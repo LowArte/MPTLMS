@@ -35,10 +35,10 @@ class ConstructorTimeTableController extends Controller
 
         $teachersName = array();
         for ($i = 0; $i < count($teachers); $i++) {
-            $user = User::where($teachers[$i]['user_id'])->get();
+            $user = User::where('id', $teachers[$i]['user_id'])->first();
             array_push(
                 $teachersName,
-                ['name' => $user['name'] . " ".$user['secName'." ".$user['thirdName']]]
+                ['name' => $user['name'] . " " . $user['secName'] . " " . $user['thirdName']]
             );
         }
         $discip = Discipline::get();
@@ -51,8 +51,8 @@ class ConstructorTimeTableController extends Controller
                 "departaments" => $deps,
                 "cur_departament" => -1
             ],
-            "teachers"=>$teachersName,
-            "discip"=>$discip
+            "teachers" => $teachersName,
+            "discip" => $discip
         ]);
     }
 }
