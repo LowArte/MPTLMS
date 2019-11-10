@@ -3,31 +3,25 @@
     <v-tab>Справки</v-tab>
     <v-tab>Характеристики</v-tab>
     <v-tab-item>
-      <OrderCertificate v-bind:info="info"/>
+      <ViewCertificate />
     </v-tab-item>
     <v-tab-item>
-      <OrderCharacteristic v-bind:info="info"/>
+      <ViewCharacteristic />
     </v-tab-item>
   </v-tabs>
 </template>
 
 <script>
-import OrderCertificate from "./Components/Certificate";
-import OrderCharacteristic from "./Components/Characteristic";
+import ViewCertificate from "./Components/ViewCertificate";
+import ViewCharacteristic from "./Components/ViewCharacteristic";
 export default {
   data: () => ({
     tab: null,
-    tabs: 2,
+    tabs: 2
   }),
-  props:{
-    info:{
-      data:String,
-      default:null
-    }
-  },
   components: {
-    OrderCharacteristic,
-    OrderCertificate
+    ViewCharacteristic,
+    ViewCertificate
   }
 };
 </script>

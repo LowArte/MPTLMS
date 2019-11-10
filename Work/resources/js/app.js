@@ -12,6 +12,7 @@ import RememberPasswordComponent from './components/authentication/RememberPassw
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
 import FeedbackComponent from './components/feedback/FeedbackComponent'
 import CertificateComponent from './components/certificate/CertificateComponent'
+import ListCertificateComponent from './components/certificate/ListCertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
 import TimetableComponent from './components/timetable/TimetableComponent'
@@ -65,6 +66,7 @@ new Vue({
     'panel': Panel,
     'feedback': FeedbackComponent,
     'certificate': CertificateComponent,
+    'listcertificate' : ListCertificateComponent,
     'timetable': TimetableComponent,
     'teachertimetable': TeacherTimetableComponent,
     'teacherhomework': TeacherHomeworkComponent,
@@ -239,7 +241,7 @@ new Vue({
           {
             icon: 'home',
             text: 'Заказ справок',
-            href: '/contimetable'
+            href: '/listcertificate'
           },
           {
             icon: 'feedback',
