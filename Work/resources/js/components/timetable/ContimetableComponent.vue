@@ -20,6 +20,10 @@ export default {
     tabs: 2,
   }),
   props:{
+    discip:{
+      type: String,
+      default:null
+    },
     place:{
       type: String,
       default:null
@@ -44,7 +48,7 @@ export default {
   components: {
     Timetable,
     Constructor
-  }
+  },
 };
 </script>
 

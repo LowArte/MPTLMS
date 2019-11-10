@@ -3,11 +3,7 @@
 @section('content')
 
 <v-container fluid grid-list-md text-xs-center>
-<contimetable discip="{{json_encode($discip) ?? null}}" c
-all="{{json_encode($call) ?? null}}" 
-teachers="{{json_encode($teachers) ?? null}}" 
-place="{{json_encode($place) ?? null }}"   
-departaments="{{json_encode($dep) ?? null}}"></contimetable>
+    <contimetable discip="{{$discip ?? null}}" call="{{$call ?? null}}" schedule="{{$schedule ?? null}}"  teachers="{{$teachers ?? null}}" groups ="{{$groups ?? null}}" place="{{$place ?? null }}" departaments="{{$dep ?? null}}"></contimetable>
 </v-container>
 
 @endsection

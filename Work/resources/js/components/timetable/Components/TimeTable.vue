@@ -179,7 +179,7 @@
         </v-col>
       </v-row>
     </v-data>
-    <v-row v-if="load==true" sm="2" md="0" class="pa-0 ml-5 align-self-center justify-center">
+    <v-row v-if="load==true" sm="2" md="0" class="pa-0 mt-5 align-self-center justify-center">
       <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
     </v-row>
   </v-container>
