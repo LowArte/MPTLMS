@@ -12,23 +12,6 @@
               <v-autocomplete v-model="oMode" label="Режим работы" solo :items="operatingMode"></v-autocomplete>
               <v-btn class="ma-2" color="accent" dark @click="sendQuery">Применить</v-btn>
             </v-row>
-            <v-divider></v-divider>
-            <v-row class="pa-2 ma-0">
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header>Расписание дисциплин</v-expansion-panel-header>
-                  <v-expansion-panel-content><Timetable/></v-expansion-panel-content>
-                </v-expansion-panel>
-                <v-expansion-panel>
-                  <v-expansion-panel-header>Замены</v-expansion-panel-header>
-                  <v-expansion-panel-content><Replacements/></v-expansion-panel-content>
-                </v-expansion-panel>
-                <v-expansion-panel>
-                  <v-expansion-panel-header>Расписание звонков</v-expansion-panel-header>
-                  <v-expansion-panel-content> <Concallschedule/></v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-            </v-row>
           </v-container>
         </v-card>
       </v-hover>
@@ -37,18 +20,15 @@
 </template>
 
 <script>
-import Timetable from "./timetable/ContimetableComponent";
-import Replacements from "./timetable/ConreplacementsComponent";
-import Concallschedule from "./callschedule/ConCallScheduleComponent";
+
+
 export default {
   data: () => ({
     operatingMode: ["Полный функционал", "Профилактика"],
     oMode: "Профилактика"
   }),
   components: {
-    Timetable,
-    Replacements,
-    Concallschedule
+
   },
   methods: {
     sendQuery() {

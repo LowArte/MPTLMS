@@ -2038,9 +2038,6 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _timetable_ContimetableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./timetable/ContimetableComponent */ "./resources/js/components/timetable/ContimetableComponent.vue");
-/* harmony import */ var _timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./timetable/ConreplacementsComponent */ "./resources/js/components/timetable/ConreplacementsComponent.vue");
-/* harmony import */ var _callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./callschedule/ConCallScheduleComponent */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue");
 //
 //
 //
@@ -2062,26 +2059,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2089,11 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
       oMode: "Профилактика"
     };
   },
-  components: {
-    Timetable: _timetable_ContimetableComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Replacements: _timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Concallschedule: _callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
+  components: {},
   methods: {
     sendQuery: function sendQuery() {
       //Вписывай отправку
@@ -6298,15 +6271,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2,
-      tabitem: [{
-        name: "Расписание",
-        com: _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__["default"]
-      }, {
-        name: "Замены",
-        com: _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__["default"]
-      }]
+      tab: null
     };
   },
   components: {
@@ -7673,69 +7638,6 @@ var render = function() {
                                     on: { click: _vm.sendQuery }
                                   },
                                   [_vm._v("Применить")]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("v-divider"),
-                            _vm._v(" "),
-                            _c(
-                              "v-row",
-                              { staticClass: "pa-2 ma-0" },
-                              [
-                                _c(
-                                  "v-expansion-panels",
-                                  [
-                                    _c(
-                                      "v-expansion-panel",
-                                      [
-                                        _c("v-expansion-panel-header", [
-                                          _vm._v("Расписание дисциплин")
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-expansion-panel-content",
-                                          [_c("Timetable")],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-expansion-panel",
-                                      [
-                                        _c("v-expansion-panel-header", [
-                                          _vm._v("Замены")
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-expansion-panel-content",
-                                          [_c("Replacements")],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-expansion-panel",
-                                      [
-                                        _c("v-expansion-panel-header", [
-                                          _vm._v("Расписание звонков")
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-expansion-panel-content",
-                                          [_c("Concallschedule")],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
                                 )
                               ],
                               1
@@ -16723,13 +16625,13 @@ var render = function() {
       }
     },
     [
-      _c("v-tab", { key: _vm.item }, [_vm._v("Расписание")]),
+      _c("v-tab", [_vm._v("Расписание")]),
       _vm._v(" "),
-      _c("v-tab", { key: _vm.item }, [_vm._v("Замены")]),
+      _c("v-tab", [_vm._v("Замены")]),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("TimeTable")], 1),
+      _c("v-tab-item", [_c("TimeTable")], 1),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("TeacherReplacements")], 1)
+      _c("v-tab-item", [_c("TeacherReplacements")], 1)
     ],
     1
   )
@@ -68058,34 +67960,6 @@ var map = {
 	],
 	"./certificate/ListCertificateComponent.vue": [
 		"./resources/js/components/certificate/ListCertificateComponent.vue"
-	],
-	"./constructorreplacements/Components/Certificate": [
-		"./resources/js/components/constructorreplacements/Components/Certificate.vue",
-		0
-	],
-	"./constructorreplacements/Components/Certificate.vue": [
-		"./resources/js/components/constructorreplacements/Components/Certificate.vue",
-		0
-	],
-	"./constructorreplacements/Components/Characteristic": [
-		"./resources/js/components/constructorreplacements/Components/Characteristic.vue",
-		1
-	],
-	"./constructorreplacements/Components/Characteristic.vue": [
-		"./resources/js/components/constructorreplacements/Components/Characteristic.vue",
-		1
-	],
-	"./constructorreplacements/ConreplacementsComponent": [
-		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
-		0,
-		1,
-		7
-	],
-	"./constructorreplacements/ConreplacementsComponent.vue": [
-		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
-		0,
-		1,
-		7
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
