@@ -5240,6 +5240,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
+    discip: {
+      type: String,
+      "default": null
+    },
     place: {
       type: String,
       "default": null
@@ -5323,17 +5327,21 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
 
-        _this2.newarrschedule = [];
-
         for (var i = 0; i < 6; i++) {
           for (var i1 = 0; i1 < 8; i1++) {
-            _this2.newarrschedule[i][i1] = _this2.arrschedule[_this2.arrday[i]][l1];
+            for (var i2 = 0; i2 < 2; i2++) {
+              for (var i3 = 0; i3 < 2; i3++) {
+                _this2.newarrschedule[i][i1][i2][i3] = "Операционные системы";
+              }
+            } //this.arrschedule[this.arrday[i]][l1];
+
           }
         }
+
+        _this2.load = false;
       })["catch"](function (ex) {
         console.log(ex);
       });
-      this.load = false;
     }
   },
   mounted: function mounted() {
@@ -6243,6 +6251,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
+    discip: {
+      type: String,
+      "default": null
+    },
     place: {
       type: String,
       "default": null
@@ -15440,7 +15452,7 @@ var render = function() {
         ? _c(
             "v-row",
             {
-              staticClass: "pa-0 ml-5 align-self-center justify-center",
+              staticClass: "pa-0 mt-5 align-self-center justify-center",
               attrs: { sm: "2", md: "0" }
             },
             [
@@ -16477,7 +16489,7 @@ var render = function() {
         ? _c(
             "v-row",
             {
-              staticClass: "pa-0 ml-5 align-self-center justify-center",
+              staticClass: "pa-0 mt-5 align-self-center justify-center",
               attrs: { sm: "2", md: "0" }
             },
             [
@@ -67642,6 +67654,18 @@ new Vue({
               //Замены, расписание, перевод в режим профилактики, редактирование пользователей
               href: '/panelcontrol'
             }, {
+              icon: 'today',
+              text: 'Расписание',
+              href: '/contimetable'
+            }, {
+              icon: 'today',
+              text: 'Замены',
+              href: '/conreplacements'
+            }, {
+              icon: 'today',
+              text: 'Расписание звонков',
+              href: '/concallschedule'
+            }, {
               icon: 'feedback',
               text: 'Обращение пользователей',
               href: '/requestsusers'
@@ -67924,6 +67948,14 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./Expention/Panel": [
+		"./resources/js/components/Expention/Panel.vue",
+		4
+	],
+	"./Expention/Panel.vue": [
+		"./resources/js/components/Expention/Panel.vue",
+		4
+	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -67938,11 +67970,11 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		5
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		6
+		5
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
@@ -68012,37 +68044,31 @@ var map = {
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
-		2
+		0
 	],
 	"./constructortimetable/Components/Constructor.vue": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
-		2
+		0
 	],
 	"./constructortimetable/Components/Timetable": [
 		"./resources/js/components/constructortimetable/Components/Timetable.vue",
-		3
+		1
 	],
 	"./constructortimetable/Components/Timetable.vue": [
 		"./resources/js/components/constructortimetable/Components/Timetable.vue",
-		3
+		1
 	],
 	"./constructortimetable/ContimetableComponent": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
-		2,
-		3,
-		8
+		0,
+		1,
+		6
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
-		2,
-		3,
-		8
-	],
-	"./expention/Panel": [
-		"./resources/js/components/expention/Panel.vue"
-	],
-	"./expention/Panel.vue": [
-		"./resources/js/components/expention/Panel.vue"
+		0,
+		1,
+		6
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -68058,11 +68084,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		7
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		9
+		7
 	],
 	"./mainpage/MainPageComponent": [
 		"./resources/js/components/mainpage/MainPageComponent.vue"
@@ -68102,29 +68128,29 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		8
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		10
+		8
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
-		4
+		2
 	],
 	"./teachertimetable/Components/TeacherTimeTable.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
-		4
+		2
 	],
 	"./teachertimetable/TeacherTimetableComponent": [
 		"./resources/js/components/teachertimetable/TeacherTimetableComponent.vue",
-		4,
-		5
+		2,
+		3
 	],
 	"./teachertimetable/TeacherTimetableComponent.vue": [
 		"./resources/js/components/teachertimetable/TeacherTimetableComponent.vue",
-		4,
-		5
+		2,
+		3
 	],
 	"./timetable/Components/ConstructorReplacements": [
 		"./resources/js/components/timetable/Components/ConstructorReplacements.vue"
@@ -70926,8 +70952,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

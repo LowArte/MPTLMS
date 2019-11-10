@@ -46,14 +46,14 @@ class ConstructorTimeTableController extends Controller
 
         $deps = Departament::get();
         return view('components/contimetable', [
-            "call" => $call,
-            "place" => $places,
-            "dep" => [
-                "departaments" => $deps,
+            "call" => json_encode($call),
+            "place" => json_encode($places),
+            "dep" => json_encode([
+                "departaments" => json_encode($deps),
                 "cur_departament" => -1
-            ],
-            "teachers" => $teachersName,
-            "discip" => $discip
+            ]),
+            "teachers" => json_encode($teachersName),
+            "discip" => json_encode($discip)
         ]);
     }
 }
