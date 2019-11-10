@@ -25,7 +25,7 @@
       </v-container>
     </v-row>
     <v-divider class="ma-0"></v-divider>
-    <v-data :items="arrday" :items-per-page.sync="itemsPerPage">
+    <v-data v-if="load==false" :items="arrday" :items-per-page.sync="itemsPerPage">
       <v-row>
         <v-col v-for="(day, d1) in arrday" :key="d1" cols="12" sm="12" md="2" lg="4">
           <v-card dark class="pa-0 pb-0">
@@ -124,6 +124,9 @@
         </v-col>
       </v-row>
     </v-data>
+    <v-row v-if="load==true" sm="2" md="0" class="pa-0 mt-5 align-self-center justify-center">
+      <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
+    </v-row>
   </v-container>
 </template>
 
@@ -134,6 +137,7 @@ export default {
   data: () => ({
     itemsPerPageOptions: [6],
     itemsPerPage: 6,
+    load: true,
 
     arrgroups: null,
     casegroup: null,
@@ -221,6 +225,8 @@ export default {
     },
     changeSchedule: function(group) {
       //alert("Группа " + group);
+
+      this.load = true;
       apischedule
         .getSchedule(group)
         .then(reg => {
@@ -253,10 +259,19 @@ export default {
               this.arrswitch[i].push(null);
             }
           }
+
+          this.newarrschedule = [];
+          for (var i = 0; i < 6; i++) {
+            for (var i1 = 0; i1 < 8; i1++) {
+              this.newarrschedule[i][i1] = this.arrschedule[this.arrday[i]][l1];
+            }
+          }
         })
         .catch(ex => {
           console.log(ex);
         });
+
+      this.load = false;
     }
   },
   mounted: function() {
