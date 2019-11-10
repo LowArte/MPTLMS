@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\CallSchedule;
 use App\Models\Places;
 use App\Models\Departament;
+use App\Models\Discipline;
+use App\Models\Teacher;
+use App\User;
 
 class ConstructorTimeTableController extends Controller
 {
@@ -28,15 +31,28 @@ class ConstructorTimeTableController extends Controller
     {
         $call = CallSchedule::get();
         $places = Places::get();
+        $teachers = Teacher::get();
+
+        $teachersName = array();
+        for ($i = 0; $i < count($teachers); $i++) {
+            $user = User::where($teachers[$i]['user_id'])->get();
+            array_push(
+                $teachersName,
+                ['name' => $user['name'] . " ".$user['secName'." ".$user['thirdName']]]
+            );
+        }
+        $discip = Discipline::get();
 
         $deps = Departament::get();
         return view('components/contimetable', [
-            "call" => json_encode($call),
-            "place" => json_encode($places),
-            "dep" => json_encode([
-                "departaments" => json_encode($deps),
+            "call" => $call,
+            "place" => $places,
+            "dep" => [
+                "departaments" => $deps,
                 "cur_departament" => -1
-            ]),
+            ],
+            "teachers"=>$teachersName,
+            "discip"=>$discip
         ]);
     }
 }

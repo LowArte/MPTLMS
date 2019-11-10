@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\RouteControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Certificate;
+use App\User;
 
 class ListCertificateController extends Controller
 {
@@ -22,6 +24,19 @@ class ListCertificateController extends Controller
      */
     public function index()
     {
-        return view('components/listcertificate');
+        $data = array();
+        $cert = Certificate::get();
+        for ($i=0; $i < count($cert); $i++) { 
+            $user = User::where('id',$cert[$i]['user_id'])->first();
+            array_push($data,[
+                'id'=>$cert[$i]['id'],
+                'name'=>$cert[$i]['type'],
+                'email'=>$user['email'],
+                'date'=>date_format( $cert[$i]['created_at'],'d/m/Y'),
+                "fio"=>$user['name'].' '.$user['secName'].' '.$user['thirdName'],
+                "body"=>$cert[$i]['certificates_data']
+            ]);
+        }       
+        return view('components/listcertificate',['requests'=>$data]);
     }
 }

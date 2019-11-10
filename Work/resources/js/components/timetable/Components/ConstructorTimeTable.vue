@@ -1,4 +1,4 @@
-<template>
+<template v-cloak>
   <v-container fluid>
     <v-row align="center">
       <v-container>
@@ -137,8 +137,8 @@ export default {
   data: () => ({
     itemsPerPageOptions: [6],
     itemsPerPage: 6,
-    load: true,
 
+    load: true,
     arrgroups: null,
     casegroup: null,
     arrdepartaments: [],

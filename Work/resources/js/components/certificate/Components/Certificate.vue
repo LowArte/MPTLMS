@@ -176,7 +176,7 @@ export default {
   methods: {
     sendQuery() {
       cerificateApi
-        .save({ data: this.model, type: "Справка" })
+        .save({ data:{"Текст заявки": this.model}, type: "Справка" })
         .then(res => {
           this.showMessage("Справка отправленна");
           this.cleardata();
