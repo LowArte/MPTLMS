@@ -2038,6 +2038,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_panel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/panel */ "./resources/js/api/panel.js");
 //
 //
 //
@@ -2059,18 +2060,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      operatingMode: ["Полный функционал", "Профилактика"],
-      oMode: "Профилактика"
+      options: {
+        prof: false
+      }
     };
   },
   components: {},
+  props: {
+    options_prop: {
+      data: String,
+      "default": null
+    }
+  },
+  mounted: function mounted() {
+    this.options = JSON.parse(this.options_prop);
+    console.log(this.options);
+  },
   methods: {
     sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос изменения режима работы сайта!");
+      var _this = this;
+
+      Object.keys(this.options).forEach(function (element) {
+        switch (element) {
+          case "prof":
+            {
+              _api_panel__WEBPACK_IMPORTED_MODULE_0__["default"].setOptionValue({
+                prop: "isProfilacticServer",
+                value: _this.options[element]
+              }).then(function (res) {
+                console.log(res);
+              })["catch"](function (ex) {
+                console.log(ex);
+              });
+              break;
+            }
+        }
+      });
     }
   }
 });
@@ -7644,32 +7673,28 @@ var render = function() {
                               "v-row",
                               { staticClass: "pa-2 ma-0" },
                               [
-                                _c("v-autocomplete", {
-                                  attrs: {
-                                    label: "Режим работы",
-                                    solo: "",
-                                    items: _vm.operatingMode
-                                  },
+                                _c("v-checkbox", {
+                                  attrs: { label: "Режим профилактики" },
                                   model: {
-                                    value: _vm.oMode,
+                                    value: _vm.options.prof,
                                     callback: function($$v) {
-                                      _vm.oMode = $$v
+                                      _vm.$set(_vm.options, "prof", $$v)
                                     },
-                                    expression: "oMode"
+                                    expression: "options.prof"
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    staticClass: "ma-2",
-                                    attrs: { color: "accent", dark: "" },
-                                    on: { click: _vm.sendQuery }
-                                  },
-                                  [_vm._v("Применить")]
-                                )
+                                })
                               ],
                               1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { color: "accent", dark: "" },
+                                on: { click: _vm.sendQuery }
+                              },
+                              [_vm._v("Применить")]
                             )
                           ],
                           1
@@ -67422,6 +67447,29 @@ __webpack_require__.r(__webpack_exports__);
   getGroup: function getGroup(credentials) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_group_by_departament_id', {
       "dep_id": credentials
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/panel.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/panel.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  setOptionValue: function setOptionValue(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/set_options', {
+      "prop_name": credentials.prop,
+      'value': credentials.value
     });
   }
 });

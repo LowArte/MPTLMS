@@ -24,7 +24,8 @@ class TimetableController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','profilactic']);
+
     }
 
     public function groupByDepartamentId (Request $request)
