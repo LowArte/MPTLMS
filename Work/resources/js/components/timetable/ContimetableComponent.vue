@@ -17,7 +17,6 @@ import Timetable from "./Components/Timetable";
 export default {
   data: () => ({
     tab: null,
-    tabs: 2,
   }),
   props:{
     discip:{

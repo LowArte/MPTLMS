@@ -171,7 +171,7 @@ export default {
     ]
   }),
   props: {
-    discip:{
+    discip: {
       type: String,
       default: null
     },
@@ -267,8 +267,39 @@ export default {
           for (var i = 0; i < 6; i++) {
             for (var i1 = 0; i1 < 8; i1++) {
               for (var i2 = 0; i2 < 2; i2++)
-              for (var i3 = 0; i3 < 2; i3++)
-              this.newarrschedule[i][i1][i2][i3] = "Операционные системы";//this.arrschedule[this.arrday[i]][l1];
+                for (var i3 = 0; i3 < 2; i3++) {
+                  if (i2 == 0) {
+                    if (this.arrschedule[this.arrday[i]][i1 + 1] != null) {
+                      console.log(this.arrschedule[this.arrday[i]][i1 + 1]);
+                      console.log(
+                        typeof this.arrschedule[this.arrday[i]][i1 + 1]
+                      );
+
+                      if (
+                        this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] ==
+                        null
+                      ) {
+                        this.newarrschedule[i][i1][i2][i3] = "";
+                      } else if (
+                        this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] !=
+                        "object"
+                      ) {
+                        this.newarrschedule[i][i1][i2][i3] = this.arrschedule[
+                          this.arrday[i]
+                        ][i1 + 1]["Lesson"];
+                      } else
+                        this.newarrschedule[i][i1][i2][i3] =
+                          "Операционные системы";
+                      //this.arrschedule[this.arrday[i]][l1];
+                    } else {
+                      console.log(this.arrschedule[this.arrday[i]][i1]);
+                      this.newarrschedule[i][i1][i2][i3] =
+                        "Технология разработки программного обеспечения";
+                    }
+                  } //Преподаватели
+                  else {
+                  }
+                }
             }
           }
           this.load = false;
@@ -293,6 +324,7 @@ export default {
     this.departament = this.arrdepartaments[0];
 
     this.changeGroups(this.departament.id);
+    console.log(this.discip);
   }
 };
 </script>

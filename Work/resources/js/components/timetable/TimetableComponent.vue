@@ -19,7 +19,6 @@ import axios from 'axios'
 export default {
   data: () => ({
     tab: null,
-    tabs: 2,
   }),
   props:{
     place:{

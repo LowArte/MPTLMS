@@ -5055,6 +5055,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
 /* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -5302,10 +5304,25 @@ __webpack_require__.r(__webpack_exports__);
           for (var i1 = 0; i1 < 8; i1++) {
             for (var i2 = 0; i2 < 2; i2++) {
               for (var i3 = 0; i3 < 2; i3++) {
-                _this2.newarrschedule[i][i1][i2][i3] = "Операционные системы";
-              }
-            } //this.arrschedule[this.arrday[i]][l1];
+                if (i2 == 0) {
+                  if (_this2.arrschedule[_this2.arrday[i]][i1 + 1] != null) {
+                    console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1]);
+                    console.log(_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1]));
 
+                    if (_this2.arrschedule[_this2.arrday[i]][i1 + 1]["Lesson"] == null) {
+                      _this2.newarrschedule[i][i1][i2][i3] = "";
+                    } else if (_this2.arrschedule[_this2.arrday[i]][i1 + 1]["Lesson"] != "object") {
+                      _this2.newarrschedule[i][i1][i2][i3] = _this2.arrschedule[_this2.arrday[i]][i1 + 1]["Lesson"];
+                    } else _this2.newarrschedule[i][i1][i2][i3] = "Операционные системы"; //this.arrschedule[this.arrday[i]][l1];
+
+                  } else {
+                    console.log(_this2.arrschedule[_this2.arrday[i]][i1]);
+                    _this2.newarrschedule[i][i1][i2][i3] = "Технология разработки программного обеспечения";
+                  }
+                } //Преподаватели
+                else {}
+              }
+            }
           }
         }
 
@@ -5329,6 +5346,7 @@ __webpack_require__.r(__webpack_exports__);
     this.arrdepartaments = JSON.parse(arrd.departaments);
     this.departament = this.arrdepartaments[0];
     this.changeGroups(this.departament.id);
+    console.log(this.discip);
   }
 });
 
@@ -6217,8 +6235,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2
+      tab: null
     };
   },
   props: {
@@ -6327,8 +6344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2
+      tab: null
     };
   },
   props: {
