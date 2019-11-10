@@ -66,7 +66,8 @@
                         <v-autocomplete
                           v-model="Lesson1[0]"
                           label="Дисциплины"
-                          :items="arrlessons"
+                          :items="arrdiscip"
+                          item-text="discipline_name"
                           small-chips
                           chips
                           multiple
@@ -78,6 +79,7 @@
                           v-model="Lesson1[1]"
                           label="Преподаватели"
                           :items="arrteachers"
+                          item-text="name"
                           small-chips
                           chips
                           multiple
@@ -96,7 +98,8 @@
                         <v-autocomplete
                           v-model="Lesson1[0]"
                           label="Дисциплины"
-                          :items="arrlessons"
+                          :items="arrdiscip"
+                          item-text="discipline_name"
                           small-chips
                           chips
                           multiple
@@ -108,6 +111,7 @@
                           v-model="Lesson1[1]"
                           label="Преподаватели"
                           :items="arrteachers"
+                          item-text="name"
                           small-chips
                           chips
                           multiple
@@ -157,21 +161,28 @@ export default {
     ],
 
     arrswitch: [],
+    arrdiscip: [],
+    arrteachers: [],
 
     newarrschedule: [],
-    arrlessons: [
-      "Технология разработки и защиты баз данных",
-      "Операционные системы",
-      "Технология разработки программного обеспечения"
-    ],
-    arrteachers: [
-      "Горбунов Антон Дмитриевич",
-      "Шимбирёв Андрей Андреевич",
-      "Комаров Андрей Алексеевич"
-    ]
+
+    // arrlessons: [
+    //   "Технология разработки и защиты баз данных",
+    //   "Операционные системы",
+    //   "Технология разработки программного обеспечения"
+    // ],
+    // arrteachers: [
+    //   "Горбунов Антон Дмитриевич",
+    //   "Шимбирёв Андрей Андреевич",
+    //   "Комаров Андрей Алексеевич"
+    // ]
   }),
   props: {
     discip: {
+      type: String,
+      default: null
+    },
+    teachers: {
       type: String,
       default: null
     },
@@ -264,7 +275,31 @@ export default {
             }
           }
 
-          for (var i = 0; i < 6; i++) {
+          for (var i = 0; i < 1; i++)
+          for (var i1 = 0; i1 < 8; i1++)
+          {
+            console.log(i + 1 + " день. " + (i1 + 1) + " пара. ");
+            if (typeof(this.arrschedule[this.arrday[i]][i1 + 1].Lesson) != "object")
+            {
+              console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
+              console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);    
+            }
+            else
+            {
+              if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson != null)
+              {
+                console.log("Это обжект");
+                //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
+                //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);
+              }
+              else
+              {
+                console.log("Свободная пара");
+              }
+            }
+          }
+
+          /* for (var i = 0; i < 6; i++) {
             for (var i1 = 0; i1 < 8; i1++) {
               for (var i2 = 0; i2 < 2; i2++)
                 for (var i3 = 0; i3 < 2; i3++) {
@@ -301,7 +336,7 @@ export default {
                   }
                 }
             }
-          }
+          }*/
           this.load = false;
         })
         .catch(ex => {
@@ -324,7 +359,9 @@ export default {
     this.departament = this.arrdepartaments[0];
 
     this.changeGroups(this.departament.id);
-    console.log(this.discip);
+    
+    this.arrdiscip = JSON.parse(this.discip);
+    this.arrteachers = JSON.parse(this.teachers);
   }
 };
 </script>

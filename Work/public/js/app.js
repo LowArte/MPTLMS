@@ -5030,6 +5030,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5218,6 +5238,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5236,13 +5260,27 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       caseplace: [null, null, null, null, null, null],
       arrday: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
       arrswitch: [],
-      newarrschedule: [],
-      arrlessons: ["Технология разработки и защиты баз данных", "Операционные системы", "Технология разработки программного обеспечения"],
-      arrteachers: ["Горбунов Антон Дмитриевич", "Шимбирёв Андрей Андреевич", "Комаров Андрей Алексеевич"]
+      arrdiscip: [],
+      arrteachers: [],
+      newarrschedule: [] // arrlessons: [
+      //   "Технология разработки и защиты баз данных",
+      //   "Операционные системы",
+      //   "Технология разработки программного обеспечения"
+      // ],
+      // arrteachers: [
+      //   "Горбунов Антон Дмитриевич",
+      //   "Шимбирёв Андрей Андреевич",
+      //   "Комаров Андрей Алексеевич"
+      // ]
+
     };
   },
   props: {
     discip: {
+      type: String,
+      "default": null
+    },
+    teachers: {
       type: String,
       "default": null
     },
@@ -5329,31 +5367,61 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           }
         }
 
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 1; i++) {
           for (var i1 = 0; i1 < 8; i1++) {
-            for (var i2 = 0; i2 < 2; i2++) {
-              for (var i3 = 0; i3 < 2; i3++) {
-                if (i2 == 0) {
-                  if (_this2.arrschedule[_this2.arrday[i]][i1 + 1] != null) {
-                    console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1]);
-                    console.log(_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1]));
+            console.log(i + 1 + " день. " + (i1 + 1) + " пара. ");
 
-                    if (_this2.arrschedule[_this2.arrday[i]][i1 + 1]["Lesson"] == null) {
-                      _this2.newarrschedule[i][i1][i2][i3] = "";
-                    } else if (_this2.arrschedule[_this2.arrday[i]][i1 + 1]["Lesson"] != "object") {
-                      _this2.newarrschedule[i][i1][i2][i3] = _this2.arrschedule[_this2.arrday[i]][i1 + 1]["Lesson"];
-                    } else _this2.newarrschedule[i][i1][i2][i3] = "Операционные системы"; //this.arrschedule[this.arrday[i]][l1];
-
-                  } else {
-                    console.log(_this2.arrschedule[_this2.arrday[i]][i1]);
-                    _this2.newarrschedule[i][i1][i2][i3] = "Технология разработки программного обеспечения";
-                  }
-                } //Преподаватели
-                else {}
+            if (_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson) != "object") {
+              console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson);
+              console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher);
+            } else {
+              if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson != null) {
+                console.log("Это обжект"); //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
+                //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);
+              } else {
+                console.log("Свободная пара");
               }
             }
           }
         }
+        /* for (var i = 0; i < 6; i++) {
+          for (var i1 = 0; i1 < 8; i1++) {
+            for (var i2 = 0; i2 < 2; i2++)
+              for (var i3 = 0; i3 < 2; i3++) {
+                if (i2 == 0) {
+                  if (this.arrschedule[this.arrday[i]][i1 + 1] != null) {
+                    console.log(this.arrschedule[this.arrday[i]][i1 + 1]);
+                    console.log(
+                      typeof this.arrschedule[this.arrday[i]][i1 + 1]
+                    );
+                      if (
+                      this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] ==
+                      null
+                    ) {
+                      this.newarrschedule[i][i1][i2][i3] = "";
+                    } else if (
+                      this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] !=
+                      "object"
+                    ) {
+                      this.newarrschedule[i][i1][i2][i3] = this.arrschedule[
+                        this.arrday[i]
+                      ][i1 + 1]["Lesson"];
+                    } else
+                      this.newarrschedule[i][i1][i2][i3] =
+                        "Операционные системы";
+                    //this.arrschedule[this.arrday[i]][l1];
+                  } else {
+                    console.log(this.arrschedule[this.arrday[i]][i1]);
+                    this.newarrschedule[i][i1][i2][i3] =
+                      "Технология разработки программного обеспечения";
+                  }
+                } //Преподаватели
+                else {
+                }
+              }
+          }
+        }*/
+
 
         _this2.load = false;
       })["catch"](function (ex) {
@@ -5375,7 +5443,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     this.arrdepartaments = JSON.parse(arrd.departaments);
     this.departament = this.arrdepartaments[0];
     this.changeGroups(this.departament.id);
-    console.log(this.discip);
+    this.arrdiscip = JSON.parse(this.discip);
+    this.arrteachers = JSON.parse(this.teachers);
   }
 });
 
@@ -6289,6 +6358,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     },
     departaments: {
+      type: String,
+      "default": null
+    },
+    teachers: {
       type: String,
       "default": null
     }
@@ -13270,17 +13343,6 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-autocomplete", {
-                attrs: { label: "День недели", solo: "", items: _vm.arrday },
-                model: {
-                  value: _vm.caseday,
-                  callback: function($$v) {
-                    _vm.caseday = $$v
-                  },
-                  expression: "caseday"
-                }
-              }),
-              _vm._v(" "),
               _c(
                 "v-row",
                 {
@@ -13456,6 +13518,9 @@ var render = function() {
                                                   width: "100%",
                                                   label: "Дисциплина",
                                                   solo: "",
+                                                  "small-chips": "",
+                                                  chips: "",
+                                                  multiple: "",
                                                   items: _vm.lesson,
                                                   grow: ""
                                                 }
@@ -13472,6 +13537,9 @@ var render = function() {
                                                   width: "100%",
                                                   label: "Преподаватель",
                                                   solo: "",
+                                                  "small-chips": "",
+                                                  chips: "",
+                                                  multiple: "",
                                                   items: _vm.teacher,
                                                   grow: ""
                                                 }
@@ -13484,13 +13552,10 @@ var render = function() {
                                             "v-row",
                                             [
                                               _c("v-switch", {
-                                                staticClass: "ma-0 pa-0",
                                                 attrs: {
                                                   color: "primary",
-                                                  value: "primary",
-                                                  flat: "",
-                                                  grow: "",
-                                                  label: "Дополнительная пара"
+                                                  inset: "",
+                                                  label: "Знаменатель"
                                                 },
                                                 model: {
                                                   value: _vm.tab[n],
@@ -13512,6 +13577,9 @@ var render = function() {
                                                     attrs: {
                                                       label: "Дисциплина",
                                                       solo: "",
+                                                      "small-chips": "",
+                                                      chips: "",
+                                                      multiple: "",
                                                       items: _vm.lesson,
                                                       grow: ""
                                                     }
@@ -13529,6 +13597,9 @@ var render = function() {
                                                     attrs: {
                                                       label: "Преподаватель",
                                                       solo: "",
+                                                      "small-chips": "",
+                                                      chips: "",
+                                                      multiple: "",
                                                       items: _vm.teacher,
                                                       grow: ""
                                                     }
@@ -13846,7 +13917,9 @@ var render = function() {
                                                           attrs: {
                                                             label: "Дисциплины",
                                                             items:
-                                                              _vm.arrlessons,
+                                                              _vm.arrdiscip,
+                                                            "item-text":
+                                                              "discipline_name",
                                                             "small-chips": "",
                                                             chips: "",
                                                             multiple: "",
@@ -13889,6 +13962,7 @@ var render = function() {
                                                               "Преподаватели",
                                                             items:
                                                               _vm.arrteachers,
+                                                            "item-text": "name",
                                                             "small-chips": "",
                                                             chips: "",
                                                             multiple: "",
@@ -13971,7 +14045,9 @@ var render = function() {
                                                           attrs: {
                                                             label: "Дисциплины",
                                                             items:
-                                                              _vm.arrlessons,
+                                                              _vm.arrdiscip,
+                                                            "item-text":
+                                                              "discipline_name",
                                                             "small-chips": "",
                                                             chips: "",
                                                             multiple: "",
@@ -14014,6 +14090,7 @@ var render = function() {
                                                               "Преподаватели",
                                                             items:
                                                               _vm.arrteachers,
+                                                            "item-text": "name",
                                                             "small-chips": "",
                                                             chips: "",
                                                             multiple: "",
@@ -16630,6 +16707,8 @@ var render = function() {
         [
           _c("Constructor", {
             attrs: {
+              discip: _vm.discip,
+              teachers: _vm.teachers,
               place: _vm.place,
               schedule: _vm.schedule,
               callSchedule: _vm.call,
