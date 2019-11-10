@@ -4054,9 +4054,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/dataFormater */ "./resources/js/utils/dataFormater.js");
-/* harmony import */ var _api_certificate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/certificate */ "./resources/js/api/certificate.js");
-/* harmony import */ var _mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 //
 //
 //
@@ -4117,146 +4114,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
     mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
   },
-  mixins: [_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_3__["default"]],
-  data: function data(vm) {
+  data: function data() {
     return {
+      search: "",
       mask: "####",
-      menu: false,
-      group: "",
-      FIO: user.secName + " " + user.name + " " + user.thirdName,
-      modelprogress: "",
-      modelorder: "",
-      special: "",
-      school: "",
-      datebirth: "",
-      dateendschool: "",
-      yearmpt: new Date().getFullYear().toString(),
-      email: user.email,
-      postofgroup: "",
-      notEmtyRules: [function (v) {
-        return v.length > 0 || "Поле не заполнено";
+      expanded: [],
+      singleExpand: true,
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 100,
+      headers: [{
+        text: "Номер обращения",
+        value: "id"
+      }, {
+        text: "Тематика",
+        value: "name"
+      }, {
+        text: "Почта",
+        value: "email"
+      }, {
+        text: "Дата обращения",
+        value: "date"
+      }, {
+        text: "",
+        value: "data-table-expand"
       }],
-      progressRules: [function (v) {
-        return v.length > 0 || "Успеваемость не указана";
-      }, function (v) {
-        return v.length <= 255 || "Текст успеваемости должен быть не более 255 символов";
-      }],
-      yearMptRules: [function (v) {
-        return v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4 || "Ошибка даты";
-      }, function (v) {
-        return v.length > 0 || "Поле не заполнено";
-      }],
-      orderRules: [function (v) {
-        return v.length > 0 || "Текст заявки не указан";
-      }, function (v) {
-        return v.length <= 255 || "Текст заявки должен быть не более 255 символов";
-      }],
-      form: false
+      items: []
     };
   },
   mounted: function mounted() {
-    var info = JSON.parse(this.info);
-    this.special = info.dep.dep_name_full;
-    this.group = info.group.group_name;
-    this.datebirth = Object(_utils_dataFormater__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(info.student.birthday));
-  },
-  props: {
-    info: {
-      data: String,
-      "default": null
-    }
-  },
-  watch: {
-    menu: function menu(val) {
-      var _this = this;
-
-      val && setTimeout(function () {
-        return _this.$refs.picker.activePicker = "YEAR";
-      });
-    }
+    //this.items = JSON.parse(this.requests);
+    console.log(this.items);
   },
   methods: {
-    sendQuery: function sendQuery() {
-      var _this2 = this;
+    parseIntLoc: function parseIntLoc(val) {
+      if (val == "" || val == null || val == "0") {
+        return 1;
+      }
 
-      _api_certificate__WEBPACK_IMPORTED_MODULE_2__["default"].save({
-        data: {
-          year: this.yearmpt,
-          school: this.school,
-          postofgroup: this.postofgroup,
-          modelprogress: this.modelprogress,
-          modelorder: this.modelorder
-        },
-        type: "Характеристика"
-      }).then(function (res) {
-        _this2.showMessage("Характеристика сохранена");
-
-        _this2.cleardata();
-      })["catch"](function (exp) {
-        _this2.showError("Произошла ошибка");
-
-        _this2.cleardata();
-      });
-    },
-    cleardata: function cleardata() {
-      this.yearmpt = new Date().getFullYear().toString();
-      this.school = "";
-      this.postofgroup = "";
-      this.modelprogress = "";
-      this.modelorder = "";
+      return parseInt(val);
     }
   }
 });
@@ -11100,6 +11001,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-row",
+    { attrs: { align: "center", justify: "center" } },
     [
       _c(
         "v-col",
@@ -11115,7 +11017,7 @@ var render = function() {
                     _c(
                       "v-card",
                       {
-                        staticClass: "mx-auto",
+                        staticClass: "mx-auto pa-4",
                         attrs: {
                           elevation: hover ? 12 : 2,
                           height: "auto",
@@ -11123,297 +11025,184 @@ var render = function() {
                         }
                       },
                       [
-                        _c(
-                          "v-form",
-                          {
-                            model: {
-                              value: _vm.form,
-                              callback: function($$v) {
-                                _vm.form = $$v
-                              },
-                              expression: "form"
+                        _c("v-data-table", {
+                          staticClass: "elevation-1",
+                          attrs: {
+                            headers: _vm.headers,
+                            items: _vm.items,
+                            "single-expand": true,
+                            expanded: _vm.expanded,
+                            "item-key": "id",
+                            "show-expand": "",
+                            page: _vm.page,
+                            "hide-default-footer": "",
+                            search: _vm.search,
+                            "items-per-page": _vm.itemsPerPage
+                          },
+                          on: {
+                            "update:expanded": function($event) {
+                              _vm.expanded = $event
+                            },
+                            "update:page": function($event) {
+                              _vm.page = $event
+                            },
+                            "page-count": function($event) {
+                              _vm.pageCount = $event
                             }
                           },
-                          [
-                            _c(
-                              "v-container",
-                              [
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label:
-                                          "Фамилия, Имя, Отчество студента",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.FIO,
-                                        callback: function($$v) {
-                                          _vm.FIO = $$v
-                                        },
-                                        expression: "FIO"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "Специальность",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.special,
-                                        callback: function($$v) {
-                                          _vm.special = $$v
-                                        },
-                                        expression: "special"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: { label: "Группа", readonly: "" },
-                                      model: {
-                                        value: _vm.group,
-                                        callback: function($$v) {
-                                          _vm.group = $$v
-                                        },
-                                        expression: "group"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "Дата рождения",
-                                        "persistent-hint": "",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.datebirth,
-                                        callback: function($$v) {
-                                          _vm.datebirth = $$v
-                                        },
-                                        expression: "datebirth"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        label: "E-mail",
-                                        required: "",
-                                        readonly: ""
-                                      },
-                                      model: {
-                                        value: _vm.email,
-                                        callback: function($$v) {
-                                          _vm.email = $$v
-                                        },
-                                        expression: "email"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        rules: _vm.notEmtyRules,
-                                        label: "Школа"
-                                      },
-                                      model: {
-                                        value: _vm.school,
-                                        callback: function($$v) {
-                                          _vm.school = $$v
-                                        },
-                                        expression: "school"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      directives: [
-                                        {
-                                          name: "mask",
-                                          rawName: "v-mask",
-                                          value: _vm.mask,
-                                          expression: "mask"
-                                        }
-                                      ],
-                                      attrs: {
-                                        rules: _vm.yearMptRules,
-                                        label:
-                                          "Год поступления в учебное заведение"
-                                      },
-                                      model: {
-                                        value: _vm.yearmpt,
-                                        callback: function($$v) {
-                                          _vm.yearmpt = $$v
-                                        },
-                                        expression: "yearmpt"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-text-field", {
-                                      attrs: {
-                                        rules: _vm.notEmtyRules,
-                                        label: "Обязанности в группе"
-                                      },
-                                      model: {
-                                        value: _vm.postofgroup,
-                                        callback: function($$v) {
-                                          _vm.postofgroup = $$v
-                                        },
-                                        expression: "postofgroup"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-textarea", {
-                                      attrs: {
-                                        "auto-grow": true,
-                                        clearable: false,
-                                        counter: 255 ? 255 : undefined,
-                                        filled: false,
-                                        flat: true,
-                                        hint: "Не более 255 символов",
-                                        label: "Успеваемость",
-                                        loading: false,
-                                        "no-resize": false,
-                                        outlined: false,
-                                        "persistent-hint": false,
-                                        placeholder: "",
-                                        rounded: false,
-                                        "row-height": 24,
-                                        rows: 1,
-                                        shaped: false,
-                                        "single-line": false,
-                                        solo: false,
-                                        rules: _vm.progressRules
-                                      },
-                                      model: {
-                                        value: _vm.modelprogress,
-                                        callback: function($$v) {
-                                          _vm.modelprogress = $$v
-                                        },
-                                        expression: "modelprogress"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2" },
-                                  [
-                                    _c("v-textarea", {
-                                      attrs: {
-                                        "auto-grow": true,
-                                        clearable: false,
-                                        counter: 255 ? 255 : undefined,
-                                        filled: false,
-                                        flat: true,
-                                        hint: "Не более 255 символов",
-                                        label: "Куда нужна характеристика",
-                                        loading: false,
-                                        "no-resize": false,
-                                        outlined: false,
-                                        "persistent-hint": false,
-                                        placeholder: "",
-                                        rounded: false,
-                                        "row-height": 24,
-                                        rows: 3,
-                                        shaped: false,
-                                        "single-line": false,
-                                        solo: false,
-                                        rules: _vm.orderRules
-                                      },
-                                      model: {
-                                        value: _vm.modelorder,
-                                        callback: function($$v) {
-                                          _vm.modelorder = $$v
-                                        },
-                                        expression: "modelorder"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-row",
-                                  { staticClass: "pa-2 justify-center" },
-                                  [
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "top",
+                                fn: function() {
+                                  return [
                                     _c(
-                                      "v-btn",
-                                      {
-                                        staticClass: "white--text",
-                                        attrs: {
-                                          disabled: !_vm.form,
-                                          color: "blue",
-                                          depressed: ""
-                                        },
-                                        on: { click: _vm.sendQuery }
-                                      },
-                                      [_vm._v("Заказать")]
+                                      "div",
+                                      [
+                                        _c(
+                                          "v-toolbar",
+                                          {
+                                            staticClass: "ma-0 ml-2 mr-2 pa-0",
+                                            attrs: { flat: "", color: "white" }
+                                          },
+                                          [
+                                            _c("v-toolbar-title", [
+                                              _vm._v(
+                                                "Заказы справок от студентов"
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("v-spacer")
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-card-title",
+                                          {
+                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              staticClass: "ma-0 pa-0",
+                                              attrs: {
+                                                label: "Поиск",
+                                                "single-line": "",
+                                                "hide-details": ""
+                                              },
+                                              model: {
+                                                value: _vm.search,
+                                                callback: function($$v) {
+                                                  _vm.search = $$v
+                                                },
+                                                expression: "search"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
                                     )
-                                  ],
-                                  1
-                                )
+                                  ]
+                                },
+                                proxy: true
+                              },
+                              {
+                                key: "expanded-item",
+                                fn: function(ref) {
+                                  var headers = ref.headers
+                                  return [
+                                    _vm.expanded.length > 0
+                                      ? _c(
+                                          "td",
+                                          {
+                                            attrs: { colspan: headers.length }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              [
+                                                _c(
+                                                  "v-card-text",
+                                                  {
+                                                    staticClass:
+                                                      "my-1 ma-0 pa-0 text"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "ФИО: " +
+                                                        _vm._s(
+                                                          _vm.expanded[0].fio
+                                                        )
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-card-text",
+                                                  {
+                                                    staticClass:
+                                                      "my-1 ma-0 pa-0 text"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "Текст заявки: " +
+                                                        _vm._s(
+                                                          _vm.expanded[0].body
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "text-center pt-2" },
+                          [
+                            _c("v-pagination", {
+                              attrs: { length: _vm.pageCount },
+                              model: {
+                                value: _vm.page,
+                                callback: function($$v) {
+                                  _vm.page = $$v
+                                },
+                                expression: "page"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              directives: [
+                                {
+                                  name: "mask",
+                                  rawName: "v-mask",
+                                  value: _vm.mask,
+                                  expression: "mask"
+                                }
                               ],
-                              1
-                            )
+                              attrs: {
+                                value: _vm.itemsPerPage,
+                                label: "Количество отображаемых обращений"
+                              },
+                              on: {
+                                input: function($event) {
+                                  _vm.itemsPerPage = _vm.parseIntLoc($event)
+                                }
+                              }
+                            })
                           ],
                           1
                         )

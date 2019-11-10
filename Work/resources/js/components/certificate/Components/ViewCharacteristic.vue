@@ -1,102 +1,57 @@
 <template>
-  <v-row>
+  <v-row align="center" justify="center">
     <v-col cols="12">
       <v-hover v-slot:default="{ hover }">
-        <v-card :elevation="hover ? 12 : 2" class="mx-auto" height="auto" width="max">
-          <v-form v-model="form">
-            <v-container>
-              <v-row class="pa-2">
-                <v-text-field v-model="FIO" label="Фамилия, Имя, Отчество студента" readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field v-model="special" label="Специальность" readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field v-model="group" label="Группа" readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field v-model="datebirth" label="Дата рождения" persistent-hint readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field v-model="email" label="E-mail" required readonly></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field :rules="notEmtyRules" v-model="school" label="Школа"></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field
-                  :rules="yearMptRules"
-                  v-model="yearmpt"
-                  v-mask="mask"
-                  label="Год поступления в учебное заведение"
-                ></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-text-field
-                  :rules="notEmtyRules"
-                  v-model="postofgroup"
-                  label="Обязанности в группе"
-                ></v-text-field>
-              </v-row>
-              <v-row class="pa-2">
-                <v-textarea
-                  v-model="modelprogress"
-                  :auto-grow="true"
-                  :clearable="false"
-                  :counter="255 ? 255 : false"
-                  :filled="false"
-                  :flat="true"
-                  :hint="'Не более 255 символов'"
-                  :label="'Успеваемость'"
-                  :loading="false"
-                  :no-resize="false"
-                  :outlined="false"
-                  :persistent-hint="false"
-                  :placeholder="''"
-                  :rounded="false"
-                  :row-height="24"
-                  :rows="1"
-                  :shaped="false"
-                  :single-line="false"
-                  :solo="false"
-                  :rules="progressRules"
-                ></v-textarea>
-              </v-row>
-              <v-row class="pa-2">
-                <v-textarea
-                  v-model="modelorder"
-                  :auto-grow="true"
-                  :clearable="false"
-                  :counter="255 ? 255 : false"
-                  :filled="false"
-                  :flat="true"
-                  :hint="'Не более 255 символов'"
-                  :label="'Куда нужна характеристика'"
-                  :loading="false"
-                  :no-resize="false"
-                  :outlined="false"
-                  :persistent-hint="false"
-                  :placeholder="''"
-                  :rounded="false"
-                  :row-height="24"
-                  :rows="3"
-                  :shaped="false"
-                  :single-line="false"
-                  :solo="false"
-                  :rules="orderRules"
-                ></v-textarea>
-              </v-row>
-              <v-row class="pa-2 justify-center">
-                <v-btn
-                  :disabled="!form"
-                  class="white--text"
-                  color="blue"
-                  depressed
-                  @click="sendQuery"
-                >Заказать</v-btn>
-              </v-row>
-            </v-container>
-          </v-form>
+        <v-card :elevation="hover ? 12 : 2" class="mx-auto pa-4" height="auto" width="max">
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            :single-expand="true"
+            :expanded.sync="expanded"
+            item-key="id"
+            show-expand
+            class="elevation-1"
+            :page.sync="page"
+            hide-default-footer
+            @page-count="pageCount = $event"
+            :search="search"
+            :items-per-page="itemsPerPage"
+          >
+            <template v-slot:top>
+              <div>
+                <v-toolbar flat color="white" class="ma-0 ml-2 mr-2 pa-0">
+                  <v-toolbar-title>Заказы справок от студентов</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                </v-toolbar>
+                <v-card-title class="ma-0 ml-4 mr-4 pa-0">
+                  <v-text-field
+                    class="ma-0 pa-0"
+                    v-model="search"
+                    label="Поиск"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                </v-card-title>
+              </div>
+            </template>
+            <template v-slot:expanded-item="{ headers }">
+              <td :colspan="headers.length" v-if="expanded.length > 0">
+                <div>
+                  <v-card-text class="my-1 ma-0 pa-0 text">ФИО: {{expanded[0].fio}}</v-card-text>
+                  <v-card-text class="my-1 ma-0 pa-0 text">Текст заявки: {{expanded[0].body}}</v-card-text>
+                </div>
+              </td>
+            </template>
+          </v-data-table>
+          <div class="text-center pt-2">
+            <v-pagination v-model="page" :length="pageCount"></v-pagination>
+            <v-text-field
+              :value="itemsPerPage"
+              label="Количество отображаемых обращений"
+              v-mask="mask"
+              @input="itemsPerPage = parseIntLoc($event)"
+            ></v-text-field>
+          </div>
         </v-card>
       </v-hover>
     </v-col>
@@ -105,93 +60,40 @@
 
 <script>
 import { mask } from "vue-the-mask";
-import dataFormater from "../../../utils/dataFormater";
-import cerificateApi from "../../../api/certificate";
-import withSnackbar from "../../mixins/withSnackbar";
 
 export default {
   directives: {
     mask
   },
-  mixins: [withSnackbar],
-  data: vm => ({
-    mask: "####",
-    menu: false,
-    group: "",
-    FIO: user.secName + " " + user.name + " " + user.thirdName,
-    modelprogress: "",
-    modelorder: "",
-    special: "",
-    school: "",
-    datebirth: "",
-    dateendschool: "",
-    yearmpt: new Date().getFullYear().toString(),
-    email: user.email,
-    postofgroup: "",
-    notEmtyRules: [v => v.length > 0 || "Поле не заполнено"],
-    progressRules: [
-      v => v.length > 0 || "Успеваемость не указана",
-      v =>
-        v.length <= 255 ||
-        "Текст успеваемости должен быть не более 255 символов"
-    ],
-    yearMptRules: [
-      v =>
-        (v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) ||
-        "Ошибка даты",
-      v => v.length > 0 || "Поле не заполнено"
-    ],
-    orderRules: [
-      v => v.length > 0 || "Текст заявки не указан",
-      v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
-    ],
-    form: false
-  }),
+  data() {
+    return {
+      search: "",
+      mask: "####",
+      expanded: [],
+      singleExpand: true,
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 100,
+      headers: [
+        { text: "Номер обращения", value: "id" },
+        { text: "Тематика", value: "name" },
+        { text: "Почта", value: "email" },
+        { text: "Дата обращения", value: "date" },
+        { text: "", value: "data-table-expand" }
+      ],
+      items:[]
+    };
+  },
   mounted() {
-    let info = JSON.parse(this.info);
-    this.special = info.dep.dep_name_full;
-    this.group = info.group.group_name;
-    this.datebirth = dataFormater(new Date(info.student.birthday));
-  },
-  props: {
-    info: {
-      data: String,
-      default: null
-    }
-  },
-  watch: {
-    menu(val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-    }
+    //this.items = JSON.parse(this.requests);
+    console.log(this.items);
   },
   methods: {
-    sendQuery() {
-      cerificateApi
-        .save({
-          data: {
-            year: this.yearmpt,
-            school: this.school,
-            postofgroup: this.postofgroup,
-            modelprogress: this.modelprogress,
-            modelorder: this.modelorder
-          },
-          type: "Характеристика"
-        })
-        .then(res => {
-          this.showMessage("Характеристика сохранена");
-          this.cleardata();
-        })
-        .catch(exp => {
-          this.showError("Произошла ошибка");
-          this.cleardata();
-        });
-    },
-    cleardata() {
-      this.yearmpt = new Date().getFullYear().toString();
-      this.school = "";
-      this.postofgroup = "";
-      this.modelprogress = "";
-      this.modelorder = "";
+    parseIntLoc(val) {
+      if (val == "" || val == null || val == "0") {
+        return 1;
+      }
+      return parseInt(val);
     }
   }
 };
