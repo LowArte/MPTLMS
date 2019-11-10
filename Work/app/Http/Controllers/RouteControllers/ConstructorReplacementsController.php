@@ -25,6 +25,7 @@ class ConstructorReplacementsController extends Controller
      */
     public function index()
     {
+        
         return view('components/conreplacements');
     }
 }

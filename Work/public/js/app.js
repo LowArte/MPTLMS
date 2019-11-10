@@ -6274,7 +6274,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_ConstructorReplacements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/ConstructorReplacements */ "./resources/js/components/timetable/Components/ConstructorReplacements.vue");
-/* harmony import */ var _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/TeacherReplacements */ "./resources/js/components/timetable/Components/TeacherReplacements.vue");
+/* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timetable/Components/Replacements.vue");
 //
 //
 //
@@ -6296,8 +6296,14 @@ __webpack_require__.r(__webpack_exports__);
       tab: null
     };
   },
+  props: {
+    replacements: {
+      data: String,
+      "default": null
+    }
+  },
   components: {
-    Replacements: _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Replacements: _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__["default"],
     Constructor: _Components_ConstructorReplacements__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
