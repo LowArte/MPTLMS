@@ -185,6 +185,8 @@
     <v-row v-if="load==true" sm="2" md="0" class="pa-0 mt-5 align-self-center justify-center">
       <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
     </v-row>
+    {{arrschedule}}
+    <br />
     {{newarrschedule}}
   </v-container>
 </template>
@@ -265,12 +267,24 @@ export default {
       //   Lesson1[0].push(Lesson1[0][0]);
     },
     sendNewSchedule: function() {
-      for (var i = 0; i < this.caseplace.length; i++)
+      for (var i = 0; i < this.caseplace.length; i++) //Формирование место проведения
         if (this.caseplace[i] != null && this.caseplace[i] != "")
           this.places[
             (this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id)
           ];
 
+      //var sendarrschedule = [];
+      for (var i = 0; i < this.arrday.length; i++) //Прохождение по дням
+      {
+        for (var j = 1; j < 8; j++) //Прохождение по парам
+        {
+          if (this.arrswitchp[i][j])
+          this.arrschedule[this.arrday[i]][j].Lesson = this.newarrschedule[i][j][0];
+          this.arrschedule[this.arrday[i]][j].Teacher = this.newarrschedule[i][j];
+          
+
+        }
+      }
       alert("Расписание изменено!");
     },
 
@@ -326,7 +340,7 @@ export default {
 
 
           for (var i = 0; i < 6; i++) //Прохождение по дням
-          for (var i1 = 0; i1 < 8; i1++) //Прохождение по парам
+          for (var i1 = 0; i1 < this.newarrschedule[i].length - 1; i1++) //Прохождение по парам
           {
             console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
             if (typeof(this.arrschedule[this.arrday[i]][i1 + 1].Lesson) != "object") //Не массивный контент
