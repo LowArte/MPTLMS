@@ -44,7 +44,7 @@
 
               <v-list class="ma-0 pa-0">
                 <v-list class="ma-0 pa-0" v-for="(Lesson, l1) in newarrschedule[d1]" :key="l1">
-                  <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
+                  <v-divider class="my-1 ma-0 pa-0"></v-divider>
                   <v-list-item
                     class="ma-0 pa-0"
                     v-if="callschedule[arrschedule[day].Place].call_schedule[l1 + 1] != null && callschedule[arrschedule[day].Place].call_schedule[l1 + 1]!=''"
@@ -60,27 +60,30 @@
                       class="subtitle-1 ma-0 pa-0"
                     >{{l1 + 1}} пара - расписание звонка отсутствует!</v-card-title>
                   </v-list-item>
+
                   <v-list v-for="(Lesson1, l2) in Lesson" :key="l2" class="ma-0 pa-0">
                     <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
                       <v-autocomplete
-                        v-model="Lesson1[0]"
+                        v-model="Lesson[0][0]"
                         label="Дисциплины"
-                        :items="arrlessons"
+                        :items="arrdiscip"
+                        item-text="discipline_name"
                         small-chips
                         chips
                         multiple
-                        return-object
+                        @change="setNull(Lesson[0][0], d1, l1, 0, 0)"
                       ></v-autocomplete>
                     </v-list-item>
                     <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
                       <v-autocomplete
-                        v-model="Lesson1[1]"
+                        v-model="Lesson[1][0]"
                         label="Преподаватели"
                         :items="arrteachers"
+                        item-text="name"
                         small-chips
                         chips
                         multiple
-                        return-object
+                        @change="setNull(Lesson[1][0], d1, l1, 1, 0)"
                       ></v-autocomplete>
                     </v-list-item>
                     <v-list-item class="ma-0 pa-0 pl-1" v-if="l2 == 1" fill-width>
@@ -93,91 +96,33 @@
                     </v-list-item>
                     <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
                       <v-autocomplete
-                        v-model="Lesson1[0]"
+                        v-model="Lesson[0][1]"
                         label="Дисциплины"
-                        :items="arrlessons"
+                        :items="arrdiscip"
+                        item-text="discipline_name"
                         small-chips
                         chips
                         multiple
-                        return-object
+                        @change="setNull(Lesson[0][1], d1, l1, 0, 1)"
                       ></v-autocomplete>
                     </v-list-item>
                     <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
                       <v-autocomplete
-                        v-model="Lesson1[1]"
+                        v-model="Lesson[1][1]"
                         label="Преподаватели"
                         :items="arrteachers"
+                        item-text="name"
                         small-chips
                         chips
                         multiple
-                        return-object
+                        @change="setNull(Lesson[1][1], d1, l1, 1, 1)"
                       ></v-autocomplete>
                     </v-list-item>
-
-                    <v-list v-for="(Lesson1, l2) in Lesson" :key="l2" class="ma-0 pa-0">
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[0]"
-                          label="Дисциплины"
-                          :items="arrdiscip"
-                          item-text="discipline_name"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[1]"
-                          label="Преподаватели"
-                          :items="arrteachers"
-                          item-text="name"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                          @change="caseTeacher(Lesson1)"
-                        ></v-autocomplete>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0 pl-1" v-if="l2 == 1" fill-width>
-                        <v-switch
-                          v-model="arrswitch[d1][l1]"
-                          color="primary"
-                          inset
-                          label="Знаменатель"
-                        ></v-switch>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[0]"
-                          label="Дисциплины"
-                          :items="arrdiscip"
-                          item-text="discipline_name"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[1]"
-                          label="Преподаватели"
-                          :items="arrteachers"
-                          item-text="name"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                    </v-list>
                   </v-list>
                 </v-list>
               </v-list>
             </v-list>
-            <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
+            <v-divider class="my-1 ma-0 pa-0"></v-divider>
           </v-card>
         </v-col>
       </v-row>
@@ -185,9 +130,15 @@
     <v-row v-if="load==true" sm="2" md="0" class="pa-0 mt-5 align-self-center justify-center">
       <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
     </v-row>
-    {{arrschedule}}
-    <br />
-    {{newarrschedule}}
+    <!-- <v-row v-for="(it, t) in newarrschedule" :key="t">
+      <v-col>
+        <div>
+          День {{t}}
+          <br />
+          <p v-for="(it1, t1) in it" :key="t1">Пара {{t1}}. | {{it1}}</p>
+        </div>
+      </v-col>
+    </v-row> -->
   </v-container>
 </template>
 
@@ -221,7 +172,7 @@ export default {
     arrdiscip: [],
     arrteachers: [],
 
-    newarrschedule: [],
+    newarrschedule: []
   }),
   props: {
     discip: {
@@ -262,29 +213,55 @@ export default {
     }
   },
   methods: {
-    caseTeacher: function(Lesson1){ //Дубликат пары - желательно не использовать
-      // if (Lesson1[0].length < Lesson1[1].length)
-      //   Lesson1[0].push(Lesson1[0][0]);
-    },
     sendNewSchedule: function() {
-      for (var i = 0; i < this.caseplace.length; i++) //Формирование место проведения
+      for (
+        var i = 0;
+        i < this.caseplace.length;
+        i++ //Формирование место проведения
+      )
         if (this.caseplace[i] != null && this.caseplace[i] != "")
           this.places[
             (this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id)
           ];
 
-      //var sendarrschedule = [];
-      for (var i = 0; i < this.arrday.length; i++) //Прохождение по дням
-      {
-        for (var j = 1; j < 8; j++) //Прохождение по парам
-        {
-          if (this.arrswitchp[i][j])
-          this.arrschedule[this.arrday[i]][j].Lesson = this.newarrschedule[i][j][0];
-          this.arrschedule[this.arrday[i]][j].Teacher = this.newarrschedule[i][j];
-          
-
+      for (
+        var i = 0;
+        i < this.arrday.length;
+        i++ //Прохождение по дням
+      ) {
+        for (
+          var j = 0;
+          j < 8;
+          j++ //Прохождение по парам
+        ) {
+          if (this.newarrschedule[i][j] != null) {
+            console.log(this.newarrschedule[i][j]);
+            if (this.arrswitch[i][j]) {
+              this.arrschedule[this.arrday[i]][
+                j + 1
+              ].Lesson = this.newarrschedule[i][j + 1];
+              this.arrschedule[this.arrday[i]][
+                j + 1
+              ].Teacher = this.newarrschedule[i][j + 1];
+            } else {
+              this.arrschedule[this.arrday[i]][
+                j + 1
+              ].Lesson = this.newarrschedule[i][j][0];
+              this.arrschedule[this.arrday[i]][
+                j + 1
+              ].Teacher = this.newarrschedule[i][j][0];
+            }
+          }
         }
       }
+
+      ///
+      ///
+      ///
+      //ОООООООООООООООТПРАААААААААААААААААААААВКАААААААААААААААААААААААА
+      ///
+      ///
+      ///
       alert("Расписание изменено!");
     },
 
@@ -300,6 +277,19 @@ export default {
           console.log(ex);
         });
     },
+
+    setNull: function(value, id1, id2, id3, id4) //установка null
+     {
+      if (value == "") {
+        this.newarrschedule[id1][id2][id3][id4] = null;
+
+        if (id3 == 0) this.newarrschedule[id1][id2][1][id4] = null;
+        else this.newarrschedule[id1][id2][0][id4] = null;
+      }
+      if (value.length > 2)
+        this.newarrschedule[id1][id2][id3][id4].splice(2, 1);
+    },
+
     changeSchedule: function(group) {
       //alert("Группа " + group);
 
@@ -324,7 +314,7 @@ export default {
             for (var i1 = 0; i1 < 8; i1++) {
               this.newarrschedule[i].push([]);
               for (var i2 = 0; i2 < 2; i2++) {
-                this.newarrschedule[i][i1].push([[null], [null]]);
+                this.newarrschedule[i][i1].push([null]);
               }
             }
           }
@@ -338,71 +328,206 @@ export default {
             }
           }
 
+          for (
+            var i = 0;
+            i < 6;
+            i++ //Прохождение по дням
+          )
+            for (
+              var i1 = 0;
+              i1 < this.newarrschedule[i].length - 1;
+              i1++ //Прохождение по парам
+            ) {
+              console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
+              if (
+                typeof this.arrschedule[this.arrday[i]][i1 + 1].Lesson !=
+                "object"
+              ) {
+                //Не массивный контент
+                console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
+                console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);
+                this.newarrschedule[i][i1][0][0] = this.arrschedule[
+                  this.arrday[i]
+                ][i1 + 1].Lesson;
+                this.newarrschedule[i][i1][1][0] = this.arrschedule[
+                  this.arrday[i]
+                ][i1 + 1].Teacher;
+              } else {
+                if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson != null) {
+                  //Не нулевое значение
+                  console.log("Это обжект");
+                  if (
+                    this.arrschedule[this.arrday[i]][i1 + 1].Lesson.length > 1
+                  ) {
+                    this.arrswitch[i][i1] = true; //Активация свитча обозначающий, что работает система числителя знаменателя
+                    //Если пара по числителю не пустая
+                    if (
+                      this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0] != null
+                    ) {
+                      if (
+                        typeof this.arrschedule[this.arrday[i]][i1 + 1]
+                          .Lesson[0] == "object"
+                      ) {
+                        //Проверка на обычную пару
+                        if (
+                          this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0]
+                            .length > 1
+                        ) {
+                          ////Получение дисциплинн
+                          if (
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Lesson[0][0] ==
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Lesson[0][1]
+                          )
+                            this.newarrschedule[i][i1][0][0] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Lesson[0][0]
+                            ];
+                          else
+                            this.newarrschedule[i][i1][0][0] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Lesson[0][0],
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Lesson[0][1]
+                            ];
 
-          for (var i = 0; i < 6; i++) //Прохождение по дням
-          for (var i1 = 0; i1 < this.newarrschedule[i].length - 1; i1++) //Прохождение по парам
-          {
-            console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
-            if (typeof(this.arrschedule[this.arrday[i]][i1 + 1].Lesson) != "object") //Не массивный контент
-            {
-              console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
-              console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);    
-              this.newarrschedule[i][i1][0][0] = this.arrschedule[this.arrday[i]][i1 + 1].Lesson;
-              this.newarrschedule[i][i1][0][1] = this.arrschedule[this.arrday[i]][i1 + 1].Teacher;
-            }
-            else
-            {
-              if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson != null) //Не нулевое значение
-              {
-                console.log("Это обжект");
-                if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson.length > 1)
-                {
-                  this.arrswitch[i][i1] = true; //Активация свитча обозначающий, что работает система числителя знаменателя
-                  if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0] != null) //Если пара по числителю не пустая
-                  {
-                  if(this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1])
-                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0]];
-                  else
-                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1]];
-                  
-                  if(this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1])
-                   this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0]];
-                  else
-                    this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1]];
-                  }
+                          ////Получение преподавателей
+                          if (
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Teacher[0][0] ==
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Teacher[0][1]
+                          )
+                            this.newarrschedule[i][i1][1][0] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Teacher[0][0]
+                            ];
+                          else
+                            this.newarrschedule[i][i1][1][0] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Teacher[0][0],
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Teacher[0][1]
+                            ];
+                        } else {
+                          this.newarrschedule[i][i1][0][1] = this.arrschedule[
+                            this.arrday[i]
+                          ][i1 + 1].Lesson[1][0];
+                          this.newarrschedule[i][i1][1][1] = this.arrschedule[
+                            this.arrday[i]
+                          ][i1 + 1].Teacher[1][0];
+                        }
+                      } else {
+                        this.newarrschedule[i][i1][0][0] = this.arrschedule[
+                          this.arrday[i]
+                        ][i1 + 1].Lesson[0];
+                        this.newarrschedule[i][i1][1][0] = this.arrschedule[
+                          this.arrday[i]
+                        ][i1 + 1].Teacher[0];
+                      }
+                    }
+                    if (
+                      this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1] != null
+                    ) {
+                      if (
+                        typeof this.arrschedule[this.arrday[i]][i1 + 1]
+                          .Lesson[1] == "object"
+                      ) {
+                        //Проверка на обычную пару
+                        if (
+                          this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1]
+                            .length > 1
+                        ) {
+                          ////Получение дисциплинн
+                          if (
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Lesson[1][0] ==
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Lesson[1][1]
+                          )
+                            this.newarrschedule[i][i1][0][1] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Lesson[1][0]
+                            ];
+                          else
+                            this.newarrschedule[i][i1][0][1] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Lesson[1][0],
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Lesson[1][1]
+                            ];
 
-                  if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1] != null) //Если пара по знаменателю не пустая
-                  {
-                  if(this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][0] == this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][1])
-                    this.newarrschedule[i][i1][1][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][0]];
-                  else
-                    this.newarrschedule[i][i1][1][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][0], this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][1]];
-                  
-                  if(this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][0] == this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][1])
-                   this.newarrschedule[i][i1][1][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][0]];
-                  else
-                    this.newarrschedule[i][i1][1][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][0], this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][1]];
+                          ////Получение преподавателей
+                          if (
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Teacher[1][0] ==
+                            this.arrschedule[this.arrday[i]][i1 + 1]
+                              .Teacher[1][1]
+                          )
+                            this.newarrschedule[i][i1][1][1] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Teacher[1][0]
+                            ];
+                          else
+                            this.newarrschedule[i][i1][1][1] = [
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Teacher[1][0],
+                              this.arrschedule[this.arrday[i]][i1 + 1]
+                                .Teacher[1][1]
+                            ];
+                        } else {
+                          this.newarrschedule[i][i1][0][1] = this.arrschedule[
+                            this.arrday[i]
+                          ][i1 + 1].Lesson[1][0];
+                          this.newarrschedule[i][i1][1][1] = this.arrschedule[
+                            this.arrday[i]
+                          ][i1 + 1].Teacher[1][0];
+                        }
+                      } else {
+                        this.newarrschedule[i][i1][0][1] = this.arrschedule[
+                          this.arrday[i]
+                        ][i1 + 1].Lesson[1];
+                        this.newarrschedule[i][i1][1][1] = this.arrschedule[
+                          this.arrday[i]
+                        ][i1 + 1].Teacher[1];
+                      }
+                    }
                   }
-                }
-                else //Есди одна сдвоенная пара
-                {
-                  if(this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1])
-                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0]];
-                  else
-                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1]];
-                  
-                  if(this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1])
-                   this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0]];
-                  else
-                    this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1]];
+                  //Есди одна сдвоенная пара
+                  else {
+                    if (
+                      this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0] ==
+                      this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1]
+                    )
+                      this.newarrschedule[i][i1][0][0] = [
+                        this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0]
+                      ];
+                    else
+                      this.newarrschedule[i][i1][0][0] = [
+                        this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0],
+                        this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1]
+                      ];
+
+                    if (
+                      this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0] ==
+                      this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1]
+                    )
+                      this.newarrschedule[i][i1][1][0] = [
+                        this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0]
+                      ];
+                    else
+                      this.newarrschedule[i][i1][1][0] = [
+                        this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0],
+                        this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1]
+                      ];
+                  }
+                } //Пустая пара
+                else {
+                  console.log("Свободная пара");
                 }
               }
-              else //Пустая пара
-              {
-                console.log("Свободная пара");
-              }
             }
-          }
           this.load = false;
         })
         .catch(ex => {
@@ -425,16 +550,18 @@ export default {
     this.departament = this.arrdepartaments[0];
 
     this.changeGroups(this.departament.id);
-    
+
     this.arrdiscip = JSON.parse(this.discip);
     this.arrteachers = JSON.parse(this.teachers);
 
     //Тестовые данные отображения УДАЛИТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
     this.arrdiscip.push(this.arrdiscip[0]);
-    this.arrdiscip[this.arrdiscip.length-1].discipline_name = "Информационные системы и технологии";
+    this.arrdiscip[this.arrdiscip.length - 1].discipline_name =
+      "Информационные системы и технологии";
 
     this.arrteachers.push(this.arrteachers[0]);
-    this.arrteachers[this.arrteachers.length-1].name = "Токарчук Александр Сергеевич";
+    this.arrteachers[this.arrteachers.length - 1].name =
+      "Токарчук Александр Сергеевич";
   }
 };
 </script>
