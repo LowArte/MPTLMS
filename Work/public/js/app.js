@@ -5244,6 +5244,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5311,7 +5313,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     },
     sendNewSchedule: function sendNewSchedule() {
       for (var i = 0; i < this.caseplace.length; i++) {
+        //Формирование место проведения
         if (this.caseplace[i] != null && this.caseplace[i] != "") this.places[this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id];
+      } //var sendarrschedule = [];
+
+
+      for (var i = 0; i < this.arrday.length; i++) //Прохождение по дням
+      {
+        for (var j = 1; j < 8; j++) //Прохождение по парам
+        {
+          if (this.arrswitchp[i][j]) this.arrschedule[this.arrday[i]][j].Lesson = this.newarrschedule[i][j][0];
+          this.arrschedule[this.arrday[i]][j].Teacher = this.newarrschedule[i][j];
+        }
       }
 
       alert("Расписание изменено!");
@@ -5366,7 +5379,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
         for (var i = 0; i < 6; i++) {
           //Прохождение по дням
-          for (var i1 = 0; i1 < 8; i1++) //Прохождение по парам
+          for (var i1 = 0; i1 < _this2.newarrschedule[i].length - 1; i1++) //Прохождение по парам
           {
             console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
 
@@ -14174,6 +14187,8 @@ var render = function() {
             1
           )
         : _vm._e(),
+      _vm._v("\n  " + _vm._s(_vm.arrschedule) + "\n  "),
+      _c("br"),
       _vm._v("\n  " + _vm._s(_vm.newarrschedule) + "\n")
     ],
     1
@@ -14683,7 +14698,7 @@ var render = function() {
                                     attrs: { color: "Black" }
                                   }),
                                   _vm._v(" "),
-                                  _vm._l(8, function(n, i) {
+                                  _vm._l(7, function(n, i) {
                                     return _c(
                                       "div",
                                       { key: i, staticClass: "ma-0 pa-0" },
@@ -15720,7 +15735,7 @@ var render = function() {
                                     attrs: { color: "Black" }
                                   }),
                                   _vm._v(" "),
-                                  _vm._l(8, function(n, i) {
+                                  _vm._l(7, function(n, i) {
                                     return _c(
                                       "div",
                                       { key: i, staticClass: "ma-0 pa-0" },

@@ -32,7 +32,7 @@
               <v-list dense class="ma-0 pa-0">
                 <v-list-item>Место проведения: {{places[arrschedule[item].Place-1].place_name}}</v-list-item>
                 <v-divider class="my-2" color="Black"></v-divider>
-                <div v-for="(n,i) in 8" :key="i" class="ma-0 pa-0">
+                <div v-for="(n,i) in 7" :key="i" class="ma-0 pa-0">
                   <v-list
                     class="ma-0 ml-4 mr-4 pa-0"
                     v-if="arrschedule[item][n].Lesson != null && arrschedule[item][n].Lesson != ''"
