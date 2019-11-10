@@ -107,6 +107,21 @@ new Vue({
             href: '/panelcontrol'
           },
           {
+            icon: 'today',
+            text: 'Расписание',
+            href: '/contimetable'
+          },
+          {
+            icon: 'today',
+            text: 'Замены',
+            href: '/conreplacements'
+          },
+          {
+            icon: 'today',
+            text: 'Расписание звонков',
+            href: '/concallschedule'
+          },
+          {
             icon: 'feedback',
             text: 'Обращение пользователей',
             href: '/requestsusers'

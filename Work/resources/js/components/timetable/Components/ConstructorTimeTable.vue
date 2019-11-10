@@ -263,7 +263,9 @@ export default {
           this.newarrschedule = [];
           for (var i = 0; i < 6; i++) {
             for (var i1 = 0; i1 < 8; i1++) {
-              this.newarrschedule[i][i1] = this.arrschedule[this.arrday[i]][l1];
+              for (var i2 = 0; i2 < 2; i2++)
+              for (var i3 = 0; i3 < 2; i3++)
+              this.newarrschedule[i][i1][i2][i3] = "Жопа";//this.arrschedule[this.arrday[i]][l1];
             }
           }
         })
