@@ -1,12 +1,12 @@
 <template>
   <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-    <v-tab :key="item">Расписание</v-tab>
-    <v-tab :key="item">Конструктор</v-tab>
-    <v-tab-item :key="item">
-      <Timetable />
+    <v-tab>Расписание</v-tab>
+    <v-tab>Конструктор</v-tab>
+    <v-tab-item>
+      <Timetable v-bind:place="place" v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
     </v-tab-item>
-    <v-tab-item :key="item">
-      <Constructor />
+    <v-tab-item>
+      <Constructor v-bind:place="place" v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
     </v-tab-item>
   </v-tabs>
 </template>
@@ -18,17 +18,29 @@ export default {
   data: () => ({
     tab: null,
     tabs: 2,
-    tabitem: [
-      {
-        name: "Расписание",
-        com: Timetable
-      },
-      {
-        name: "Конструктор",
-        com: Constructor
-      }
-    ]
   }),
+  props:{
+    place:{
+      type: String,
+      default:null
+    },
+    schedule:{
+      type: String,
+      default:null
+    },
+    call:{
+      type: String,
+      default:null
+    },
+    groups:{
+      type: String,
+      default:null
+    },
+    departaments:{
+      type:String,
+      default:null
+    }
+  },
   components: {
     Timetable,
     Constructor

@@ -35,6 +35,8 @@ Route::get('/card', 'RouteControllers\CardController@index')->name('card');
 
 Route::get('/certificate', 'RouteControllers\CertificateController@index')->name('certificate');
 
+Route::get('/listcertificate', 'RouteControllers\ListCertificateController@index')->name('listcertificate');
+
 Route::get('/timetable', 'RouteControllers\TimetableController@index')->name('timetable');
 
 Route::get('/teachertimetable', 'RouteControllers\TeacherTimetableController@index')->name('teachertimetable');

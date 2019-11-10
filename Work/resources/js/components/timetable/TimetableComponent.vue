@@ -20,16 +20,6 @@ export default {
   data: () => ({
     tab: null,
     tabs: 2,
-    tabitem: [
-      {
-        name: "Расписание",
-        com: TimeTable
-      },
-      {
-        name: "Замены",
-        com: Replacements
-      }
-    ]
   }),
   props:{
     place:{
@@ -52,9 +42,6 @@ export default {
       type:String,
       default:null
     }
-  },
-  mounted:function(){ 
-
   },
   components: {
     TimeTable,

@@ -18,16 +18,6 @@ export default {
   data: () => ({
     tab: null,
     tabs: 2,
-    tabitem: [
-      {
-        name: "Справка",
-        com: OrderCertificate
-      },
-      {
-        name: "Характеристика",
-        com: OrderCharacteristic
-      }
-    ]
   }),
   props:{
     info:{

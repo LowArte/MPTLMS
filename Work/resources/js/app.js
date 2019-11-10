@@ -12,6 +12,7 @@ import RememberPasswordComponent from './components/authentication/RememberPassw
 import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
 import FeedbackComponent from './components/feedback/FeedbackComponent'
 import CertificateComponent from './components/certificate/CertificateComponent'
+import ListCertificateComponent from './components/certificate/ListCertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
 import TimetableComponent from './components/timetable/TimetableComponent'
@@ -65,6 +66,7 @@ new Vue({
     'panel': Panel,
     'feedback': FeedbackComponent,
     'certificate': CertificateComponent,
+    'listcertificate' : ListCertificateComponent,
     'timetable': TimetableComponent,
     'teachertimetable': TeacherTimetableComponent,
     'teacherhomework': TeacherHomeworkComponent,
@@ -223,6 +225,23 @@ new Vue({
             icon: 'today',
             text: 'Расписание звонков',
             href: '/concallschedule'
+          },
+          {
+            icon: 'feedback',
+            text: 'Обратная связь',
+            href: '/feedback'
+          }];
+        }
+        case 5: { //Лапшина (Канцелярия)
+          return [{
+            icon: 'home',
+            text: 'Главная',
+            href: '/home'
+          },
+          {
+            icon: 'home',
+            text: 'Заказ справок',
+            href: '/listcertificate'
           },
           {
             icon: 'feedback',
