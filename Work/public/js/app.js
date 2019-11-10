@@ -5242,6 +5242,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5262,17 +5264,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       arrswitch: [],
       arrdiscip: [],
       arrteachers: [],
-      newarrschedule: [] // arrlessons: [
-      //   "Технология разработки и защиты баз данных",
-      //   "Операционные системы",
-      //   "Технология разработки программного обеспечения"
-      // ],
-      // arrteachers: [
-      //   "Горбунов Антон Дмитриевич",
-      //   "Шимбирёв Андрей Андреевич",
-      //   "Комаров Андрей Алексеевич"
-      // ]
-
+      newarrschedule: []
     };
   },
   props: {
@@ -5313,6 +5305,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
   },
   methods: {
+    caseTeacher: function caseTeacher(Lesson1) {//Дубликат пары - желательно не использовать
+      // if (Lesson1[0].length < Lesson1[1].length)
+      //   Lesson1[0].push(Lesson1[0][0]);
+    },
     sendNewSchedule: function sendNewSchedule() {
       for (var i = 0; i < this.caseplace.length; i++) {
         if (this.caseplace[i] != null && this.caseplace[i] != "") this.places[this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id];
@@ -5352,11 +5348,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             _this2.newarrschedule[i].push([]);
 
             for (var i2 = 0; i2 < 2; i2++) {
-              _this2.newarrschedule[i][i1].push([[], []]);
+              _this2.newarrschedule[i][i1].push([[null], [null]]);
             }
           }
         }
 
+        console.log(_this2.newarrschedule);
         _this2.arrswitch = [];
 
         for (var i = 0; i < 6; i++) {
@@ -5368,60 +5365,48 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
 
         for (var i = 0; i < 1; i++) {
-          for (var i1 = 0; i1 < 8; i1++) {
-            console.log(i + 1 + " день. " + (i1 + 1) + " пара. ");
+          //Прохождение по дням
+          for (var i1 = 0; i1 < 8; i1++) //Прохождение по парам
+          {
+            console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
 
-            if (_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson) != "object") {
-              console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson);
-              console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher);
-            } else {
-              if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson != null) {
-                console.log("Это обжект"); //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
-                //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);
+            if (_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson) != "object") //Не массивный контент
+              {
+                console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson);
+                console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher);
+                _this2.newarrschedule[i][i1][0][0] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson;
+                _this2.newarrschedule[i][i1][0][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher;
               } else {
-                console.log("Свободная пара");
-              }
+              if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson != null) //Не нулевое значение
+                {
+                  console.log("Это обжект");
+
+                  if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson.length > 1) {
+                    _this2.arrswitch[i][i1] = true; //Активация свитча обозначающий, что работает система числителя знаменателя
+
+                    if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0] != null) //Если пара по числителю не пустая
+                      {
+                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]) _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0]];else _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]];
+                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]) _this2.newarrschedule[i][i1][0][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0]];else _this2.newarrschedule[i][i1][0][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]];
+                      }
+
+                    if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1] != null) //Если пара по знаменателю не пустая
+                      {
+                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][1]) _this2.newarrschedule[i][i1][1][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0]];else _this2.newarrschedule[i][i1][1][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][1]];
+                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][1]) _this2.newarrschedule[i][i1][1][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0]];else _this2.newarrschedule[i][i1][1][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][1]];
+                      }
+                  } else //Есди одна сдвоенная пара
+                    {
+                      if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]) _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0]];else _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]];
+                      if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]) _this2.newarrschedule[i][i1][0][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0]];else _this2.newarrschedule[i][i1][0][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]];
+                    }
+                } else //Пустая пара
+                {
+                  console.log("Свободная пара");
+                }
             }
           }
         }
-        /* for (var i = 0; i < 6; i++) {
-          for (var i1 = 0; i1 < 8; i1++) {
-            for (var i2 = 0; i2 < 2; i2++)
-              for (var i3 = 0; i3 < 2; i3++) {
-                if (i2 == 0) {
-                  if (this.arrschedule[this.arrday[i]][i1 + 1] != null) {
-                    console.log(this.arrschedule[this.arrday[i]][i1 + 1]);
-                    console.log(
-                      typeof this.arrschedule[this.arrday[i]][i1 + 1]
-                    );
-                      if (
-                      this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] ==
-                      null
-                    ) {
-                      this.newarrschedule[i][i1][i2][i3] = "";
-                    } else if (
-                      this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] !=
-                      "object"
-                    ) {
-                      this.newarrschedule[i][i1][i2][i3] = this.arrschedule[
-                        this.arrday[i]
-                      ][i1 + 1]["Lesson"];
-                    } else
-                      this.newarrschedule[i][i1][i2][i3] =
-                        "Операционные системы";
-                    //this.arrschedule[this.arrday[i]][l1];
-                  } else {
-                    console.log(this.arrschedule[this.arrday[i]][i1]);
-                    this.newarrschedule[i][i1][i2][i3] =
-                      "Технология разработки программного обеспечения";
-                  }
-                } //Преподаватели
-                else {
-                }
-              }
-          }
-        }*/
-
 
         _this2.load = false;
       })["catch"](function (ex) {
@@ -5444,7 +5429,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     this.departament = this.arrdepartaments[0];
     this.changeGroups(this.departament.id);
     this.arrdiscip = JSON.parse(this.discip);
-    this.arrteachers = JSON.parse(this.teachers);
+    this.arrteachers = JSON.parse(this.teachers); //Тестовые данные отображения УДАЛИТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+
+    this.arrdiscip.push(this.arrdiscip[0]);
+    this.arrdiscip[this.arrdiscip.length - 1].discipline_name = "Информационные системы и технологии";
+    this.arrteachers.push(this.arrteachers[0]);
+    this.arrteachers[this.arrteachers.length - 1].name = "Токарчук Александр Сергеевич";
   }
 });
 
@@ -13968,6 +13958,15 @@ var render = function() {
                                                             multiple: "",
                                                             "return-object": ""
                                                           },
+                                                          on: {
+                                                            change: function(
+                                                              $event
+                                                            ) {
+                                                              return _vm.caseTeacher(
+                                                                Lesson1
+                                                              )
+                                                            }
+                                                          },
                                                           model: {
                                                             value: Lesson1[1],
                                                             callback: function(
@@ -14168,7 +14167,8 @@ var render = function() {
             ],
             1
           )
-        : _vm._e()
+        : _vm._e(),
+      _vm._v("\n  " + _vm._s(_vm.newarrschedule) + "\n")
     ],
     1
   )

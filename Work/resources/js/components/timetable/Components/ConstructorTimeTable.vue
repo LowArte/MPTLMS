@@ -84,6 +84,7 @@
                           chips
                           multiple
                           return-object
+                          @change="caseTeacher(Lesson1)"
                         ></v-autocomplete>
                       </v-list-item>
                       <v-list-item class="ma-0 pa-0 pl-1" v-if="l2 == 1" fill-width>
@@ -131,6 +132,7 @@
     <v-row v-if="load==true" sm="2" md="0" class="pa-0 mt-5 align-self-center justify-center">
       <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
     </v-row>
+    {{newarrschedule}}
   </v-container>
 </template>
 
@@ -165,17 +167,6 @@ export default {
     arrteachers: [],
 
     newarrschedule: [],
-
-    // arrlessons: [
-    //   "Технология разработки и защиты баз данных",
-    //   "Операционные системы",
-    //   "Технология разработки программного обеспечения"
-    // ],
-    // arrteachers: [
-    //   "Горбунов Антон Дмитриевич",
-    //   "Шимбирёв Андрей Андреевич",
-    //   "Комаров Андрей Алексеевич"
-    // ]
   }),
   props: {
     discip: {
@@ -216,6 +207,10 @@ export default {
     }
   },
   methods: {
+    caseTeacher: function(Lesson1){ //Дубликат пары - желательно не использовать
+      // if (Lesson1[0].length < Lesson1[1].length)
+      //   Lesson1[0].push(Lesson1[0][0]);
+    },
     sendNewSchedule: function() {
       for (var i = 0; i < this.caseplace.length; i++)
         if (this.caseplace[i] != null && this.caseplace[i] != "")
@@ -262,10 +257,11 @@ export default {
             for (var i1 = 0; i1 < 8; i1++) {
               this.newarrschedule[i].push([]);
               for (var i2 = 0; i2 < 2; i2++) {
-                this.newarrschedule[i][i1].push([[], []]);
+                this.newarrschedule[i][i1].push([[null], [null]]);
               }
             }
           }
+          console.log(this.newarrschedule);
 
           this.arrswitch = [];
           for (var i = 0; i < 6; i++) {
@@ -275,68 +271,70 @@ export default {
             }
           }
 
-          for (var i = 0; i < 1; i++)
-          for (var i1 = 0; i1 < 8; i1++)
+          for (var i = 0; i < 1; i++) //Прохождение по дням
+          for (var i1 = 0; i1 < 8; i1++) //Прохождение по парам
           {
-            console.log(i + 1 + " день. " + (i1 + 1) + " пара. ");
-            if (typeof(this.arrschedule[this.arrday[i]][i1 + 1].Lesson) != "object")
+            console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
+            if (typeof(this.arrschedule[this.arrday[i]][i1 + 1].Lesson) != "object") //Не массивный контент
             {
               console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
               console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);    
+              this.newarrschedule[i][i1][0][0] = this.arrschedule[this.arrday[i]][i1 + 1].Lesson;
+              this.newarrschedule[i][i1][0][1] = this.arrschedule[this.arrday[i]][i1 + 1].Teacher;
             }
             else
             {
-              if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson != null)
+              if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson != null) //Не нулевое значение
               {
                 console.log("Это обжект");
-                //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Lesson);
-                //console.log(this.arrschedule[this.arrday[i]][i1 + 1].Teacher);
+                if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson.length > 1)
+                {
+                  this.arrswitch[i][i1] = true; //Активация свитча обозначающий, что работает система числителя знаменателя
+                  if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0] != null) //Если пара по числителю не пустая
+                  {
+                  if(this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1])
+                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0]];
+                  else
+                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1]];
+                  
+                  if(this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1])
+                   this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0]];
+                  else
+                    this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1]];
+                  }
+
+                  if (this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1] != null) //Если пара по знаменателю не пустая
+                  {
+                  if(this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][0] == this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][1])
+                    this.newarrschedule[i][i1][1][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][0]];
+                  else
+                    this.newarrschedule[i][i1][1][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][0], this.arrschedule[this.arrday[i]][i1 + 1].Lesson[1][1]];
+                  
+                  if(this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][0] == this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][1])
+                   this.newarrschedule[i][i1][1][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][0]];
+                  else
+                    this.newarrschedule[i][i1][1][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][0], this.arrschedule[this.arrday[i]][i1 + 1].Teacher[1][1]];
+                  }
+                }
+                else //Есди одна сдвоенная пара
+                {
+                  if(this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1])
+                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0]];
+                  else
+                    this.newarrschedule[i][i1][0][0] = [this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Lesson[0][1]];
+                  
+                  if(this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0] == this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1])
+                   this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0]];
+                  else
+                    this.newarrschedule[i][i1][0][1] = [this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][0], this.arrschedule[this.arrday[i]][i1 + 1].Teacher[0][1]];
+                }
               }
-              else
+              else //Пустая пара
               {
                 console.log("Свободная пара");
               }
             }
           }
-
-          /* for (var i = 0; i < 6; i++) {
-            for (var i1 = 0; i1 < 8; i1++) {
-              for (var i2 = 0; i2 < 2; i2++)
-                for (var i3 = 0; i3 < 2; i3++) {
-                  if (i2 == 0) {
-                    if (this.arrschedule[this.arrday[i]][i1 + 1] != null) {
-                      console.log(this.arrschedule[this.arrday[i]][i1 + 1]);
-                      console.log(
-                        typeof this.arrschedule[this.arrday[i]][i1 + 1]
-                      );
-
-                      if (
-                        this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] ==
-                        null
-                      ) {
-                        this.newarrschedule[i][i1][i2][i3] = "";
-                      } else if (
-                        this.arrschedule[this.arrday[i]][i1 + 1]["Lesson"] !=
-                        "object"
-                      ) {
-                        this.newarrschedule[i][i1][i2][i3] = this.arrschedule[
-                          this.arrday[i]
-                        ][i1 + 1]["Lesson"];
-                      } else
-                        this.newarrschedule[i][i1][i2][i3] =
-                          "Операционные системы";
-                      //this.arrschedule[this.arrday[i]][l1];
-                    } else {
-                      console.log(this.arrschedule[this.arrday[i]][i1]);
-                      this.newarrschedule[i][i1][i2][i3] =
-                        "Технология разработки программного обеспечения";
-                    }
-                  } //Преподаватели
-                  else {
-                  }
-                }
-            }
-          }*/
           this.load = false;
         })
         .catch(ex => {
@@ -362,6 +360,13 @@ export default {
     
     this.arrdiscip = JSON.parse(this.discip);
     this.arrteachers = JSON.parse(this.teachers);
+
+    //Тестовые данные отображения УДАЛИТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+    this.arrdiscip.push(this.arrdiscip[0]);
+    this.arrdiscip[this.arrdiscip.length-1].discipline_name = "Информационные системы и технологии";
+
+    this.arrteachers.push(this.arrteachers[0]);
+    this.arrteachers[this.arrteachers.length-1].name = "Токарчук Александр Сергеевич";
   }
 };
 </script>
