@@ -9,9 +9,9 @@
             </v-row>
             <v-divider></v-divider>
             <v-row class="pa-2 ma-0">
-              <v-autocomplete v-model="oMode" label="Режим работы" solo :items="operatingMode"></v-autocomplete>
-              <v-btn class="ma-2" color="accent" dark @click="sendQuery">Применить</v-btn>
+              <v-checkbox v-model="options.prof" :label="`Режим профилактики`"></v-checkbox>
             </v-row>
+            <v-btn class="ma-2" color="accent" dark @click="sendQuery">Применить</v-btn>
           </v-container>
         </v-card>
       </v-hover>
@@ -20,20 +20,45 @@
 </template>
 
 <script>
-
+import panelApi from "../api/panel";
 
 export default {
   data: () => ({
-    operatingMode: ["Полный функционал", "Профилактика"],
-    oMode: "Профилактика"
+    options: {
+      prof: false
+    }
   }),
-  components: {
-
+  components: {},
+  props: {
+    options_prop: {
+      data: String,
+      default: null
+    }
+  },
+  mounted() {
+    this.options = JSON.parse(this.options_prop);
+    console.log(this.options);
   },
   methods: {
     sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос изменения режима работы сайта!");
+      Object.keys(this.options).forEach(element => {
+        switch (element) {
+          case "prof": {
+            panelApi
+              .setOptionValue({
+                prop: "isProfilacticServer",
+                value: this.options[element]
+              })
+              .then(res => {
+                console.log(res);
+              })
+              .catch(ex => {
+                console.log(ex);
+              });
+            break;
+          }
+        }
+      });
     }
   }
 };

@@ -6,7 +6,7 @@
       <Timetable v-bind:place="place" v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
     </v-tab-item>
     <v-tab-item>
-      <Constructor v-bind:place="place" v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
+      <Constructor v-bind:discip="discip" v-bind:teachers="teachers" v-bind:place="place" v-bind:schedule="schedule"  v-bind:callSchedule="call" v-bind:groups="groups" v-bind:departaments="departaments"/>
     </v-tab-item>
   </v-tabs>
 </template>
@@ -17,7 +17,6 @@ import Timetable from "./Components/Timetable";
 export default {
   data: () => ({
     tab: null,
-    tabs: 2,
   }),
   props:{
     discip:{
@@ -41,6 +40,10 @@ export default {
       default:null
     },
     departaments:{
+      type:String,
+      default:null
+    },
+    teachers:{
       type:String,
       default:null
     }

@@ -13,11 +13,17 @@
 
 <script>
 import Constructor from "./Components/ConstructorReplacements";
-import Replacements from "./Components/TeacherReplacements";
+import Replacements from "./Components/Replacements";
 export default {
   data: () => ({
     tab: null
   }),
+  props:{
+    replacements:{
+      data:String,
+      default:null
+    }
+  },
   components: {
     Replacements,
     Constructor

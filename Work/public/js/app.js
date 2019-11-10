@@ -2038,6 +2038,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_panel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/panel */ "./resources/js/api/panel.js");
 //
 //
 //
@@ -2059,18 +2060,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      operatingMode: ["Полный функционал", "Профилактика"],
-      oMode: "Профилактика"
+      options: {
+        prof: false
+      }
     };
   },
   components: {},
+  props: {
+    options_prop: {
+      data: String,
+      "default": null
+    }
+  },
+  mounted: function mounted() {
+    this.options = JSON.parse(this.options_prop);
+    console.log(this.options);
+  },
   methods: {
     sendQuery: function sendQuery() {
-      //Вписывай отправку
-      alert("Отправлен запрос изменения режима работы сайта!");
+      var _this = this;
+
+      Object.keys(this.options).forEach(function (element) {
+        switch (element) {
+          case "prof":
+            {
+              _api_panel__WEBPACK_IMPORTED_MODULE_0__["default"].setOptionValue({
+                prop: "isProfilacticServer",
+                value: _this.options[element]
+              }).then(function (res) {
+                console.log(res);
+              })["catch"](function (ex) {
+                console.log(ex);
+              });
+              break;
+            }
+        }
+      });
     }
   }
 });
@@ -4981,6 +5010,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5029,286 +5078,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
-/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      itemsPerPageOptions: [6],
-      itemsPerPage: 6,
-      load: true,
-      arrgroups: null,
-      casegroup: null,
-      arrdepartaments: [],
-      departament: null,
-      callschedule: null,
-      arrschedule: null,
-      places: [],
-      caseplace: [null, null, null, null, null, null],
-      arrday: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
-      arrswitch: [],
-      newarrschedule: [],
-      arrlessons: ["Технология разработки и защиты баз данных", "Операционные системы", "Технология разработки программного обеспечения"],
-      arrteachers: ["Горбунов Антон Дмитриевич", "Шимбирёв Андрей Андреевич", "Комаров Андрей Алексеевич"]
-    };
-  },
-  props: {
-    discip: {
-      type: String,
-      "default": null
-    },
-    place: {
-      type: String,
-      "default": null
-    },
-    schedule: {
-      type: String,
-      "default": null
-    },
-    callSchedule: {
-      type: String,
-      "default": null
-    },
-    groups: {
-      type: String,
-      "default": null
-    },
-    departaments: {
-      type: String,
-      "default": null
-    }
-  },
-  watch: {
-    casegroup: function casegroup(val, oldval) {
-      if (this.groups == "") this.changeSchedule(val.id);else {
-        if (oldval != null) this.changeSchedule(val.id);
-      }
-    }
-  },
-  methods: {
-    sendNewSchedule: function sendNewSchedule() {
-      for (var i = 0; i < this.caseplace.length; i++) {
-        if (this.caseplace[i] != null && this.caseplace[i] != "") this.places[this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id];
-      }
-
-      alert("Расписание изменено!");
-    },
-    changeGroups: function changeGroups(departament) {
-      var _this = this;
-
-      //alert("Отеделение " + departament);
-      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
-        _this.arrgroups = reg.data.group;
-        _this.casegroup = _this.arrgroups[0];
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-    },
-    changeSchedule: function changeSchedule(group) {
-      var _this2 = this;
-
-      //alert("Группа " + group);
-      this.load = true;
-      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
-        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
-
-        for (var i = 0; i < _this2.caseplace.length; i++) {
-          if (_this2.arrschedule[_this2.arrday[i]].Place != null && _this2.arrschedule[_this2.arrday[i]].Place != "") _this2.caseplace[i] = _this2.places[_this2.arrschedule[_this2.arrday[i]].Place - 1];
-        }
-
-        _this2.newarrschedule = [];
-
-        for (var i = 0; i < 6; i++) {
-          _this2.newarrschedule.push([]);
-
-          for (var i1 = 0; i1 < 8; i1++) {
-            _this2.newarrschedule[i].push([]);
-
-            for (var i2 = 0; i2 < 2; i2++) {
-              _this2.newarrschedule[i][i1].push([[], []]);
-            }
-          }
-        }
-
-        _this2.arrswitch = [];
-
-        for (var i = 0; i < 6; i++) {
-          _this2.arrswitch.push([]);
-
-          for (var i1 = 0; i1 < _this2.newarrschedule[i].length; i1++) {
-            _this2.arrswitch[i].push(null);
-          }
-        }
-
-        for (var i = 0; i < 6; i++) {
-          for (var i1 = 0; i1 < 8; i1++) {
-            for (var i2 = 0; i2 < 2; i2++) {
-              for (var i3 = 0; i3 < 2; i3++) {
-                _this2.newarrschedule[i][i1][i2][i3] = "Операционные системы";
-              }
-            } //this.arrschedule[this.arrday[i]][l1];
-
-          }
-        }
-
-        _this2.load = false;
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-    }
-  },
-  mounted: function mounted() {
-    //Место
-    this.places = JSON.parse(this.place); //Расписание звонков
-
-    this.callschedule = JSON.parse(this.callSchedule);
-
-    for (var i = 0; i < this.callschedule.length; i++) {
-      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
-    }
-
-    var arrd = JSON.parse(this.departaments);
-    this.arrdepartaments = JSON.parse(arrd.departaments);
-    this.departament = this.arrdepartaments[0];
-    this.changeGroups(this.departament.id);
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\resources\\js\\components\\timetable\\Components\\ConstructorTimeTable.vue: Unexpected token (228:0)\n\n\u001b[0m \u001b[90m 226 | \u001b[39m  props\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 227 | \u001b[39m    discip\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 228 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 229 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 230 | \u001b[39m      type\u001b[33m:\u001b[39m \u001b[33mString\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 231 | \u001b[39m      \u001b[36mdefault\u001b[39m\u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m\u001b[0m\n    at Parser.raise (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:6400:17)\n    at Parser.unexpected (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:7728:16)\n    at Parser.parseIdentifierName (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9624:18)\n    at Parser.parseIdentifier (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9598:23)\n    at Parser.parseMaybePrivateName (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8962:19)\n    at Parser.parsePropertyName (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9418:98)\n    at Parser.parseObjectMember (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9319:10)\n    at Parser.parseObj (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9253:25)\n    at Parser.parseExprAtom (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8883:28)\n    at Parser.parseExprSubscripts (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8507:23)\n    at Parser.parseMaybeUnary (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8487:21)\n    at Parser.parseExprOps (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8353:23)\n    at Parser.parseMaybeConditional (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8326:23)\n    at Parser.parseMaybeAssign (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8273:21)\n    at Parser.parseObjectProperty (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9380:101)\n    at Parser.parseObjPropValue (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9405:101)\n    at Parser.parseObjectMember (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9329:10)\n    at Parser.parseObj (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9253:25)\n    at Parser.parseExprAtom (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8883:28)\n    at Parser.parseExprSubscripts (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8507:23)\n    at Parser.parseMaybeUnary (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8487:21)\n    at Parser.parseExprOps (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8353:23)\n    at Parser.parseMaybeConditional (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8326:23)\n    at Parser.parseMaybeAssign (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8273:21)\n    at Parser.parseObjectProperty (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9380:101)\n    at Parser.parseObjPropValue (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9405:101)\n    at Parser.parseObjectMember (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9329:10)\n    at Parser.parseObj (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:9253:25)\n    at Parser.parseExprAtom (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8883:28)\n    at Parser.parseExprSubscripts (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8507:23)\n    at Parser.parseMaybeUnary (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8487:21)\n    at Parser.parseExprOps (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8353:23)\n    at Parser.parseMaybeConditional (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8326:23)\n    at Parser.parseMaybeAssign (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:8273:21)\n    at Parser.parseExportDefaultExpression (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:11113:24)\n    at Parser.parseExport (C:\\Users\\Artem\\Documents\\GitHub\\MPTLMS\\Work\\node_modules\\@babel\\parser\\lib\\index.js:11008:31)");
 
 /***/ }),
 
@@ -6048,7 +5820,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_ConstructorReplacements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/ConstructorReplacements */ "./resources/js/components/timetable/Components/ConstructorReplacements.vue");
-/* harmony import */ var _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/TeacherReplacements */ "./resources/js/components/timetable/Components/TeacherReplacements.vue");
+/* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timetable/Components/Replacements.vue");
 //
 //
 //
@@ -6070,8 +5842,14 @@ __webpack_require__.r(__webpack_exports__);
       tab: null
     };
   },
+  props: {
+    replacements: {
+      data: String,
+      "default": null
+    }
+  },
   components: {
-    Replacements: _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Replacements: _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__["default"],
     Constructor: _Components_ConstructorReplacements__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
@@ -6107,8 +5885,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2
+      tab: null
     };
   },
   props: {
@@ -6133,6 +5910,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     },
     departaments: {
+      type: String,
+      "default": null
+    },
+    teachers: {
       type: String,
       "default": null
     }
@@ -6217,8 +5998,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2
+      tab: null
     };
   },
   props: {
@@ -7518,32 +7298,28 @@ var render = function() {
                               "v-row",
                               { staticClass: "pa-2 ma-0" },
                               [
-                                _c("v-autocomplete", {
-                                  attrs: {
-                                    label: "Режим работы",
-                                    solo: "",
-                                    items: _vm.operatingMode
-                                  },
+                                _c("v-checkbox", {
+                                  attrs: { label: "Режим профилактики" },
                                   model: {
-                                    value: _vm.oMode,
+                                    value: _vm.options.prof,
                                     callback: function($$v) {
-                                      _vm.oMode = $$v
+                                      _vm.$set(_vm.options, "prof", $$v)
                                     },
-                                    expression: "oMode"
+                                    expression: "options.prof"
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    staticClass: "ma-2",
-                                    attrs: { color: "accent", dark: "" },
-                                    on: { click: _vm.sendQuery }
-                                  },
-                                  [_vm._v("Применить")]
-                                )
+                                })
                               ],
                               1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { color: "accent", dark: "" },
+                                on: { click: _vm.sendQuery }
+                              },
+                              [_vm._v("Применить")]
                             )
                           ],
                           1
@@ -13055,17 +12831,6 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-autocomplete", {
-                attrs: { label: "День недели", solo: "", items: _vm.arrday },
-                model: {
-                  value: _vm.caseday,
-                  callback: function($$v) {
-                    _vm.caseday = $$v
-                  },
-                  expression: "caseday"
-                }
-              }),
-              _vm._v(" "),
               _c(
                 "v-row",
                 {
@@ -13241,6 +13006,9 @@ var render = function() {
                                                   width: "100%",
                                                   label: "Дисциплина",
                                                   solo: "",
+                                                  "small-chips": "",
+                                                  chips: "",
+                                                  multiple: "",
                                                   items: _vm.lesson,
                                                   grow: ""
                                                 }
@@ -13257,6 +13025,9 @@ var render = function() {
                                                   width: "100%",
                                                   label: "Преподаватель",
                                                   solo: "",
+                                                  "small-chips": "",
+                                                  chips: "",
+                                                  multiple: "",
                                                   items: _vm.teacher,
                                                   grow: ""
                                                 }
@@ -13269,13 +13040,10 @@ var render = function() {
                                             "v-row",
                                             [
                                               _c("v-switch", {
-                                                staticClass: "ma-0 pa-0",
                                                 attrs: {
                                                   color: "primary",
-                                                  value: "primary",
-                                                  flat: "",
-                                                  grow: "",
-                                                  label: "Дополнительная пара"
+                                                  inset: "",
+                                                  label: "Знаменатель"
                                                 },
                                                 model: {
                                                   value: _vm.tab[n],
@@ -13297,6 +13065,9 @@ var render = function() {
                                                     attrs: {
                                                       label: "Дисциплина",
                                                       solo: "",
+                                                      "small-chips": "",
+                                                      chips: "",
+                                                      multiple: "",
                                                       items: _vm.lesson,
                                                       grow: ""
                                                     }
@@ -13314,6 +13085,9 @@ var render = function() {
                                                     attrs: {
                                                       label: "Преподаватель",
                                                       solo: "",
+                                                      "small-chips": "",
+                                                      chips: "",
+                                                      multiple: "",
                                                       items: _vm.teacher,
                                                       grow: ""
                                                     }
@@ -13781,9 +13555,263 @@ var render = function() {
                                                   ],
                                                   1
                                                 )
-                                              : _vm._e()
+                                              : _vm._e(),
+                                            _vm._v(
+                                              "\n<<<<<<< HEAD\n=======\n                    "
+                                            ),
+                                            _vm._l(Lesson, function(
+                                              Lesson1,
+                                              l2
+                                            ) {
+                                              return _c(
+                                                "v-list",
+                                                {
+                                                  key: l2,
+                                                  staticClass: "ma-0 pa-0"
+                                                },
+                                                [
+                                                  l2 == 0
+                                                    ? _c(
+                                                        "v-list-item",
+                                                        {
+                                                          staticClass:
+                                                            "ma-0 pa-0",
+                                                          attrs: {
+                                                            "fill-width": ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("v-autocomplete", {
+                                                            attrs: {
+                                                              label:
+                                                                "Дисциплины",
+                                                              items:
+                                                                _vm.arrdiscip,
+                                                              "item-text":
+                                                                "discipline_name",
+                                                              "small-chips": "",
+                                                              chips: "",
+                                                              multiple: "",
+                                                              "return-object":
+                                                                ""
+                                                            },
+                                                            model: {
+                                                              value: Lesson1[0],
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  Lesson1,
+                                                                  0,
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "Lesson1[0]"
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  l2 == 0
+                                                    ? _c(
+                                                        "v-list-item",
+                                                        {
+                                                          staticClass:
+                                                            "ma-0 pa-0",
+                                                          attrs: {
+                                                            "fill-width": ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("v-autocomplete", {
+                                                            attrs: {
+                                                              label:
+                                                                "Преподаватели",
+                                                              items:
+                                                                _vm.arrteachers,
+                                                              "item-text":
+                                                                "name",
+                                                              "small-chips": "",
+                                                              chips: "",
+                                                              multiple: "",
+                                                              "return-object":
+                                                                ""
+                                                            },
+                                                            on: {
+                                                              change: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.caseTeacher(
+                                                                  Lesson1
+                                                                )
+                                                              }
+                                                            },
+                                                            model: {
+                                                              value: Lesson1[1],
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  Lesson1,
+                                                                  1,
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "Lesson1[1]"
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  l2 == 1
+                                                    ? _c(
+                                                        "v-list-item",
+                                                        {
+                                                          staticClass:
+                                                            "ma-0 pa-0 pl-1",
+                                                          attrs: {
+                                                            "fill-width": ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("v-switch", {
+                                                            attrs: {
+                                                              color: "primary",
+                                                              inset: "",
+                                                              label:
+                                                                "Знаменатель"
+                                                            },
+                                                            model: {
+                                                              value:
+                                                                _vm.arrswitch[
+                                                                  d1
+                                                                ][l1],
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  _vm.arrswitch[
+                                                                    d1
+                                                                  ],
+                                                                  l1,
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "arrswitch[d1][l1]"
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  l2 == 1 &&
+                                                  _vm.arrswitch[d1][l1]
+                                                    ? _c(
+                                                        "v-list-item",
+                                                        {
+                                                          staticClass:
+                                                            "ma-0 pa-0",
+                                                          attrs: {
+                                                            "fill-width": ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("v-autocomplete", {
+                                                            attrs: {
+                                                              label:
+                                                                "Дисциплины",
+                                                              items:
+                                                                _vm.arrdiscip,
+                                                              "item-text":
+                                                                "discipline_name",
+                                                              "small-chips": "",
+                                                              chips: "",
+                                                              multiple: "",
+                                                              "return-object":
+                                                                ""
+                                                            },
+                                                            model: {
+                                                              value: Lesson1[0],
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  Lesson1,
+                                                                  0,
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "Lesson1[0]"
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  l2 == 1 &&
+                                                  _vm.arrswitch[d1][l1]
+                                                    ? _c(
+                                                        "v-list-item",
+                                                        {
+                                                          staticClass:
+                                                            "ma-0 pa-0",
+                                                          attrs: {
+                                                            "fill-width": ""
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("v-autocomplete", {
+                                                            attrs: {
+                                                              label:
+                                                                "Преподаватели",
+                                                              items:
+                                                                _vm.arrteachers,
+                                                              "item-text":
+                                                                "name",
+                                                              "small-chips": "",
+                                                              chips: "",
+                                                              multiple: "",
+                                                              "return-object":
+                                                                ""
+                                                            },
+                                                            model: {
+                                                              value: Lesson1[1],
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  Lesson1,
+                                                                  1,
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "Lesson1[1]"
+                                                            }
+                                                          })
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e()
+                                                ],
+                                                1
+                                              )
+                                            }),
+                                            _vm._v(
+                                              "\n>>>>>>> 20e3b6795ced508d7cce5fea983d6ff289a4c8fd\n                  "
+                                            )
                                           ],
-                                          1
+                                          2
                                         )
                                       })
                                     ],
@@ -13832,7 +13860,8 @@ var render = function() {
             ],
             1
           )
-        : _vm._e()
+        : _vm._e(),
+      _vm._v("\n    " + _vm._s(_vm.newarrschedule) + "\n  ")
     ],
     1
   )
@@ -16403,6 +16432,8 @@ var render = function() {
         [
           _c("Constructor", {
             attrs: {
+              discip: _vm.discip,
+              teachers: _vm.teachers,
               place: _vm.place,
               schedule: _vm.schedule,
               callSchedule: _vm.call,
@@ -67220,6 +67251,29 @@ __webpack_require__.r(__webpack_exports__);
   getGroup: function getGroup(credentials) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_group_by_departament_id', {
       "dep_id": credentials
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/panel.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/panel.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  setOptionValue: function setOptionValue(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/set_options', {
+      "prop_name": credentials.prop,
+      'value': credentials.value
     });
   }
 });
