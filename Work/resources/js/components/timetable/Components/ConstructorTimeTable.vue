@@ -1,4 +1,4 @@
-<template>
+<template v-cloak>
   <v-container fluid>
     <v-row align="center">
       <v-container>
@@ -25,8 +25,8 @@
       </v-container>
     </v-row>
     <v-divider class="ma-0"></v-divider>
-    <v-data :items="arrday" :items-per-page.sync="itemsPerPage">
-      <v-row>
+    <v-data v-cloak :items="arrday" :items-per-page.sync="itemsPerPage">
+      <v-row >
         <v-col v-for="(day, d1) in arrday" :key="d1" cols="12" sm="12" md="2" lg="4">
           <v-card dark class="pa-0 pb-0">
             <v-card light class="ma-1 pa-0">
@@ -134,7 +134,6 @@ export default {
   data: () => ({
     itemsPerPageOptions: [6],
     itemsPerPage: 6,
-
     arrgroups: null,
     casegroup: null,
     arrdepartaments: [],
@@ -220,7 +219,8 @@ export default {
         });
     },
     changeSchedule: function(group) {
-      //alert("Группа " + group);
+      //alert("Группа " + group);   
+
       apischedule
         .getSchedule(group)
         .then(reg => {

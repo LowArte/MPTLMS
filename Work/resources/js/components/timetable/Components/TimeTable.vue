@@ -22,7 +22,7 @@
       </v-container>
     </v-row>
     <v-divider class="ma-0"></v-divider>
-    <v-data v-if="arrschedule" :items-per-page.sync="itemsPerPage">
+    <v-data v-cloak v-if="arrschedule" :items-per-page.sync="itemsPerPage">
       <v-row>
         <v-col v-for="item in arrday" :key="item" cols="12" sm="6" md="2" lg="4">
           <v-card dark class="pa-0 pb-0">

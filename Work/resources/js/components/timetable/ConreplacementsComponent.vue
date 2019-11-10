@@ -3,10 +3,10 @@
     <v-tab :key="item">Замены</v-tab>
     <v-tab :key="item">Конструктор</v-tab>
     <v-tab-item :key="item">
-      <Replacements />
+      <Replacements/>
     </v-tab-item>
     <v-tab-item :key="item">
-      <Constructor />
+      <Constructor/>
     </v-tab-item>
   </v-tabs>
 </template>
