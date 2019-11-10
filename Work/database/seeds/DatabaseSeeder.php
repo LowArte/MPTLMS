@@ -20,6 +20,7 @@ class DatabaseSeeder  extends Seeder
             PlacesSeeder::class,
             CallSchedulesSeeder::class,
             DesciplineSeeder::class,
+            SiteOptionsSeeder::class
         ]);
         factory(\App\User::class ,100)->create();
         $this->call([
