@@ -45,6 +45,7 @@
 
                 <v-list class="ma-0 pa-0">
                   <v-list class="ma-0 pa-0" v-for="(Lesson, l1) in newarrschedule[d1]" :key="l1">
+                    <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
                     <v-list-item
                       class="ma-0 pa-0"
                       v-if="callschedule[arrschedule[day].Place].call_schedule[l1 + 1] != null && callschedule[arrschedule[day].Place].call_schedule[l1 + 1]!=''"
@@ -60,7 +61,6 @@
                         class="subtitle-1 ma-0 pa-0"
                       >{{l1 + 1}} пара - расписание звонка отсутствует!</v-card-title>
                     </v-list-item>
-                    <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
                     <v-list v-for="(Lesson1, l2) in Lesson" :key="l2" class="ma-0 pa-0">
                       <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
                         <v-autocomplete
@@ -92,7 +92,7 @@
                           label="Знаменатель"
                         ></v-switch>
                       </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1" fill-width>
+                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
                         <v-autocomplete
                           v-model="Lesson1[0]"
                           label="Дисциплины"
@@ -103,7 +103,7 @@
                           return-object
                         ></v-autocomplete>
                       </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1" fill-width>
+                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
                         <v-autocomplete
                           v-model="Lesson1[1]"
                           label="Преподаватели"

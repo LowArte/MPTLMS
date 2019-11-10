@@ -13260,6 +13260,11 @@ var render = function() {
                                     "v-list",
                                     { key: l1, staticClass: "ma-0 pa-0" },
                                     [
+                                      _c("v-divider", {
+                                        staticClass: "my-1 ma-0 pa-0",
+                                        attrs: { color: "Black" }
+                                      }),
+                                      _vm._v(" "),
                                       _vm.callschedule[
                                         _vm.arrschedule[day].Place
                                       ].call_schedule[l1 + 1] != null &&
@@ -13318,11 +13323,6 @@ var render = function() {
                                             ],
                                             1
                                           ),
-                                      _vm._v(" "),
-                                      _c("v-divider", {
-                                        staticClass: "my-1 ma-0 pa-0",
-                                        attrs: { color: "Black" }
-                                      }),
                                       _vm._v(" "),
                                       _vm._l(Lesson, function(Lesson1, l2) {
                                         return _c(
@@ -13437,7 +13437,7 @@ var render = function() {
                                                 )
                                               : _vm._e(),
                                             _vm._v(" "),
-                                            l2 == 1
+                                            l2 == 1 && _vm.arrswitch[d1][l1]
                                               ? _c(
                                                   "v-list-item",
                                                   {
@@ -13473,7 +13473,7 @@ var render = function() {
                                                 )
                                               : _vm._e(),
                                             _vm._v(" "),
-                                            l2 == 1
+                                            l2 == 1 && _vm.arrswitch[d1][l1]
                                               ? _c(
                                                   "v-list-item",
                                                   {
@@ -67425,11 +67425,11 @@ var map = {
 	],
 	"./certificate/ListCertificateComponent": [
 		"./resources/js/components/certificate/ListCertificateComponent.vue",
-		13
+		8
 	],
 	"./certificate/ListCertificateComponent.vue": [
 		"./resources/js/components/certificate/ListCertificateComponent.vue",
-		13
+		8
 	],
 	"./constructorreplacements/Components/Certificate": [
 		"./resources/js/components/constructorreplacements/Components/Certificate.vue",
@@ -67451,13 +67451,13 @@ var map = {
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		8
+		9
 	],
 	"./constructorreplacements/ConreplacementsComponent.vue": [
 		"./resources/js/components/constructorreplacements/ConreplacementsComponent.vue",
 		0,
 		1,
-		8
+		9
 	],
 	"./constructortimetable/Components/Constructor": [
 		"./resources/js/components/constructortimetable/Components/Constructor.vue",
@@ -67479,13 +67479,13 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		9
+		10
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		2,
 		3,
-		9
+		10
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -67501,11 +67501,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		10
+		11
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		10
+		11
 	],
 	"./mainpage/MainPageComponent": [
 		"./resources/js/components/mainpage/MainPageComponent.vue"
@@ -67545,11 +67545,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		11
+		12
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		11
+		12
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
