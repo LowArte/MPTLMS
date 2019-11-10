@@ -28,98 +28,96 @@
     <v-data v-if="load==false" :items="arrday" :items-per-page.sync="itemsPerPage">
       <v-row>
         <v-col v-for="(day, d1) in arrday" :key="d1" cols="12" sm="12" md="2" lg="4">
-          <v-card dark class="pa-0 pb-0">
-            <v-card light class="ma-1 pa-0">
-              <v-divider class="my-2" color="Black"></v-divider>
-              <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">{{day}}</v-card-title>
-              <v-list dense class="ma-0 pa-1">
-                <v-list-item class="ma-0 pa-0">
-                  <v-autocomplete
-                    v-model="caseplace[d1]"
-                    label="Место проведения"
-                    :items="places"
-                    item-text="place_name"
-                    return-object
-                  ></v-autocomplete>
-                </v-list-item>
+          <v-card class="ma-1 pa-0">
+            <v-divider class="my-2" color="Black"></v-divider>
+            <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">{{day}}</v-card-title>
+            <v-list dense class="ma-0 pa-1">
+              <v-list-item class="ma-0 pa-0">
+                <v-autocomplete
+                  v-model="caseplace[d1]"
+                  label="Место проведения"
+                  :items="places"
+                  item-text="place_name"
+                  return-object
+                ></v-autocomplete>
+              </v-list-item>
 
-                <v-list class="ma-0 pa-0">
-                  <v-list class="ma-0 pa-0" v-for="(Lesson, l1) in newarrschedule[d1]" :key="l1">
-                    <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
-                    <v-list-item
-                      class="ma-0 pa-0"
-                      v-if="callschedule[arrschedule[day].Place].call_schedule[l1 + 1] != null && callschedule[arrschedule[day].Place].call_schedule[l1 + 1]!=''"
-                    >
-                      <v-card-title
-                        style="color: #FF3D00;"
-                        class="subtitle-1 ma-0 pa-0"
-                      >{{l1 + 1}} пара - {{callschedule[arrschedule[day].Place-1].call_schedule[l1 + 1]}}</v-card-title>
+              <v-list class="ma-0 pa-0">
+                <v-list class="ma-0 pa-0" v-for="(Lesson, l1) in newarrschedule[d1]" :key="l1">
+                  <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
+                  <v-list-item
+                    class="ma-0 pa-0"
+                    v-if="callschedule[arrschedule[day].Place].call_schedule[l1 + 1] != null && callschedule[arrschedule[day].Place].call_schedule[l1 + 1]!=''"
+                  >
+                    <v-card-title
+                      style="color: #FF3D00;"
+                      class="subtitle-1 ma-0 pa-0"
+                    >{{l1 + 1}} пара - {{callschedule[arrschedule[day].Place-1].call_schedule[l1 + 1]}}</v-card-title>
+                  </v-list-item>
+                  <v-list-item class="ma-0 pa-0" v-else>
+                    <v-card-title
+                      style="color: #FF3D00;"
+                      class="subtitle-1 ma-0 pa-0"
+                    >{{l1 + 1}} пара - расписание звонка отсутствует!</v-card-title>
+                  </v-list-item>
+                  <v-list v-for="(Lesson1, l2) in Lesson" :key="l2" class="ma-0 pa-0">
+                    <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
+                      <v-autocomplete
+                        v-model="Lesson1[0]"
+                        label="Дисциплины"
+                        :items="arrlessons"
+                        small-chips
+                        chips
+                        multiple
+                        return-object
+                      ></v-autocomplete>
                     </v-list-item>
-                    <v-list-item class="ma-0 pa-0" v-else>
-                      <v-card-title
-                        style="color: #FF3D00;"
-                        class="subtitle-1 ma-0 pa-0"
-                      >{{l1 + 1}} пара - расписание звонка отсутствует!</v-card-title>
+                    <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
+                      <v-autocomplete
+                        v-model="Lesson1[1]"
+                        label="Преподаватели"
+                        :items="arrteachers"
+                        small-chips
+                        chips
+                        multiple
+                        return-object
+                      ></v-autocomplete>
                     </v-list-item>
-                    <v-list v-for="(Lesson1, l2) in Lesson" :key="l2" class="ma-0 pa-0">
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[0]"
-                          label="Дисциплины"
-                          :items="arrlessons"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 0" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[1]"
-                          label="Преподаватели"
-                          :items="arrteachers"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0 pl-1" v-if="l2 == 1" fill-width>
-                        <v-switch
-                          v-model="arrswitch[d1][l1]"
-                          color="primary"
-                          inset
-                          label="Знаменатель"
-                        ></v-switch>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[0]"
-                          label="Дисциплины"
-                          :items="arrlessons"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                      <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
-                        <v-autocomplete
-                          v-model="Lesson1[1]"
-                          label="Преподаватели"
-                          :items="arrteachers"
-                          small-chips
-                          chips
-                          multiple
-                          return-object
-                        ></v-autocomplete>
-                      </v-list-item>
-                    </v-list>
+                    <v-list-item class="ma-0 pa-0 pl-1" v-if="l2 == 1" fill-width>
+                      <v-switch
+                        v-model="arrswitch[d1][l1]"
+                        color="primary"
+                        inset
+                        label="Знаменатель"
+                      ></v-switch>
+                    </v-list-item>
+                    <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
+                      <v-autocomplete
+                        v-model="Lesson1[0]"
+                        label="Дисциплины"
+                        :items="arrlessons"
+                        small-chips
+                        chips
+                        multiple
+                        return-object
+                      ></v-autocomplete>
+                    </v-list-item>
+                    <v-list-item class="ma-0 pa-0" v-if="l2 == 1 && arrswitch[d1][l1]" fill-width>
+                      <v-autocomplete
+                        v-model="Lesson1[1]"
+                        label="Преподаватели"
+                        :items="arrteachers"
+                        small-chips
+                        chips
+                        multiple
+                        return-object
+                      ></v-autocomplete>
+                    </v-list-item>
                   </v-list>
                 </v-list>
               </v-list>
-              <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
-            </v-card>
+            </v-list>
+            <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
           </v-card>
         </v-col>
       </v-row>
@@ -171,7 +169,7 @@ export default {
     ]
   }),
   props: {
-    discip:{
+    discip: {
       type: String,
       default: null
     },
@@ -267,8 +265,8 @@ export default {
           for (var i = 0; i < 6; i++) {
             for (var i1 = 0; i1 < 8; i1++) {
               for (var i2 = 0; i2 < 2; i2++)
-              for (var i3 = 0; i3 < 2; i3++)
-              this.newarrschedule[i][i1][i2][i3] = "Операционные системы";//this.arrschedule[this.arrday[i]][l1];
+                for (var i3 = 0; i3 < 2; i3++)
+                  this.newarrschedule[i][i1][i2][i3] = "Операционные системы"; //this.arrschedule[this.arrday[i]][l1];
             }
           }
           this.load = false;

@@ -25,156 +25,112 @@
     <v-data v-if="arrschedule != null && load == false" :items-per-page.sync="itemsPerPage">
       <v-row>
         <v-col v-for="item in arrday" :key="item" cols="12" sm="6" md="2" lg="4">
-          <v-card dark class="pa-0 pb-0">
-            <v-card light class="ma-1 pa-0">
-              <v-divider class="my-2" color="Black"></v-divider>
-              <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">{{item}}</v-card-title>
-              <v-list dense class="ma-0 pa-0">
-                <v-list-item>Место проведения: {{places[arrschedule[item].Place-1].place_name}}</v-list-item>
-                <v-divider class="my-2" color="Black"></v-divider>
-                <div v-for="(n,i) in 8" :key="i" class="ma-0 pa-0">
+          <v-card class="ma-1 pa-0">
+            <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">{{item}}</v-card-title>
+            <v-list dense class="ma-0 pa-4">
+              <small class="font-weight-light">Место проведения: {{places[arrschedule[item].Place-1].place_name}}</small>
+              <v-divider class="my-2"></v-divider>
+              <div v-for="(n,i) in 8" :key="i" class="ma-0 pa-0">
+                <v-list
+                  class="ma-0 ml-3 mr-3 pa-0"
+                  v-if="arrschedule[item][n].Lesson != null && arrschedule[item][n].Lesson != ''"
+                >
                   <v-list
-                    class="ma-0 ml-4 mr-4 pa-0"
-                    v-if="arrschedule[item][n].Lesson != null && arrschedule[item][n].Lesson != ''"
+                    class="ma-0 pa-0"
+                    v-if="typeof(arrschedule[item][n].Lesson) == 'object' && arrschedule[item][n].Lesson != null"
                   >
+                    <v-card-title
+                      style="color: #FF3D00;"
+                      class="subtitle-1 ma-0 pa-0"
+                    >{{n}} пара - {{callschedule[arrschedule[item].Place-1].call_schedule[n]}}</v-card-title>
                     <v-list
+                      v-for="(Lesson, l1) in arrschedule[item][n].Lesson"
+                      :key="l1"
                       class="ma-0 pa-0"
-                      v-if="typeof(arrschedule[item][n].Lesson) == 'object' && arrschedule[item][n].Lesson != null"
                     >
-                      <v-card-title
-                        style="color: #FF3D00;"
-                        class="subtitle-1 ma-0 pa-0"
-                      >{{n}} пара - {{callschedule[arrschedule[item].Place-1].call_schedule[n]}}</v-card-title>
-                      <v-list
-                        v-for="(Lesson, l1) in arrschedule[item][n].Lesson"
-                        :key="l1"
-                        class="ma-0 pa-0"
-                      >
-                        <v-list v-if="typeof(Lesson) == 'object'" class="ma-0 pa-0">
+                      <v-list v-if="typeof(Lesson) == 'object'" class="ma-0 pa-0">
+                        <v-list v-if="Lesson != null" class="ma-0 pa-0">
+                          <v-list-item v-if="l1 == 0" class="ma-0 pa-0">
+                            <div class="ma-0 pa-0">
+                              <v-card-title style="color: #4066FF;" class="subtitle-1 ma-0 pa-0" v-if="arrschedule[item][n].Lesson.length > 1">Числитель:</v-card-title>
+                              <p class="ma-0 pa-0">{{Lesson[0]}}</p>
+                              <small class="font-weight-light" ma-0 pa-0>{{arrschedule[item][n].Teacher[l1][0]}}, {{arrschedule[item][n].Teacher[l1][1]}}</small>
+                            </div>
+                          </v-list-item>
                           <v-list v-if="Lesson != null" class="ma-0 pa-0">
-                            <v-list-item v-if="l1 == 0" class="ma-0 pa-0">
+                            <v-list-item v-if="l1 == 1" class="ma-0 pa-0">
                               <div class="ma-0 pa-0">
-                                <v-card-title
-                                  style="color: #FF3D00;"
-                                  class="subtitle-1 ma-0 pa-0"
-                                  v-if="arrschedule[item][n].Lesson.length > 1"
-                                >Числитель:</v-card-title>
-                                <p class="ma-0 pa-0">{{Lesson[0]}}/{{Lesson[1]}}</p>
-                                <p
-                                  class="ma-0 pa-0"
-                                >{{arrschedule[item][n].Teacher[l1][0]}}/{{arrschedule[item][n].Teacher[l1][1]}}</p>
+                                <v-divider class="my-2"  width="48px"></v-divider>
+                                <v-card-title style="color: #FF3D00;" class="subtitle-1 ma-0 pa-0">Знаменатель:</v-card-title>
+                                <p class="ma-0 pa-0">{{Lesson[0]}}</p>
+                                <small class="font-weight-light" ma-0 pa-0>{{arrschedule[item][n].Teacher[l1][0]}}, {{arrschedule[item][n].Teacher[l1][1]}}</small>
                               </div>
                             </v-list-item>
-                            <v-list v-if="Lesson != null" class="ma-0 pa-0">
-                              <v-list-item v-if="l1 == 1" class="ma-0 pa-0">
-                                <div class="ma-0 pa-0">
-                                  <v-card-title
-                                    style="color: #FF3D00;"
-                                    class="subtitle-1 ma-0 pa-0"
-                                  >Знаменатель:</v-card-title>
-                                  <p class="ma-0 pa-0">{{Lesson[0]}}/{{Lesson[1]}}</p>
-                                  <p
-                                    class="ma-0 pa-0"
-                                  >{{arrschedule[item][n].Teacher[l1][0]}}/{{arrschedule[item][n].Teacher[l1][1]}}</p>
-                                </div>
-                              </v-list-item>
-                            </v-list>
                           </v-list>
                         </v-list>
-                        <v-list v-if="Lesson == null" class="ma-0 pa-0">
-                          <v-list-item v-if="l1 == 0" class="ma-0 pa-0">
-                            <div class="ma-0 pa-0">
-                              <v-card-title
-                                style="color: #FF3D00;"
-                                class="subtitle-1 ma-0 pa-0"
-                              >Числитель:</v-card-title>
-                              <p class="ma-0 pa-0">{{nullDis}}</p>
-                            </div>
-                          </v-list-item>
-
-                          <v-list-item v-if="l1 == 1" class="ma-0 pa-0">
-                            <div class="ma-0 pa-0">
-                              <v-card-title
-                                style="color: #FF3D00;"
-                                class="subtitle-1 ma-0 pa-0"
-                              >Знаменатель:</v-card-title>
-                              <p class="ma-0 pa-0">{{nullDis}}</p>
-                            </div>
-                          </v-list-item>
-                        </v-list>
-
-                        <v-list v-if="typeof(Lesson) != 'object'" class="ma-0 pa-0">
-                          <v-list-item v-if="l1 == 0" class="ma-0 pa-0">
-                            <div class="ma-0 pa-0">
-                              <v-card-title
-                                style="color: #FF3D00;"
-                                class="subtitle-1 ma-0 pa-0"
-                              >Числитель:</v-card-title>
-                              <p class="ma-0 pa-0">{{Lesson}}</p>
-                              <p class="ma-0 pa-0">{{arrschedule[item][n].Teacher[l1]}}</p>
-                            </div>
-                          </v-list-item>
-
-                          <v-list-item v-if="l1 == 1" class="ma-0 pa-0">
-                            <div class="ma-0 pa-0">
-                              <v-card-title
-                                style="color: #FF3D00;"
-                                class="subtitle-1 ma-0 pa-0"
-                              >Знаменатель:</v-card-title>
-                              <p class="ma-0 pa-0">{{Lesson}}</p>
-                              <p class="ma-0 pa-0">{{arrschedule[item][n].Teacher[l1]}}</p>
-                            </div>
-                          </v-list-item>
-                        </v-list>
+                      </v-list>
+                      <v-list v-if="Lesson == null" class="ma-0 pa-0">
+                        <v-list-item v-if="l1 == 0" class="ma-0 pa-0">
+                          <div class="ma-0 pa-0">
+                            <v-card-title style="color: #4066FF;" class="subtitle-1 ma-0 pa-0">Числитель:</v-card-title>
+                            <p class="ma-0 pa-0">{{nullDis}}</p>
+                          </div>
+                        </v-list-item>
+                        <v-list-item v-if="l1 == 1" class="ma-0 pa-0">
+                          <div class="ma-0 pa-0">
+                            <v-divider class="my-2"  width="48px"></v-divider>
+                            <v-card-title style="color: #FF3D00;" class="subtitle-1 ma-0 pa-0">Знаменатель:</v-card-title>
+                            <p class="ma-0 pa-0">{{nullDis}}</p>
+                          </div>
+                        </v-list-item>
+                      </v-list>
+                      <v-list v-if="typeof(Lesson) != 'object'" class="ma-0 pa-0">
+                        <v-list-item v-if="l1 == 0" class="ma-0 pa-0">
+                          <div class="ma-0 pa-0">
+                            <v-card-title style="color: #4066FF;" class="subtitle-1 ma-0 pa-0">Числитель:</v-card-title>
+                            <p class="ma-0 pa-0">{{Lesson}}</p>
+                            <small class="font-weight-light" ma-0 pa-0>{{arrschedule[item][n].Teacher[l1]}}</small>
+                          </div>
+                        </v-list-item>
+                        <v-list-item v-if="l1 == 1" class="ma-0 pa-0">
+                          <div class="ma-0 pa-0">
+                            <v-divider class="my-2"  width="48px"></v-divider>
+                            <v-card-title style="color: #FF3D00;" class="subtitle-1 ma-0 pa-0">Знаменатель:</v-card-title>
+                            <p class="ma-0 pa-0">{{Lesson}}</p>
+                            <small class="font-weight-light" ma-0 pa-0>{{arrschedule[item][n].Teacher[l1]}}</small>
+                          </div>
+                        </v-list-item>
                       </v-list>
                     </v-list>
+                  </v-list>
 
-                    <!-- Обычная пара -->
-                    <v-list class="ma-0 pa-0" v-else>
-                      <v-list-item
-                        class="ma-0 pa-0"
-                        v-if="callschedule[arrschedule[item].Place].call_schedule[n] != null && callschedule[arrschedule[item].Place].call_schedule[n]!=''"
-                      >
-                        <v-card-title
-                          style="color: #FF3D00;"
-                          class="subtitle-1 ma-0 pa-0"
-                        >{{n}} пара - {{callschedule[arrschedule[item].Place-1].call_schedule[n]}}</v-card-title>
-                      </v-list-item>
-                      <v-list-item
-                        v-else
-                        class="ma-0 pa-0"
-                      >{{n}} пара - расписание звонка отсутствует!</v-list-item>
-                      <v-list-item class="ma-0 pa-0">
-                        <div class="ma-0 pa-0">
-                          <p class="ma-0 pa-0">{{arrschedule[item][n].Lesson}}</p>
-                          <p class="ma-0 pa-0">{{arrschedule[item][n].Teacher}}</p>
-                        </div>
-                      </v-list-item>
-                    </v-list>
-                  </v-list>
-                  <!-- Свободная пара -->
-                  <v-list class="ma-0 ml-4 mr-4 pa-0" v-else>
-                    <v-list-item
-                      class="ma-0 pa-0"
-                      v-if="callschedule[arrschedule[item].Place].call_schedule[n] != null && callschedule[arrschedule[item].Place].call_schedule[n]!=''"
-                    >
-                      <v-card-title
-                        style="color: #FF3D00;"
-                        class="subtitle-1 ma-0 pa-0"
-                      >{{n}} пара - {{callschedule[arrschedule[item].Place-1].call_schedule[n]}}</v-card-title>
+                  <!-- Обычная пара -->
+                  <v-list class="ma-0 pa-0" v-else>
+                    <v-list-item class="ma-0 pa-0" v-if="callschedule[arrschedule[item].Place].call_schedule[n] != null && callschedule[arrschedule[item].Place].call_schedule[n]!=''">
+                      <v-card-title style="color: #FF3D00;" class="subtitle-1 ma-0 pa-0">{{n}} пара - {{callschedule[arrschedule[item].Place-1].call_schedule[n]}}</v-card-title>
                     </v-list-item>
-                    <v-list-item class="ma-0 pa-0" v-else>
-                      <v-card-title
-                        style="color: #FF3D00;"
-                        class="subtitle-1 ma-0 pa-0"
-                      >{{n}} пара - расписание звонка отсутствует!</v-card-title>
+                    <v-list-item v-else class="ma-0 pa-0">{{n}} пара - расписание звонка отсутствует!</v-list-item>
+                    <v-list-item class="ma-0 pa-0">
+                      <div class="ma-0 pa-0">
+                        <p class="ma-0 pa-0">{{arrschedule[item][n].Lesson}}</p>
+                        <small class="font-weight-light" ma-0 pa-0>{{arrschedule[item][n].Teacher}}</small>
+                      </div>
                     </v-list-item>
-                    <v-list-item class="ma-0 pa-0">{{nullDis}}</v-list-item>
                   </v-list>
-                  <v-divider class="my-1 ma-0 pa-0" color="Black"></v-divider>
-                </div>
-              </v-list>
-            </v-card>
+                </v-list>
+                <!-- Свободная пара -->
+                <v-list class="ma-0 ml-4 mr-4 pa-0" v-else>
+                  <v-list-item class="ma-0 pa-0" v-if="callschedule[arrschedule[item].Place].call_schedule[n] != null && callschedule[arrschedule[item].Place].call_schedule[n]!=''">
+                    <v-card-title style="color: #FF3D00;" class="subtitle-1 ma-0 pa-0">{{n}} пара - {{callschedule[arrschedule[item].Place-1].call_schedule[n]}}</v-card-title>
+                  </v-list-item>
+                  <v-list-item class="ma-0 pa-0" v-else>
+                    <v-card-title style="color: #FF3D00;" class="subtitle-1 ma-0 pa-0">{{n}} пара - расписание звонка отсутствует!</v-card-title>
+                  </v-list-item>
+                  <v-list-item class="ma-0 pa-0">{{nullDis}}</v-list-item>
+                </v-list>
+                <v-divider class="my-1 ma-0 pa-0"></v-divider>
+              </div>
+            </v-list>
           </v-card>
         </v-col>
       </v-row>
@@ -251,7 +207,7 @@ export default {
         .catch(ex => {
           console.log(ex);
         });
-        this.load = false;
+      this.load = false;
     },
     changeSchedule: function(group) {
       //alert("Группа " + group);

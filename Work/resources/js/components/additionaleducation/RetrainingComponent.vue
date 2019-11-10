@@ -3,74 +3,54 @@
     <v-card
       v-for="(item, index) in items"
       :key="index"
-      :loading="loading"
       class="mx-auto my-12"
       max-width="374"
+      max-height="auto"
     >
       <v-img height="250" v-bind:src="item.href"></v-img>
-      <v-card-title>{{item.title}}</v-card-title>
+      <p class="title text--primary ma-2 text-center">{{item.title}}</p>
       <v-card-text>
         <div class="my-4 subtitle-1 black--text">₽ • {{item.cost}}</div>
         <div class="my-4 subtitle-1 black--text">Продолжительность • {{item.time}}</div>
         <div>{{item.text}}</div>
       </v-card-text>
       <v-card-actions>
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="deep-purple accent-4" text @click="reserve" dark v-on="on">Подать заявку</v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">User Profile</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field label="Legal first name*" required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Legal middle name"
-                      hint="example of helper text only on focus"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Legal last name*"
-                      hint="example of persistent helper text"
-                      persistent-hint
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field label="Email*" required></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field label="Password*" type="password" required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*" required></v-select>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-autocomplete
-                      :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                      label="Interests"
-                      multiple
-                    ></v-autocomplete>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-content class="pa-2 text--center">
+          <v-btn block text small @click="dialog = true">Подать заявку</v-btn>
+        </v-content>
       </v-card-actions>
+      <v-dialog v-model="dialog" width="480">
+        <v-card>
+          <v-card-title class="headline grey lighten-3" primary-title>Заявка</v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" class="py-0">
+                  <v-text-field label="Имя" required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <v-text-field label="Фамилия" required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <v-text-field label="Отчество (при наличии)"></v-text-field>
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <v-text-field label="Email" required></v-text-field>
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <v-text-field label="Телефонный номер" required></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="red" text @click="dialog = false">Отмена</v-btn>
+            <v-btn color="primary" text @click="dialog = false">Отправить</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-card>
   </v-row>
 </template>
