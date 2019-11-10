@@ -29,12 +29,6 @@
             <v-btn text color="primary" @click="$refs.dialog.save(date)">Принять</v-btn>
           </v-date-picker>
         </v-dialog>
-        <v-autocomplete
-          v-model="caseday"
-          label="День недели"
-          solo
-          :items="arrday"
-        ></v-autocomplete>
         <v-row sm="2" md="0" class="pa-0 align-self-center justify-center">
           <v-btn color="primary" dark @click="sendNewReplacements">Применить</v-btn>
         </v-row>
@@ -76,27 +70,53 @@
                 <div class="ma-2 mb-0 pa-2">
                   <v-row>{{n}} пара</v-row>
                   <v-row>
-                    <v-autocomplete width="100%" label="Дисциплина" solo :items="lesson" grow></v-autocomplete>
-                  </v-row>
-                  <v-row>
-                    <v-autocomplete width="100%" label="Преподаватель" solo :items="teacher" grow></v-autocomplete>
-                  </v-row>
-                  <v-row>
-                    <v-switch
-                      color="primary"
-                      value="primary"
-                      v-model="tab[n]"
-                      class="ma-0 pa-0"
-                      flat
+                    <v-autocomplete
+                      width="100%"
+                      label="Дисциплина"
+                      solo
+                      small-chips
+                      chips
+                      multiple
+                      :items="lesson"
                       grow
-                      label="Дополнительная пара"
-                    ></v-switch>
+                    ></v-autocomplete>
+                  </v-row>
+                  <v-row>
+                    <v-autocomplete
+                      width="100%"
+                      label="Преподаватель"
+                      solo
+                      small-chips
+                      chips
+                      multiple
+                      :items="teacher"
+                      grow
+                    ></v-autocomplete>
+                  </v-row>
+                  <v-row>
+                    <v-switch v-model="tab[n]" color="primary" inset label="Знаменатель"></v-switch>
                   </v-row>
                   <v-row v-if="tab[n]">
-                    <v-autocomplete label="Дисциплина" solo :items="lesson" grow></v-autocomplete>
+                    <v-autocomplete
+                      label="Дисциплина"
+                      solo
+                      small-chips
+                      chips
+                      multiple
+                      :items="lesson"
+                      grow
+                    ></v-autocomplete>
                   </v-row>
                   <v-row v-if="tab[n]">
-                    <v-autocomplete label="Преподаватель" solo :items="teacher" grow></v-autocomplete>
+                    <v-autocomplete
+                      label="Преподаватель"
+                      solo
+                      small-chips
+                      chips
+                      multiple
+                      :items="teacher"
+                      grow
+                    ></v-autocomplete>
                   </v-row>
                 </div>
                 <v-divider class="ma-0 pa-0"></v-divider>
@@ -121,14 +141,7 @@ export default {
     ],
     teacher: ["Токарчук А.С.", "Горбунов А.Д."],
     tab: [null, null, null, null, null, null, null],
-     arrday: [
-      "Понедельник",
-      "Вторник",
-      "Среда",
-      "Четверг",
-      "Пятница",
-      "Суббота"
-    ],
+    arrday: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
   }),
   props: {
     place: {
@@ -153,7 +166,7 @@ export default {
     }
   },
   methods: {
-    sendNewReplacements(){
+    sendNewReplacements() {
       alert("Замена принята!");
     }
   }
