@@ -86,14 +86,14 @@ export default {
   methods: {
     sendQuery() {
       feedbackApi
-        .save({ type: this.thematic, text: this.modelmessage })
+        .save({ type: this.thematic, text: this.modelmessage})
         .then(res => {
           this.showMessage("Жалоба принята на рассмотрение");
+          this.modelmessage = "";
         })
         .catch(ex => {
           this.showError("Произошла ошибка");
         });
-      this.modelmessage = "";
     }
   }
 };

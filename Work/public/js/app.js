@@ -4202,10 +4202,11 @@ __webpack_require__.r(__webpack_exports__);
         text: this.modelmessage
       }).then(function (res) {
         _this.showMessage("Жалоба принята на рассмотрение");
+
+        _this.modelmessage = "";
       })["catch"](function (ex) {
         _this.showError("Произошла ошибка");
       });
-      this.modelmessage = "";
     }
   }
 });

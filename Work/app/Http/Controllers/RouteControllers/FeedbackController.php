@@ -32,7 +32,7 @@ class FeedbackController extends Controller
         $feed['type'] = $request['type'];
         $feed['text'] = $request['text'];
         $feed['answered'] = 0;
-        $feed->update();
+        $feed->save();
 
         return response()->json(['success'=>true]);
     }
