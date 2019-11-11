@@ -5335,8 +5335,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         console.log(ex);
       });
     },
-    setNull: function setNull(value, id1, id2, id3, id4) //установка null
-    {
+    setNull: function setNull(value, id1, id2, id3, id4 //установка null
+    ) {
       if (value == "") {
         this.newarrschedule[id1][id2][id3][id4] = null;
         if (id3 == 0) this.newarrschedule[id1][id2][1][id4] = null;else this.newarrschedule[id1][id2][0][id4] = null;
@@ -67768,7 +67768,7 @@ new Vue({
             }, {
               icon: 'today',
               text: 'Расписание звонков',
-              href: '/concallschedule'
+              href: '/callschedule'
             }, {
               icon: 'home',
               text: 'Домашнее задание',

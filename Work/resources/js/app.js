@@ -203,7 +203,7 @@ new Vue({
           {
             icon: 'today',
             text: 'Расписание звонков',
-            href: '/concallschedule'
+            href: '/callschedule'
           },
           {
             icon: 'home',
