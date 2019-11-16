@@ -4872,15 +4872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2,
-      tabitem: [{
-        name: "Новое домашнее задание",
-        com: _Components_NewHomework__WEBPACK_IMPORTED_MODULE_0__["default"]
-      }, {
-        name: "Просмотр домашних заданий",
-        com: _Components_ViewHomework__WEBPACK_IMPORTED_MODULE_1__["default"]
-      }]
+      tab: null
     };
   },
   components: {
@@ -13047,13 +13039,13 @@ var render = function() {
       }
     },
     [
-      _c("v-tab", { key: _vm.item }, [_vm._v("Просмотр домашних заданий")]),
+      _c("v-tab", [_vm._v("Просмотр домашних заданий")]),
       _vm._v(" "),
-      _c("v-tab", { key: _vm.item }, [_vm._v("Новое домашнее задание")]),
+      _c("v-tab", [_vm._v("Новое домашнее задание")]),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("ViewHomework")], 1),
+      _c("v-tab-item", [_c("ViewHomework")], 1),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("NewHomework")], 1)
+      _c("v-tab-item", [_c("NewHomework")], 1)
     ],
     1
   )
