@@ -22,7 +22,10 @@ class ConstructorTimeTableController extends Controller
         $this->middleware(['auth','profilactic']);
 
     }
-
+    public function save(Request $request)
+    {
+        return response()->json(['success'=>true]);
+    }
     /**
      * Show the application dashboard.
      *

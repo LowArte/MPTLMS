@@ -254,15 +254,14 @@ export default {
           }
         }
       }
-
-      ///
-      ///
-      ///
-      //ОООООООООООООООТПРАААААААААААААААААААААВКАААААААААААААААААААААААА
-      ///
-      ///
-      ///
-      alert("Расписание изменено!");
+      apischedule
+        .saveSchedule({ group_id: this.casegroup.id, schedule: this.arrschedule })
+        .then(res => {
+          alert("Расписание изменено для группы " + this.casegroup.discipline_name + "1");
+        })
+        .catch(ex => {
+          alert("Произошла ошибка - " + ex);
+        });
     },
 
     changeGroups: function(departament) {
