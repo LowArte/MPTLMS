@@ -10,6 +10,10 @@ use App\Models\Discipline;
 use App\Models\Teacher;
 use App\User;
 
+use Illuminate\Http\Request;
+use Debugbar;
+
+
 class ConstructorTimeTableController extends Controller
 {
     /**
@@ -22,8 +26,10 @@ class ConstructorTimeTableController extends Controller
         $this->middleware(['auth','profilactic']);
 
     }
+
     public function save(Request $request)
     {
+        Debugbar::info($request['group_id']);
         return response()->json(['success'=>true]);
     }
     /**

@@ -254,6 +254,7 @@ export default {
           }
         }
       }
+    
       apischedule
         .saveSchedule({ group_id: this.casegroup.id, schedule: this.arrschedule })
         .then(res => {

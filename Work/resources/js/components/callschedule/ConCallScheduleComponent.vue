@@ -54,7 +54,6 @@
 <script>
 import { mask } from "vue-the-mask";
 import callScedule from "../../api/callSchedule";
-import callSchedule from "../../api/callSchedule";
 export default {
   directives: {
     mask
@@ -99,7 +98,7 @@ export default {
   methods: {
     sendQuery() {
       if (this.$refs.CallSchedule.validate()) {
-        callSchedule
+        callScedule
           .save({ data: this.timeTable })
           .then(res => {
             alert("Расписание звонков принято!");
