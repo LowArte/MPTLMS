@@ -7,5 +7,4 @@ export default {
   sendEmail (credentials) {
     return axios.post('/send_email', {"text":credentials.text,"to":credentials.mail,'id':credentials.id})
   }
-
 }

@@ -201,6 +201,11 @@ new Vue({
             href: '/timetable'
           },
           {
+            icon: 'today',
+            text: 'Расписание звонков',
+            href: '/callschedule'
+          },
+          {
             icon: 'home',
             text: 'Домашнее задание',
             href: '/teacherhomework'

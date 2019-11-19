@@ -138,7 +138,7 @@
           <p v-for="(it1, t1) in it" :key="t1">Пара {{t1}}. | {{it1}}</p>
         </div>
       </v-col>
-    </v-row> -->
+    </v-row>-->
   </v-container>
 </template>
 
@@ -254,15 +254,14 @@ export default {
           }
         }
       }
-
-      ///
-      ///
-      ///
-      //ОООООООООООООООТПРАААААААААААААААААААААВКАААААААААААААААААААААААА
-      ///
-      ///
-      ///
-      alert("Расписание изменено!");
+      apischedule
+        .saveSchedule({ group_id: this.casegroup.id, schedule: this.arrschedule })
+        .then(res => {
+          alert("Расписание изменено для группы " + this.casegroup.discipline_name + "1");
+        })
+        .catch(ex => {
+          alert("Произошла ошибка - " + ex);
+        });
     },
 
     changeGroups: function(departament) {
@@ -278,8 +277,13 @@ export default {
         });
     },
 
-    setNull: function(value, id1, id2, id3, id4) //установка null
-     {
+    setNull: function(
+      value,
+      id1,
+      id2,
+      id3,
+      id4 //установка null
+    ) {
       if (value == "") {
         this.newarrschedule[id1][id2][id3][id4] = null;
 

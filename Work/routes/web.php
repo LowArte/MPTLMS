@@ -69,6 +69,8 @@ Route::post('/get_group_by_departament_id', 'RouteControllers\TimeTableControlle
 
 Route::post('/get_schedule_by_group_id', 'RouteControllers\TimeTableController@scheduleByGroupId');
 
+Route::post('/save_schedule', 'RouteControllers\ConstructorTimeTableController@save');
+
 Route::post('/set_options', 'RouteControllers\PanelControlController@setConfigOptions');
 
 

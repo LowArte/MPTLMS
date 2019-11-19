@@ -4202,10 +4202,11 @@ __webpack_require__.r(__webpack_exports__);
         text: this.modelmessage
       }).then(function (res) {
         _this.showMessage("Жалоба принята на рассмотрение");
+
+        _this.modelmessage = "";
       })["catch"](function (ex) {
         _this.showError("Произошла ошибка");
       });
-      this.modelmessage = "";
     }
   }
 });
@@ -4871,15 +4872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tab: null,
-      tabs: 2,
-      tabitem: [{
-        name: "Новое домашнее задание",
-        com: _Components_NewHomework__WEBPACK_IMPORTED_MODULE_0__["default"]
-      }, {
-        name: "Просмотр домашних заданий",
-        com: _Components_ViewHomework__WEBPACK_IMPORTED_MODULE_1__["default"]
-      }]
+      tab: null
     };
   },
   components: {
@@ -5292,6 +5285,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   },
   methods: {
     sendNewSchedule: function sendNewSchedule() {
+      var _this = this;
+
       for (var i = 0; i < this.caseplace.length; i++ //Формирование место проведения
       ) {
         if (this.caseplace[i] != null && this.caseplace[i] != "") this.places[this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id];
@@ -5313,30 +5308,30 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             }
           }
         }
-      } ///
-      ///
-      ///
-      //ОООООООООООООООТПРАААААААААААААААААААААВКАААААААААААААААААААААААА
-      ///
-      ///
-      ///
+      }
 
-
-      alert("Расписание изменено!");
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].saveSchedule({
+        group_id: this.casegroup.id,
+        schedule: this.arrschedule
+      }).then(function (res) {
+        alert("Расписание изменено для группы " + _this.casegroup.discipline_name + "1");
+      })["catch"](function (ex) {
+        alert("Произошла ошибка - " + ex);
+      });
     },
     changeGroups: function changeGroups(departament) {
-      var _this = this;
+      var _this2 = this;
 
       //alert("Отеделение " + departament);
       _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
-        _this.arrgroups = reg.data.group;
-        _this.casegroup = _this.arrgroups[0];
+        _this2.arrgroups = reg.data.group;
+        _this2.casegroup = _this2.arrgroups[0];
       })["catch"](function (ex) {
         console.log(ex);
       });
     },
-    setNull: function setNull(value, id1, id2, id3, id4) //установка null
-    {
+    setNull: function setNull(value, id1, id2, id3, id4 //установка null
+    ) {
       if (value == "") {
         this.newarrschedule[id1][id2][id3][id4] = null;
         if (id3 == 0) this.newarrschedule[id1][id2][1][id4] = null;else this.newarrschedule[id1][id2][0][id4] = null;
@@ -5345,102 +5340,102 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       if (value.length > 2) this.newarrschedule[id1][id2][id3][id4].splice(2, 1);
     },
     changeSchedule: function changeSchedule(group) {
-      var _this2 = this;
+      var _this3 = this;
 
       //alert("Группа " + group);
       this.load = true;
       _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
-        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
+        _this3.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
 
-        for (var i = 0; i < _this2.caseplace.length; i++) {
-          if (_this2.arrschedule[_this2.arrday[i]].Place != null && _this2.arrschedule[_this2.arrday[i]].Place != "") _this2.caseplace[i] = _this2.places[_this2.arrschedule[_this2.arrday[i]].Place - 1];
+        for (var i = 0; i < _this3.caseplace.length; i++) {
+          if (_this3.arrschedule[_this3.arrday[i]].Place != null && _this3.arrschedule[_this3.arrday[i]].Place != "") _this3.caseplace[i] = _this3.places[_this3.arrschedule[_this3.arrday[i]].Place - 1];
         }
 
-        _this2.newarrschedule = [];
+        _this3.newarrschedule = [];
 
         for (var i = 0; i < 6; i++) {
-          _this2.newarrschedule.push([]);
+          _this3.newarrschedule.push([]);
 
           for (var i1 = 0; i1 < 8; i1++) {
-            _this2.newarrschedule[i].push([]);
+            _this3.newarrschedule[i].push([]);
 
             for (var i2 = 0; i2 < 2; i2++) {
-              _this2.newarrschedule[i][i1].push([null]);
+              _this3.newarrschedule[i][i1].push([null]);
             }
           }
         }
 
-        console.log(_this2.newarrschedule);
-        _this2.arrswitch = [];
+        console.log(_this3.newarrschedule);
+        _this3.arrswitch = [];
 
         for (var i = 0; i < 6; i++) {
-          _this2.arrswitch.push([]);
+          _this3.arrswitch.push([]);
 
-          for (var i1 = 0; i1 < _this2.newarrschedule[i].length; i1++) {
-            _this2.arrswitch[i].push(null);
+          for (var i1 = 0; i1 < _this3.newarrschedule[i].length; i1++) {
+            _this3.arrswitch[i].push(null);
           }
         }
 
         for (var i = 0; i < 6; i++ //Прохождение по дням
         ) {
-          for (var i1 = 0; i1 < _this2.newarrschedule[i].length - 1; i1++ //Прохождение по парам
+          for (var i1 = 0; i1 < _this3.newarrschedule[i].length - 1; i1++ //Прохождение по парам
           ) {
             console.log(i + 1 + " день. " + (i1 + 1) + " пара. "); //День и пара
 
-            if (_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson) != "object") {
+            if (_typeof(_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson) != "object") {
               //Не массивный контент
-              console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson);
-              console.log(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher);
-              _this2.newarrschedule[i][i1][0][0] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson;
-              _this2.newarrschedule[i][i1][1][0] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher;
+              console.log(_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson);
+              console.log(_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher);
+              _this3.newarrschedule[i][i1][0][0] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson;
+              _this3.newarrschedule[i][i1][1][0] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher;
             } else {
-              if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson != null) {
+              if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson != null) {
                 //Не нулевое значение
                 console.log("Это обжект");
 
-                if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson.length > 1) {
-                  _this2.arrswitch[i][i1] = true; //Активация свитча обозначающий, что работает система числителя знаменателя
+                if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson.length > 1) {
+                  _this3.arrswitch[i][i1] = true; //Активация свитча обозначающий, что работает система числителя знаменателя
                   //Если пара по числителю не пустая
 
-                  if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0] != null) {
-                    if (_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0]) == "object") {
+                  if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0] != null) {
+                    if (_typeof(_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0]) == "object") {
                       //Проверка на обычную пару
-                      if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0].length > 1) {
+                      if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0].length > 1) {
                         ////Получение дисциплинн
-                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]) _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0]];else _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]]; ////Получение преподавателей
+                        if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][0] == _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][1]) _this3.newarrschedule[i][i1][0][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][0]];else _this3.newarrschedule[i][i1][0][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][0], _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][1]]; ////Получение преподавателей
 
-                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]) _this2.newarrschedule[i][i1][1][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0]];else _this2.newarrschedule[i][i1][1][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]];
+                        if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][0] == _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][1]) _this3.newarrschedule[i][i1][1][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][0]];else _this3.newarrschedule[i][i1][1][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][0], _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][1]];
                       } else {
-                        _this2.newarrschedule[i][i1][0][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0];
-                        _this2.newarrschedule[i][i1][1][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0];
+                        _this3.newarrschedule[i][i1][0][1] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][0];
+                        _this3.newarrschedule[i][i1][1][1] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][0];
                       }
                     } else {
-                      _this2.newarrschedule[i][i1][0][0] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0];
-                      _this2.newarrschedule[i][i1][1][0] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0];
+                      _this3.newarrschedule[i][i1][0][0] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0];
+                      _this3.newarrschedule[i][i1][1][0] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0];
                     }
                   }
 
-                  if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1] != null) {
-                    if (_typeof(_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1]) == "object") {
+                  if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1] != null) {
+                    if (_typeof(_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1]) == "object") {
                       //Проверка на обычную пару
-                      if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1].length > 1) {
+                      if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1].length > 1) {
                         ////Получение дисциплинн
-                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][1]) _this2.newarrschedule[i][i1][0][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0]];else _this2.newarrschedule[i][i1][0][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][1]]; ////Получение преподавателей
+                        if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][0] == _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][1]) _this3.newarrschedule[i][i1][0][1] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][0]];else _this3.newarrschedule[i][i1][0][1] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][0], _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][1]]; ////Получение преподавателей
 
-                        if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][1]) _this2.newarrschedule[i][i1][1][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0]];else _this2.newarrschedule[i][i1][1][1] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][1]];
+                        if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][0] == _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][1]) _this3.newarrschedule[i][i1][1][1] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][0]];else _this3.newarrschedule[i][i1][1][1] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][0], _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][1]];
                       } else {
-                        _this2.newarrschedule[i][i1][0][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1][0];
-                        _this2.newarrschedule[i][i1][1][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1][0];
+                        _this3.newarrschedule[i][i1][0][1] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1][0];
+                        _this3.newarrschedule[i][i1][1][1] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1][0];
                       }
                     } else {
-                      _this2.newarrschedule[i][i1][0][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[1];
-                      _this2.newarrschedule[i][i1][1][1] = _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[1];
+                      _this3.newarrschedule[i][i1][0][1] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[1];
+                      _this3.newarrschedule[i][i1][1][1] = _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[1];
                     }
                   }
                 } //Есди одна сдвоенная пара
                 else {
-                    if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]) _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0]];else _this2.newarrschedule[i][i1][0][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Lesson[0][1]];
-                    if (_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0] == _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]) _this2.newarrschedule[i][i1][1][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0]];else _this2.newarrschedule[i][i1][1][0] = [_this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][0], _this2.arrschedule[_this2.arrday[i]][i1 + 1].Teacher[0][1]];
+                    if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][0] == _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][1]) _this3.newarrschedule[i][i1][0][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][0]];else _this3.newarrschedule[i][i1][0][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][0], _this3.arrschedule[_this3.arrday[i]][i1 + 1].Lesson[0][1]];
+                    if (_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][0] == _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][1]) _this3.newarrschedule[i][i1][1][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][0]];else _this3.newarrschedule[i][i1][1][0] = [_this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][0], _this3.arrschedule[_this3.arrday[i]][i1 + 1].Teacher[0][1]];
                   }
               } //Пустая пара
               else {
@@ -5450,7 +5445,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           }
         }
 
-        _this2.load = false;
+        _this3.load = false;
       })["catch"](function (ex) {
         console.log(ex);
       });
@@ -13046,13 +13041,13 @@ var render = function() {
       }
     },
     [
-      _c("v-tab", { key: _vm.item }, [_vm._v("Просмотр домашних заданий")]),
+      _c("v-tab", [_vm._v("Просмотр домашних заданий")]),
       _vm._v(" "),
-      _c("v-tab", { key: _vm.item }, [_vm._v("Новое домашнее задание")]),
+      _c("v-tab", [_vm._v("Новое домашнее задание")]),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("ViewHomework")], 1),
+      _c("v-tab-item", [_c("ViewHomework")], 1),
       _vm._v(" "),
-      _c("v-tab-item", { key: _vm.item }, [_c("NewHomework")], 1)
+      _c("v-tab-item", [_c("NewHomework")], 1)
     ],
     1
   )
@@ -67494,6 +67489,12 @@ __webpack_require__.r(__webpack_exports__);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/get_schedule_by_group_id', {
       "group_id": credentials
     });
+  },
+  saveSchedule: function saveSchedule(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_schedule', {
+      "group_id": credentials.group_id,
+      "schedule": credentials.schedule
+    });
   }
 });
 
@@ -67765,6 +67766,10 @@ new Vue({
               icon: 'today',
               text: 'Расписание',
               href: '/timetable'
+            }, {
+              icon: 'today',
+              text: 'Расписание звонков',
+              href: '/callschedule'
             }, {
               icon: 'home',
               text: 'Домашнее задание',

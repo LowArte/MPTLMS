@@ -1,11 +1,11 @@
 <template>
   <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-    <v-tab :key="item">Просмотр домашних заданий</v-tab>
-    <v-tab :key="item">Новое домашнее задание</v-tab>
-    <v-tab-item :key="item">
+    <v-tab>Просмотр домашних заданий</v-tab>
+    <v-tab>Новое домашнее задание</v-tab>
+    <v-tab-item>
       <ViewHomework />
     </v-tab-item>
-    <v-tab-item :key="item">
+    <v-tab-item>
       <NewHomework />
     </v-tab-item>
   </v-tabs>
@@ -17,17 +17,6 @@ import ViewHomework from "./Components/ViewHomework";
 export default {
   data: () => ({
     tab: null,
-    tabs: 2,
-    tabitem: [
-      {
-        name: "Новое домашнее задание",
-        com: NewHomework
-      },
-      {
-        name: "Просмотр домашних заданий",
-        com: ViewHomework
-      }
-    ]
   }),
   components: {
     NewHomework,
