@@ -14,10 +14,16 @@
     <v-divider></v-divider>
     <v-row v-for="(item, j) in items" :key="j" align="center" justify="center">
       <v-col cols="12">
-        <v-hover v-if="(item.group == group && hidden==true) || hidden==false" v-slot:default="{ hover }">
+        <v-hover
+          v-if="(item.group == group && hidden==true) || hidden==false"
+          v-slot:default="{ hover }"
+        >
           <v-card :elevation="hover ? 10 : 5" class="mx-auto" height="auto" width="auto">
             <v-card>
-              <v-card-title class="subtitle-1" style="color: #FF3D00;">{{item.group}} - {{item.date}}</v-card-title>
+              <v-card-title
+                class="subtitle-1"
+                style="color: #FF3D00;"
+              >{{item.group}} - {{item.date}}</v-card-title>
               <v-divider class="my-0"></v-divider>
               <v-simple-table>
                 <thead>
@@ -77,7 +83,7 @@ export default {
   }),
   methods: {
     loader: function() {
-      //Получить массив описанный выше и забиндить его во vue 
+      //Получить массив описанный выше и забиндить его во vue
       return;
     }
   }
