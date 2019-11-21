@@ -30,6 +30,12 @@ class DesciplineSeeder extends Seeder
             [
                 "discipline_name"=>"Теория разработки программного обеспечения",
             ],
+            [
+                "discipline_name"=>"Операционные системы",
+            ],
+            [
+                "discipline_name"=>"Информационные системы и технологии",
+            ],
         );
         DB::table("disciplines")->insert($date);
     }

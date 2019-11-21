@@ -7,6 +7,7 @@ use App\Models\CallSchedule;
 use App\Models\Places;
 use App\Models\Departament;
 use App\Models\Discipline;
+use App\Models\Schedule;
 use App\Models\Teacher;
 use App\User;
 
@@ -23,14 +24,20 @@ class ConstructorTimeTableController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','profilactic']);
-
+        $this->middleware(['auth', 'profilactic']);
     }
 
     public function save(Request $request)
     {
-        Debugbar::info($request['group_id']);
-        return response()->json(['success'=>true]);
+        foreach ($request['schedule'] as $i) 
+        {
+            foreach ($i as $j) 
+            {
+                $j = json_encode($j);
+            }
+        }
+        Schedule::where('group_id', $request['group_id'])->update(['schedule' => json_encode($request['schedule'])]);
+        return response()->json(['success' => true]);
     }
     /**
      * Show the application dashboard.

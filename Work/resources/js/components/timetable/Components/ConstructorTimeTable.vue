@@ -130,7 +130,7 @@
     <v-row v-if="load==true" sm="2" md="0" class="pa-0 mt-5 align-self-center justify-center">
       <v-progress-circular :disabled="load" indeterminate color="primary"></v-progress-circular>
     </v-row>
-    <!-- <v-row v-for="(it, t) in newarrschedule" :key="t">
+    <v-row v-for="(it, t) in newarrschedule" :key="t">
       <v-col>
         <div>
           День {{t}}
@@ -138,7 +138,7 @@
           <p v-for="(it1, t1) in it" :key="t1">Пара {{t1}}. | {{it1}}</p>
         </div>
       </v-col>
-    </v-row>-->
+    </v-row>
   </v-container>
 </template>
 
@@ -223,46 +223,99 @@ export default {
           this.places[
             (this.arrschedule[this.arrday[i]].Place = this.caseplace[i].id)
           ];
+      //Прохождение по дням
+      for (var i = 0; i < this.arrday.length; i++)  
+      {
+        //Прохождение по парам
+        for (var j = 0; j < 8; j++) 
+        {
+          if (this.newarrschedule[i][j] != null) 
+          {
+            if (this.arrswitch[i][j]) 
+            {
+              if (typeof(this.newarrschedule[i][j][0]) == 'object')
+              {
+                if (typeof(this.newarrschedule[i][j][0]) == null)
+                {
+                  this.arrschedule[this.arrday[i]][j + 1].Lesson = null;
+                  this.arrschedule[this.arrday[i]][j + 1].Teacher = null;
+                }
+                else
+                {
+                  this.arrschedule[this.arrday[i]][j + 1].Lesson = this.newarrschedule[i][j][0];
+                  this.arrschedule[this.arrday[i]][j + 1].Teacher = this.newarrschedule[i][j][1];
 
-      for (
-        var i = 0;
-        i < this.arrday.length;
-        i++ //Прохождение по дням
-      ) {
-        for (
-          var j = 0;
-          j < 8;
-          j++ //Прохождение по парам
-        ) {
-          if (this.newarrschedule[i][j] != null) {
-            console.log(this.newarrschedule[i][j]);
-            if (this.arrswitch[i][j]) {
-              this.arrschedule[this.arrday[i]][
-                j + 1
-              ].Lesson = this.newarrschedule[i][j + 1];
-              this.arrschedule[this.arrday[i]][
-                j + 1
-              ].Teacher = this.newarrschedule[i][j + 1];
-            } else {
-              this.arrschedule[this.arrday[i]][
-                j + 1
-              ].Lesson = this.newarrschedule[i][j][0];
-              this.arrschedule[this.arrday[i]][
-                j + 1
-              ].Teacher = this.newarrschedule[i][j][0];
+                  if (typeof(this.arrschedule[this.arrday[i]][j + 1].Lesson[0]) == "object")
+                  {
+                    if (this.arrschedule[this.arrday[i]][j + 1].Lesson[0] != null)
+                    {
+                      if(this.arrschedule[this.arrday[i]][j + 1].Teacher[0].length > this.arrschedule[this.arrday[i]][j + 1].Lesson[0].length)
+                        this.arrschedule[this.arrday[i]][j + 1].Lesson[0].push(this.arrschedule[this.arrday[i]][j + 1].Lesson[0][0]);
+                    }
+                  }
+
+                  if (this.arrschedule[this.arrday[i]][j + 1].Lesson.length == 2)
+                  {
+                    if (typeof(this.arrschedule[this.arrday[i]][j + 1].Lesson[1]) == "object")
+                    {
+                      if (this.arrschedule[this.arrday[i]][j + 1].Lesson[1] != null)
+                      {
+                        if(this.arrschedule[this.arrday[i]][j + 1].Teacher[1].length > this.arrschedule[this.arrday[i]][j + 1].Lesson[1].length)
+                          this.arrschedule[this.arrday[i]][j + 1].Lesson[1].push(this.arrschedule[this.arrday[i]][j + 1].Lesson[1][0]);
+                      }
+                    }
+                  }
+                }
+              }
+              else
+              {
+                this.arrschedule[this.arrday[i]][j + 1].Lesson = this.newarrschedule[i][j][0];
+                this.arrschedule[this.arrday[i]][j + 1].Teacher = this.newarrschedule[i][j][1];
+              }
+            } 
+            else 
+            {
+              if (typeof(this.newarrschedule[i][j][0]) == "object")
+              {
+                if (typeof(this.newarrschedule[i][j][0]) == null)
+                {
+                  this.arrschedule[this.arrday[i]][j + 1].Lesson = null;
+                  this.arrschedule[this.arrday[i]][j + 1].Teacher = null;
+                }
+                else
+                if (this.newarrschedule[i][j][0].length == 1 || this.newarrschedule[i][j][0].length == 2)
+                {
+                  if (typeof(this.newarrschedule[i][j][0]) == null)
+                  {
+                    this.arrschedule[this.arrday[i]][j + 1].Lesson = null;
+                    this.arrschedule[this.arrday[i]][j + 1].Teacher = null;
+                  }
+                  else
+                  {
+                    this.arrschedule[this.arrday[i]][j + 1].Lesson = this.newarrschedule[i][j][0][0];
+                    this.arrschedule[this.arrday[i]][j + 1].Teacher = this.newarrschedule[i][j][1][0];
+                  }
+                }
+              }
+              else
+              {
+                this.arrschedule[this.arrday[i]][j + 1].Lesson = this.newarrschedule[i][j][0];
+                this.arrschedule[this.arrday[i]][j + 1].Teacher = this.newarrschedule[i][j][1];
+              }
             }
           }
         }
       }
+          alert("Расписание изменено для группы " + this.casegroup.group_name + "!");
     
-      apischedule
+      /*apischedule
         .saveSchedule({ group_id: this.casegroup.id, schedule: this.arrschedule })
         .then(res => {
-          alert("Расписание изменено для группы " + this.casegroup.discipline_name + "1");
+          alert("Расписание изменено для группы " + this.casegroup.group_name + "!");
         })
         .catch(ex => {
           alert("Произошла ошибка - " + ex);
-        });
+        });*/
     },
 
     changeGroups: function(departament) {
@@ -288,8 +341,16 @@ export default {
       if (value == "") {
         this.newarrschedule[id1][id2][id3][id4] = null;
 
-        if (id3 == 0) this.newarrschedule[id1][id2][1][id4] = null;
-        else this.newarrschedule[id1][id2][0][id4] = null;
+        if (id3 == 0) 
+          this.newarrschedule[id1][id2][1][id4] = null;
+        else 
+          this.newarrschedule[id1][id2][0][id4] = null;
+
+        if ((this.newarrschedule[id1][id2][0][0] == null && this.newarrschedule[id1][id2][0][1] == null) || (this.newarrschedule[id1][id2][1][0] == null && this.newarrschedule[id1][id2][1][1] == null))
+        {
+          this.newarrschedule[id1][id2][0] = null;
+          this.newarrschedule[id1][id2][1] = null;
+        }
       }
       if (value.length > 2)
         this.newarrschedule[id1][id2][id3][id4].splice(2, 1);
@@ -297,12 +358,14 @@ export default {
 
     changeSchedule: function(group) {
       //alert("Группа " + group);
+      console.log(this.casegroup);
 
       this.load = true;
       apischedule
         .getSchedule(group)
         .then(reg => {
           this.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
+          console.log(this.arrschedule['Понедельник']);
           for (var i = 0; i < this.caseplace.length; i++) {
             if (
               this.arrschedule[this.arrday[i]].Place != null &&
