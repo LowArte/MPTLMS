@@ -14,7 +14,10 @@ export default {
     return axios.get('/get_users');
   },
   
-  saveUsers(users){
-    return axios.post('/save_users', {"users":users.users})
+  saveUser(user){
+    return axios.post('/save_user', {"user":user.user})
   },
+  deleteUser(user){
+    return axios.post('/delete_user', {"id":user.id})
+  }
 }

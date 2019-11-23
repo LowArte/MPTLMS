@@ -2262,9 +2262,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2297,10 +2294,7 @@ __webpack_require__.r(__webpack_exports__);
         value: "thirdname"
       }, {
         text: "Почта",
-        value: "email"
-      }, {
-        text: "Пароль",
-        value: "password",
+        value: "email",
         sortable: false
       }, {
         text: "Роль",
@@ -2360,23 +2354,27 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    sendQuery: function sendQuery() {
-      for (var i = 0; i < this.arrusers.length; i++) {
-        this.arrusers[i].secName = this.listusers[i].secname, this.arrusers[i].name = this.listusers[i].name;
+    /*sendQuery() {
+      for (var i = 0; i < this.arrusers.length; i++) 
+      {
+        this.arrusers[i].secName = this.listusers[i].secname;
+        this.arrusers[i].name = this.listusers[i].name;
         this.arrusers[i].thirdName = this.listusers[i].thirdname;
         this.arrusers[i].email = this.listusers[i].email;
         this.arrusers[i].password_notHash = this.listusers[i].password;
         this.arrusers[i].post_id = this.listusers[i].post;
       }
-
-      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUsers({
-        users: this.arrusers
-      }).then(function (res) {
-        alert("Отправлено!");
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-    },
+        apiuser
+        .saveUser({
+          users: this.arrusers
+        })
+        .then(res => {
+          alert("Отправлено!");
+        })
+        .catch(ex => {
+          console.log(ex);
+        });
+    },*/
     initialize: function initialize($b) {
       var _this = this;
 
@@ -2412,26 +2410,44 @@ __webpack_require__.r(__webpack_exports__);
       this.dialog = true;
     },
     deleteItem: function deleteItem(item) {
-      var index = this.listusers.indexOf(item);
-      confirm("Вы действительно хотите удалить данного пользователя?") && this.listusers.splice(index, 1);
+      var _this2 = this;
+
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].deleteUser({
+        id: item.id
+      }).then(function (res) {
+        var index = _this2.listusers.indexOf(item);
+
+        confirm("Вы действительно хотите удалить данного пользователя?") && _this2.listusers.splice(index, 1);
+        alert("Удалён!");
+      })["catch"](function (ex) {
+        initialize(true);
+        console.log(ex);
+      });
     },
     close: function close() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.dialog = false;
       setTimeout(function () {
-        _this2.editedItem = Object.assign({}, _this2.defaultItem);
-        _this2.editedIndex = -1;
+        _this3.editedItem = Object.assign({}, _this3.defaultItem);
+        _this3.editedIndex = -1;
       }, 300);
     },
     save: function save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.listusers[this.editedIndex], this.editedItem);
-      } else {
-        this.listusers.push(this.editedItem);
-      }
+      var _this4 = this;
 
-      this.close();
+      if (this.editedIndex == -1) this.editedItem.id = -1;
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
+        user: this.editedItem
+      }).then(function (res) {
+        if (_this4.editedIndex > -1) Object.assign(_this4.listusers[_this4.editedIndex], _this4.editedItem);else _this4.initialize(true);
+        alert("Сохранён!");
+
+        _this4.close();
+      })["catch"](function (ex) {
+        initialize(true);
+        console.log(ex);
+      });
     },
     parseIntLoc: function parseIntLoc(val) {
       if (val == "" || val == null || val == "0") {
@@ -8253,19 +8269,6 @@ var render = function() {
                                               {
                                                 staticClass: "ma-2",
                                                 attrs: {
-                                                  color: "accent",
-                                                  dark: ""
-                                                },
-                                                on: { click: _vm.sendQuery }
-                                              },
-                                              [_vm._v("Сохранить")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "ma-2",
-                                                attrs: {
                                                   color: "primary",
                                                   dark: ""
                                                 },
@@ -8512,47 +8515,6 @@ var render = function() {
                                                                           },
                                                                           expression:
                                                                             "editedItem.email"
-                                                                        }
-                                                                      }
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "v-col",
-                                                                  {
-                                                                    attrs: {
-                                                                      cols:
-                                                                        "12",
-                                                                      sm: "6",
-                                                                      md: "12"
-                                                                    }
-                                                                  },
-                                                                  [
-                                                                    _c(
-                                                                      "v-text-field",
-                                                                      {
-                                                                        attrs: {
-                                                                          label:
-                                                                            "Пароль"
-                                                                        },
-                                                                        model: {
-                                                                          value:
-                                                                            _vm
-                                                                              .editedItem
-                                                                              .password,
-                                                                          callback: function(
-                                                                            $$v
-                                                                          ) {
-                                                                            _vm.$set(
-                                                                              _vm.editedItem,
-                                                                              "password",
-                                                                              $$v
-                                                                            )
-                                                                          },
-                                                                          expression:
-                                                                            "editedItem.password"
                                                                         }
                                                                       }
                                                                     )
@@ -68561,9 +68523,14 @@ __webpack_require__.r(__webpack_exports__);
   getUsers: function getUsers() {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/get_users');
   },
-  saveUsers: function saveUsers(users) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_users', {
-      "users": users.users
+  saveUser: function saveUser(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_user', {
+      "user": user.user
+    });
+  },
+  deleteUser: function deleteUser(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/delete_user', {
+      "id": user.id
     });
   }
 });

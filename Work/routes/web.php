@@ -61,7 +61,9 @@ Route::get('/usermanagement', 'RouteControllers\UserManagementController@index')
 
 Route::get('/get_users', 'RouteControllers\UserManagementController@getUsers');
 
-Route::post('/save_users', 'RouteControllers\UserManagementController@saveUsers');
+Route::post('/save_user', 'RouteControllers\UserManagementController@saveUser');
+
+Route::post('/delete_user', 'RouteControllers\UserManagementController@deleteUser');
 
 Route::post('/send_email', 'RouteControllers\RequestsUsersController@sendEmail');
 

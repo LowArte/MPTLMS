@@ -23,7 +23,7 @@
                   <v-divider class="mx-4" inset vertical></v-divider>
                 </v-toolbar>
                 <v-row sm="2" md="0" class="pa-0 align-self-center justify-center">
-                  <v-btn color="accent" dark class="ma-2" @click="sendQuery">Сохранить</v-btn>
+                  <!-- <v-btn color="accent" dark class="ma-2" @click="sendQuery">Сохранить</v-btn> -->
                   <v-btn color="primary" dark class="ma-2" @click="initialize(true)">Обновить</v-btn>
                   <v-dialog v-model="dialog" max-width="500px">
                     <template v-slot:activator="{ on }">
@@ -48,9 +48,6 @@
                             </v-col>
                             <v-col cols="12" sm="6" md="12">
                               <v-text-field v-model="editedItem.email" label="Почта"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="12">
-                              <v-text-field v-model="editedItem.password" label="Пароль"></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="12">
                               <v-text-field v-model="editedItem.post" label="Роль"></v-text-field>
@@ -129,8 +126,7 @@ export default {
       { text: "Фамилия", value: "secname" },
       { text: "Имя", value: "name" },
       { text: "Отчество", value: "thirdname" },
-      { text: "Почта", value: "email" },
-      { text: "Пароль", value: "password", sortable: false },
+      { text: "Почта", value: "email", sortable: false },
       { text: "Роль", value: "post" },
       { text: "Действия", value: "action", sortable: false }
     ],
@@ -189,10 +185,10 @@ export default {
   },
 
   methods: {
-    sendQuery() {
+    /*sendQuery() {
       for (var i = 0; i < this.arrusers.length; i++) 
       {
-        this.arrusers[i].secName = this.listusers[i].secname,
+        this.arrusers[i].secName = this.listusers[i].secname;
         this.arrusers[i].name = this.listusers[i].name;
         this.arrusers[i].thirdName = this.listusers[i].thirdname;
         this.arrusers[i].email = this.listusers[i].email;
@@ -201,7 +197,7 @@ export default {
       }
 
       apiuser
-        .saveUsers({
+        .saveUser({
           users: this.arrusers
         })
         .then(res => {
@@ -210,7 +206,7 @@ export default {
         .catch(ex => {
           console.log(ex);
         });
-    },
+    },*/
 
     initialize($b) {
       if ($b == true) {
@@ -249,9 +245,20 @@ export default {
     },
 
     deleteItem(item) {
-      const index = this.listusers.indexOf(item);
-      confirm("Вы действительно хотите удалить данного пользователя?") &&
-        this.listusers.splice(index, 1);
+      apiuser
+        .deleteUser({
+          id: item.id
+        })
+        .then(res => {
+          const index = this.listusers.indexOf(item);
+          confirm("Вы действительно хотите удалить данного пользователя?") &&
+            this.listusers.splice(index, 1);
+          alert("Удалён!");
+        })
+        .catch(ex => {
+          initialize(true);
+          console.log(ex);
+        });
     },
 
     close() {
@@ -263,12 +270,26 @@ export default {
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.listusers[this.editedIndex], this.editedItem);
-      } else {
-        this.listusers.push(this.editedItem);
-      }
-      this.close();
+      if (this.editedIndex == -1)
+        this.editedItem.id = -1;     
+
+      apiuser
+        .saveUser({
+          user: this.editedItem
+        })
+        .then(res => {
+          if (this.editedIndex > -1)
+            Object.assign(this.listusers[this.editedIndex], this.editedItem);
+          else
+            this.initialize(true);
+
+          alert("Сохранён!");
+          this.close();
+        })
+        .catch(ex => {
+          initialize(true);
+          console.log(ex);
+        });
     },
 
     parseIntLoc(val) {

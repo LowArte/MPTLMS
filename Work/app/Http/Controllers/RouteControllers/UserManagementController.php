@@ -22,16 +22,36 @@ class UserManagementController extends Controller
         $this->middleware(['auth','profilactic']);
     }
 
-    public function saveUsers (Request $request)
+    public function saveUser (Request $request)
     {
         try
         {
             Debugbar::info($request);
+
+            //Тут перезаписать
+
             return response()->json(['success'=>true]);
         }
         catch(MNF $e)
         {
             Debugbar::info("users_not_save");
+            return response()->json(['error'=>$e],400);
+        }
+    }
+
+    public function deleteUser (Request $request)
+    {
+        try
+        {
+            Debugbar::info($request);
+
+            //Тут перезаписать
+
+            return response()->json(['success'=>true]);
+        }
+        catch(MNF $e)
+        {
+            Debugbar::info("users_not_delete");
             return response()->json(['error'=>$e],400);
         }
     }
