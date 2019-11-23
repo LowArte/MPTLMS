@@ -19,6 +19,7 @@
                     <span class="font-weight-light">Личный кабинет</span>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Включён режим профилактики!</v-card-title>
                 @if (Route::has('login') && ! Auth::check() )
                 <v-spacer></v-spacer>
                 <login-button action="{{ $action ?? null }}"></login-button>
