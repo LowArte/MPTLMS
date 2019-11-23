@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 /**
  * Student model
  * 
@@ -18,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Student extends Model
 {
+    use SoftDeletes;
     public $timestamps = true;
 
     protected $hidden = [

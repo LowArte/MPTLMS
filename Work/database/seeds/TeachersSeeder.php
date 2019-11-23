@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
 
 
 
@@ -16,7 +17,7 @@ class TeachersSeeder extends Seeder
     {
         $data = array();
         $users = User::where('post_id', 3)->get();
-        $faker = Faker\Factory::create();
+        $faker = Factory::create();
         for ($i = 0; $i < count($users); $i++) {
             array_push(
                 $data,
