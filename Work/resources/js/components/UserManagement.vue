@@ -248,9 +248,13 @@ export default {
     save() {
       var $check = true;
       for (var i = 0; i < this.arrusers.length; i++)
-        if (this.arrusers[i].email == this.editedItem.email) $check = false;
-      if ($check) {
-        if (this.editedIndex == -1) this.editedItem.id = -1;
+        if (this.arrusers[i].email == this.editedItem.email) 
+        $check = false;
+        
+      if ($check == true) 
+      {
+        if (this.editedIndex == -1) 
+        this.editedItem.id = -1;
 
         apiuser
           .saveUser({

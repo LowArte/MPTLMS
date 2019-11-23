@@ -2420,7 +2420,7 @@ __webpack_require__.r(__webpack_exports__);
         if (this.arrusers[i].email == this.editedItem.email) $check = false;
       }
 
-      if ($check) {
+      if ($check == true) {
         if (this.editedIndex == -1) this.editedItem.id = -1;
         _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
           user: this.editedItem
