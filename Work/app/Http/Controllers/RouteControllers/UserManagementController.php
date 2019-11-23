@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\UsersPost;
+use App\User;
 use Debugbar;
 
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +26,7 @@ class UserManagementController extends Controller
     public function saveUsers (Request $request)
     {
         try
-        {
-            Debugbar::info($request);
-            return response()->json(['success'=>true]);
+        {            
         }
         catch(MNF $e)
         {

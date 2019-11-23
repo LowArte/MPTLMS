@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\SiteOptions;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,7 @@
 Route::get(
     '/',
     function () {
+
         $panel_array = array(
             array(
                 "header"  => "Подробная информация",
