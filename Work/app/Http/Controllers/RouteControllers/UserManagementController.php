@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\UsersPost;
+use App\User;
 use Debugbar;
 
 use Illuminate\Support\Facades\Auth;

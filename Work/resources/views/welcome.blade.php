@@ -1,3 +1,6 @@
+<?php
+use App\Models\SiteOptions;
+?>
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
@@ -19,15 +22,17 @@
                     <span class="font-weight-light">Личный кабинет</span>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Включён режим профилактики!</v-card-title>
+                @if (SiteOptions::get()[0]->option_value == 1)
+                    <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Включён режим профилактики!</v-card-title>
+                @endif
                 @if (Route::has('login') && ! Auth::check() )
-                <v-spacer></v-spacer>
-                <login-button action="{{ $action ?? null }}"></login-button>
-                <remember-password action="{{ $action ?? null }}"></remember-password>
-                <reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"></reset-password>
+                    <v-spacer></v-spacer>
+                    <login-button action="{{ $action ?? null }}"></login-button>
+                    <remember-password action="{{ $action ?? null }}"></remember-password>
+                    <reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"></reset-password>
                 @else
-                <v-btn color="accent" dark href="\home">ВОЙТИ</v-btn>
-                <v-btn color="accent" dark @click="logout">ВЫЙТИ</v-btn>
+                    <v-btn color="accent" dark href="\home">ВОЙТИ</v-btn>
+                    <v-btn color="accent" dark @click="logout">ВЫЙТИ</v-btn>
                 @endif
             </v-app-bar>
             <v-content>
