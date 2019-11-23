@@ -44,6 +44,7 @@ class ResetPassword extends ResetPasswordNotification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->markdown('vendor.notifications.email')
             ->from('p_a.n.pikalov@mpt.ru', "Востановление пароля")
             ->subject('Восстановление пароля от аккаунта: ' . config('app.name'))
             ->line('По вашему требованию мы выслали ссылку на восстановления пароля. Что бы продолжить нажмите "Восстановить".')

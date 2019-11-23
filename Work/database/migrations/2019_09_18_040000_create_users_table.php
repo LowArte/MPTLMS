@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->foreign('post_id')->references('id')->on('users_posts');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
