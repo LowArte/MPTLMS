@@ -28,6 +28,7 @@ import CallSchedule from './components/callschedule/CallScheduleComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
 import Retraining from './components/additionaleducation/RetrainingComponent'
+import UserManagement from './components/UserManagement'
 
 //import vuetif from './plugins/vuetify'
 
@@ -79,7 +80,8 @@ new Vue({
     'requestsusers': RequestsUsers,
     'panelcontrol': PanelControl,
     'callschedule': CallSchedule,
-    'retraining': Retraining
+    'retraining': Retraining,
+    'usermanagement' : UserManagement
   },
   data: () => ({
     drawer: null,
@@ -120,6 +122,11 @@ new Vue({
             icon: 'today',
             text: 'Расписание звонков',
             href: '/concallschedule'
+          },
+          {
+            icon: 'edit',
+            text: 'Управление пользователями',
+            href: '/usermanagement'
           },
           {
             icon: 'feedback',

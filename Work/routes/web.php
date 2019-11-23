@@ -57,6 +57,12 @@ Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->
 
 Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('panelcontrol');
 
+Route::get('/usermanagement', 'RouteControllers\UserManagementController@index')->name('usermanagement');
+
+Route::get('/get_users', 'RouteControllers\UserManagementController@getUsers');
+
+Route::post('/save_users', 'RouteControllers\UserManagementController@saveUsers');
+
 Route::post('/send_email', 'RouteControllers\RequestsUsersController@sendEmail');
 
 Route::post('/save_feedback', 'RouteControllers\FeedbackController@savefeedback');

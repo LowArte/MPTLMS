@@ -9,5 +9,12 @@ export default {
       'name': user.name,
       'email': user.email
     })
-  }
+  },
+  getUsers(){
+    return axios.get('/get_users');
+  },
+  
+  saveUsers(users){
+    return axios.post('/save_users', {"users":users.users})
+  },
 }
