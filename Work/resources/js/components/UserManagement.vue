@@ -183,8 +183,7 @@ export default {
     }
   },
 
-  methods: 
-  {
+  methods: {
     initialize($b) {
       if ($b == true) {
         apiuser
@@ -247,26 +246,31 @@ export default {
     },
 
     save() {
-      if (this.editedIndex == -1)
-        this.editedItem.id = -1;     
+      var $check = true;
+      for (var i = 0; i < this.arrusers.length; i++)
+        if (this.arrusers[i].email == this.editedItem.email) $check = false;
+      if ($check) {
+        if (this.editedIndex == -1) this.editedItem.id = -1;
 
-      apiuser
-        .saveUser({
-          user: this.editedItem
-        })
-        .then(res => {
-          if (this.editedIndex > -1)
-            Object.assign(this.listusers[this.editedIndex], this.editedItem);
-          else
-            this.initialize(true);
+        apiuser
+          .saveUser({
+            user: this.editedItem
+          })
+          .then(res => {
+            if (this.editedIndex > -1)
+              Object.assign(this.listusers[this.editedIndex], this.editedItem);
+            else this.initialize(true);
 
-          alert("Сохранён!");
-          this.close();
-        })
-        .catch(ex => {
-          initialize(true);
-          console.log(ex);
-        });
+            alert("Сохранён!");
+            this.close();
+          })
+          .catch(ex => {
+            initialize(true);
+            console.log(ex);
+          });
+      }
+      else
+        alert("Указанная почта уже используется!");
     },
 
     parseIntLoc(val) {

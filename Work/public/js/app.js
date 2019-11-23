@@ -2414,18 +2414,26 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this4 = this;
 
-      if (this.editedIndex == -1) this.editedItem.id = -1;
-      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
-        user: this.editedItem
-      }).then(function (res) {
-        if (_this4.editedIndex > -1) Object.assign(_this4.listusers[_this4.editedIndex], _this4.editedItem);else _this4.initialize(true);
-        alert("Сохранён!");
+      var $check = true;
 
-        _this4.close();
-      })["catch"](function (ex) {
-        initialize(true);
-        console.log(ex);
-      });
+      for (var i = 0; i < this.arrusers.length; i++) {
+        if (this.arrusers[i].email == this.editedItem.email) $check = false;
+      }
+
+      if ($check) {
+        if (this.editedIndex == -1) this.editedItem.id = -1;
+        _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
+          user: this.editedItem
+        }).then(function (res) {
+          if (_this4.editedIndex > -1) Object.assign(_this4.listusers[_this4.editedIndex], _this4.editedItem);else _this4.initialize(true);
+          alert("Сохранён!");
+
+          _this4.close();
+        })["catch"](function (ex) {
+          initialize(true);
+          console.log(ex);
+        });
+      } else alert("Указанная почта уже используется!");
     },
     parseIntLoc: function parseIntLoc(val) {
       if (val == "" || val == null || val == "0") {
