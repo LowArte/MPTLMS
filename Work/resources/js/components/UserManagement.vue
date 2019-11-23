@@ -23,7 +23,6 @@
                   <v-divider class="mx-4" inset vertical></v-divider>
                 </v-toolbar>
                 <v-row sm="2" md="0" class="pa-0 align-self-center justify-center">
-                  <!-- <v-btn color="accent" dark class="ma-2" @click="sendQuery">Сохранить</v-btn> -->
                   <v-btn color="primary" dark class="ma-2" @click="initialize(true)">Обновить</v-btn>
                   <v-dialog v-model="dialog" max-width="500px">
                     <template v-slot:activator="{ on }">
@@ -184,30 +183,8 @@ export default {
     }
   },
 
-  methods: {
-    /*sendQuery() {
-      for (var i = 0; i < this.arrusers.length; i++) 
-      {
-        this.arrusers[i].secName = this.listusers[i].secname;
-        this.arrusers[i].name = this.listusers[i].name;
-        this.arrusers[i].thirdName = this.listusers[i].thirdname;
-        this.arrusers[i].email = this.listusers[i].email;
-        this.arrusers[i].password_notHash = this.listusers[i].password;
-        this.arrusers[i].post_id = this.listusers[i].post;
-      }
-
-      apiuser
-        .saveUser({
-          users: this.arrusers
-        })
-        .then(res => {
-          alert("Отправлено!");
-        })
-        .catch(ex => {
-          console.log(ex);
-        });
-    },*/
-
+  methods: 
+  {
     initialize($b) {
       if ($b == true) {
         apiuser
