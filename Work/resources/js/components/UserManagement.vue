@@ -250,7 +250,7 @@ export default {
       for (var i = 0; i < this.arrusers.length; i++)
         if (this.arrusers[i].email == this.editedItem.email) 
         $check = false;
-        
+      if (this.editedItem.email != null)
       if ($check == true) 
       {
         if (this.editedIndex == -1) 

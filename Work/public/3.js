@@ -45,24 +45,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: [{
-        group: "П-1-16",
-        date: "11.10.2019"
-      }, {
-        group: "П-2-16",
-        date: "12.10.2019"
-      }, {
-        group: "П-3-16",
-        date: "13.10.2019"
-      }],
-      z: [{
-        number: "1",
-        original: "Технология разработки и защита баз данных",
-        originalt: "Токарчук А.С.",
-        newp: "Операционные системы",
-        newpt: "Горбунов А.Д.",
-        date: "08.10.2019"
-      }]
+      items: [],
+      z: []
     };
   }
 });
