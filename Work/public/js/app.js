@@ -3917,8 +3917,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -4113,7 +4111,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data(vm) {
     return {
       mask: "####",
-      menu: false,
       group: "",
       FIO: user.secName + " " + user.name + " " + user.thirdName,
       modelprogress: "",
@@ -4158,18 +4155,9 @@ __webpack_require__.r(__webpack_exports__);
       "default": null
     }
   },
-  watch: {
-    menu: function menu(val) {
-      var _this = this;
-
-      val && setTimeout(function () {
-        return _this.$refs.picker.activePicker = "YEAR";
-      });
-    }
-  },
   methods: {
     sendQuery: function sendQuery() {
-      var _this2 = this;
+      var _this = this;
 
       _api_certificate__WEBPACK_IMPORTED_MODULE_2__["default"].save({
         data: {
@@ -4181,13 +4169,13 @@ __webpack_require__.r(__webpack_exports__);
         },
         type: "Характеристика"
       }).then(function (res) {
-        _this2.showMessage("Характеристика сохранена");
+        _this.showMessage("Характеристика сохранена");
 
-        _this2.cleardata();
+        _this.cleardata();
       })["catch"](function (exp) {
-        _this2.showError("Произошла ошибка");
+        _this.showError("Произошла ошибка");
 
-        _this2.cleardata();
+        _this.cleardata();
       });
     },
     cleardata: function cleardata() {
@@ -5179,10 +5167,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5362,10 +5350,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5816,10 +5804,293 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Replacements.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/Replacements.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
+/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      load: true,
+      nullDis: "Свободная пара",
+      casegroup: null,
+      model: null,
+      hidden: false,
+      itemsPerPageOptions: [6],
+      itemsPerPage: 6,
+      Datetime: "00.00.0000",
+      arrgroups: [],
+      arrdepartaments: [],
+      departament: null,
+      callschedule: null,
+      arrschedule: null,
+      group: null,
+      places: [],
+      arrday: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+    };
+  },
+  props: {
+    place: {
+      type: String,
+      "default": null
+    },
+    schedule: {
+      type: String,
+      "default": null
+    },
+    callSchedule: {
+      type: String,
+      "default": null
+    },
+    groups: {
+      type: String,
+      "default": null
+    },
+    departaments: {
+      type: String,
+      "default": null
+    }
+  },
+  watch: {
+    casegroup: function casegroup(val, oldval) {
+      if (this.groups == "") this.changeSchedule(val.id);else {
+        if (oldval != null) this.changeSchedule(val.id);
+      }
+    }
+  },
+  methods: {
+    changeGroups: function changeGroups(departament) {
+      var _this = this;
+
+      //alert("Отеделение " + departament);
+      this.load = true;
+      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
+        _this.arrgroups = reg.data.group;
+        _this.casegroup = _this.arrgroups[0];
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+      this.load = false;
+    },
+    changeSchedule: function changeSchedule(group) {
+      var _this2 = this;
+
+      //alert("Группа " + group);
+      this.load = true;
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
+        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+      this.load = false;
+    }
+  },
+  mounted: function mounted() {
+    this.load = true;
+    var currDate = new Date();
+    var hours = currDate.getHours();
+    var minutes = currDate.getMinutes();
+    var seconds = currDate.getSeconds();
+
+    if (hours <= 9) {
+      hours = "0" + hours;
+    }
+
+    if (minutes <= 9) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds <= 9) {
+      seconds = "0" + seconds;
+    }
+
+    this.Datetime = hours + ":" + minutes + ":" + seconds; //Место
+
+    this.places = JSON.parse(this.place); //Расписание звонков
+
+    this.callschedule = JSON.parse(this.callSchedule);
+
+    for (var i = 0; i < this.callschedule.length; i++) {
+      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
+    }
+
+    var arrd = JSON.parse(this.departaments);
+    this.arrdepartaments = JSON.parse(arrd.departaments);
+
+    if (this.groups == null || this.groups == "") {
+      //Отделения
+      this.departament = this.arrdepartaments[0];
+      this.changeGroups(this.departament.id);
+    } else {
+      //Отделения
+      this.departament = JSON.parse(arrd.cur_departament); //Группы
+
+      this.changeGroups(this.departament.id);
+      this.casegroup = JSON.parse(this.groups);
+    }
+
+    this.load = false;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5913,652 +6184,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      items: [{
-        group: "П-1-16",
-        date: "11.10.2019"
-      }, {
-        group: "П-2-16",
-        date: "12.10.2019"
-      }, {
-        group: "П-3-16",
-        date: "13.10.2019"
-      }],
-      z: [{
-        number: "1",
-        original: "Технология разработки и защита баз данных",
-        originalt: "Токарчук А.С.",
-        newp: "Операционные системы",
-        newpt: "Горбунов А.Д.",
-        date: "08.10.2019"
-      }]
-    };
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TimeTable.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/TimeTable.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
-/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      load: true,
-      nullDis: "Свободная пара",
-      casegroup: null,
-      model: null,
-      hidden: false,
-      itemsPerPageOptions: [6],
-      itemsPerPage: 6,
-      Datetime: "00.00.0000",
-      arrgroups: [],
-      arrdepartaments: [],
-      departament: null,
-      callschedule: null,
-      arrschedule: null,
-      group: null,
-      places: [],
-      arrday: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
-    };
-  },
-  props: {
-    place: {
-      type: String,
-      "default": null
-    },
-    schedule: {
-      type: String,
-      "default": null
-    },
-    callSchedule: {
-      type: String,
-      "default": null
-    },
-    groups: {
-      type: String,
-      "default": null
-    },
-    departaments: {
-      type: String,
-      "default": null
-    }
-  },
-  watch: {
-    casegroup: function casegroup(val, oldval) {
-      if (this.groups == "") this.changeSchedule(val.id);else {
-        if (oldval != null) this.changeSchedule(val.id);
-      }
-    }
-  },
-  methods: {
-    changeGroups: function changeGroups(departament) {
-      var _this = this;
-
-      //alert("Отеделение " + departament);
-      this.load = true;
-      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
-        _this.arrgroups = reg.data.group;
-        _this.casegroup = _this.arrgroups[0];
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-      this.load = false;
-    },
-    changeSchedule: function changeSchedule(group) {
-      var _this2 = this;
-
-      //alert("Группа " + group);
-      this.load = true;
-      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
-        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-      this.load = false;
-    }
-  },
-  mounted: function mounted() {
-    this.load = true;
-    var currDate = new Date();
-    var hours = currDate.getHours();
-    var minutes = currDate.getMinutes();
-    var seconds = currDate.getSeconds();
-
-    if (hours <= 9) {
-      hours = "0" + hours;
-    }
-
-    if (minutes <= 9) {
-      minutes = "0" + minutes;
-    }
-
-    if (seconds <= 9) {
-      seconds = "0" + seconds;
-    }
-
-    this.Datetime = hours + ":" + minutes + ":" + seconds; //Место
-
-    this.places = JSON.parse(this.place); //Расписание звонков
-
-    this.callschedule = JSON.parse(this.callSchedule);
-
-    for (var i = 0; i < this.callschedule.length; i++) {
-      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
-    }
-
-    var arrd = JSON.parse(this.departaments);
-    this.arrdepartaments = JSON.parse(arrd.departaments);
-
-    if (this.groups == null || this.groups == "") {
-      //Отделения
-      this.departament = this.arrdepartaments[0];
-      this.changeGroups(this.departament.id);
-    } else {
-      //Отделения
-      this.departament = JSON.parse(arrd.cur_departament); //Группы
-
-      this.changeGroups(this.departament.id);
-      this.casegroup = JSON.parse(this.groups);
-    }
-
-    this.load = false;
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Timetable.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/Timetable.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../api/group */ "./resources/js/api/group.js");
-/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/schedule */ "./resources/js/api/schedule.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      load: true,
-      nullDis: "Свободная пара",
-      casegroup: null,
-      model: null,
-      hidden: false,
-      itemsPerPageOptions: [6],
-      itemsPerPage: 6,
-      Datetime: "00.00.0000",
-      arrgroups: [],
-      arrdepartaments: [],
-      departament: null,
-      callschedule: null,
-      arrschedule: null,
-      group: null,
-      places: [],
-      arrday: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
-    };
-  },
-  props: {
-    place: {
-      type: String,
-      "default": null
-    },
-    schedule: {
-      type: String,
-      "default": null
-    },
-    callSchedule: {
-      type: String,
-      "default": null
-    },
-    groups: {
-      type: String,
-      "default": null
-    },
-    departaments: {
-      type: String,
-      "default": null
-    }
-  },
-  watch: {
-    casegroup: function casegroup(val, oldval) {
-      if (this.groups == "") this.changeSchedule(val.id);else {
-        if (oldval != null) this.changeSchedule(val.id);
-      }
-    }
-  },
-  methods: {
-    changeGroups: function changeGroups(departament) {
-      var _this = this;
-
-      //alert("Отеделение " + departament);
-      this.load = true;
-      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(departament).then(function (reg) {
-        _this.arrgroups = reg.data.group;
-        _this.casegroup = _this.arrgroups[0];
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-      this.load = false;
-    },
-    changeSchedule: function changeSchedule(group) {
-      var _this2 = this;
-
-      //alert("Группа " + group);
-      this.load = true;
-      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(group).then(function (reg) {
-        _this2.arrschedule = JSON.parse(reg.data.schedule[0].schedule);
-      })["catch"](function (ex) {
-        console.log(ex);
-      });
-      this.load = false;
-    }
-  },
-  mounted: function mounted() {
-    this.load = true;
-    var currDate = new Date();
-    var hours = currDate.getHours();
-    var minutes = currDate.getMinutes();
-    var seconds = currDate.getSeconds();
-
-    if (hours <= 9) {
-      hours = "0" + hours;
-    }
-
-    if (minutes <= 9) {
-      minutes = "0" + minutes;
-    }
-
-    if (seconds <= 9) {
-      seconds = "0" + seconds;
-    }
-
-    this.Datetime = hours + ":" + minutes + ":" + seconds; //Место
-
-    this.places = JSON.parse(this.place); //Расписание звонков
-
-    this.callschedule = JSON.parse(this.callSchedule);
-
-    for (var i = 0; i < this.callschedule.length; i++) {
-      this.callschedule[i].call_schedule = JSON.parse(this.callschedule[i].call_schedule);
-    }
-
-    var arrd = JSON.parse(this.departaments);
-    this.arrdepartaments = JSON.parse(arrd.departaments);
-
-    if (this.groups == null || this.groups == "") {
-      //Отделения
-      this.departament = this.arrdepartaments[0];
-      this.changeGroups(this.departament.id);
-    } else {
-      //Отделения
-      this.departament = JSON.parse(arrd.cur_departament); //Группы
-
-      this.changeGroups(this.departament.id);
-      this.casegroup = JSON.parse(this.groups);
-    }
-
-    this.load = false;
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Components_ConstructorReplacements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/ConstructorReplacements */ "./resources/js/components/timetable/Components/ConstructorReplacements.vue");
-/* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timetable/Components/Replacements.vue");
+/* harmony import */ var _Components_ConstructorReplacements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/ConstructorReplacements */ "./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue");
+/* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timeTablesFolders/Components/Replacements.vue");
 //
 //
 //
@@ -6594,17 +6230,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ContimetableComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/ContimetableComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Components_ConstructorTimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/ConstructorTimeTable */ "./resources/js/components/timetable/Components/ConstructorTimeTable.vue");
-/* harmony import */ var _Components_Timetable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Timetable */ "./resources/js/components/timetable/Components/Timetable.vue");
+/* harmony import */ var _Components_ConstructorTimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/ConstructorTimeTable */ "./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue");
+/* harmony import */ var _Components_MainTimeTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/MainTimeTable */ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue");
 //
 //
 //
@@ -6657,64 +6293,24 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    Timetable: _Components_Timetable__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Timetable: _Components_MainTimeTable__WEBPACK_IMPORTED_MODULE_1__["default"],
     Constructor: _Components_ConstructorTimeTable__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/TimeTable */ "./resources/js/components/timetable/Components/TimeTable.vue");
-/* harmony import */ var _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/TeacherReplacements */ "./resources/js/components/timetable/Components/TeacherReplacements.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      tab: null
-    };
-  },
-  components: {
-    TimeTable: _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TeacherReplacements: _Components_TeacherReplacements__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TimetableComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/TimetableComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/TimeTable */ "./resources/js/components/timetable/Components/TimeTable.vue");
-/* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timetable/Components/Replacements.vue");
+/* harmony import */ var _Components_MainTimeTable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Components/MainTimeTable */ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue");
+/* harmony import */ var _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/Replacements */ "./resources/js/components/timeTablesFolders/Components/Replacements.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
@@ -6762,7 +6358,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    TimeTable: _Components_TimeTable__WEBPACK_IMPORTED_MODULE_0__["default"],
+    TimeTable: _Components_MainTimeTable__WEBPACK_IMPORTED_MODULE_0__["default"],
     Replacements: _Components_Replacements__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
@@ -14017,10 +13613,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=template&id=22a0cd3b&":
-/*!***********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=template&id=22a0cd3b& ***!
-  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=template&id=5f86b549&":
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=template&id=5f86b549& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14486,10 +14082,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15049,10 +14645,1063 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Replacements.vue?vue&type=template&id=69262d5e&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/Replacements.vue?vue&type=template&id=69262d5e& ***!
-  \************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=template&id=1cd153d6&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=template&id=1cd153d6& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-row",
+        { attrs: { align: "center" } },
+        [
+          _c(
+            "v-container",
+            [
+              _c("v-autocomplete", {
+                attrs: {
+                  label: "Отделения",
+                  solo: "",
+                  items: _vm.arrdepartaments,
+                  "item-text": "dep_name_full",
+                  "return-object": ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.changeGroups(_vm.departament.id)
+                  }
+                },
+                model: {
+                  value: _vm.departament,
+                  callback: function($$v) {
+                    _vm.departament = $$v
+                  },
+                  expression: "departament"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-autocomplete", {
+                attrs: {
+                  label: "Группа",
+                  solo: "",
+                  items: _vm.arrgroups,
+                  "item-text": "group_name",
+                  "return-object": ""
+                },
+                model: {
+                  value: _vm.casegroup,
+                  callback: function($$v) {
+                    _vm.casegroup = $$v
+                  },
+                  expression: "casegroup"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-divider", { staticClass: "ma-0" }),
+      _vm._v(" "),
+      _vm.arrschedule != null && _vm.load == false
+        ? _c(
+            "v-data",
+            {
+              attrs: { "items-per-page": _vm.itemsPerPage },
+              on: {
+                "update:itemsPerPage": function($event) {
+                  _vm.itemsPerPage = $event
+                },
+                "update:items-per-page": function($event) {
+                  _vm.itemsPerPage = $event
+                }
+              }
+            },
+            [
+              _c(
+                "v-row",
+                _vm._l(_vm.arrday, function(item) {
+                  return _c(
+                    "v-col",
+                    {
+                      key: item,
+                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
+                    },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "ma-1 pa-0" },
+                        [
+                          _c(
+                            "v-card-title",
+                            {
+                              staticClass: "mb-0 pb-0",
+                              staticStyle: { color: "#FF3D00" }
+                            },
+                            [_vm._v(_vm._s(item))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list",
+                            { staticClass: "ma-0 pa-4", attrs: { dense: "" } },
+                            [
+                              _c(
+                                "small",
+                                { staticClass: "font-weight-light" },
+                                [
+                                  _vm._v(
+                                    "Место проведения: " +
+                                      _vm._s(
+                                        _vm.places[
+                                          _vm.arrschedule[item].Place - 1
+                                        ].place_name
+                                      )
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider", { staticClass: "my-2" }),
+                              _vm._v(" "),
+                              _vm._l(8, function(n, i) {
+                                return _c(
+                                  "div",
+                                  { key: i, staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm.arrschedule[item][n].Lesson != null &&
+                                    _vm.arrschedule[item][n].Lesson != ""
+                                      ? _c(
+                                          "v-list",
+                                          {
+                                            staticClass: "ma-0 ml-3 mr-3 pa-0"
+                                          },
+                                          [
+                                            typeof _vm.arrschedule[item][n]
+                                              .Lesson == "object" &&
+                                            _vm.arrschedule[item][n].Lesson !=
+                                              null
+                                              ? _c(
+                                                  "v-list",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - " +
+                                                            _vm._s(
+                                                              _vm.callschedule[
+                                                                _vm.arrschedule[
+                                                                  item
+                                                                ].Place - 1
+                                                              ].call_schedule[n]
+                                                            )
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.arrschedule[item][n]
+                                                        .Lesson,
+                                                      function(Lesson, l1) {
+                                                        return _c(
+                                                          "v-list",
+                                                          {
+                                                            key: l1,
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            typeof Lesson ==
+                                                            "object"
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    Lesson !=
+                                                                    null
+                                                                      ? _c(
+                                                                          "v-list",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            l1 ==
+                                                                            0
+                                                                              ? _c(
+                                                                                  "v-list-item",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _c(
+                                                                                      "div",
+                                                                                      {
+                                                                                        staticClass:
+                                                                                          "ma-0 pa-0"
+                                                                                      },
+                                                                                      [
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Lesson
+                                                                                          .length >
+                                                                                        1
+                                                                                          ? _c(
+                                                                                              "v-card-title",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "subtitle-1 ma-0 pa-0",
+                                                                                                staticStyle: {
+                                                                                                  color:
+                                                                                                    "#4066FF"
+                                                                                                }
+                                                                                              },
+                                                                                              [
+                                                                                                _vm._v(
+                                                                                                  "Числитель:"
+                                                                                                )
+                                                                                              ]
+                                                                                            )
+                                                                                          : _vm._e(),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "p",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _vm._v(
+                                                                                              _vm._s(
+                                                                                                Lesson[0]
+                                                                                              )
+                                                                                            )
+                                                                                          ]
+                                                                                        ),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "small",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "font-weight-light",
+                                                                                            attrs: {
+                                                                                              "ma-0":
+                                                                                                "",
+                                                                                              "pa-0":
+                                                                                                ""
+                                                                                            }
+                                                                                          },
+                                                                                          [
+                                                                                            _vm._v(
+                                                                                              _vm._s(
+                                                                                                _vm
+                                                                                                  .arrschedule[
+                                                                                                  item
+                                                                                                ][
+                                                                                                  n
+                                                                                                ]
+                                                                                                  .Teacher[
+                                                                                                  l1
+                                                                                                ][0]
+                                                                                              ) +
+                                                                                                ", " +
+                                                                                                _vm._s(
+                                                                                                  _vm
+                                                                                                    .arrschedule[
+                                                                                                    item
+                                                                                                  ][
+                                                                                                    n
+                                                                                                  ]
+                                                                                                    .Teacher[
+                                                                                                    l1
+                                                                                                  ][1]
+                                                                                                )
+                                                                                            )
+                                                                                          ]
+                                                                                        )
+                                                                                      ],
+                                                                                      1
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              : _vm._e(),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            Lesson !=
+                                                                            null
+                                                                              ? _c(
+                                                                                  "v-list",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    l1 ==
+                                                                                    1
+                                                                                      ? _c(
+                                                                                          "v-list-item",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "ma-0 pa-0"
+                                                                                          },
+                                                                                          [
+                                                                                            _c(
+                                                                                              "div",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "ma-0 pa-0"
+                                                                                              },
+                                                                                              [
+                                                                                                _c(
+                                                                                                  "v-divider",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "my-2",
+                                                                                                    attrs: {
+                                                                                                      width:
+                                                                                                        "48px"
+                                                                                                    }
+                                                                                                  }
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "v-card-title",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                                    staticStyle: {
+                                                                                                      color:
+                                                                                                        "#FF3D00"
+                                                                                                    }
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      "Знаменатель:"
+                                                                                                    )
+                                                                                                  ]
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "p",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "ma-0 pa-0"
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      _vm._s(
+                                                                                                        Lesson[0]
+                                                                                                      )
+                                                                                                    )
+                                                                                                  ]
+                                                                                                ),
+                                                                                                _vm._v(
+                                                                                                  " "
+                                                                                                ),
+                                                                                                _c(
+                                                                                                  "small",
+                                                                                                  {
+                                                                                                    staticClass:
+                                                                                                      "font-weight-light",
+                                                                                                    attrs: {
+                                                                                                      "ma-0":
+                                                                                                        "",
+                                                                                                      "pa-0":
+                                                                                                        ""
+                                                                                                    }
+                                                                                                  },
+                                                                                                  [
+                                                                                                    _vm._v(
+                                                                                                      _vm._s(
+                                                                                                        _vm
+                                                                                                          .arrschedule[
+                                                                                                          item
+                                                                                                        ][
+                                                                                                          n
+                                                                                                        ]
+                                                                                                          .Teacher[
+                                                                                                          l1
+                                                                                                        ][0]
+                                                                                                      ) +
+                                                                                                        ", " +
+                                                                                                        _vm._s(
+                                                                                                          _vm
+                                                                                                            .arrschedule[
+                                                                                                            item
+                                                                                                          ][
+                                                                                                            n
+                                                                                                          ]
+                                                                                                            .Teacher[
+                                                                                                            l1
+                                                                                                          ][1]
+                                                                                                        )
+                                                                                                    )
+                                                                                                  ]
+                                                                                                )
+                                                                                              ],
+                                                                                              1
+                                                                                            )
+                                                                                          ]
+                                                                                        )
+                                                                                      : _vm._e()
+                                                                                  ],
+                                                                                  1
+                                                                                )
+                                                                              : _vm._e()
+                                                                          ],
+                                                                          1
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            Lesson == null
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    l1 == 0
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#4066FF"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Числитель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm.nullDis
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    l1 == 1
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-divider",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "my-2",
+                                                                                    attrs: {
+                                                                                      width:
+                                                                                        "48px"
+                                                                                    }
+                                                                                  }
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Знаменатель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm.nullDis
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e(),
+                                                            _vm._v(" "),
+                                                            typeof Lesson !=
+                                                            "object"
+                                                              ? _c(
+                                                                  "v-list",
+                                                                  {
+                                                                    staticClass:
+                                                                      "ma-0 pa-0"
+                                                                  },
+                                                                  [
+                                                                    l1 == 0
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#4066FF"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Числитель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        Lesson
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "small",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "font-weight-light",
+                                                                                    attrs: {
+                                                                                      "ma-0":
+                                                                                        "",
+                                                                                      "pa-0":
+                                                                                        ""
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Teacher[
+                                                                                          l1
+                                                                                        ]
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    l1 == 1
+                                                                      ? _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticClass:
+                                                                              "ma-0 pa-0"
+                                                                          },
+                                                                          [
+                                                                            _c(
+                                                                              "div",
+                                                                              {
+                                                                                staticClass:
+                                                                                  "ma-0 pa-0"
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-divider",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "my-2",
+                                                                                    attrs: {
+                                                                                      width:
+                                                                                        "48px"
+                                                                                    }
+                                                                                  }
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "v-card-title",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "subtitle-1 ma-0 pa-0",
+                                                                                    staticStyle: {
+                                                                                      color:
+                                                                                        "#FF3D00"
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      "Знаменатель:"
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "p",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "ma-0 pa-0"
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        Lesson
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                ),
+                                                                                _vm._v(
+                                                                                  " "
+                                                                                ),
+                                                                                _c(
+                                                                                  "small",
+                                                                                  {
+                                                                                    staticClass:
+                                                                                      "font-weight-light",
+                                                                                    attrs: {
+                                                                                      "ma-0":
+                                                                                        "",
+                                                                                      "pa-0":
+                                                                                        ""
+                                                                                    }
+                                                                                  },
+                                                                                  [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        _vm
+                                                                                          .arrschedule[
+                                                                                          item
+                                                                                        ][
+                                                                                          n
+                                                                                        ]
+                                                                                          .Teacher[
+                                                                                          l1
+                                                                                        ]
+                                                                                      )
+                                                                                    )
+                                                                                  ]
+                                                                                )
+                                                                              ],
+                                                                              1
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _vm._e()
+                                                          ],
+                                                          1
+                                                        )
+                                                      }
+                                                    )
+                                                  ],
+                                                  2
+                                                )
+                                              : _c(
+                                                  "v-list",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _vm.callschedule[
+                                                      _vm.arrschedule[item]
+                                                        .Place
+                                                    ].call_schedule[n] !=
+                                                      null &&
+                                                    _vm.callschedule[
+                                                      _vm.arrschedule[item]
+                                                        .Place
+                                                    ].call_schedule[n] != ""
+                                                      ? _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-card-title",
+                                                              {
+                                                                staticClass:
+                                                                  "subtitle-1 ma-0 pa-0",
+                                                                staticStyle: {
+                                                                  color:
+                                                                    "#FF3D00"
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(n) +
+                                                                    " пара - " +
+                                                                    _vm._s(
+                                                                      _vm
+                                                                        .callschedule[
+                                                                        _vm
+                                                                          .arrschedule[
+                                                                          item
+                                                                        ]
+                                                                          .Place -
+                                                                          1
+                                                                      ]
+                                                                        .call_schedule[
+                                                                        n
+                                                                      ]
+                                                                    )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      : _c(
+                                                          "v-list-item",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(n) +
+                                                                " пара - расписание звонка отсутствует!"
+                                                            )
+                                                          ]
+                                                        ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-list-item",
+                                                      {
+                                                        staticClass: "ma-0 pa-0"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "ma-0 pa-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "p",
+                                                              {
+                                                                staticClass:
+                                                                  "ma-0 pa-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Lesson
+                                                                  )
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "small",
+                                                              {
+                                                                staticClass:
+                                                                  "font-weight-light",
+                                                                attrs: {
+                                                                  "ma-0": "",
+                                                                  "pa-0": ""
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm
+                                                                      .arrschedule[
+                                                                      item
+                                                                    ][n].Teacher
+                                                                  )
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                          ],
+                                          1
+                                        )
+                                      : _c(
+                                          "v-list",
+                                          {
+                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
+                                          },
+                                          [
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != null &&
+                                            _vm.callschedule[
+                                              _vm.arrschedule[item].Place
+                                            ].call_schedule[n] != ""
+                                              ? _c(
+                                                  "v-list-item",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - " +
+                                                            _vm._s(
+                                                              _vm.callschedule[
+                                                                _vm.arrschedule[
+                                                                  item
+                                                                ].Place - 1
+                                                              ].call_schedule[n]
+                                                            )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              : _c(
+                                                  "v-list-item",
+                                                  { staticClass: "ma-0 pa-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-title",
+                                                      {
+                                                        staticClass:
+                                                          "subtitle-1 ma-0 pa-0",
+                                                        staticStyle: {
+                                                          color: "#FF3D00"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(n) +
+                                                            " пара - расписание звонка отсутствует!"
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              { staticClass: "ma-0 pa-0" },
+                                              [_vm._v(_vm._s(_vm.nullDis))]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                    _vm._v(" "),
+                                    _c("v-divider", {
+                                      staticClass: "my-1 ma-0 pa-0"
+                                    })
+                                  ],
+                                  1
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                }),
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.load == true
+        ? _c(
+            "v-row",
+            {
+              staticClass: "pa-0 mt-5 align-self-center justify-center",
+              attrs: { sm: "2", md: "0" }
+            },
+            [
+              _c("v-progress-circular", {
+                attrs: {
+                  disabled: _vm.load,
+                  indeterminate: "",
+                  color: "primary"
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=template&id=893103fa&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=template&id=893103fa& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15260,2259 +15909,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=template&id=01b66523&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=template&id=01b66523& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    { attrs: { fluid: "" } },
-    _vm._l(_vm.items, function(item) {
-      return _c(
-        "v-row",
-        { key: item, attrs: { align: "center", justify: "center" } },
-        [
-          _c(
-            "v-col",
-            { attrs: { cols: "12" } },
-            [
-              _c("v-hover", {
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "default",
-                      fn: function(ref) {
-                        var hover = ref.hover
-                        return [
-                          _c(
-                            "v-card",
-                            {
-                              staticClass: "mx-auto",
-                              attrs: {
-                                elevation: hover ? 10 : 5,
-                                height: "auto",
-                                width: "auto"
-                              }
-                            },
-                            [
-                              _c(
-                                "v-card-title",
-                                {
-                                  staticClass: "subtitle-1",
-                                  staticStyle: { color: "#FF3D00" }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(item.group) +
-                                      " - " +
-                                      _vm._s(item.date)
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("v-divider", { staticClass: "my-0" }),
-                              _vm._v(" "),
-                              _c("v-simple-table", [
-                                _c("thead", [
-                                  _c("tr", [
-                                    _c("th", { staticClass: "text-left" }, [
-                                      _vm._v("№")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("th", { staticClass: "text-left" }, [
-                                      _vm._v("Что заменяют")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("th", { staticClass: "text-left" }, [
-                                      _vm._v("На что заменяют")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("th", { staticClass: "text-left" }, [
-                                      _vm._v("Дата")
-                                    ])
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "tbody",
-                                  { attrs: { grow: "" } },
-                                  _vm._l(_vm.z, function(z1) {
-                                    return _c("tr", { key: z1.number }, [
-                                      _c("td", [_vm._v(_vm._s(z1.number))]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(z1.original) +
-                                            " (" +
-                                            _vm._s(z1.originalt) +
-                                            ")"
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(z1.newp) +
-                                            " (" +
-                                            _vm._s(z1.newpt) +
-                                            ")"
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [_vm._v(_vm._s(z1.date))])
-                                    ])
-                                  }),
-                                  0
-                                )
-                              ])
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ],
-                  null,
-                  true
-                )
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    }),
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TimeTable.vue?vue&type=template&id=84fa70fe&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/TimeTable.vue?vue&type=template&id=84fa70fe& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    { attrs: { fluid: "" } },
-    [
-      _c(
-        "v-row",
-        { attrs: { align: "center" } },
-        [
-          _c(
-            "v-container",
-            [
-              _c("v-autocomplete", {
-                attrs: {
-                  label: "Отделения",
-                  solo: "",
-                  items: _vm.arrdepartaments,
-                  "item-text": "dep_name_full",
-                  "return-object": ""
-                },
-                on: {
-                  change: function($event) {
-                    return _vm.changeGroups(_vm.departament.id)
-                  }
-                },
-                model: {
-                  value: _vm.departament,
-                  callback: function($$v) {
-                    _vm.departament = $$v
-                  },
-                  expression: "departament"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-autocomplete", {
-                attrs: {
-                  label: "Группа",
-                  solo: "",
-                  items: _vm.arrgroups,
-                  "item-text": "group_name",
-                  "return-object": ""
-                },
-                model: {
-                  value: _vm.casegroup,
-                  callback: function($$v) {
-                    _vm.casegroup = $$v
-                  },
-                  expression: "casegroup"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("v-divider", { staticClass: "ma-0" }),
-      _vm._v(" "),
-      _vm.arrschedule != null && _vm.load == false
-        ? _c(
-            "v-data",
-            {
-              attrs: { "items-per-page": _vm.itemsPerPage },
-              on: {
-                "update:itemsPerPage": function($event) {
-                  _vm.itemsPerPage = $event
-                },
-                "update:items-per-page": function($event) {
-                  _vm.itemsPerPage = $event
-                }
-              }
-            },
-            [
-              _c(
-                "v-row",
-                _vm._l(_vm.arrday, function(item) {
-                  return _c(
-                    "v-col",
-                    {
-                      key: item,
-                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
-                    },
-                    [
-                      _c(
-                        "v-card",
-                        { staticClass: "ma-1 pa-0" },
-                        [
-                          _c(
-                            "v-card-title",
-                            {
-                              staticClass: "mb-0 pb-0",
-                              staticStyle: { color: "#FF3D00" }
-                            },
-                            [_vm._v(_vm._s(item))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list",
-                            { staticClass: "ma-0 pa-4", attrs: { dense: "" } },
-                            [
-                              _c(
-                                "small",
-                                { staticClass: "font-weight-light" },
-                                [
-                                  _vm._v(
-                                    "Место проведения: " +
-                                      _vm._s(
-                                        _vm.places[
-                                          _vm.arrschedule[item].Place - 1
-                                        ].place_name
-                                      )
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("v-divider", { staticClass: "my-2" }),
-                              _vm._v(" "),
-                              _vm._l(8, function(n, i) {
-                                return _c(
-                                  "div",
-                                  { key: i, staticClass: "ma-0 pa-0" },
-                                  [
-                                    _vm.arrschedule[item][n].Lesson != null &&
-                                    _vm.arrschedule[item][n].Lesson != ""
-                                      ? _c(
-                                          "v-list",
-                                          {
-                                            staticClass: "ma-0 ml-3 mr-3 pa-0"
-                                          },
-                                          [
-                                            typeof _vm.arrschedule[item][n]
-                                              .Lesson == "object" &&
-                                            _vm.arrschedule[item][n].Lesson !=
-                                              null
-                                              ? _c(
-                                                  "v-list",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-title",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-1 ma-0 pa-0",
-                                                        staticStyle: {
-                                                          color: "#FF3D00"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(n) +
-                                                            " пара - " +
-                                                            _vm._s(
-                                                              _vm.callschedule[
-                                                                _vm.arrschedule[
-                                                                  item
-                                                                ].Place - 1
-                                                              ].call_schedule[n]
-                                                            )
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _vm._l(
-                                                      _vm.arrschedule[item][n]
-                                                        .Lesson,
-                                                      function(Lesson, l1) {
-                                                        return _c(
-                                                          "v-list",
-                                                          {
-                                                            key: l1,
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            typeof Lesson ==
-                                                            "object"
-                                                              ? _c(
-                                                                  "v-list",
-                                                                  {
-                                                                    staticClass:
-                                                                      "ma-0 pa-0"
-                                                                  },
-                                                                  [
-                                                                    Lesson !=
-                                                                    null
-                                                                      ? _c(
-                                                                          "v-list",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            l1 ==
-                                                                            0
-                                                                              ? _c(
-                                                                                  "v-list-item",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _c(
-                                                                                      "div",
-                                                                                      {
-                                                                                        staticClass:
-                                                                                          "ma-0 pa-0"
-                                                                                      },
-                                                                                      [
-                                                                                        _vm
-                                                                                          .arrschedule[
-                                                                                          item
-                                                                                        ][
-                                                                                          n
-                                                                                        ]
-                                                                                          .Lesson
-                                                                                          .length >
-                                                                                        1
-                                                                                          ? _c(
-                                                                                              "v-card-title",
-                                                                                              {
-                                                                                                staticClass:
-                                                                                                  "subtitle-1 ma-0 pa-0",
-                                                                                                staticStyle: {
-                                                                                                  color:
-                                                                                                    "#4066FF"
-                                                                                                }
-                                                                                              },
-                                                                                              [
-                                                                                                _vm._v(
-                                                                                                  "Числитель:"
-                                                                                                )
-                                                                                              ]
-                                                                                            )
-                                                                                          : _vm._e(),
-                                                                                        _vm._v(
-                                                                                          " "
-                                                                                        ),
-                                                                                        _c(
-                                                                                          "p",
-                                                                                          {
-                                                                                            staticClass:
-                                                                                              "ma-0 pa-0"
-                                                                                          },
-                                                                                          [
-                                                                                            _vm._v(
-                                                                                              _vm._s(
-                                                                                                Lesson[0]
-                                                                                              )
-                                                                                            )
-                                                                                          ]
-                                                                                        ),
-                                                                                        _vm._v(
-                                                                                          " "
-                                                                                        ),
-                                                                                        _c(
-                                                                                          "small",
-                                                                                          {
-                                                                                            staticClass:
-                                                                                              "font-weight-light",
-                                                                                            attrs: {
-                                                                                              "ma-0":
-                                                                                                "",
-                                                                                              "pa-0":
-                                                                                                ""
-                                                                                            }
-                                                                                          },
-                                                                                          [
-                                                                                            _vm._v(
-                                                                                              _vm._s(
-                                                                                                _vm
-                                                                                                  .arrschedule[
-                                                                                                  item
-                                                                                                ][
-                                                                                                  n
-                                                                                                ]
-                                                                                                  .Teacher[
-                                                                                                  l1
-                                                                                                ][0]
-                                                                                              ) +
-                                                                                                ", " +
-                                                                                                _vm._s(
-                                                                                                  _vm
-                                                                                                    .arrschedule[
-                                                                                                    item
-                                                                                                  ][
-                                                                                                    n
-                                                                                                  ]
-                                                                                                    .Teacher[
-                                                                                                    l1
-                                                                                                  ][1]
-                                                                                                )
-                                                                                            )
-                                                                                          ]
-                                                                                        )
-                                                                                      ],
-                                                                                      1
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              : _vm._e(),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            Lesson !=
-                                                                            null
-                                                                              ? _c(
-                                                                                  "v-list",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    l1 ==
-                                                                                    1
-                                                                                      ? _c(
-                                                                                          "v-list-item",
-                                                                                          {
-                                                                                            staticClass:
-                                                                                              "ma-0 pa-0"
-                                                                                          },
-                                                                                          [
-                                                                                            _c(
-                                                                                              "div",
-                                                                                              {
-                                                                                                staticClass:
-                                                                                                  "ma-0 pa-0"
-                                                                                              },
-                                                                                              [
-                                                                                                _c(
-                                                                                                  "v-divider",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "my-2",
-                                                                                                    attrs: {
-                                                                                                      width:
-                                                                                                        "48px"
-                                                                                                    }
-                                                                                                  }
-                                                                                                ),
-                                                                                                _vm._v(
-                                                                                                  " "
-                                                                                                ),
-                                                                                                _c(
-                                                                                                  "v-card-title",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                                    staticStyle: {
-                                                                                                      color:
-                                                                                                        "#FF3D00"
-                                                                                                    }
-                                                                                                  },
-                                                                                                  [
-                                                                                                    _vm._v(
-                                                                                                      "Знаменатель:"
-                                                                                                    )
-                                                                                                  ]
-                                                                                                ),
-                                                                                                _vm._v(
-                                                                                                  " "
-                                                                                                ),
-                                                                                                _c(
-                                                                                                  "p",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "ma-0 pa-0"
-                                                                                                  },
-                                                                                                  [
-                                                                                                    _vm._v(
-                                                                                                      _vm._s(
-                                                                                                        Lesson[0]
-                                                                                                      )
-                                                                                                    )
-                                                                                                  ]
-                                                                                                ),
-                                                                                                _vm._v(
-                                                                                                  " "
-                                                                                                ),
-                                                                                                _c(
-                                                                                                  "small",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "font-weight-light",
-                                                                                                    attrs: {
-                                                                                                      "ma-0":
-                                                                                                        "",
-                                                                                                      "pa-0":
-                                                                                                        ""
-                                                                                                    }
-                                                                                                  },
-                                                                                                  [
-                                                                                                    _vm._v(
-                                                                                                      _vm._s(
-                                                                                                        _vm
-                                                                                                          .arrschedule[
-                                                                                                          item
-                                                                                                        ][
-                                                                                                          n
-                                                                                                        ]
-                                                                                                          .Teacher[
-                                                                                                          l1
-                                                                                                        ][0]
-                                                                                                      ) +
-                                                                                                        ", " +
-                                                                                                        _vm._s(
-                                                                                                          _vm
-                                                                                                            .arrschedule[
-                                                                                                            item
-                                                                                                          ][
-                                                                                                            n
-                                                                                                          ]
-                                                                                                            .Teacher[
-                                                                                                            l1
-                                                                                                          ][1]
-                                                                                                        )
-                                                                                                    )
-                                                                                                  ]
-                                                                                                )
-                                                                                              ],
-                                                                                              1
-                                                                                            )
-                                                                                          ]
-                                                                                        )
-                                                                                      : _vm._e()
-                                                                                  ],
-                                                                                  1
-                                                                                )
-                                                                              : _vm._e()
-                                                                          ],
-                                                                          1
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e(),
-                                                            _vm._v(" "),
-                                                            Lesson == null
-                                                              ? _c(
-                                                                  "v-list",
-                                                                  {
-                                                                    staticClass:
-                                                                      "ma-0 pa-0"
-                                                                  },
-                                                                  [
-                                                                    l1 == 0
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#4066FF"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Числитель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm.nullDis
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e(),
-                                                                    _vm._v(" "),
-                                                                    l1 == 1
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-divider",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "my-2",
-                                                                                    attrs: {
-                                                                                      width:
-                                                                                        "48px"
-                                                                                    }
-                                                                                  }
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#FF3D00"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Знаменатель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm.nullDis
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e(),
-                                                            _vm._v(" "),
-                                                            typeof Lesson !=
-                                                            "object"
-                                                              ? _c(
-                                                                  "v-list",
-                                                                  {
-                                                                    staticClass:
-                                                                      "ma-0 pa-0"
-                                                                  },
-                                                                  [
-                                                                    l1 == 0
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#4066FF"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Числитель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        Lesson
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "small",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "font-weight-light",
-                                                                                    attrs: {
-                                                                                      "ma-0":
-                                                                                        "",
-                                                                                      "pa-0":
-                                                                                        ""
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm
-                                                                                          .arrschedule[
-                                                                                          item
-                                                                                        ][
-                                                                                          n
-                                                                                        ]
-                                                                                          .Teacher[
-                                                                                          l1
-                                                                                        ]
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e(),
-                                                                    _vm._v(" "),
-                                                                    l1 == 1
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-divider",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "my-2",
-                                                                                    attrs: {
-                                                                                      width:
-                                                                                        "48px"
-                                                                                    }
-                                                                                  }
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#FF3D00"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Знаменатель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        Lesson
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "small",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "font-weight-light",
-                                                                                    attrs: {
-                                                                                      "ma-0":
-                                                                                        "",
-                                                                                      "pa-0":
-                                                                                        ""
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm
-                                                                                          .arrschedule[
-                                                                                          item
-                                                                                        ][
-                                                                                          n
-                                                                                        ]
-                                                                                          .Teacher[
-                                                                                          l1
-                                                                                        ]
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e()
-                                                          ],
-                                                          1
-                                                        )
-                                                      }
-                                                    )
-                                                  ],
-                                                  2
-                                                )
-                                              : _c(
-                                                  "v-list",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _vm.callschedule[
-                                                      _vm.arrschedule[item]
-                                                        .Place
-                                                    ].call_schedule[n] !=
-                                                      null &&
-                                                    _vm.callschedule[
-                                                      _vm.arrschedule[item]
-                                                        .Place
-                                                    ].call_schedule[n] != ""
-                                                      ? _c(
-                                                          "v-list-item",
-                                                          {
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "v-card-title",
-                                                              {
-                                                                staticClass:
-                                                                  "subtitle-1 ma-0 pa-0",
-                                                                staticStyle: {
-                                                                  color:
-                                                                    "#FF3D00"
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(n) +
-                                                                    " пара - " +
-                                                                    _vm._s(
-                                                                      _vm
-                                                                        .callschedule[
-                                                                        _vm
-                                                                          .arrschedule[
-                                                                          item
-                                                                        ]
-                                                                          .Place -
-                                                                          1
-                                                                      ]
-                                                                        .call_schedule[
-                                                                        n
-                                                                      ]
-                                                                    )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      : _c(
-                                                          "v-list-item",
-                                                          {
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(n) +
-                                                                " пара - расписание звонка отсутствует!"
-                                                            )
-                                                          ]
-                                                        ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-list-item",
-                                                      {
-                                                        staticClass: "ma-0 pa-0"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "p",
-                                                              {
-                                                                staticClass:
-                                                                  "ma-0 pa-0"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    _vm
-                                                                      .arrschedule[
-                                                                      item
-                                                                    ][n].Lesson
-                                                                  )
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "small",
-                                                              {
-                                                                staticClass:
-                                                                  "font-weight-light",
-                                                                attrs: {
-                                                                  "ma-0": "",
-                                                                  "pa-0": ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    _vm
-                                                                      .arrschedule[
-                                                                      item
-                                                                    ][n].Teacher
-                                                                  )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                          ],
-                                          1
-                                        )
-                                      : _c(
-                                          "v-list",
-                                          {
-                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
-                                          },
-                                          [
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != null &&
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != ""
-                                              ? _c(
-                                                  "v-list-item",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-title",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-1 ma-0 pa-0",
-                                                        staticStyle: {
-                                                          color: "#FF3D00"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(n) +
-                                                            " пара - " +
-                                                            _vm._s(
-                                                              _vm.callschedule[
-                                                                _vm.arrschedule[
-                                                                  item
-                                                                ].Place - 1
-                                                              ].call_schedule[n]
-                                                            )
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              : _c(
-                                                  "v-list-item",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-title",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-1 ma-0 pa-0",
-                                                        staticStyle: {
-                                                          color: "#FF3D00"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(n) +
-                                                            " пара - расписание звонка отсутствует!"
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              { staticClass: "ma-0 pa-0" },
-                                              [_vm._v(_vm._s(_vm.nullDis))]
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                    _vm._v(" "),
-                                    _c("v-divider", {
-                                      staticClass: "my-1 ma-0 pa-0"
-                                    })
-                                  ],
-                                  1
-                                )
-                              })
-                            ],
-                            2
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                }),
-                1
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.load == true
-        ? _c(
-            "v-row",
-            {
-              staticClass: "pa-0 mt-5 align-self-center justify-center",
-              attrs: { sm: "2", md: "0" }
-            },
-            [
-              _c("v-progress-circular", {
-                attrs: {
-                  disabled: _vm.load,
-                  indeterminate: "",
-                  color: "primary"
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e()
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Timetable.vue?vue&type=template&id=4610a7a1&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/Components/Timetable.vue?vue&type=template&id=4610a7a1& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    { attrs: { fluid: "" } },
-    [
-      _c(
-        "v-row",
-        { attrs: { align: "center" } },
-        [
-          _c(
-            "v-container",
-            [
-              _c("v-autocomplete", {
-                attrs: {
-                  label: "Отделения",
-                  solo: "",
-                  items: _vm.arrdepartaments,
-                  "item-text": "dep_name_full",
-                  "return-object": ""
-                },
-                on: {
-                  change: function($event) {
-                    return _vm.changeGroups(_vm.departament.id)
-                  }
-                },
-                model: {
-                  value: _vm.departament,
-                  callback: function($$v) {
-                    _vm.departament = $$v
-                  },
-                  expression: "departament"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-autocomplete", {
-                attrs: {
-                  label: "Группа",
-                  solo: "",
-                  items: _vm.arrgroups,
-                  "item-text": "group_name",
-                  "return-object": ""
-                },
-                model: {
-                  value: _vm.casegroup,
-                  callback: function($$v) {
-                    _vm.casegroup = $$v
-                  },
-                  expression: "casegroup"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("v-divider", { staticClass: "ma-0" }),
-      _vm._v(" "),
-      _vm.arrschedule != null && _vm.load == false
-        ? _c(
-            "v-data",
-            {
-              attrs: { "items-per-page": _vm.itemsPerPage },
-              on: {
-                "update:itemsPerPage": function($event) {
-                  _vm.itemsPerPage = $event
-                },
-                "update:items-per-page": function($event) {
-                  _vm.itemsPerPage = $event
-                }
-              }
-            },
-            [
-              _c(
-                "v-row",
-                _vm._l(_vm.arrday, function(item) {
-                  return _c(
-                    "v-col",
-                    {
-                      key: item,
-                      attrs: { cols: "12", sm: "6", md: "2", lg: "4" }
-                    },
-                    [
-                      _c(
-                        "v-card",
-                        { staticClass: "ma-1 pa-0" },
-                        [
-                          _c(
-                            "v-card-title",
-                            {
-                              staticClass: "mb-0 pb-0",
-                              staticStyle: { color: "#FF3D00" }
-                            },
-                            [_vm._v(_vm._s(item))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list",
-                            { staticClass: "ma-0 pa-4", attrs: { dense: "" } },
-                            [
-                              _c(
-                                "small",
-                                { staticClass: "font-weight-light" },
-                                [
-                                  _vm._v(
-                                    "Место проведения: " +
-                                      _vm._s(
-                                        _vm.places[
-                                          _vm.arrschedule[item].Place - 1
-                                        ].place_name
-                                      )
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("v-divider", { staticClass: "my-2" }),
-                              _vm._v(" "),
-                              _vm._l(8, function(n, i) {
-                                return _c(
-                                  "div",
-                                  { key: i, staticClass: "ma-0 pa-0" },
-                                  [
-                                    _vm.arrschedule[item][n].Lesson != null &&
-                                    _vm.arrschedule[item][n].Lesson != ""
-                                      ? _c(
-                                          "v-list",
-                                          {
-                                            staticClass: "ma-0 ml-3 mr-3 pa-0"
-                                          },
-                                          [
-                                            typeof _vm.arrschedule[item][n]
-                                              .Lesson == "object" &&
-                                            _vm.arrschedule[item][n].Lesson !=
-                                              null
-                                              ? _c(
-                                                  "v-list",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-title",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-1 ma-0 pa-0",
-                                                        staticStyle: {
-                                                          color: "#FF3D00"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(n) +
-                                                            " пара - " +
-                                                            _vm._s(
-                                                              _vm.callschedule[
-                                                                _vm.arrschedule[
-                                                                  item
-                                                                ].Place - 1
-                                                              ].call_schedule[n]
-                                                            )
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _vm._l(
-                                                      _vm.arrschedule[item][n]
-                                                        .Lesson,
-                                                      function(Lesson, l1) {
-                                                        return _c(
-                                                          "v-list",
-                                                          {
-                                                            key: l1,
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            typeof Lesson ==
-                                                            "object"
-                                                              ? _c(
-                                                                  "v-list",
-                                                                  {
-                                                                    staticClass:
-                                                                      "ma-0 pa-0"
-                                                                  },
-                                                                  [
-                                                                    Lesson !=
-                                                                    null
-                                                                      ? _c(
-                                                                          "v-list",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            l1 ==
-                                                                            0
-                                                                              ? _c(
-                                                                                  "v-list-item",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _c(
-                                                                                      "div",
-                                                                                      {
-                                                                                        staticClass:
-                                                                                          "ma-0 pa-0"
-                                                                                      },
-                                                                                      [
-                                                                                        _vm
-                                                                                          .arrschedule[
-                                                                                          item
-                                                                                        ][
-                                                                                          n
-                                                                                        ]
-                                                                                          .Lesson
-                                                                                          .length >
-                                                                                        1
-                                                                                          ? _c(
-                                                                                              "v-card-title",
-                                                                                              {
-                                                                                                staticClass:
-                                                                                                  "subtitle-1 ma-0 pa-0",
-                                                                                                staticStyle: {
-                                                                                                  color:
-                                                                                                    "#4066FF"
-                                                                                                }
-                                                                                              },
-                                                                                              [
-                                                                                                _vm._v(
-                                                                                                  "Числитель:"
-                                                                                                )
-                                                                                              ]
-                                                                                            )
-                                                                                          : _vm._e(),
-                                                                                        _vm._v(
-                                                                                          " "
-                                                                                        ),
-                                                                                        _c(
-                                                                                          "p",
-                                                                                          {
-                                                                                            staticClass:
-                                                                                              "ma-0 pa-0"
-                                                                                          },
-                                                                                          [
-                                                                                            _vm._v(
-                                                                                              _vm._s(
-                                                                                                Lesson[0]
-                                                                                              )
-                                                                                            )
-                                                                                          ]
-                                                                                        ),
-                                                                                        _vm._v(
-                                                                                          " "
-                                                                                        ),
-                                                                                        _c(
-                                                                                          "small",
-                                                                                          {
-                                                                                            staticClass:
-                                                                                              "font-weight-light",
-                                                                                            attrs: {
-                                                                                              "ma-0":
-                                                                                                "",
-                                                                                              "pa-0":
-                                                                                                ""
-                                                                                            }
-                                                                                          },
-                                                                                          [
-                                                                                            _vm._v(
-                                                                                              _vm._s(
-                                                                                                _vm
-                                                                                                  .arrschedule[
-                                                                                                  item
-                                                                                                ][
-                                                                                                  n
-                                                                                                ]
-                                                                                                  .Teacher[
-                                                                                                  l1
-                                                                                                ][0]
-                                                                                              ) +
-                                                                                                ", " +
-                                                                                                _vm._s(
-                                                                                                  _vm
-                                                                                                    .arrschedule[
-                                                                                                    item
-                                                                                                  ][
-                                                                                                    n
-                                                                                                  ]
-                                                                                                    .Teacher[
-                                                                                                    l1
-                                                                                                  ][1]
-                                                                                                )
-                                                                                            )
-                                                                                          ]
-                                                                                        )
-                                                                                      ],
-                                                                                      1
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              : _vm._e(),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            Lesson !=
-                                                                            null
-                                                                              ? _c(
-                                                                                  "v-list",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    l1 ==
-                                                                                    1
-                                                                                      ? _c(
-                                                                                          "v-list-item",
-                                                                                          {
-                                                                                            staticClass:
-                                                                                              "ma-0 pa-0"
-                                                                                          },
-                                                                                          [
-                                                                                            _c(
-                                                                                              "div",
-                                                                                              {
-                                                                                                staticClass:
-                                                                                                  "ma-0 pa-0"
-                                                                                              },
-                                                                                              [
-                                                                                                _c(
-                                                                                                  "v-divider",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "my-2",
-                                                                                                    attrs: {
-                                                                                                      width:
-                                                                                                        "48px"
-                                                                                                    }
-                                                                                                  }
-                                                                                                ),
-                                                                                                _vm._v(
-                                                                                                  " "
-                                                                                                ),
-                                                                                                _c(
-                                                                                                  "v-card-title",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                                    staticStyle: {
-                                                                                                      color:
-                                                                                                        "#FF3D00"
-                                                                                                    }
-                                                                                                  },
-                                                                                                  [
-                                                                                                    _vm._v(
-                                                                                                      "Знаменатель:"
-                                                                                                    )
-                                                                                                  ]
-                                                                                                ),
-                                                                                                _vm._v(
-                                                                                                  " "
-                                                                                                ),
-                                                                                                _c(
-                                                                                                  "p",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "ma-0 pa-0"
-                                                                                                  },
-                                                                                                  [
-                                                                                                    _vm._v(
-                                                                                                      _vm._s(
-                                                                                                        Lesson[0]
-                                                                                                      )
-                                                                                                    )
-                                                                                                  ]
-                                                                                                ),
-                                                                                                _vm._v(
-                                                                                                  " "
-                                                                                                ),
-                                                                                                _c(
-                                                                                                  "small",
-                                                                                                  {
-                                                                                                    staticClass:
-                                                                                                      "font-weight-light",
-                                                                                                    attrs: {
-                                                                                                      "ma-0":
-                                                                                                        "",
-                                                                                                      "pa-0":
-                                                                                                        ""
-                                                                                                    }
-                                                                                                  },
-                                                                                                  [
-                                                                                                    _vm._v(
-                                                                                                      _vm._s(
-                                                                                                        _vm
-                                                                                                          .arrschedule[
-                                                                                                          item
-                                                                                                        ][
-                                                                                                          n
-                                                                                                        ]
-                                                                                                          .Teacher[
-                                                                                                          l1
-                                                                                                        ][0]
-                                                                                                      ) +
-                                                                                                        ", " +
-                                                                                                        _vm._s(
-                                                                                                          _vm
-                                                                                                            .arrschedule[
-                                                                                                            item
-                                                                                                          ][
-                                                                                                            n
-                                                                                                          ]
-                                                                                                            .Teacher[
-                                                                                                            l1
-                                                                                                          ][1]
-                                                                                                        )
-                                                                                                    )
-                                                                                                  ]
-                                                                                                )
-                                                                                              ],
-                                                                                              1
-                                                                                            )
-                                                                                          ]
-                                                                                        )
-                                                                                      : _vm._e()
-                                                                                  ],
-                                                                                  1
-                                                                                )
-                                                                              : _vm._e()
-                                                                          ],
-                                                                          1
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e(),
-                                                            _vm._v(" "),
-                                                            Lesson == null
-                                                              ? _c(
-                                                                  "v-list",
-                                                                  {
-                                                                    staticClass:
-                                                                      "ma-0 pa-0"
-                                                                  },
-                                                                  [
-                                                                    l1 == 0
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#4066FF"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Числитель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm.nullDis
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e(),
-                                                                    _vm._v(" "),
-                                                                    l1 == 1
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-divider",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "my-2",
-                                                                                    attrs: {
-                                                                                      width:
-                                                                                        "48px"
-                                                                                    }
-                                                                                  }
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#FF3D00"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Знаменатель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm.nullDis
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e(),
-                                                            _vm._v(" "),
-                                                            typeof Lesson !=
-                                                            "object"
-                                                              ? _c(
-                                                                  "v-list",
-                                                                  {
-                                                                    staticClass:
-                                                                      "ma-0 pa-0"
-                                                                  },
-                                                                  [
-                                                                    l1 == 0
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#4066FF"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Числитель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        Lesson
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "small",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "font-weight-light",
-                                                                                    attrs: {
-                                                                                      "ma-0":
-                                                                                        "",
-                                                                                      "pa-0":
-                                                                                        ""
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm
-                                                                                          .arrschedule[
-                                                                                          item
-                                                                                        ][
-                                                                                          n
-                                                                                        ]
-                                                                                          .Teacher[
-                                                                                          l1
-                                                                                        ]
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e(),
-                                                                    _vm._v(" "),
-                                                                    l1 == 1
-                                                                      ? _c(
-                                                                          "v-list-item",
-                                                                          {
-                                                                            staticClass:
-                                                                              "ma-0 pa-0"
-                                                                          },
-                                                                          [
-                                                                            _c(
-                                                                              "div",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "ma-0 pa-0"
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-divider",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "my-2",
-                                                                                    attrs: {
-                                                                                      width:
-                                                                                        "48px"
-                                                                                    }
-                                                                                  }
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "v-card-title",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "subtitle-1 ma-0 pa-0",
-                                                                                    staticStyle: {
-                                                                                      color:
-                                                                                        "#FF3D00"
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "Знаменатель:"
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "p",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "ma-0 pa-0"
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        Lesson
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                ),
-                                                                                _vm._v(
-                                                                                  " "
-                                                                                ),
-                                                                                _c(
-                                                                                  "small",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "font-weight-light",
-                                                                                    attrs: {
-                                                                                      "ma-0":
-                                                                                        "",
-                                                                                      "pa-0":
-                                                                                        ""
-                                                                                    }
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      _vm._s(
-                                                                                        _vm
-                                                                                          .arrschedule[
-                                                                                          item
-                                                                                        ][
-                                                                                          n
-                                                                                        ]
-                                                                                          .Teacher[
-                                                                                          l1
-                                                                                        ]
-                                                                                      )
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              : _vm._e()
-                                                          ],
-                                                          1
-                                                        )
-                                                      }
-                                                    )
-                                                  ],
-                                                  2
-                                                )
-                                              : _c(
-                                                  "v-list",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _vm.callschedule[
-                                                      _vm.arrschedule[item]
-                                                        .Place
-                                                    ].call_schedule[n] !=
-                                                      null &&
-                                                    _vm.callschedule[
-                                                      _vm.arrschedule[item]
-                                                        .Place
-                                                    ].call_schedule[n] != ""
-                                                      ? _c(
-                                                          "v-list-item",
-                                                          {
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "v-card-title",
-                                                              {
-                                                                staticClass:
-                                                                  "subtitle-1 ma-0 pa-0",
-                                                                staticStyle: {
-                                                                  color:
-                                                                    "#FF3D00"
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(n) +
-                                                                    " пара - " +
-                                                                    _vm._s(
-                                                                      _vm
-                                                                        .callschedule[
-                                                                        _vm
-                                                                          .arrschedule[
-                                                                          item
-                                                                        ]
-                                                                          .Place -
-                                                                          1
-                                                                      ]
-                                                                        .call_schedule[
-                                                                        n
-                                                                      ]
-                                                                    )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      : _c(
-                                                          "v-list-item",
-                                                          {
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(n) +
-                                                                " пара - расписание звонка отсутствует!"
-                                                            )
-                                                          ]
-                                                        ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-list-item",
-                                                      {
-                                                        staticClass: "ma-0 pa-0"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "ma-0 pa-0"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "p",
-                                                              {
-                                                                staticClass:
-                                                                  "ma-0 pa-0"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    _vm
-                                                                      .arrschedule[
-                                                                      item
-                                                                    ][n].Lesson
-                                                                  )
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "small",
-                                                              {
-                                                                staticClass:
-                                                                  "font-weight-light",
-                                                                attrs: {
-                                                                  "ma-0": "",
-                                                                  "pa-0": ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    _vm
-                                                                      .arrschedule[
-                                                                      item
-                                                                    ][n].Teacher
-                                                                  )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                          ],
-                                          1
-                                        )
-                                      : _c(
-                                          "v-list",
-                                          {
-                                            staticClass: "ma-0 ml-4 mr-4 pa-0"
-                                          },
-                                          [
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != null &&
-                                            _vm.callschedule[
-                                              _vm.arrschedule[item].Place
-                                            ].call_schedule[n] != ""
-                                              ? _c(
-                                                  "v-list-item",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-title",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-1 ma-0 pa-0",
-                                                        staticStyle: {
-                                                          color: "#FF3D00"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(n) +
-                                                            " пара - " +
-                                                            _vm._s(
-                                                              _vm.callschedule[
-                                                                _vm.arrschedule[
-                                                                  item
-                                                                ].Place - 1
-                                                              ].call_schedule[n]
-                                                            )
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              : _c(
-                                                  "v-list-item",
-                                                  { staticClass: "ma-0 pa-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-title",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-1 ma-0 pa-0",
-                                                        staticStyle: {
-                                                          color: "#FF3D00"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(n) +
-                                                            " пара - расписание звонка отсутствует!"
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              { staticClass: "ma-0 pa-0" },
-                                              [_vm._v(_vm._s(_vm.nullDis))]
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                    _vm._v(" "),
-                                    _c("v-divider", {
-                                      staticClass: "my-1 ma-0 pa-0"
-                                    })
-                                  ],
-                                  1
-                                )
-                              })
-                            ],
-                            2
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                }),
-                1
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.load == true
-        ? _c(
-            "v-row",
-            {
-              staticClass: "pa-0 mt-5 align-self-center justify-center",
-              attrs: { sm: "2", md: "0" }
-            },
-            [
-              _c("v-progress-circular", {
-                attrs: {
-                  disabled: _vm.load,
-                  indeterminate: "",
-                  color: "primary"
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e()
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=template&id=f5095c1a&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=template&id=f5095c1a& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=template&id=d65958fe&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=template&id=d65958fe& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17555,10 +15955,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ContimetableComponent.vue?vue&type=template&id=5983e456&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/ContimetableComponent.vue?vue&type=template&id=5983e456& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=template&id=0c4bb1f2&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=template&id=0c4bb1f2& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17631,56 +16031,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=template&id=1ed49656&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=template&id=1ed49656& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-tabs",
-    {
-      attrs: { "background-color": "transparent", color: "basil", grow: "" },
-      model: {
-        value: _vm.tab,
-        callback: function($$v) {
-          _vm.tab = $$v
-        },
-        expression: "tab"
-      }
-    },
-    [
-      _c("v-tab", [_vm._v("Расписание")]),
-      _vm._v(" "),
-      _c("v-tab", [_vm._v("Замены")]),
-      _vm._v(" "),
-      _c("v-tab-item", [_c("TimeTable")], 1),
-      _vm._v(" "),
-      _c("v-tab-item", [_c("TeacherReplacements")], 1)
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TimetableComponent.vue?vue&type=template&id=54d36575&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable/TimetableComponent.vue?vue&type=template&id=54d36575& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=template&id=7f11acfa&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=template&id=7f11acfa& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -68540,26 +66894,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_certificate_ListCertificateComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/certificate/ListCertificateComponent */ "./resources/js/components/certificate/ListCertificateComponent.vue");
 /* harmony import */ var _components_SnackBarComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/SnackBarComponent */ "./resources/js/components/SnackBarComponent.vue");
 /* harmony import */ var _components_expention_Panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/expention/Panel */ "./resources/js/components/expention/Panel.vue");
-/* harmony import */ var _components_timetable_TimetableComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/timetable/TimetableComponent */ "./resources/js/components/timetable/TimetableComponent.vue");
-/* harmony import */ var _components_timetable_TeacherTimetableComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/timetable/TeacherTimetableComponent */ "./resources/js/components/timetable/TeacherTimetableComponent.vue");
-/* harmony import */ var _components_teacherhomework_TeacherHomeworkComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/teacherhomework/TeacherHomeworkComponent */ "./resources/js/components/teacherhomework/TeacherHomeworkComponent.vue");
-/* harmony import */ var _components_timetable_ContimetableComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/timetable/ContimetableComponent */ "./resources/js/components/timetable/ContimetableComponent.vue");
-/* harmony import */ var _components_timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/timetable/ConreplacementsComponent */ "./resources/js/components/timetable/ConreplacementsComponent.vue");
-/* harmony import */ var _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/academicperformance/TeacherAPComponent */ "./resources/js/components/academicperformance/TeacherAPComponent.vue");
-/* harmony import */ var _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/callschedule/ConCallScheduleComponent */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue");
-/* harmony import */ var _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/mainpage/SpecialtyPageComponent */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue");
-/* harmony import */ var _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/mainpage/MainPageComponent */ "./resources/js/components/mainpage/MainPageComponent.vue");
-/* harmony import */ var _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/callschedule/CallScheduleComponent */ "./resources/js/components/callschedule/CallScheduleComponent.vue");
-/* harmony import */ var _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/feedback/RequestsUsersComponent */ "./resources/js/components/feedback/RequestsUsersComponent.vue");
-/* harmony import */ var _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/PanelControlComponent */ "./resources/js/components/PanelControlComponent.vue");
-/* harmony import */ var _components_additionaleducation_RetrainingComponent__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/additionaleducation/RetrainingComponent */ "./resources/js/components/additionaleducation/RetrainingComponent.vue");
-/* harmony import */ var _components_UserManagement__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/UserManagement */ "./resources/js/components/UserManagement.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
-/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _components_timeTablesFolders_TimetableComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/timeTablesFolders/TimetableComponent */ "./resources/js/components/timeTablesFolders/TimetableComponent.vue");
+/* harmony import */ var _components_teacherhomework_TeacherHomeworkComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/teacherhomework/TeacherHomeworkComponent */ "./resources/js/components/teacherhomework/TeacherHomeworkComponent.vue");
+/* harmony import */ var _components_timeTablesFolders_ContimetableComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/timeTablesFolders/ContimetableComponent */ "./resources/js/components/timeTablesFolders/ContimetableComponent.vue");
+/* harmony import */ var _components_timeTablesFolders_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/timeTablesFolders/ConreplacementsComponent */ "./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue");
+/* harmony import */ var _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/academicperformance/TeacherAPComponent */ "./resources/js/components/academicperformance/TeacherAPComponent.vue");
+/* harmony import */ var _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/callschedule/ConCallScheduleComponent */ "./resources/js/components/callschedule/ConCallScheduleComponent.vue");
+/* harmony import */ var _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/mainpage/SpecialtyPageComponent */ "./resources/js/components/mainpage/SpecialtyPageComponent.vue");
+/* harmony import */ var _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/mainpage/MainPageComponent */ "./resources/js/components/mainpage/MainPageComponent.vue");
+/* harmony import */ var _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/callschedule/CallScheduleComponent */ "./resources/js/components/callschedule/CallScheduleComponent.vue");
+/* harmony import */ var _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/feedback/RequestsUsersComponent */ "./resources/js/components/feedback/RequestsUsersComponent.vue");
+/* harmony import */ var _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/PanelControlComponent */ "./resources/js/components/PanelControlComponent.vue");
+/* harmony import */ var _components_additionaleducation_RetrainingComponent__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/additionaleducation/RetrainingComponent */ "./resources/js/components/additionaleducation/RetrainingComponent.vue");
+/* harmony import */ var _components_UserManagement__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/UserManagement */ "./resources/js/components/UserManagement.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -68574,7 +66927,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
 
 
 
@@ -68611,15 +66963,15 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 if (window.user) {
-  _store__WEBPACK_IMPORTED_MODULE_22__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_24__["USER"], user);
-  _store__WEBPACK_IMPORTED_MODULE_22__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_24__["LOGGED"], true);
+  _store__WEBPACK_IMPORTED_MODULE_21__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_23__["USER"], user);
+  _store__WEBPACK_IMPORTED_MODULE_21__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_23__["LOGGED"], true);
 }
 
 new Vue({
   el: '#app',
-  store: _store__WEBPACK_IMPORTED_MODULE_22__["default"],
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_25__["default"],
-  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_27__["default"]],
+  store: _store__WEBPACK_IMPORTED_MODULE_21__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_24__["default"],
+  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_26__["default"]],
   components: {
     'login-button': _components_authentication_LoginButtonComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     'remember-password': _components_authentication_RememberPasswordComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -68629,20 +66981,19 @@ new Vue({
     'feedback': _components_feedback_FeedbackComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
     'certificate': _components_certificate_CertificateComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
     'listcertificate': _components_certificate_ListCertificateComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
-    'timetable': _components_timetable_TimetableComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
-    'teachertimetable': _components_timetable_TeacherTimetableComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
-    'teacherhomework': _components_teacherhomework_TeacherHomeworkComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
-    'contimetable': _components_timetable_ContimetableComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
-    'conreplacements': _components_timetable_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
-    'teacheracademicperfomance': _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
-    'concallschedule': _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_14__["default"],
-    'subtitle': _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
-    'maintitle': _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
-    'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_18__["default"],
-    'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_19__["default"],
-    'callschedule': _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_17__["default"],
-    'retraining': _components_additionaleducation_RetrainingComponent__WEBPACK_IMPORTED_MODULE_20__["default"],
-    'usermanagement': _components_UserManagement__WEBPACK_IMPORTED_MODULE_21__["default"]
+    'timetable': _components_timeTablesFolders_TimetableComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
+    'teacherhomework': _components_teacherhomework_TeacherHomeworkComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
+    'contimetable': _components_timeTablesFolders_ContimetableComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
+    'conreplacements': _components_timeTablesFolders_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
+    'teacheracademicperfomance': _components_academicperformance_TeacherAPComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
+    'concallschedule': _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
+    'subtitle': _components_mainpage_SpecialtyPageComponent__WEBPACK_IMPORTED_MODULE_14__["default"],
+    'maintitle': _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_15__["default"],
+    'requestsusers': _components_feedback_RequestsUsersComponent__WEBPACK_IMPORTED_MODULE_17__["default"],
+    'panelcontrol': _components_PanelControlComponent__WEBPACK_IMPORTED_MODULE_18__["default"],
+    'callschedule': _components_callschedule_CallScheduleComponent__WEBPACK_IMPORTED_MODULE_16__["default"],
+    'retraining': _components_additionaleducation_RetrainingComponent__WEBPACK_IMPORTED_MODULE_19__["default"],
+    'usermanagement': _components_UserManagement__WEBPACK_IMPORTED_MODULE_20__["default"]
   },
   data: function data() {
     return {
@@ -68654,7 +67005,7 @@ new Vue({
       updatingUser: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_26__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_25__["mapGetters"])({
     user: 'user'
   }), {
     items: function items() {
@@ -68855,7 +67206,7 @@ new Vue({
       var _this = this;
 
       this.updatingUser = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_23__["UPDATE_USER"], this.user).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_22__["UPDATE_USER"], this.user).then(function (response) {
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
@@ -68883,7 +67234,7 @@ new Vue({
       var _this2 = this;
 
       this.logoutLoading = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_23__["LOGOUT"]).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_22__["LOGOUT"]).then(function (response) {
         window.location = '/';
       })["catch"](function (error) {
         console.log(error);
@@ -68904,7 +67255,7 @@ new Vue({
       var _this3 = this;
 
       this.changingPassword = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_23__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_22__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
         _this3.showMessage("Email sent to change password");
       })["catch"](function (error) {
         console.dir(error);
@@ -68974,14 +67325,6 @@ if (userHeader) if (userHeader.content) window.user = JSON.parse(userHeader.cont
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./Expention/Panel": [
-		"./resources/js/components/Expention/Panel.vue",
-		4
-	],
-	"./Expention/Panel.vue": [
-		"./resources/js/components/Expention/Panel.vue",
-		4
-	],
 	"./PanelControlComponent": [
 		"./resources/js/components/PanelControlComponent.vue"
 	],
@@ -69002,11 +67345,11 @@ var map = {
 	],
 	"./academicperformance/StudentAPComponent": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		5
+		4
 	],
 	"./academicperformance/StudentAPComponent.vue": [
 		"./resources/js/components/academicperformance/StudentAPComponent.vue",
-		5
+		4
 	],
 	"./academicperformance/TeacherAPComponent": [
 		"./resources/js/components/academicperformance/TeacherAPComponent.vue"
@@ -69094,13 +67437,19 @@ var map = {
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		0,
 		1,
-		6
+		5
 	],
 	"./constructortimetable/ContimetableComponent.vue": [
 		"./resources/js/components/constructortimetable/ContimetableComponent.vue",
 		0,
 		1,
-		6
+		5
+	],
+	"./expention/Panel": [
+		"./resources/js/components/expention/Panel.vue"
+	],
+	"./expention/Panel.vue": [
+		"./resources/js/components/expention/Panel.vue"
 	],
 	"./feedback/FeedbackComponent": [
 		"./resources/js/components/feedback/FeedbackComponent.vue"
@@ -69116,11 +67465,11 @@ var map = {
 	],
 	"./homework/StudentViewHomework": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		7
+		6
 	],
 	"./homework/StudentViewHomework.vue": [
 		"./resources/js/components/homework/StudentViewHomework.vue",
-		7
+		6
 	],
 	"./mainpage/MainPageComponent": [
 		"./resources/js/components/mainpage/MainPageComponent.vue"
@@ -69160,11 +67509,11 @@ var map = {
 	],
 	"./teachertimetable/Components/TeacherReplacements": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		8
+		7
 	],
 	"./teachertimetable/Components/TeacherReplacements.vue": [
 		"./resources/js/components/teachertimetable/Components/TeacherReplacements.vue",
-		8
+		7
 	],
 	"./teachertimetable/Components/TeacherTimeTable": [
 		"./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue",
@@ -69184,59 +67533,55 @@ var map = {
 		2,
 		3
 	],
-	"./timetable/Components/ConstructorReplacements": [
-		"./resources/js/components/timetable/Components/ConstructorReplacements.vue"
+	"./timeTablesFolders/Components/ConstructorReplacements": [
+		"./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue"
 	],
-	"./timetable/Components/ConstructorReplacements.vue": [
-		"./resources/js/components/timetable/Components/ConstructorReplacements.vue"
+	"./timeTablesFolders/Components/ConstructorReplacements.vue": [
+		"./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue"
 	],
-	"./timetable/Components/ConstructorTimeTable": [
-		"./resources/js/components/timetable/Components/ConstructorTimeTable.vue"
+	"./timeTablesFolders/Components/ConstructorTimeTable": [
+		"./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue"
 	],
-	"./timetable/Components/ConstructorTimeTable.vue": [
-		"./resources/js/components/timetable/Components/ConstructorTimeTable.vue"
+	"./timeTablesFolders/Components/ConstructorTimeTable.vue": [
+		"./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue"
 	],
-	"./timetable/Components/Replacements": [
-		"./resources/js/components/timetable/Components/Replacements.vue"
+	"./timeTablesFolders/Components/MainTimeTable": [
+		"./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue"
 	],
-	"./timetable/Components/Replacements.vue": [
-		"./resources/js/components/timetable/Components/Replacements.vue"
+	"./timeTablesFolders/Components/MainTimeTable.vue": [
+		"./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue"
 	],
-	"./timetable/Components/TeacherReplacements": [
-		"./resources/js/components/timetable/Components/TeacherReplacements.vue"
+	"./timeTablesFolders/Components/Replacements": [
+		"./resources/js/components/timeTablesFolders/Components/Replacements.vue"
 	],
-	"./timetable/Components/TeacherReplacements.vue": [
-		"./resources/js/components/timetable/Components/TeacherReplacements.vue"
+	"./timeTablesFolders/Components/Replacements.vue": [
+		"./resources/js/components/timeTablesFolders/Components/Replacements.vue"
 	],
-	"./timetable/Components/TimeTable": [
-		"./resources/js/components/timetable/Components/TimeTable.vue"
+	"./timeTablesFolders/Components/TeacherReplacements": [
+		"./resources/js/components/timeTablesFolders/Components/TeacherReplacements.vue",
+		8
 	],
-	"./timetable/Components/TimeTable.vue": [
-		"./resources/js/components/timetable/Components/TimeTable.vue"
+	"./timeTablesFolders/Components/TeacherReplacements.vue": [
+		"./resources/js/components/timeTablesFolders/Components/TeacherReplacements.vue",
+		8
 	],
-	"./timetable/ConreplacementsComponent": [
-		"./resources/js/components/timetable/ConreplacementsComponent.vue"
+	"./timeTablesFolders/ConreplacementsComponent": [
+		"./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue"
 	],
-	"./timetable/ConreplacementsComponent.vue": [
-		"./resources/js/components/timetable/ConreplacementsComponent.vue"
+	"./timeTablesFolders/ConreplacementsComponent.vue": [
+		"./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue"
 	],
-	"./timetable/ContimetableComponent": [
-		"./resources/js/components/timetable/ContimetableComponent.vue"
+	"./timeTablesFolders/ContimetableComponent": [
+		"./resources/js/components/timeTablesFolders/ContimetableComponent.vue"
 	],
-	"./timetable/ContimetableComponent.vue": [
-		"./resources/js/components/timetable/ContimetableComponent.vue"
+	"./timeTablesFolders/ContimetableComponent.vue": [
+		"./resources/js/components/timeTablesFolders/ContimetableComponent.vue"
 	],
-	"./timetable/TeacherTimetableComponent": [
-		"./resources/js/components/timetable/TeacherTimetableComponent.vue"
+	"./timeTablesFolders/TimetableComponent": [
+		"./resources/js/components/timeTablesFolders/TimetableComponent.vue"
 	],
-	"./timetable/TeacherTimetableComponent.vue": [
-		"./resources/js/components/timetable/TeacherTimetableComponent.vue"
-	],
-	"./timetable/TimetableComponent": [
-		"./resources/js/components/timetable/TimetableComponent.vue"
-	],
-	"./timetable/TimetableComponent.vue": [
-		"./resources/js/components/timetable/TimetableComponent.vue"
+	"./timeTablesFolders/TimetableComponent.vue": [
+		"./resources/js/components/timeTablesFolders/TimetableComponent.vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -70835,17 +69180,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/ConstructorReplacements.vue":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/ConstructorReplacements.vue ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue ***!
+  \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ConstructorReplacements_vue_vue_type_template_id_22a0cd3b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConstructorReplacements.vue?vue&type=template&id=22a0cd3b& */ "./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=template&id=22a0cd3b&");
-/* harmony import */ var _ConstructorReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConstructorReplacements.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ConstructorReplacements_vue_vue_type_template_id_5f86b549___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConstructorReplacements.vue?vue&type=template&id=5f86b549& */ "./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=template&id=5f86b549&");
+/* harmony import */ var _ConstructorReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConstructorReplacements.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -70856,8 +69201,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ConstructorReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ConstructorReplacements_vue_vue_type_template_id_22a0cd3b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ConstructorReplacements_vue_vue_type_template_id_22a0cd3b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ConstructorReplacements_vue_vue_type_template_id_5f86b549___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ConstructorReplacements_vue_vue_type_template_id_5f86b549___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -70867,54 +69212,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/Components/ConstructorReplacements.vue"
+component.options.__file = "resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorReplacements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorReplacements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=template&id=22a0cd3b&":
-/*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=template&id=22a0cd3b& ***!
-  \*****************************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=template&id=5f86b549&":
+/*!*************************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=template&id=5f86b549& ***!
+  \*************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_template_id_22a0cd3b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorReplacements.vue?vue&type=template&id=22a0cd3b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorReplacements.vue?vue&type=template&id=22a0cd3b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_template_id_22a0cd3b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_template_id_5f86b549___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorReplacements.vue?vue&type=template&id=5f86b549& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorReplacements.vue?vue&type=template&id=5f86b549&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_template_id_5f86b549___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_template_id_22a0cd3b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorReplacements_vue_vue_type_template_id_5f86b549___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/ConstructorTimeTable.vue":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/ConstructorTimeTable.vue ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue ***!
+  \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ConstructorTimeTable_vue_vue_type_template_id_52897bd7_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true& */ "./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true&");
-/* harmony import */ var _ConstructorTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConstructorTimeTable.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ConstructorTimeTable_vue_vue_type_template_id_50453e89_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true& */ "./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true&");
+/* harmony import */ var _ConstructorTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConstructorTimeTable.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -70925,8 +69270,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ConstructorTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ConstructorTimeTable_vue_vue_type_template_id_52897bd7_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ConstructorTimeTable_vue_vue_type_template_id_52897bd7_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ConstructorTimeTable_vue_vue_type_template_id_50453e89_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ConstructorTimeTable_vue_vue_type_template_id_50453e89_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -70936,54 +69281,123 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/Components/ConstructorTimeTable.vue"
+component.options.__file = "resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorTimeTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorTimeTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true&":
-/*!***************************************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true& ***!
-  \***************************************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true& ***!
+  \***********************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_template_id_52897bd7_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/ConstructorTimeTable.vue?vue&type=template&id=52897bd7&v-cloak=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_template_id_52897bd7_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_template_id_50453e89_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/ConstructorTimeTable.vue?vue&type=template&id=50453e89&v-cloak=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_template_id_50453e89_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_template_id_52897bd7_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConstructorTimeTable_vue_vue_type_template_id_50453e89_v_cloak_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/Replacements.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/Replacements.vue ***!
-  \***********************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Replacements_vue_vue_type_template_id_69262d5e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Replacements.vue?vue&type=template&id=69262d5e& */ "./resources/js/components/timetable/Components/Replacements.vue?vue&type=template&id=69262d5e&");
-/* harmony import */ var _Replacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Replacements.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/Components/Replacements.vue?vue&type=script&lang=js&");
+/* harmony import */ var _MainTimeTable_vue_vue_type_template_id_1cd153d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainTimeTable.vue?vue&type=template&id=1cd153d6& */ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=template&id=1cd153d6&");
+/* harmony import */ var _MainTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainTimeTable.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MainTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MainTimeTable_vue_vue_type_template_id_1cd153d6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MainTimeTable_vue_vue_type_template_id_1cd153d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/timeTablesFolders/Components/MainTimeTable.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MainTimeTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=template&id=1cd153d6&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=template&id=1cd153d6& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainTimeTable_vue_vue_type_template_id_1cd153d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MainTimeTable.vue?vue&type=template&id=1cd153d6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/MainTimeTable.vue?vue&type=template&id=1cd153d6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainTimeTable_vue_vue_type_template_id_1cd153d6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainTimeTable_vue_vue_type_template_id_1cd153d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/timeTablesFolders/Components/Replacements.vue":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/Replacements.vue ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Replacements_vue_vue_type_template_id_893103fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Replacements.vue?vue&type=template&id=893103fa& */ "./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=template&id=893103fa&");
+/* harmony import */ var _Replacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Replacements.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -70994,8 +69408,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Replacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Replacements_vue_vue_type_template_id_69262d5e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Replacements_vue_vue_type_template_id_69262d5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Replacements_vue_vue_type_template_id_893103fa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Replacements_vue_vue_type_template_id_893103fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -71005,261 +69419,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/Components/Replacements.vue"
+component.options.__file = "resources/js/components/timeTablesFolders/Components/Replacements.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/Replacements.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/Replacements.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Replacements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Replacements.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Replacements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/Replacements.vue?vue&type=template&id=69262d5e&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/Replacements.vue?vue&type=template&id=69262d5e& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=template&id=893103fa&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=template&id=893103fa& ***!
+  \**************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_template_id_69262d5e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Replacements.vue?vue&type=template&id=69262d5e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Replacements.vue?vue&type=template&id=69262d5e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_template_id_69262d5e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_template_id_893103fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Replacements.vue?vue&type=template&id=893103fa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/Components/Replacements.vue?vue&type=template&id=893103fa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_template_id_893103fa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_template_id_69262d5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Replacements_vue_vue_type_template_id_893103fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/Components/TeacherReplacements.vue":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/TeacherReplacements.vue ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TeacherReplacements_vue_vue_type_template_id_01b66523___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeacherReplacements.vue?vue&type=template&id=01b66523& */ "./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=template&id=01b66523&");
-/* harmony import */ var _TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TeacherReplacements.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TeacherReplacements_vue_vue_type_template_id_01b66523___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TeacherReplacements_vue_vue_type_template_id_01b66523___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/Components/TeacherReplacements.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherReplacements.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=template&id=01b66523&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=template&id=01b66523& ***!
-  \*************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_template_id_01b66523___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherReplacements.vue?vue&type=template&id=01b66523& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TeacherReplacements.vue?vue&type=template&id=01b66523&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_template_id_01b66523___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherReplacements_vue_vue_type_template_id_01b66523___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/TimeTable.vue":
-/*!********************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/TimeTable.vue ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TimeTable_vue_vue_type_template_id_84fa70fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimeTable.vue?vue&type=template&id=84fa70fe& */ "./resources/js/components/timetable/Components/TimeTable.vue?vue&type=template&id=84fa70fe&");
-/* harmony import */ var _TimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TimeTable.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/Components/TimeTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TimeTable_vue_vue_type_template_id_84fa70fe___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TimeTable_vue_vue_type_template_id_84fa70fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/Components/TimeTable.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/TimeTable.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/TimeTable.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TimeTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/TimeTable.vue?vue&type=template&id=84fa70fe&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/TimeTable.vue?vue&type=template&id=84fa70fe& ***!
-  \***************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeTable_vue_vue_type_template_id_84fa70fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeTable.vue?vue&type=template&id=84fa70fe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/TimeTable.vue?vue&type=template&id=84fa70fe&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeTable_vue_vue_type_template_id_84fa70fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeTable_vue_vue_type_template_id_84fa70fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/Timetable.vue":
-/*!********************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/Timetable.vue ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Timetable_vue_vue_type_template_id_4610a7a1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timetable.vue?vue&type=template&id=4610a7a1& */ "./resources/js/components/timetable/Components/Timetable.vue?vue&type=template&id=4610a7a1&");
-/* harmony import */ var _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timetable.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/Components/Timetable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Timetable_vue_vue_type_template_id_4610a7a1___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Timetable_vue_vue_type_template_id_4610a7a1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/Components/Timetable.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/Timetable.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/Timetable.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Timetable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/Components/Timetable.vue?vue&type=template&id=4610a7a1&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/Components/Timetable.vue?vue&type=template&id=4610a7a1& ***!
-  \***************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_4610a7a1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=template&id=4610a7a1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/Components/Timetable.vue?vue&type=template&id=4610a7a1&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_4610a7a1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_4610a7a1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/ConreplacementsComponent.vue":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/timetable/ConreplacementsComponent.vue ***!
-  \************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ConreplacementsComponent_vue_vue_type_template_id_f5095c1a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConreplacementsComponent.vue?vue&type=template&id=f5095c1a& */ "./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=template&id=f5095c1a&");
-/* harmony import */ var _ConreplacementsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConreplacementsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ConreplacementsComponent_vue_vue_type_template_id_d65958fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConreplacementsComponent.vue?vue&type=template&id=d65958fe& */ "./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=template&id=d65958fe&");
+/* harmony import */ var _ConreplacementsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConreplacementsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -71270,8 +69477,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ConreplacementsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ConreplacementsComponent_vue_vue_type_template_id_f5095c1a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ConreplacementsComponent_vue_vue_type_template_id_f5095c1a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ConreplacementsComponent_vue_vue_type_template_id_d65958fe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ConreplacementsComponent_vue_vue_type_template_id_d65958fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -71281,54 +69488,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/ConreplacementsComponent.vue"
+component.options.__file = "resources/js/components/timeTablesFolders/ConreplacementsComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ConreplacementsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ConreplacementsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=template&id=f5095c1a&":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=template&id=f5095c1a& ***!
-  \*******************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=template&id=d65958fe&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=template&id=d65958fe& ***!
+  \***************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_template_id_f5095c1a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ConreplacementsComponent.vue?vue&type=template&id=f5095c1a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ConreplacementsComponent.vue?vue&type=template&id=f5095c1a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_template_id_f5095c1a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_template_id_d65958fe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ConreplacementsComponent.vue?vue&type=template&id=d65958fe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ConreplacementsComponent.vue?vue&type=template&id=d65958fe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_template_id_d65958fe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_template_id_f5095c1a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConreplacementsComponent_vue_vue_type_template_id_d65958fe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/ContimetableComponent.vue":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/timetable/ContimetableComponent.vue ***!
-  \*********************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/ContimetableComponent.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/ContimetableComponent.vue ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ContimetableComponent_vue_vue_type_template_id_5983e456___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContimetableComponent.vue?vue&type=template&id=5983e456& */ "./resources/js/components/timetable/ContimetableComponent.vue?vue&type=template&id=5983e456&");
-/* harmony import */ var _ContimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContimetableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/ContimetableComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ContimetableComponent_vue_vue_type_template_id_0c4bb1f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContimetableComponent.vue?vue&type=template&id=0c4bb1f2& */ "./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=template&id=0c4bb1f2&");
+/* harmony import */ var _ContimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContimetableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -71339,8 +69546,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ContimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ContimetableComponent_vue_vue_type_template_id_5983e456___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ContimetableComponent_vue_vue_type_template_id_5983e456___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ContimetableComponent_vue_vue_type_template_id_0c4bb1f2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ContimetableComponent_vue_vue_type_template_id_0c4bb1f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -71350,123 +69557,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/ContimetableComponent.vue"
+component.options.__file = "resources/js/components/timeTablesFolders/ContimetableComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/ContimetableComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/timetable/ContimetableComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ContimetableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ContimetableComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ContimetableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/ContimetableComponent.vue?vue&type=template&id=5983e456&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/ContimetableComponent.vue?vue&type=template&id=5983e456& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=template&id=0c4bb1f2&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=template&id=0c4bb1f2& ***!
+  \************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_template_id_5983e456___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ContimetableComponent.vue?vue&type=template&id=5983e456& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/ContimetableComponent.vue?vue&type=template&id=5983e456&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_template_id_5983e456___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_template_id_0c4bb1f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ContimetableComponent.vue?vue&type=template&id=0c4bb1f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/ContimetableComponent.vue?vue&type=template&id=0c4bb1f2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_template_id_0c4bb1f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_template_id_5983e456___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ContimetableComponent_vue_vue_type_template_id_0c4bb1f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/TeacherTimetableComponent.vue":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/timetable/TeacherTimetableComponent.vue ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/TimetableComponent.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/TimetableComponent.vue ***!
+  \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TeacherTimetableComponent_vue_vue_type_template_id_1ed49656___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeacherTimetableComponent.vue?vue&type=template&id=1ed49656& */ "./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=template&id=1ed49656&");
-/* harmony import */ var _TeacherTimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TeacherTimetableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TeacherTimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TeacherTimetableComponent_vue_vue_type_template_id_1ed49656___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TeacherTimetableComponent_vue_vue_type_template_id_1ed49656___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/TeacherTimetableComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherTimetableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=template&id=1ed49656&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=template&id=1ed49656& ***!
-  \********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimetableComponent_vue_vue_type_template_id_1ed49656___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherTimetableComponent.vue?vue&type=template&id=1ed49656& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TeacherTimetableComponent.vue?vue&type=template&id=1ed49656&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimetableComponent_vue_vue_type_template_id_1ed49656___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimetableComponent_vue_vue_type_template_id_1ed49656___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/timetable/TimetableComponent.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/timetable/TimetableComponent.vue ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TimetableComponent_vue_vue_type_template_id_54d36575___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimetableComponent.vue?vue&type=template&id=54d36575& */ "./resources/js/components/timetable/TimetableComponent.vue?vue&type=template&id=54d36575&");
-/* harmony import */ var _TimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TimetableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable/TimetableComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _TimetableComponent_vue_vue_type_template_id_7f11acfa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimetableComponent.vue?vue&type=template&id=7f11acfa& */ "./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=template&id=7f11acfa&");
+/* harmony import */ var _TimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TimetableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -71477,8 +69615,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _TimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TimetableComponent_vue_vue_type_template_id_54d36575___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TimetableComponent_vue_vue_type_template_id_54d36575___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TimetableComponent_vue_vue_type_template_id_7f11acfa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TimetableComponent_vue_vue_type_template_id_7f11acfa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -71488,38 +69626,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/timetable/TimetableComponent.vue"
+component.options.__file = "resources/js/components/timeTablesFolders/TimetableComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/TimetableComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/timetable/TimetableComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimetableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TimetableComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimetableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable/TimetableComponent.vue?vue&type=template&id=54d36575&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/timetable/TimetableComponent.vue?vue&type=template&id=54d36575& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=template&id=7f11acfa&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=template&id=7f11acfa& ***!
+  \*********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_template_id_54d36575___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimetableComponent.vue?vue&type=template&id=54d36575& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable/TimetableComponent.vue?vue&type=template&id=54d36575&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_template_id_54d36575___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_template_id_7f11acfa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimetableComponent.vue?vue&type=template&id=7f11acfa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timeTablesFolders/TimetableComponent.vue?vue&type=template&id=7f11acfa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_template_id_7f11acfa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_template_id_54d36575___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimetableComponent_vue_vue_type_template_id_7f11acfa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -72053,8 +70191,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -116,7 +116,6 @@ export default {
   mixins: [withSnackbar],
   data: vm => ({
     mask: "####",
-    menu: false,
     group: "",
     FIO: user.secName + " " + user.name + " " + user.thirdName,
     modelprogress: "",
@@ -136,9 +135,7 @@ export default {
         "Текст успеваемости должен быть не более 255 символов"
     ],
     yearMptRules: [
-      v =>
-        (v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) ||
-        "Ошибка даты",
+      v =>(v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) || "Ошибка даты",
       v => v.length > 0 || "Поле не заполнено"
     ],
     orderRules: [
@@ -157,11 +154,6 @@ export default {
     info: {
       data: String,
       default: null
-    }
-  },
-  watch: {
-    menu(val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     }
   },
   methods: {

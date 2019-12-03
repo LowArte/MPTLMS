@@ -11,7 +11,7 @@
           return-object
           @change="changeGroups(departament.id)"
         ></v-autocomplete>
-        <v-autocomplete
+        <v-autocomplete       
           v-model="casegroup"
           label="Группа"
           solo
@@ -144,6 +144,7 @@
 <script>
 import apigroup from "../../../api/group";
 import apischedule from "../../../api/schedule";
+
 export default {
   data: () => ({
     load: true,
