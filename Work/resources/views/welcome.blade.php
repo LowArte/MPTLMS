@@ -39,7 +39,7 @@ use App\Models\SiteOptions;
                 <v-container fluid grid-list-md text-xs-center>
                     <v-layout row wrap>
                         <v-flex xs12>
-                            <v-card :elevation="1">
+                            <v-card :elevation="0">
                                 <v-card-title class="secondary info--text font-weight-light">
                                     <h2 class="font-weight-light text-truncate">Информация для студентов</h2>
                                 </v-card-title>

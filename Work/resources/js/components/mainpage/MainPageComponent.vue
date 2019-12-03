@@ -1,11 +1,11 @@
 <template>
   <v-row>
-    <v-col>
-      <v-card :elevation="0">
+    <v-col >
+      <v-card outlined>
         <v-card-title class="info--text font-weight-light">
           <h2 class="font-weight-light">Объявление</h2>
         </v-card-title>
-        <v-divider class="ma-2"></v-divider>
+        <v-divider  class="ma-2"></v-divider>
         <v-card-text>
           <b>Автошкола объявляет набор слушателей на курсы профессиональной подготовки водителей категории "В" на ОКТЯБРЬ с 01.10.2019 года.</b>
         </v-card-text>

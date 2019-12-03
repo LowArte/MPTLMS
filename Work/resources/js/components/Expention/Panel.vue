@@ -1,8 +1,8 @@
 <template>
-  <v-expansion-panels v-model="panel" multiple>
+  <v-expansion-panels class="pa-2" v-model="panel" multiple>
     <v-expansion-panel v-for="(component,i) in components" :key="i">
-      <v-expansion-panel-header>{{ component.header }}</v-expansion-panel-header>
-      <v-expansion-panel-content>
+      <v-expansion-panel-header >{{ component.header }}</v-expansion-panel-header>
+      <v-expansion-panel-content >
         <component :is="component.component" v-bind="component.props"></component>
       </v-expansion-panel-content>
     </v-expansion-panel>

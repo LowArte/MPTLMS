@@ -1,15 +1,18 @@
 <template>
-  <v-card class="mx-auto my-12" max-width="300">
+  <v-card class="mx-auto my-4" max-width="300" flex>
     <v-img height="200px" v-bind:src="item.href"></v-img>
-     <p class="title text--primary ma-2 text-center">{{item.title}}</p>
+    <p class="mx-4 my-1 text-center">{{item.title}}</p>
     <v-card-text>
-      <div class="my-4 subtitle-1 black--text">₽ • {{item.cost}}</div>
+      <div class="my-1 subtitle-1 black--text">₽ • {{item.cost}}</div>
       <div class="my-4 subtitle-1 black--text">Продолжительность • {{item.time}}</div>
       <div>{{item.text}}</div>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions class="my-0" style="margin-top: 0!important; margin-bottom: 0!important;">
       <v-content class="pa-2 text--center">
         <v-btn block text small @click="dialog = true">Подать заявку</v-btn>
+      </v-content>
+      <v-content class="pa-2 text--center">
+        <v-btn block text small color="accent">Подробнее</v-btn>
       </v-content>
     </v-card-actions>
     <v-dialog v-model="dialog" width="480">
@@ -43,7 +46,7 @@
           <v-btn color="primary" text @click="dialog = false">Отправить</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog> 
+    </v-dialog>
   </v-card>
 </template>
 

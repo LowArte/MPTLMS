@@ -1,15 +1,11 @@
 <template>
-  <v-row class="pa-6">
-    <retraining 
-      v-for="(item, index) in items"
-      :key="index"
-      :item="item"/>
-    
+  <v-row class="pa-4">
+    <retraining v-for="(item, index) in items" :key="index" :item="item" />
   </v-row>
 </template>
 
 <script>
-import Retraining from "./RetCom"
+import Retraining from "./RetCom";
 export default {
   data: () => ({
     items: [
@@ -86,8 +82,8 @@ export default {
       }
     ]
   }),
-  components:{
-    "retraining":Retraining 
+  components: {
+    retraining: Retraining
   }
 };
 </script>
