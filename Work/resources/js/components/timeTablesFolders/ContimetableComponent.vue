@@ -13,7 +13,7 @@
 
 <script>
 import Constructor from "./Components/ConstructorTimeTable";
-import Timetable from "./Components/Timetable";
+import Timetable from "./Components/MainTimeTable";
 export default {
   data: () => ({
     tab: null,

@@ -15,11 +15,10 @@ import CertificateComponent from './components/certificate/CertificateComponent'
 import ListCertificateComponent from './components/certificate/ListCertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
-import TimetableComponent from './components/timetable/TimetableComponent'
-import TeacherTimetableComponent from './components/timetable/TeacherTimetableComponent'
+import TimetableComponent from './components/timeTablesFolders/TimetableComponent'
 import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
-import ConTimeTable from './components/timetable/ContimetableComponent'
-import ConReplacements from './components/timetable/ConreplacementsComponent'
+import ConTimeTable from './components/timeTablesFolders/ContimetableComponent'
+import ConReplacements from './components/timeTablesFolders/ConreplacementsComponent'
 import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 import TitlePage from './components/mainpage/SpecialtyPageComponent'
@@ -69,7 +68,6 @@ new Vue({
     'certificate': CertificateComponent,
     'listcertificate' : ListCertificateComponent,
     'timetable': TimetableComponent,
-    'teachertimetable': TeacherTimetableComponent,
     'teacherhomework': TeacherHomeworkComponent,
     'contimetable': ConTimeTable,
     'conreplacements': ConReplacements,

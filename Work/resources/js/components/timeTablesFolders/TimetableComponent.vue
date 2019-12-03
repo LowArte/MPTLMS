@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import TimeTable from "./Components/TimeTable"
+import TimeTable from "./Components/MainTimeTable"
 import Replacements from "./Components/Replacements"
 import axios from 'axios'
 
