@@ -31,7 +31,7 @@ use App\Models\SiteOptions;
                     <remember-password action="{{ $action ?? null }}"></remember-password>
                     <reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"></reset-password>
                 @else
-                    <v-btn color="accent" dark href="\home">ВОЙТИ</v-btn>
+                    <v-btn color="primary mr-5" dark href="\home">ВОЙТИ</v-btn>
                     <v-btn color="accent" dark @click="logout">ВЫЙТИ</v-btn>
                 @endif
             </v-app-bar>
