@@ -1,7 +1,7 @@
 <template>
-  <v-row class="pa-4">
+  <v-layout row wrap>
     <retraining v-for="(item, index) in items" :key="index" :item="item" />
-  </v-row>
+  </v-layout>
 </template>
 
 <script>
