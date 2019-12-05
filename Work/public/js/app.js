@@ -2990,6 +2990,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4798,6 +4799,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/users */ "./resources/js/api/users.js");
+//
 //
 //
 //
@@ -7690,7 +7692,7 @@ var render = function() {
           key: "badge",
           fn: function() {
             return [
-              _vm.messages
+              _vm.messages.length != 0
                 ? _c("span", [
                     _c("label", [_vm._v(_vm._s(_vm.messages.length))])
                   ])
@@ -7712,15 +7714,17 @@ var render = function() {
               fn: function(ref) {
                 var on = ref.on
                 return [
-                  _c(
-                    "v-btn",
-                    _vm._g(
-                      { attrs: { icon: "", width: "32", height: "32" } },
-                      on
-                    ),
-                    [_c("v-icon", [_vm._v("notifications")])],
-                    1
-                  )
+                  _vm.messages.length != 0
+                    ? _c(
+                        "v-btn",
+                        _vm._g(
+                          { attrs: { icon: "", width: "32", height: "32" } },
+                          on
+                        ),
+                        [_c("v-icon", [_vm._v("notifications")])],
+                        1
+                      )
+                    : _c("v-icon", [_vm._v("notifications")])
                 ]
               }
             }
@@ -9475,9 +9479,16 @@ var render = function() {
     [
       _c("v-img", { attrs: { height: "200px", src: _vm.item.href } }),
       _vm._v(" "),
-      _c("p", { staticClass: "mx-4 my-1 text-center" }, [
-        _vm._v(_vm._s(_vm.item.title))
-      ]),
+      _c(
+        "p",
+        {
+          staticClass: "title mx-4 my-1 text-center",
+          staticStyle: { color: "#FF3D00" }
+        },
+        [_vm._v(_vm._s(_vm.item.title))]
+      ),
+      _vm._v(" "),
+      _c("v-divider"),
       _vm._v(" "),
       _c("v-card-text", [
         _c("div", { staticClass: "my-1 subtitle-1 black--text" }, [
@@ -12657,9 +12668,14 @@ var render = function() {
         [
           _c("v-img", { attrs: { src: item.href, height: "200px" } }),
           _vm._v(" "),
-          _c("p", { staticClass: "title text--primary ma-2 text-center" }, [
-            _vm._v(_vm._s(item.title))
-          ]),
+          _c(
+            "p",
+            {
+              staticClass: "title mx-4 my-1 text-center",
+              staticStyle: { color: "#FF3D00" }
+            },
+            [_vm._v(_vm._s(item.title))]
+          ),
           _vm._v(" "),
           _c("v-expand-transition", [
             _c(
@@ -67550,7 +67566,6 @@ new Vue({
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
-        /* this.showMessage('Вы пытаетесь созранить данные, не изменив их!') */
 
         _this.showError(error);
       }).then(function () {
