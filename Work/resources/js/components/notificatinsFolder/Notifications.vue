@@ -27,7 +27,7 @@ export default {
   data: () => {
     return {
       sheet: false,
-      messages: null
+      messages: ""
     };
   },
   props: {

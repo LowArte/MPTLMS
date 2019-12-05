@@ -39,9 +39,13 @@ class ConCallScheduleController extends Controller
      */
     public function index()
     {
-        $places = Places::get();
         $callSchedule = CallSchedule::get();
-        return view('components/concallschedule', ["place" => json_encode($places), "callSch" => json_encode($callSchedule)]);
+        $calls = array();
+        foreach($callSchedule as $call){
+            array_push($calls,["place"=>Places::where("id",$call->place_id)->first(),"schedule"=>$call->call_schedule]);
+        }
+        Debugbar::info($calls);
+        return view('components/callschedule', ["calls"=>$calls]);
     }
     /**
      * Show the application dashboard.
@@ -50,8 +54,12 @@ class ConCallScheduleController extends Controller
      */
     public function index2()
     {
-        $places = Places::get();
         $callSchedule = CallSchedule::get();
-        return view('components/callschedule', ["place" => json_encode($places), "callSch" => json_encode($callSchedule)]);
+        $calls = array();
+        foreach($callSchedule as $call){
+            array_push($calls,["place"=>Places::where("id",$call->place_id)->first(),"schedule"=>$call->call_schedule]);
+        }
+        Debugbar::info($calls);
+        return view('components/callschedule', ["calls"=>$calls]);
     }
 }

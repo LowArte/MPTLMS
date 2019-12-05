@@ -63,7 +63,7 @@ use App\Models\SiteOptions;
                         <v-flex xs12>
                             <v-card :elevation="0">
                                 <v-card-title class="secondary info--text font-weight-light">
-                                    <h2 class="font-weight-light">Дополнительное образование</h2>
+                                    <h2 class="font-weight-light text-truncate">Дополнительное образование</h2>
                                 </v-card-title>
                                 <v-divider class="ma-2"></v-divider>
                                 <retraining></retraining>

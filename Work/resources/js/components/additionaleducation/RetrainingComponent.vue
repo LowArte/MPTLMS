@@ -1,7 +1,6 @@
-<template>
-  <v-layout row wrap>
-    <retraining v-for="(item, index) in items" :key="index" :item="item" />
-  </v-layout>
+<template lang="pug">
+  v-layout.row.wrap
+    retraining(v-for="(item, index) in items" :key="index" :item="item")
 </template>
 
 <script>
