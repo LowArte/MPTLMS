@@ -35,7 +35,7 @@ use App\Models\SiteOptions;
                     <v-btn color="accent" dark @click="logout">ВЫЙТИ</v-btn>
                 @endif
             </v-app-bar>
-            <v-content>
+            <v-content style="background: white;">
                 <v-container fluid grid-list-md text-xs-center>
                     <v-layout row wrap>
                         <v-flex xs12>
