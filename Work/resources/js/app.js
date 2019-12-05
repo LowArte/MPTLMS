@@ -28,6 +28,7 @@ import RequestsUsers from './components/feedback/RequestsUsersComponent'
 import PanelControl from './components/PanelControlComponent'
 import Retraining from './components/additionaleducation/RetrainingComponent'
 import UserManagement from './components/UserManagement'
+import Notifications from './components/notificatinsFolder/Notifications'
 
 //import vuetif from './plugins/vuetify'
 
@@ -79,7 +80,9 @@ new Vue({
     'panelcontrol': PanelControl,
     'callschedule': CallSchedule,
     'retraining': Retraining,
-    'usermanagement' : UserManagement
+    'usermanagement' : UserManagement,
+    'notifications' : Notifications
+
   },
   data: () => ({
     drawer: null,

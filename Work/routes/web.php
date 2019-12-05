@@ -1,6 +1,9 @@
 <?php
 
 use App\Models\SiteOptions;
+use App\Notifications\BaseNotification;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +18,6 @@ use App\Models\SiteOptions;
 Route::get(
     '/',
     function () {
-
         $panel_array = array(
             array(
                 "header"  => "Подробная информация",
@@ -82,3 +84,5 @@ Route::post('/get_schedule_by_group_id', 'RouteControllers\TimeTableController@s
 Route::post('/save_schedule', 'RouteControllers\ConstructorTimeTableController@save');
 
 Route::post('/set_options', 'RouteControllers\PanelControlController@setConfigOptions');
+
+Route::post('/setNotificationAsRead', 'LoggedUserController@setNotificationAsRead');

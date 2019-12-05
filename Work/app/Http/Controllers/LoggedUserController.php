@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 
+use Debugbar;
+
 /**
  * Class LoggedUserController.
  *
@@ -12,6 +14,16 @@ use Illuminate\Http\Request;
  */
 class LoggedUserController extends Controller
 {
+    
+    public function setNotificationAsRead(Request $request)
+    {
+        foreach(Auth::user()->unreadNotifications as $notif){
+            if($notif->id==$request["id"]){
+                $notif->markAsRead();           
+                break;
+            }
+        }
+    }
     /**
      * Update user.
      * @param Request $request

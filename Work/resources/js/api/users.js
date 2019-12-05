@@ -19,5 +19,8 @@ export default {
   },
   deleteUser(user){
     return axios.post('/delete_user', {"id":user.id})
+  },
+  notificate(notId){
+    return axios.post("/setNotificationAsRead",{"id":notId})
   }
 }
