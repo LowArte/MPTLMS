@@ -291,7 +291,6 @@ new Vue({
         this.showMessage('Изменения сохранены!')
       }).catch(error => {
         console.dir(error)
-        /* this.showMessage('Вы пытаетесь созранить данные, не изменив их!') */
         this.showError(error)
       }).then(() => {
         this.editingUser = false
