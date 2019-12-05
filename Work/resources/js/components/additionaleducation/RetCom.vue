@@ -1,7 +1,8 @@
 <template>
   <v-card class="mx-auto my-4" max-width="300" flex>
     <v-img height="200px" v-bind:src="item.href"></v-img>
-    <p class="mx-4 my-1 text-center">{{item.title}}</p>
+    <p class="title mx-4 my-1 text-center" style="color: #FF3D00">{{item.title}}</p>
+    <v-divider></v-divider>
     <v-card-text>
       <div class="my-1 subtitle-1 black--text">₽ • {{item.cost}}</div>
       <div class="my-4 subtitle-1 black--text">Продолжительность • {{item.time}}</div>

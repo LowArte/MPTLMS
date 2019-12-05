@@ -27,6 +27,20 @@
                     </v-container>
                 </v-card>
             </v-hover>
+            <v-hover v-slot:default="{ hover }">
+                <v-card :elevation="hover ? 12 : 2" class="mx-auto my-4 pa-4" height="auto" width="max">
+                    <v-card-text class="my-1 ma-2 pa-0 display-1 font-weight-black">Напрвление</v-card-text>
+                    <v-divider class="ma-2"></v-divider>
+                    <v-container class="ma-0 pa-2">
+                        <p class="black--text">Если у вас есть задолжности, Вы можете самостоятельно скачать и распечатать направление на пересдачу.</p>
+                        <v-btn color="warning" class="my-2 white--text">
+                            Загрузить
+                            <v-icon right dark>cloud_download</v-icon>
+                        </v-btn>
+                    </v-container>
+                    <small dark style="color: #FF3D00">*на данный момент функция находистя в процессе тестирования</small>
+                </v-card>
+            </v-hover>
         </v-col>
     </v-row>
 </v-container>

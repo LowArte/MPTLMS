@@ -3,7 +3,7 @@
   <v-row class="pa-4">
     <v-card v-for="(item, index) in items" :key="index" class="mx-auto pb-1 my-4" max-width="300">
       <v-img v-bind:src="item.href" height="200px"></v-img>
-      <p class="title text--primary ma-2 text-center">{{item.title}}</p>
+      <p class="title mx-4 my-1 text-center" style="color: #FF3D00">{{item.title}}</p>
       <v-expand-transition>
         <div v-show="true">
           <v-divider></v-divider>
