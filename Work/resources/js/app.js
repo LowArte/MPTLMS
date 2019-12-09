@@ -15,11 +15,10 @@ import CertificateComponent from './components/certificate/CertificateComponent'
 import ListCertificateComponent from './components/certificate/ListCertificateComponent'
 import SnackBar from './components/SnackBarComponent'
 import Panel from './components/expention/Panel'
-import TimetableComponent from './components/timeTablesFolders/TimetableComponent'
 import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
-import ConTimeTable from './components/timeTablesFolders/ContimetableComponent'
+/* import ConTimeTable from './components/timeTablesFolders/ContimetableComponent'
 import ConReplacements from './components/timeTablesFolders/ConreplacementsComponent'
-import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
+import ConCallSchedule from './components/callschedule/ConCallScheduleComponent' */
 import TitlePage from './components/mainpage/SpecComp'
 import InfoPage from './components/mainpage/MainPageComponent'
 import CallSchedule from './components/callschedule/CallScheduleComponent'
@@ -69,21 +68,21 @@ new Vue({
     'panel': Panel,
     'feedback': FeedbackComponent,
     'certificate': CertificateComponent,
-    'listcertificate' : ListCertificateComponent,
+    'listcertificate': ListCertificateComponent,
     'timetable': TimetableComponent,
     'teacherhomework': TeacherHomeworkComponent,
-    'contimetable': ConTimeTable,
+/*     'contimetable': ConTimeTable,
     'conreplacements': ConReplacements,
-    'concallschedule': ConCallSchedule,
+    'concallschedule': ConCallSchedule, */
     'subtitle': TitlePage,
     'maintitle': InfoPage,
     'requestsusers': RequestsUsers,
     'panelcontrol': PanelControl,
     'callschedule': CallSchedule,
     'retraining': Retraining,
-    'usermanagement' : UserManagement,
-    'notifications' : Notifications,
-    'journal' : Journal,
+    'usermanagement': UserManagement,
+    'notifications': Notifications,
+    'journal': Journal,
     'detailedir': DetailedInformationRetrainign
 
   },
