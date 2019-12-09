@@ -2,6 +2,10 @@
 
 @section('content')
 
+<?php
+use App\Models\RetrainingInfo;
+?>
+
 <v-container fluid grid-list-md text-xs-center>
     <v-layout row wrap>
         <v-flex xs12>
@@ -32,7 +36,7 @@
                     <h2 class="font-weight-light">Дополнительное образование</h2>
                 </v-card-title>
                 <v-divider class="ma-2"></v-divider>
-                <retraining></retraining>
+                <retraining components_prop="{{json_encode(RetrainingInfo::get()) ?? null}}"></retraining>
             </v-card>
         </v-flex>
     </v-layout>

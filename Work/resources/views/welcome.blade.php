@@ -1,5 +1,7 @@
 <?php
 use App\Models\SiteOptions;
+use App\Models\RetrainingInfo;
+
 ?>
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
@@ -66,7 +68,7 @@ use App\Models\SiteOptions;
                                     <h2 class="font-weight-light text-truncate">Дополнительное образование</h2>
                                 </v-card-title>
                                 <v-divider class="ma-2"></v-divider>
-                                <retraining></retraining>
+                                <retraining components_prop="{{ json_encode(RetrainingInfo::get()) ?? null}}"></retraining>
                             </v-card>
                         </v-flex>
                     </v-layout>

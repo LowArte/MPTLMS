@@ -29,6 +29,8 @@ import Retraining from './components/additionaleducation/RetrainingComponent'
 import UserManagement from './components/UserManagement'
 import Notifications from './components/notificatinsFolder/Notifications'
 import Journal from './components/journalFolder/JournalComponent'
+import DetailedInformationRetrainign from './components/additionaleducation/DetailedInformationRetrainignComponent'
+
 
 //import vuetif from './plugins/vuetify'
 
@@ -82,6 +84,7 @@ new Vue({
     'usermanagement' : UserManagement,
     'notifications' : Notifications,
     'journal' : Journal,
+    'detailedir': DetailedInformationRetrainign
 
   },
   data: () => ({
@@ -165,7 +168,7 @@ new Vue({
           {
             icon: 'business_center',
             text: 'Дополнительное образование',
-            href: '/home'
+            href: '/detailedir'
           }, /*
           {
             icon: 'school',

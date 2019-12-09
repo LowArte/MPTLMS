@@ -86,3 +86,5 @@ Route::post('/save_schedule', 'RouteControllers\ConstructorTimeTableController@s
 Route::post('/set_options', 'RouteControllers\PanelControlController@setConfigOptions');
 
 Route::post('/setNotificationAsRead', 'LoggedUserController@setNotificationAsRead');
+
+Route::get('/detailedir', 'RouteControllers\DetailedInfoIrmationRetrainingController@index')->name('detailedir');

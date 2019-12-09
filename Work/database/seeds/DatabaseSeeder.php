@@ -21,9 +21,10 @@ class DatabaseSeeder  extends Seeder
             CallSchedulesSeeder::class,
             DesciplineSeeder::class,
             SiteOptionsSeeder::class,
-            SwapScheduleSeeder::class
+            SwapScheduleSeeder::class,
+            RetrainingInfoSeeder::class
         ]);
-        factory(\App\User::class ,100)->create();
+        factory(\App\User::class, 100)->create();
         $this->call([
             TeachersSeeder::class,
             StudentsSeeder::class
