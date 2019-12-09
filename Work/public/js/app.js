@@ -4214,9 +4214,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log(this._messages);
     this.messages = JSON.parse(this._messages);
-    console.log(this.messages);
   },
   methods: {
     deleteNotification: function deleteNotification(obj) {
@@ -65675,7 +65673,6 @@ new Vue({
     'teacherhomework': _components_teacherhomework_TeacherHomeworkComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
     'contimetable': _components_timeTablesFolders_ContimetableComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
     'conreplacements': _components_timeTablesFolders_ConreplacementsComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
-    'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': _components_callschedule_ConCallScheduleComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
     'subtitle': _components_mainpage_SpecComp__WEBPACK_IMPORTED_MODULE_13__["default"],
     'maintitle': _components_mainpage_MainPageComponent__WEBPACK_IMPORTED_MODULE_14__["default"],

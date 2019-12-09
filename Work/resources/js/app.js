@@ -72,7 +72,6 @@ new Vue({
     'teacherhomework': TeacherHomeworkComponent,
     'contimetable': ConTimeTable,
     'conreplacements': ConReplacements,
-    'teacheracademicperfomance': TeacherAcademicPerfomance,
     'concallschedule': ConCallSchedule,
     'subtitle': TitlePage,
     'maintitle': InfoPage,

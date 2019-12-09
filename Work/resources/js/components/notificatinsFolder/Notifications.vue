@@ -37,9 +37,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this._messages);
     this.messages = JSON.parse(this._messages);
-    console.log(this.messages);
   },
   methods: {
     deleteNotification(obj) {
