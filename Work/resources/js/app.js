@@ -19,7 +19,6 @@ import TimetableComponent from './components/timeTablesFolders/TimetableComponen
 import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
 import ConTimeTable from './components/timeTablesFolders/ContimetableComponent'
 import ConReplacements from './components/timeTablesFolders/ConreplacementsComponent'
-import TeacherAcademicPerfomance from './components/academicperformance/TeacherAPComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
 import TitlePage from './components/mainpage/SpecialtyPageComponent'
 import InfoPage from './components/mainpage/MainPageComponent'
@@ -29,6 +28,7 @@ import PanelControl from './components/PanelControlComponent'
 import Retraining from './components/additionaleducation/RetrainingComponent'
 import UserManagement from './components/UserManagement'
 import Notifications from './components/notificatinsFolder/Notifications'
+import Journal from './components/journalFolder/JournalComponent'
 
 //import vuetif from './plugins/vuetify'
 
@@ -81,7 +81,8 @@ new Vue({
     'callschedule': CallSchedule,
     'retraining': Retraining,
     'usermanagement' : UserManagement,
-    'notifications' : Notifications
+    'notifications' : Notifications,
+    'journal' : Journal,
 
   },
   data: () => ({
