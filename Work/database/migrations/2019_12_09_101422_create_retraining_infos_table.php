@@ -15,7 +15,13 @@ class CreateRetrainingInfosTable extends Migration
     {
         Schema::create('retraining_infos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string("href");
+            $table->string("title");
+            $table->string("cost");
+            $table->string("time");
+            $table->text("text");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
