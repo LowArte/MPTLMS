@@ -94,7 +94,7 @@
                 </v-card-actions>
             </v-card>
         </v-navigation-drawer>
-        <v-content>
+        <v-content style="background: white;">
             @yield('content')
         </v-content>
     </v-app>

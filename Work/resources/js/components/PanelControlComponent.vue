@@ -1,22 +1,15 @@
-<template>
-  <v-row>
-    <v-col cols="12">
-      <v-hover v-slot:default="{ hover }">
-        <v-card :elevation="hover ? 12 : 2" class="mx-auto pa-0" height="auto" width="max">
-          <v-container class="pa-0 ma-0">
-            <v-row class="pa-2 ma-0">
-              <v-card-text class="my-2 ma-0 pa-0 text-center title">Панель управления</v-card-text>
-            </v-row>
-            <v-divider></v-divider>
-            <v-row class="pa-2 ma-0">
-              <v-checkbox v-model="options.prof" :label="`Режим профилактики`"></v-checkbox>
-            </v-row>
-            <v-btn class="ma-2" color="accent" dark @click="sendQuery">Применить</v-btn>
-          </v-container>
-        </v-card>
-      </v-hover>
-    </v-col>
-  </v-row>
+<template lang="pug">
+  v-row
+    v-col(cols='12')
+      v-hover(v-slot:default='{ hover }')
+        v-card.mx-auto.pa-0(:elevation='hover ? 12 : 2' height='auto' width='max')
+          v-container.pa-0.ma-0
+            v-row.pa-2.ma-0
+              v-card-text.my-2.ma-0.pa-0.text-center.title Панель управления
+            v-divider
+            v-row.pa-2.ma-0
+              v-checkbox(v-model='options.prof' :label='`Режим профилактики`')
+            v-btn.ma-2(color='accent' dark='' @click='sendQuery') Применить
 </template>
 
 <script>

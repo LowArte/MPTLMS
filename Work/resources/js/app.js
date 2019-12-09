@@ -20,7 +20,7 @@ import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomewo
 import ConTimeTable from './components/timeTablesFolders/ContimetableComponent'
 import ConReplacements from './components/timeTablesFolders/ConreplacementsComponent'
 import ConCallSchedule from './components/callschedule/ConCallScheduleComponent'
-import TitlePage from './components/mainpage/SpecialtyPageComponent'
+import TitlePage from './components/mainpage/SpecComp'
 import InfoPage from './components/mainpage/MainPageComponent'
 import CallSchedule from './components/callschedule/CallScheduleComponent'
 import RequestsUsers from './components/feedback/RequestsUsersComponent'
@@ -153,7 +153,7 @@ new Vue({
             href: '/timetable'
           },
           {
-            icon: 'today',
+            icon: 'alarm',
             text: 'Расписание звонков',
             href: '/callschedule'
           },
@@ -163,11 +163,11 @@ new Vue({
             text: 'Успеваемость',
             href: '/home'
           }, */
-          /* {
+          {
             icon: 'business_center',
             text: 'Дополнительное образование',
             href: '/home'
-          }, 
+          }, /*
           {
             icon: 'school',
             text: 'Преподаватели',

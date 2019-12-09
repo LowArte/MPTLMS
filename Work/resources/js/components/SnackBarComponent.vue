@@ -1,14 +1,9 @@
-<template>
-    <v-snackbar
-            :timeout="snackbarTimeout"
-            :color="snackbarColor"
-            v-model="snackbarShow"
-            :multi-line="true"
-    >
-        {{ snackbarText }}<br/>
-        {{ snackbarSubtext }}
-        <v-btn dark text @click.native="close">Закрыть</v-btn>
-    </v-snackbar>
+<template lang="pug">
+  v-snackbar(:timeout='snackbarTimeout' :color='snackbarColor' v-model='snackbarShow' :multi-line='true')
+    | {{ snackbarText }}
+    br
+    | {{ snackbarSubtext }}
+    v-btn(dark='' text='' @click.native='close')
 </template>
 
 
