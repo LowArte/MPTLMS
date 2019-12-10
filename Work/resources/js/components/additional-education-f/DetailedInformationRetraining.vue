@@ -51,7 +51,7 @@
         v-card.mx-auto(max-width="420px" :elevation="0")
           v-card-text.grow.my-1.black--text.py-0 При успешном окончании обучения выдаётся диплом о профессиональной переподготовке Российского экономического университета им. Г.В. Плеханова
       v-flex.my-2
-        v-card.mx-auto.mb-3(max-width="320px" style="box-shadow: 0px 9px 40px 0px rgba(0,0,0,.5)")
+        v-card.mx-auto.mb-3(max-width="320px" style="box-shadow: 0px 6px 15px 0px rgba(0,0,0,.5)")
           v-img( src="https://cdn.shortpixel.ai/client/q_lossless,ret_img,w_768/https://ucmpt.ru/wp-content/uploads/2019/02/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC-%D0%A0%D0%AD%D0%A3-%D0%B8%D0%BC-%D0%93.%D0%92-768x543.png" ) 
 </template>
 

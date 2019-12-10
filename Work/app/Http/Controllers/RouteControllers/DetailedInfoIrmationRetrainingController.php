@@ -24,6 +24,6 @@ class DetailedInfoIrmationRetrainingController extends Controller
      */
     public function index()
     {
-        return view('components/detailedinformationretrainign');
+        return view('components/detailed-information-retraining');
     }
 }

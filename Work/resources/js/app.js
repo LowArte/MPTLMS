@@ -130,7 +130,7 @@ new Vue({
     'c-user-management': UserManagement_C, // ! ПОМЕНЯТЬ РОЛЬ НА КОМБОБОКС
     'c-notifications': Notifications_C,
     'c-journal': Journal_C, //-
-    'c-detailed-i-r': DetailedInformationRetrainign_C // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
+    'c-detailed-inf-ret': DetailedInformationRetrainign_C // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
 
   },
   data: () => ({
