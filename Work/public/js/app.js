@@ -4276,6 +4276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../api/group */ "./resources/js/api/group.js");
 //
 //
 //
@@ -4291,11 +4292,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      name: user == null ? "" : user.name
+      groups_info: null,
+      departaments_info: null,
+      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     };
+  },
+  props: {
+    _departaments_info: {
+      type: String,
+      "default": null
+    },
+    _groups_info: {
+      type: String,
+      "default": null
+    },
+    schedule: {
+      type: Object,
+      "default": null
+    }
+  },
+  methods: {
+    departament_change: function departament_change() {
+      var _this = this;
+
+      _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(this.departaments_info.selected_departament.id).then(function (res) {
+        _this.groups_info.groups = res.data.groups;
+        _this.groups_info.selected_group = _this.groups_info.groups[0];
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.groups_info = JSON.parse(this._groups_info);
+    this.departaments_info = JSON.parse(this._departaments_info);
+    console.log(this.schedule);
   }
 });
 
@@ -7436,17 +7473,33 @@ var render = function() {
         [
           _c("v-combobox", {
             staticClass: "ma-1",
-            attrs: { label: "Специальность" }
+            attrs: {
+              label: "Специальность",
+              "item-text": "dep_name_full",
+              items: _vm.departaments_info.departaments
+            },
+            on: { change: _vm.departament_change },
+            model: {
+              value: _vm.departaments_info.selected_departament,
+              callback: function($$v) {
+                _vm.$set(_vm.departaments_info, "selected_departament", $$v)
+              },
+              expression: "departaments_info.selected_departament"
+            }
           }),
           _c("v-combobox", {
             staticClass: "ma-1",
-            attrs: { label: "Группа" },
+            attrs: {
+              label: "Группа",
+              "item-text": "group_name",
+              items: _vm.groups_info.groups
+            },
             model: {
-              value: _vm.name,
+              value: _vm.groups_info.selected_group,
               callback: function($$v) {
-                _vm.name = $$v
+                _vm.$set(_vm.groups_info, "selected_group", $$v)
               },
-              expression: "name"
+              expression: "groups_info.selected_group"
             }
           })
         ],
@@ -7455,46 +7508,60 @@ var render = function() {
       _c(
         "v-layout",
         { staticClass: "row wrap" },
-        [
-          _c(
+        _vm._l(_vm.days, function(day_key, day_index) {
+          return _c(
             "v-flex",
-            { staticClass: "ma-2" },
+            {
+              key: day_index,
+              staticClass: "ma-2",
+              staticStyle: { height: "auto" }
+            },
             [
               _c(
                 "v-card",
                 {
                   staticClass: "pa-2 mx-auto",
-                  staticStyle: { display: "flex", "flex-direction": "column" },
-                  attrs: { "max-width": "320px", height: "100%" }
+                  attrs: { "max-width": "265px" }
                 },
                 [
                   _c("v-card-title", { staticClass: "primary-title pt-0" }, [
-                    _vm._v("День недели")
+                    _vm._v(_vm._s(day_key))
                   ]),
-                  _c("v-card-subtitle", [_vm._v("Место проведения: ")]),
+                  _c("v-card-subtitle", [
+                    _vm._v(
+                      "Место проведения: " + _vm._s(_vm.schedule[day_key].Place)
+                    )
+                  ]),
                   _c("v-divider"),
-                  _c(
-                    "v-container",
-                    { staticClass: "grid-list-xs" },
-                    [
-                      _c(
-                        "v-card-title",
-                        {
-                          staticClass:
-                            "pa-0 accent--text font-weight-light text-truncate"
-                        },
-                        [_vm._v("10:00 - 11:30 Числитель")]
-                      )
-                    ],
-                    1
-                  )
+                  _vm._l(_vm.schedule[day_key], function(lesson, lesson_index) {
+                    return _c(
+                      "v-container",
+                      { key: "l" + lesson_index, staticClass: "grid-list-xs" },
+                      [
+                        lesson.Lesson != null
+                          ? _c(
+                              "v-card-title",
+                              {
+                                staticClass:
+                                  "pa-0 accent--text font-weight-light text-truncate"
+                              },
+                              [_vm._v(_vm._s(lesson.time) + " ")]
+                            )
+                          : _vm._e(),
+                        _vm._v(
+                          _vm._s(lesson.Lesson) + " \n" + _vm._s(lesson.Teacher)
+                        )
+                      ],
+                      1
+                    )
+                  })
                 ],
-                1
+                2
               )
             ],
             1
           )
-        ],
+        }),
         1
       )
     ],
@@ -60636,6 +60703,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/group.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/group.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getGroup: function getGroup(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/get_group_by_departament_id', {
+      params: {
+        "dep_id": credentials
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/panel.js":
 /*!***********************************!*\
   !*** ./resources/js/api/panel.js ***!
@@ -63562,8 +63653,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

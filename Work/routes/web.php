@@ -55,5 +55,5 @@ Route::post('/setNotificationAsRead', 'LoggedUserController@setNotificationAsRea
 
 Route::get('/detailedir', 'RouteControllers\DetailedInfoIrmationRetrainingController@index')->name('detailedir');
 Route::get('/get_users', 'RouteControllers\UserManagementController@getUsers');
-Route::get('/get_group_by_departament_id', 'RouteControllers\TimeTableController@groupByDepartamentId');
-Route::get('/get_schedule_by_group_id', 'RouteControllers\TimeTableController@scheduleByGroupId');
+Route::get('/get_group_by_departament_id', 'RouteControllers\TimetableController@groupByDepartamentId');
+Route::get('/get_schedule_by_group_id', 'RouteControllers\TimetableController@scheduleByGroupId');

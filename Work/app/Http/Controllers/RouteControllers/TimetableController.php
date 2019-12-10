@@ -5,7 +5,15 @@ namespace App\Http\Controllers\RouteControllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CallSchedule;
+use App\Models\Departament;
+use App\Models\Group;
 use App\Models\Places;
+use App\Models\Schedule;
+use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
+
+use Debugbar;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class TimetableController extends Controller
 {
@@ -19,6 +27,16 @@ class TimetableController extends Controller
         $this->middleware(['auth', 'profilactic']);
     }
 
+    public function groupByDepartamentId(Request $request)
+    {
+
+        $groups = Group::where("departaments_id",$request["dep_id"])->get();
+        Debugbar::info($request["dep_id"]);
+        return response()->json(array(
+            "groups"=>$groups
+        ));
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -26,11 +44,44 @@ class TimetableController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        $departaments = Departament::get();
+        $groups = Group::where("departaments_id",$departaments[0]['id'])->get();
+        $selected_group = null;
+        $selected_departament = null;
+
+        if($user["post_id"] == 2){
+            $student = Student::where("user_id",$user["id"])->first();           
+            $selected_group = Group::where("id",$student["group_id"])->first();
+            $groups = Group::where("departaments_id",$selected_group['departaments_id'])->get();
+            $selected_departament = Departament::where("id",$selected_group["departaments_id"])->first();
+        }
+        else
+        {
+            $selected_group = $groups[0];
+            $selected_departament = $departaments[0];
+        }
+
+        $schedule =json_decode(Schedule::where("group_id",$selected_group['id'])->first()->schedule);
+
+        foreach ((array)$schedule as $days => $row) {
+            $place = Places::where("id", $schedule->{$days}->Place)->first();
+            $time = json_decode(CallSchedule::where("place_id",$place->id)->first()->call_schedule);
+            $schedule->{$days}->Place = $place->place_name;
+            foreach ((array)$time as $lessons =>$row2) {
+                $schedule->{$days}->{$lessons}->time = $time->{$lessons};
+            }      
+        }
+
         $callSchedule = CallSchedule::get();
         $calls = array();
+
         foreach($callSchedule as $call){
+            
             array_push($calls,["place"=>Places::where("id",$call->place_id)->first()["place_name"],"schedule"=>$call->call_schedule]);
         }
+        
         $panel_array = array(
             array(
                 "header"  => "Расписание звонков",
@@ -38,6 +89,21 @@ class TimetableController extends Controller
                 "props"   => array('_time_table'=>json_encode($calls))
             )
         );
-        return view('components/timetable', ["panel_array"=>$panel_array]);
+
+        return view('components/timetable',
+        [
+            "panel_array"=>$panel_array,
+
+            "departaments_info"=>array(
+                "departaments"=>$departaments,
+                "selected_departament"=>$selected_departament
+            ),
+            "groups_info"=>array(
+                "groups"=>$groups,
+                "selected_group"=>$selected_group
+            ),
+            "schedule"=>$schedule
+        ]
+        );
     }
 }

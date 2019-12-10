@@ -21,10 +21,16 @@ class ScheduleSeeder extends Seeder
         $les5 = array('Teacher'=>array(null, 'Токарчук Александр Сергеевич'),'Lesson'=>array(null, 'Информационные системы и технологии'));//Формат числителя и знаменателя пары
         $les6 = array('Teacher'=>array('Горбунов Антон Дмитриевич', null),'Lesson'=>array('Операционные системы', null));//Формат числителя и знаменателя пары
 
-        $lesons = array('Place'=>"1",'1'=>$les1,'2'=>$les2,'3'=>$les3,'4'=>$les4,'5'=>$les0,'6'=>$les5,'7'=>$les6,'8'=>$les);//Формат дня
-        
-        $rasp = array('Понедельник'=>$lesons,'Вторник'=>$lesons,'Среда'=>$lesons,'Четверг'=>$lesons,'Пятница'=>$lesons,'Суббота'=>$lesons);// Формат недели
+        $lessons = array($les,$les0,$les1,$les2,$les3,$les4,$les5,$les6);
+        $days = array('Понедельник','Вторник','Среда','Четверг','Пятница','Суббота');
+    
         foreach (Group::get() as $group) {  
+            $rasp = array();
+            foreach ($days as $key => $value) {
+                $lesons = array('Place'=>rand(1,2),'1'=>$lessons[rand(0,count($lessons)-1)],'2'=>$lessons[rand(0,count($lessons)-1)],'3'=>$lessons[rand(0,count($lessons)-1)],'4'=>$lessons[rand(0,count($lessons)-1)],'5'=>$lessons[rand(0,count($lessons)-1)],'6'=>$lessons[rand(0,count($lessons)-1)],'7'=>$lessons[rand(0,count($lessons)-1)]);//Формат дня
+                $rasp[$value]=$lesons;
+            }
+            // Формат недели
             DB::table("schedules")->insert(array('schedule'=>json_encode($rasp),'group_id'=>$group['id']));
         }
     }
