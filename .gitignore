@@ -1,13 +1,13 @@
 Work/vendor/
 Work/node_modules/
 Work/npm-debug.log
+Work/public/
 
 # Laravel 4 specific
 Work/bootstrap/compiled.php
 Work/app/storage/
 
 # Laravel 5 & Lumen specific
-Work/public/
 Work/storage/*.key
 .env.*.php
 .env.php
