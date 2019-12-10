@@ -3,6 +3,9 @@ Work/node_modules/
 Work/npm-debug.log
 Work/public/
 
+Work/package-lock.json
+Work/package.json
+
 # Laravel 4 specific
 Work/bootstrap/compiled.php
 Work/app/storage/
@@ -17,8 +20,8 @@ Homestead.json
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
+
 Work/package-lock.json
 Work/package.json
-Work/public/0.js
 Work/public/0.js
 Work/public/js/app.js
