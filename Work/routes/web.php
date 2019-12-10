@@ -39,6 +39,7 @@ Route::get('/concallschedule', 'RouteControllers\BildCallScheduleController@inde
 Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->name('Requestsusers');
 Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('Panelcontrol');
 Route::get('/usermanagement', 'RouteControllers\UserManagementController@index')->name('usermanagement');
+Route::get('/timetable', 'RouteControllers\TimetableController@index')->name('timetable');
 
 
 Route::post('/save_user', 'RouteControllers\UserManagementController@saveUser');

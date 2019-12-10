@@ -78,9 +78,10 @@ import DetailedInformationRetrainign_C from './components/additional-education-f
 // ! --------------------------------------------------------------------------------------------
 
 /**
- * * Компонент журнал
+ * * Компонент учебной нагрузки для студента
  */
 import Journal_C from './components/journal-f/Journal'
+import Timetable_C from './components/timetable-f/Timetable'
 
 
 //import vuetif from './plugins/vuetify'
@@ -130,7 +131,8 @@ new Vue({
     'c-user-management': UserManagement_C, // ! ПОМЕНЯТЬ РОЛЬ НА КОМБОБОКС
     'c-notifications': Notifications_C,
     'c-journal': Journal_C, //-
-    'c-detailed-inf-ret': DetailedInformationRetrainign_C // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
+    'c-detailed-inf-ret': DetailedInformationRetrainign_C, // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
+    'c-timetable': Timetable_C
 
   },
   data: () => ({
@@ -202,9 +204,9 @@ new Vue({
               href: '/timetable'
             },
             {
-              icon: 'alarm',
-              text: 'Расписание звонков',
-              href: '/callschedule'
+              icon: 'autorenew',
+              text: 'Изменения в расписании',
+              href: '/replaces'
             },
             /* 
             {
