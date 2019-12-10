@@ -14,7 +14,7 @@ use App\Models\RetrainingInfo;
                     <h2 class="font-weight-light text-truncate">Информация для студентов</h2>
                 </v-card-title>
                 <v-card-text class="px-5">Начало обучения в автошколе РЭУ им. Г.В.Плеханова с 1 октября 2019 г...</v-card-text>
-                <c-panel components_prop="{{$panel_array ?? null}}"/>
+                <c-panel components_prop="{{$panel_array ?? null}}"></c-panel>
             </v-card>
         </v-flex>
     </v-layout>
@@ -25,7 +25,7 @@ use App\Models\RetrainingInfo;
                     <h2 class="font-weight-light">Специальности</h2>
                 </v-card-title>
                 <v-divider class="ma-2"></v-divider>
-                <c-specialties-list/>
+                <c-specialties-list></c-specialties-list>
             </v-card>
         </v-flex>
     </v-layout>
@@ -36,7 +36,7 @@ use App\Models\RetrainingInfo;
                     <h2 class="font-weight-light">Дополнительное образование</h2>
                 </v-card-title>
                 <v-divider class="ma-2"></v-divider>
-                <retraining components_prop="{{json_encode(RetrainingInfo::get()) ?? null}}"></retraining>
+                <c-retraining components_prop="{{json_encode(RetrainingInfo::get()) ?? null}}"></c-retraining>
             </v-card>
         </v-flex>
     </v-layout>
