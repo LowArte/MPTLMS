@@ -170,8 +170,6 @@ export default {
   mounted() {
     this.arrusers = JSON.parse(this.users);
     this.arrusersposts = JSON.parse(this.usersposts);
-    console.log(this.arrusers);
-    console.log(this.arrusersposts);
     this.initialize(false);
   },
 
@@ -196,7 +194,10 @@ export default {
           .catch(ex => {
             console.log(ex);
           });
-      } else this.pushUsers();
+      } 
+      else {
+        this.pushUsers();
+      }
     },
 
     pushUsers() {

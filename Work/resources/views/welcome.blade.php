@@ -29,9 +29,9 @@ use App\Models\RetrainingInfo;
                 @endif
                 @if (Route::has('login') && ! Auth::check() )
                     <v-spacer></v-spacer>
-                    <login-button action="{{ $action ?? null }}"></login-button>
-                    <remember-password action="{{ $action ?? null }}"></remember-password>
-                    <reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"></reset-password>
+                    <c-login-button action="{{ $action ?? null }}"/>
+                    <c-remember-password action="{{ $action ?? null }}"/>
+                    <c-reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"/>
                 @else
                     <v-btn color="accent mr-5" dark href="\home">ВОЙТИ</v-btn>
                     <v-btn color="accent" dark @click="logout">ВЫЙТИ</v-btn>
@@ -46,7 +46,7 @@ use App\Models\RetrainingInfo;
                                     <h2 class="font-weight-light text-truncate">Информация для студентов</h2>
                                 </v-card-title>
                                 <v-card-text class="px-5">Начало обучения в автошколе РЭУ им. Г.В.Плеханова с 1 октября 2019 г...</v-card-text>
-                                <panel :elevation="1" components_prop="{{$panel_array ?? null}}"></panel>
+                                <c-panel :elevation="1" components_prop="{{$panel_array ?? null}}"/>
                             </v-card>
                         </v-flex>
                     </v-layout>

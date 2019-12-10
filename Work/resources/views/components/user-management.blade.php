@@ -3,7 +3,7 @@
 @section('content')
 
 <v-container fluid grid-list-md text-xs-center>
-    <callschedule time_table="{{ json_encode($calls) }}"></callschedule>
+    <c-user-management users="{{$users ?? null}}" usersposts="{{$usersposts ?? null}}"/>
 </v-container>
 
 @endsection

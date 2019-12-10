@@ -18,9 +18,7 @@ class ConCallScheduleController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','profilactic']);
-
     }
-
 
     public function save(Request $request){
         for($i = 0;$i<count($request['data']);$i++){
@@ -30,8 +28,8 @@ class ConCallScheduleController extends Controller
         response()->json([
             "success"=>true
         ]);
-        //CallSchedule::where('id',$request['id']);
     }
+
     /**
      * Show the application dashboard.
      *
@@ -42,24 +40,8 @@ class ConCallScheduleController extends Controller
         $callSchedule = CallSchedule::get();
         $calls = array();
         foreach($callSchedule as $call){
-            array_push($calls,["place"=>Places::where("id",$call->place_id)->first(),"schedule"=>$call->call_schedule]);
+            array_push($calls,["place"=>Places::where("id",$call->place_id)->first()["place_name"],"schedule"=>$call->call_schedule]);
         }
-        Debugbar::info($calls);
-        return view('components/callschedule', ["calls"=>$calls]);
-    }
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index2()
-    {
-        $callSchedule = CallSchedule::get();
-        $calls = array();
-        foreach($callSchedule as $call){
-            array_push($calls,["place"=>Places::where("id",$call->place_id)->first(),"schedule"=>$call->call_schedule]);
-        }
-        Debugbar::info($calls);
-        return view('components/callschedule', ["calls"=>$calls]);
+        return view('components/bild-call-schedule', ["calls"=>$calls]);
     }
 }

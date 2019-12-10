@@ -14,7 +14,7 @@ use App\Models\RetrainingInfo;
                     <h2 class="font-weight-light text-truncate">Информация для студентов</h2>
                 </v-card-title>
                 <v-card-text class="px-5">Начало обучения в автошколе РЭУ им. Г.В.Плеханова с 1 октября 2019 г...</v-card-text>
-                <panel components_prop="{{$panel_array ?? null}}"></panel>
+                <c-panel components_prop="{{$panel_array ?? null}}"/>
             </v-card>
         </v-flex>
     </v-layout>

@@ -23,13 +23,13 @@ export default {
   }),
   components: {},
   props: {
-    options_prop: {
+    _options: {
       data: String,
       default: null
     }
   },
   mounted() {
-    this.options = JSON.parse(this.options_prop);
+    this.options = JSON.parse(this._options);
     console.log(this.options);
   },
   methods: {

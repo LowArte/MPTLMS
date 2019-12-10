@@ -65,13 +65,13 @@ export default {
     };
   },
   props: {
-    requests: {
+    _requests: {
       data: String,
       default: ""
     }
   },
   mounted() {
-    this.items = JSON.parse(this.requests);
+    this.items = JSON.parse(this._requests);
     console.log(this.items);
   },
   methods: {

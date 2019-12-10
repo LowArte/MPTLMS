@@ -72,28 +72,18 @@ export default {
     date: null
   }),
   props: {
-    place: {
-      type: String,
-      default: null
-    },
-    time: {
+    _time_table: {
       type: String,
       default: null
     }
   },
   created: function() {
-    var arr = JSON.parse(this.place);
-    this.places = [];
-    for (var i = 0; i < arr.length; i++) this.places.push(arr[i].place_name);
-
-    this.timeTable = JSON.parse(this.time);
-    for (var i = 0; i < this.timeTable.length; i++)
-      this.timeTable[i].call_schedule = JSON.parse(
-        this.timeTable[i].call_schedule
-      );
-    this.mplace = this.places[0];
-
-    this.rendererTime = this.timeTable[0].call_schedule;
+    let arr = JSON.parse(this._time_table);
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].schedule = JSON.parse(arr[i].schedule);
+    }
+    this.table = arr;
+    console.log(this.table);
   },
   methods: {
     sendQuery() {

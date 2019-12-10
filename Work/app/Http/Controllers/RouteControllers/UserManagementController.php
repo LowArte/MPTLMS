@@ -29,7 +29,6 @@ class UserManagementController extends Controller
     {
         try
         {
-            Debugbar::info($request);
             $user = null;
             if($request->user["id"]==-1){ // New user
                 $faker = Factory::create();
@@ -56,7 +55,6 @@ class UserManagementController extends Controller
         }
         catch(MNF $e)
         {
-            Debugbar::info("users_not_save");
             return response()->json(['error'=>$e],400);
         }
     }
@@ -65,14 +63,12 @@ class UserManagementController extends Controller
     {
         try
         {
-            Debugbar::info($request);
             $user = User::where("id",$request->id)->first();
             $user->delete();
             return response()->json(['success'=>true]);
         }
         catch(MNF $e)
         {
-            Debugbar::info("users_not_delete");
             return response()->json(['error'=>$e],400);
         }
     }

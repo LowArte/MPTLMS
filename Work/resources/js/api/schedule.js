@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   getSchedule (credentials) {
-    return axios.post('/get_schedule_by_group_id', {"group_id":credentials})
+    return axios.get('/get_schedule_by_group_id', {"group_id":credentials})
   },
   
   saveSchedule (credentials) {
