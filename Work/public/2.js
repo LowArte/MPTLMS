@@ -1,14 +1,22 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SnackBar.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/mutation-types */ "./resources/js/store/mutation-types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -18,110 +26,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      groups: ["П-1-16", "П-2-16", "П-3-16", "П-4-16"],
-      group: "П-2-16",
-      model: null,
-      hidden: false,
-      itemsPerPageOptions: [6],
-      itemsPerPage: 6,
-      Datetime: '00.00.0000',
-      timeitems: {},
-      items: {}
-    };
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['snackbarShow', 'snackbarColor', 'snackbarText', 'snackbarSubtext', 'snackbarTimeout'])),
+  methods: {
+    close: function close() {
+      this.$store.commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_1__["SET_SNACKBAR_SHOW"], false);
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&":
-/*!***********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653& ***!
-  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n*[data-v-29f98bd0]{\r\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug&":
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -134,303 +104,32 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { fluid: "" } },
+    "v-snackbar",
+    {
+      attrs: {
+        timeout: _vm.snackbarTimeout,
+        color: _vm.snackbarColor,
+        "multi-line": true
+      },
+      model: {
+        value: _vm.snackbarShow,
+        callback: function($$v) {
+          _vm.snackbarShow = $$v
+        },
+        expression: "snackbarShow"
+      }
+    },
     [
-      _c(
-        "v-row",
-        { attrs: { align: "center" } },
-        [
-          _c(
-            "v-container",
-            [
-              _c("v-autocomplete", {
-                attrs: { label: "Группа", solo: "", items: _vm.groups },
-                model: {
-                  value: _vm.group,
-                  callback: function($$v) {
-                    _vm.group = $$v
-                  },
-                  expression: "group"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                {
-                  staticClass: "pa-0 align-self-center",
-                  attrs: { "d-flex": "" }
-                },
-                [
-                  _c(
-                    "v-row",
-                    {
-                      staticClass: "pa-0 justify-center",
-                      attrs: { sm: "2", md: "0" }
-                    },
-                    [
-                      _c(
-                        "v-col",
-                        {
-                          staticClass: "pa-0 d-flex justify-center",
-                          attrs: { sm: "2", md: "0" }
-                        },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "accent", dark: "" },
-                              on: {
-                                click: function($event) {
-                                  _vm.hidden = !_vm.hidden
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.hidden ? "Числитель" : "Знаменатель")
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("v-divider", { staticClass: "ma-0" }),
-      _vm._v(" "),
-      _c("v-data", {
-        attrs: {
-          items: _vm.items[_vm.group],
-          "items-per-page": _vm.itemsPerPage
-        },
-        on: {
-          "update:itemsPerPage": function($event) {
-            _vm.itemsPerPage = $event
-          },
-          "update:items-per-page": function($event) {
-            _vm.itemsPerPage = $event
+      _vm._v(_vm._s(_vm.snackbarText)),
+      _c("br"),
+      _vm._v(_vm._s(_vm.snackbarSubtext)),
+      _c("v-btn", {
+        attrs: { dark: "", text: "" },
+        nativeOn: {
+          click: function($event) {
+            return _vm.close($event)
           }
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(props) {
-              return [
-                _c(
-                  "v-row",
-                  _vm._l(props.items, function(item) {
-                    return _c(
-                      "v-col",
-                      {
-                        key: item.name,
-                        attrs: { cols: "12", sm: "6", md: "2", lg: "2" }
-                      },
-                      [
-                        _c(
-                          "v-card",
-                          [
-                            _c(
-                              "v-card-title",
-                              {
-                                staticClass: "subtitle-1",
-                                staticStyle: { color: "#FF3D00" }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(item.name) +
-                                    " - " +
-                                    _vm._s(_vm.Datetime)
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-list",
-                              { attrs: { dense: "" } },
-                              [
-                                _c("v-list-item", [
-                                  _vm._v("Здание: " + _vm._s(_vm.Building))
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p1) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p1) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t1) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p2) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p2) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t2) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p3) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p3) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t3) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p4) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p4) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t4) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p5) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p5) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t5) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2" }),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p6) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p6) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t6) +
-                                      "\n              "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("v-list-item", [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.timeitems.p7) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.p7) +
-                                      "\n                "
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(item.t7) +
-                                      "\n              "
-                                  )
-                                ])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  }),
-                  1
-                )
-              ]
-            }
-          }
-        ])
+        }
       })
     ],
     1
@@ -443,18 +142,20 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/SnackBar.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/SnackBar.vue ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeacherTimeTable.vue?vue&type=template&id=3991e653& */ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&");
-/* harmony import */ var _TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TeacherTimeTable.vue?vue&type=script&lang=js& */ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _SnackBar_vue_vue_type_template_id_29f98bd0_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug& */ "./resources/js/components/SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug&");
+/* harmony import */ var _SnackBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SnackBar.vue?vue&type=script&lang=js& */ "./resources/js/components/SnackBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css& */ "./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -462,51 +163,67 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _SnackBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SnackBar_vue_vue_type_template_id_29f98bd0_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SnackBar_vue_vue_type_template_id_29f98bd0_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "29f98bd0",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/teachertimetable/Components/TeacherTimeTable.vue"
+component.options.__file = "resources/js/components/SnackBar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/components/SnackBar.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/SnackBar.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherTimeTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SnackBar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&":
-/*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653& ***!
-  \*****************************************************************************************************************/
+/***/ "./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css& ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=style&index=0&id=29f98bd0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_style_index_0_id_29f98bd0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TeacherTimeTable.vue?vue&type=template&id=3991e653& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teachertimetable/Components/TeacherTimeTable.vue?vue&type=template&id=3991e653&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_template_id_29f98bd0_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/pug-plain-loader!../../../node_modules/vue-loader/lib??vue-loader-options!./SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SnackBar.vue?vue&type=template&id=29f98bd0&scoped=true&lang=pug&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_template_id_29f98bd0_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TeacherTimeTable_vue_vue_type_template_id_3991e653___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_SnackBar_vue_vue_type_template_id_29f98bd0_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

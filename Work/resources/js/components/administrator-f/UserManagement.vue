@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import apiuser from "../api/users";
+import apiuser from "../../api/users";
 import { mask } from "vue-the-mask";
 
 export default {

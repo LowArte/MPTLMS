@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import a from "../feedback/FeedbackComponent";
 import * as actions from "../../store/action-types";
 import withSnackbar from "../mixins/withSnackbar";
 

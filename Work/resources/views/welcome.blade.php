@@ -57,7 +57,7 @@ use App\Models\RetrainingInfo;
                                     <h2 class="font-weight-light">Специальности</h2>
                                 </v-card-title>
                                 <v-divider class="ma-2"></v-divider>
-                                <subtitle></subtitle>
+                                <c-specialties-list/>
                             </v-card>
                         </v-flex>
                     </v-layout>

@@ -7,28 +7,80 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import LoginButtonComponent from './components/authentication/LoginButtonComponent'
-import RememberPasswordComponent from './components/authentication/RememberPasswordComponent'
-import ResetPasswordComponent from './components/authentication/ResetPasswordComponent'
-import FeedbackComponent from './components/feedback/FeedbackComponent'
+
+/**
+ * * Компоненты авторизации
+ */
+import LoginButton_C from './components/authentication-f/LoginButton'
+import RememberPassword_C from './components/authentication-f/RememberPassword'
+import ResetPassword_C from './components/authentication-f/ResetPassword'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компоенты обратной связи и просмотр обращений
+ */
+import Feedback_C from './components/feedback-f/Feedback'
+import RequestsUsers_C from './components/feedback-f/RequestsUsers'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компоненты выдачи и заказа справок
+ * ! Переписать вёрстку
+ * ? <ListCertificateComponent> перенести в blade шаблон
+ */
 import CertificateComponent from './components/certificate/CertificateComponent'
 import ListCertificateComponent from './components/certificate/ListCertificateComponent'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компоненты уведомлений / системы 
+ */
 import SnackBar from './components/SnackBarComponent'
-import Panel from './components/expention/Panel'
-import TeacherHomeworkComponent from './components/teacherhomework/TeacherHomeworkComponent'
-/* import ConTimeTable from './components/timeTablesFolders/ContimetableComponent'
-import ConReplacements from './components/timeTablesFolders/ConreplacementsComponent'
-import ConCallSchedule from './components/callschedule/ConCallScheduleComponent' */
-import TitlePage from './components/mainpage/SpecComp'
-import InfoPage from './components/mainpage/MainPageComponent'
-import CallSchedule from './components/callschedule/CallScheduleComponent'
-import RequestsUsers from './components/feedback/RequestsUsersComponent'
-import PanelControl from './components/PanelControlComponent'
-import Retraining from './components/additionaleducation/RetrainingComponent'
-import UserManagement from './components/UserManagement'
-import Notifications from './components/notificatinsFolder/Notifications'
-import Journal from './components/journalFolder/JournalComponent'
-import DetailedInformationRetrainign from './components/additionaleducation/DetailedInformationRetrainignComponent'
+import Notifications_C from './components/notifications-f/Notifications'
+import Panel_C from './components/expention-f/Panel'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компоненты добавления и отображения звонков
+ */
+import Bild_CallSchedule_C from './components/call-schedule-f/Bild_CallSchedule'
+import CallSchedule_C from './components/call-schedule-f/CallSchedule'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компонент отображения списка специальностей
+ */
+import SpecialtiesList_C from './components/information-page-f/SpecialtiesList'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компоненты админской панели
+ */
+import PanelControl_C from './components/administrator-f/PanelControl'
+import UserManagement_C from './components/administrator-f/UserManagement'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компоненты центра дополнительного образования
+ * ! Перенести в blade шаблон
+ * ? Реализовать компонент кнопки записи
+ */
+import Retraining_C from './components/additional-education-f/Retraining'
+import DetailedInformationRetrainign_C from './components/additional-education-f/DetailedInformationRetraining'
+
+// ! --------------------------------------------------------------------------------------------
+
+/**
+ * * Компонент журнал
+ */
+import Journal_C from './components/journal-f/Journal'
 
 
 //import vuetif from './plugins/vuetify'
@@ -61,29 +113,24 @@ new Vue({
   vuetify,
   mixins: [withSnackbar],
   components: {
-    'login-button': LoginButtonComponent,
-    'remember-password': RememberPasswordComponent,
-    'reset-password': ResetPasswordComponent,
+    'c-login-button': LoginButton_C,
+    'c-remember-password': RememberPassword_C,
+    'c-reset-password': ResetPassword_C,
     'snackbar': SnackBar,
-    'panel': Panel,
-    'feedback': FeedbackComponent,
-    'certificate': CertificateComponent,
-    'listcertificate': ListCertificateComponent,
-    'timetable': TimetableComponent,
-    'teacherhomework': TeacherHomeworkComponent,
-/*     'contimetable': ConTimeTable,
-    'conreplacements': ConReplacements,
-    'concallschedule': ConCallSchedule, */
-    'subtitle': TitlePage,
-    'maintitle': InfoPage,
-    'requestsusers': RequestsUsers,
-    'panelcontrol': PanelControl,
-    'callschedule': CallSchedule,
-    'retraining': Retraining,
-    'usermanagement': UserManagement,
-    'notifications': Notifications,
-    'journal': Journal,
-    'detailedir': DetailedInformationRetrainign
+    'c-panel': Panel_C,
+    'c-feedback': Feedback_C,
+    'certificate': CertificateComponent, // !
+    'listcertificate': ListCertificateComponent, // !
+    'c-bild-call-schedule': Bild_CallSchedule_C,
+    'c-specialties-list': SpecialtiesList_C,
+    'c-requests-users': RequestsUsers_C,
+    'c-panel-control': PanelControl_C, // ! ПРОВЕРИТЬ
+    'c-call-schedule': CallSchedule_C,
+    'c-retraining': Retraining_C,
+    'c-user-management': UserManagement_C, // ! ПОМЕНЯТЬ РОЛЬ НА КОМБОБОКС
+    'c-notifications': Notifications_C,
+    'c-journal': Journal_C, //-
+    'c-detailed-i-r': DetailedInformationRetrainign_C // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
 
   },
   data: () => ({
@@ -102,182 +149,189 @@ new Vue({
       switch (user.post_id) {
         case 1: { //Администраторы
           return [{
-            icon: 'home',
-            text: 'Главная',
-            href: '/home'
-          },
-          {
-            icon: 'edit',
-            text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
-            href: '/panelcontrol'
-          },
-          {
-            icon: 'today',
-            text: 'Расписание',
-            href: '/contimetable'
-          },
-          {
-            icon: 'today',
-            text: 'Замены',
-            href: '/conreplacements'
-          },
-          {
-            icon: 'today',
-            text: 'Расписание звонков',
-            href: '/concallschedule'
-          },
-          {
-            icon: 'edit',
-            text: 'Управление пользователями',
-            href: '/usermanagement'
-          },
-          {
-            icon: 'feedback',
-            text: 'Обращение пользователей',
-            href: '/requestsusers'
-          }];
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            },
+            {
+              icon: 'edit',
+              text: 'Панель управления', //Замены, расписание, перевод в режим профилактики, редактирование пользователей
+              href: '/panelcontrol'
+            },
+            {
+              icon: 'today',
+              text: 'Расписание',
+              href: '/contimetable'
+            },
+            {
+              icon: 'today',
+              text: 'Замены',
+              href: '/conreplacements'
+            },
+            {
+              icon: 'today',
+              text: 'Расписание звонков',
+              href: '/concallschedule'
+            },
+            {
+              icon: 'edit',
+              text: 'Управление пользователями',
+              href: '/usermanagement'
+            },
+            {
+              icon: 'feedback',
+              text: 'Обращение пользователей',
+              href: '/requestsusers'
+            }
+          ];
         }
         case 2: { //Студент
           return [{
-            icon: 'home',
-            text: 'Главная',
-            href: '/home'
-          },
-          {
-            icon: 'portrait',
-            text: 'Студенческая карточка',
-            href: '/card'
-          },
-          {
-            icon: 'today',
-            text: 'Расписание',
-            href: '/timetable'
-          },
-          {
-            icon: 'alarm',
-            text: 'Расписание звонков',
-            href: '/callschedule'
-          },
-          /* 
-          {
-            icon: 'show_chart',
-            text: 'Успеваемость',
-            href: '/home'
-          }, */
-          {
-            icon: 'business_center',
-            text: 'Дополнительное образование',
-            href: '/detailedir'
-          }, /*
-          {
-            icon: 'school',
-            text: 'Преподаватели',
-            href: '/home'
-          }, */
-          {
-            icon: 'edit',
-            text: 'Справки',
-            href: '/certificate'
-          },/* 
-          {
-            icon: 'home',
-            text: 'Домашнее задание',
-            href: '/home'
-          }, */
-          /*{
-            icon: 'storefront',
-            text: 'Портфолио',
-            href: '/home'
-          }, {
-            icon: 'layers',
-            text: 'Базы практики',
-            href: '/home'
-          },*/
-          {
-            icon: 'feedback',
-            text: 'Обратная связь',
-            href: '/feedback'
-          }];
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            },
+            {
+              icon: 'portrait',
+              text: 'Студенческая карточка',
+              href: '/card'
+            },
+            {
+              icon: 'today',
+              text: 'Расписание',
+              href: '/timetable'
+            },
+            {
+              icon: 'alarm',
+              text: 'Расписание звонков',
+              href: '/callschedule'
+            },
+            /* 
+            {
+              icon: 'show_chart',
+              text: 'Успеваемость',
+              href: '/home'
+            }, */
+            {
+              icon: 'business_center',
+              text: 'Дополнительное образование',
+              href: '/detailedir'
+            },
+            /*
+                     {
+                       icon: 'school',
+                       text: 'Преподаватели',
+                       href: '/home'
+                     }, */
+            {
+              icon: 'edit',
+              text: 'Справки',
+              href: '/certificate'
+            },
+            /* 
+                      {
+                        icon: 'home',
+                        text: 'Домашнее задание',
+                        href: '/home'
+                      }, */
+            /*{
+              icon: 'storefront',
+              text: 'Портфолио',
+              href: '/home'
+            }, {
+              icon: 'layers',
+              text: 'Базы практики',
+              href: '/home'
+            },*/
+            {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/feedback'
+            }
+          ];
         }
         case 3: { //Преподы
           return [{
-            icon: 'home',
-            text: 'Главная',
-            href: '/home'
-          },
-          {
-            icon: 'today',
-            text: 'Расписание',
-            href: '/timetable'
-          },
-          {
-            icon: 'today',
-            text: 'Расписание звонков',
-            href: '/callschedule'
-          },
-          {
-            icon: 'home',
-            text: 'Домашнее задание',
-            href: '/teacherhomework'
-          },
-          /*{
-            icon: 'layers',
-            text: 'Ведомости',
-            href: '/home'
-          },*/
-          {
-            icon: 'home',
-            text: 'Электронный журнал',
-            href: '/teacheracademicperfomance'
-          }, {
-            icon: 'feedback',
-            text: 'Обратная связь',
-            href: '/feedback'
-          }];
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            },
+            {
+              icon: 'today',
+              text: 'Расписание',
+              href: '/timetable'
+            },
+            {
+              icon: 'today',
+              text: 'Расписание звонков',
+              href: '/callschedule'
+            },
+            {
+              icon: 'home',
+              text: 'Домашнее задание',
+              href: '/teacherhomework'
+            },
+            /*{
+              icon: 'layers',
+              text: 'Ведомости',
+              href: '/home'
+            },*/
+            {
+              icon: 'home',
+              text: 'Электронный журнал',
+              href: '/teacheracademicperfomance'
+            }, {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/feedback'
+            }
+          ];
         }
         case 4: { //Учебная часть
           return [{
-            icon: 'home',
-            text: 'Главная',
-            href: '/home'
-          },
-          {
-            icon: 'home',
-            text: 'Расписание',
-            href: '/contimetable'
-          },
-          {
-            icon: 'home',
-            text: 'Замены',
-            href: '/conreplacements'
-          },
-          {
-            icon: 'today',
-            text: 'Расписание звонков',
-            href: '/concallschedule'
-          },
-          {
-            icon: 'feedback',
-            text: 'Обратная связь',
-            href: '/feedback'
-          }];
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            },
+            {
+              icon: 'home',
+              text: 'Расписание',
+              href: '/contimetable'
+            },
+            {
+              icon: 'home',
+              text: 'Замены',
+              href: '/conreplacements'
+            },
+            {
+              icon: 'today',
+              text: 'Расписание звонков',
+              href: '/concallschedule'
+            },
+            {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/feedback'
+            }
+          ];
         }
         case 5: { //Лапшина (Канцелярия)
           return [{
-            icon: 'home',
-            text: 'Главная',
-            href: '/home'
-          },
-          {
-            icon: 'home',
-            text: 'Заказ справок',
-            href: '/listcertificate'
-          },
-          {
-            icon: 'feedback',
-            text: 'Обратная связь',
-            href: '/feedback'
-          }];
+              icon: 'home',
+              text: 'Главная',
+              href: '/home'
+            },
+            {
+              icon: 'home',
+              text: 'Заказ справок',
+              href: '/listcertificate'
+            },
+            {
+              icon: 'feedback',
+              text: 'Обратная связь',
+              href: '/feedback'
+            }
+          ];
         }
         default: {
           return null;

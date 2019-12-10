@@ -1,10 +1,10 @@
 <template lang="pug">
   v-layout.row.wrap
-    subtitle(v-for="(item, index) in items" :key="index" :item="item")
+    c-specialtie(v-for="(item, index) in items" :key="index" :item="item")
 </template>
 
 <script>
-import Subtitle from "./SpecialtyPageComponent";
+import SpecialtiePage_C from "./components/C_SpecialtyPage";
 export default {
   data: () => ({
     items: [
@@ -55,7 +55,7 @@ export default {
     ]
   }),
   components: {
-    subtitle: Subtitle
+    "c-specialtie": SpecialtiePage_C
   }
 };
 </script>

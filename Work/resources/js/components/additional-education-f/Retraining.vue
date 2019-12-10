@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Retraining from "./RetCom";
+import Retraining_C from "./components/Com_Ret";
 export default {
   props: {
     components_prop: {
@@ -22,7 +22,7 @@ export default {
     this.data = JSON.parse(this.components_prop);
   },
   components: {
-    retraining: Retraining
+    "c-retraining": Retraining_C
   }
 };
 </script>

@@ -4,7 +4,7 @@
 @section('content')
 
 <v-container fluid grid-list-md text-xs-center>
-    <journal></journal>
+    <c-journal/>
 </v-container>
 
 @endsection

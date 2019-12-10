@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import panelApi from "../api/panel";
+import panelApi from "../../api/panel";
 
 export default {
   data: () => ({
