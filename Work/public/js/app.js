@@ -4277,6 +4277,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../api/group */ "./resources/js/api/group.js");
+/* harmony import */ var _api_schedule__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../api/schedule */ "./resources/js/api/schedule.js");
 //
 //
 //
@@ -4295,11 +4296,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       groups_info: null,
       departaments_info: null,
+      schedule: null,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     };
   },
@@ -4312,7 +4315,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": null
     },
-    schedule: {
+    _schedule: {
       type: Object,
       "default": null
     }
@@ -4324,6 +4327,17 @@ __webpack_require__.r(__webpack_exports__);
       _api_group__WEBPACK_IMPORTED_MODULE_0__["default"].getGroup(this.departaments_info.selected_departament.id).then(function (res) {
         _this.groups_info.groups = res.data.groups;
         _this.groups_info.selected_group = _this.groups_info.groups[0];
+
+        _this.group_change();
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    group_change: function group_change() {
+      var _this2 = this;
+
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(this.groups_info.selected_group.id).then(function (res) {
+        _this2.schedule = res.data.schedule;
       })["catch"](function (ex) {
         console.log(ex);
       });
@@ -4332,7 +4346,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     this.groups_info = JSON.parse(this._groups_info);
     this.departaments_info = JSON.parse(this._departaments_info);
-    console.log(this.schedule);
+    this.schedule = this._schedule;
   }
 });
 
@@ -7494,6 +7508,7 @@ var render = function() {
               "item-text": "group_name",
               items: _vm.groups_info.groups
             },
+            on: { change: _vm.group_change },
             model: {
               value: _vm.groups_info.selected_group,
               callback: function($$v) {
@@ -60744,6 +60759,36 @@ __webpack_require__.r(__webpack_exports__);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/set_options', {
       "prop_name": credentials.prop,
       'value': credentials.value
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/schedule.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/schedule.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getSchedule: function getSchedule(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/get_schedule_by_group_id', {
+      params: {
+        "group_id": credentials
+      }
+    });
+  },
+  saveSchedule: function saveSchedule(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_schedule', {
+      "group_id": credentials.group_id,
+      "schedule": credentials.schedule
     });
   }
 });

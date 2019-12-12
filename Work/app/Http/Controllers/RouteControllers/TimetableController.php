@@ -12,11 +12,22 @@ use App\Models\Schedule;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
-use Debugbar;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class TimetableController extends Controller
 {
+
+    private function get_schedule($group_id){
+        $schedule =json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
+        foreach ((array)$schedule as $days => $row) {
+            $place = Places::where("id", $schedule->{$days}->Place)->first();
+            $time = json_decode(CallSchedule::where("place_id",$place->id)->first()->call_schedule);
+            $schedule->{$days}->Place = $place->place_name;
+            foreach ((array)$time as $lessons =>$row2) {
+                $schedule->{$days}->{$lessons}->time = $time->{$lessons};
+            }      
+        }
+        return $schedule;
+    }
     /**
      * Create a new controller instance.
      *
@@ -29,11 +40,17 @@ class TimetableController extends Controller
 
     public function groupByDepartamentId(Request $request)
     {
-
         $groups = Group::where("departaments_id",$request["dep_id"])->get();
-        Debugbar::info($request["dep_id"]);
         return response()->json(array(
             "groups"=>$groups
+        ));
+    }
+
+    public function scheduleByGroupId(Request $request)
+    {
+        $schedule = $this->get_schedule($request["group_id"]);
+        return response()->json(array(
+            "schedule"=>$schedule
         ));
     }
 
@@ -61,17 +78,6 @@ class TimetableController extends Controller
         {
             $selected_group = $groups[0];
             $selected_departament = $departaments[0];
-        }
-
-        $schedule =json_decode(Schedule::where("group_id",$selected_group['id'])->first()->schedule);
-
-        foreach ((array)$schedule as $days => $row) {
-            $place = Places::where("id", $schedule->{$days}->Place)->first();
-            $time = json_decode(CallSchedule::where("place_id",$place->id)->first()->call_schedule);
-            $schedule->{$days}->Place = $place->place_name;
-            foreach ((array)$time as $lessons =>$row2) {
-                $schedule->{$days}->{$lessons}->time = $time->{$lessons};
-            }      
         }
 
         $callSchedule = CallSchedule::get();
@@ -102,7 +108,7 @@ class TimetableController extends Controller
                 "groups"=>$groups,
                 "selected_group"=>$selected_group
             ),
-            "schedule"=>$schedule
+            "schedule"=>$this->get_schedule($selected_group['id'])
         ]
         );
     }
