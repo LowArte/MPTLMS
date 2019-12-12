@@ -4295,7 +4295,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+
+
+Date.prototype.getWeek = function () {
+  var onejan = new Date(this.getFullYear(), 0, 1);
+  return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4303,6 +4342,7 @@ __webpack_require__.r(__webpack_exports__);
       groups_info: null,
       departaments_info: null,
       schedule: null,
+      isToday: null,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     };
   },
@@ -4333,6 +4373,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log(ex);
       });
     },
+    isChisl: function isChisl() {
+      var today = new Date();
+      return today.getWeek() % 2;
+    },
     group_change: function group_change() {
       var _this2 = this;
 
@@ -4347,6 +4391,8 @@ __webpack_require__.r(__webpack_exports__);
     this.groups_info = JSON.parse(this._groups_info);
     this.departaments_info = JSON.parse(this._departaments_info);
     this.schedule = this._schedule;
+    this.isToday = 1;
+    console.log(this.isChisl());
   }
 });
 
@@ -4423,6 +4469,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.flexcard {\r\n  display: flex;\r\n  flex-direction: row;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.v-expansion-panel-content__wrap[data-v-a6055e9e] {\r\n  padding: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -5011,6 +5076,36 @@ options.transform = transform
 options.insertInto = undefined;
 
 var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -7462,10 +7557,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&lang=pug&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&lang=pug& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7521,57 +7616,482 @@ var render = function() {
         1
       ),
       _c(
+        "v-card-title",
+        { staticClass: "primary-title pt-0 px-0" },
+        [
+          _c(
+            "v-chip",
+            { staticClass: "pa-2 ml-2", attrs: { label: "" } },
+            [
+              _c(
+                "v-card-title",
+                {
+                  staticClass:
+                    "pa-0 accent--text font-weight-light text-truncate overline"
+                },
+                [_vm._v(_vm._s(_vm.isToday == 0 ? "Числитель" : "Знаменатель"))]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _c(
         "v-layout",
         { staticClass: "row wrap" },
         _vm._l(_vm.days, function(day_key, day_index) {
           return _c(
             "v-flex",
-            {
-              key: day_index,
-              staticClass: "ma-2",
-              staticStyle: { height: "auto" }
-            },
+            { key: day_index, staticClass: "ma-2" },
             [
               _c(
                 "v-card",
                 {
                   staticClass: "pa-2 mx-auto",
-                  attrs: { "max-width": "265px" }
+                  staticStyle: { display: "flex", "flex-direction": "column" },
+                  attrs: { "max-width": "265px", height: "100%", elevation: 0 }
                 },
                 [
-                  _c("v-card-title", { staticClass: "primary-title pt-0" }, [
-                    _vm._v(_vm._s(day_key))
-                  ]),
-                  _c("v-card-subtitle", [
-                    _vm._v(
-                      "Место проведения: " + _vm._s(_vm.schedule[day_key].Place)
-                    )
-                  ]),
-                  _c("v-divider"),
-                  _vm._l(_vm.schedule[day_key], function(lesson, lesson_index) {
-                    return _c(
-                      "v-container",
-                      { key: "l" + lesson_index, staticClass: "grid-list-xs" },
-                      [
-                        lesson.Lesson != null
-                          ? _c(
-                              "v-card-title",
-                              {
-                                staticClass:
-                                  "pa-0 accent--text font-weight-light text-truncate"
-                              },
-                              [_vm._v(_vm._s(lesson.time) + " ")]
-                            )
-                          : _vm._e(),
+                  _c(
+                    "v-card-title",
+                    { staticClass: "primary-title pt-0 px-0" },
+                    [
+                      _vm._v(_vm._s(day_key) + " "),
+                      _c("v-card-subtitle", { staticClass: "px-0 pt-0" }, [
                         _vm._v(
-                          _vm._s(lesson.Lesson) + " \n" + _vm._s(lesson.Teacher)
+                          "Место проведения: " +
+                            _vm._s(_vm.schedule[day_key].Place)
                         )
-                      ],
-                      1
-                    )
-                  })
+                      ]),
+                      _c("v-divider"),
+                      _vm._l(_vm.schedule[day_key], function(
+                        lesson,
+                        lesson_index
+                      ) {
+                        return lesson.Lesson != null
+                          ? _c(
+                              "v-container",
+                              {
+                                key: "l" + lesson_index,
+                                staticClass: "grid-list-xs pa-0"
+                              },
+                              [
+                                Array.isArray(lesson.Lesson) == false
+                                  ? _c(
+                                      "v-container",
+                                      { staticClass: "pa-0 ma-0" },
+                                      [
+                                        _c(
+                                          "v-card-title",
+                                          {
+                                            staticClass:
+                                              "pa-0 accent--text font-weight-light text-truncate"
+                                          },
+                                          [_vm._v(_vm._s(lesson.time) + " ")]
+                                        ),
+                                        _c(
+                                          "v-card-text",
+                                          {
+                                            staticClass: "pa-0 wrap text-black"
+                                          },
+                                          [_vm._v(_vm._s(lesson.Lesson) + " ")]
+                                        ),
+                                        _c(
+                                          "v-card-text",
+                                          {
+                                            staticClass:
+                                              "pa-0 pt-2 font-weight-light wrap caption"
+                                          },
+                                          [_vm._v(_vm._s(lesson.Teacher))]
+                                        ),
+                                        _c("v-divider", { staticClass: "ma-0" })
+                                      ],
+                                      1
+                                    )
+                                  : lesson.Lesson[_vm.isToday] != null
+                                  ? _c(
+                                      "v-container",
+                                      { staticClass: "pa-0 ma-0" },
+                                      [
+                                        _c(
+                                          "v-card-title",
+                                          {
+                                            staticClass:
+                                              "pa-0 accent--text font-weight-light text-truncate"
+                                          },
+                                          [_vm._v(_vm._s(lesson.time) + " ")]
+                                        ),
+                                        _c(
+                                          "v-container",
+                                          { staticClass: "pa-0 ma-0" },
+                                          [
+                                            Array.isArray(
+                                              lesson.Lesson[_vm.isToday]
+                                            ) == false
+                                              ? _c(
+                                                  "v-container",
+                                                  { staticClass: "pa-0 ma-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-text",
+                                                      {
+                                                        staticClass:
+                                                          "pa-0 wrap text-black"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            lesson.Lesson[
+                                                              _vm.isToday
+                                                            ]
+                                                          ) + " "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _c(
+                                                      "v-card-text",
+                                                      {
+                                                        staticClass:
+                                                          "pa-0 pt-2 font-weight-light wrap caption"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            lesson.Teacher[
+                                                              _vm.isToday
+                                                            ]
+                                                          )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              : _c(
+                                                  "v-container",
+                                                  { staticClass: "pa-0 ma-0" },
+                                                  [
+                                                    _c(
+                                                      "v-card-text",
+                                                      {
+                                                        staticClass:
+                                                          "pa-0 wrap text-black"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            lesson.Lesson[
+                                                              _vm.isToday
+                                                            ][0] ==
+                                                              lesson.Lesson[
+                                                                _vm.isToday
+                                                              ][1]
+                                                              ? lesson.Lesson[
+                                                                  _vm.isToday
+                                                                ][0]
+                                                              : lesson.Lesson[
+                                                                  _vm.isToday
+                                                                ][0] +
+                                                                  "," +
+                                                                  lesson.Lesson[
+                                                                    _vm.isToday
+                                                                  ][1]
+                                                          ) + " "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _c(
+                                                      "v-card-text",
+                                                      {
+                                                        staticClass:
+                                                          "pa-0 pt-2 font-weight-light wrap caption"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            lesson.Teacher[
+                                                              _vm.isToday
+                                                            ][0] ==
+                                                              lesson.Teacher[
+                                                                _vm.isToday
+                                                              ][1]
+                                                              ? lesson.Teacher[
+                                                                  _vm.isToday
+                                                                ][0]
+                                                              : lesson.Teacher[
+                                                                  _vm.isToday
+                                                                ][0] +
+                                                                  "," +
+                                                                  lesson
+                                                                    .Teacher[
+                                                                    _vm.isToday
+                                                                  ][1]
+                                                          ) + " "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
+                                            _c(
+                                              "v-container",
+                                              { staticClass: "pa-0 ma-0" },
+                                              [
+                                                _c("v-divider", {
+                                                  staticClass: "mt-2"
+                                                }),
+                                                lesson.Lesson[
+                                                  _vm.isToday == 0 ? 1 : 0
+                                                ] != null
+                                                  ? _c(
+                                                      "v-expansion-panels",
+                                                      {
+                                                        staticClass:
+                                                          "px-1 py-0",
+                                                        staticStyle: {
+                                                          "z-index": "initial"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "v-expansion-panel",
+                                                          {
+                                                            staticClass:
+                                                              "px-1 py-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-expansion-panel-header",
+                                                              {
+                                                                staticClass:
+                                                                  "px-1 py-0"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm.isToday ==
+                                                                      0
+                                                                      ? "Знаменатель"
+                                                                      : "Числитель"
+                                                                  ) +
+                                                                    "                 "
+                                                                )
+                                                              ]
+                                                            ),
+                                                            _c(
+                                                              "v-expansion-panel-content",
+                                                              {
+                                                                staticClass:
+                                                                  "px-0 mx-0"
+                                                              },
+                                                              [
+                                                                Array.isArray(
+                                                                  lesson.Lesson[
+                                                                    _vm.isToday ==
+                                                                    0
+                                                                      ? 1
+                                                                      : 0
+                                                                  ]
+                                                                ) == false
+                                                                  ? _c(
+                                                                      "v-container",
+                                                                      {
+                                                                        staticClass:
+                                                                          "pa-0 ma-0"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "v-card-text",
+                                                                          {
+                                                                            staticClass:
+                                                                              "pa-0 wrap text-black"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                lesson
+                                                                                  .Lesson[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ]
+                                                                              ) +
+                                                                                " "
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _c(
+                                                                          "v-card-text",
+                                                                          {
+                                                                            staticClass:
+                                                                              "pa-0 pt-2 font-weight-light wrap caption"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                lesson
+                                                                                  .Teacher[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ]
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    )
+                                                                  : _c(
+                                                                      "v-container",
+                                                                      {
+                                                                        staticClass:
+                                                                          "pa-0 ma-0"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "v-card-text",
+                                                                          {
+                                                                            staticClass:
+                                                                              "pa-0 wrap text-black"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                lesson
+                                                                                  .Lesson[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ][0] ==
+                                                                                  lesson
+                                                                                    .Lesson[
+                                                                                    _vm.isToday ==
+                                                                                    0
+                                                                                      ? 1
+                                                                                      : 0
+                                                                                  ][1]
+                                                                                  ? lesson
+                                                                                      .Lesson[
+                                                                                      _vm.isToday ==
+                                                                                      0
+                                                                                        ? 1
+                                                                                        : 0
+                                                                                    ][0]
+                                                                                  : lesson
+                                                                                      .Lesson[
+                                                                                      _vm.isToday ==
+                                                                                      0
+                                                                                        ? 1
+                                                                                        : 0
+                                                                                    ][0] +
+                                                                                      "," +
+                                                                                      lesson
+                                                                                        .Lesson[
+                                                                                        _vm.isToday ==
+                                                                                        0
+                                                                                          ? 1
+                                                                                          : 0
+                                                                                      ][1]
+                                                                              ) +
+                                                                                " "
+                                                                            )
+                                                                          ]
+                                                                        ),
+                                                                        _c(
+                                                                          "v-card-text",
+                                                                          {
+                                                                            staticClass:
+                                                                              "pa-0 pt-2 font-weight-light wrap caption"
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                lesson
+                                                                                  .Teacher[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ][0] ==
+                                                                                  lesson
+                                                                                    .Teacher[
+                                                                                    _vm.isToday ==
+                                                                                    0
+                                                                                      ? 1
+                                                                                      : 0
+                                                                                  ][1]
+                                                                                  ? lesson
+                                                                                      .Teacher[
+                                                                                      _vm.isToday ==
+                                                                                      0
+                                                                                        ? 1
+                                                                                        : 0
+                                                                                    ][0]
+                                                                                  : lesson
+                                                                                      .Teacher[
+                                                                                      _vm.isToday ==
+                                                                                      0
+                                                                                        ? 1
+                                                                                        : 0
+                                                                                    ][0] +
+                                                                                      "," +
+                                                                                      lesson
+                                                                                        .Teacher[
+                                                                                        _vm.isToday ==
+                                                                                        0
+                                                                                          ? 1
+                                                                                          : 0
+                                                                                      ][1]
+                                                                              ) +
+                                                                                " "
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    )
+                                                              ],
+                                                              1
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  : _vm._e(),
+                                                lesson.Lesson[
+                                                  _vm.isToday == 0 ? 1 : 0
+                                                ] != null
+                                                  ? _c("v-divider", {
+                                                      staticClass: "ma-0"
+                                                    })
+                                                  : _vm._e()
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      })
+                    ],
+                    2
+                  )
                 ],
-                2
+                1
               )
             ],
             1
@@ -63110,9 +63630,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Timetable_vue_vue_type_template_id_a6055e9e_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timetable.vue?vue&type=template&id=a6055e9e&lang=pug& */ "./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&lang=pug&");
+/* harmony import */ var _Timetable_vue_vue_type_template_id_a6055e9e_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug& */ "./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug&");
 /* harmony import */ var _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timetable.vue?vue&type=script&lang=js& */ "./resources/js/components/timetable-f/Timetable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css& */ "./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -63120,13 +63642,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Timetable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Timetable_vue_vue_type_template_id_a6055e9e_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Timetable_vue_vue_type_template_id_a6055e9e_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Timetable_vue_vue_type_template_id_a6055e9e_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Timetable_vue_vue_type_template_id_a6055e9e_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "a6055e9e",
   null
   
 )
@@ -63152,19 +63674,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&lang=pug&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&lang=pug& ***!
-  \***************************************************************************************************/
+/***/ "./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=style&index=0&id=a6055e9e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_style_index_0_id_a6055e9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug& ***!
+  \***************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_a6055e9e_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/pug-plain-loader!../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=template&id=a6055e9e&lang=pug& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&lang=pug&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_a6055e9e_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_a6055e9e_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/pug-plain-loader!../../../../node_modules/vue-loader/lib??vue-loader-options!./Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timetable-f/Timetable.vue?vue&type=template&id=a6055e9e&scoped=true&lang=pug&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_a6055e9e_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_a6055e9e_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Timetable_vue_vue_type_template_id_a6055e9e_scoped_true_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -63698,8 +64236,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\FindInfo\4 курс\Диплом\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
