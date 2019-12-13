@@ -41,6 +41,7 @@ import ListCertificateComponent from './components/certificate/ListCertificateCo
 import SnackBar from './components/SnackBarComponent'
 import Notifications_C from './components/notifications-f/Notifications'
 import Panel_C from './components/expention-f/Panel'
+import Downloadbutton_C from './components/buttons-f/DownloadButton'
 
 // ! --------------------------------------------------------------------------------------------
 
@@ -132,7 +133,8 @@ new Vue({
     'c-notifications': Notifications_C,
     'c-journal': Journal_C, //-
     'c-detailed-inf-ret': DetailedInformationRetrainign_C, // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
-    'c-timetable': Timetable_C
+    'c-timetable': Timetable_C,
+    'c-download-button' : Downloadbutton_C
 
   },
   data: () => ({

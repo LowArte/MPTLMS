@@ -6,8 +6,9 @@ use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Helpers\UserNotification;
-
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 use Debugbar;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class LoggedUserController.
@@ -16,6 +17,10 @@ use Debugbar;
  */
 class LoggedUserController extends Controller
 {
+    
+    public function downloadFile(Request $request){
+        return Storage::download($request["file_name"]);
+    }
     
     public function setNotificationAsRead(Request $request)
     {

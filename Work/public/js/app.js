@@ -3042,6 +3042,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/buttons-f/DownloadButton.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/buttons-f/DownloadButton.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../api/users */ "./resources/js/api/users.js");
+/* harmony import */ var js_file_download__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-file-download */ "./node_modules/js-file-download/file-download.js");
+/* harmony import */ var js_file_download__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_file_download__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    _file_path: {
+      type: String,
+      "default": null
+    }
+  },
+  methods: {
+    download: function download() {
+      var _this = this;
+
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].downloadFile(this._file_path).then(function (res) {
+        js_file_download__WEBPACK_IMPORTED_MODULE_1___default()(res.data, _this._file_path.split("/").pop());
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/call-schedule-f/Bild_CallSchedule.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/call-schedule-f/Bild_CallSchedule.vue?vue&type=script&lang=js& ***!
@@ -4295,7 +4334,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+
+
+Date.prototype.getWeek = function () {
+  var onejan = new Date(this.getFullYear(), 0, 1);
+  return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4303,6 +4373,7 @@ __webpack_require__.r(__webpack_exports__);
       groups_info: null,
       departaments_info: null,
       schedule: null,
+      isToday: null,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     };
   },
@@ -4333,6 +4404,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log(ex);
       });
     },
+    isChisl: function isChisl() {
+      var today = new Date();
+      return today.getWeek() % 2;
+    },
     group_change: function group_change() {
       var _this2 = this;
 
@@ -4347,6 +4422,8 @@ __webpack_require__.r(__webpack_exports__);
     this.groups_info = JSON.parse(this._groups_info);
     this.departaments_info = JSON.parse(this._departaments_info);
     this.schedule = this._schedule;
+    this.isToday = 1;
+    console.log(this.isChisl());
   }
 });
 
@@ -4560,6 +4637,52 @@ module.exports = function escape(url) {
 module.exports = function isBuffer (obj) {
   return obj != null && obj.constructor != null &&
     typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/js-file-download/file-download.js":
+/*!********************************************************!*\
+  !*** ./node_modules/js-file-download/file-download.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(data, filename, mime, bom) {
+    var blobData = (typeof bom !== 'undefined') ? [bom, data] : [data]
+    var blob = new Blob(blobData, {type: mime || 'application/octet-stream'});
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        // IE workaround for "HTML7007: One or more blob URLs were 
+        // revoked by closing the blob for which they were created. 
+        // These URLs will no longer resolve as the data backing 
+        // the URL has been freed."
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+        var blobURL = window.URL.createObjectURL(blob);
+        var tempLink = document.createElement('a');
+        tempLink.style.display = 'none';
+        tempLink.href = blobURL;
+        tempLink.setAttribute('download', filename); 
+        
+        // Safari thinks _blank anchor are pop ups. We only want to set _blank
+        // target if the browser does not support the HTML5 download attribute.
+        // This allows you to download files in desktop safari if pop up blocking 
+        // is enabled.
+        if (typeof tempLink.download === 'undefined') {
+            tempLink.setAttribute('target', '_blank');
+        }
+        
+        document.body.appendChild(tempLink);
+        tempLink.click();
+        
+        // Fixes "webkit blob resource error 1"
+        setTimeout(function() {
+            document.body.removeChild(tempLink);
+            window.URL.revokeObjectURL(blobURL);
+        }, 0)
+    }
 }
 
 
@@ -6462,6 +6585,44 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/buttons-f/DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug&":
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/buttons-f/DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-btn",
+    {
+      staticClass: "my-2 white--text",
+      attrs: { color: "warning" },
+      on: { click: _vm.download }
+    },
+    [
+      _vm._v("Загрузить"),
+      _c("v-icon", { attrs: { dark: "", right: "" } }, [
+        _vm._v("cloud_download")
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/call-schedule-f/CallSchedule.vue?vue&type=template&id=6879a510&lang=pug&":
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/call-schedule-f/CallSchedule.vue?vue&type=template&id=6879a510&lang=pug& ***!
@@ -7526,21 +7687,22 @@ var render = function() {
         _vm._l(_vm.days, function(day_key, day_index) {
           return _c(
             "v-flex",
-            {
-              key: day_index,
-              staticClass: "ma-2",
-              staticStyle: { height: "auto" }
-            },
+            { key: day_index, staticClass: "ma-2" },
             [
               _c(
                 "v-card",
                 {
                   staticClass: "pa-2 mx-auto",
-                  attrs: { "max-width": "265px" }
+                  staticStyle: { display: "flex", "flex-direction": "column" },
+                  attrs: { "max-width": "265px", height: "100%", elevation: 0 }
                 },
                 [
                   _c("v-card-title", { staticClass: "primary-title pt-0" }, [
-                    _vm._v(_vm._s(day_key))
+                    _vm._v(
+                      _vm._s(day_key) +
+                        " " +
+                        _vm._s(_vm.isToday == 0 ? "Числитель" : "Знаменатель")
+                    )
                   ]),
                   _c("v-card-subtitle", [
                     _vm._v(
@@ -7549,26 +7711,412 @@ var render = function() {
                   ]),
                   _c("v-divider"),
                   _vm._l(_vm.schedule[day_key], function(lesson, lesson_index) {
-                    return _c(
-                      "v-container",
-                      { key: "l" + lesson_index, staticClass: "grid-list-xs" },
-                      [
-                        lesson.Lesson != null
-                          ? _c(
-                              "v-card-title",
-                              {
-                                staticClass:
-                                  "pa-0 accent--text font-weight-light text-truncate"
-                              },
-                              [_vm._v(_vm._s(lesson.time) + " ")]
-                            )
-                          : _vm._e(),
-                        _vm._v(
-                          _vm._s(lesson.Lesson) + " \n" + _vm._s(lesson.Teacher)
+                    return lesson.Lesson != null
+                      ? _c(
+                          "v-container",
+                          {
+                            key: "l" + lesson_index,
+                            staticClass: "grid-list-xs pa-0"
+                          },
+                          [
+                            Array.isArray(lesson.Lesson) == false
+                              ? _c(
+                                  "v-container",
+                                  { staticClass: "pa-0 ma-0" },
+                                  [
+                                    _c(
+                                      "v-card-title",
+                                      {
+                                        staticClass:
+                                          "pa-0 accent--text font-weight-light text-truncate"
+                                      },
+                                      [_vm._v(_vm._s(lesson.time) + " ")]
+                                    ),
+                                    _c(
+                                      "v-card-text",
+                                      { staticClass: "pa-0 wrap text-black" },
+                                      [_vm._v(_vm._s(lesson.Lesson) + " ")]
+                                    ),
+                                    _c(
+                                      "v-card-text",
+                                      {
+                                        staticClass:
+                                          "pa-0 pt-2 font-weight-light wrap caption"
+                                      },
+                                      [_vm._v(_vm._s(lesson.Teacher))]
+                                    ),
+                                    _c("v-divider", { staticClass: "ma-0" })
+                                  ],
+                                  1
+                                )
+                              : lesson.Lesson[_vm.isToday] != null
+                              ? _c(
+                                  "v-container",
+                                  { staticClass: "pa-0 ma-0" },
+                                  [
+                                    _c(
+                                      "v-card-title",
+                                      {
+                                        staticClass:
+                                          "pa-0 accent--text font-weight-light text-truncate"
+                                      },
+                                      [_vm._v(_vm._s(lesson.time) + " ")]
+                                    ),
+                                    _c(
+                                      "v-container",
+                                      { staticClass: "pa-0 ma-0" },
+                                      [
+                                        Array.isArray(
+                                          lesson.Lesson[_vm.isToday]
+                                        ) == false
+                                          ? _c(
+                                              "v-container",
+                                              { staticClass: "pa-0 ma-0" },
+                                              [
+                                                _c(
+                                                  "v-card-text",
+                                                  {
+                                                    staticClass:
+                                                      "pa-0 wrap text-black"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        lesson.Lesson[
+                                                          _vm.isToday
+                                                        ]
+                                                      ) + " "
+                                                    )
+                                                  ]
+                                                ),
+                                                _c(
+                                                  "v-card-text",
+                                                  {
+                                                    staticClass:
+                                                      "pa-0 pt-2 font-weight-light wrap caption"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        lesson.Teacher[
+                                                          _vm.isToday
+                                                        ]
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          : _c(
+                                              "v-container",
+                                              { staticClass: "pa-0 ma-0" },
+                                              [
+                                                _c(
+                                                  "v-card-text",
+                                                  {
+                                                    staticClass:
+                                                      "pa-0 wrap text-black"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        lesson.Lesson[
+                                                          _vm.isToday
+                                                        ][0] ==
+                                                          lesson.Lesson[
+                                                            _vm.isToday
+                                                          ][1]
+                                                          ? lesson.Lesson[
+                                                              _vm.isToday
+                                                            ][0]
+                                                          : lesson.Lesson[
+                                                              _vm.isToday
+                                                            ][0] +
+                                                              "," +
+                                                              lesson.Lesson[
+                                                                _vm.isToday
+                                                              ][1]
+                                                      ) + " "
+                                                    )
+                                                  ]
+                                                ),
+                                                _c(
+                                                  "v-card-text",
+                                                  {
+                                                    staticClass:
+                                                      "pa-0 pt-2 font-weight-light wrap caption"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        lesson.Teacher[
+                                                          _vm.isToday
+                                                        ][0] ==
+                                                          lesson.Teacher[
+                                                            _vm.isToday
+                                                          ][1]
+                                                          ? lesson.Teacher[
+                                                              _vm.isToday
+                                                            ][0]
+                                                          : lesson.Teacher[
+                                                              _vm.isToday
+                                                            ][0] +
+                                                              "," +
+                                                              lesson.Teacher[
+                                                                _vm.isToday
+                                                              ][1]
+                                                      ) + " "
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                        _c(
+                                          "v-container",
+                                          { staticClass: "pa-0 ma-0" },
+                                          [
+                                            _c("v-divider", {
+                                              staticClass: "mt-2"
+                                            }),
+                                            lesson.Lesson[
+                                              _vm.isToday == 0 ? 1 : 0
+                                            ] != null
+                                              ? _c(
+                                                  "v-expansion-panels",
+                                                  {
+                                                    staticClass: "px-1 py-0",
+                                                    staticStyle: {
+                                                      "z-index": "initial"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "v-expansion-panel",
+                                                      {
+                                                        staticClass: "px-1 py-0"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "v-expansion-panel-header",
+                                                          {
+                                                            staticClass:
+                                                              "px-1 py-0"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                _vm.isToday == 0
+                                                                  ? "Знаменатель"
+                                                                  : "Числитель"
+                                                              ) +
+                                                                "                 "
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _c(
+                                                          "v-expansion-panel-content",
+                                                          [
+                                                            Array.isArray(
+                                                              lesson.Lesson[
+                                                                _vm.isToday == 0
+                                                                  ? 1
+                                                                  : 0
+                                                              ]
+                                                            ) == false
+                                                              ? _c(
+                                                                  "v-container",
+                                                                  {
+                                                                    staticClass:
+                                                                      "pa-0 ma-0"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "v-card-text",
+                                                                      {
+                                                                        staticClass:
+                                                                          "pa-0 wrap text-black"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            lesson
+                                                                              .Lesson[
+                                                                              _vm.isToday ==
+                                                                              0
+                                                                                ? 1
+                                                                                : 0
+                                                                            ]
+                                                                          ) +
+                                                                            " "
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _c(
+                                                                      "v-card-text",
+                                                                      {
+                                                                        staticClass:
+                                                                          "pa-0 pt-2 font-weight-light wrap caption"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            lesson
+                                                                              .Teacher[
+                                                                              _vm.isToday ==
+                                                                              0
+                                                                                ? 1
+                                                                                : 0
+                                                                            ]
+                                                                          )
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              : _c(
+                                                                  "v-container",
+                                                                  {
+                                                                    staticClass:
+                                                                      "pa-0 ma-0"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "v-card-text",
+                                                                      {
+                                                                        staticClass:
+                                                                          "pa-0 wrap text-black"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            lesson
+                                                                              .Lesson[
+                                                                              _vm.isToday ==
+                                                                              0
+                                                                                ? 1
+                                                                                : 0
+                                                                            ][0] ==
+                                                                              lesson
+                                                                                .Lesson[
+                                                                                _vm.isToday ==
+                                                                                0
+                                                                                  ? 1
+                                                                                  : 0
+                                                                              ][1]
+                                                                              ? lesson
+                                                                                  .Lesson[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ][0]
+                                                                              : lesson
+                                                                                  .Lesson[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ][0] +
+                                                                                  "," +
+                                                                                  lesson
+                                                                                    .Lesson[
+                                                                                    _vm.isToday ==
+                                                                                    0
+                                                                                      ? 1
+                                                                                      : 0
+                                                                                  ][1]
+                                                                          ) +
+                                                                            " "
+                                                                        )
+                                                                      ]
+                                                                    ),
+                                                                    _c(
+                                                                      "v-card-text",
+                                                                      {
+                                                                        staticClass:
+                                                                          "pa-0 pt-2 font-weight-light wrap caption"
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            lesson
+                                                                              .Teacher[
+                                                                              _vm.isToday ==
+                                                                              0
+                                                                                ? 1
+                                                                                : 0
+                                                                            ][0] ==
+                                                                              lesson
+                                                                                .Teacher[
+                                                                                _vm.isToday ==
+                                                                                0
+                                                                                  ? 1
+                                                                                  : 0
+                                                                              ][1]
+                                                                              ? lesson
+                                                                                  .Teacher[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ][0]
+                                                                              : lesson
+                                                                                  .Teacher[
+                                                                                  _vm.isToday ==
+                                                                                  0
+                                                                                    ? 1
+                                                                                    : 0
+                                                                                ][0] +
+                                                                                  "," +
+                                                                                  lesson
+                                                                                    .Teacher[
+                                                                                    _vm.isToday ==
+                                                                                    0
+                                                                                      ? 1
+                                                                                      : 0
+                                                                                  ][1]
+                                                                          ) +
+                                                                            " "
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              : _vm._e(),
+                                            lesson.Lesson[
+                                              _vm.isToday == 0 ? 1 : 0
+                                            ] != null
+                                              ? _c("v-divider", {
+                                                  staticClass: "ma-0"
+                                                })
+                                              : _vm._e()
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ],
+                          1
                         )
-                      ],
-                      1
-                    )
+                      : _vm._e()
                   })
                 ],
                 2
@@ -60834,6 +61382,13 @@ __webpack_require__.r(__webpack_exports__);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/setNotificationAsRead", {
       "id": notId
     });
+  },
+  downloadFile: function downloadFile(file_name) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/download_file", {
+      params: {
+        "file_name": file_name
+      }
+    });
   }
 });
 
@@ -60858,21 +61413,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SnackBarComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SnackBarComponent */ "./resources/js/components/SnackBarComponent.vue");
 /* harmony import */ var _components_notifications_f_Notifications__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/notifications-f/Notifications */ "./resources/js/components/notifications-f/Notifications.vue");
 /* harmony import */ var _components_expention_f_Panel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/expention-f/Panel */ "./resources/js/components/expention-f/Panel.vue");
-/* harmony import */ var _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/call-schedule-f/Bild_CallSchedule */ "./resources/js/components/call-schedule-f/Bild_CallSchedule.vue");
-/* harmony import */ var _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/call-schedule-f/CallSchedule */ "./resources/js/components/call-schedule-f/CallSchedule.vue");
-/* harmony import */ var _components_information_page_f_SpecialtiesList__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/information-page-f/SpecialtiesList */ "./resources/js/components/information-page-f/SpecialtiesList.vue");
-/* harmony import */ var _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/administrator-f/PanelControl */ "./resources/js/components/administrator-f/PanelControl.vue");
-/* harmony import */ var _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/administrator-f/UserManagement */ "./resources/js/components/administrator-f/UserManagement.vue");
-/* harmony import */ var _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/additional-education-f/Retraining */ "./resources/js/components/additional-education-f/Retraining.vue");
-/* harmony import */ var _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/additional-education-f/DetailedInformationRetraining */ "./resources/js/components/additional-education-f/DetailedInformationRetraining.vue");
-/* harmony import */ var _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/journal-f/Journal */ "./resources/js/components/journal-f/Journal.vue");
-/* harmony import */ var _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/timetable-f/Timetable */ "./resources/js/components/timetable-f/Timetable.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
-/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _components_buttons_f_DownloadButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/buttons-f/DownloadButton */ "./resources/js/components/buttons-f/DownloadButton.vue");
+/* harmony import */ var _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/call-schedule-f/Bild_CallSchedule */ "./resources/js/components/call-schedule-f/Bild_CallSchedule.vue");
+/* harmony import */ var _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/call-schedule-f/CallSchedule */ "./resources/js/components/call-schedule-f/CallSchedule.vue");
+/* harmony import */ var _components_information_page_f_SpecialtiesList__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/information-page-f/SpecialtiesList */ "./resources/js/components/information-page-f/SpecialtiesList.vue");
+/* harmony import */ var _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/administrator-f/PanelControl */ "./resources/js/components/administrator-f/PanelControl.vue");
+/* harmony import */ var _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/administrator-f/UserManagement */ "./resources/js/components/administrator-f/UserManagement.vue");
+/* harmony import */ var _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/additional-education-f/Retraining */ "./resources/js/components/additional-education-f/Retraining.vue");
+/* harmony import */ var _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/additional-education-f/DetailedInformationRetraining */ "./resources/js/components/additional-education-f/DetailedInformationRetraining.vue");
+/* harmony import */ var _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/journal-f/Journal */ "./resources/js/components/journal-f/Journal.vue");
+/* harmony import */ var _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/timetable-f/Timetable */ "./resources/js/components/timetable-f/Timetable.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -60914,6 +61470,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 /**
  * * Компоненты уведомлений / системы 
  */
+
 
 
 
@@ -60969,15 +61526,15 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 if (window.user) {
-  _store__WEBPACK_IMPORTED_MODULE_19__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_21__["USER"], user);
-  _store__WEBPACK_IMPORTED_MODULE_19__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_21__["LOGGED"], true);
+  _store__WEBPACK_IMPORTED_MODULE_20__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_22__["USER"], user);
+  _store__WEBPACK_IMPORTED_MODULE_20__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_22__["LOGGED"], true);
 }
 
 new Vue({
   el: '#app',
-  store: _store__WEBPACK_IMPORTED_MODULE_19__["default"],
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_22__["default"],
-  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_24__["default"]],
+  store: _store__WEBPACK_IMPORTED_MODULE_20__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_23__["default"],
+  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_25__["default"]],
   components: {
     'c-login-button': _components_authentication_f_LoginButton__WEBPACK_IMPORTED_MODULE_0__["default"],
     'c-remember-password': _components_authentication_f_RememberPassword__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -60989,21 +61546,22 @@ new Vue({
     // !
     'listcertificate': _components_certificate_ListCertificateComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
     // !
-    'c-bild-call-schedule': _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_10__["default"],
-    'c-specialties-list': _components_information_page_f_SpecialtiesList__WEBPACK_IMPORTED_MODULE_12__["default"],
+    'c-bild-call-schedule': _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_11__["default"],
+    'c-specialties-list': _components_information_page_f_SpecialtiesList__WEBPACK_IMPORTED_MODULE_13__["default"],
     'c-requests-users': _components_feedback_f_RequestsUsers__WEBPACK_IMPORTED_MODULE_4__["default"],
-    'c-panel-control': _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_13__["default"],
+    'c-panel-control': _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_14__["default"],
     // ! ПРОВЕРИТЬ
-    'c-call-schedule': _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_11__["default"],
-    'c-retraining': _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_15__["default"],
-    'c-user-management': _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_14__["default"],
+    'c-call-schedule': _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_12__["default"],
+    'c-retraining': _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_16__["default"],
+    'c-user-management': _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_15__["default"],
     // ! ПОМЕНЯТЬ РОЛЬ НА КОМБОБОКС
     'c-notifications': _components_notifications_f_Notifications__WEBPACK_IMPORTED_MODULE_8__["default"],
-    'c-journal': _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_17__["default"],
+    'c-journal': _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_18__["default"],
     //-
-    'c-detailed-inf-ret': _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_16__["default"],
+    'c-detailed-inf-ret': _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_17__["default"],
     // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
-    'c-timetable': _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_18__["default"]
+    'c-timetable': _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_19__["default"],
+    'c-download-button': _components_buttons_f_DownloadButton__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
   data: function data() {
     return {
@@ -61015,7 +61573,7 @@ new Vue({
       updatingUser: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_23__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_24__["mapGetters"])({
     user: 'user'
   }), {
     items: function items() {
@@ -61216,7 +61774,7 @@ new Vue({
       var _this = this;
 
       this.updatingUser = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["UPDATE_USER"], this.user).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_21__["UPDATE_USER"], this.user).then(function (response) {
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
@@ -61243,7 +61801,7 @@ new Vue({
       var _this2 = this;
 
       this.logoutLoading = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["LOGOUT"]).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_21__["LOGOUT"]).then(function (response) {
         window.location = '/';
       })["catch"](function (error) {
         console.log(error);
@@ -61264,7 +61822,7 @@ new Vue({
       var _this3 = this;
 
       this.changingPassword = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_20__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_21__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
         _this3.showMessage("Email sent to change password");
       })["catch"](function (error) {
         console.dir(error);
@@ -61387,6 +61945,12 @@ var map = {
 	],
 	"./authentication-f/ResetPassword.vue": [
 		"./resources/js/components/authentication-f/ResetPassword.vue"
+	],
+	"./buttons-f/DownloadButton": [
+		"./resources/js/components/buttons-f/DownloadButton.vue"
+	],
+	"./buttons-f/DownloadButton.vue": [
+		"./resources/js/components/buttons-f/DownloadButton.vue"
 	],
 	"./call-schedule-f/Bild_CallSchedule": [
 		"./resources/js/components/call-schedule-f/Bild_CallSchedule.vue"
@@ -62161,6 +62725,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_9f34a692___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_9f34a692___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/buttons-f/DownloadButton.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/buttons-f/DownloadButton.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DownloadButton_vue_vue_type_template_id_2926bf5a_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug& */ "./resources/js/components/buttons-f/DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug&");
+/* harmony import */ var _DownloadButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DownloadButton.vue?vue&type=script&lang=js& */ "./resources/js/components/buttons-f/DownloadButton.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DownloadButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DownloadButton_vue_vue_type_template_id_2926bf5a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DownloadButton_vue_vue_type_template_id_2926bf5a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/buttons-f/DownloadButton.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/buttons-f/DownloadButton.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/buttons-f/DownloadButton.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./DownloadButton.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/buttons-f/DownloadButton.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/buttons-f/DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/buttons-f/DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadButton_vue_vue_type_template_id_2926bf5a_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/pug-plain-loader!../../../../node_modules/vue-loader/lib??vue-loader-options!./DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/buttons-f/DownloadButton.vue?vue&type=template&id=2926bf5a&lang=pug&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadButton_vue_vue_type_template_id_2926bf5a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadButton_vue_vue_type_template_id_2926bf5a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
