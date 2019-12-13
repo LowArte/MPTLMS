@@ -7,8 +7,8 @@
             v-chip.pa-2.ml-2(label) 
               v-card-title.pa-0.accent--text.font-weight-light.text-truncate.overline {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
         v-layout.row.wrap
-          v-flex.ma-2(v-for="(day_key,day_index) in days" :key="day_index")
-            v-card.pa-2.mx-auto(max-width="265px" style="display: flex; flex-direction: column;" height="100%" :elevation="0" )
+          v-flex.sm12.md6.lg4.xl2(v-for="(day_key,day_index) in days" :key="day_index")
+            v-card.pa-2.mx-auto(max-width="268px"  style="display: flex; flex-direction: column;" height="100%" :elevation="0" )
               v-card-title.primary-title.pt-0.px-0 {{day_key}} 
                 v-card-subtitle.px-0.pt-0 Место проведения: {{schedule[day_key].Place}}
                 v-divider
