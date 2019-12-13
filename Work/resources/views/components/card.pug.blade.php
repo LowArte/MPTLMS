@@ -45,11 +45,11 @@ v-container(text-xs-center, grid-list-md, fluid)
               b Срок обучения:  {{$group->study_period}}
       v-hover(v-slot:default='{ hover }')
         v-card.mx-auto.my-4.pa-4(width='max', height='auto', :elevation='hover ? 12 : 2')
-          v-card-text.my-1.ma-2.pa-0.display-1.font-weight-black Напрвление
+          v-card-text.my-1.ma-2.pa-0.display-1.font-weight-black Направление
           v-divider.my-2
           v-container.ma-0.pa-2
             p.black--text Если у вас есть задолжности, Вы можете самостоятельно скачать и распечатать направление на пересдачу.
-            c-download-button(_file_path="files/xyi.txt")
+            c-download-button(_file_path="files/xyi.docx")
 
           
 
