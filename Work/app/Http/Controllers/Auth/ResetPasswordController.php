@@ -57,7 +57,7 @@ class ResetPasswordController extends Controller
         $panel_array = array(
             array(
                 "header"  => "Подробная информация",
-                "content" => "mainpage/MainPageComponent",
+                "content" => "information-page-f/DrivingSchool",
                 "props"   => array()
             )
         );
