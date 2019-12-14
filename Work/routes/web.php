@@ -1,5 +1,8 @@
 <?php
+
+use App\Http\Controllers\Helpers\UserNotification;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HelpersUserNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +25,7 @@ Route::get(
                 "props"   => array()
             )
         );
+        UserNotification::notify("Тестовое уведомление",null,2);
         return view('welcome', ["panel_array" => json_encode($panel_array)]);
     }
 );

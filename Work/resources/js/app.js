@@ -167,16 +167,16 @@ new Vue({
               text: 'Расписание',
               href: '/contimetable'
             },
-            {
-              icon: 'today',
-              text: 'Замены',
-              href: '/conreplacements'
-            },
-            {
-              icon: 'today',
-              text: 'Расписание звонков',
-              href: '/concallschedule'
-            },
+            // {
+            //   icon: 'today',
+            //   text: 'Замены',
+            //   href: '/conreplacements'
+            // },
+            // {
+            //   icon: 'today',
+            //   text: 'Расписание звонков',
+            //   href: '/concallschedule'
+            // },
             {
               icon: 'edit',
               text: 'Управление пользователями',
@@ -302,16 +302,16 @@ new Vue({
               text: 'Расписание',
               href: '/contimetable'
             },
-            {
-              icon: 'home',
-              text: 'Замены',
-              href: '/conreplacements'
-            },
-            {
-              icon: 'today',
-              text: 'Расписание звонков',
-              href: '/concallschedule'
-            },
+            // {
+            //   icon: 'home',
+            //   text: 'Замены',
+            //   href: '/conreplacements'
+            // },
+            // {
+            //   icon: 'today',
+            //   text: 'Расписание звонков',
+            //   href: '/concallschedule'
+            // },
             {
               icon: 'feedback',
               text: 'Обратная связь',

@@ -103,6 +103,9 @@ export default {
       }
     }
   },
+  mounted(){
+      console.log("asdas");
+  },
   computed: {
     showRememberPassword: {
       get() {
