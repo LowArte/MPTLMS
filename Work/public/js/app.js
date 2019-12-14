@@ -7617,17 +7617,17 @@ var render = function() {
       ),
       _c(
         "v-card-title",
-        { staticClass: "primary-title pt-0 px-0" },
+        { staticClass: "primary-title pt-0 px-0 ml-4" },
         [
           _c(
             "v-chip",
-            { staticClass: "pa-2 ml-2", attrs: { label: "" } },
+            { staticClass: "pa-2 ml-4", attrs: { label: "" } },
             [
               _c(
                 "v-card-title",
                 {
                   staticClass:
-                    "pa-0 accent--text font-weight-light text-truncate overline"
+                    "pa-0 accent--text font-weight-light text-truncate title"
                 },
                 [_vm._v(_vm._s(_vm.isToday == 0 ? "Числитель" : "Знаменатель"))]
               )
