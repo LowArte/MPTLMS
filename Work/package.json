@@ -17,17 +17,19 @@
         "laravel-mix-blade-pug": "^1.0.5",
         "laravel-mix-pug": "^0.3.0",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
+        "sass": "^1.23.7",
         "sass-loader": "^7.1.0",
         "vue-template-compiler": "^2.6.10",
-        "vuetify": "^2.1.9",
-        "vuex": "^3.0"
+        "vuetify": "^2.1.14",
+        "vuex": "^3.1.2"
     },
     "dependencies": {
-        "@mdi/font": "^4.5.95",
+        "@mdi/font": "^4.7.95",
+        "install": "^0.13.0",
+        "js-file-download": "^0.4.9",
         "pug": "^2.0.4",
         "pug-plain-loader": "^1.0.0",
-        "vee-validate": "^3.0.11",
+        "vee-validate": "^3.2.0",
         "vue": "^2.6.10",
         "vue-the-mask": "^0.11.1"
     }

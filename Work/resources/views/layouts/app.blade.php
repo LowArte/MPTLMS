@@ -70,7 +70,7 @@
                 </v-btn>
             </div>
             <div class="d-flex align-center" style="margin-left: auto">
-                <c-notifications _messages="{{json_encode(Auth::user()->unreadNotifications)}}"></c-notifications>
+                <c-notifications _messages="{{json_encode(Auth::user()->unreadNotifications)}} "></c-notifications>
                 <v-btn class="ml-5" light @click="toogleRightDrawer">
                     @{{user.name}}
                 </v-btn>

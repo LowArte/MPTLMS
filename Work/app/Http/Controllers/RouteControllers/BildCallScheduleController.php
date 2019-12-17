@@ -8,7 +8,7 @@ use App\Models\Places;
 use App\Models\CallSchedule;
 use Debugbar;
 
-class ConCallScheduleController extends Controller
+class BildCallScheduleController extends Controller
 {
     /**
      * Create a new controller instance.

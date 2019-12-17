@@ -29,9 +29,9 @@ use App\Models\RetrainingInfo;
                 @endif
                 @if (Route::has('login') && ! Auth::check() )
                     <v-spacer></v-spacer>
-                    <c-login-button action="{{ $action ?? null }}"/>
-                    <c-remember-password action="{{ $action ?? null }}"/>
-                    <c-reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"/>
+                    <c-login-button action="{{ $action ?? null }}"></c-login-button>
+                    <c-remember-password action="{{ $action ?? null }}"></c-remember-password>
+                    <c-reset-password action="{{ $action ?? null}}" token="{{$token ?? null}}" email="{{$email ?? null}}"></c-reset-password>
                 @else
                     <v-btn color="accent mr-5" dark href="\home">ВОЙТИ</v-btn>
                     <v-btn color="accent" dark @click="logout">ВЫЙТИ</v-btn>
