@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('password_notHash');
+            $table->boolean('disabled');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('users_posts');
             $table->rememberToken();

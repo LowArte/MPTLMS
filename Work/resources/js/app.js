@@ -150,6 +150,19 @@ new Vue({
       user: 'user',
     }),
     items: function () {
+      if (user.disabled) //Заблокированный пользователь
+      {
+        return [{
+          icon: 'home',
+          text: 'Главная',
+          href: '/home'
+        },
+        {
+          icon: 'feedback',
+          text: 'Обратная связь',
+          href: '/feedback'
+        }];
+      };
       switch (user.post_id) {
         case 1: { //Администраторы
           return [{

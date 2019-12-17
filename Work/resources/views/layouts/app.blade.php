@@ -69,6 +69,9 @@
                     <v-icon>menu</v-icon>
                 </v-btn>
             </div>
+            @if (Auth::user()->disabled)
+            <div class="d-flex align-center" style="margin-left: auto"><v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Вы заблокированы!</v-card-title></div>
+            @endif
             <div class="d-flex align-center" style="margin-left: auto">
                 <c-notifications _messages="{{json_encode(Auth::user()->unreadNotifications)}} "></c-notifications>
                 <v-btn class="ml-5" light @click="toogleRightDrawer">

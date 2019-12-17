@@ -1,179 +1,122 @@
-<template>
-  <v-row>
-    <v-col cols="12">
-      <v-hover v-slot:default="{ hover }">
-        <v-card :elevation="hover ? 12 : 2" height="auto" width="max">
-          <v-data-table
+<template lang="pug">
+  v-layout.row
+    v-layout.col(cols="12")
+      v-hover(v-slot:default='{ hover }')
+        v-card.mx-auto.pa-4.max(width='100%' height='auto' :elevation='hover ? 12 : 2')
+          v-data-table.elevation-1.pa-0.ma-0(
             :headers="headers"
             :items="listusers"
-            class="elevation-1 pa-0 ma-0"
             :search="search"
             item-key="id"
             :page.sync="page"
             hide-default-footer
             @page-count="pageCount = $event"
-            :items-per-page="itemsPerPage"
-          >
-            <template v-slot:top>
-              <div>
-                <v-toolbar flat color="white">
-                  <v-toolbar-title>
-                    <v-card-text class="my-2 ma-0 pa-0 text-center title">Управление пользователями</v-card-text>
-                  </v-toolbar-title>
-                  <v-divider class="mx-4" inset vertical></v-divider>
-                </v-toolbar>
-                <v-row sm="2" md="0" class="pa-0 align-self-center justify-center">
-                  <v-btn color="primary" dark class="ma-2" @click="initialize(true)">Обновить</v-btn>
-                  <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on }">
-                      <v-btn color="primary" dark class="ma-2" v-on="on">Новый пользователь</v-btn>
-                    </template>
-                    <v-card>
-                      <v-card-title>
-                        <span class="headline">{{ formTitle }}</span>
-                      </v-card-title>
+            :items-per-page="itemsPerPage")
+            template(v-slot:top)
+              v-toolbar(color="white" flat)
+                v-toolbar-title
+                  v-card-text.my-2.ma-0.pa-0.title Управление пользователями
+                v-divider.mx-4(inset vertical)
+              v-layout.row.pa-0.align-self-center.justify-center(sm="2" md="0")
+                v-btn.dark.ma-2(color="primary" @click="initialize()") Обновить
+                v-dialog(v-model="dialog" max-width="500px")
+                  template(v-slot:activator="{ on }")
+                    v-btn.ma-2.dark(color="primary" v-on="on") Новый пользователь
+                  v-card
+                    v-card-title.span.headline {{ formTitle }}
+                    v-card-text
+                      v-container.mb-0.pb-0
+                        v-layout.row
+                          v-text-field(v-model="editedItem.thirdName" label="Фамилия")
+                        v-layout.row
+                          v-text-field(v-model="editedItem.name" label="Имя")
+                        v-layout.row
+                          v-text-field(v-model="editedItem.secName" label="Отчество")
+                        v-layout.row
+                          v-text-field(v-model="editedItem.email" label="Почта")
+                        v-layout.row
+                          v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль')
+                        v-layout.row
+                          v-autocomplete(:items="adisabled" item-value='id' item-text='name' v-model="editedItem.disabled" dense solo label='Блокировка')
+                      v-card-actions
+                        v-spacer
+                        v-btn(color="blue darken-1" text @click="close") Отмена
+                        v-btn(color="blue darken-1" text @click="save") Сохранить
+              v-card-title.ma-0.ml-4.mr-4.pa-0
+                v-text-field.ma-0.pa-0.single-line.hide-details(v-model="search" label="Поиск")
+            template(v-slot:item.action="{ item }")
+              v-icon.mr-2.small(@click="editItem(item)") edit
+              v-icon.small(@click="deleteItem(item)") delete
 
-                      <v-card-text>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12" sm="6" md="12">
-                              <v-text-field v-model="editedItem.thirdname" label="Фамилия"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="12">
-                              <v-text-field v-model="editedItem.name" label="Имя"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="12">
-                              <v-text-field v-model="editedItem.secname" label="Отчество"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="12">
-                              <v-text-field v-model="editedItem.email" label="Почта"></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="12">
-                              <v-text-field v-model="editedItem.post" label="Роль"></v-text-field>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                      </v-card-text>
-
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="close">Отмена</v-btn>
-                        <v-btn color="blue darken-1" text @click="save">Сохранить</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </v-row>
-                <v-card-title class="ma-0 ml-4 mr-4 pa-0">
-                  <v-text-field
-                    class="ma-0 pa-0"
-                    v-model="search"
-                    label="Поиск"
-                    single-line
-                    hide-details
-                  ></v-text-field>
-                </v-card-title>
-              </div>
-            </template>
-            <template v-slot:item.action="{ item }">
-              <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-              <v-icon small @click="deleteItem(item)">delete</v-icon>
-            </template>
-            <template v-slot:no-data>
-              <v-btn color="primary" @click="initialize(true)">Обновить</v-btn>
-            </template>
-          </v-data-table>
-          <div class="text-center pa-2 ma-2">
-            <v-pagination v-model="page" :length="pageCount"></v-pagination>
-            <v-text-field
-              :value="itemsPerPage"
-              label="Количество отображаемых обращений"
-              v-mask="mask"
-              @input="itemsPerPage = parseIntLoc($event)"
-            ></v-text-field>
-          </div>
-        </v-card>
-      </v-hover>
-    </v-col>
-  </v-row>
+            template(v-slot:no-data)
+              v-btn(color="primary" @click="initialize(true)") Обновить
+          v-layout.row.text-center.pa-2.ma-2
+            v-pagination(v-model="page" :length="pageCount")
+            v-text-field(:value="itemsPerPage" label="Количество отображаемых обращений" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
 </template>
 
 <script>
-import apiuser from "../../api/users";
-import { mask } from "vue-the-mask";
+import apiuser from "../../api/users"; //api для пользователей
+import { mask } from "vue-the-mask"; //маски vue
 
 export default {
   directives: {
     mask
   },
   data: () => ({
-    arrusers: [],
-    arrusersposts: [],
-    search: "",
-    page: 1,
-    mask: "####",
-    itemsPerPage: 10,
-    pageCount: 0,
-    on: false,
-
-    dialog: false,
+    listusers: [], //Массив
+    arrusersposts: [], //Массив постов
+    search: "", //Поиск
+    page: 1, //Текущая страница
+    itemsPerPage: 10, //Количество отображаемых пользователей
+    pageCount: 0, //Количество страниц
+    mask: "####", //Маска для количества отображаемых строк
+    dialog: false, //Активатор диалога
+    adisabled: [{id: 0, name: "Отсутствует"}, {id: 1, name: "Заблокирован"}],
     headers: [
       {
         text: "№",
         align: "left",
         value: "id"
       },
-      { text: "Фамилия", value: "secname" },
+      { text: "Фамилия", value: "secName" },
       { text: "Имя", value: "name" },
-      { text: "Отчество", value: "thirdname" },
-      { text: "Почта", value: "email", sortable: false },
-      { text: "Роль", value: "post" },
+      { text: "Отчество", value: "thirdName" },
+      { text: "Почта", value: "email" },
+      { text: "Роль", value: "post_id"},
+      { text: "Блокировка", value: "disabled"},
       { text: "Действия", value: "action", sortable: false }
-    ],
-    listusers: [],
-    editedIndex: -1,
+    ], //Структура таблицы и с полями которые требуется выводить
+    editedIndex: -1, //Текущий индекс редактируемой строки
     editedItem: {
       id: "",
-      secname: "",
+      secName: "",
       name: "",
-      thirdname: "",
+      thirdName: "",
       email: "",
       password: "",
-      post: ""
-    },
-    defaultItem: {
-      id: "",
-      secname: "",
-      name: "",
-      thirdname: "",
-      email: "",
-      password: "",
-      post: ""
-    }
+      post_id: "",
+      disabled: "",
+    } //Массив с данным для сохранения в бд
   }),
   props: {
     users: {
       data: String,
       default: null
-    },
+    }, //JSON пользователей
     usersposts: {
       data: String,
       default: null
-    }
+    } //JSON ролей пользователей
   },
-
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
-
+  //Получаем данные при старте
   mounted() {
-    this.arrusers = JSON.parse(this.users);
+    this.listusers = JSON.parse(this.users);
     this.arrusersposts = JSON.parse(this.usersposts);
-    this.initialize(false);
   },
 
   computed: {
+    //Получение названия диалога
     formTitle() {
       return this.editedIndex === -1
         ? "Новый пользователь"
@@ -182,106 +125,86 @@ export default {
   },
 
   methods: {
-    initialize($b) {
-      if ($b == true) {
-        apiuser
-          .getUsers()
-          .then(res => {
-            this.arrusers = JSON.parse(res.data.users);
-            this.arrposts = JSON.parse(res.data.usersposts);
-            this.pushUsers();
-          })
-          .catch(ex => {
-            console.log(ex);
-          });
-      } 
-      else {
-        this.pushUsers();
-      }
-    },
-
-    pushUsers() {
-      this.listusers = [];
-      for (var i = 0; i < this.arrusers.length; i++) {
-        this.listusers.push({
-          id: this.arrusers[i].id,
-          secname: this.arrusers[i].secName,
-          name: this.arrusers[i].name,
-          thirdname: this.arrusers[i].thirdName,
-          email: this.arrusers[i].email,
-          password: this.arrusers[i].password_notHash,
-          post: this.arrusers[i].post_id
+    //Иницилизации данных
+    initialize(){
+      apiuser
+        .getUsers()
+        .then(res => {
+          this.listusers = JSON.parse(res.data.users);
+          this.arrposts = JSON.parse(res.data.usersposts);
+        })
+        .catch(ex => {
+          console.log(ex);
         });
-      }
     },
-
-    editItem(item) {
+    //Редактирование учётной записи
+    editItem(item) 
+    {
       this.editedIndex = this.listusers.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-
-    deleteItem(item) {
+    //Удаление учётной записи
+    deleteItem(item) 
+    {
+      confirm("Вы действительно хотите удалить данного пользователя?") &&
       apiuser
-        .deleteUser({
-          id: item.id
-        })
+        .deleteUser({id: item.id})
         .then(res => {
-          const index = this.listusers.indexOf(item);
-          confirm("Вы действительно хотите удалить данного пользователя?") &&
-            this.listusers.splice(index, 1);
           alert("Удалён!");
+          this.initialize();
         })
         .catch(ex => {
-          initialize(true);
           console.log(ex);
         });
     },
-
+    //Закрытие диалога
     close() {
       this.dialog = false;
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedItem = Object.assign({}, {
+          id: "",
+          secName: "",
+          name: "",
+          thirdName: "",
+          email: "",
+          password: "",
+          post_id: "",
+          disabled: "",
+        });
         this.editedIndex = -1;
       }, 300);
     },
 
     save() {
-      var $check = true;
-      for (var i = 0; i < this.arrusers.length; i++)
-        if (this.arrusers[i].email == this.editedItem.email) 
-        $check = false;
-      if (this.editedItem.email != null)
-      if ($check == true) 
-      {
-        if (this.editedIndex == -1) 
-        this.editedItem.id = -1;
+      if (this.editedIndex == -1) this.editedItem.id = -1;
 
-        apiuser
-          .saveUser({
-            user: this.editedItem
-          })
-          .then(res => {
-            if (this.editedIndex > -1)
-              Object.assign(this.listusers[this.editedIndex], this.editedItem);
-            else this.initialize(true);
-
-            alert("Сохранён!");
-            this.close();
-          })
-          .catch(ex => {
-            initialize(true);
-            console.log(ex);
-          });
-      }
-      else
-        alert("Указанная почта уже используется!");
+      apiuser
+        .saveUser({
+          user: this.editedItem
+        })
+        .then(res => {
+          switch(res.data.success)
+          {
+            case 'erroremail':
+              alert("Почта уже используется!");
+              break;
+            case true:
+              this.initialize();
+              alert("Сохранён!");
+              this.close();
+              break;
+          }
+        })
+        .catch(ex => {
+          alert("Сохранение не было произведено!");
+          console.log(ex);
+        });
     },
 
     parseIntLoc(val) {
-      if (val == "" || val == null || val == "0") {
+      if (val == "" || val == null || val == "0")
         return 1;
-      }
       return parseInt(val);
     }
   }

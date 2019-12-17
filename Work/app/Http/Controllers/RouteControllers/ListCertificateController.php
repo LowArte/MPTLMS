@@ -38,6 +38,6 @@ class ListCertificateController extends Controller
                 "body"=>$cert[$i]['certificates_data']
             ]);
         }       
-        return view('components/listcertificate',['requests'=>$data]);
+        return view('components/list-certificate',['requests'=>$data]);
     }
 }

@@ -35,10 +35,9 @@ class PanelControlController extends Controller
      */
     public function index()
     {
-
         $prof = SiteOptions::get();
         Debugbar::info($prof);
-        return view('components/panelcontrol',[
+        return view('components/panel-control',[
             'options'=>[
                 "prof"=>boolval($prof[0]['option_value'])
             ]

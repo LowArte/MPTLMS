@@ -11,7 +11,6 @@ use Debugbar;
 use Faker\Factory;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 class UserManagementController extends Controller
 {
@@ -29,26 +28,31 @@ class UserManagementController extends Controller
     {
         try
         {
-            $user = null;
-            if($request->user["id"]==-1){ // New user
+            $user = User::where("email",'=', $request->user["email"])->first();
+            if($request->user["id"]==-1){ //new user
+                if ($user != null)
+                    return response()->json(['success'=>'erroremail']);
                 $faker = Factory::create();
                 $pas = $faker->password();
                 $user = new User();
                 $user->name = $request->user["name"];
-                $user->secname = $request->user["secname"];
-                $user->thirdname = $request->user["thirdname"];
+                $user->secname = $request->user["secName"];
+                $user->thirdname = $request->user["thirdName"];
                 $user->email = $request->user["email"];
-                $user->post_id = $request->user["post"];
+                $user->post_id = $request->user["post_id"];
+                $user->disabled = $request->user["disabled"];
                 $user->password = Hash::make($pas);
                 $user->password_notHash = Hash::make($pas);
                 $user->save();
             }else{ // update user
-                $user = User::where("id",$request->user["id"])->first();
+                if ($user != null && $user->id != $request->user["id"])
+                    return response()->json(['success'=>'erroremail']);
                 $user->name = $request->user["name"];
-                $user->secname = $request->user["name"];
-                $user->thirdname = $request->user["thirdname"];
+                $user->secname = $request->user["secName"];
+                $user->thirdname = $request->user["thirdName"];
                 $user->email = $request->user["email"];
-                $user->post = $request->user["post"];
+                $user->post_id = $request->user["post_id"];
+                $user->disabled = $request->user["disabled"];
                 $user->save();
             }
             return response()->json(['success'=>true]);
