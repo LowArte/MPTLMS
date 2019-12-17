@@ -56,6 +56,6 @@ class RequestsUsersController extends Controller
                 "email"=>$user['email'],
                 ]);
         }
-        return view('components/requestsusers', ["requests" => $data]);
+        return view('components/requests-users', ["requests" => $data]);
     }
 }

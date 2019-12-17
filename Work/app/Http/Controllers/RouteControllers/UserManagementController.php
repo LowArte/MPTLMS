@@ -91,7 +91,7 @@ class UserManagementController extends Controller
         $usersposts = UsersPost::get();
         return view
         (
-            'components/UserManagement', 
+            'components/user-management', 
             [
                 'users' => json_encode($users), 
                 'usersposts' => json_encode($usersposts)
