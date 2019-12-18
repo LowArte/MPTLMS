@@ -83,7 +83,7 @@ import DetailedInformationRetrainign_C from './components/additional-education-f
  */
 import Journal_C from './components/journal-f/Journal'
 import Timetable_C from './components/timetable-f/Timetable'
-
+import BildTimetable_C from './components/timetable-f/Bild_Timetable'
 
 //import vuetif from './plugins/vuetify'
 
@@ -134,8 +134,9 @@ new Vue({
     'c-journal': Journal_C, //-
     'c-detailed-inf-ret': DetailedInformationRetrainign_C, // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
     'c-timetable': Timetable_C,
+    'c-bildtimetable': BildTimetable_C,
     'c-download-button' : Downloadbutton_C
-
+    
   },
   data: () => ({
     drawer: null,
@@ -178,18 +179,23 @@ new Vue({
             {
               icon: 'today',
               text: 'Расписание',
-              href: '/contimetable'
+              href: '/timetable'
+            },
+            {
+              icon: 'today',
+              text: 'Конструктор расписания',
+              href: '/bildtimetable'
             },
             // {
             //   icon: 'today',
             //   text: 'Замены',
             //   href: '/conreplacements'
             // },
-            // {
-            //   icon: 'today',
-            //   text: 'Расписание звонков',
-            //   href: '/concallschedule'
-            // },
+            {
+              icon: 'today',
+              text: 'Расписание звонков',
+              href: '/bildcallschedule'
+            },
             {
               icon: 'edit',
               text: 'Управление пользователями',
@@ -313,18 +319,18 @@ new Vue({
             {
               icon: 'home',
               text: 'Расписание',
-              href: '/contimetable'
+              href: '/timetable'
+            },
+            {
+              icon: 'home',
+              text: 'Конструктор расписания',
+              href: '/bildtimetable'
             },
             // {
             //   icon: 'home',
             //   text: 'Замены',
             //   href: '/conreplacements'
-            // },
-            // {
-            //   icon: 'today',
-            //   text: 'Расписание звонков',
-            //   href: '/concallschedule'
-            // },
+            // },         
             {
               icon: 'feedback',
               text: 'Обратная связь',

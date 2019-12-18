@@ -23,11 +23,9 @@ class BildCallScheduleController extends Controller
     public function save(Request $request){
         for($i = 0;$i<count($request['data']);$i++){
             CallSchedule::where('id',$request['data'][$i]['id'])
-            ->update(['call_schedule'=>json_encode($request['data'][$i]['call_schedule'])]);
+            ->update(['call_schedule'=>json_encode($request['data'][$i]['schedule'])]);
         }
-        response()->json([
-            "success"=>true
-        ]);
+        response()->json(["success"=>true]);
     }
 
     /**
@@ -40,7 +38,7 @@ class BildCallScheduleController extends Controller
         $callSchedule = CallSchedule::get();
         $calls = array();
         foreach($callSchedule as $call){
-            array_push($calls,["place"=>Places::where("id",$call->place_id)->first()["place_name"],"schedule"=>$call->call_schedule]);
+            array_push($calls,["place"=>Places::where("id",$call->place_id)->first()["place_name"],"schedule"=>$call->call_schedule, "id"=>$call->id]);
         }
         return view('components/bild-call-schedule', ["calls"=>$calls]);
     }
