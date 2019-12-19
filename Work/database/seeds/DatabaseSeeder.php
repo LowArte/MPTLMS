@@ -25,7 +25,9 @@ class DatabaseSeeder  extends Seeder
             RetrainingInfoSeeder::class
         ]);
         factory(\App\User::class, 100)->create();
+        
         $this->call([
+            TestUserSeeder::class,
             TeachersSeeder::class,
             StudentsSeeder::class
         ]);
