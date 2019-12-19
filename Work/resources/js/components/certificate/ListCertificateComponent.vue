@@ -11,6 +11,8 @@
             item-key="id"
             show-expand
             class="elevation-1"
+            no-results-text='Нет результатов' 
+            no-data-text='Нет результатов'
             :page.sync="page"
             hide-default-footer
             @page-count="pageCount = $event"

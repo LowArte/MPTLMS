@@ -2389,6 +2389,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
  //api для пользователей
 
  //маски vue
@@ -2417,7 +2419,7 @@ __webpack_require__.r(__webpack_exports__);
       //Активатор диалога
       adisabled: [{
         id: 0,
-        name: "Отсутствует"
+        name: "Свободен"
       }, {
         id: 1,
         name: "Заблокирован"
@@ -2440,10 +2442,10 @@ __webpack_require__.r(__webpack_exports__);
         value: "email"
       }, {
         text: "Роль",
-        value: "post_id"
+        value: "post"
       }, {
         text: "Блокировка",
-        value: "disabled"
+        value: "text-disabled"
       }, {
         text: "Действия",
         value: "action",
@@ -2481,6 +2483,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.listusers = JSON.parse(this.users);
     this.arrusersposts = JSON.parse(this.usersposts);
+
+    for (var i = 0; i < this.listusers.length; i++) {
+      this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
+    }
   },
   computed: {
     //Получение названия диалога
@@ -2496,6 +2502,10 @@ __webpack_require__.r(__webpack_exports__);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (res) {
         _this.listusers = JSON.parse(res.data.users);
         _this.arrposts = JSON.parse(res.data.usersposts);
+
+        for (var i = 0; i < _this.listusers.length; i++) {
+          _this.listusers[i]['text-disabled'] = _this.adisabled[_this.listusers[i]['disabled']].name;
+        }
       })["catch"](function (ex) {
         console.log(ex);
       });
@@ -3677,6 +3687,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -6600,6 +6612,8 @@ var render = function() {
                             items: _vm.listusers,
                             search: _vm.search,
                             "item-key": "id",
+                            "no-results-text": "Нет результатов",
+                            "no-data-text": "Нет результатов",
                             page: _vm.page,
                             "hide-default-footer": "",
                             "items-per-page": _vm.itemsPerPage
@@ -7771,6 +7785,8 @@ var render = function() {
                             headers: _vm.headers,
                             items: _vm.items,
                             "single-expand": true,
+                            "no-results-text": "Нет результатов",
+                            "no-data-text": "Нет результатов",
                             expanded: _vm.expanded,
                             "item-key": "id",
                             "show-expand": "",
@@ -10903,6 +10919,8 @@ var render = function() {
                             expanded: _vm.expanded,
                             "item-key": "id",
                             "show-expand": "",
+                            "no-results-text": "Нет результатов",
+                            "no-data-text": "Нет результатов",
                             page: _vm.page,
                             "hide-default-footer": "",
                             search: _vm.search,

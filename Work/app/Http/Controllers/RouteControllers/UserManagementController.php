@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\UsersPost;
 use App\User;
-use Debugbar;
 use Faker\Factory;
 
 use Illuminate\Support\Facades\Hash;
@@ -79,7 +78,7 @@ class UserManagementController extends Controller
 
     public function getUsers ()
     {
-        $users = Users::select('id', 'name', 'secName', 'thirdName', 'email', 'disabled', 'post_id')->leftJoin('users_posts', 'users.post_id', '=', 'users_posts.name')->get();
+        $users = Users::join('users_posts', 'users.post_id', '=', 'users_posts.id')->select('users.id', 'users.name', 'users.secName', 'users.thirdName', 'users.email', 'users.disabled', 'users.post_id', 'users_posts.name as post')->get();
         $usersposts = UsersPost::get();
         return response()->json(['users'=>json_encode($users), 'usersposts' => json_encode($usersposts)],200);
     }
@@ -91,7 +90,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = Users::get();
+        $users = Users::join('users_posts', 'users.post_id', '=', 'users_posts.id')->select('users.id', 'users.name', 'users.secName', 'users.thirdName', 'users.email', 'users.disabled', 'users.post_id', 'users_posts.name as post')->get();
         $usersposts = UsersPost::get();
         return view
         (

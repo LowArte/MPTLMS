@@ -8,6 +8,8 @@
             :items="listusers"
             :search="search"
             item-key="id"
+            no-results-text='Нет результатов' 
+            no-data-text='Нет результатов'
             :page.sync="page"
             hide-default-footer
             @page-count="pageCount = $event"
@@ -37,7 +39,7 @@
                         v-layout.row
                           v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль')
                         v-layout.row
-                          v-autocomplete(:items="adisabled" item-value='id' item-text='name' v-model="editedItem.disabled" dense solo label='Блокировка')
+                          v-autocomplete(:items="adisabled" item-value='id' item-text='name' value=item v-model="editedItem.disabled" dense solo label='Блокировка')
                       v-card-actions
                         v-spacer
                         v-btn(color="blue darken-1" text @click="close") Отмена
@@ -72,7 +74,7 @@ export default {
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
-    adisabled: [{id: 0, name: "Отсутствует"}, {id: 1, name: "Заблокирован"}],
+    adisabled: [{id: 0, name: "Свободен"}, {id: 1, name: "Заблокирован"}],
     headers: [
       {
         text: "№",
@@ -83,8 +85,8 @@ export default {
       { text: "Имя", value: "name" },
       { text: "Отчество", value: "thirdName" },
       { text: "Почта", value: "email" },
-      { text: "Роль", value: "post_id"},
-      { text: "Блокировка", value: "disabled"},
+      { text: "Роль", value: "post"},
+      { text: "Блокировка", value: "text-disabled"},
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
     editedIndex: -1, //Текущий индекс редактируемой строки
@@ -113,6 +115,8 @@ export default {
   mounted() {
     this.listusers = JSON.parse(this.users);
     this.arrusersposts = JSON.parse(this.usersposts);
+    for(var i = 0; i < this.listusers.length; i++)
+      this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
   },
 
   computed: {
@@ -132,6 +136,8 @@ export default {
         .then(res => {
           this.listusers = JSON.parse(res.data.users);
           this.arrposts = JSON.parse(res.data.usersposts);
+          for(var i = 0; i < this.listusers.length; i++)
+            this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
         })
         .catch(ex => {
           console.log(ex);

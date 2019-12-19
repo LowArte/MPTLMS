@@ -3,7 +3,7 @@
     v-col(cols='12')
       v-hover(v-slot:default='{ hover }')
         v-card.mx-auto.pa-4(:elevation='hover ? 12 : 2' height='auto' width='max')
-          v-data-table.elevation-1(:headers='headers' :items='items' :single-expand='true' :expanded.sync='expanded' item-key='id' show-expand='' :page.sync='page' hide-default-footer='' @page-count='pageCount = $event' :search='search' :items-per-page='itemsPerPage')
+          v-data-table.elevation-1(:headers='headers' :items='items' :single-expand='true' no-results-text='Нет результатов' no-data-text='Нет результатов' :expanded.sync='expanded' item-key='id' show-expand='' :page.sync='page' hide-default-footer='' @page-count='pageCount = $event' :search='search' :items-per-page='itemsPerPage')
             template(v-slot:top='')
               div
                 v-toolbar.ma-0.ml-2.mr-2.pa-0(flat='' color='white')
