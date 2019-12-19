@@ -28,8 +28,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  hint="Не меньше 6 символов"
-                  min="6"
+                  min="1"
                   v-model="password"
                   :rules="passwordRules"
                   label="Пароль"
@@ -75,7 +74,6 @@ export default {
       password: "",
       passwordRules: [
         v => !!v || "Пароль не соответствует требования",
-        v => v.length >= 6 || "Пароль должен быть как минимум 6 символов"
       ],
       valid: false,
       loginLoading: false

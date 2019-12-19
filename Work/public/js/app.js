@@ -2641,7 +2641,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2659,8 +2658,6 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       passwordRules: [function (v) {
         return !!v || "Пароль не соответствует требования";
-      }, function (v) {
-        return v.length >= 6 || "Пароль должен быть как минимум 6 символов";
       }],
       valid: false,
       loginLoading: false
@@ -9596,8 +9593,7 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  hint: "Не меньше 6 символов",
-                                  min: "6",
+                                  min: "1",
                                   rules: _vm.passwordRules,
                                   label: "Пароль",
                                   type: "password",

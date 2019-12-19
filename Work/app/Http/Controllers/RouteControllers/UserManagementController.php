@@ -79,7 +79,7 @@ class UserManagementController extends Controller
 
     public function getUsers ()
     {
-        $users = Users::get();
+        $users = Users::select('id', 'name', 'secName', 'thirdName', 'email', 'disabled', 'post_id')->leftJoin('users_posts', 'users.post_id', '=', 'users_posts.name')->get();
         $usersposts = UsersPost::get();
         return response()->json(['users'=>json_encode($users), 'usersposts' => json_encode($usersposts)],200);
     }
