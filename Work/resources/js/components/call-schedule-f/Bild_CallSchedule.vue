@@ -1,22 +1,17 @@
 <template lang="pug">
   v-layout.row
-    v-layout.col(cols="12")
-      v-hover(v-slot:default='{ hover }')
-        v-card.mx-auto.pa-4.max(width='100%' height='auto' :elevation='hover ? 12 : 2')
-          v-form(ref="BildCallSchedule" v-model="valid")
-            v-card-text(text-center title) Расписание звонков
-              v-select.pa-0.mb-0.mt-2(v-model="mplace" label="Место проведения" solo :items="timeTable" item-text="place" return-object)
-            v-container.pt-0(grey lighten-5)
-              v-layout.row(no-gutters v-for="(value) in Object.keys(timeTable[mplace.i].schedule)" :key="value" sm="6" md="4" lg="3")
-                v-layout.v-col
-                  v-card.pa-2(width='100%' outlined tile) {{value}} пара
-                    v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
-                      v-model="timeTable[mplace.i].schedule[value]"
-                      v-mask="mask"
-                      :rules="inputRules"
-                      label="Начало/конец пары")
-              v-layout.row.pa-0.align-self-center.justify-center(sm="2" md="0")
-                v-btn.justify-center(color="accent" dark @click="sendQuery") Принять
+    v-hover(v-slot:default='{ hover }')
+      v-card.mx-auto.pa-1.max(width='100%' height='auto' :elevation='hover ? 12 : 2')
+        v-form(ref="BildCallSchedule" v-model="valid")
+          v-card-text(text-center title) Расписание звонков
+            v-select.pa-0.mb-0.mt-2(v-model="mplace" label="Место проведения" solo :items="timeTable" item-text="place" return-object)
+            v-card.pa-2(width='100%' outlined tile v-for="(value) in Object.keys(timeTable[mplace.i].schedule)" :key="value") {{value}} пара
+              v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
+                v-model="timeTable[mplace.i].schedule[value]"
+                v-mask="mask"
+                :rules="inputRules"
+                label="Начало/конец пары")
+            v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
 <script>
@@ -51,7 +46,6 @@ export default {
       this.mplace = arr[0];
     } //Распарсирование массива
     this.timeTable = arr; //Массив с расписанием
-    console.log(this.timeTable);
   },
   methods: {
     sendQuery() {

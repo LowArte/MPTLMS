@@ -1,60 +1,57 @@
 <template lang="pug">
   v-layout.row
-    v-layout.col(cols="12")
-      v-hover(v-slot:default='{ hover }')
-        v-card.mx-auto.pa-4.max(width='100%' height='auto' :elevation='hover ? 12 : 2')
-          v-data-table.elevation-1.pa-0.ma-0(
-            :headers="headers"
-            :items="listusers"
-            :search="search"
-            item-key="id"
-            no-results-text='Нет результатов' 
-            no-data-text='Нет результатов'
-            :page.sync="page"
-            hide-default-footer
-            @page-count="pageCount = $event"
-            :items-per-page="itemsPerPage")
-            template(v-slot:top)
-              v-toolbar(color="white" flat)
-                v-toolbar-title
-                  v-card-text.my-2.ma-0.pa-0.title Управление пользователями
-                v-divider.mx-4(inset vertical)
-              v-layout.row.pa-0.align-self-center.justify-center(sm="2" md="0")
-                v-btn.dark.ma-2(color="primary" @click="initialize()") Обновить
-                v-dialog(v-model="dialog" max-width="500px")
-                  template(v-slot:activator="{ on }")
-                    v-btn.ma-2.dark(color="primary" v-on="on") Новый пользователь
-                  v-card
-                    v-card-title.span.headline {{ formTitle }}
-                    v-card-text
-                      v-container.mb-0.pb-0
-                        v-layout.row
-                          v-text-field(v-model="editedItem.thirdName" label="Фамилия")
-                        v-layout.row
-                          v-text-field(v-model="editedItem.name" label="Имя")
-                        v-layout.row
-                          v-text-field(v-model="editedItem.secName" label="Отчество")
-                        v-layout.row
-                          v-text-field(v-model="editedItem.email" label="Почта")
-                        v-layout.row
-                          v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль')
-                        v-layout.row
-                          v-autocomplete(:items="adisabled" item-value='id' item-text='name' value=item v-model="editedItem.disabled" dense solo label='Блокировка')
-                      v-card-actions
-                        v-spacer
-                        v-btn(color="blue darken-1" text @click="close") Отмена
-                        v-btn(color="blue darken-1" text @click="save") Сохранить
-              v-card-title.ma-0.ml-4.mr-4.pa-0
-                v-text-field.ma-0.pa-0.single-line.hide-details(v-model="search" label="Поиск")
-            template(v-slot:item.action="{ item }")
-              v-icon.mr-2.small(@click="editItem(item)") edit
-              v-icon.small(@click="deleteItem(item)") delete
-
-            template(v-slot:no-data)
-              v-btn(color="primary" @click="initialize(true)") Обновить
-          v-layout.row.text-center.pa-2.ma-2
-            v-pagination(v-model="page" :length="pageCount")
-            v-text-field(:value="itemsPerPage" label="Количество отображаемых обращений" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
+    v-hover(v-slot:default='{ hover }')
+      v-card.mx-auto.pa-2(width='100%' height='auto' :elevation='hover ? 12 : 2')
+        v-data-table.elevation-1.pa-0.ma-0(
+          :headers="headers"
+          :items="listusers"
+          :search="search"
+          item-key="id"
+          no-results-text='Нет результатов' 
+          no-data-text='Нет результатов'
+          :page.sync="page"
+          mobile-breakpoint=200
+          hide-default-footer
+          @page-count="pageCount = $event"
+          :items-per-page="itemsPerPage")
+          template(v-slot:top)
+            v-toolbar(color="white" flat)
+              v-toolbar-title
+                v-card-text.my-2.ma-0.pa-0.title Управление пользователями
+            v-layout.row.pa-0.align-self-center.justify-center(sm="2" md="0")
+              v-btn.dark.ma-2(color="primary" @click="initialize()") Обновить
+              v-dialog(v-model="dialog" max-width="500px")
+                template(v-slot:activator="{ on }")
+                  v-btn.ma-2.dark(color="primary" v-on="on") Новый пользователь
+                v-card
+                  v-card-title.span.headline {{ formTitle }}
+                  v-card-text
+                    v-layout.row
+                      v-text-field(v-model="editedItem.thirdName" label="Фамилия")
+                    v-layout.row
+                      v-text-field(v-model="editedItem.name" label="Имя")
+                    v-layout.row
+                      v-text-field(v-model="editedItem.secName" label="Отчество")
+                    v-layout.row
+                      v-text-field(v-model="editedItem.email" label="Почта")
+                    v-layout.row
+                      v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль')
+                    v-layout.row
+                      v-autocomplete(:items="adisabled" item-value='id' item-text='name' value=item v-model="editedItem.disabled" dense solo label='Блокировка')
+                    v-card-actions
+                      v-spacer
+                      v-btn(color="blue darken-1" text @click="close") Отмена
+                      v-btn(color="blue darken-1" text @click="save") Сохранить
+            v-card-title.ma-0.ml-4.mr-4.pa-0
+              v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
+          template(v-slot:item.action="{ item }")
+            v-icon.small(@click="editItem(item)") edit
+            v-icon.small(@click="deleteItem(item)") delete
+          template(v-slot:no-data)
+            v-btn(color="primary" @click="initialize(true)") Обновить
+        v-layout.row.text-center.pa-2.ma-2
+          v-pagination(v-model="page" :length="pageCount")
+          v-text-field(:value="itemsPerPage" label="Количество отображаемых обращений" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
 </template>
 
 <script>
@@ -81,12 +78,9 @@ export default {
         align: "left",
         value: "id"
       },
-      { text: "Фамилия", value: "secName" },
-      { text: "Имя", value: "name" },
-      { text: "Отчество", value: "thirdName" },
-      { text: "Почта", value: "email" },
-      { text: "Роль", value: "post"},
-      { text: "Блокировка", value: "text-disabled"},
+      { text: "Почта", value: "email", },
+      { text: "Роль", value: "post" },
+      { text: "Блокировка", value: "text-disabled" },
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
     editedIndex: -1, //Текущий индекс редактируемой строки

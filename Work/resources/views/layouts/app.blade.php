@@ -90,9 +90,11 @@
                     <v-spacer></v-spacer>
                 </v-card-actions>
                 <v-card-actions>
+                @if (Auth::user()->disabled)
                     <v-spacer></v-spacer>
                     <v-btn :loading="changingPassword" text color="accent" @click="changePassword">Смена пароля</v-btn>
                     <v-spacer></v-spacer>
+                @endif
                 </v-card-actions>
             </v-card>
         </v-navigation-drawer>
