@@ -11,7 +11,8 @@
             v-card.mx-auto.pa-1.max(width='100%' height='auto')
               //- p {{schedule[day_key]}}
               v-select.pa-0.mb-0.mt-2(v-model="schedule[day_key]['Place']" label="Место проведения" solo :items="places" item-text="place_name" item-value="id")
-              v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") {{lesson_key}} пара
+              v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
+                v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
                 v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="checkbox[day_index][lesson_index]") Числитель
                 v-autocomplete(v-model="schedule[day_key][lesson_key]['Lesson']" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
                 v-autocomplete(v-model="schedule[day_key][lesson_key]['Teacher']" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
