@@ -6,28 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CallSchedule;
 use App\Models\Departament;
+use App\Models\Discipline;
 use App\Models\Group;
 use App\Models\Places;
 use App\Models\Schedule;
-use App\Models\Student;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Teacher;
+use App\User;
 
 
 class BildTimetableController extends Controller
 {
-
-    private function get_schedule($group_id){
-        $schedule =json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
-        foreach ((array)$schedule as $days => $row) {
-            $place = Places::where("id", $schedule->{$days}->Place)->first();
-            $time = json_decode(CallSchedule::where("place_id",$place->id)->first()->call_schedule);
-            $schedule->{$days}->Place = $place->place_name;
-            foreach ((array)$time as $lessons =>$row2) {
-                $schedule->{$days}->{$lessons}->time = $time->{$lessons};
-            }      
-        }
-        return $schedule;
-    }
     /**
      * Create a new controller instance.
      *
@@ -54,6 +42,12 @@ class BildTimetableController extends Controller
         ));
     }
 
+    private function get_schedule($group_id)
+    {
+        $schedule =json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
+        return $schedule;
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -61,30 +55,17 @@ class BildTimetableController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
         $departaments = Departament::get();
         $groups = Group::where("departaments_id",$departaments[0]['id'])->get();
-        $selected_group = null;
-        $selected_departament = null;
 
-        if($user["post_id"] == 2){
-            $student = Student::where("user_id",$user["id"])->first();           
-            $selected_group = Group::where("id",$student["group_id"])->first();
-            $groups = Group::where("departaments_id",$selected_group['departaments_id'])->get();
-            $selected_departament = Departament::where("id",$selected_group["departaments_id"])->first();
-        }
-        else
-        {
-            $selected_group = $groups[0];
-            $selected_departament = $departaments[0];
-        }
+        $selected_group = $groups[0];
+        $selected_departament = $departaments[0];
 
         $callSchedule = CallSchedule::get();
         $calls = array();
 
-        foreach($callSchedule as $call){
-            
+        foreach($callSchedule as $call)
+        {
             array_push($calls,["place"=>Places::where("id",$call->place_id)->first()["place_name"],"schedule"=>$call->call_schedule]);
         }
         
@@ -96,10 +77,19 @@ class BildTimetableController extends Controller
             )
         );
 
+        $places = Places::get();
+        $teachers = Teacher::get();
+
+        $teachersName = array();
+        for ($i = 0; $i < count($teachers); $i++) {
+            $user = User::where('id', $teachers[$i]['user_id'])->first();
+            array_push($teachersName, ['name' => $user['name'] . " " . $user['secName'] . " " . $user['thirdName']]);
+        };
+        $discip = Discipline::get();
+
         return view('components/bild-timetable',
         [
             "panel_array"=>$panel_array,
-
             "departaments_info"=>array(
                 "departaments"=>$departaments,
                 "selected_departament"=>$selected_departament
@@ -108,8 +98,24 @@ class BildTimetableController extends Controller
                 "groups"=>$groups,
                 "selected_group"=>$selected_group
             ),
+            "places"=>$places,
+            "teachers"=>$teachersName,
+            "discip"=>$discip,
             "schedule"=>$this->get_schedule($selected_group['id'])
         ]
         );
+    }
+    
+    public function save(Request $request)
+    {
+        foreach ($request['schedule'] as $i) 
+        {
+            foreach ($i as $j) 
+            {
+                $j = json_encode($j);
+            }
+        }
+        Schedule::where('group_id', $request['group_id'])->update(['schedule' => json_encode($request['schedule'])]);
+        return response()->json(['success' => true]);
     }
 }

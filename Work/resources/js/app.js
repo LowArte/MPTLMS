@@ -65,6 +65,7 @@ import SpecialtiesList_C from './components/information-page-f/SpecialtiesList'
  */
 import PanelControl_C from './components/administrator-f/PanelControl'
 import UserManagement_C from './components/administrator-f/UserManagement'
+import FileManagement_C from './components/administrator-f/FileManagement'
 
 // ! --------------------------------------------------------------------------------------------
 
@@ -129,7 +130,8 @@ new Vue({
     'c-panel-control': PanelControl_C, // ! ПРОВЕРИТЬ
     'c-call-schedule': CallSchedule_C,
     'c-retraining': Retraining_C,
-    'c-user-management': UserManagement_C, // ! ПОМЕНЯТЬ РОЛЬ НА КОМБОБОКС
+    'c-user-management': UserManagement_C, // Изменена роль на комбобокс
+    'c-file-management': FileManagement_C,
     'c-notifications': Notifications_C,
     'c-journal': Journal_C, //-
     'c-detailed-inf-ret': DetailedInformationRetrainign_C, // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
@@ -200,6 +202,11 @@ new Vue({
               icon: 'edit',
               text: 'Управление пользователями',
               href: '/usermanagement'
+            },
+            {
+              icon: 'edit',
+              text: 'Управление файлами',
+              href: '/filemanagement'
             },
             {
               icon: 'feedback',

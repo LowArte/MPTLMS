@@ -9,6 +9,14 @@ export default {
     })
   },
 
+  getBildSchedule(credentials) {
+    return axios.get('/get_bild_schedule_by_group_id', {
+      params: {
+        "group_id": credentials
+      }
+    })
+  },
+
   saveSchedule(credentials) {
     return axios.post('/save_schedule', {
       "group_id": credentials.group_id,

@@ -22,12 +22,12 @@ class DatabaseSeeder  extends Seeder
             DesciplineSeeder::class,
             SiteOptionsSeeder::class,
             SwapScheduleSeeder::class,
-            RetrainingInfoSeeder::class
+            RetrainingInfoSeeder::class,
+            TestUserSeeder::class, //Подлежит удалению
         ]);
         factory(\App\User::class, 100)->create();
         
         $this->call([
-            TestUserSeeder::class,
             TeachersSeeder::class,
             StudentsSeeder::class
         ]);

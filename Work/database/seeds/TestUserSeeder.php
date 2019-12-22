@@ -16,7 +16,6 @@ class TestUserSeeder extends Seeder
     public function run()
     {
         $data = array();
-        $users = User::where('post_id', 3)->get();
         $faker = Factory::create();
         //Админ
         array_push($data,

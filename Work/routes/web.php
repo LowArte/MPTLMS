@@ -45,20 +45,25 @@ Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->na
 Route::get('/usermanagement', 'RouteControllers\UserManagementController@index')->name('usermanagement');
 Route::get('/timetable', 'RouteControllers\TimetableController@index')->name('Timetable');
 Route::get('/bildtimetable', 'RouteControllers\BildTimetableController@index')->name('BildTimetable');
+Route::get('/filemanagement', 'RouteControllers\FileManagementController@index')->name('filemanagement');
 
-
+Route::post('/save_schedule', 'RouteControllers\BildTimetableController@save');
 Route::post('/save_user', 'RouteControllers\UserManagementController@saveUser');
 Route::post('/delete_user', 'RouteControllers\UserManagementController@deleteUser');
+Route::post('/save_file', 'RouteControllers\FileManagementController@saveFile');
+Route::post('/delete_file', 'RouteControllers\FileManagementController@deleteFile');
 Route::post('/send_email', 'RouteControllers\RequestsUsersController@sendEmail');
 Route::post('/save_feedback', 'RouteControllers\FeedbackController@savefeedback');
 Route::post('/save_bildcallschedule', 'RouteControllers\BildCallScheduleController@save');
 Route::post('/save_certificate', 'RouteControllers\CertificateController@saveCertificate');
-// Route::post('/save_schedule', 'RouteControllers\ConstructorTimeTableController@save');
 Route::post('/set_options', 'RouteControllers\PanelControlController@setConfigOptions');
 Route::post('/setNotificationAsRead', 'LoggedUserController@setNotificationAsRead');
 
+Route::get('/get_file', 'RouteControllers\FileManagementController@getFile');
 Route::get('/detailedir', 'RouteControllers\DetailedInfoIrmationRetrainingController@index')->name('detailedir');
 Route::get('/get_users', 'RouteControllers\UserManagementController@getUsers');
+Route::get('/get_files', 'RouteControllers\FileManagementController@getFiles');
 Route::get('/get_group_by_departament_id', 'RouteControllers\TimetableController@groupByDepartamentId');
 Route::get('/get_schedule_by_group_id', 'RouteControllers\TimetableController@scheduleByGroupId');
+Route::get('/get_bild_schedule_by_group_id', 'RouteControllers\BildTimetableController@scheduleByGroupId');
 Route::get('/download_file', 'LoggedUserController@downloadFile');

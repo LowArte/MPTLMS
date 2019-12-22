@@ -2250,6 +2250,237 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/FileManagement.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/administrator-f/FileManagement.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_files__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/files */ "./resources/js/api/files.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var js_file_download__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-file-download */ "./node_modules/js-file-download/file-download.js");
+/* harmony import */ var js_file_download__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_file_download__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+ //api для Файлов
+
+ //маски vue
+
+ //Требуется для скачивания файла
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  directives: {
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_1__["mask"]
+  },
+  data: function data() {
+    return {
+      files: [],
+      search: "",
+      //Поиск
+      page: 1,
+      //Текущая страница
+      itemsPerPage: 10,
+      //Количество отображаемых пользователей
+      pageCount: 0,
+      //Количество страниц
+      mask: "####",
+      //Маска для количества отображаемых строк
+      dialog: false,
+      //Активатор диалога
+      rulesFile: [function (v) {
+        return !!v || "Файл не указан";
+      }, function (value) {
+        return !value || value.size < 100 * 1024 * 1024 || 'Не более 100 МБ! Текущий размер = ' + value.size + ' байт!';
+      }],
+      //Проверка на файл. Минимальный размер 100 МБ значение изменяется в байтах
+      headers: [{
+        text: "№",
+        align: "left",
+        value: "id"
+      }, {
+        text: "Название",
+        value: "name"
+      }, {
+        text: "Файл",
+        value: "path"
+      }, //Будет убрано!
+      {
+        text: "Действия",
+        value: "action",
+        sortable: false
+      }],
+      //Структура таблицы и с полями которые требуется выводить
+      editedIndex: -1,
+      //Текущий индекс редактируемой строки
+      editedItem: {
+        id: "",
+        name: "",
+        file: null
+      } //Массив с данным для сохранения в бд
+
+    };
+  },
+  props: {
+    _files: {
+      data: String,
+      "default": null
+    } //JSON пользователей
+
+  },
+  //Получаем данные при старте
+  mounted: function mounted() {
+    this.files = JSON.parse(this._files);
+  },
+  computed: {
+    //Получение названия диалога
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? "Новый файл" : "Редактировать файл";
+    }
+  },
+  methods: {
+    //Иницилизации данных
+    initialize: function initialize() {
+      var _this = this;
+
+      _api_files__WEBPACK_IMPORTED_MODULE_0__["default"].getFiles().then(function (res) {
+        _this.files = JSON.parse(res.data.files);
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    //Редактирование файла
+    editItem: function editItem(item) {
+      this.editedIndex = this.files.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    //Удаление файла
+    deleteItem: function deleteItem(item) {
+      var _this2 = this;
+
+      confirm("Вы действительно хотите удалить данный файл?") && _api_files__WEBPACK_IMPORTED_MODULE_0__["default"].deleteFile({
+        id: item.id
+      }).then(function (res) {
+        alert("Удалён!");
+
+        _this2.initialize();
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    //Загрузка файлов
+    downloadItem: function downloadItem(item) {
+      var name = "files/file.txt";
+      _api_files__WEBPACK_IMPORTED_MODULE_0__["default"].getFile(name).then(function (res) {
+        js_file_download__WEBPACK_IMPORTED_MODULE_2___default()(res.data, name.split("/").pop());
+      });
+    },
+    //Закрытие диалога
+    close: function close() {
+      var _this3 = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this3.editedItem = Object.assign({}, {
+          id: "",
+          name: "",
+          file: null
+        });
+        _this3.editedIndex = -1;
+      }, 300);
+    },
+    //Сохранение файла
+    save: function save() {
+      var _this4 = this;
+
+      if (this.editedIndex == -1) this.editedItem.id = -1;
+      if (this.$refs.SaveDialog.validate()) _api_files__WEBPACK_IMPORTED_MODULE_0__["default"].saveFile({
+        file: this.editedItem
+      }).then(function (res) {
+        switch (res.data.success) {
+          //Проверяем результат отправки запроса
+          case 'errorname':
+            alert("Имя уже используется!");
+            break;
+
+          case true:
+            _this4.initialize();
+
+            alert("Сохранён!");
+
+            _this4.close();
+
+            break;
+        }
+      })["catch"](function (ex) {
+        alert("Сохранение не было произведено!");
+        console.log(ex);
+      });
+    },
+    //Требуется для определения количества страниц
+    parseIntLoc: function parseIntLoc(val) {
+      if (val == "" || val == null || val == "0") return 1;
+      return parseInt(val);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/PanelControl.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/administrator-f/PanelControl.vue?vue&type=script&lang=js& ***!
@@ -4266,50 +4497,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
-
-
-Date.prototype.getWeek = function () {
-  var onejan = new Date(this.getFullYear(), 0, 1);
-  return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
-};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       groups_info: null,
+      //Группы
       departaments_info: null,
+      //Отделения
       schedule: null,
-      isToday: null,
+      //Расписание
+      places: null,
+      //Места проведения
+      teachers: null,
+      //Преподаватели
+      discip: null,
+      //Дисциплины
+      checkbox: [],
+      //Чек боксы для числителя знаменателя
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     };
   },
   props: {
     _departaments_info: {
-      type: String,
+      type: Object,
       "default": null
     },
     _groups_info: {
+      type: Object,
+      "default": null
+    },
+    _places: {
+      type: String,
+      "default": null
+    },
+    _teachers: {
+      type: String,
+      "default": null
+    },
+    _discip: {
       type: String,
       "default": null
     },
@@ -4331,26 +4558,50 @@ Date.prototype.getWeek = function () {
         console.log(ex);
       });
     },
-    isChisl: function isChisl() {
-      var today = new Date();
-      return today.getWeek() % 2;
-    },
     group_change: function group_change() {
       var _this2 = this;
 
-      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getSchedule(this.groups_info.selected_group.id).then(function (res) {
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].getBildSchedule(this.groups_info.selected_group.id).then(function (res) {
         _this2.schedule = res.data.schedule;
       })["catch"](function (ex) {
         console.log(ex);
       });
+    },
+    changeCheckBox: function changeCheckBox(day, lesson) {
+      if (!this.checkbox[day][lesson]) {//this.schedule[day][lesson] = [];
+      }
+    },
+    sendQuery: function sendQuery() {
+      var _this3 = this;
+
+      _api_schedule__WEBPACK_IMPORTED_MODULE_1__["default"].saveSchedule({
+        group_id: this.groups_info.selected_group.id,
+        schedule: this.schedule
+      }).then(function (res) {
+        _this3.group_change();
+
+        alert('Расписание сохранено!');
+      })["catch"](function (ex) {
+        console.log(ex);
+        alert('Расписание не сохранено!');
+      });
     }
   },
   beforeMount: function beforeMount() {
-    this.groups_info = JSON.parse(this._groups_info);
-    this.departaments_info = JSON.parse(this._departaments_info);
+    this.groups_info = this._groups_info;
+    this.departaments_info = this._departaments_info;
     this.schedule = this._schedule;
-    this.isToday = 0;
-    console.log(this.isChisl());
+    this.places = JSON.parse(this._places);
+    this.teachers = JSON.parse(this._teachers);
+    this.discip = JSON.parse(this._discip);
+
+    for (var i = 0; i < 6; i++) {
+      this.checkbox.push([]);
+
+      for (var j = 0; j < 7; j++) {
+        this.checkbox[i].push(false);
+      }
+    }
   }
 });
 
@@ -6434,6 +6685,472 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/administrator-f/FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { staticClass: "row" },
+    [
+      _c("v-hover", {
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(ref) {
+              var hover = ref.hover
+              return [
+                _c(
+                  "v-card",
+                  {
+                    staticClass: "mx-auto pa-2",
+                    attrs: {
+                      width: "100%",
+                      height: "auto",
+                      elevation: hover ? 12 : 2
+                    }
+                  },
+                  [
+                    _c("v-data-table", {
+                      staticClass: "elevation-1 pa-0 ma-0",
+                      attrs: {
+                        headers: _vm.headers,
+                        items: _vm.files,
+                        search: _vm.search,
+                        "item-key": "id",
+                        "no-results-text": "Нет результатов",
+                        "no-data-text": "Нет результатов",
+                        page: _vm.page,
+                        "mobile-breakpoint": 200,
+                        "hide-default-footer": "",
+                        "items-per-page": _vm.itemsPerPage
+                      },
+                      on: {
+                        "update:page": function($event) {
+                          _vm.page = $event
+                        },
+                        "page-count": function($event) {
+                          _vm.pageCount = $event
+                        }
+                      },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "top",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-toolbar",
+                                  { attrs: { color: "white", flat: "" } },
+                                  [
+                                    _c(
+                                      "v-toolbar-title",
+                                      [
+                                        _c(
+                                          "v-card-text",
+                                          {
+                                            staticClass: "my-2 ma-0 pa-0 title"
+                                          },
+                                          [_vm._v("Управление файлами")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _c(
+                                  "v-layout",
+                                  {
+                                    staticClass:
+                                      "row pa-0 align-self-center justify-center",
+                                    attrs: { sm: "2", md: "0" }
+                                  },
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        staticClass: "dark ma-2",
+                                        attrs: { color: "primary" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.initialize()
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Обновить")]
+                                    ),
+                                    _c(
+                                      "v-dialog",
+                                      {
+                                        attrs: { "max-width": "500px" },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "activator",
+                                              fn: function(ref) {
+                                                var on = ref.on
+                                                return [
+                                                  _c(
+                                                    "v-btn",
+                                                    _vm._g(
+                                                      {
+                                                        staticClass:
+                                                          "ma-2 dark",
+                                                        attrs: {
+                                                          color: "primary"
+                                                        }
+                                                      },
+                                                      on
+                                                    ),
+                                                    [_vm._v("Новый файл")]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        ),
+                                        model: {
+                                          value: _vm.dialog,
+                                          callback: function($$v) {
+                                            _vm.dialog = $$v
+                                          },
+                                          expression: "dialog"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "v-card",
+                                          [
+                                            _c(
+                                              "v-card-title",
+                                              { staticClass: "span headline" },
+                                              [_vm._v(_vm._s(_vm.formTitle))]
+                                            ),
+                                            _c(
+                                              "v-card-text",
+                                              [
+                                                _c(
+                                                  "v-form",
+                                                  { ref: "SaveDialog" },
+                                                  [
+                                                    _c(
+                                                      "v-layout",
+                                                      { staticClass: "row" },
+                                                      [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            label: "Название"
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.editedItem
+                                                                .name,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.editedItem,
+                                                                "name",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "editedItem.name"
+                                                          }
+                                                        })
+                                                      ],
+                                                      1
+                                                    ),
+                                                    _c(
+                                                      "v-layout",
+                                                      { staticClass: "row" },
+                                                      [
+                                                        _c("v-file-input", {
+                                                          attrs: {
+                                                            rules:
+                                                              _vm.rulesFile,
+                                                            "show-size": "",
+                                                            placeholder:
+                                                              "Не более 100 МБ",
+                                                            "prepend-icon":
+                                                              "mdi-paperclip",
+                                                            label: "Новый файл"
+                                                          },
+                                                          scopedSlots: _vm._u(
+                                                            [
+                                                              {
+                                                                key:
+                                                                  "selection",
+                                                                fn: function(
+                                                                  ref
+                                                                ) {
+                                                                  var index =
+                                                                    ref.index
+                                                                  var text =
+                                                                    ref.text
+                                                                  return [
+                                                                    index < 2
+                                                                      ? _c(
+                                                                          "v-chip",
+                                                                          {
+                                                                            attrs: {
+                                                                              color:
+                                                                                "deep-purple accent-4",
+                                                                              dark:
+                                                                                "",
+                                                                              label:
+                                                                                "",
+                                                                              small:
+                                                                                ""
+                                                                            }
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                text
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ]
+                                                                }
+                                                              }
+                                                            ],
+                                                            null,
+                                                            true
+                                                          ),
+                                                          model: {
+                                                            value:
+                                                              _vm.editedItem
+                                                                .file,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.editedItem,
+                                                                "file",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "editedItem.file"
+                                                          }
+                                                        })
+                                                      ],
+                                                      1
+                                                    ),
+                                                    _c(
+                                                      "v-card-actions",
+                                                      [
+                                                        _c("v-spacer"),
+                                                        _c(
+                                                          "v-btn",
+                                                          {
+                                                            attrs: {
+                                                              color:
+                                                                "blue darken-1",
+                                                              text: ""
+                                                            },
+                                                            on: {
+                                                              click: _vm.close
+                                                            }
+                                                          },
+                                                          [_vm._v("Отмена")]
+                                                        ),
+                                                        _c(
+                                                          "v-btn",
+                                                          {
+                                                            attrs: {
+                                                              color:
+                                                                "blue darken-1",
+                                                              text: ""
+                                                            },
+                                                            on: {
+                                                              click: _vm.save
+                                                            }
+                                                          },
+                                                          [_vm._v("Сохранить")]
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _c(
+                                  "v-card-title",
+                                  { staticClass: "ma-0 ml-4 mr-4 pa-0" },
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass:
+                                        "ma-0 pa-0 mt-4 single-line hide-details",
+                                      attrs: { label: "Поиск" },
+                                      model: {
+                                        value: _vm.search,
+                                        callback: function($$v) {
+                                          _vm.search = $$v
+                                        },
+                                        expression: "search"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "item.action",
+                            fn: function(ref) {
+                              var item = ref.item
+                              return [
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "small",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editItem(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("edit")]
+                                ),
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "small",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteItem(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("delete")]
+                                ),
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "small",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.downloadItem(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("cloud_download")]
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "no-data",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "primary" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.initialize(true)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Обновить")]
+                                )
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        true
+                      )
+                    }),
+                    _c(
+                      "v-layout",
+                      { staticClass: "row text-center pa-2 ma-2" },
+                      [
+                        _c("v-pagination", {
+                          attrs: { length: _vm.pageCount },
+                          model: {
+                            value: _vm.page,
+                            callback: function($$v) {
+                              _vm.page = $$v
+                            },
+                            expression: "page"
+                          }
+                        }),
+                        _c("v-text-field", {
+                          directives: [
+                            {
+                              name: "mask",
+                              rawName: "v-mask",
+                              value: _vm.mask,
+                              expression: "mask"
+                            }
+                          ],
+                          attrs: {
+                            value: _vm.itemsPerPage,
+                            label: "Количество отображаемых обращений"
+                          },
+                          on: {
+                            input: function($event) {
+                              _vm.itemsPerPage = _vm.parseIntLoc($event)
+                            }
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/PanelControl.vue?vue&type=template&id=42eac1ad&lang=pug&":
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/administrator-f/PanelControl.vue?vue&type=template&id=42eac1ad&lang=pug& ***!
@@ -8314,487 +9031,242 @@ var render = function() {
         ],
         1
       ),
+      _c("v-divider", { staticClass: "ma-0" }),
       _c(
-        "v-card-title",
-        { staticClass: "primary-title pt-0 px-0" },
+        "v-flex",
+        { staticClass: "ma-0 pa-0 row" },
         [
           _c(
-            "v-chip",
-            { staticClass: "pa-2 ml-2", attrs: { label: "" } },
+            "v-tabs",
+            {
+              attrs: {
+                "background-color": "transparent",
+                color: "basil",
+                "mobile-break-point": "0",
+                grow: "",
+                "next-icon": "mdi-arrow-right-bold-box-outline",
+                "prev-icon": "mdi-arrow-left-bold-box-outline",
+                "show-arrows": ""
+              }
+            },
             [
-              _c(
-                "v-card-title",
-                {
-                  staticClass:
-                    "pa-0 accent--text font-weight-light text-truncate overline"
-                },
-                [_vm._v(_vm._s(_vm.isToday == 0 ? "Числитель" : "Знаменатель"))]
-              )
+              _vm._l(_vm.days, function(day_key, day_index) {
+                return _c("v-tab", { key: day_index }, [
+                  _vm._v(_vm._s(day_key))
+                ])
+              }),
+              _vm._l(_vm.days, function(day_key, day_index) {
+                return _c(
+                  "v-tab-item",
+                  { key: day_index },
+                  [
+                    _c(
+                      "v-card",
+                      {
+                        staticClass: "mx-auto pa-1 max",
+                        attrs: { width: "100%", height: "auto" }
+                      },
+                      [
+                        _c("v-select", {
+                          staticClass: "pa-0 mb-0 mt-2",
+                          attrs: {
+                            label: "Место проведения",
+                            solo: "",
+                            items: _vm.places,
+                            "item-text": "place_name",
+                            "item-value": "id"
+                          },
+                          model: {
+                            value: _vm.schedule[day_key]["Place"],
+                            callback: function($$v) {
+                              _vm.$set(_vm.schedule[day_key], "Place", $$v)
+                            },
+                            expression: "schedule[day_key]['Place']"
+                          }
+                        }),
+                        _vm._l(7, function(lesson_key, lesson_index) {
+                          return _c(
+                            "v-card",
+                            {
+                              key: lesson_index,
+                              staticClass: "pa-2",
+                              attrs: { width: "100%", outlined: "", tile: "" }
+                            },
+                            [
+                              _vm._v(_vm._s(lesson_key) + " пара"),
+                              _vm.checkbox[day_index][lesson_index]
+                                ? _c(
+                                    "v-card-title",
+                                    {
+                                      staticClass:
+                                        "pa-0 accent--text font-weight-light text-truncate"
+                                    },
+                                    [_vm._v("Числитель")]
+                                  )
+                                : _vm._e(),
+                              _c("v-autocomplete", {
+                                attrs: {
+                                  label: "Дисциплины",
+                                  items: _vm.discip,
+                                  "item-text": "discipline_name",
+                                  "small-chips": "",
+                                  chips: "",
+                                  multiple: ""
+                                },
+                                model: {
+                                  value:
+                                    _vm.schedule[day_key][lesson_key]["Lesson"],
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.schedule[day_key][lesson_key],
+                                      "Lesson",
+                                      $$v
+                                    )
+                                  },
+                                  expression:
+                                    "schedule[day_key][lesson_key]['Lesson']"
+                                }
+                              }),
+                              _c("v-autocomplete", {
+                                attrs: {
+                                  label: "Преподаватели",
+                                  items: _vm.teachers,
+                                  "item-text": "name",
+                                  "small-chips": "",
+                                  chips: "",
+                                  multiple: ""
+                                },
+                                model: {
+                                  value:
+                                    _vm.schedule[day_key][lesson_key][
+                                      "Teacher"
+                                    ],
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.schedule[day_key][lesson_key],
+                                      "Teacher",
+                                      $$v
+                                    )
+                                  },
+                                  expression:
+                                    "schedule[day_key][lesson_key]['Teacher']"
+                                }
+                              }),
+                              _c("v-switch", {
+                                attrs: {
+                                  color: "primary",
+                                  inset: "",
+                                  label: "Числитель/Знаменатель"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.changeCheckBox(
+                                      day_index,
+                                      lesson_index
+                                    )
+                                  }
+                                },
+                                model: {
+                                  value: _vm.checkbox[day_index][lesson_index],
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.checkbox[day_index],
+                                      lesson_index,
+                                      $$v
+                                    )
+                                  },
+                                  expression:
+                                    "checkbox[day_index][lesson_index]"
+                                }
+                              }),
+                              _vm.checkbox[day_index][lesson_index]
+                                ? _c(
+                                    "v-card-title",
+                                    {
+                                      staticClass:
+                                        "pa-0 accent--text font-weight-light text-truncate"
+                                    },
+                                    [_vm._v("Знаменатель")]
+                                  )
+                                : _vm._e(),
+                              _vm.checkbox[day_index][lesson_index]
+                                ? _c("v-autocomplete", {
+                                    attrs: {
+                                      label: "Дисциплины",
+                                      items: _vm.discip,
+                                      "item-text": "discipline_name",
+                                      "small-chips": "",
+                                      chips: "",
+                                      multiple: ""
+                                    },
+                                    model: {
+                                      value:
+                                        _vm.schedule[day_key][lesson_key][
+                                          "Lesson"
+                                        ],
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.schedule[day_key][lesson_key],
+                                          "Lesson",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "schedule[day_key][lesson_key]['Lesson']"
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm.checkbox[day_index][lesson_index]
+                                ? _c("v-autocomplete", {
+                                    attrs: {
+                                      label: "Преподаватели",
+                                      items: _vm.teachers,
+                                      "item-text": "name",
+                                      "small-chips": "",
+                                      chips: "",
+                                      multiple: ""
+                                    },
+                                    model: {
+                                      value:
+                                        _vm.schedule[day_key][lesson_key][
+                                          "Teacher"
+                                        ],
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.schedule[day_key][lesson_key],
+                                          "Teacher",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "schedule[day_key][lesson_key]['Teacher']"
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                )
+              })
             ],
-            1
+            2
+          ),
+          _c(
+            "v-btn",
+            {
+              staticClass: "mt-2 justify-center",
+              attrs: { color: "accent", block: "", dark: "" },
+              on: { click: _vm.sendQuery }
+            },
+            [_vm._v("Принять")]
           )
         ],
-        1
-      ),
-      _c(
-        "v-layout",
-        { staticClass: "row wrap" },
-        _vm._l(_vm.days, function(day_key, day_index) {
-          return _c(
-            "v-flex",
-            { key: day_index, staticClass: "sm12 md6 lg4 xl2" },
-            [
-              _c(
-                "v-card",
-                {
-                  staticClass: "pa-2 mx-auto",
-                  staticStyle: { display: "flex", "flex-direction": "column" },
-                  attrs: { "max-width": "268px", height: "100%", elevation: 0 }
-                },
-                [
-                  _c(
-                    "v-card-title",
-                    { staticClass: "primary-title pt-0 px-0" },
-                    [
-                      _vm._v(_vm._s(day_key) + " "),
-                      _c("v-card-subtitle", { staticClass: "px-0 pt-0" }, [
-                        _vm._v(
-                          "Место проведения: " +
-                            _vm._s(_vm.schedule[day_key].Place)
-                        )
-                      ]),
-                      _c("v-divider"),
-                      _vm._l(_vm.schedule[day_key], function(
-                        lesson,
-                        lesson_index
-                      ) {
-                        return lesson.Lesson != null
-                          ? _c(
-                              "v-container",
-                              {
-                                key: "l" + lesson_index,
-                                staticClass: "grid-list-xs pa-0"
-                              },
-                              [
-                                Array.isArray(lesson.Lesson) == false
-                                  ? _c(
-                                      "v-container",
-                                      { staticClass: "pa-0 ma-0" },
-                                      [
-                                        _c(
-                                          "v-card-title",
-                                          {
-                                            staticClass:
-                                              "pa-0 accent--text font-weight-light text-truncate"
-                                          },
-                                          [_vm._v(_vm._s(lesson.time) + " ")]
-                                        ),
-                                        _c(
-                                          "v-card-text",
-                                          {
-                                            staticClass: "pa-0 wrap text-black"
-                                          },
-                                          [_vm._v(_vm._s(lesson.Lesson) + " ")]
-                                        ),
-                                        _c(
-                                          "v-card-text",
-                                          {
-                                            staticClass:
-                                              "pa-0 pt-2 font-weight-light wrap caption"
-                                          },
-                                          [_vm._v(_vm._s(lesson.Teacher))]
-                                        ),
-                                        _c("v-divider", { staticClass: "ma-0" })
-                                      ],
-                                      1
-                                    )
-                                  : lesson.Lesson[_vm.isToday] != null
-                                  ? _c(
-                                      "v-container",
-                                      { staticClass: "pa-0 ma-0" },
-                                      [
-                                        _c(
-                                          "v-card-title",
-                                          {
-                                            staticClass:
-                                              "pa-0 accent--text font-weight-light text-truncate"
-                                          },
-                                          [_vm._v(_vm._s(lesson.time) + " ")]
-                                        ),
-                                        _c(
-                                          "v-container",
-                                          { staticClass: "pa-0 ma-0" },
-                                          [
-                                            Array.isArray(
-                                              lesson.Lesson[_vm.isToday]
-                                            ) == false
-                                              ? _c(
-                                                  "v-container",
-                                                  { staticClass: "pa-0 ma-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-text",
-                                                      {
-                                                        staticClass:
-                                                          "pa-0 wrap text-black"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            lesson.Lesson[
-                                                              _vm.isToday
-                                                            ]
-                                                          ) + " "
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _c(
-                                                      "v-card-text",
-                                                      {
-                                                        staticClass:
-                                                          "pa-0 pt-2 font-weight-light wrap caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            lesson.Teacher[
-                                                              _vm.isToday
-                                                            ]
-                                                          )
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              : _c(
-                                                  "v-container",
-                                                  { staticClass: "pa-0 ma-0" },
-                                                  [
-                                                    _c(
-                                                      "v-card-text",
-                                                      {
-                                                        staticClass:
-                                                          "pa-0 wrap text-black"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            lesson.Lesson[
-                                                              _vm.isToday
-                                                            ][0] ==
-                                                              lesson.Lesson[
-                                                                _vm.isToday
-                                                              ][1]
-                                                              ? lesson.Lesson[
-                                                                  _vm.isToday
-                                                                ][0]
-                                                              : lesson.Lesson[
-                                                                  _vm.isToday
-                                                                ][0] +
-                                                                  "," +
-                                                                  lesson.Lesson[
-                                                                    _vm.isToday
-                                                                  ][1]
-                                                          ) + " "
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _c(
-                                                      "v-card-text",
-                                                      {
-                                                        staticClass:
-                                                          "pa-0 pt-2 font-weight-light wrap caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            lesson.Teacher[
-                                                              _vm.isToday
-                                                            ][0] ==
-                                                              lesson.Teacher[
-                                                                _vm.isToday
-                                                              ][1]
-                                                              ? lesson.Teacher[
-                                                                  _vm.isToday
-                                                                ][0]
-                                                              : lesson.Teacher[
-                                                                  _vm.isToday
-                                                                ][0] +
-                                                                  "," +
-                                                                  lesson
-                                                                    .Teacher[
-                                                                    _vm.isToday
-                                                                  ][1]
-                                                          ) + " "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                            _c(
-                                              "v-container",
-                                              { staticClass: "pa-0 ma-0" },
-                                              [
-                                                _c("v-divider", {
-                                                  staticClass: "mt-2"
-                                                }),
-                                                lesson.Lesson[
-                                                  _vm.isToday == 0 ? 1 : 0
-                                                ] != null
-                                                  ? _c(
-                                                      "v-expansion-panels",
-                                                      {
-                                                        staticClass:
-                                                          "px-1 py-0",
-                                                        staticStyle: {
-                                                          "z-index": "initial"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "v-expansion-panel",
-                                                          {
-                                                            staticClass:
-                                                              "px-1 py-0"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "v-expansion-panel-header",
-                                                              {
-                                                                staticClass:
-                                                                  "px-1 py-0"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    _vm.isToday ==
-                                                                      0
-                                                                      ? "Знаменатель"
-                                                                      : "Числитель"
-                                                                  ) +
-                                                                    "                 "
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _c(
-                                                              "v-expansion-panel-content",
-                                                              {
-                                                                staticClass:
-                                                                  "px-0 mx-0"
-                                                              },
-                                                              [
-                                                                Array.isArray(
-                                                                  lesson.Lesson[
-                                                                    _vm.isToday ==
-                                                                    0
-                                                                      ? 1
-                                                                      : 0
-                                                                  ]
-                                                                ) == false
-                                                                  ? _c(
-                                                                      "v-container",
-                                                                      {
-                                                                        staticClass:
-                                                                          "pa-0 ma-0"
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "v-card-text",
-                                                                          {
-                                                                            staticClass:
-                                                                              "pa-0 wrap text-black"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                lesson
-                                                                                  .Lesson[
-                                                                                  _vm.isToday ==
-                                                                                  0
-                                                                                    ? 1
-                                                                                    : 0
-                                                                                ]
-                                                                              )
-                                                                            )
-                                                                          ]
-                                                                        ),
-                                                                        _c(
-                                                                          "v-card-text",
-                                                                          {
-                                                                            staticClass:
-                                                                              "pa-0 pt-2 font-weight-light wrap caption"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                lesson
-                                                                                  .Teacher[
-                                                                                  _vm.isToday ==
-                                                                                  0
-                                                                                    ? 1
-                                                                                    : 0
-                                                                                ]
-                                                                              )
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    )
-                                                                  : _c(
-                                                                      "v-container",
-                                                                      {
-                                                                        staticClass:
-                                                                          "pa-0 ma-0"
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "v-card-text",
-                                                                          {
-                                                                            staticClass:
-                                                                              "pa-0 wrap text-black"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                lesson
-                                                                                  .Lesson[
-                                                                                  _vm.isToday ==
-                                                                                  0
-                                                                                    ? 1
-                                                                                    : 0
-                                                                                ][0] ==
-                                                                                  lesson
-                                                                                    .Lesson[
-                                                                                    _vm.isToday ==
-                                                                                    0
-                                                                                      ? 1
-                                                                                      : 0
-                                                                                  ][1]
-                                                                                  ? lesson
-                                                                                      .Lesson[
-                                                                                      _vm.isToday ==
-                                                                                      0
-                                                                                        ? 1
-                                                                                        : 0
-                                                                                    ][0]
-                                                                                  : lesson
-                                                                                      .Lesson[
-                                                                                      _vm.isToday ==
-                                                                                      0
-                                                                                        ? 1
-                                                                                        : 0
-                                                                                    ][0] +
-                                                                                      "," +
-                                                                                      lesson
-                                                                                        .Lesson[
-                                                                                        _vm.isToday ==
-                                                                                        0
-                                                                                          ? 1
-                                                                                          : 0
-                                                                                      ][1]
-                                                                              ) +
-                                                                                " "
-                                                                            )
-                                                                          ]
-                                                                        ),
-                                                                        _c(
-                                                                          "v-card-text",
-                                                                          {
-                                                                            staticClass:
-                                                                              "pa-0 pt-2 font-weight-light wrap caption"
-                                                                          },
-                                                                          [
-                                                                            _vm._v(
-                                                                              _vm._s(
-                                                                                lesson
-                                                                                  .Teacher[
-                                                                                  _vm.isToday ==
-                                                                                  0
-                                                                                    ? 1
-                                                                                    : 0
-                                                                                ][0] ==
-                                                                                  lesson
-                                                                                    .Teacher[
-                                                                                    _vm.isToday ==
-                                                                                    0
-                                                                                      ? 1
-                                                                                      : 0
-                                                                                  ][1]
-                                                                                  ? lesson
-                                                                                      .Teacher[
-                                                                                      _vm.isToday ==
-                                                                                      0
-                                                                                        ? 1
-                                                                                        : 0
-                                                                                    ][0]
-                                                                                  : lesson
-                                                                                      .Teacher[
-                                                                                      _vm.isToday ==
-                                                                                      0
-                                                                                        ? 1
-                                                                                        : 0
-                                                                                    ][0] +
-                                                                                      "," +
-                                                                                      lesson
-                                                                                        .Teacher[
-                                                                                        _vm.isToday ==
-                                                                                        0
-                                                                                          ? 1
-                                                                                          : 0
-                                                                                      ][1]
-                                                                              ) +
-                                                                                " "
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  : _vm._e(),
-                                                lesson.Lesson[
-                                                  _vm.isToday == 0 ? 1 : 0
-                                                ] != null
-                                                  ? _c("v-divider", {
-                                                      staticClass: "ma-0"
-                                                    })
-                                                  : _vm._e()
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e()
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      })
-                    ],
-                    2
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        }),
         1
       )
     ],
@@ -61660,6 +62132,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/files.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/files.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getFiles: function getFiles() {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/get_files');
+  },
+  getFile: function getFile(name) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/get_file", {
+      params: {
+        "name": name
+      }
+    });
+  },
+  saveFile: function saveFile(file) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save_file', {
+      "file": file.file
+    });
+  },
+  deleteFile: function deleteFile(file) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/delete_file', {
+      "id": file.id
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/group.js":
 /*!***********************************!*\
   !*** ./resources/js/api/group.js ***!
@@ -61722,6 +62231,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   getSchedule: function getSchedule(credentials) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/get_schedule_by_group_id', {
+      params: {
+        "group_id": credentials
+      }
+    });
+  },
+  getBildSchedule: function getBildSchedule(credentials) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/get_bild_schedule_by_group_id', {
       params: {
         "group_id": credentials
       }
@@ -61813,17 +62329,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_information_page_f_SpecialtiesList__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/information-page-f/SpecialtiesList */ "./resources/js/components/information-page-f/SpecialtiesList.vue");
 /* harmony import */ var _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/administrator-f/PanelControl */ "./resources/js/components/administrator-f/PanelControl.vue");
 /* harmony import */ var _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/administrator-f/UserManagement */ "./resources/js/components/administrator-f/UserManagement.vue");
-/* harmony import */ var _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/additional-education-f/Retraining */ "./resources/js/components/additional-education-f/Retraining.vue");
-/* harmony import */ var _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/additional-education-f/DetailedInformationRetraining */ "./resources/js/components/additional-education-f/DetailedInformationRetraining.vue");
-/* harmony import */ var _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/journal-f/Journal */ "./resources/js/components/journal-f/Journal.vue");
-/* harmony import */ var _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/timetable-f/Timetable */ "./resources/js/components/timetable-f/Timetable.vue");
-/* harmony import */ var _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/timetable-f/Bild_Timetable */ "./resources/js/components/timetable-f/Bild_Timetable.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
-/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
-/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _components_administrator_f_FileManagement__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/administrator-f/FileManagement */ "./resources/js/components/administrator-f/FileManagement.vue");
+/* harmony import */ var _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/additional-education-f/Retraining */ "./resources/js/components/additional-education-f/Retraining.vue");
+/* harmony import */ var _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/additional-education-f/DetailedInformationRetraining */ "./resources/js/components/additional-education-f/DetailedInformationRetraining.vue");
+/* harmony import */ var _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/journal-f/Journal */ "./resources/js/components/journal-f/Journal.vue");
+/* harmony import */ var _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/timetable-f/Timetable */ "./resources/js/components/timetable-f/Timetable.vue");
+/* harmony import */ var _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/timetable-f/Bild_Timetable */ "./resources/js/components/timetable-f/Bild_Timetable.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _store_action_types__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/action-types */ "./resources/js/store/action-types.js");
+/* harmony import */ var _store_mutation_types__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/mutation-types */ "./resources/js/store/mutation-types.js");
+/* harmony import */ var _vuetify__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./vuetify */ "./resources/js/vuetify.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -61889,6 +62406,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 
 
+
  // ! --------------------------------------------------------------------------------------------
 
 /**
@@ -61922,15 +62440,15 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 if (window.user) {
-  _store__WEBPACK_IMPORTED_MODULE_21__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_23__["USER"], user);
-  _store__WEBPACK_IMPORTED_MODULE_21__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_23__["LOGGED"], true);
+  _store__WEBPACK_IMPORTED_MODULE_22__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_24__["USER"], user);
+  _store__WEBPACK_IMPORTED_MODULE_22__["default"].commit(_store_mutation_types__WEBPACK_IMPORTED_MODULE_24__["LOGGED"], true);
 }
 
 new Vue({
   el: '#app',
-  store: _store__WEBPACK_IMPORTED_MODULE_21__["default"],
-  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_24__["default"],
-  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_26__["default"]],
+  store: _store__WEBPACK_IMPORTED_MODULE_22__["default"],
+  vuetify: _vuetify__WEBPACK_IMPORTED_MODULE_25__["default"],
+  mixins: [_components_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_27__["default"]],
   components: {
     'c-login-button': _components_authentication_f_LoginButton__WEBPACK_IMPORTED_MODULE_0__["default"],
     'c-remember-password': _components_authentication_f_RememberPassword__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -61948,16 +62466,17 @@ new Vue({
     'c-panel-control': _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_14__["default"],
     // ! ПРОВЕРИТЬ
     'c-call-schedule': _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_12__["default"],
-    'c-retraining': _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_16__["default"],
+    'c-retraining': _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_17__["default"],
     'c-user-management': _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_15__["default"],
-    // ! ПОМЕНЯТЬ РОЛЬ НА КОМБОБОКС
+    // Изменена роль на комбобокс
+    'c-file-management': _components_administrator_f_FileManagement__WEBPACK_IMPORTED_MODULE_16__["default"],
     'c-notifications': _components_notifications_f_Notifications__WEBPACK_IMPORTED_MODULE_8__["default"],
-    'c-journal': _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_18__["default"],
+    'c-journal': _components_journal_f_Journal__WEBPACK_IMPORTED_MODULE_19__["default"],
     //-
-    'c-detailed-inf-ret': _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_17__["default"],
+    'c-detailed-inf-ret': _components_additional_education_f_DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_18__["default"],
     // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
-    'c-timetable': _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_19__["default"],
-    'c-bildtimetable': _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_20__["default"],
+    'c-timetable': _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_20__["default"],
+    'c-bildtimetable': _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_21__["default"],
     'c-download-button': _components_buttons_f_DownloadButton__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
   data: function data() {
@@ -61970,7 +62489,7 @@ new Vue({
       updatingUser: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_25__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_26__["mapGetters"])({
     user: 'user'
   }), {
     items: function items() {
@@ -62023,6 +62542,10 @@ new Vue({
               icon: 'edit',
               text: 'Управление пользователями',
               href: '/usermanagement'
+            }, {
+              icon: 'edit',
+              text: 'Управление файлами',
+              href: '/filemanagement'
             }, {
               icon: 'feedback',
               text: 'Обращение пользователей',
@@ -62192,7 +62715,7 @@ new Vue({
       var _this = this;
 
       this.updatingUser = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_22__["UPDATE_USER"], this.user).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_23__["UPDATE_USER"], this.user).then(function (response) {
         _this.showMessage('Изменения сохранены!');
       })["catch"](function (error) {
         console.dir(error);
@@ -62219,7 +62742,7 @@ new Vue({
       var _this2 = this;
 
       this.logoutLoading = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_22__["LOGOUT"]).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_23__["LOGOUT"]).then(function (response) {
         window.location = '/';
       })["catch"](function (error) {
         console.log(error);
@@ -62240,7 +62763,7 @@ new Vue({
       var _this3 = this;
 
       this.changingPassword = true;
-      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_22__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
+      this.$store.dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_23__["REMEMBER_PASSWORD"], this.user.email).then(function (response) {
         _this3.showMessage("Email sent to change password");
       })["catch"](function (error) {
         console.dir(error);
@@ -62333,6 +62856,12 @@ var map = {
 	],
 	"./additional-education-f/components/Com_Ret.vue": [
 		"./resources/js/components/additional-education-f/components/Com_Ret.vue"
+	],
+	"./administrator-f/FileManagement": [
+		"./resources/js/components/administrator-f/FileManagement.vue"
+	],
+	"./administrator-f/FileManagement.vue": [
+		"./resources/js/components/administrator-f/FileManagement.vue"
 	],
 	"./administrator-f/PanelControl": [
 		"./resources/js/components/administrator-f/PanelControl.vue"
@@ -62804,6 +63333,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Com_Ret_vue_vue_type_template_id_510e3da3_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Com_Ret_vue_vue_type_template_id_510e3da3_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/administrator-f/FileManagement.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/administrator-f/FileManagement.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FileManagement_vue_vue_type_template_id_f4bca05a_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug& */ "./resources/js/components/administrator-f/FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug&");
+/* harmony import */ var _FileManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FileManagement.vue?vue&type=script&lang=js& */ "./resources/js/components/administrator-f/FileManagement.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FileManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FileManagement_vue_vue_type_template_id_f4bca05a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FileManagement_vue_vue_type_template_id_f4bca05a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/administrator-f/FileManagement.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/administrator-f/FileManagement.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/administrator-f/FileManagement.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FileManagement.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/FileManagement.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/administrator-f/FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/administrator-f/FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagement_vue_vue_type_template_id_f4bca05a_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/pug-plain-loader!../../../../node_modules/vue-loader/lib??vue-loader-options!./FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/FileManagement.vue?vue&type=template&id=f4bca05a&lang=pug&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagement_vue_vue_type_template_id_f4bca05a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagement_vue_vue_type_template_id_f4bca05a_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
