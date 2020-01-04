@@ -5,41 +5,44 @@
         v-combobox.ma-1(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
     v-card-title.primary-title.pt-0.px-0.ml-4
         v-chip.pa-2.ml-4(label) 
-          v-card-title.pa-0.accent--text.font-weight-light.text-truncate.title {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
+          v-card-title.pa-0.accent--text.font-weight-light.text-truncate.title Неделя {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
     v-layout.row.wrap
       v-flex.ma-2(v-for="(day_key,day_index) in days" :key="day_index")
-        v-card.pa-2.mx-auto(max-width="265px" style="display: flex; flex-direction: column;" height="100%" :elevation="0" )
-          v-card-title.primary-title.pt-0.px-0 {{day_key}} 
-            v-card-subtitle.px-0.pt-0 Место проведения: {{schedule[day_key].Place}}
-            v-divider
-            v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule[day_key]" :key="'l'+lesson_index" v-if="lesson.Lesson != null")
-                v-container.pa-0.ma-0(v-if="Array.isArray(lesson.Lesson) == false")
-                    v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
-                    v-card-text.pa-0.wrap.text-black {{lesson.Lesson}} 
-                    v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.Teacher }}
-                    v-divider.ma-0
-                v-container.pa-0.ma-0(v-else-if="lesson.Lesson[isToday] != null")
-                    v-card-title.pa-0.accent--text.font-weight-light.text-truncate() {{ lesson.time }} 
-                    v-container.pa-0.ma-0
-                        v-container.pa-0.ma-0(v-if="Array.isArray(lesson.Lesson[isToday])==false")
-                            v-card-text.pa-0.wrap.text-black {{ lesson.Lesson[isToday]}} 
-                            v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.Teacher[isToday] }}
-                        v-container.pa-0.ma-0(v-else)
-                            v-card-text.pa-0.wrap.text-black {{ lesson.Lesson[isToday][0] == lesson.Lesson[isToday][1] ? (lesson.Lesson[isToday][0]) : (lesson.Lesson[isToday][0] + ',' + lesson.Lesson[isToday][1])  }} 
-                            v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.Teacher[isToday][0] == lesson.Teacher[isToday][1] ? (lesson.Teacher[isToday][0]) : (lesson.Teacher[isToday][0] + ',' + lesson.Teacher[isToday][1])  }} 
-                        v-container.pa-0.ma-0
-                            v-divider.mt-2
-                            v-expansion-panels.px-1.py-0(v-if="lesson.Lesson[isToday == 0 ?  1 : 0] != null" style="z-index: initial;")                    
-                                v-expansion-panel.px-1.py-0
-                                    v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
-                                    v-expansion-panel-content.px-0.mx-0
-                                            v-container.pa-0.ma-0(v-if="Array.isArray(lesson.Lesson[isToday == 0 ?  1 : 0])==false")
-                                                v-card-text.pa-0.wrap.text-black {{ lesson.Lesson[isToday == 0 ?  1 : 0]}} 
-                                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.Teacher[isToday == 0 ?  1 : 0] }}
-                                            v-container.pa-0.ma-0(v-else)
-                                                v-card-text.pa-0.wrap.text-black {{ lesson.Lesson[isToday == 0 ?  1 : 0][0] == lesson.Lesson[isToday == 0 ?  1 : 0][1] ? (lesson.Lesson[isToday == 0 ?  1 : 0][0]) : (lesson.Lesson[isToday == 0 ?  1 : 0][0] + ',' + lesson.Lesson[isToday == 0 ?  1 : 0][1])  }} 
-                                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.Teacher[isToday == 0 ?  1 : 0][0] == lesson.Teacher[isToday == 0 ?  1 : 0][1] ? (lesson.Teacher[isToday == 0 ?  1 : 0][0]) : (lesson.Teacher[isToday == 0 ?  1 : 0][0] + ',' + lesson.Teacher[isToday == 0 ?  1 : 0][1])  }} 
-                            v-divider.ma-0(v-if="lesson.Lesson[isToday == 0 ?  1 : 0] != null")
+        v-hover(v-slot:default='{ hover }')
+          v-card.pa-2.pb-0.mx-auto(:elevation='hover ? 12 : 6' max-width="265px" style="display: flex; flex-direction: column;")
+            v-card-title.primary-title.pt-0.px-0.pb-0 {{day_key}} 
+              v-card-subtitle.px-0.pt-0 Место проведения: {{schedule[day_key].Place}}
+              v-divider.ma-1
+              v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule[day_key]" :key="'l'+lesson_index")
+                  v-container.pa-0.ma-0(v-if="lesson.chisl == false") <!--Прорисовка обычной пары-->
+                    v-container.pa-0.ma-0(v-if="lesson.LessonChisl != null")
+                      v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                      v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
+                      v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                  v-container.pa-0.ma-0(v-else) <!--Прорисовка числителя/знаменателя-->
+                    v-container.pa-0.ma-0(v-if="isToday == 0")
+                      v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                      v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
+                      v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                      v-divider.ma-0(v-if="lesson.LessonZnam!= null")
+                      v-expansion-panels.px-1.py-0(v-if="lesson.LessonZnam!= null" style="z-index: initial;")                    
+                        v-expansion-panel.px-1.py-0
+                            v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
+                            v-expansion-panel-content.px-0.mx-0
+                              v-card-text.pa-0.wrap.text-black {{ lesson.LessonZnam }} 
+                              v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
+                      v-divider.ma-0(v-if="lesson.LessonZnam!= null")
+                    v-container.pa-0.ma-0(v-else)
+                      v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                      v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam}} 
+                      v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
+                      v-expansion-panels.px-1.py-0(v-if="lesson.LessonChisl!= null" style="z-index: initial;")                    
+                        v-expansion-panel.px-1.py-0
+                            v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
+                            v-expansion-panel-content.px-0.mx-0
+                              v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl }} 
+                              v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                      v-divider.ma-0
 </template>
 
 <style scoped>
@@ -102,10 +105,37 @@ export default {
         .getSchedule(this.groups_info.selected_group.id)
         .then(res => {
           this.schedule = res.data.schedule;
+          this.parseSchedule();
         })
         .catch(ex => {
           console.log(ex);
         });
+    },
+    parseSchedule()
+    {
+      var tag = 0;
+      for(var i = 0; i < this.days.length; i++)
+      {
+        for(var j = 1; j <= 7; j++)
+        {
+          if(Array.isArray(this.schedule[this.days[i]][j]['LessonChisl'])) 
+            this.schedule[this.days[i]][j]['LessonChisl'] = this.schedule[this.days[i]][j]['LessonChisl'].join(' / ');
+          if(Array.isArray(this.schedule[this.days[i]][j]['LessonZnam'])) 
+            this.schedule[this.days[i]][j]['LessonZnam'] = this.schedule[this.days[i]][j]['LessonZnam'].join(' / ');
+          if(Array.isArray(this.schedule[this.days[i]][j]['TeacherChisl'])) 
+            this.schedule[this.days[i]][j]['TeacherChisl'] = this.schedule[this.days[i]][j]['TeacherChisl'].join(' / ');
+          if(Array.isArray(this.schedule[this.days[i]][j]['TeacherZnam'])) 
+            this.schedule[this.days[i]][j]['TeacherZnam'] = this.schedule[this.days[i]][j]['TeacherZnam'].join(' / ');
+          if(this.schedule[this.days[i]][j]['LessonChisl'] == null && this.schedule[this.days[i]][j]['LessonZnam'] == null)
+            tag++;
+          if(tag >= 7)
+          {
+            this.schedule[this.days[i]][1]['LessonChisl'] = "Домашнее обучение";
+            this.schedule[this.days[i]][1]['time'] = "Весь день";
+          }
+        }
+        tag = 0;
+      }
     }
   },
   beforeMount() {
@@ -113,7 +143,7 @@ export default {
     this.departaments_info = JSON.parse(this._departaments_info);
     this.schedule = this._schedule;
     this.isToday = 0;
-    console.log(this.isChisl());
+    this.parseSchedule();
   }
 };
 </script>

@@ -47,7 +47,7 @@
             v-btn(color="primary" @click="initialize(true)") Обновить
         v-layout.row.text-center.pa-2.ma-2
           v-pagination(v-model="page" :length="pageCount")
-          v-text-field(:value="itemsPerPage" label="Количество отображаемых обращений" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
+          v-text-field(:value="itemsPerPage" label="Количество отображаемых записей" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
 </template>
 
 <script>

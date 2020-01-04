@@ -9,6 +9,16 @@ export default {
     })
   },
 
+  getScheduleByDay(credentials) {
+    console.log(credentials);
+    return axios.get('/get_schedule_by_day', {
+      params: {
+        "group_id": credentials.group_id,
+        "day": credentials.day
+      }
+    })
+  },
+
   getBildSchedule(credentials) {
     return axios.get('/get_bild_schedule_by_group_id', {
       params: {

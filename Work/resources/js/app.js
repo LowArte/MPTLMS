@@ -84,7 +84,9 @@ import DetailedInformationRetrainign_C from './components/additional-education-f
  */
 import Journal_C from './components/journal-f/Journal'
 import Timetable_C from './components/timetable-f/Timetable'
-import BildTimetable_C from './components/timetable-f/Bild_Timetable'
+import Bild_Timetable_C from './components/timetable-f/Bild_Timetable'
+import Replacements_C from './components/replacements-f/Replacements'
+import Bild_Replacements_C from './components/replacements-f/Bild_Replacements'
 
 //import vuetif from './plugins/vuetify'
 
@@ -136,9 +138,10 @@ new Vue({
     'c-journal': Journal_C, //-
     'c-detailed-inf-ret': DetailedInformationRetrainign_C, // ! ДОПИСАТЬ ПОДХВАТ ДАННЫХ
     'c-timetable': Timetable_C,
-    'c-bildtimetable': BildTimetable_C,
-    'c-download-button' : Downloadbutton_C
-    
+    'c-bildtimetable': Bild_Timetable_C,
+    'c-download-button' : Downloadbutton_C,
+    'c-replacements' : Replacements_C,
+    'c-bild-replacements' : Bild_Replacements_C
   },
   data: () => ({
     drawer: null,
@@ -188,11 +191,16 @@ new Vue({
               text: 'Конструктор расписания',
               href: '/bildtimetable'
             },
-            // {
-            //   icon: 'today',
-            //   text: 'Замены',
-            //   href: '/conreplacements'
-            // },
+            {
+              icon: 'find_replace',
+              text: 'Замены',
+              href: '/replacements'
+            },
+            {
+              icon: 'find_replace',
+              text: 'Конструктор замен',
+              href: '/bildreplacements'
+            }, 
             {
               icon: 'today',
               text: 'Расписание звонков',
@@ -333,11 +341,11 @@ new Vue({
               text: 'Конструктор расписания',
               href: '/bildtimetable'
             },
-            // {
-            //   icon: 'home',
-            //   text: 'Замены',
-            //   href: '/conreplacements'
-            // },         
+            {
+              icon: 'find_replace',
+              text: 'Замены',
+              href: '/replacements'
+            },         
             {
               icon: 'feedback',
               text: 'Обратная связь',

@@ -13,13 +13,13 @@
               v-select.pa-0.mb-0.mt-2(v-model="schedule[day_key]['Place']" label="Место проведения" solo :items="places" item-text="place_name" item-value="id")
               v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
                 v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
-                v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="checkbox[day_index][lesson_index]") Числитель
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['Lesson']" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['Teacher']" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
-                v-switch(v-model="checkbox[day_index][lesson_index]" color="primary" inset label="Числитель/Знаменатель" @change="changeCheckBox(day_index, lesson_index)")
-                v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="checkbox[day_index][lesson_index]") Знаменатель
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['Lesson']" v-if="checkbox[day_index][lesson_index]" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['Teacher']" v-if="checkbox[day_index][lesson_index]" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
+                v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Числитель
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
+                v-switch(v-model="schedule[day_key][lesson_key].chisl" color="primary" inset label="Числитель/Знаменатель")
+                v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Знаменатель
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
         v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
@@ -42,7 +42,6 @@ export default {
       places: null, //Места проведения
       teachers: null, //Преподаватели
       discip: null, //Дисциплины
-      checkbox: [], //Чек боксы для числителя знаменателя
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     };
   },
@@ -95,12 +94,6 @@ export default {
           console.log(ex);
         });
     },
-    changeCheckBox(day, lesson){
-      if(!this.checkbox[day][lesson])
-      {
-        //this.schedule[day][lesson] = [];
-      }
-    },
     sendQuery(){
       schedule_api
         .saveSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule})
@@ -121,14 +114,6 @@ export default {
     this.places = JSON.parse(this._places);
     this.teachers = JSON.parse(this._teachers);
     this.discip = JSON.parse(this._discip);
-    for(var i = 0; i < 6; i++)
-    {
-      this.checkbox.push([]);
-      for(var j = 0; j < 7; j++)
-      {
-        this.checkbox[i].push(false);
-      }  
-    }
   }
 };
 </script>

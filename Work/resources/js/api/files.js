@@ -10,6 +10,7 @@ export default {
   },
 
   saveFile(file) {
+    console.log(file.file);
     return axios.post('/save_file', {
       "file": file.file
     })

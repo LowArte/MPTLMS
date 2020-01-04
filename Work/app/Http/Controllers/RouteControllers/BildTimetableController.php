@@ -44,7 +44,7 @@ class BildTimetableController extends Controller
 
     private function get_schedule($group_id)
     {
-        $schedule =json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
+        $schedule = json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
         return $schedule;
     }
 

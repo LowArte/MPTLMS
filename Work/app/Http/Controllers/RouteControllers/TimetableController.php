@@ -10,14 +10,15 @@ use App\Models\Group;
 use App\Models\Places;
 use App\Models\Schedule;
 use App\Models\Student;
+use Debugbar;
 use Illuminate\Support\Facades\Auth;
 
 
 class TimetableController extends Controller
 {
-
-    private function get_schedule($group_id){
-        $schedule =json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
+    private function get_schedule($group_id)
+    {
+        $schedule = json_decode(Schedule::where("group_id",$group_id)->first()->schedule);
         foreach ((array)$schedule as $days => $row) {
             $place = Places::where("id", $schedule->{$days}->Place)->first();
             $time = json_decode(CallSchedule::where("place_id",$place->id)->first()->call_schedule);
@@ -51,6 +52,14 @@ class TimetableController extends Controller
         $schedule = $this->get_schedule($request["group_id"]);
         return response()->json(array(
             "schedule"=>$schedule
+        ));
+    }
+
+    public function scheduleByDay(Request $request)
+    {
+        $schedule = (array)$this->get_schedule($request["group_id"]);
+        return response()->json(array(
+            "schedule"=>$schedule[$request["day"]]
         ));
     }
 
