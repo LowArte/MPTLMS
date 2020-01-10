@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Modifications\Update;
+
+use App\Models\User as Model;
+use App\Modifications\BaseModification;
+
+class UpdateUserModification extends BaseModification
+{
+    protected function getModelClass(){
+        return Model::class;
+    }
+
+    public function updateUserInDatabase($id,$data){
+        $user = $this->startCondition()->select('id')->where('email',$data['email'])->toBase()->first();
+        if($user){
+            return false;
+        }
+
+        $user = $this->startCondition()->find($id);
+        $user->fill($data);
+        $user->save();
+        return true;
+    }
+}

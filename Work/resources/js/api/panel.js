@@ -2,6 +2,6 @@ import axios from 'axios'
 
 export default {
   setOptionValue (credentials) {
-    return axios.post('/set_options', {"prop_name":credentials.prop,'value':credentials.value})
+    return axios.post('/admin/set_options', {"id":credentials.id,'value':String(credentials.value)})
   }
 }

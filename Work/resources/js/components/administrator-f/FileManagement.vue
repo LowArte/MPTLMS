@@ -47,11 +47,10 @@
             v-btn(color="primary" @click="initialize(true)") Обновить
         v-layout.row.text-center.pa-2.ma-2
           v-pagination(v-model="page" :length="pageCount")
-          v-text-field(:value="itemsPerPage" label="Количество отображаемых записей" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
 </template>
 
 <script>
-import apifiles from "../../api/files"; //api для Файлов
+// import apifiles from "../../api/files"; //api для Файлов
 import { mask } from "vue-the-mask"; //маски vue
 import FileDownload  from "js-file-download"; //Требуется для скачивания файла
 

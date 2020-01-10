@@ -14,7 +14,7 @@ class SiteOptionsSeeder extends Seeder
         $date = array(
             [
                 "option_name"=>"isProfilacticServer",
-                "option_value"=>false
+                "option_value"=>"false"
             ],
         );
         DB::table("site_options")->insert($date);

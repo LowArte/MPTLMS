@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\SiteOptions;
+use App\Repositories\SiteOptionsRepository;
 use Closure;
 
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,10 @@ class CheckProfilactic
      */
     public function handle($request, Closure $next)
     {
-        $options = SiteOptions::where('option_name','isProfilacticServer')->first();
-        $user = Auth::user();
-        if($options['option_value']==1 && $user['post_id']!=1)
+        $siteOptionsRepository = app(SiteOptionsRepository::class);
+        $options = $siteOptionsRepository->getIsProfilactic();
+        $user = auth()->user();
+        if($options && $user['post_id']!=1)
         {
             return redirect('/');
         }

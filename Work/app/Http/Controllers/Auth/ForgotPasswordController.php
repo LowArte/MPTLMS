@@ -4,13 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Debugbar;
 
-/**
- * Class ForgotPasswordController.
- *
- * @package App\Http\Controllers\Auth
- */
 class ForgotPasswordController extends Controller
 {
     /*
@@ -24,23 +18,9 @@ class ForgotPasswordController extends Controller
     |
     */
 
-    use SendsPasswordResetEmails;
-
-    /**
-     * Display the form to request a password reset link.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLinkRequestForm()
-    {
-        $panel_array = array(
-            array(
-                "header"  => "Подробная информация",
-                "content" => "information-page-f/DrivingSchool",
-                "props"   => array()
-            )
-        );
-        return view('welcome', ["panel_array" => json_encode($panel_array),'action' => 'request_new_password']);
+    public function redirectTo(){
+        return "";
     }
 
+    use SendsPasswordResetEmails;
 }

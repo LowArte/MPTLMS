@@ -51,11 +51,10 @@
             v-btn(color="primary" @click="initialize(true)") Обновить
         v-layout.row.text-center.pa-2.ma-2
           v-pagination(v-model="page" :length="pageCount")
-          v-text-field(:value="itemsPerPage" label="Количество отображаемых учётных записей" v-mask="mask" @input="itemsPerPage = parseIntLoc($event)")  
 </template>
 
 <script>
-import apiuser from "../../api/users"; //api для пользователей
+// import apiuser from "../../api/users"; //api для пользователей
 import { mask } from "vue-the-mask"; //маски vue
 
 export default {
@@ -63,22 +62,20 @@ export default {
     mask
   },
   data: () => ({
-    listusers: [], //Массив
-    arrusersposts: [], //Массив постов
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых пользователей
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
-    adisabled: [{id: 0, name: "Свободен"}, {id: 1, name: "Заблокирован"}],
+    adisabled: [{ id: 0, name: "Свободен" }, { id: 1, name: "Заблокирован" }],
     headers: [
       {
         text: "№",
         align: "left",
         value: "id"
       },
-      { text: "Почта", value: "email", },
+      { text: "Почта", value: "email" },
       { text: "Роль", value: "post" },
       { text: "Блокировка", value: "text-disabled" },
       { text: "Действия", value: "action", sortable: false }
@@ -92,27 +89,19 @@ export default {
       email: "",
       password: "",
       post_id: "",
-      disabled: "",
+      disabled: ""
     } //Массив с данным для сохранения в бд
   }),
   props: {
-    users: {
-      data: String,
+    _listusers: {
+      data: Array,
       default: null
     }, //JSON пользователей
-    usersposts: {
-      data: String,
+    _arrusersposts: {
+      type: Array,
       default: null
-    } //JSON ролей пользователей
+    }
   },
-  //Получаем данные при старте
-  mounted() {
-    this.listusers = JSON.parse(this.users);
-    this.arrusersposts = JSON.parse(this.usersposts);
-    for(var i = 0; i < this.listusers.length; i++)
-      this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
-  },
-
   computed: {
     //Получение названия диалога
     formTitle() {
@@ -121,57 +110,45 @@ export default {
         : "Редактировать пользователя";
     }
   },
-
   methods: {
     //Иницилизации данных
-    initialize(){
-      apiuser
-        .getUsers()
-        .then(res => {
-          this.listusers = JSON.parse(res.data.users);
-          this.arrposts = JSON.parse(res.data.usersposts);
-          for(var i = 0; i < this.listusers.length; i++)
-            this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
-        })
-        .catch(ex => {
-          console.log(ex);
-        });
-    },
+
     //Редактирование учётной записи
-    editItem(item) 
-    {
-      this.editedIndex = this.listusers.indexOf(item);
+    editItem(item) {
+      this.editedIndex = this._listusers.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     //Удаление учётной записи
-    deleteItem(item) 
-    {
+    deleteItem(item) {
       confirm("Вы действительно хотите удалить данного пользователя?") &&
-      apiuser
-        .deleteUser({id: item.id})
-        .then(res => {
-          alert("Удалён!");
-          this.initialize();
-        })
-        .catch(ex => {
-          console.log(ex);
-        });
+        apiuser
+          .deleteUser({ id: item.id })
+          .then(res => {
+            alert("Удалён!");
+            this.initialize();
+          })
+          .catch(ex => {
+            console.log(ex);
+          });
     },
     //Закрытие диалога
     close() {
       this.dialog = false;
       setTimeout(() => {
-        this.editedItem = Object.assign({}, {
-          id: "",
-          secName: "",
-          name: "",
-          thirdName: "",
-          email: "",
-          password: "",
-          post_id: "",
-          disabled: "",
-        });
+        this.editedItem = Object.assign(
+          {},
+          {
+            id: "",
+            secName: "",
+            name: "",
+            thirdName: "",
+            email: "",
+            password: "",
+            post_id: "",
+            disabled: ""
+          }
+        );
         this.editedIndex = -1;
       }, 300);
     },
@@ -184,9 +161,8 @@ export default {
           user: this.editedItem
         })
         .then(res => {
-          switch(res.data.success)
-          {
-            case 'erroremail':
+          switch (res.data.success) {
+            case "erroremail":
               alert("Почта уже используется!");
               break;
             case true:
@@ -203,8 +179,7 @@ export default {
     },
 
     parseIntLoc(val) {
-      if (val == "" || val == null || val == "0")
-        return 1;
+      if (val == "" || val == null || val == "0") return 1;
       return parseInt(val);
     }
   }

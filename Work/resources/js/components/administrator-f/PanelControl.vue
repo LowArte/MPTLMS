@@ -8,7 +8,7 @@
               v-card-text.my-2.ma-0.pa-0.text-center.title Панель управления
             v-divider
             v-row.pa-2.ma-0
-              v-checkbox(v-model='options.prof' :label='`Режим профилактики`')
+              v-switch(v-model='options.option_value'  label='Режим профилактики')
             v-btn.ma-2(color='accent' dark='' @click='sendQuery') Применить
 </template>
 
@@ -16,42 +16,37 @@
 import panelApi from "../../api/panel";
 
 export default {
-  data: () => ({
-    options: {
-      prof: false
+  data:()=>{
+    return {
+      options:null
     }
-  }),
-  components: {},
+  },
   props: {
     _options: {
-      data: String,
+      data: Object,
       default: null
     }
   },
-  mounted() {
-    this.options = JSON.parse(this._options);
-    console.log(this.options);
+  beforeMount() {
+    this.options = this._options
+    console.log(this.options)
+    this.options.option_value = this.options.option_value == "true"
+        console.log(this.options)
   },
   methods: {
     sendQuery() {
-      Object.keys(this.options).forEach(element => {
-        switch (element) {
-          case "prof": {
-            panelApi
-              .setOptionValue({
-                prop: "isProfilacticServer",
-                value: this.options[element]
-              })
-              .then(res => {
-                console.log(res);
-              })
-              .catch(ex => {
-                console.log(ex);
-              });
-            break;
-          }
-        }
-      });
+      console.log(this.options.option_value)
+      panelApi
+        .setOptionValue({
+          id: this.options.id,
+          value: this.options.option_value
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(ex => {
+          console.log(ex);
+        });
     }
   }
 };

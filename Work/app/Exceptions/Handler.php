@@ -2,13 +2,11 @@
 
 namespace App\Exceptions;
 
-use Bkwld\LaravelPug\ExceptionHandlerTrait;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-    use ExceptionHandlerTrait;
     /**
      * A list of the exception types that are not reported.
      *
@@ -48,6 +46,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return $this->filterErrorResponse($exception, $request, parent::render($request, $exception));
+        return parent::render($request, $exception);
     }
 }

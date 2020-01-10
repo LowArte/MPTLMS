@@ -14,22 +14,16 @@ class DatabaseSeeder  extends Seeder
 
         $this->call([
             PostUserSeeder::class,
-            DepartamentSeeder::class,
-            GroupSeeder::class,
-            ScheduleSeeder::class,
+            UsersSeeder::class,
+            RetrainingInfoSeeder::class,
+            SiteOptionsSeeder::class,
             PlacesSeeder::class,
             CallSchedulesSeeder::class,
-            DesciplineSeeder::class,
-            SiteOptionsSeeder::class,
-            SwapScheduleSeeder::class,
-            RetrainingInfoSeeder::class,
-            TestUserSeeder::class, //Подлежит удалению
         ]);
-        factory(\App\User::class, 100)->create();
         
-        $this->call([
-            TeachersSeeder::class,
-            StudentsSeeder::class
-        ]);
+        // $this->call([
+        //     TeachersSeeder::class,
+        //     StudentsSeeder::class
+        // ]);
     }
 }

@@ -14,6 +14,11 @@ class CallSchedule extends Model
     protected $hidden = [
         'created_at', 'deleted_at', 'updated_at'
     ];
+
+    public function place()
+    {
+        return $this->hasOne(Places::class,'id','place_id');
+    }
     
     public function __construct($attributes = array())
     {

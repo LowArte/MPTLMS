@@ -14,21 +14,27 @@ class PostUserSeeder extends Seeder
         $date = array(
             [
                 "name"=>"Администратор",
+                "slug"=>"admin"
             ],
             [
                 "name"=>"Студент",
+                "slug"=>"student"
             ],
             [
                 "name"=>"Преподаватель",
+                "slug"=>"teacher"
             ],
             [
                 "name"=>"Учебная часть",
+                "slug"=>"unit"
             ],
             [
                 "name"=>"Dark lord",
+                "slug"=>"lord"
             ],
             [
                 "name"=>"Ограниченный функционал",
+                "slug"=>"nullfunc"
             ],
         );
         DB::table("users_posts")->insert($date);

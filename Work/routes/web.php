@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Helpers\UserNotification;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\HelpersUserNotification;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,63 +11,37 @@ use App\Http\Controllers\HelpersUserNotification;
 |
 */
 
-Route::get(
-    '/',
-    function () {
-        $panel_array = array(
-            array(
-                "header"  => "Подробная информация",
-                "content" => "information-page-f/DrivingSchool",
-                "props"   => array()
-            )
-        );
-        return view('welcome', ["panel_array" => json_encode($panel_array)]);
-    }
-);
+Route::get('/', "WelcomeController@index")->name("default");
 
-Auth::routes(['register' => false, 'verify' => false]);
+Auth::routes(['register' => false, 'verify' => false,'confirm'=>false]);
 
-Route::get('/home', 'HomeController@index')->name('home')->name('Home');
-Route::get('/feedback', 'RouteControllers\FeedbackController@index')->name('Feedback');
-Route::get('/card', 'RouteControllers\CardController@index')->name('Card');
-Route::get('/certificate', 'RouteControllers\CertificateController@index')->name('Certificate');
-Route::get('/listcertificate', 'RouteControllers\ListCertificateController@index')->name('Listcertificate');
-Route::get('/teacheracademicperfomance', 'RouteControllers\TeacherAcadimicPerfomanceController@index')->name('Teacheracademicperfomance');
-Route::get('/callschedule', 'RouteControllers\CallScheduleController@index')->name('Callschedule');
-Route::get('/bildcallschedule', 'RouteControllers\BildCallScheduleController@index')->name('BildCallSchedule');
-Route::get('/requestsusers', 'RouteControllers\RequestsUsersController@index')->name('Requestsusers');
-Route::get('/panelcontrol', 'RouteControllers\PanelControlController@index')->name('Panelcontrol');
-Route::get('/usermanagement', 'RouteControllers\UserManagementController@index')->name('Usermanagement');
-Route::get('/timetable', 'RouteControllers\TimetableController@index')->name('Timetable');
-Route::get('/replacements', 'RouteControllers\ReplacementsController@index')->name('Replacements');
-Route::get('/bildreplacements', 'RouteControllers\BildReplacementsController@index')->name('BildReplacements');
-Route::get('/bildtimetable', 'RouteControllers\BildTimetableController@index')->name('BildTimetable');
-Route::get('/filemanagement', 'RouteControllers\FileManagementController@index')->name('Filemanagement');
+Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admin')->group(function(){
+    Route::get('/home', 'Admin\HomeController@index')->name('home');
+    Route::get('/user_managment','Admin\UserManagmentController@index')->name('user_managment');
+    Route::get('/panel_control','Admin\PanelControlController@index')->name('panel_control');
+    Route::get('/file_management','Admin\FileManagmentController@index')->name('file_management');
+    Route::get('/timetable','Admin\TimetableController@index')->name('timetable');
+    Route::get('/bild_callschedule','Admin\TimetableController@index')->name('bild_callschedule');
+    
+});
 
-Route::post('/save_schedule', 'RouteControllers\BildTimetableController@save');
-Route::post('/save_user', 'RouteControllers\UserManagementController@saveUser');
-Route::post('/delete_user', 'RouteControllers\UserManagementController@deleteUser');
-Route::post('/save_file', 'RouteControllers\FileManagementController@saveFile');
-Route::post('/delete_file', 'RouteControllers\FileManagementController@deleteFile');
-Route::post('/delete_replacement', 'RouteControllers\ReplacementsController@deleteReplacement');
-Route::post('/send_email', 'RouteControllers\RequestsUsersController@sendEmail');
-Route::post('/save_feedback', 'RouteControllers\FeedbackController@savefeedback');
-Route::post('/save_bildcallschedule', 'RouteControllers\BildCallScheduleController@save');
-Route::post('/save_certificate', 'RouteControllers\CertificateController@saveCertificate');
-Route::post('/set_options', 'RouteControllers\PanelControlController@setConfigOptions');
-Route::post('/setNotificationAsRead', 'LoggedUserController@setNotificationAsRead');
-Route::post('/save_replacement', 'RouteControllers\BildReplacementsController@save');
 
-Route::get('/get_file', 'RouteControllers\FileManagementController@getFile');
-Route::get('/detailedir', 'RouteControllers\DetailedInfoIrmationRetrainingController@index')->name('detailedir');
-Route::get('/get_users', 'RouteControllers\UserManagementController@getUsers');
-Route::get('/get_files', 'RouteControllers\FileManagementController@getFiles');
-Route::get('/get_group_by_departament_id', 'RouteControllers\TimetableController@groupByDepartamentId');
-Route::get('/get_schedule_by_group_id', 'RouteControllers\TimetableController@scheduleByGroupId');
-Route::get('/get_schedule_by_day', 'RouteControllers\TimetableController@scheduleByDay');
-Route::get('/get_bild_schedule_by_group_id', 'RouteControllers\BildTimetableController@scheduleByGroupId');
-Route::get('/get_all_replacements', 'RouteControllers\ReplacementsController@getAllReplacements');
-Route::get('/get_replacements_by_group_id_by_date', 'RouteControllers\ReplacementsController@getReplacements');
-Route::get('/get_all_replacements_by_group', 'RouteControllers\ReplacementsController@getAllReplacementsByGroup');
-Route::get('/get_all_replacements_by_date', 'RouteControllers\ReplacementsController@getAllReplacementsByDate');
-Route::get('/download_file', 'LoggedUserController@downloadFile');
+Route::middleware(['auth','access'])->name('admin.')->prefix('admin')->group(function(){
+    Route::post('/set_options','Admin\PanelControlController@setOptions')->name('set_options');
+
+    Route::name('user_managment.')->prefix('user_managment')->group(function(){
+        Route::post('save','Admin\UserManagmentController@save')->name('');
+        Route::post('delete/{user_id}','Admin\UserManagmentController@delete')->name('set_options');
+        Route::post('edit/{user_id}','Admin\UserManagmentController@edit')->name('set_options');
+    });
+
+    Route::name('timetable.')->prefix('timetable')->group(function(){
+        Route::get('get_group_by_departament_id','Admin\TimeTableController@getGroupByDepartamentId')->name('get_group_by_departament_id');
+        Route::post('save','Admin\TimeTableController@save')->name('get_group_by_departament_id');
+        Route::get('get_schedule_by_group_id','Admin\TimeTableController@getScheduleByGroupId')->name('get_schedule_by_group_id');
+    }); 
+});
+
+
+
+
