@@ -56,7 +56,7 @@ export default {
                 href: "/admin/user_managment",
                 icon: "accessible"
               }
-/*               ,
+              /*               ,
               {
                 text: "Управление файлами",
                 href: "/admin/file_management",
@@ -126,22 +126,33 @@ export default {
           //   href: '/detailedir'
           // },
           /*
-                     {
-                       icon: 'school',
-                       text: 'Преподаватели',
-                       href: '/home'
-                     }, */
           {
-            icon: "edit",
-            text: "Справки",
-            href: "/certificate"
+            icon: 'school',
+            text: 'Преподаватели',
+            href: '/home'
+          }, */
+          {
+            text: "Услуги",
+            children: [
+              {
+                icon: "edit",
+                text: "Справки",
+                href: "/certificate"
+              },
+              {
+                icon: "tag_faces",
+                text: "Психолог",
+                href: "/certificate"
+              }
+            ]
           },
+          {},
           /* 
-                      {
-                        icon: 'home',
-                        text: 'Домашнее задание',
-                        href: '/home'
-                      }, */
+          {
+            icon: 'home',
+            text: 'Домашнее задание',
+            href: '/home'
+          }, */
           /*{
               icon: 'storefront',
               text: 'Портфолио',
@@ -170,11 +181,6 @@ export default {
             icon: "today",
             text: "Расписание",
             href: "/timetable"
-          },
-          {
-            icon: "today",
-            text: "Расписание звонков",
-            href: "/callschedule"
           },
           // {
           //   icon: 'home',
@@ -250,7 +256,7 @@ export default {
   },
   methods: {
     menuItemSelected(item) {
-      console.log(item.href)
+      console.log(item.href);
       if (item.href) {
         if (item.new) {
           window.open(item.href);
