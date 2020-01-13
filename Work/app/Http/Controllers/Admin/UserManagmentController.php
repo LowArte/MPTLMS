@@ -44,7 +44,7 @@ class UserManagmentController extends BaseController
     public function save(Request $request,CreateUserModification $createUserModification)
     {
         $data = $request->all();
-        $result = $createUserModification->addUserToDatabase($data);
+        $result = $createUserModification->addUserToDatabase($data['user']);
         if($result){
             return response()->json(["success"=>true]);
         }
@@ -72,7 +72,7 @@ class UserManagmentController extends BaseController
     public function edit($id,Request $request,UpdateUserModification $updateUserModification)
     {
         $data = $request->all();
-        $result = $updateUserModification->updateUserInDatabase($id,$data);
+        $result = $updateUserModification->updateUserInDatabase($id,$data['user']);
         if($result){
             return response()->json(["success"=>true]);
         }

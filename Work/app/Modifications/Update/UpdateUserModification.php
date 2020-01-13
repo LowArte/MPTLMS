@@ -5,6 +5,8 @@ namespace App\Modifications\Update;
 use App\Models\User as Model;
 use App\Modifications\BaseModification;
 
+use Debugbar;
+
 class UpdateUserModification extends BaseModification
 {
     protected function getModelClass(){
@@ -13,6 +15,7 @@ class UpdateUserModification extends BaseModification
 
     public function updateUserInDatabase($id,$data){
         $user = $this->startCondition()->select('id')->where('email',$data['email'])->toBase()->first();
+        
         if($user){
             return false;
         }

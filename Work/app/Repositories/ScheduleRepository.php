@@ -16,13 +16,14 @@ class ScheduleRepository extends BaseRepository
         $call = $callScheduleRepository->getCallScheduleForSchedule();
         $result = json_decode($this->startCondition()->select($columns)->where('group_id',$group_id)->toBase()->first()->schedule);
         foreach ((array)$result as $days => $row) {
-            $current = $call->where('place.id',$result->{$days}->Place);
-            $result->{$days}->Place = $current->place;
-            foreach ((array)$current->schedule as $lessons =>$row2) {
-                $result->{$days}->{$lessons}->time = $current->schedule->{$lessons};
+            $current = $call->where('place.id',$result->{$days}->Place)->first();
+            $result->{$days}->Place = $current['place'];
+
+            foreach ((array)$current['schedule'] as $lessons =>$row2) {
+                $result->{$days}->{$lessons}->time = $current['schedule']->{$lessons};
             } 
         }
-        dd($result);
+        return $result;
     }
 
 }

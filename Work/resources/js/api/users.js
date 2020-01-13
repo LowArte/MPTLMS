@@ -21,12 +21,10 @@ export default {
     })
   },
   deleteUser(user) {
-    return axios.post('user_managment/delete', {
-      "id": user.id
-    })
+    return axios.post('user_managment/delete/'+user.id)
   },
   saveEdit(user) {
-    return axios.post('user_managment/edit', {
+    return axios.post('user_managment/edit/'+user.id, {
       "user": user.user
     })
   },
