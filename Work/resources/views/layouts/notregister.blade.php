@@ -10,6 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <snackbar></snackbar>
@@ -20,19 +21,22 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 @if ($profilactic ?? false)
-                    <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Включён режим профилактики!</v-card-title>
+                <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Включён режим профилактики!</v-card-title>
                 @endif
                 @if (!Auth::check() )
                     <v-spacer></v-spacer>
                     @if( Route::currentRouteName() != "login")
-                        <v-btn href="{{route("login")}}">Войти</v-btn>
+                        <v-btn href="{{route("login")}}">ВОЙТИ</v-btn>
                     @endif
                 @else
-                    <v-btn color="accent mr-5" dark href="{{'\\'.auth()->user()->post->slug}}\home">ВОЙТИ</v-btn>
-                    <v-form method="post" action="{{route('logout')}}">
-                        @csrf
-                        <v-btn type="submit" color="accent" dark>ВЫЙТИ</v-btn>
-                    </v-form>
+                    <v-btn color="primary mr-5" dark href="{{'\\'.auth()->user()->post->slug}}\home">НАЗАД</v-btn>
+                    @if (!Auth::check() )
+                        <v-form method="post" action="{{route('logout')}}">
+                            @csrf
+                            <v-btn block text color="accent" type="submit">Выход</v-btn>
+                            <v-btn block text color="info" type="submit" href="{{route("password.request")}}">Сменить пароль</v-btn>
+                        </v-form>
+                    @endif
                 @endif
             </v-app-bar>
             <v-content style="background: white;">
@@ -41,9 +45,9 @@
                 </v-container>
             </v-content>
         </v-app>
-    </div>   
+    </div>
     @stack('beforeScripts')
-        <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     @stack('afterScripts')
 </body>
 

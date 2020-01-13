@@ -25,7 +25,9 @@
                 </v-btn>
             </div>
             @if(auth()->user()->disabled)
-                <div class="d-flex align-center" style="margin-left: auto"><v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Вы заблокированы!</v-card-title></div>
+            <div class="d-flex align-center" style="margin-left: auto">
+                <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Вы заблокированы!</v-card-title>
+            </div>
             @endif
             <div class="d-flex align-center" style="margin-left: auto">
                 <v-btn @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
@@ -36,12 +38,11 @@
 
         <v-navigation-drawer v-model="rightdrawer" fixed right clipped app>
             <v-card outlined style="border: none;" flat>
-                <v-card-actions>
-                    <v-form method="post" action="{{route("logout")}}">
-                        @csrf
-                        <v-btn type="submit" text color="accent">Выход</v-btn>
-                    </v-form>
-                </v-card-actions>
+                <v-form method="post" action="{{route("logout")}}">
+                    @csrf
+                    <v-btn block text color="accent" type="submit">Выход</v-btn>
+                    <v-btn block text color="info" type="submit" href="{{route("password.request")}}">Сменить пароль</v-btn>
+                </v-form>
             </v-card>
         </v-navigation-drawer>
 
@@ -50,7 +51,7 @@
         </v-content>
     </v-app>
     @stack('beforeScripts')
-        <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     @stack('afterScripts')
 </body>
 

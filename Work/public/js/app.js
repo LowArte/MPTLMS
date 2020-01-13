@@ -2501,11 +2501,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3126,37 +3121,37 @@ __webpack_require__.r(__webpack_exports__);
             href: "/admin/home"
           }, {
             text: "Панель управления",
-            icon: "edit",
+            icon: "",
             children: [{
               text: "Настройки сервера",
               href: "/admin/panel_control",
-              icon: "settings"
+              icon: "build"
             }, {
-              icon: "edit",
               text: "Управление пользователями",
-              href: "/admin/user_managment"
-            } // ,
-            // {
-            //   icon: "edit",
-            //   text: "Управление файлами",
-            //   href: "/admin/file_management"
-            // }
+              href: "/admin/user_managment",
+              icon: "accessible"
+            }
+            /*               ,
+                          {
+                            text: "Управление файлами",
+                            href: "/admin/file_management",
+                            icon: "insert_drive_file"
+                          } */
             ]
           }, {
-            text: "Панель рассписания",
-            icon: "today",
+            text: "Рассписания",
             children: [{
-              icon: "today",
               text: "Расписание",
-              href: "/admin/timetable"
+              href: "/admin/timetable",
+              icon: "today"
             }, {
-              icon: "find_replace",
-              text: "Замены",
-              href: "/admin/replacements"
+              text: "Изменения в расписании",
+              href: "/admin/replacements",
+              icon: "autorenew"
             }, {
-              icon: "today",
               text: "Расписание звонков",
-              href: "/admin/callschedule"
+              href: "/admin/callschedule",
+              icon: "alarm"
             }]
           }, {
             icon: "feedback",
@@ -40950,87 +40945,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-row",
+    "v-layout",
+    { staticClass: "row wrap" },
     [
       _c(
-        "v-col",
-        { attrs: { cols: "12" } },
+        "v-card",
+        {
+          staticClass: "mx-auto pa-3",
+          attrs: { height: "auto", width: "100%" }
+        },
         [
-          _c("v-hover", {
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(ref) {
-                  var hover = ref.hover
-                  return [
-                    _c(
-                      "v-card",
-                      {
-                        staticClass: "mx-auto pa-0",
-                        attrs: {
-                          elevation: hover ? 12 : 2,
-                          height: "auto",
-                          width: "max"
-                        }
-                      },
-                      [
-                        _c(
-                          "v-container",
-                          { staticClass: "pa-0 ma-0" },
-                          [
-                            _c(
-                              "v-row",
-                              { staticClass: "pa-2 ma-0" },
-                              [
-                                _c(
-                                  "v-card-text",
-                                  {
-                                    staticClass:
-                                      "my-2 ma-0 pa-0 text-center title"
-                                  },
-                                  [_vm._v("Панель управления")]
-                                )
-                              ],
-                              1
-                            ),
-                            _c("v-divider"),
-                            _c(
-                              "v-row",
-                              { staticClass: "pa-2 ma-0" },
-                              [
-                                _c("v-switch", {
-                                  attrs: { label: "Режим профилактики" },
-                                  model: {
-                                    value: _vm.options.option_value,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.options, "option_value", $$v)
-                                    },
-                                    expression: "options.option_value"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "ma-2",
-                                attrs: { color: "accent", dark: "" },
-                                on: { click: _vm.sendQuery }
-                              },
-                              [_vm._v("Применить")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                }
-              }
-            ])
-          })
+          _c("v-card-text", { staticClass: "my-2 ma-0 pa-0 title" }, [
+            _vm._v("Панель управления")
+          ]),
+          _c("v-divider"),
+          _c("v-switch", {
+            staticClass: "mx-2",
+            attrs: { label: "Режим профилактики", color: "accent" },
+            model: {
+              value: _vm.options.option_value,
+              callback: function($$v) {
+                _vm.$set(_vm.options, "option_value", $$v)
+              },
+              expression: "options.option_value"
+            }
+          }),
+          _c(
+            "v-btn",
+            {
+              attrs: { color: "accent", block: "" },
+              on: { click: _vm.sendQuery }
+            },
+            [_vm._v("Применить")]
+          )
         ],
         1
       )
@@ -41798,13 +41745,13 @@ var render = function() {
     _vm._l(_vm._time_table, function(item, item_index) {
       return _c(
         "v-flex",
-        { key: item_index, staticClass: "my-2" },
+        { key: item_index },
         [
           _c(
             "v-card",
             {
               staticClass: "mx-auto",
-              attrs: { "max-width": "500px", height: "100%", elevation: 0 }
+              attrs: { "max-width": "420px", height: "100%", elevation: 0 }
             },
             [
               _c(
@@ -99168,8 +99115,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -1,15 +1,10 @@
 <template lang="pug">
-  v-row
-    v-col(cols='12')
-      v-hover(v-slot:default='{ hover }')
-        v-card.mx-auto.pa-0(:elevation='hover ? 12 : 2' height='auto' width='max')
-          v-container.pa-0.ma-0
-            v-row.pa-2.ma-0
-              v-card-text.my-2.ma-0.pa-0.text-center.title Панель управления
-            v-divider
-            v-row.pa-2.ma-0
-              v-switch(v-model='options.option_value'  label='Режим профилактики')
-            v-btn.ma-2(color='accent' dark='' @click='sendQuery') Применить
+  v-layout.row.wrap
+      v-card.mx-auto.pa-3(height='auto' width='100%')
+        v-card-text.my-2.ma-0.pa-0.title Панель управления
+        v-divider
+        v-switch.mx-2(v-model='options.option_value' label='Режим профилактики' color='accent')
+        v-btn(color='accent' block @click='sendQuery') Применить
 </template>
 
 <script>

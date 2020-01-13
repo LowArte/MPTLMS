@@ -12,7 +12,7 @@ class GroupRepository extends BaseRepository
 
     public function getGroupsForComboBoxByDepartament($dep_id)
     {
-        $columns = ['group_name'];
+        $columns = ['id','group_name'];
         $result = $this->startCondition()->select($columns)->where('departaments_id',$dep_id)->toBase()->get();
         return $result;
     }
