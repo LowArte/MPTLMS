@@ -2501,11 +2501,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -40951,87 +40946,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-row",
+    "v-layout",
+    { staticClass: "row wrap" },
     [
       _c(
-        "v-col",
-        { attrs: { cols: "12" } },
+        "v-card",
+        {
+          staticClass: "mx-auto pa-3",
+          attrs: { height: "auto", width: "100%" }
+        },
         [
-          _c("v-hover", {
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(ref) {
-                  var hover = ref.hover
-                  return [
-                    _c(
-                      "v-card",
-                      {
-                        staticClass: "mx-auto pa-0",
-                        attrs: {
-                          elevation: hover ? 12 : 2,
-                          height: "auto",
-                          width: "max"
-                        }
-                      },
-                      [
-                        _c(
-                          "v-container",
-                          { staticClass: "pa-0 ma-0" },
-                          [
-                            _c(
-                              "v-row",
-                              { staticClass: "pa-2 ma-0" },
-                              [
-                                _c(
-                                  "v-card-text",
-                                  {
-                                    staticClass:
-                                      "my-2 ma-0 pa-0 text-center title"
-                                  },
-                                  [_vm._v("Панель управления")]
-                                )
-                              ],
-                              1
-                            ),
-                            _c("v-divider"),
-                            _c(
-                              "v-row",
-                              { staticClass: "pa-2 ma-0" },
-                              [
-                                _c("v-switch", {
-                                  attrs: { label: "Режим профилактики" },
-                                  model: {
-                                    value: _vm.options.option_value,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.options, "option_value", $$v)
-                                    },
-                                    expression: "options.option_value"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "ma-2",
-                                attrs: { color: "accent", dark: "" },
-                                on: { click: _vm.sendQuery }
-                              },
-                              [_vm._v("Применить")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                }
-              }
-            ])
-          })
+          _c("v-card-text", { staticClass: "my-2 ma-0 pa-0 title" }, [
+            _vm._v("Панель управления")
+          ]),
+          _c("v-divider"),
+          _c("v-switch", {
+            staticClass: "mx-2",
+            attrs: { label: "Режим профилактики", color: "accent" },
+            model: {
+              value: _vm.options.option_value,
+              callback: function($$v) {
+                _vm.$set(_vm.options, "option_value", $$v)
+              },
+              expression: "options.option_value"
+            }
+          }),
+          _c(
+            "v-btn",
+            {
+              attrs: { color: "accent", block: "" },
+              on: { click: _vm.sendQuery }
+            },
+            [_vm._v("Применить")]
+          )
         ],
         1
       )
