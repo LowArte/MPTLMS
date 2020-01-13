@@ -2606,6 +2606,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
  //api для пользователей
 
  //маски vue
@@ -2620,6 +2623,11 @@ __webpack_require__.r(__webpack_exports__);
       //Массив
       arrusersposts: [],
       //Массив постов
+      alert: {
+        type: null,
+        text: null
+      },
+      //Alert
       search: "",
       //Поиск
       page: 1,
@@ -2639,6 +2647,7 @@ __webpack_require__.r(__webpack_exports__);
         id: 1,
         name: "Заблокирован"
       }],
+      //Состояние блокировки
       headers: [{
         text: "№",
         align: "left",
@@ -2648,7 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
         value: "email"
       }, {
         text: "Роль",
-        value: "post"
+        value: "post.name"
       }, {
         text: "Блокировка",
         value: "text-disabled"
@@ -2687,10 +2696,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.listusers = this._listusers;
     this.arrusersposts = this._arrusersposts;
-
-    for (var i = 0; i < this.listusers.length; i++) {
-      this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
-    }
   },
   computed: {
     //Получение названия диалога
@@ -2704,12 +2709,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (res) {
-        _this.listusers = JSON.parse(res.data.users);
-        _this.arrposts = JSON.parse(res.data.usersposts);
-
-        for (var i = 0; i < _this.listusers.length; i++) {
-          _this.listusers[i]['text-disabled'] = _this.adisabled[_this.listusers[i]['disabled']].name;
-        }
+        _this.listusers = res.data.users;
+        _this.arrposts = res.data.usersposts;
       })["catch"](function (ex) {
         console.log(ex);
       });
@@ -2736,25 +2737,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     //Закрытие диалога
     close: function close() {
-      var _this3 = this;
-
       this.dialog = false;
-      setTimeout(function () {
-        _this3.editedItem = Object.assign({}, {
-          id: "",
-          secName: "",
-          name: "",
-          thirdName: "",
-          email: "",
-          password: "",
-          post_id: "",
-          disabled: ""
-        });
-        _this3.editedIndex = -1;
-      }, 300);
+      this.editedItem = Object.assign({}, {
+        id: "",
+        secName: "",
+        name: "",
+        thirdName: "",
+        email: "",
+        password: "",
+        post_id: "",
+        disabled: ""
+      });
+      this.editedIndex = -1;
     },
     save: function save() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.editedIndex == -1) this.editedItem.id = -1;
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
@@ -2766,11 +2763,11 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case true:
-            _this4.initialize();
+            _this3.initialize();
 
             alert("Сохранён!");
 
-            _this4.close();
+            _this3.close();
 
             break;
         }
@@ -41220,6 +41217,24 @@ var render = function() {
                                               { staticClass: "span headline" },
                                               [_vm._v(_vm._s(_vm.formTitle))]
                                             ),
+                                            _vm.alert.type != null
+                                              ? _c(
+                                                  "v-alert",
+                                                  {
+                                                    staticClass: "ma-2",
+                                                    attrs: {
+                                                      type: _vm.alert.type,
+                                                      transition:
+                                                        "scale-transition"
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(_vm.alert.text)
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
                                             _c(
                                               "v-card-text",
                                               [
@@ -41461,6 +41476,25 @@ var render = function() {
                               ]
                             },
                             proxy: true
+                          },
+                          {
+                            key: "item.text-disabled",
+                            fn: function(ref) {
+                              var item = ref.item
+                              return [
+                                _c(
+                                  "v-card-text",
+                                  { staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.adisabled[item["disabled"]].name
+                                      )
+                                    )
+                                  ]
+                                )
+                              ]
+                            }
                           },
                           {
                             key: "item.action",
@@ -97452,12 +97486,12 @@ __webpack_require__.r(__webpack_exports__);
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('admin/user_managment/get_users');
   },
   saveUser: function saveUser(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/save_user', {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save', {
       "user": user.user
     });
   },
   deleteUser: function deleteUser(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/delete_user', {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/delete', {
       "id": user.id
     });
   },

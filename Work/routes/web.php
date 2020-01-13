@@ -33,6 +33,7 @@ Route::middleware(['auth','access'])->name('admin.')->prefix('admin')->group(fun
         Route::post('save','Admin\UserManagmentController@save')->name('');
         Route::post('delete/{user_id}','Admin\UserManagmentController@delete')->name('set_options');
         Route::post('edit/{user_id}','Admin\UserManagmentController@edit')->name('set_options');
+        Route::post('get','Admin\UserManagmentController@get')->name('set_options');
     });
 
     Route::name('timetable.')->prefix('timetable')->group(function(){
