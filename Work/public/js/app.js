@@ -2757,28 +2757,15 @@ __webpack_require__.r(__webpack_exports__);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
         user: this.editedItem
       }).then(function (res) {
-        switch (res.data.success) {
-          case 'erroremail':
-            alert("Почта уже используется!");
-            break;
+        _this3.initialize();
 
-          case true:
-            _this3.initialize();
+        alert("Сохранён!");
 
-            alert("Сохранён!");
-
-            _this3.close();
-
-            break;
-        }
+        _this3.close();
       })["catch"](function (ex) {
         alert("Сохранение не было произведено!");
         console.log(ex);
       });
-    },
-    parseIntLoc: function parseIntLoc(val) {
-      if (val == "" || val == null || val == "0") return 1;
-      return parseInt(val);
     }
   }
 });
@@ -97483,16 +97470,21 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   getUsers: function getUsers() {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('admin/user_managment/get_users');
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('user_managment/get_users');
   },
   saveUser: function saveUser(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/save', {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/save', {
       "user": user.user
     });
   },
   deleteUser: function deleteUser(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/delete', {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/delete', {
       "id": user.id
+    });
+  },
+  saveEdit: function saveEdit(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/edit', {
+      "user": user.user
     });
   },
   notificate: function notificate(notId) {

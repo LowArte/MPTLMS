@@ -180,28 +180,14 @@ export default {
           user: this.editedItem
         })
         .then(res => {
-          switch(res.data.success)
-          {
-            case 'erroremail':
-              alert("Почта уже используется!");
-              break;
-            case true:
-              this.initialize();
-              alert("Сохранён!");
-              this.close();
-              break;
-          }
+          this.initialize();
+          alert("Сохранён!");
+          this.close();
         })
         .catch(ex => {
           alert("Сохранение не было произведено!");
           console.log(ex);
         });
-    },
-
-    parseIntLoc(val) {
-      if (val == "" || val == null || val == "0")
-        return 1;
-      return parseInt(val);
     }
   }
 };
