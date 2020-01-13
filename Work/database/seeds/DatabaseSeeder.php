@@ -19,6 +19,9 @@ class DatabaseSeeder  extends Seeder
             SiteOptionsSeeder::class,
             PlacesSeeder::class,
             CallSchedulesSeeder::class,
+            DepartamentSeeder::class,
+            GroupSeeder::class,
+            ScheduleSeeder::class
         ]);
         
         // $this->call([

@@ -13,6 +13,7 @@ class TimetableController extends BaseController
      */
     public function index()
     {
+        
         return view('roles.admin.timetable');
     }
 }
