@@ -30,7 +30,9 @@ Route::middleware(['auth','access'])->name('admin.')->prefix('admin')->group(fun
     Route::post('/set_options','Admin\PanelControlController@setOptions')->name('set_options');
 
     Route::name('user_managment.')->prefix('user_managment')->group(function(){
-        Route::post('save','Admin\UserManagmentController@save')->name('');
+        Route::get('get_users','Admin\UserManagmentController@getUsers')->name('get_users');
+
+        Route::post('save','Admin\UserManagmentController@save')->name('save');
         Route::post('delete/{user_id}','Admin\UserManagmentController@delete')->name('set_options');
         Route::post('edit/{user_id}','Admin\UserManagmentController@edit')->name('set_options');
     });

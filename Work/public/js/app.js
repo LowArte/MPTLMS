@@ -2606,6 +2606,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
  //api для пользователей
 
  //маски vue
@@ -2618,6 +2621,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       listusers: [],
       //Массив
+      arrusersposts: [],
+      //Массив постов
+      alert: {
+        type: null,
+        text: null
+      },
+      //Alert
       search: "",
       //Поиск
       page: 1,
@@ -2637,6 +2647,7 @@ __webpack_require__.r(__webpack_exports__);
         id: 1,
         name: "Заблокирован"
       }],
+      //Состояние блокировки
       headers: [{
         text: "№",
         align: "left",
@@ -2646,7 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
         value: "email"
       }, {
         text: "Роль",
-        value: "post"
+        value: "post.name"
       }, {
         text: "Блокировка",
         value: "text-disabled"
@@ -2676,11 +2687,15 @@ __webpack_require__.r(__webpack_exports__);
       data: Array,
       "default": null
     },
-    //JSON пользователей
     _arrusersposts: {
       type: Array,
       "default": null
     }
+  },
+  //Получаем данные при старте
+  mounted: function mounted() {
+    this.listusers = this._listusers;
+    this.arrusersposts = this._arrusersposts;
   },
   computed: {
     //Получение названия диалога
@@ -2689,91 +2704,69 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    mounted: function mounted() {
-      this.listusers = this._listusers; //this.arrusersposts = this._arrusersposts;
-
-      console.log(this.listusers);
-      /*for(var i = 0; i < this.listusers.length; i++)
-        this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;*/
-    },
     //Иницилизации данных
     initialize: function initialize() {
       var _this = this;
 
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (res) {
-        _this.listusers = JSON.parse(res.data.users);
-        _this.arrposts = JSON.parse(res.data.usersposts);
-
-        for (var i = 0; i < _this.listusers.length; i++) {
-          _this.listusers[i]['text-disabled'] = _this.adisabled[_this.listusers[i]['disabled']].name;
-        }
+        _this.listusers = res.data.users;
+        _this.arrposts = res.data.usersposts;
       })["catch"](function (ex) {
         console.log(ex);
       });
-    }
-    /*//Редактирование учётной записи
-    editItem(item) {
-      this.editedIndex = this._listusers.indexOf(item);
+    },
+    //Редактирование учётной записи
+    editItem: function editItem(item) {
+      this.editedIndex = this.listusers.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     //Удаление учётной записи
-    deleteItem(item) {
-      confirm("Вы действительно хотите удалить данного пользователя?") &&
-        apiuser
-          .deleteUser({ id: item.id })
-          .then(res => {
-            alert("Удалён!");
-            this.initialize();
-          })
-          .catch(ex => {
-            console.log(ex);
-          });
+    deleteItem: function deleteItem(item) {
+      var _this2 = this;
+
+      confirm("Вы действительно хотите удалить данного пользователя?") && _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].deleteUser({
+        id: item.id
+      }).then(function (res) {
+        alert("Удалён!");
+
+        _this2.initialize();
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
     },
     //Закрытие диалога
-    close() {
+    close: function close() {
       this.dialog = false;
-      setTimeout(() => {
-        this.editedItem = Object.assign(
-          {},
-          {
-            id: "",
-            secName: "",
-            name: "",
-            thirdName: "",
-            email: "",
-            password: "",
-            post_id: "",
-            disabled: ""
-          }
-        );
-        this.editedIndex = -1;
-      }, 300);
+      this.editedItem = Object.assign({}, {
+        id: "",
+        secName: "",
+        name: "",
+        thirdName: "",
+        email: "",
+        password: "",
+        post_id: "",
+        disabled: ""
+      });
+      this.editedIndex = -1;
     },
-      save() {
-      if (this.editedIndex == -1) this.editedItem.id = -1;
-        apiuser
-        .saveUser({
-          user: this.editedItem
-        })
-        .then(res => {
-          switch (res.data.success) {
-            case "erroremail":
-              alert("Почта уже используется!");
-              break;
-            case true:
-              this.initialize();
-              alert("Сохранён!");
-              this.close();
-              break;
-          }
-        })
-        .catch(ex => {
-          alert("Сохранение не было произведено!");
-          console.log(ex);
-        });
-    }*/
+    save: function save() {
+      var _this3 = this;
 
+      if (this.editedIndex == -1) this.editedItem.id = -1;
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
+        user: this.editedItem
+      }).then(function (res) {
+        _this3.initialize();
+
+        alert("Сохранён!");
+
+        _this3.close();
+      })["catch"](function (ex) {
+        alert("Сохранение не было произведено!");
+        console.log(ex);
+      });
+    }
   }
 });
 
@@ -41211,6 +41204,24 @@ var render = function() {
                                               { staticClass: "span headline" },
                                               [_vm._v(_vm._s(_vm.formTitle))]
                                             ),
+                                            _vm.alert.type != null
+                                              ? _c(
+                                                  "v-alert",
+                                                  {
+                                                    staticClass: "ma-2",
+                                                    attrs: {
+                                                      type: _vm.alert.type,
+                                                      transition:
+                                                        "scale-transition"
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(_vm.alert.text)
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
                                             _c(
                                               "v-card-text",
                                               [
@@ -41452,6 +41463,25 @@ var render = function() {
                               ]
                             },
                             proxy: true
+                          },
+                          {
+                            key: "item.text-disabled",
+                            fn: function(ref) {
+                              var item = ref.item
+                              return [
+                                _c(
+                                  "v-card-text",
+                                  { staticClass: "ma-0 pa-0" },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.adisabled[item["disabled"]].name
+                                      )
+                                    )
+                                  ]
+                                )
+                              ]
+                            }
                           },
                           {
                             key: "item.action",
@@ -97440,16 +97470,21 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   getUsers: function getUsers() {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('admin/user_managment/get_users');
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('user_managment/get_users');
   },
   saveUser: function saveUser(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/save_user', {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/save', {
       "user": user.user
     });
   },
   deleteUser: function deleteUser(user) {
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/delete_user', {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/delete', {
       "id": user.id
+    });
+  },
+  saveEdit: function saveEdit(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/edit', {
+      "user": user.user
     });
   },
   notificate: function notificate(notId) {

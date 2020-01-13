@@ -24,6 +24,7 @@
                   v-btn.ma-2.dark(color="primary" v-on="on") Новый пользователь
                 v-card
                   v-card-title.span.headline {{ formTitle }}
+                  v-alert.ma-2(v-if="alert.type != null" :type="alert.type" transition="scale-transition") {{alert.text}}
                   v-card-text
                     v-layout.row
                       v-text-field(v-model="editedItem.thirdName" label="Фамилия")
@@ -43,6 +44,8 @@
                       v-btn(color="blue darken-1" text @click="save") Сохранить
             v-card-title.ma-0.ml-4.mr-4.pa-0
               v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
+          template(v-slot:item.text-disabled="{ item }")
+            v-card-text.ma-0.pa-0 {{adisabled[item['disabled']].name}}
           template(v-slot:item.action="{ item }")
             v-icon.small(@click="editItem(item)") edit
             v-icon.small(@click="deleteItem(item)") delete
@@ -60,21 +63,23 @@ export default {
   },
   data: () => ({
     listusers: [], //Массив
+    arrusersposts: [], //Массив постов
+    alert: {type:null, text: null}, //Alert
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых пользователей
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
-    adisabled: [{ id: 0, name: "Свободен" }, { id: 1, name: "Заблокирован" }],
+    adisabled: [{id: 0, name: "Свободен"}, {id: 1, name: "Заблокирован"}], //Состояние блокировки
     headers: [
       {
         text: "№",
         align: "left",
         value: "id"
       },
-      { text: "Почта", value: "email" },
-      { text: "Роль", value: "post" },
+      { text: "Почта", value: "email", },
+      { text: "Роль", value: "post.name" },
       { text: "Блокировка", value: "text-disabled" },
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
@@ -87,19 +92,26 @@ export default {
       email: "",
       password: "",
       post_id: "",
-      disabled: ""
+      disabled: "",
     } //Массив с данным для сохранения в бд
   }),
   props: {
     _listusers: {
       data: Array,
       default: null
-    }, //JSON пользователей
+    },
     _arrusersposts: {
       type: Array,
       default: null
     }
   },
+  //Получаем данные при старте
+  mounted() 
+  {
+    this.listusers = this._listusers;
+    this.arrusersposts = this._arrusersposts;
+  },
+
   computed: {
     //Получение названия диалога
     formTitle() {
@@ -108,66 +120,56 @@ export default {
         : "Редактировать пользователя";
     }
   },
+
   methods: {
-    mounted() {
-      this.listusers = this._listusers;
-      //this.arrusersposts = this._arrusersposts;
-      console.log(this.listusers);
-      /*for(var i = 0; i < this.listusers.length; i++)
-        this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;*/
-    },
     //Иницилизации данных
     initialize(){
       apiuser
         .getUsers()
         .then(res => {
-          this.listusers = JSON.parse(res.data.users);
-          this.arrposts = JSON.parse(res.data.usersposts);
-          for(var i = 0; i < this.listusers.length; i++)
-            this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
+          this.listusers = res.data.users;
+          this.arrposts = res.data.usersposts;
         })
         .catch(ex => {
           console.log(ex);
         });
     },
-    /*//Редактирование учётной записи
-    editItem(item) {
-      this.editedIndex = this._listusers.indexOf(item);
+    //Редактирование учётной записи
+    editItem(item) 
+    {
+      this.editedIndex = this.listusers.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     //Удаление учётной записи
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       confirm("Вы действительно хотите удалить данного пользователя?") &&
-        apiuser
-          .deleteUser({ id: item.id })
-          .then(res => {
-            alert("Удалён!");
-            this.initialize();
-          })
-          .catch(ex => {
-            console.log(ex);
-          });
+      apiuser
+        .deleteUser({id: item.id})
+        .then(res => {
+          alert("Удалён!");
+          this.initialize();
+        })
+        .catch(ex => {
+          console.log(ex);
+        });
     },
     //Закрытие диалога
     close() {
       this.dialog = false;
-      setTimeout(() => {
-        this.editedItem = Object.assign(
-          {},
-          {
-            id: "",
-            secName: "",
-            name: "",
-            thirdName: "",
-            email: "",
-            password: "",
-            post_id: "",
-            disabled: ""
-          }
-        );
-        this.editedIndex = -1;
-      }, 300);
+
+      this.editedItem = Object.assign({}, {
+        id: "",
+        secName: "",
+        name: "",
+        thirdName: "",
+        email: "",
+        password: "",
+        post_id: "",
+        disabled: "",
+      });
+      this.editedIndex = -1;
     },
 
     save() {
@@ -178,22 +180,15 @@ export default {
           user: this.editedItem
         })
         .then(res => {
-          switch (res.data.success) {
-            case "erroremail":
-              alert("Почта уже используется!");
-              break;
-            case true:
-              this.initialize();
-              alert("Сохранён!");
-              this.close();
-              break;
-          }
+          this.initialize();
+          alert("Сохранён!");
+          this.close();
         })
         .catch(ex => {
           alert("Сохранение не было произведено!");
           console.log(ex);
         });
-    }*/
+    }
   }
 };
 </script>

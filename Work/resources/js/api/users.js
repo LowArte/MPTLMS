@@ -10,18 +10,24 @@ export default {
       'email': user.email
     })
   },
+
   getUsers() {
-    return axios.get('admin/user_managment/get_users');
+    return axios.get('user_managment/get_users');
   },
 
   saveUser(user) {
-    return axios.post('admin/user_managment/save_user', {
+    return axios.post('user_managment/save', {
       "user": user.user
     })
   },
   deleteUser(user) {
-    return axios.post('admin/user_managment/delete_user', {
+    return axios.post('user_managment/delete', {
       "id": user.id
+    })
+  },
+  saveEdit(user) {
+    return axios.post('user_managment/edit', {
+      "user": user.user
     })
   },
   notificate(notId) {
