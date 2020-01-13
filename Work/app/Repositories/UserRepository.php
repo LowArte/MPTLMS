@@ -2,18 +2,17 @@
 
 namespace App\Repositories;
 
-use App\Models\Places as Model;
+use App\Models\User as Model;
 
-class PlaceRepository extends BaseRepository
+class UserRepository extends BaseRepository
 {
     protected function getModelClass(){
         return Model::class;
     }
 
-    public function getPlaces(){
-        $columns=['place_name','id'];
+    public function getUsers()
+    {   $columns = ['name','secName','thirdName','email','disabled','post_id'];
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
-
 }

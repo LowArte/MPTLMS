@@ -17,7 +17,7 @@ class CallScheduleRepository extends BaseRepository
         $columns = ['call_schedule','place_id'];
         $calls = $this->startCondition()->select($columns)->toBase()->get();
 
-        $place = $placeRepository->getPlaceForCalls();
+        $place = $placeRepository->getPlaces();
         $result = collect();
         foreach ($calls as $call) {
             $result->push([

@@ -6,7 +6,10 @@ namespace App\Http\Controllers\Admin;
 use App\Modifications\Create\CreateUserModification;
 use App\Modifications\Delete\DeleteUserModification;
 use App\Modifications\Update\UpdateUserModification;
+use App\Repositories\UserRepository;
+use App\Repositories\UsersPostRepository;
 use Illuminate\Http\Request;
+
 
 class UserManagmentController extends BaseController
 {
@@ -15,9 +18,11 @@ class UserManagmentController extends BaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(UserRepository $userRepository,UsersPostRepository $usersPostRepository)
     {
-        return view('roles.admin.user-managment');
+        $users = $userRepository->getUsers();
+        $posts = $usersPostRepository->getPosts();
+        return view('roles.admin.user-managment',compact('users','posts'));
     }
     /**
      * save user from database
