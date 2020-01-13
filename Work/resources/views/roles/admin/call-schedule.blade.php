@@ -12,7 +12,7 @@
         <c-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-call-schedule>
     </v-tab-item>
     <v-tab-item>
-        <c-bild-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-bild-call-schedule>
+        <c-bild-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}" :_places="{{json_encode($places) ?? null}}"></c-bild-call-schedule>
     </v-tab-item>
 </v-tabs>
 @endsection

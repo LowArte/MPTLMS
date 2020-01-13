@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\CallScheduleRepository;
+use App\Repositories\PlaceRepository;
 use Illuminate\Http\Request;
 
 class CallScheduleController extends BaseController
@@ -12,9 +13,10 @@ class CallScheduleController extends BaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(CallScheduleRepository $callScheduleRepository)
+    public function index(CallScheduleRepository $callScheduleRepository, PlaceRepository $placeRepository)
     {
         $timeTable = $callScheduleRepository->getCallSchedule();
-        return view('roles.admin.call-schedule',compact('timeTable'));
+        $places = $placeRepository->getPlaces();
+        return view('roles.admin.call-schedule',compact('timeTable', 'places'));
     }
 }
