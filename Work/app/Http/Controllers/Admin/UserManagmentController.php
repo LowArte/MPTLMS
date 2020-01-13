@@ -24,6 +24,18 @@ class UserManagmentController extends BaseController
         $posts = $usersPostRepository->getPosts();
         return view('roles.admin.user-managment',compact('users','posts'));
     }
+
+    /**
+     * get user from database
+     * @return JSON
+     */
+    public function getUsers(UserRepository $userRepository,UsersPostRepository $usersPostRepository)
+    {
+        $users = $userRepository->getUsers();
+        $posts = $usersPostRepository->getPosts();
+        return response()->json(compact('users','posts'));
+    }
+
     /**
      * save user from database
      * @param id user id
