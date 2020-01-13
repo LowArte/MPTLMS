@@ -10,7 +10,6 @@
           no-results-text='Нет результатов' 
           no-data-text='Нет результатов'
           :page.sync="page"
-          mobile-breakpoint=200
           hide-default-footer
           @page-count="pageCount = $event"
           :items-per-page="itemsPerPage")
@@ -47,14 +46,12 @@
           template(v-slot:item.action="{ item }")
             v-icon.small(@click="editItem(item)") edit
             v-icon.small(@click="deleteItem(item)") delete
-          template(v-slot:no-data)
-            v-btn(color="primary" @click="initialize(true)") Обновить
         v-layout.row.text-center.pa-2.ma-2
           v-pagination(v-model="page" :length="pageCount")
 </template>
 
 <script>
-// import apiuser from "../../api/users"; //api для пользователей
+import apiuser from "../../api/users"; //api для пользователей
 import { mask } from "vue-the-mask"; //маски vue
 
 export default {
@@ -62,6 +59,7 @@ export default {
     mask
   },
   data: () => ({
+    listusers: [], //Массив
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых пользователей
@@ -111,9 +109,28 @@ export default {
     }
   },
   methods: {
+    mounted() {
+      this.listusers = this._listusers;
+      //this.arrusersposts = this._arrusersposts;
+      console.log(this.listusers);
+      /*for(var i = 0; i < this.listusers.length; i++)
+        this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;*/
+    },
     //Иницилизации данных
-
-    //Редактирование учётной записи
+    initialize(){
+      apiuser
+        .getUsers()
+        .then(res => {
+          this.listusers = JSON.parse(res.data.users);
+          this.arrposts = JSON.parse(res.data.usersposts);
+          for(var i = 0; i < this.listusers.length; i++)
+            this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
+        })
+        .catch(ex => {
+          console.log(ex);
+        });
+    },
+    /*//Редактирование учётной записи
     editItem(item) {
       this.editedIndex = this._listusers.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -176,12 +193,7 @@ export default {
           alert("Сохранение не было произведено!");
           console.log(ex);
         });
-    },
-
-    parseIntLoc(val) {
-      if (val == "" || val == null || val == "0") return 1;
-      return parseInt(val);
-    }
+    }*/
   }
 };
 </script>

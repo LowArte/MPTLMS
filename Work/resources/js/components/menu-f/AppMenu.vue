@@ -55,12 +55,13 @@ export default {
                 icon: "edit",
                 text: "Управление пользователями",
                 href: "/admin/user_managment"
-              },
-              {
-                icon: "edit",
-                text: "Управление файлами",
-                href: "/admin/file_management"
               }
+              // ,
+              // {
+              //   icon: "edit",
+              //   text: "Управление файлами",
+              //   href: "/admin/file_management"
+              // }
             ]
           },
           {

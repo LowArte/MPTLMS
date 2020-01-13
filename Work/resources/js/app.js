@@ -12,8 +12,8 @@ import SpecialitiesList_C from './components/information-page-f/SpecialtiesList'
 import Retraining_C from './components/additional-education-f/Retraining'
 import PanelControl_C from './components/administrator-f/PanelControl'
 
-import UserPanel_C from './components/administrator-f/PanelControl'
 import FileManagment_C from './components/administrator-f/FileManagement'
+import UserManagment_C from './components/administrator-f/UserManagement'
 
 import Timetable_C from './components/timetable-f/Timetable'
 import BildTimetable_C from './components/timetable-f/Bild_Timetable'
@@ -42,14 +42,14 @@ new Vue({
       'c-specialties-list':SpecialitiesList_C,
       'c-retraining' : Retraining_C,
       'c-panel-control' : PanelControl_C,
-      // 'c-user-panel' : UserPanel_C 
+      'c-user-managment' : UserManagment_C, 
       // ! Написать фронт
       // 'c-file-managment': FileManagment_C 
       // ! Написать фронт
       'c-timetable':Timetable_C,
       'c-bild-timetable':BildTimetable_C,
       'c-call-schedule':CallSchedule_C,
-      // 'c-bild-call-schedule':BildCallSchedule_C
+      'c-bild-call-schedule':BildCallSchedule_C
       // ! Написать фронт
     }
 });

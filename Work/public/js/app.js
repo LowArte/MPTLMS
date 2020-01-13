@@ -2542,6 +2542,243 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/UserManagement.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/administrator-f/UserManagement.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/users */ "./resources/js/api/users.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+ //api для пользователей
+
+ //маски vue
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  directives: {
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_1__["mask"]
+  },
+  data: function data() {
+    return {
+      listusers: [],
+      //Массив
+      search: "",
+      //Поиск
+      page: 1,
+      //Текущая страница
+      itemsPerPage: 10,
+      //Количество отображаемых пользователей
+      pageCount: 0,
+      //Количество страниц
+      mask: "####",
+      //Маска для количества отображаемых строк
+      dialog: false,
+      //Активатор диалога
+      adisabled: [{
+        id: 0,
+        name: "Свободен"
+      }, {
+        id: 1,
+        name: "Заблокирован"
+      }],
+      headers: [{
+        text: "№",
+        align: "left",
+        value: "id"
+      }, {
+        text: "Почта",
+        value: "email"
+      }, {
+        text: "Роль",
+        value: "post"
+      }, {
+        text: "Блокировка",
+        value: "text-disabled"
+      }, {
+        text: "Действия",
+        value: "action",
+        sortable: false
+      }],
+      //Структура таблицы и с полями которые требуется выводить
+      editedIndex: -1,
+      //Текущий индекс редактируемой строки
+      editedItem: {
+        id: "",
+        secName: "",
+        name: "",
+        thirdName: "",
+        email: "",
+        password: "",
+        post_id: "",
+        disabled: ""
+      } //Массив с данным для сохранения в бд
+
+    };
+  },
+  props: {
+    _listusers: {
+      data: Array,
+      "default": null
+    },
+    //JSON пользователей
+    _arrusersposts: {
+      type: Array,
+      "default": null
+    }
+  },
+  computed: {
+    //Получение названия диалога
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? "Новый пользователь" : "Редактировать пользователя";
+    }
+  },
+  methods: {
+    mounted: function mounted() {
+      this.listusers = this._listusers; //this.arrusersposts = this._arrusersposts;
+
+      console.log(this.listusers);
+      /*for(var i = 0; i < this.listusers.length; i++)
+        this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;*/
+    },
+    //Иницилизации данных
+    initialize: function initialize() {
+      var _this = this;
+
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (res) {
+        _this.listusers = JSON.parse(res.data.users);
+        _this.arrposts = JSON.parse(res.data.usersposts);
+
+        for (var i = 0; i < _this.listusers.length; i++) {
+          _this.listusers[i]['text-disabled'] = _this.adisabled[_this.listusers[i]['disabled']].name;
+        }
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    }
+    /*//Редактирование учётной записи
+    editItem(item) {
+      this.editedIndex = this._listusers.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    //Удаление учётной записи
+    deleteItem(item) {
+      confirm("Вы действительно хотите удалить данного пользователя?") &&
+        apiuser
+          .deleteUser({ id: item.id })
+          .then(res => {
+            alert("Удалён!");
+            this.initialize();
+          })
+          .catch(ex => {
+            console.log(ex);
+          });
+    },
+    //Закрытие диалога
+    close() {
+      this.dialog = false;
+      setTimeout(() => {
+        this.editedItem = Object.assign(
+          {},
+          {
+            id: "",
+            secName: "",
+            name: "",
+            thirdName: "",
+            email: "",
+            password: "",
+            post_id: "",
+            disabled: ""
+          }
+        );
+        this.editedIndex = -1;
+      }, 300);
+    },
+      save() {
+      if (this.editedIndex == -1) this.editedItem.id = -1;
+        apiuser
+        .saveUser({
+          user: this.editedItem
+        })
+        .then(res => {
+          switch (res.data.success) {
+            case "erroremail":
+              alert("Почта уже используется!");
+              break;
+            case true:
+              this.initialize();
+              alert("Сохранён!");
+              this.close();
+              break;
+          }
+        })
+        .catch(ex => {
+          alert("Сохранение не было произведено!");
+          console.log(ex);
+        });
+    }*/
+
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth-f/Login.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth-f/Login.vue?vue&type=script&lang=js& ***!
@@ -2638,22 +2875,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     _time_table: {
-      type: String,
+      type: Array,
       "default": null
     }
   },
   //JSON расписания звонков
-  created: function created() {
-    var arr = JSON.parse(this._time_table); //Получение массива
-
-    for (var i = 0; i < arr.length; i++) {
-      arr[i].schedule = JSON.parse(arr[i].schedule);
-      arr[i].i = i;
-      this.mplace = arr[0];
-    } //Распарсирование массива
-
-
-    this.timeTable = arr; //Массив с расписанием
+  created: function created() {// let arr = JSON.parse(this._time_table); //Получение массива
+    // for (let i = 0; i < arr.length; i++) {
+    //   arr[i].schedule = JSON.parse(arr[i].schedule);
+    //   arr[i].i = i;
+    //   this.mplace = arr[0];
+    // } //Распарсирование массива
+    //this.timeTable = this._time_table; //Массив с расписанием
+    //this.mplace = this.timeTable[0];
   },
   methods: {
     sendQuery: function sendQuery() {
@@ -2699,25 +2933,11 @@ __webpack_require__.r(__webpack_exports__);
   directives: {
     mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
   },
-  data: function data() {
-    return {
-      table: null
-    };
-  },
   props: {
     _time_table: {
       Type: String,
       "default": null
     }
-  },
-  mounted: function mounted() {
-    var arr = JSON.parse(this._time_table);
-
-    for (var i = 0; i < arr.length; i++) {
-      arr[i].schedule = JSON.parse(arr[i].schedule);
-    }
-
-    this.table = arr;
   }
 });
 
@@ -2923,11 +3143,13 @@ __webpack_require__.r(__webpack_exports__);
               icon: "edit",
               text: "Управление пользователями",
               href: "/admin/user_managment"
-            }, {
-              icon: "edit",
-              text: "Управление файлами",
-              href: "/admin/file_management"
-            }]
+            } // ,
+            // {
+            //   icon: "edit",
+            //   text: "Управление файлами",
+            //   href: "/admin/file_management"
+            // }
+            ]
           }, {
             text: "Панель рассписания",
             icon: "today",
@@ -2942,7 +3164,7 @@ __webpack_require__.r(__webpack_exports__);
             }, {
               icon: "today",
               text: "Расписание звонков",
-              href: "/admin/bild_callschedule"
+              href: "/admin/callschedule"
             }]
           }, {
             icon: "feedback",
@@ -40831,6 +41053,479 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/UserManagement.vue?vue&type=template&id=d410203c&lang=pug&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/administrator-f/UserManagement.vue?vue&type=template&id=d410203c&lang=pug& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { staticClass: "row" },
+    [
+      _c("v-hover", {
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(ref) {
+              var hover = ref.hover
+              return [
+                _c(
+                  "v-card",
+                  {
+                    staticClass: "mx-auto pa-2",
+                    attrs: {
+                      width: "100%",
+                      height: "auto",
+                      elevation: hover ? 12 : 2
+                    }
+                  },
+                  [
+                    _c("v-data-table", {
+                      staticClass: "elevation-1 pa-0 ma-0",
+                      attrs: {
+                        headers: _vm.headers,
+                        items: _vm.listusers,
+                        search: _vm.search,
+                        "item-key": "id",
+                        "no-results-text": "Нет результатов",
+                        "no-data-text": "Нет результатов",
+                        page: _vm.page,
+                        "hide-default-footer": "",
+                        "items-per-page": _vm.itemsPerPage
+                      },
+                      on: {
+                        "update:page": function($event) {
+                          _vm.page = $event
+                        },
+                        "page-count": function($event) {
+                          _vm.pageCount = $event
+                        }
+                      },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "top",
+                            fn: function() {
+                              return [
+                                _c(
+                                  "v-toolbar",
+                                  { attrs: { color: "white", flat: "" } },
+                                  [
+                                    _c(
+                                      "v-toolbar-title",
+                                      [
+                                        _c(
+                                          "v-card-text",
+                                          {
+                                            staticClass: "my-2 ma-0 pa-0 title"
+                                          },
+                                          [_vm._v("Управление пользователями")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _c(
+                                  "v-layout",
+                                  {
+                                    staticClass:
+                                      "row pa-0 align-self-center justify-center",
+                                    attrs: { sm: "2", md: "0" }
+                                  },
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        staticClass: "dark ma-2",
+                                        attrs: { color: "primary" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.initialize()
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Обновить")]
+                                    ),
+                                    _c(
+                                      "v-dialog",
+                                      {
+                                        attrs: { "max-width": "500px" },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "activator",
+                                              fn: function(ref) {
+                                                var on = ref.on
+                                                return [
+                                                  _c(
+                                                    "v-btn",
+                                                    _vm._g(
+                                                      {
+                                                        staticClass:
+                                                          "ma-2 dark",
+                                                        attrs: {
+                                                          color: "primary"
+                                                        }
+                                                      },
+                                                      on
+                                                    ),
+                                                    [
+                                                      _vm._v(
+                                                        "Новый пользователь"
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        ),
+                                        model: {
+                                          value: _vm.dialog,
+                                          callback: function($$v) {
+                                            _vm.dialog = $$v
+                                          },
+                                          expression: "dialog"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "v-card",
+                                          [
+                                            _c(
+                                              "v-card-title",
+                                              { staticClass: "span headline" },
+                                              [_vm._v(_vm._s(_vm.formTitle))]
+                                            ),
+                                            _c(
+                                              "v-card-text",
+                                              [
+                                                _c(
+                                                  "v-layout",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        label: "Фамилия"
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem
+                                                            .thirdName,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "thirdName",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.thirdName"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _c(
+                                                  "v-layout",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: { label: "Имя" },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem.name,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "name",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.name"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _c(
+                                                  "v-layout",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        label: "Отчество"
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem
+                                                            .secName,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "secName",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.secName"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _c(
+                                                  "v-layout",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: { label: "Почта" },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem.email,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "email",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.email"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _c(
+                                                  "v-layout",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c("v-autocomplete", {
+                                                      attrs: {
+                                                        items:
+                                                          _vm.arrusersposts,
+                                                        "item-value": "id",
+                                                        "item-text": "name",
+                                                        dense: "",
+                                                        solo: "",
+                                                        label: "Роль"
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem
+                                                            .post_id,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "post_id",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.post_id"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _c(
+                                                  "v-layout",
+                                                  { staticClass: "row" },
+                                                  [
+                                                    _c("v-autocomplete", {
+                                                      attrs: {
+                                                        items: _vm.adisabled,
+                                                        "item-value": "id",
+                                                        "item-text": "name",
+                                                        dense: "",
+                                                        solo: "",
+                                                        label: "Блокировка"
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.editedItem
+                                                            .disabled,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.editedItem,
+                                                            "disabled",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "editedItem.disabled"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _c(
+                                                  "v-card-actions",
+                                                  [
+                                                    _c("v-spacer"),
+                                                    _c(
+                                                      "v-btn",
+                                                      {
+                                                        attrs: {
+                                                          color:
+                                                            "blue darken-1",
+                                                          text: ""
+                                                        },
+                                                        on: { click: _vm.close }
+                                                      },
+                                                      [_vm._v("Отмена")]
+                                                    ),
+                                                    _c(
+                                                      "v-btn",
+                                                      {
+                                                        attrs: {
+                                                          color:
+                                                            "blue darken-1",
+                                                          text: ""
+                                                        },
+                                                        on: { click: _vm.save }
+                                                      },
+                                                      [_vm._v("Сохранить")]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _c(
+                                  "v-card-title",
+                                  { staticClass: "ma-0 ml-4 mr-4 pa-0" },
+                                  [
+                                    _c("v-text-field", {
+                                      staticClass:
+                                        "ma-0 pa-0 mt-4 single-line hide-details",
+                                      attrs: { label: "Поиск" },
+                                      model: {
+                                        value: _vm.search,
+                                        callback: function($$v) {
+                                          _vm.search = $$v
+                                        },
+                                        expression: "search"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "item.action",
+                            fn: function(ref) {
+                              var item = ref.item
+                              return [
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "small",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editItem(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("edit")]
+                                ),
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "small",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteItem(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("delete")]
+                                )
+                              ]
+                            }
+                          }
+                        ],
+                        null,
+                        true
+                      )
+                    }),
+                    _c(
+                      "v-layout",
+                      { staticClass: "row text-center pa-2 ma-2" },
+                      [
+                        _c("v-pagination", {
+                          attrs: { length: _vm.pageCount },
+                          model: {
+                            value: _vm.page,
+                            callback: function($$v) {
+                              _vm.page = $$v
+                            },
+                            expression: "page"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth-f/Login.vue?vue&type=template&id=07c9d8f4&lang=pug&":
 /*!********************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth-f/Login.vue?vue&type=template&id=07c9d8f4&lang=pug& ***!
@@ -41095,7 +41790,7 @@ var render = function() {
   return _c(
     "v-layout",
     { staticClass: "row wrap" },
-    _vm._l(_vm.table, function(item, item_index) {
+    _vm._l(_vm._time_table, function(item, item_index) {
       return _c(
         "v-flex",
         { key: item_index, staticClass: "my-2" },
@@ -96722,6 +97417,57 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/users.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/users.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  fetch: function fetch() {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/v1/users');
+  },
+  update: function update(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('/api/v1/user', {
+      'name': user.name,
+      'email': user.email
+    });
+  },
+  getUsers: function getUsers() {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('admin/user_managment/get_users');
+  },
+  saveUser: function saveUser(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/save_user', {
+      "user": user.user
+    });
+  },
+  deleteUser: function deleteUser(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('admin/user_managment/delete_user', {
+      "id": user.id
+    });
+  },
+  notificate: function notificate(notId) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/setNotificationAsRead", {
+      "id": notId
+    });
+  },
+  downloadFile: function downloadFile(file_name) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/download_file", {
+      params: {
+        "file_name": file_name
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -96742,10 +97488,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/additional-education-f/Retraining */ "./resources/js/components/additional-education-f/Retraining.vue");
 /* harmony import */ var _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/administrator-f/PanelControl */ "./resources/js/components/administrator-f/PanelControl.vue");
 /* harmony import */ var _components_administrator_f_FileManagement__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/administrator-f/FileManagement */ "./resources/js/components/administrator-f/FileManagement.vue");
-/* harmony import */ var _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/timetable-f/Timetable */ "./resources/js/components/timetable-f/Timetable.vue");
-/* harmony import */ var _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/timetable-f/Bild_Timetable */ "./resources/js/components/timetable-f/Bild_Timetable.vue");
-/* harmony import */ var _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/call-schedule-f/CallSchedule */ "./resources/js/components/call-schedule-f/CallSchedule.vue");
-/* harmony import */ var _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/call-schedule-f/Bild_CallSchedule */ "./resources/js/components/call-schedule-f/Bild_CallSchedule.vue");
+/* harmony import */ var _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/administrator-f/UserManagement */ "./resources/js/components/administrator-f/UserManagement.vue");
+/* harmony import */ var _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/timetable-f/Timetable */ "./resources/js/components/timetable-f/Timetable.vue");
+/* harmony import */ var _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/timetable-f/Bild_Timetable */ "./resources/js/components/timetable-f/Bild_Timetable.vue");
+/* harmony import */ var _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/call-schedule-f/CallSchedule */ "./resources/js/components/call-schedule-f/CallSchedule.vue");
+/* harmony import */ var _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/call-schedule-f/Bild_CallSchedule */ "./resources/js/components/call-schedule-f/Bild_CallSchedule.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -96784,14 +97531,15 @@ new Vue({
     'c-specialties-list': _components_information_page_f_SpecialtiesList__WEBPACK_IMPORTED_MODULE_7__["default"],
     'c-retraining': _components_additional_education_f_Retraining__WEBPACK_IMPORTED_MODULE_8__["default"],
     'c-panel-control': _components_administrator_f_PanelControl__WEBPACK_IMPORTED_MODULE_9__["default"],
-    // 'c-user-panel' : UserPanel_C 
+    'c-user-managment': _components_administrator_f_UserManagement__WEBPACK_IMPORTED_MODULE_11__["default"],
     // ! Написать фронт
     // 'c-file-managment': FileManagment_C 
     // ! Написать фронт
-    'c-timetable': _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_11__["default"],
-    'c-bild-timetable': _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_12__["default"],
-    'c-call-schedule': _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_13__["default"],
-    'c-bild-call-schedule': _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_14__["default"]
+    'c-timetable': _components_timetable_f_Timetable__WEBPACK_IMPORTED_MODULE_12__["default"],
+    'c-bild-timetable': _components_timetable_f_Bild_Timetable__WEBPACK_IMPORTED_MODULE_13__["default"],
+    'c-call-schedule': _components_call_schedule_f_CallSchedule__WEBPACK_IMPORTED_MODULE_14__["default"],
+    'c-bild-call-schedule': _components_call_schedule_f_Bild_CallSchedule__WEBPACK_IMPORTED_MODULE_15__["default"] // ! Написать фронт
+
   }
 });
 
@@ -96887,18 +97635,28 @@ var map = {
 		"./resources/js/components/administrator-f/PanelControl.vue"
 	],
 	"./administrator-f/UserManagement": [
-		"./resources/js/components/administrator-f/UserManagement.vue",
-		0
+		"./resources/js/components/administrator-f/UserManagement.vue"
 	],
 	"./administrator-f/UserManagement.vue": [
-		"./resources/js/components/administrator-f/UserManagement.vue",
-		0
+		"./resources/js/components/administrator-f/UserManagement.vue"
 	],
 	"./auth-f/Login": [
 		"./resources/js/components/auth-f/Login.vue"
 	],
 	"./auth-f/Login.vue": [
 		"./resources/js/components/auth-f/Login.vue"
+	],
+	"./call-schedule-f/Bild_CallSchedule": [
+		"./resources/js/components/call-schedule-f/Bild_CallSchedule.vue"
+	],
+	"./call-schedule-f/Bild_CallSchedule.vue": [
+		"./resources/js/components/call-schedule-f/Bild_CallSchedule.vue"
+	],
+	"./call-schedule-f/CallSchedule": [
+		"./resources/js/components/call-schedule-f/CallSchedule.vue"
+	],
+	"./call-schedule-f/CallSchedule.vue": [
+		"./resources/js/components/call-schedule-f/CallSchedule.vue"
 	],
 	"./expention-f/Panel": [
 		"./resources/js/components/expention-f/Panel.vue"
@@ -97418,6 +98176,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelControl_vue_vue_type_template_id_42eac1ad_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelControl_vue_vue_type_template_id_42eac1ad_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/administrator-f/UserManagement.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/administrator-f/UserManagement.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserManagement_vue_vue_type_template_id_d410203c_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserManagement.vue?vue&type=template&id=d410203c&lang=pug& */ "./resources/js/components/administrator-f/UserManagement.vue?vue&type=template&id=d410203c&lang=pug&");
+/* harmony import */ var _UserManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserManagement.vue?vue&type=script&lang=js& */ "./resources/js/components/administrator-f/UserManagement.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserManagement_vue_vue_type_template_id_d410203c_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserManagement_vue_vue_type_template_id_d410203c_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/administrator-f/UserManagement.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/administrator-f/UserManagement.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/administrator-f/UserManagement.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserManagement.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/UserManagement.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/administrator-f/UserManagement.vue?vue&type=template&id=d410203c&lang=pug&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/administrator-f/UserManagement.vue?vue&type=template&id=d410203c&lang=pug& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagement_vue_vue_type_template_id_d410203c_lang_pug___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/pug-plain-loader!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserManagement.vue?vue&type=template&id=d410203c&lang=pug& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/pug-plain-loader/index.js!./node_modules/vue-loader/lib/index.js?!./resources/js/components/administrator-f/UserManagement.vue?vue&type=template&id=d410203c&lang=pug&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagement_vue_vue_type_template_id_d410203c_lang_pug___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_pug_plain_loader_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagement_vue_vue_type_template_id_d410203c_lang_pug___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -98331,8 +99158,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Workspace/Refix/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/Workspace/Refix/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

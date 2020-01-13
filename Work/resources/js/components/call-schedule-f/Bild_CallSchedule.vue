@@ -45,8 +45,8 @@ export default {
     //   arr[i].i = i;
     //   this.mplace = arr[0];
     // } //Распарсирование массива
-    this.timeTable = this._time_table; //Массив с расписанием
-    this.mplace = this.timeTable[0];
+    //this.timeTable = this._time_table; //Массив с расписанием
+    //this.mplace = this.timeTable[0];
   },
   methods: {
     sendQuery() {
