@@ -21,7 +21,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/panel_control','Admin\PanelControlController@index')->name('panel_control');
     Route::get('/file_management','Admin\FileManagmentController@index')->name('file_management');
     Route::get('/timetable','Admin\TimetableController@index')->name('timetable');
-    Route::get('/bild_callschedule','Admin\TimetableController@index')->name('bild_callschedule');
+    Route::get('/callschedule','Admin\CallScheduleController@index')->name('callschedule');
     
 });
 

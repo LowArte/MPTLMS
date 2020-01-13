@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Repositories\CallScheduleRepository;
 use Illuminate\Http\Request;
 
-class CallScheduleController extends Controller
+class CallScheduleController extends BaseController
 {
     /**
      * Show the application call schedule page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(CallScheduleRepository $callScheduleRepository)
     {
-        return view('roles.admin.call-schedule');
+        $timeTable = $callScheduleRepository->getCallSchedule();
+        return view('roles.admin.call-schedule',compact('timeTable'));
     }
 }

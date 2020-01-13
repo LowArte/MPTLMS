@@ -80,7 +80,7 @@ export default {
               {
                 icon: "today",
                 text: "Расписание звонков",
-                href: "/admin/bild_callschedule"
+                href: "/admin/callschedule"
               }
             ]
           },

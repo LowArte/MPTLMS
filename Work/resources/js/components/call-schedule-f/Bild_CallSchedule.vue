@@ -34,18 +34,19 @@ export default {
   }),
   props: {
     _time_table: {
-      type: String,
+      type: Array,
       default: null
     }
   }, //JSON расписания звонков
   created: function() {
-    let arr = JSON.parse(this._time_table); //Получение массива
-    for (let i = 0; i < arr.length; i++) {
-      arr[i].schedule = JSON.parse(arr[i].schedule);
-      arr[i].i = i;
-      this.mplace = arr[0];
-    } //Распарсирование массива
-    this.timeTable = arr; //Массив с расписанием
+    // let arr = JSON.parse(this._time_table); //Получение массива
+    // for (let i = 0; i < arr.length; i++) {
+    //   arr[i].schedule = JSON.parse(arr[i].schedule);
+    //   arr[i].i = i;
+    //   this.mplace = arr[0];
+    // } //Распарсирование массива
+    this.timeTable = this._time_table; //Массив с расписанием
+    this.mplace = this.timeTable[0];
   },
   methods: {
     sendQuery() {
