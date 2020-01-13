@@ -6,6 +6,8 @@ use App\Models\User as Model;
 use App\Modifications\BaseModification;
 use Hash;
 
+
+
 class CreateUserModification extends BaseModification
 {
     protected function getModelClass(){
@@ -13,14 +15,14 @@ class CreateUserModification extends BaseModification
     }
 
     public function addUserToDatabase($data){
-        $user = $this->startCondition()->select('email')->where('email',$data['email'])->toBase()->first();
+
+        $user = $this->startCondition()->select(['email'])->where('email',$data['email'])->toBase()->first();
         if($user){
             return false;
         }
 
         $user = new Model();
         $user->fill($data);
-        $user->password = Hash::make($data['password']);
         $user->save();
         
         return true;

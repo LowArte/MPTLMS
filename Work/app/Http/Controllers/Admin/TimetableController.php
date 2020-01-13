@@ -34,6 +34,7 @@ class TimetableController extends BaseController
                 "groups"=>$groups,
                 "selected_group"=>$groups[0]
             ),
+            'schedule'=>$schedule
         ]);
     }
 }
