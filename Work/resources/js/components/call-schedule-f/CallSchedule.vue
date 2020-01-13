@@ -18,6 +18,6 @@ export default {
       Type: String,
       default: null
     }
-  }
+  },
 };
 </script>

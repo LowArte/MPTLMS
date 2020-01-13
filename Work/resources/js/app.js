@@ -49,6 +49,7 @@ new Vue({
       'c-timetable':Timetable_C,
       'c-bild-timetable':BildTimetable_C,
       'c-call-schedule':CallSchedule_C,
-      'c-bild-call-schedule':BildCallSchedule_C
+      // 'c-bild-call-schedule':BildCallSchedule_C
+      // ! Написать фронт
     }
 });
