@@ -16,7 +16,7 @@
         </v-tab-item>
         <v-tab-item>
             <v-container mt-3 fluid grid-list-md text-xs-center pa-0>
-                <c-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-call-schedule>
+                <c-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}" :_places="{{json_encode($places) ?? null}}"></c-call-schedule>
             </v-container>
         </v-tab-item>
     </v-tabs>

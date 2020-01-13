@@ -2830,7 +2830,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
  //Маска
 
  //api для расписания звонков
@@ -2860,17 +2859,17 @@ __webpack_require__.r(__webpack_exports__);
     _time_table: {
       type: Array,
       "default": null
+    },
+    _places: {
+      type: Array,
+      "default": null
     }
   },
   //JSON расписания звонков
-  created: function created() {// let arr = JSON.parse(this._time_table); //Получение массива
-    // for (let i = 0; i < arr.length; i++) {
-    //   arr[i].schedule = JSON.parse(arr[i].schedule);
-    //   arr[i].i = i;
-    //   this.mplace = arr[0];
-    // } //Распарсирование массива
-    //this.timeTable = this._time_table; //Массив с расписанием
-    //this.mplace = this.timeTable[0];
+  created: function created() {
+    this.timeTable = this._time_table; //Массив с расписанием
+
+    this.mplace = this._places[0].id;
   },
   methods: {
     sendQuery: function sendQuery() {
@@ -41528,134 +41527,110 @@ var render = function() {
     "v-layout",
     { staticClass: "row" },
     [
-      _c("v-hover", {
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(ref) {
-              var hover = ref.hover
-              return [
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "mx-auto pa-1 max",
+      _c(
+        "v-card",
+        {
+          staticClass: "mx-auto pa-2",
+          attrs: { width: "100%", height: "auto" }
+        },
+        [
+          _c(
+            "v-form",
+            {
+              ref: "BildCallSchedule",
+              model: {
+                value: _vm.valid,
+                callback: function($$v) {
+                  _vm.valid = $$v
+                },
+                expression: "valid"
+              }
+            },
+            [
+              _c(
+                "v-card-text",
+                { attrs: { "text-center": "", title: "" } },
+                [
+                  _vm._v("Расписание звонков"),
+                  _c("v-select", {
+                    staticClass: "pa-0 mb-0 mt-2",
                     attrs: {
-                      width: "100%",
-                      height: "auto",
-                      elevation: hover ? 12 : 2
-                    }
-                  },
-                  [
-                    _c(
-                      "v-form",
-                      {
-                        ref: "BildCallSchedule",
-                        model: {
-                          value: _vm.valid,
-                          callback: function($$v) {
-                            _vm.valid = $$v
-                          },
-                          expression: "valid"
-                        }
+                      label: "Место проведения",
+                      solo: "",
+                      items: _vm._places,
+                      "item-value": "id",
+                      "item-text": "place_name"
+                    },
+                    model: {
+                      value: _vm.mplace,
+                      callback: function($$v) {
+                        _vm.mplace = $$v
                       },
-                      [
-                        _c(
-                          "v-card-text",
-                          { attrs: { "text-center": "", title: "" } },
-                          [
-                            _vm._v("Расписание звонков"),
-                            _c("v-select", {
-                              staticClass: "pa-0 mb-0 mt-2",
-                              attrs: {
-                                label: "Место проведения",
-                                solo: "",
-                                items: _vm.timeTable,
-                                "item-text": "place",
-                                "return-object": ""
-                              },
-                              model: {
-                                value: _vm.mplace,
-                                callback: function($$v) {
-                                  _vm.mplace = $$v
-                                },
-                                expression: "mplace"
-                              }
-                            }),
-                            _vm._l(
-                              Object.keys(_vm.timeTable[_vm.mplace.i].schedule),
-                              function(value) {
-                                return _c(
-                                  "v-card",
-                                  {
-                                    key: value,
-                                    staticClass: "pa-2",
-                                    attrs: {
-                                      width: "100%",
-                                      outlined: "",
-                                      tile: ""
-                                    }
-                                  },
-                                  [
-                                    _vm._v(_vm._s(value) + " пара"),
-                                    _c("v-text-field", {
-                                      directives: [
-                                        {
-                                          name: "mask",
-                                          rawName: "v-mask",
-                                          value: _vm.mask,
-                                          expression: "mask"
-                                        }
-                                      ],
-                                      attrs: {
-                                        hint: "(ЧЧ:ММ-ЧЧ:ММ)",
-                                        rules: _vm.inputRules,
-                                        label: "Начало/конец пары"
-                                      },
-                                      model: {
-                                        value:
-                                          _vm.timeTable[_vm.mplace.i].schedule[
-                                            value
-                                          ],
-                                        callback: function($$v) {
-                                          _vm.$set(
-                                            _vm.timeTable[_vm.mplace.i]
-                                              .schedule,
-                                            value,
-                                            $$v
-                                          )
-                                        },
-                                        expression:
-                                          "timeTable[mplace.i].schedule[value]"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              }
-                            ),
-                            _c(
-                              "v-btn",
+                      expression: "mplace"
+                    }
+                  }),
+                  _vm._l(
+                    Object.keys(_vm.timeTable[_vm.mplace - 1].schedule),
+                    function(value) {
+                      return _c(
+                        "v-card",
+                        {
+                          key: value,
+                          staticClass: "pa-2",
+                          attrs: { width: "100%", outlined: "", tile: "" }
+                        },
+                        [
+                          _vm._v(_vm._s(value) + " пара"),
+                          _c("v-text-field", {
+                            directives: [
                               {
-                                staticClass: "mt-2 justify-center",
-                                attrs: { color: "accent", block: "", dark: "" },
-                                on: { click: _vm.sendQuery }
+                                name: "mask",
+                                rawName: "v-mask",
+                                value: _vm.mask,
+                                expression: "mask"
+                              }
+                            ],
+                            attrs: {
+                              hint: "(ЧЧ:ММ-ЧЧ:ММ)",
+                              rules: _vm.inputRules,
+                              label: "Начало/конец пары"
+                            },
+                            model: {
+                              value:
+                                _vm.timeTable[_vm.mplace - 1].schedule[value],
+                              callback: function($$v) {
+                                _vm.$set(
+                                  _vm.timeTable[_vm.mplace - 1].schedule,
+                                  value,
+                                  $$v
+                                )
                               },
-                              [_vm._v("Принять")]
-                            )
-                          ],
-                          2
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      })
+                              expression: "timeTable[mplace-1].schedule[value]"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    }
+                  ),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "mt-2 justify-center",
+                      attrs: { color: "accent", block: "", dark: "" },
+                      on: { click: _vm.sendQuery }
+                    },
+                    [_vm._v("Принять")]
+                  )
+                ],
+                2
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
