@@ -44,48 +44,46 @@ export default {
           },
           {
             text: "Панель управления",
-            icon: "edit",
+            icon: "",
             children: [
               {
                 text: "Настройки сервера",
                 href: "/admin/panel_control",
-                icon: "settings"
+                icon: "build"
               },
               {
-                icon: "edit",
                 text: "Управление пользователями",
-                href: "/admin/user_managment"
+                href: "/admin/user_managment",
+                icon: "accessible"
               }
-              // ,
-              // {
-              //   icon: "edit",
-              //   text: "Управление файлами",
-              //   href: "/admin/file_management"
-              // }
+/*               ,
+              {
+                text: "Управление файлами",
+                href: "/admin/file_management",
+                icon: "insert_drive_file"
+              } */
             ]
           },
           {
-            text: "Панель рассписания",
-            icon: "today",
+            text: "Рассписания",
             children: [
               {
-                icon: "today",
                 text: "Расписание",
-                href: "/admin/timetable"
+                href: "/admin/timetable",
+                icon: "today"
               },
               {
-                icon: "find_replace",
-                text: "Замены",
-                href: "/admin/replacements"
+                text: "Изменения в расписании",
+                href: "/admin/replacements",
+                icon: "autorenew"
               },
               {
-                icon: "today",
                 text: "Расписание звонков",
-                href: "/admin/callschedule"
+                href: "/admin/callschedule",
+                icon: "alarm"
               }
             ]
           },
-
           {
             icon: "feedback",
             text: "Обращение пользователей",
