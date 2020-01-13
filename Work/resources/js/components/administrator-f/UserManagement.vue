@@ -24,6 +24,7 @@
                   v-btn.ma-2.dark(color="primary" v-on="on") Новый пользователь
                 v-card
                   v-card-title.span.headline {{ formTitle }}
+                  v-alert.ma-2(v-if="alert.type != null" :type="alert.type" transition="scale-transition") {{alert.text}}
                   v-card-text
                     v-layout.row
                       v-text-field(v-model="editedItem.thirdName" label="Фамилия")
@@ -43,6 +44,8 @@
                       v-btn(color="blue darken-1" text @click="save") Сохранить
             v-card-title.ma-0.ml-4.mr-4.pa-0
               v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
+          template(v-slot:item.text-disabled="{ item }")
+            v-card-text.ma-0.pa-0 {{adisabled[item['disabled']].name}}
           template(v-slot:item.action="{ item }")
             v-icon.small(@click="editItem(item)") edit
             v-icon.small(@click="deleteItem(item)") delete
@@ -61,13 +64,14 @@ export default {
   data: () => ({
     listusers: [], //Массив
     arrusersposts: [], //Массив постов
+    alert: {type:null, text: null}, //Alert
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых пользователей
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
-    adisabled: [{id: 0, name: "Свободен"}, {id: 1, name: "Заблокирован"}],
+    adisabled: [{id: 0, name: "Свободен"}, {id: 1, name: "Заблокирован"}], //Состояние блокировки
     headers: [
       {
         text: "№",
@@ -75,7 +79,7 @@ export default {
         value: "id"
       },
       { text: "Почта", value: "email", },
-      { text: "Роль", value: "post" },
+      { text: "Роль", value: "post.name" },
       { text: "Блокировка", value: "text-disabled" },
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
@@ -102,11 +106,10 @@ export default {
     }
   },
   //Получаем данные при старте
-  mounted() {
+  mounted() 
+  {
     this.listusers = this._listusers;
     this.arrusersposts = this._arrusersposts;
-    for(var i = 0; i < this.listusers.length; i++)
-      this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
   },
 
   computed: {
@@ -124,10 +127,8 @@ export default {
       apiuser
         .getUsers()
         .then(res => {
-          this.listusers = JSON.parse(res.data.users);
-          this.arrposts = JSON.parse(res.data.usersposts);
-          for(var i = 0; i < this.listusers.length; i++)
-            this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
+          this.listusers = res.data.users;
+          this.arrposts = res.data.usersposts;
         })
         .catch(ex => {
           console.log(ex);
@@ -157,19 +158,18 @@ export default {
     //Закрытие диалога
     close() {
       this.dialog = false;
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, {
-          id: "",
-          secName: "",
-          name: "",
-          thirdName: "",
-          email: "",
-          password: "",
-          post_id: "",
-          disabled: "",
-        });
-        this.editedIndex = -1;
-      }, 300);
+
+      this.editedItem = Object.assign({}, {
+        id: "",
+        secName: "",
+        name: "",
+        thirdName: "",
+        email: "",
+        password: "",
+        post_id: "",
+        disabled: "",
+      });
+      this.editedIndex = -1;
     },
 
     save() {
