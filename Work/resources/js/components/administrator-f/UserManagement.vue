@@ -60,20 +60,21 @@ export default {
   },
   data: () => ({
     listusers: [], //Массив
+    arrusersposts: [], //Массив постов
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых пользователей
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
-    adisabled: [{ id: 0, name: "Свободен" }, { id: 1, name: "Заблокирован" }],
+    adisabled: [{id: 0, name: "Свободен"}, {id: 1, name: "Заблокирован"}],
     headers: [
       {
         text: "№",
         align: "left",
         value: "id"
       },
-      { text: "Почта", value: "email" },
+      { text: "Почта", value: "email", },
       { text: "Роль", value: "post" },
       { text: "Блокировка", value: "text-disabled" },
       { text: "Действия", value: "action", sortable: false }
@@ -87,19 +88,27 @@ export default {
       email: "",
       password: "",
       post_id: "",
-      disabled: ""
+      disabled: "",
     } //Массив с данным для сохранения в бд
   }),
   props: {
     _listusers: {
       data: Array,
       default: null
-    }, //JSON пользователей
+    },
     _arrusersposts: {
       type: Array,
       default: null
     }
   },
+  //Получаем данные при старте
+  mounted() {
+    this.listusers = this._listusers;
+    this.arrusersposts = this._arrusersposts;
+    for(var i = 0; i < this.listusers.length; i++)
+      this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;
+  },
+
   computed: {
     //Получение названия диалога
     formTitle() {
@@ -108,14 +117,8 @@ export default {
         : "Редактировать пользователя";
     }
   },
+
   methods: {
-    mounted() {
-      this.listusers = this._listusers;
-      //this.arrusersposts = this._arrusersposts;
-      console.log(this.listusers);
-      /*for(var i = 0; i < this.listusers.length; i++)
-        this.listusers[i]['text-disabled'] = this.adisabled[this.listusers[i]['disabled']].name;*/
-    },
     //Иницилизации данных
     initialize(){
       apiuser
@@ -130,42 +133,41 @@ export default {
           console.log(ex);
         });
     },
-    /*//Редактирование учётной записи
-    editItem(item) {
-      this.editedIndex = this._listusers.indexOf(item);
+    //Редактирование учётной записи
+    editItem(item) 
+    {
+      this.editedIndex = this.listusers.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
     //Удаление учётной записи
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       confirm("Вы действительно хотите удалить данного пользователя?") &&
-        apiuser
-          .deleteUser({ id: item.id })
-          .then(res => {
-            alert("Удалён!");
-            this.initialize();
-          })
-          .catch(ex => {
-            console.log(ex);
-          });
+      apiuser
+        .deleteUser({id: item.id})
+        .then(res => {
+          alert("Удалён!");
+          this.initialize();
+        })
+        .catch(ex => {
+          console.log(ex);
+        });
     },
     //Закрытие диалога
     close() {
       this.dialog = false;
       setTimeout(() => {
-        this.editedItem = Object.assign(
-          {},
-          {
-            id: "",
-            secName: "",
-            name: "",
-            thirdName: "",
-            email: "",
-            password: "",
-            post_id: "",
-            disabled: ""
-          }
-        );
+        this.editedItem = Object.assign({}, {
+          id: "",
+          secName: "",
+          name: "",
+          thirdName: "",
+          email: "",
+          password: "",
+          post_id: "",
+          disabled: "",
+        });
         this.editedIndex = -1;
       }, 300);
     },
@@ -178,8 +180,9 @@ export default {
           user: this.editedItem
         })
         .then(res => {
-          switch (res.data.success) {
-            case "erroremail":
+          switch(res.data.success)
+          {
+            case 'erroremail':
               alert("Почта уже используется!");
               break;
             case true:
@@ -193,7 +196,13 @@ export default {
           alert("Сохранение не было произведено!");
           console.log(ex);
         });
-    }*/
+    },
+
+    parseIntLoc(val) {
+      if (val == "" || val == null || val == "0")
+        return 1;
+      return parseInt(val);
+    }
   }
 };
 </script>
