@@ -25,6 +25,7 @@ Route::get(
                 "props"   => array()
             )
         );
+        UserNotification::notify("Тестовое уведомление",null,2);
         return view('welcome', ["panel_array" => json_encode($panel_array)]);
     }
 );
