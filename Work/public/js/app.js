@@ -3134,37 +3134,37 @@ __webpack_require__.r(__webpack_exports__);
             href: "/admin/home"
           }, {
             text: "Панель управления",
-            icon: "edit",
+            icon: "",
             children: [{
               text: "Настройки сервера",
               href: "/admin/panel_control",
-              icon: "settings"
+              icon: "build"
             }, {
-              icon: "edit",
               text: "Управление пользователями",
-              href: "/admin/user_managment"
-            } // ,
-            // {
-            //   icon: "edit",
-            //   text: "Управление файлами",
-            //   href: "/admin/file_management"
-            // }
+              href: "/admin/user_managment",
+              icon: "accessible"
+            }
+            /*               ,
+                          {
+                            text: "Управление файлами",
+                            href: "/admin/file_management",
+                            icon: "insert_drive_file"
+                          } */
             ]
           }, {
-            text: "Панель рассписания",
-            icon: "today",
+            text: "Рассписания",
             children: [{
-              icon: "today",
               text: "Расписание",
-              href: "/admin/timetable"
+              href: "/admin/timetable",
+              icon: "today"
             }, {
-              icon: "find_replace",
-              text: "Замены",
-              href: "/admin/replacements"
+              text: "Изменения в расписании",
+              href: "/admin/replacements",
+              icon: "autorenew"
             }, {
-              icon: "today",
               text: "Расписание звонков",
-              href: "/admin/callschedule"
+              href: "/admin/callschedule",
+              icon: "alarm"
             }]
           }, {
             icon: "feedback",
@@ -41793,13 +41793,13 @@ var render = function() {
     _vm._l(_vm._time_table, function(item, item_index) {
       return _c(
         "v-flex",
-        { key: item_index, staticClass: "my-2" },
+        { key: item_index },
         [
           _c(
             "v-card",
             {
               staticClass: "mx-auto",
-              attrs: { "max-width": "500px", height: "100%", elevation: 0 }
+              attrs: { "max-width": "420px", height: "100%", elevation: 0 }
             },
             [
               _c(
@@ -97666,11 +97666,11 @@ var map = {
 	],
 	"./information-page-f/DrivingSchool": [
 		"./resources/js/components/information-page-f/DrivingSchool.vue",
-		1
+		0
 	],
 	"./information-page-f/DrivingSchool.vue": [
 		"./resources/js/components/information-page-f/DrivingSchool.vue",
-		1
+		0
 	],
 	"./information-page-f/SpecialtiesList": [
 		"./resources/js/components/information-page-f/SpecialtiesList.vue"
@@ -99158,8 +99158,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

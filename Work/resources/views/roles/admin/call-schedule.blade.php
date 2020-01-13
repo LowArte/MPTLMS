@@ -1,18 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<v-tabs grow >
-    <v-tab>
-        Звонки
-    </v-tab>
-    <v-tab>
-        Конструктор
-    </v-tab>
-    <v-tab-item>
-        <c-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-call-schedule>
-    </v-tab-item>
-    <v-tab-item>
-        <c-bild-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-bild-call-schedule>
-    </v-tab-item>
-</v-tabs>
+<v-card pa-0 ma-0 :elevation='0'>
+    <v-tabs light mobile-break-point="0" centered>
+        <v-tab>
+            Расписание
+        </v-tab>
+        <v-tab>
+            Конструктор
+        </v-tab>
+        <v-tab-item>
+            <v-container mt-3 fluid grid-list-md text-xs-center pa-0>
+                <c-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-call-schedule>
+            </v-container>
+        </v-tab-item>
+        <v-tab-item>
+            <v-container mt-3 fluid grid-list-md text-xs-center pa-0>
+                <c-call-schedule :_time_table="{{json_encode($timeTable) ?? null}}"></c-call-schedule>
+            </v-container>
+        </v-tab-item>
+    </v-tabs>
+</v-card>
 @endsection
