@@ -7,7 +7,7 @@
             <span class="headline">Новый пароль</span>
         </v-card-title>
         @if ($errors->any())
-        <v-alert text dense type="error">
+        <v-alert  text dense type="error">
             @foreach ($errors->all() as $error)
                 <p>{{ $error }}</p>  
             @endforeach

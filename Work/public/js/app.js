@@ -3200,7 +3200,7 @@ __webpack_require__.r(__webpack_exports__);
               text: "Справки",
               href: "/certificate"
             }, {
-              icon: "tag_faces",
+              icon: "favorite",
               text: "Психолог",
               href: "/certificate"
             }]

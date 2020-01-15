@@ -140,7 +140,7 @@ export default {
                 href: "/certificate"
               },
               {
-                icon: "tag_faces",
+                icon: "favorite",
                 text: "Психолог",
                 href: "/certificate"
               }
