@@ -2198,7 +2198,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3167,33 +3166,40 @@ __webpack_require__.r(__webpack_exports__);
             text: "Студенческая карточка",
             href: "/card"
           }, {
-            icon: "today",
-            text: "Расписание",
-            href: "/timetable"
+            text: "Учебные процесс",
+            children: [{
+              icon: "today",
+              text: "Расписание",
+              href: "/certificate"
+            }, {
+              icon: "autorenew",
+              text: "Изменеия в расписание",
+              href: "/detailedir"
+            }, {
+              icon: "",
+              text: "Домашнее задание",
+              href: "/detailedir"
+            }, {
+              icon: "show_chart",
+              text: "Успеваемость",
+              href: "/home"
+            }]
           }, {
-            icon: "autorenew",
-            text: "Изменения в расписании",
-            href: "/replaces"
-          },
-          /* 
-            {
-              icon: 'show_chart',
-              text: 'Успеваемость',
-              href: '/home'
-            }, */
-          // {
-          //   icon: 'business_center',
-          //   text: 'Дополнительное образование',
-          //   href: '/detailedir'
-          // },
-
-          /*
-          {
-            icon: 'school',
-            text: 'Преподаватели',
-            href: '/home'
-          }, */
-          {
+            icon: "school",
+            text: "Преподаватели",
+            href: "/home"
+          }, {
+            text: "Дополнительное образование",
+            children: [{
+              icon: "",
+              text: "Текущие программы ДО",
+              href: "/certificate"
+            }, {
+              icon: "business_center",
+              text: "Программы ДО",
+              href: "/detailedir"
+            }]
+          }, {
             text: "Услуги",
             children: [{
               icon: "edit",
@@ -3204,24 +3210,15 @@ __webpack_require__.r(__webpack_exports__);
               text: "Психолог",
               href: "/certificate"
             }]
-          }, {},
-          /* 
-          {
-            icon: 'home',
-            text: 'Домашнее задание',
-            href: '/home'
-          }, */
-
-          /*{
-              icon: 'storefront',
-              text: 'Портфолио',
-              href: '/home'
-            }, {
-              icon: 'layers',
-              text: 'Базы практики',
-              href: '/home'
-            },*/
-          {
+          }, {
+            icon: "storefront",
+            text: "Портфолио",
+            href: "/home"
+          }, {
+            icon: "layers",
+            text: "Базы практики",
+            href: "/home"
+          }, {
             icon: "feedback",
             text: "Обратная связь",
             href: "/feedback"
@@ -97489,6 +97486,14 @@ var map = {
 	"./additional-education-f/Retraining.vue": [
 		"./resources/js/components/additional-education-f/Retraining.vue"
 	],
+	"./additional-education-f/components/C_DialogRequest": [
+		"./resources/js/components/additional-education-f/components/C_DialogRequest.vue",
+		0
+	],
+	"./additional-education-f/components/C_DialogRequest.vue": [
+		"./resources/js/components/additional-education-f/components/C_DialogRequest.vue",
+		0
+	],
 	"./additional-education-f/components/Com_Ret": [
 		"./resources/js/components/additional-education-f/components/Com_Ret.vue"
 	],
@@ -97539,11 +97544,11 @@ var map = {
 	],
 	"./information-page-f/DrivingSchool": [
 		"./resources/js/components/information-page-f/DrivingSchool.vue",
-		0
+		1
 	],
 	"./information-page-f/DrivingSchool.vue": [
 		"./resources/js/components/information-page-f/DrivingSchool.vue",
-		0
+		1
 	],
 	"./information-page-f/SpecialtiesList": [
 		"./resources/js/components/information-page-f/SpecialtiesList.vue"
@@ -99031,8 +99036,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

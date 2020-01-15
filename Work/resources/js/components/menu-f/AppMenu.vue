@@ -105,32 +105,50 @@ export default {
             href: "/card"
           },
           {
-            icon: "today",
-            text: "Расписание",
-            href: "/timetable"
+            text: "Учебные процесс",
+            children: [
+              {
+                icon: "today",
+                text: "Расписание",
+                href: "/certificate"
+              },
+              {
+                icon: "autorenew",
+                text: "Изменеия в расписание",
+                href: "/detailedir"
+              },
+              {
+                icon: "",
+                text: "Домашнее задание",
+                href: "/detailedir"
+              },
+              {
+                icon: "show_chart",
+                text: "Успеваемость",
+                href: "/home"
+              }
+            ]
           },
           {
-            icon: "autorenew",
-            text: "Изменения в расписании",
-            href: "/replaces"
+            icon: "school",
+            text: "Преподаватели",
+            href: "/home"
           },
-          /* 
-            {
-              icon: 'show_chart',
-              text: 'Успеваемость',
-              href: '/home'
-            }, */
-          // {
-          //   icon: 'business_center',
-          //   text: 'Дополнительное образование',
-          //   href: '/detailedir'
-          // },
-          /*
           {
-            icon: 'school',
-            text: 'Преподаватели',
-            href: '/home'
-          }, */
+            text: "Дополнительное образование",
+            children: [
+              {
+                icon: "",
+                text: "Текущие программы ДО",
+                href: "/certificate"
+              },
+              {
+                icon: "business_center",
+                text: "Программы ДО",
+                href: "/detailedir"
+              }
+            ]
+          },
           {
             text: "Услуги",
             children: [
@@ -146,22 +164,16 @@ export default {
               }
             ]
           },
-          {},
-          /* 
           {
-            icon: 'home',
-            text: 'Домашнее задание',
-            href: '/home'
-          }, */
-          /*{
-              icon: 'storefront',
-              text: 'Портфолио',
-              href: '/home'
-            }, {
-              icon: 'layers',
-              text: 'Базы практики',
-              href: '/home'
-            },*/
+            icon: "storefront",
+            text: "Портфолио",
+            href: "/home"
+          },
+          {
+            icon: "layers",
+            text: "Базы практики",
+            href: "/home"
+          },
           {
             icon: "feedback",
             text: "Обратная связь",
