@@ -34,6 +34,7 @@
               v-spacer
               v-btn(color="red" text @click="dialog = false") Отмена
               v-btn(color="primary" text) Отправить
+              // ! Заменить диалог на отдельную страницу
         v-dialog(v-model="dialogMore" fullscreen transition="dialog-bottom-transition")
           v-card
             v-toolbar(dark color="primary")
@@ -43,8 +44,6 @@
               v-toolbar-items
                 v-btn(dark text @click="dialog = true") Подать заявку
             c-detailed-info(:_info="_item")
-        
-   
 </template>
 
 <script>
