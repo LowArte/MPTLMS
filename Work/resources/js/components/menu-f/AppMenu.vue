@@ -119,6 +119,11 @@ export default {
               },
               {
                 icon: "",
+                text: "Расписание экзаменов",
+                href: "/detailedir"
+              },
+              {
+                icon: "",
                 text: "Домашнее задание",
                 href: "/detailedir"
               },
@@ -126,26 +131,36 @@ export default {
                 icon: "show_chart",
                 text: "Успеваемость",
                 href: "/home"
+              },
+              {
+                icon: "school",
+                text: "Преподаватели",
+                href: "/home"
+              },
+              {
+                icon: "",
+                text: "Тесты по дисциплинам",
+                href: "/home"
               }
             ]
           },
           {
-            icon: "school",
-            text: "Преподаватели",
-            href: "/home"
-          },
-          {
             text: "Дополнительное образование",
             children: [
+              {
+                icon: "business_center",
+                text: "Доступные программы",
+                href: "/detailedir"
+              },
               {
                 icon: "",
                 text: "Текущие программы ДО",
                 href: "/certificate"
               },
               {
-                icon: "business_center",
-                text: "Программы ДО",
-                href: "/detailedir"
+                icon: "",
+                text: "Автошкола",
+                href: "/drivingschool"
               }
             ]
           },
@@ -154,7 +169,12 @@ export default {
             children: [
               {
                 icon: "edit",
-                text: "Справки",
+                text: "Справки и направления",
+                href: "/certificate"
+              },
+              {
+                icon: "",
+                text: "Стипендия",
                 href: "/certificate"
               },
               {
@@ -170,9 +190,39 @@ export default {
             href: "/home"
           },
           {
+            icon: "",
+            text: "Личный репозиторий",
+            href: "/home"
+          },
+          {
             icon: "layers",
             text: "Базы практики",
             href: "/home"
+          },
+          {
+            icon: "",
+            text: "Студенческий совет",
+            href: "/home"
+          },
+          {
+            text: "Студенческая жизнь",
+            children: [
+              {
+                icon: "",
+                text: "Фотоархив",
+                href: "/certificate"
+              },
+              {
+                icon: "",
+                text: "Соревнования и чемпионаты",
+                href: "/certificate"
+              },
+              {
+                icon: "",
+                text: "Спортивная жизнь",
+                href: "/certificate"
+              }
+            ]
           },
           {
             icon: "feedback",
@@ -217,7 +267,7 @@ export default {
         ]);
       }
       case 4: {
-        //Учебная часть
+        //Учебная часть (manager)
         return (this.items = [
           {
             icon: "home",

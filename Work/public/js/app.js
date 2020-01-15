@@ -3177,33 +3177,49 @@ __webpack_require__.r(__webpack_exports__);
               href: "/detailedir"
             }, {
               icon: "",
+              text: "Расписание экзаменов",
+              href: "/detailedir"
+            }, {
+              icon: "",
               text: "Домашнее задание",
               href: "/detailedir"
             }, {
               icon: "show_chart",
               text: "Успеваемость",
               href: "/home"
+            }, {
+              icon: "school",
+              text: "Преподаватели",
+              href: "/home"
+            }, {
+              icon: "",
+              text: "Тесты по дисциплинам",
+              href: "/home"
             }]
-          }, {
-            icon: "school",
-            text: "Преподаватели",
-            href: "/home"
           }, {
             text: "Дополнительное образование",
             children: [{
+              icon: "business_center",
+              text: "Доступные программы",
+              href: "/detailedir"
+            }, {
               icon: "",
               text: "Текущие программы ДО",
               href: "/certificate"
             }, {
-              icon: "business_center",
-              text: "Программы ДО",
-              href: "/detailedir"
+              icon: "",
+              text: "Автошкола",
+              href: "/drivingschool"
             }]
           }, {
             text: "Услуги",
             children: [{
               icon: "edit",
-              text: "Справки",
+              text: "Справки и направления",
+              href: "/certificate"
+            }, {
+              icon: "",
+              text: "Стипендия",
               href: "/certificate"
             }, {
               icon: "favorite",
@@ -3215,9 +3231,32 @@ __webpack_require__.r(__webpack_exports__);
             text: "Портфолио",
             href: "/home"
           }, {
+            icon: "",
+            text: "Личный репозиторий",
+            href: "/home"
+          }, {
             icon: "layers",
             text: "Базы практики",
             href: "/home"
+          }, {
+            icon: "",
+            text: "Студенческий совет",
+            href: "/home"
+          }, {
+            text: "Студенческая жизнь",
+            children: [{
+              icon: "",
+              text: "Фотоархив",
+              href: "/certificate"
+            }, {
+              icon: "",
+              text: "Соревнования и чемпионаты",
+              href: "/certificate"
+            }, {
+              icon: "",
+              text: "Спортивная жизнь",
+              href: "/certificate"
+            }]
           }, {
             icon: "feedback",
             text: "Обратная связь",
@@ -3261,7 +3300,7 @@ __webpack_require__.r(__webpack_exports__);
 
       case 4:
         {
-          //Учебная часть
+          //Учебная часть (manager)
           return this.items = [{
             icon: "home",
             text: "Главная",
@@ -99003,13 +99042,11 @@ var opts = {
     themes: {
       light: {
         primary: '#434343',
-        secondary: '#FFFFFF',
-        accent: '#FF3D00',
-        error: '#FF3D00',
+        accent: '#CC2222',
+        error: '#CC2222',
         info: '#4066FF',
-        success: '#FF3D00',
-        warning: '#FFCA28',
-        subsidiary: '#C3E88D'
+        success: '#7EB03D',
+        warning: '#FFCA28'
       }
     }
   }
@@ -99036,8 +99073,8 @@ var opts = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Artem\Documents\GitHub\MPTLMS2\MPTLMS\Work\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
