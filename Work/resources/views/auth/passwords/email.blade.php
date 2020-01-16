@@ -18,7 +18,7 @@
             @csrf
             <v-text-field label="E-mail" name="email" required></v-text-field>
             <v-card-actions class="text-right">
-              <v-btn color="accent" text>Отмена</v-btn>
+              <v-btn color="accent" text href="/login">Отмена</v-btn>
               <v-spacer></v-spacer>
               <v-btn type="submit" text> Отправить</v-btn>
             </v-card-actions>
