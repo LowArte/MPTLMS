@@ -11,7 +11,7 @@
                     v-list-item-action(v-if="child.icon")
                         v-icon {{ child.icon }}
                     v-list-item-content
-                        v-list-item-title {{ child.text }}
+                        v-list-item-title.pl-4 {{ child.text }}
             v-list-item(v-else @click="menuItemSelected(item)")      
                 v-list-item-action
                     v-icon {{ item.icon }}
@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     switch (this._role) {
-      case "admin": {
+      case "student": {
         //Администраторы
         return (this.items = [
           {
@@ -44,7 +44,6 @@ export default {
           },
           {
             text: "Панель управления",
-            icon: "",
             children: [
               {
                 text: "Настройки сервера",
@@ -91,143 +90,132 @@ export default {
           }
         ]);
       }
-      case "student": {
+      case "admin": {
         //Студент
         return (this.items = [
           {
             icon: "home",
             text: "Главная",
-            href: "/home"
+            href: "/student/home"
           },
           {
             icon: "portrait",
-            text: "Студенческая карточка",
-            href: "/card"
+            text: "Профиль",
+            href: "/student/bio"
           },
           {
             text: "Учебные процесс",
+            icon: "school",
             children: [
               {
-                icon: "today",
+                icon: "",
                 text: "Расписание",
-                href: "/certificate"
+                href: "/student/timetable"
               },
               {
-                icon: "autorenew",
+                icon: "",
                 text: "Изменеия в расписание",
-                href: "/detailedir"
+                href: "/student/changes"
               },
               {
                 icon: "",
                 text: "Расписание экзаменов",
-                href: "/detailedir"
+                href: "/student/exams"
               },
               {
                 icon: "",
                 text: "Домашнее задание",
-                href: "/detailedir"
-              },
-              {
-                icon: "show_chart",
-                text: "Успеваемость",
-                href: "/home"
-              },
-              {
-                icon: "school",
-                text: "Преподаватели",
-                href: "/home"
+                href: "/student/homework"
               },
               {
                 icon: "",
-                text: "Тесты по дисциплинам",
-                href: "/home"
+                text: "Успеваемость",
+                href: "/student/progress"
+              },
+              {
+                icon: "",
+                text: "Преподаватели",
+                href: "/student/teachers"
               }
             ]
           },
           {
-            text: "Дополнительное образование",
+            text: "ДО",
+            icon: "business_center",
             children: [
               {
-                icon: "business_center",
-                text: "Доступные программы",
-                href: "/detailedir"
-              },
-              {
                 icon: "",
-                text: "Текущие программы ДО",
-                href: "/certificate"
+                text: "Программы",
+                href: "/student/blueprints"
               },
               {
                 icon: "",
                 text: "Автошкола",
-                href: "/drivingschool"
+                href: "/student/drivingschool"
               }
             ]
           },
           {
             text: "Услуги",
+            icon: "beenhere",
             children: [
               {
-                icon: "edit",
+                icon: "",
                 text: "Справки и направления",
-                href: "/certificate"
+                href: "/student/certificate"
               },
               {
                 icon: "",
                 text: "Стипендия",
-                href: "/certificate"
+                href: "/student/petition"
               },
               {
-                icon: "favorite",
+                icon: "",
                 text: "Психолог",
-                href: "/certificate"
+                href: "/student/psych"
               }
             ]
           },
           {
-            icon: "storefront",
-            text: "Портфолио",
-            href: "/home"
-          },
-          {
-            icon: "",
-            text: "Личный репозиторий",
-            href: "/home"
-          },
-          {
-            icon: "layers",
-            text: "Базы практики",
-            href: "/home"
-          },
-          {
-            icon: "",
-            text: "Студенческий совет",
-            href: "/home"
-          },
-          {
             text: "Студенческая жизнь",
+            icon: "palette",
             children: [
               {
                 icon: "",
                 text: "Фотоархив",
-                href: "/certificate"
+                href: "/student/photos"
               },
               {
                 icon: "",
                 text: "Соревнования и чемпионаты",
-                href: "/certificate"
+                href: "/student/competitions"
               },
               {
                 icon: "",
                 text: "Спортивная жизнь",
-                href: "/certificate"
+                href: "/student/sportlife"
               }
             ]
           },
           {
+            icon: "cloud",
+            text: "Хранилище данных",
+            href: "/student/datastorage"
+          },
+          {
+            icon: "layers",
+            text: "Базы практики",
+            href: "/student/plants"
+          },
+          {
+            icon: "group",
+            text: "Студенческий совет",
+            href: "/student/convocation"
+          },
+          {
             icon: "feedback",
             text: "Обратная связь",
-            href: "/feedback"
+            href: "/student/feedback"
           }
         ]);
       }

@@ -3106,7 +3106,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     switch (this._role) {
-      case "admin":
+      case "student":
         {
           //Администраторы
           return this.items = [{
@@ -3115,7 +3115,6 @@ __webpack_require__.r(__webpack_exports__);
             href: "/admin/home"
           }, {
             text: "Панель управления",
-            icon: "",
             children: [{
               text: "Настройки сервера",
               href: "/admin/panel_control",
@@ -3154,113 +3153,105 @@ __webpack_require__.r(__webpack_exports__);
           }];
         }
 
-      case "student":
+      case "admin":
         {
           //Студент
           return this.items = [{
             icon: "home",
             text: "Главная",
-            href: "/home"
+            href: "/student/home"
           }, {
             icon: "portrait",
-            text: "Студенческая карточка",
-            href: "/card"
+            text: "Профиль",
+            href: "/student/bio"
           }, {
             text: "Учебные процесс",
+            icon: "school",
             children: [{
-              icon: "today",
+              icon: "",
               text: "Расписание",
-              href: "/certificate"
+              href: "/student/timetable"
             }, {
-              icon: "autorenew",
+              icon: "",
               text: "Изменеия в расписание",
-              href: "/detailedir"
+              href: "/student/changes"
             }, {
               icon: "",
               text: "Расписание экзаменов",
-              href: "/detailedir"
+              href: "/student/exams"
             }, {
               icon: "",
               text: "Домашнее задание",
-              href: "/detailedir"
-            }, {
-              icon: "show_chart",
-              text: "Успеваемость",
-              href: "/home"
-            }, {
-              icon: "school",
-              text: "Преподаватели",
-              href: "/home"
+              href: "/student/homework"
             }, {
               icon: "",
-              text: "Тесты по дисциплинам",
-              href: "/home"
+              text: "Успеваемость",
+              href: "/student/progress"
+            }, {
+              icon: "",
+              text: "Преподаватели",
+              href: "/student/teachers"
             }]
           }, {
-            text: "Дополнительное образование",
+            text: "ДО",
+            icon: "business_center",
             children: [{
-              icon: "business_center",
-              text: "Доступные программы",
-              href: "/detailedir"
-            }, {
               icon: "",
-              text: "Текущие программы ДО",
-              href: "/certificate"
+              text: "Программы",
+              href: "/student/blueprints"
             }, {
               icon: "",
               text: "Автошкола",
-              href: "/drivingschool"
+              href: "/student/drivingschool"
             }]
           }, {
             text: "Услуги",
+            icon: "beenhere",
             children: [{
-              icon: "edit",
+              icon: "",
               text: "Справки и направления",
-              href: "/certificate"
+              href: "/student/certificate"
             }, {
               icon: "",
               text: "Стипендия",
-              href: "/certificate"
+              href: "/student/petition"
             }, {
-              icon: "favorite",
+              icon: "",
               text: "Психолог",
-              href: "/certificate"
+              href: "/student/psych"
             }]
           }, {
-            icon: "storefront",
-            text: "Портфолио",
-            href: "/home"
-          }, {
-            icon: "",
-            text: "Личный репозиторий",
-            href: "/home"
-          }, {
-            icon: "layers",
-            text: "Базы практики",
-            href: "/home"
-          }, {
-            icon: "",
-            text: "Студенческий совет",
-            href: "/home"
-          }, {
             text: "Студенческая жизнь",
+            icon: "palette",
             children: [{
               icon: "",
               text: "Фотоархив",
-              href: "/certificate"
+              href: "/student/photos"
             }, {
               icon: "",
               text: "Соревнования и чемпионаты",
-              href: "/certificate"
+              href: "/student/competitions"
             }, {
               icon: "",
               text: "Спортивная жизнь",
-              href: "/certificate"
+              href: "/student/sportlife"
             }]
+          }, {
+            icon: "cloud",
+            text: "Хранилище данных",
+            href: "/student/datastorage"
+          }, {
+            icon: "layers",
+            text: "Базы практики",
+            href: "/student/plants"
+          }, {
+            icon: "group",
+            text: "Студенческий совет",
+            href: "/student/convocation"
           }, {
             icon: "feedback",
             text: "Обратная связь",
-            href: "/feedback"
+            href: "/student/feedback"
           }];
         }
 
@@ -42006,7 +41997,11 @@ var render = function() {
                         : _vm._e(),
                       _c(
                         "v-list-item-content",
-                        [_c("v-list-item-title", [_vm._v(_vm._s(child.text))])],
+                        [
+                          _c("v-list-item-title", { staticClass: "pl-4" }, [
+                            _vm._v(_vm._s(child.text))
+                          ])
+                        ],
                         1
                       )
                     ],
@@ -99042,7 +99037,7 @@ var opts = {
     themes: {
       light: {
         primary: '#434343',
-        accent: '#CC2222',
+        accent: '#FE532C',
         error: '#CC2222',
         info: '#4066FF',
         success: '#7EB03D',
