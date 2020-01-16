@@ -2594,14 +2594,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
  //api для пользователей
 
  //маски vue
@@ -2635,7 +2627,7 @@ __webpack_require__.r(__webpack_exports__);
       //Активатор диалога
       adisabled: [{
         id: 0,
-        name: "Блокировка отсутсвует"
+        name: "Разблокирован"
       }, {
         id: 1,
         name: "Заблокирован"
@@ -2717,7 +2709,7 @@ __webpack_require__.r(__webpack_exports__);
       confirm("Вы действительно хотите удалить данного пользователя?") && _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].deleteUser({
         id: item.id
       }).then(function (res) {
-        alert("Удалён!");
+        alert("Удалён!"); //! Перенести в другое тип встроенных уведомлений
 
         _this2.initialize();
       })["catch"](function (ex) {
@@ -2748,11 +2740,12 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this3.initialize();
 
-        alert("Сохранён!");
+        alert("Сохранён!"); //! Перенести в другое тип встроенных уведомлений
 
         _this3.close();
       })["catch"](function (ex) {
-        alert("Сохранение не было произведено!");
+        alert("Сохранение не было произведено!"); //! Перенести в другое тип встроенных уведомлений
+
         console.log(ex);
       });
     }
@@ -41033,311 +41026,210 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    { staticClass: "row" },
+    "v-card",
+    {
+      staticClass: "mx-auto pa-2",
+      attrs: { width: "100%", height: "auto", outline: "" }
+    },
     [
-      _c(
-        "v-card",
-        {
-          staticClass: "mx-auto pa-2",
-          attrs: { width: "100%", height: "auto", outline: "" }
+      _c("v-data-table", {
+        staticClass: "elevation-0 pa-0 ma-0",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.listusers,
+          search: _vm.search,
+          "item-key": "id",
+          "no-results-text": "Нет результатов",
+          "no-data-text": "Нет результатов",
+          page: _vm.page,
+          "hide-default-footer": "",
+          "items-per-page": _vm.itemsPerPage
         },
-        [
-          _c("v-data-table", {
-            staticClass: "elevation-0 pa-0 ma-0",
-            attrs: {
-              headers: _vm.headers,
-              items: _vm.listusers,
-              search: _vm.search,
-              "item-key": "id",
-              "no-results-text": "Нет результатов",
-              "no-data-text": "Нет результатов",
-              page: _vm.page,
-              "hide-default-footer": "",
-              "items-per-page": _vm.itemsPerPage
-            },
-            on: {
-              "update:page": function($event) {
-                _vm.page = $event
-              },
-              "page-count": function($event) {
-                _vm.pageCount = $event
-              }
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "top",
-                fn: function() {
-                  return [
-                    _c(
-                      "v-toolbar",
-                      { attrs: { color: "white", flat: "" } },
-                      [
-                        _c(
-                          "v-toolbar-title",
-                          [
-                            _c(
-                              "v-card-text",
-                              { staticClass: "my-2 ma-0 pa-0 title" },
-                              [_vm._v("Управление пользователями")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _c(
-                      "v-layout",
+        on: {
+          "update:page": function($event) {
+            _vm.page = $event
+          },
+          "page-count": function($event) {
+            _vm.pageCount = $event
+          }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "top",
+            fn: function() {
+              return [
+                _c(
+                  "v-card-title",
+                  { staticClass: "my-2 ma-0 py-2 text-truncate" },
+                  [_vm._v("CRUD - пользователи")]
+                ),
+                _c(
+                  "v-btn",
+                  {
+                    staticClass: "ma-2 ml-0",
+                    attrs: { text: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.initialize()
+                      }
+                    }
+                  },
+                  [_c("v-icon", [_vm._v("refresh")])],
+                  1
+                ),
+                _c(
+                  "v-dialog",
+                  {
+                    attrs: { "max-width": "500px" },
+                    scopedSlots: _vm._u([
                       {
-                        staticClass:
-                          "row pa-0 align-self-center justify-center",
-                        attrs: { sm: "2", md: "0" }
-                      },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            staticClass: "dark ma-2",
-                            attrs: { color: "primary" },
-                            on: {
-                              click: function($event) {
-                                return _vm.initialize()
-                              }
-                            }
-                          },
-                          [_vm._v("Обновить")]
-                        ),
-                        _c(
-                          "v-dialog",
-                          {
-                            attrs: { "max-width": "500px" },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "activator",
-                                fn: function(ref) {
-                                  var on = ref.on
-                                  return [
-                                    _c(
-                                      "v-btn",
-                                      _vm._g(
-                                        {
-                                          staticClass: "ma-2 dark",
-                                          attrs: { color: "primary" }
-                                        },
-                                        on
-                                      ),
-                                      [_vm._v("Новый пользователь")]
-                                    )
-                                  ]
-                                }
-                              }
-                            ]),
-                            model: {
-                              value: _vm.dialog,
-                              callback: function($$v) {
-                                _vm.dialog = $$v
-                              },
-                              expression: "dialog"
-                            }
-                          },
-                          [
+                        key: "activator",
+                        fn: function(ref) {
+                          var on = ref.on
+                          return [
                             _c(
-                              "v-card",
-                              { staticClass: "ma-0 ml-4 mr-4 pa-0" },
+                              "v-btn",
+                              _vm._g(
+                                { staticClass: "ma-2", attrs: { text: "" } },
+                                on
+                              ),
+                              [_c("v-icon", [_vm._v("add_circle_outline")])],
+                              1
+                            )
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.dialog,
+                      callback: function($$v) {
+                        _vm.dialog = $$v
+                      },
+                      expression: "dialog"
+                    }
+                  },
+                  [
+                    _c(
+                      "v-card",
+                      { staticClass: "ma-0 pa-0" },
+                      [
+                        _c("v-card-title", { staticClass: "headline" }, [
+                          _c("h4", { staticClass: "text-truncate" }, [
+                            _vm._v(_vm._s(_vm.formTitle))
+                          ])
+                        ]),
+                        _vm.alert.type != null
+                          ? _c(
+                              "v-alert",
+                              {
+                                staticClass: "ma-2",
+                                attrs: {
+                                  type: _vm.alert.type,
+                                  transition: "scale-transition"
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.alert.text))]
+                            )
+                          : _vm._e(),
+                        _c(
+                          "v-card-text",
+                          [
+                            _c("v-text-field", {
+                              attrs: { label: "Фамилия" },
+                              model: {
+                                value: _vm.editedItem.thirdName,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "thirdName", $$v)
+                                },
+                                expression: "editedItem.thirdName"
+                              }
+                            }),
+                            _c("v-text-field", {
+                              attrs: { label: "Имя" },
+                              model: {
+                                value: _vm.editedItem.name,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "name", $$v)
+                                },
+                                expression: "editedItem.name"
+                              }
+                            }),
+                            _c("v-text-field", {
+                              attrs: { label: "Отчество" },
+                              model: {
+                                value: _vm.editedItem.secName,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "secName", $$v)
+                                },
+                                expression: "editedItem.secName"
+                              }
+                            }),
+                            _c("v-text-field", {
+                              attrs: { label: "Почта" },
+                              model: {
+                                value: _vm.editedItem.email,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "email", $$v)
+                                },
+                                expression: "editedItem.email"
+                              }
+                            }),
+                            _c("v-autocomplete", {
+                              attrs: {
+                                items: _vm.arrusersposts,
+                                "item-value": "id",
+                                "item-text": "name",
+                                dense: "",
+                                solo: "",
+                                label: "Роль"
+                              },
+                              model: {
+                                value: _vm.editedItem.post_id,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "post_id", $$v)
+                                },
+                                expression: "editedItem.post_id"
+                              }
+                            }),
+                            _c("v-autocomplete", {
+                              attrs: {
+                                items: _vm.adisabled,
+                                "item-value": "id",
+                                "item-text": "name",
+                                dense: "",
+                                solo: "",
+                                label: "Блокировка"
+                              },
+                              model: {
+                                value: _vm.editedItem.disabled,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "disabled", $$v)
+                                },
+                                expression: "editedItem.disabled"
+                              }
+                            }),
+                            _c(
+                              "v-card-actions",
                               [
                                 _c(
-                                  "v-card-title",
-                                  { staticClass: "span headline" },
-                                  [_vm._v(_vm._s(_vm.formTitle))]
+                                  "v-btn",
+                                  {
+                                    attrs: {
+                                      color: "accent darken-1",
+                                      text: ""
+                                    },
+                                    on: { click: _vm.close }
+                                  },
+                                  [_vm._v("Отмена")]
                                 ),
-                                _vm.alert.type != null
-                                  ? _c(
-                                      "v-alert",
-                                      {
-                                        staticClass: "ma-2",
-                                        attrs: {
-                                          type: _vm.alert.type,
-                                          transition: "scale-transition"
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(_vm.alert.text))]
-                                    )
-                                  : _vm._e(),
+                                _c("v-spacer"),
                                 _c(
-                                  "v-card-text",
-                                  [
-                                    _c(
-                                      "v-layout",
-                                      { staticClass: "row" },
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: { label: "Фамилия" },
-                                          model: {
-                                            value: _vm.editedItem.thirdName,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "thirdName",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "editedItem.thirdName"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _c(
-                                      "v-layout",
-                                      { staticClass: "row" },
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: { label: "Имя" },
-                                          model: {
-                                            value: _vm.editedItem.name,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "name",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "editedItem.name"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _c(
-                                      "v-layout",
-                                      { staticClass: "row" },
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: { label: "Отчество" },
-                                          model: {
-                                            value: _vm.editedItem.secName,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "secName",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "editedItem.secName"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _c(
-                                      "v-layout",
-                                      { staticClass: "row" },
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: { label: "Почта" },
-                                          model: {
-                                            value: _vm.editedItem.email,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "email",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "editedItem.email"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _c(
-                                      "v-layout",
-                                      { staticClass: "row" },
-                                      [
-                                        _c("v-autocomplete", {
-                                          attrs: {
-                                            items: _vm.arrusersposts,
-                                            "item-value": "id",
-                                            "item-text": "name",
-                                            dense: "",
-                                            solo: "",
-                                            label: "Роль"
-                                          },
-                                          model: {
-                                            value: _vm.editedItem.post_id,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "post_id",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "editedItem.post_id"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _c(
-                                      "v-layout",
-                                      { staticClass: "row" },
-                                      [
-                                        _c("v-autocomplete", {
-                                          attrs: {
-                                            items: _vm.adisabled,
-                                            "item-value": "id",
-                                            "item-text": "name",
-                                            dense: "",
-                                            solo: "",
-                                            label: "Блокировка"
-                                          },
-                                          model: {
-                                            value: _vm.editedItem.disabled,
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                _vm.editedItem,
-                                                "disabled",
-                                                $$v
-                                              )
-                                            },
-                                            expression: "editedItem.disabled"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    ),
-                                    _c(
-                                      "v-card-actions",
-                                      [
-                                        _c("v-spacer"),
-                                        _c(
-                                          "v-btn",
-                                          {
-                                            attrs: {
-                                              color: "blue darken-1",
-                                              text: ""
-                                            },
-                                            on: { click: _vm.close }
-                                          },
-                                          [_vm._v("Отмена")]
-                                        ),
-                                        _c(
-                                          "v-btn",
-                                          {
-                                            attrs: {
-                                              color: "blue darken-1",
-                                              text: ""
-                                            },
-                                            on: { click: _vm.save }
-                                          },
-                                          [_vm._v("Сохранить")]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "info darken-1", text: "" },
+                                    on: { click: _vm.save }
+                                  },
+                                  [_vm._v("Сохранить")]
                                 )
                               ],
                               1
@@ -41347,92 +41239,84 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _c(
-                      "v-card-title",
-                      { staticClass: "ma-0 ml-4 mr-4 pa-0" },
-                      [
-                        _c("v-text-field", {
-                          staticClass:
-                            "ma-0 pa-0 mt-4 single-line hide-details",
-                          attrs: { label: "Поиск" },
-                          model: {
-                            value: _vm.search,
-                            callback: function($$v) {
-                              _vm.search = $$v
-                            },
-                            expression: "search"
-                          }
-                        })
-                      ],
-                      1
                     )
-                  ]
-                },
-                proxy: true
-              },
-              {
-                key: "item.text-disabled",
-                fn: function(ref) {
-                  var item = ref.item
-                  return [
-                    _c("v-card-text", { staticClass: "ma-0 pa-0" }, [
-                      _vm._v(_vm._s(_vm.adisabled[item["disabled"]].name))
-                    ])
-                  ]
-                }
-              },
-              {
-                key: "item.action",
-                fn: function(ref) {
-                  var item = ref.item
-                  return [
-                    _c(
-                      "v-icon",
-                      {
-                        staticClass: "small",
-                        on: {
-                          click: function($event) {
-                            return _vm.editItem(item)
-                          }
-                        }
-                      },
-                      [_vm._v("edit")]
-                    ),
-                    _c(
-                      "v-icon",
-                      {
-                        staticClass: "small",
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteItem(item)
-                          }
-                        }
-                      },
-                      [_vm._v("delete")]
-                    )
-                  ]
-                }
-              }
-            ])
-          }),
-          _c(
-            "v-layout",
-            { staticClass: "row text-center pa-2 ma-2" },
-            [
-              _c("v-pagination", {
-                attrs: { length: _vm.pageCount },
-                model: {
-                  value: _vm.page,
-                  callback: function($$v) {
-                    _vm.page = $$v
+                  ],
+                  1
+                ),
+                _c("v-text-field", {
+                  staticClass: "ma-0 pa-0 mt-4 single-line hide-details",
+                  attrs: { label: "Поиск" },
+                  model: {
+                    value: _vm.search,
+                    callback: function($$v) {
+                      _vm.search = $$v
+                    },
+                    expression: "search"
+                  }
+                })
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "item.text-disabled",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c("v-card-text", { staticClass: "ma-0 pa-0" }, [
+                  _vm._v(_vm._s(_vm.adisabled[item["disabled"]].name))
+                ])
+              ]
+            }
+          },
+          {
+            key: "item.action",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "small",
+                    on: {
+                      click: function($event) {
+                        return _vm.editItem(item)
+                      }
+                    }
                   },
-                  expression: "page"
-                }
-              })
-            ],
-            1
-          )
+                  [_vm._v("edit")]
+                ),
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "small",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteItem(item)
+                      }
+                    }
+                  },
+                  [_vm._v("delete")]
+                )
+              ]
+            }
+          }
+        ])
+      }),
+      _c(
+        "v-layout",
+        { staticClass: "row text-center pa-2 ma-2" },
+        [
+          _c("v-pagination", {
+            attrs: { length: _vm.pageCount },
+            model: {
+              value: _vm.page,
+              callback: function($$v) {
+                _vm.page = $$v
+              },
+              expression: "page"
+            }
+          })
         ],
         1
       )
