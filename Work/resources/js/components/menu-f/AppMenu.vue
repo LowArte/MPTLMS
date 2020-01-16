@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     switch (this._role) {
-      case "student": {
+      case "admin": {
         //Администраторы
         return (this.items = [
           {
@@ -90,7 +90,7 @@ export default {
           }
         ]);
       }
-      case "admin": {
+      case "student": {
         //Студент
         return (this.items = [
           {

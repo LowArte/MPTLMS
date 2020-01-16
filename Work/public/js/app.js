@@ -3106,7 +3106,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     switch (this._role) {
-      case "student":
+      case "admin":
         {
           //Администраторы
           return this.items = [{
@@ -3153,7 +3153,7 @@ __webpack_require__.r(__webpack_exports__);
           }];
         }
 
-      case "admin":
+      case "student":
         {
           //Студент
           return this.items = [{
@@ -41471,7 +41471,7 @@ var render = function() {
         [
           _c(
             "v-col",
-            { attrs: { cols: "12" } },
+            { staticClass: "pt-0 pb-0", attrs: { cols: "12" } },
             [
               _c("v-text-field", {
                 attrs: {
@@ -41486,7 +41486,7 @@ var render = function() {
           ),
           _c(
             "v-col",
-            { attrs: { cols: "12" } },
+            { staticClass: "pt-0 pb-0", attrs: { cols: "12" } },
             [
               _c("v-text-field", {
                 attrs: {
@@ -41502,24 +41502,32 @@ var render = function() {
             1
           ),
           _c(
+            "div",
+            { staticClass: "flex" },
+            [
+              _c("v-btn", { attrs: { color: "accent", href: "/", text: "" } }, [
+                _vm._v("Отмена")
+              ]),
+              _c(
+                "v-btn",
+                { attrs: { type: "submit", color: "blue darken-1", text: "" } },
+                [_vm._v("ВОЙТИ")]
+              )
+            ],
+            1
+          ),
+          _c(
             "v-btn",
             {
               attrs: {
-                color: "accent font-weight-light",
+                color: "primary font-weight-light",
+                block: "",
                 text: "",
+                height: "25",
                 href: "/password/reset"
               }
             },
             [_c("small", [_vm._v("Не можете войти?")])]
-          ),
-          _c("div", { staticClass: "flex-grow-1" }),
-          _c("v-btn", { attrs: { color: "accent", href: "/", text: "" } }, [
-            _vm._v("Отмена")
-          ]),
-          _c(
-            "v-btn",
-            { attrs: { type: "submit", color: "blue darken-1", text: "" } },
-            [_vm._v("ВОЙТИ")]
           )
         ],
         1
