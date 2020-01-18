@@ -2548,6 +2548,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/users */ "./resources/js/api/users.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mixins/withSnackbar */ "./resources/js/components/mixins/withSnackbar.js");
+/* harmony import */ var _api_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../api/group */ "./resources/js/api/group.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2598,21 +2612,24 @@ __webpack_require__.r(__webpack_exports__);
 
  //маски vue
 
+ //Alert
+
+ //Группы
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_withSnackbar__WEBPACK_IMPORTED_MODULE_2__["default"]],
   directives: {
     mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_1__["mask"]
   },
   data: function data() {
     return {
+      departaments_info: [],
+      //Массив отеделений
+      groups_info: [],
       listusers: [],
       //Массив
       arrusersposts: [],
       //Массив постов
-      alert: {
-        type: null,
-        text: null
-      },
-      //Alert
       search: "",
       //Поиск
       page: 1,
@@ -2625,6 +2642,7 @@ __webpack_require__.r(__webpack_exports__);
       //Маска для количества отображаемых строк
       dialog: false,
       //Активатор диалога
+      arrfinancings: ["Бюджетный", "Платный"],
       adisabled: [{
         id: 0,
         name: "Разблокирован"
@@ -2648,10 +2666,8 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false
       }],
       //Структура таблицы и с полями которые требуется выводить
-      editedIndex: -1,
-      //Текущий индекс редактируемой строки
       editedItem: {
-        id: "",
+        id: -1,
         secName: "",
         name: "",
         thirdName: "",
@@ -2659,11 +2675,25 @@ __webpack_require__.r(__webpack_exports__);
         password: "",
         post_id: "",
         disabled: ""
-      } //Массив с данным для сохранения в бд
+      },
+      //Массив с данными учётной записи для сохранения в бд
+      studentItem: {
+        id: -1,
+        group: "",
+        birthday: new Date().toISOString().substr(0, 10),
+        gender: "Мужской",
+        type_of_financing: ""
+      },
+      //Массив с данным студента для сохранения в бд
+      dateDialog: null //Диалог даты
 
     };
   },
   props: {
+    _departaments_info: {
+      type: Array,
+      "default": null
+    },
     _listusers: {
       data: Array,
       "default": null
@@ -2677,50 +2707,74 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.listusers = this._listusers;
     this.arrusersposts = this._arrusersposts;
+    this.departaments = this._departaments;
   },
   computed: {
     //Получение названия диалога
     formTitle: function formTitle() {
-      return this.editedIndex === -1 ? "Новый пользователь" : "Редактировать пользователя";
+      return this.editedItem.id === -1 ? "Новый пользователь" : "Редактировать пользователя";
     }
   },
   methods: {
-    //Иницилизации данных
-    initialize: function initialize() {
+    //Изменение отделения
+    departament_change: function departament_change() {
       var _this = this;
 
-      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (res) {
-        _this.listusers = res.data.users;
-        _this.arrposts = res.data.usersposts;
+      _api_group__WEBPACK_IMPORTED_MODULE_3__["default"].getGroup(departaments_info.selected).then(function (res) {
+        _this.groups_info.groups = res.data.groups;
+        _this.studentItem.group = _this.groups_info.groups[0];
       })["catch"](function (ex) {
         console.log(ex);
       });
     },
-    //Редактирование учётной записи
+    //Иницилизации данных
+    initialize: function initialize() {
+      var _this2 = this;
+
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getUsers().then(function (res) {
+        _this2.listusers = res.data.users;
+        _this2.arrposts = res.data.usersposts;
+      })["catch"](function (ex) {
+        console.log(ex);
+      });
+    },
+    //Вызов диалогового окна для редактирования учётной записи
     editItem: function editItem(item) {
-      this.editedIndex = this.listusers.indexOf(item);
+      var _this3 = this;
+
       this.editedItem = Object.assign({}, item);
+
+      if (item.post_id == 2) {
+        _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getStudent({
+          id: this.editedItem.id
+        }).then(function (res) {
+          _this3.studentItem = Object.assign({}, res.data.student);
+        })["catch"](function (ex) {
+          console.log(ex);
+        });
+      }
+
       this.dialog = true;
     },
     //Удаление учётной записи
     deleteItem: function deleteItem(item) {
-      var _this2 = this;
+      var _this4 = this;
 
       confirm("Вы действительно хотите удалить данного пользователя?") && _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].deleteUser({
         id: item.id
       }).then(function (res) {
-        alert("Удалён!"); //! Перенести в другое тип встроенных уведомлений
+        _this4.showMessage("Удалён!");
 
-        _this2.initialize();
+        _this4.initialize();
       })["catch"](function (ex) {
-        console.log(ex);
+        _this4.showError("Удаление не было произведено!" + ex);
       });
     },
     //Закрытие диалога
     close: function close() {
       this.dialog = false;
       this.editedItem = Object.assign({}, {
-        id: "",
+        id: -1,
         secName: "",
         name: "",
         thirdName: "",
@@ -2729,24 +2783,56 @@ __webpack_require__.r(__webpack_exports__);
         post_id: "",
         disabled: ""
       });
-      this.editedIndex = -1;
+      this.studentItem = Object.assign({}, {
+        id: -1,
+        group: "",
+        birthday: new Date().toISOString().substr(0, 10),
+        gender: "Мужской",
+        type_of_financing: ""
+      });
     },
+    //Обработка нажатия на кнопку сохранить
     save: function save() {
-      var _this3 = this;
+      if (this.editedItem.id == -1) {
+        this.editedItem.id = -1;
+        this.saveNew();
+      } else this.saveEdit();
+    },
+    //Сохранение нового пользователя
+    saveNew: function saveNew() {
+      var _this5 = this;
 
-      if (this.editedIndex == -1) this.editedItem.id = -1;
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].saveUser({
-        user: this.editedItem
+        user: this.editedItem,
+        student: this.studentItem
       }).then(function (res) {
-        _this3.initialize();
+        _this5.initialize();
 
-        alert("Сохранён!"); //! Перенести в другое тип встроенных уведомлений
+        _this5.showMessage("Сохранён!");
 
-        _this3.close();
+        _this5.close();
       })["catch"](function (ex) {
-        alert("Сохранение не было произведено!"); //! Перенести в другое тип встроенных уведомлений
+        _this5.showError("Сохранение не было произведено! " + ex);
+      });
+    },
+    //Сохранение изменения для выбранного пользователя
+    saveEdit: function saveEdit() {
+      var _this6 = this;
 
-        console.log(ex);
+      console.log(this.editedItem);
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"] //! 400 ошибка Bad Request исправить
+      .saveEdit({
+        id: this.editedItem.id,
+        user: this.editedItem,
+        student: this.studentItem
+      }).then(function (res) {
+        _this6.initialize();
+
+        _this6.showMessage("Изменён!");
+
+        _this6.close();
+      })["catch"](function (ex) {
+        _this6.showError("Изменение не было произведено! " + ex);
       });
     }
   }
@@ -3125,7 +3211,7 @@ __webpack_require__.r(__webpack_exports__);
             } */
             ]
           }, {
-            text: "Рассписания",
+            text: "Расписания",
             children: [{
               text: "Расписание",
               href: "/admin/timetable",
@@ -39978,7 +40064,7 @@ var render = function() {
       _c("br"),
       _vm._v(_vm._s(_vm.snackbarSubtext)),
       _c("v-btn", {
-        attrs: { dark: "", text: "" },
+        attrs: { dark: "", text: "Закрыть" },
         nativeOn: {
           click: function($event) {
             return _vm.close($event)
@@ -41118,19 +41204,6 @@ var render = function() {
                             _vm._v(_vm._s(_vm.formTitle))
                           ])
                         ]),
-                        _vm.alert.type != null
-                          ? _c(
-                              "v-alert",
-                              {
-                                staticClass: "ma-2",
-                                attrs: {
-                                  type: _vm.alert.type,
-                                  transition: "scale-transition"
-                                }
-                              },
-                              [_vm._v(_vm._s(_vm.alert.text))]
-                            )
-                          : _vm._e(),
                         _c(
                           "v-card-text",
                           [
@@ -41208,6 +41281,204 @@ var render = function() {
                                 expression: "editedItem.disabled"
                               }
                             }),
+                            _vm.editedItem.post_id == 2
+                              ? _c("v-combobox", {
+                                  attrs: { label: "Группа" },
+                                  model: {
+                                    value: _vm.studentItem.group,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.studentItem, "group", $$v)
+                                    },
+                                    expression: "studentItem.group"
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm.editedItem.post_id == 2
+                              ? _c(
+                                  "v-dialog",
+                                  {
+                                    ref: "dateDialog",
+                                    attrs: {
+                                      "return-value": _vm.studentItem.group,
+                                      persistent: "",
+                                      width: "290px"
+                                    },
+                                    on: {
+                                      "update:returnValue": function($event) {
+                                        return _vm.$set(
+                                          _vm.studentItem,
+                                          "group",
+                                          $event
+                                        )
+                                      },
+                                      "update:return-value": function($event) {
+                                        return _vm.$set(
+                                          _vm.studentItem,
+                                          "group",
+                                          $event
+                                        )
+                                      }
+                                    },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "v-text-field",
+                                                _vm._g(
+                                                  {
+                                                    attrs: {
+                                                      label: "Дата",
+                                                      readonly: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.studentItem.group,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.studentItem,
+                                                          "group",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "studentItem.group"
+                                                    }
+                                                  },
+                                                  on
+                                                )
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      null,
+                                      false,
+                                      2904035782
+                                    ),
+                                    model: {
+                                      value: _vm.dateDialog,
+                                      callback: function($$v) {
+                                        _vm.dateDialog = $$v
+                                      },
+                                      expression: "dateDialog"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "v-date-picker",
+                                      {
+                                        attrs: {
+                                          scrollable: "",
+                                          "first-day-of-week": 1,
+                                          locale: "ru-Ru"
+                                        },
+                                        model: {
+                                          value: _vm.studentItem.group,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.studentItem,
+                                              "group",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "studentItem.group"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              text: "",
+                                              color: "primary"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.dateDialog = false
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Отмена")]
+                                        ),
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              text: "",
+                                              color: "primary"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.$refs.dateDialog.save(
+                                                  _vm.studentItem.group
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Принять")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm.editedItem.post_id == 2
+                              ? _c(
+                                  "v-radio-group",
+                                  {
+                                    attrs: { mandatory: false },
+                                    model: {
+                                      value: _vm.studentItem.gender,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.studentItem, "gender", $$v)
+                                      },
+                                      expression: "studentItem.gender"
+                                    }
+                                  },
+                                  [
+                                    _c("v-radio", {
+                                      attrs: {
+                                        label: "Мужской",
+                                        value: "Мужской"
+                                      }
+                                    }),
+                                    _c("v-radio", {
+                                      attrs: {
+                                        label: "Женский",
+                                        value: "Женский"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm.editedItem.post_id == 2
+                              ? _c("v-autocomplete", {
+                                  attrs: {
+                                    items: _vm.arrfinancings,
+                                    dense: "",
+                                    solo: "",
+                                    label: "Вид финансирования"
+                                  },
+                                  model: {
+                                    value: _vm.studentItem.type_of_financing,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.studentItem,
+                                        "type_of_financing",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "studentItem.type_of_financing"
+                                  }
+                                })
+                              : _vm._e(),
                             _c(
                               "v-card-actions",
                               [
@@ -41227,7 +41498,11 @@ var render = function() {
                                   "v-btn",
                                   {
                                     attrs: { color: "info darken-1", text: "" },
-                                    on: { click: _vm.save }
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.save()
+                                      }
+                                    }
                                   },
                                   [_vm._v("Сохранить")]
                                 )
@@ -97248,6 +97523,9 @@ __webpack_require__.r(__webpack_exports__);
       "user": user.user
     });
   },
+  getStudent: function getStudent(user) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('user_managment/getStudent/' + user.id, {});
+  },
   notificate: function notificate(notId) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/setNotificationAsRead", {
       "id": notId
@@ -98561,6 +98839,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     showMessage: function showMessage(message) {
       this.showSnackBar(message, 'success');
+    },
+    showInfo: function showInfo(error) {
+      this.showSnackBar(error, 'info');
     },
     showError: function showError(error) {
       this.showSnackBar(error, 'error');
