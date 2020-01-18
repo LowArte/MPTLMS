@@ -32,6 +32,10 @@ export default {
     })
   },
 
+  getStudent(user) {
+    return axios.post('user_managment/getStudent/'+user.id, {})
+  },
+
   notificate(notId) {
     return axios.post("/setNotificationAsRead", {
       "id": notId
