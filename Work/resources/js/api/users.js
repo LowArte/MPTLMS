@@ -20,17 +20,14 @@ export default {
       "user": user.user
     })
   },
-
   deleteUser(user) {
     return axios.post('user_managment/delete/'+user.id)
   },
-
   saveEdit(user) {
     return axios.post('user_managment/edit/'+user.id, {
       "user": user.user
     })
   },
-  
   notificate(notId) {
     return axios.post("/setNotificationAsRead", {
       "id": notId
