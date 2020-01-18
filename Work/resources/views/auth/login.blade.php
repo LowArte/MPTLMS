@@ -2,14 +2,14 @@
 
 @section('content')
 <v-container justify-center>
-    <v-card class="pa-5">
-        <v-card-title>
+    <v-card class="ma-0 pa-5 pb-2 mx-auto" style="width: 440px">
+        <v-card-title class="pl-0 pb-0">
             <span class="headline">ВОЙТИ</span>
         </v-card-title>
         @if ($errors->any())
-        <v-alert text dense type="error">
+        <v-alert class="my-2" text dense type="error">
             @foreach ($errors->all() as $error)
-               <p>{{ $error }}</p>  
+               <small>{{ $error }}</small>  
             @endforeach
         </v-alert>
         @endif

@@ -11,7 +11,7 @@
                     v-list-item-action(v-if="child.icon")
                         v-icon {{ child.icon }}
                     v-list-item-content
-                        v-list-item-title {{ child.text }}
+                        v-list-item-title.pl-4 {{ child.text }}
             v-list-item(v-else @click="menuItemSelected(item)")      
                 v-list-item-action
                     v-icon {{ item.icon }}
@@ -44,7 +44,6 @@ export default {
           },
           {
             text: "Панель управления",
-            icon: "",
             children: [
               {
                 text: "Настройки сервера",
@@ -56,7 +55,7 @@ export default {
                 href: "/admin/user_managment",
                 icon: "accessible"
               }
-/*               ,
+              /*               ,
               {
                 text: "Управление файлами",
                 href: "/admin/file_management",
@@ -97,64 +96,126 @@ export default {
           {
             icon: "home",
             text: "Главная",
-            href: "/home"
+            href: "/student/home"
           },
           {
             icon: "portrait",
-            text: "Студенческая карточка",
-            href: "/card"
+            text: "Профиль",
+            href: "/student/bio"
           },
           {
-            icon: "today",
-            text: "Расписание",
-            href: "/timetable"
+            text: "Учебные процесс",
+            icon: "school",
+            children: [
+              {
+                icon: "",
+                text: "Расписание",
+                href: "/student/timetable"
+              },
+              {
+                icon: "",
+                text: "Изменеия в расписание",
+                href: "/student/changes"
+              },
+              {
+                icon: "",
+                text: "Расписание экзаменов",
+                href: "/student/exams"
+              },
+              {
+                icon: "",
+                text: "Домашнее задание",
+                href: "/student/homework"
+              },
+              {
+                icon: "",
+                text: "Успеваемость",
+                href: "/student/progress"
+              },
+              {
+                icon: "",
+                text: "Преподаватели",
+                href: "/student/teachers"
+              }
+            ]
           },
           {
-            icon: "autorenew",
-            text: "Изменения в расписании",
-            href: "/replaces"
+            text: "ДО",
+            icon: "business_center",
+            children: [
+              {
+                icon: "",
+                text: "Программы",
+                href: "/student/blueprints"
+              },
+              {
+                icon: "",
+                text: "Автошкола",
+                href: "/student/drivingschool"
+              }
+            ]
           },
-          /* 
-            {
-              icon: 'show_chart',
-              text: 'Успеваемость',
-              href: '/home'
-            }, */
-          // {
-          //   icon: 'business_center',
-          //   text: 'Дополнительное образование',
-          //   href: '/detailedir'
-          // },
-          /*
-                     {
-                       icon: 'school',
-                       text: 'Преподаватели',
-                       href: '/home'
-                     }, */
           {
-            icon: "edit",
-            text: "Справки",
-            href: "/certificate"
+            text: "Услуги",
+            icon: "beenhere",
+            children: [
+              {
+                icon: "",
+                text: "Справки и направления",
+                href: "/student/certificate"
+              },
+              {
+                icon: "",
+                text: "Стипендия",
+                href: "/student/petition"
+              },
+              {
+                icon: "",
+                text: "Психолог",
+                href: "/student/psych"
+              }
+            ]
           },
-          /* 
-                      {
-                        icon: 'home',
-                        text: 'Домашнее задание',
-                        href: '/home'
-                      }, */
-          /*{
-              icon: 'storefront',
-              text: 'Портфолио',
-              href: '/home'
-            }, {
-              icon: 'layers',
-              text: 'Базы практики',
-              href: '/home'
-            },*/
+          {
+            text: "Студенческая жизнь",
+            icon: "palette",
+            children: [
+              {
+                icon: "",
+                text: "Фотоархив",
+                href: "/student/photos"
+              },
+              {
+                icon: "",
+                text: "Соревнования и чемпионаты",
+                href: "/student/competitions"
+              },
+              {
+                icon: "",
+                text: "Спортивная жизнь",
+                href: "/student/sportlife"
+              }
+            ]
+          },
+          {
+            icon: "cloud",
+            text: "Хранилище данных",
+            href: "/student/datastorage"
+          },
+          {
+            icon: "layers",
+            text: "Базы практики",
+            href: "/student/plants"
+          },
+          {
+            icon: "group",
+            text: "Студенческий совет",
+            href: "/student/convocation"
+          },
           {
             icon: "feedback",
             text: "Обратная связь",
-            href: "/feedback"
+            href: "/student/feedback"
           }
         ]);
       }
@@ -170,11 +231,6 @@ export default {
             icon: "today",
             text: "Расписание",
             href: "/timetable"
-          },
-          {
-            icon: "today",
-            text: "Расписание звонков",
-            href: "/callschedule"
           },
           // {
           //   icon: 'home',
@@ -199,7 +255,7 @@ export default {
         ]);
       }
       case 4: {
-        //Учебная часть
+        //Учебная часть (manager)
         return (this.items = [
           {
             icon: "home",
@@ -250,7 +306,7 @@ export default {
   },
   methods: {
     menuItemSelected(item) {
-      console.log(item.href)
+      console.log(item.href);
       if (item.href) {
         if (item.new) {
           window.open(item.href);

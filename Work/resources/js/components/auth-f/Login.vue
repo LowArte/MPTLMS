@@ -2,15 +2,15 @@
 <template lang="pug">
   v-container(pa-0 text-center)
     v-row
-      v-col(cols="12")
+      v-col.pt-0.pb-0(cols="12")
         v-text-field(name="email" :rules="emailRules"  label="Email" required)
-      v-col(cols="12")
+      v-col.pt-0.pb-0(cols="12")
         v-text-field(min="6" label="Пароль" :rules="passwordRules" name="password" type="password" required)
-      v-btn(color="accent font-weight-light" text href="/password/reset")
+      div(class="flex")
+        v-btn(color="accent" href="/" text) Отмена
+        v-btn( type="submit" color="blue darken-1" text) ВОЙТИ
+      v-btn(color="primary font-weight-light" block text height="25" href="/password/reset")
         small Не можете войти?
-      div(class="flex-grow-1")
-      v-btn(color="accent" href="/" text) Отмена
-      v-btn( type="submit" color="blue darken-1" text) ВОЙТИ
 </template>
 
 <script>
