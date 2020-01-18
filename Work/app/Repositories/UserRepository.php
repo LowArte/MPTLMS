@@ -11,7 +11,7 @@ class UserRepository extends BaseRepository
     }
 
     public function getUsers()
-    {   $columns = ['id','name','secName','thirdName','email','disabled','post_id'];
+    {   $columns = ['id','name','secName','thirdName','email','post_id','disabled'];
         $result = $this->startCondition()->select($columns)->with('post:id,name')->get();
         return $result;
     }

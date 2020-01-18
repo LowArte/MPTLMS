@@ -64,7 +64,7 @@ export default {
             ]
           },
           {
-            text: "Рассписания",
+            text: "Расписания",
             children: [
               {
                 text: "Расписание",

@@ -33,7 +33,7 @@
                 v-card-actions                  
                   v-btn(color="accent darken-1" text @click="close") Отмена
                   v-spacer
-                  v-btn(color="info darken-1" text @click="save") Сохранить
+                  v-btn(color="info darken-1" text @click="save()") Сохранить
           v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
         template(v-slot:item.text-disabled="{ item }")
           v-card-text.ma-0.pa-0 {{adisabled[item['disabled']].name}}
@@ -72,9 +72,8 @@ export default {
       { text: "Блокировка", value: "text-disabled" },
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
-    editedIndex: -1, //Текущий индекс редактируемой строки
     editedItem: {
-      id: "",
+      id: -1,
       secName: "",
       name: "",
       thirdName: "",
@@ -103,7 +102,7 @@ export default {
   computed: {
     //Получение названия диалога
     formTitle() {
-      return this.editedIndex === -1
+      return this.editedItem.id === -1
         ? "Новый пользователь"
         : "Редактировать пользователя";
     }
@@ -122,9 +121,9 @@ export default {
           console.log(ex);
         });
     },
-    //Редактирование учётной записи
-    editItem(item) {
-      this.editedIndex = this.listusers.indexOf(item);
+    //Вызов диалогового окна для редактирования учётной записи
+    editItem(item) 
+    {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
@@ -144,11 +143,10 @@ export default {
     //Закрытие диалога
     close() {
       this.dialog = false;
-
       this.editedItem = Object.assign(
         {},
         {
-          id: "",
+          id: -1,
           secName: "",
           name: "",
           thirdName: "",
@@ -158,12 +156,22 @@ export default {
           disabled: ""
         }
       );
-      this.editedIndex = -1;
     },
-
-    save() {
-      if (this.editedIndex == -1) this.editedItem.id = -1;
-
+    //Обработка нажатия на кнопку сохранить
+    save() 
+    {
+      if (this.editedItem.id == -1)
+      { 
+        this.editedItem.id = -1;
+        this.saveNew();
+      }
+      else
+        this.saveEdit();
+    }, 
+    //Сохранение нового пользователя
+    saveNew()
+    {
+      console.log(this.editedItem);
       apiuser
         .saveUser({
           user: this.editedItem
@@ -175,7 +183,26 @@ export default {
         })
         .catch(ex => {
           alert("Сохранение не было произведено!"); //! Перенести в другое тип встроенных уведомлений
-          console.log(ex);
+          console.log(ex); 
+        });
+    },
+    //Сохранение изменения для выбранного пользователя
+    saveEdit()
+    {
+      console.log(this.editedItem);
+      apiuser
+        .saveEdit({
+          id: this.editedItem.id,
+          user: this.editedItem
+        })
+        .then(res => {
+          this.initialize();
+          alert("Сохранён!"); //! Перенести в другое тип встроенных уведомлений
+          this.close();
+        })
+        .catch(ex => {
+          alert("Сохранение не было произведено!"); //! Перенести в другое тип встроенных уведомлений
+          console.log(ex); 
         });
     }
   }

@@ -4,6 +4,7 @@ export default {
   fetch() {
     return axios.get('/api/v1/users')
   },
+  
   update(user) {
     return axios.put('/api/v1/user', {
       'name': user.name,
@@ -20,19 +21,23 @@ export default {
       "user": user.user
     })
   },
+
   deleteUser(user) {
     return axios.post('user_managment/delete/'+user.id)
   },
+
   saveEdit(user) {
     return axios.post('user_managment/edit/'+user.id, {
       "user": user.user
     })
   },
+
   notificate(notId) {
     return axios.post("/setNotificationAsRead", {
       "id": notId
     })
   },
+
   downloadFile(file_name) {
     return axios.get("/download_file", {
       params: {
