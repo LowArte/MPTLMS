@@ -2090,19 +2090,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     _info: {
       type: Object,
       "default": null
     }
-  },
-  data: function data() {
-    return {
-      title: "sdfghjkl"
-    };
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -2151,6 +2204,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DetailedInformationRetraining__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../DetailedInformationRetraining */ "./resources/js/components/additional-education-f/DetailedInformationRetraining.vue");
+//
+//
+//
 //
 //
 //
@@ -40388,28 +40444,479 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
-    { staticClass: "ma-3" },
+    "v-content",
+    { staticClass: "pt-0" },
     [
-      _c("v-img", { attrs: { "max-height": "200px", src: _vm._info.href } }),
-      _c("v-divider"),
-      _c("v-card-title", [
-        _c(
-          "h2",
-          { staticClass: "info--text font-weight-light text-truncate" },
-          [_vm._v(_vm._s(_vm._info.title))]
-        )
-      ]),
-      _c("v-card-text", [
-        _c("h3", { staticClass: "font-weight-light" }, [
-          _vm._v(
-            'Программа профессиональной переподготовки "' +
-              _vm._s(_vm._info.title) +
-              '"'
+      _c(
+        "v-layout",
+        { staticClass: "pa-4 pb-0", attrs: { column: "", "align-center": "" } },
+        [
+          _c(
+            "v-alert",
+            {
+              staticClass: "my-3",
+              attrs: { text: "", type: "error", "max-width": "900" }
+            },
+            [
+              _c("span", { attrs: { "primary--text": "", "subtitle-1": "" } }, [
+                _vm._v(
+                  "Раздел работает в автономном режиме - данные могут не соответсвовать действительности. За подробной информацией обратитесь в центр дополнительного образования."
+                )
+              ])
+            ]
+          ),
+          _c(
+            "v-card",
+            { staticClass: "ma-3" },
+            [
+              _c("v-img", {
+                attrs: { "max-height": "300px", src: _vm._info.href }
+              }),
+              _c("v-divider"),
+              _c("v-card-title", [
+                _c(
+                  "h2",
+                  {
+                    staticClass: "accent--text font-weight-light text-truncate"
+                  },
+                  [_vm._v(_vm._s(_vm._info.title))]
+                )
+              ]),
+              _c("v-card-text", [
+                _c("h3", { staticClass: "font-weight-light" }, [
+                  _vm._v(
+                    'Программа профессиональной переподготовки "' +
+                      _vm._s(_vm._info.title) +
+                      '"'
+                  )
+                ])
+              ]),
+              _c("v-card-text", [_vm._v(_vm._s(_vm._info.text))])
+            ],
+            1
           )
-        ])
-      ]),
-      _c("v-card-text", [_vm._v(_vm._s(_vm._info.text))])
+        ],
+        1
+      ),
+      _c(
+        "v-layout",
+        { staticClass: "pa-4 wrap", attrs: { column: "", "align-center": "" } },
+        [
+          _c(
+            "v-content",
+            [
+              _c(
+                "v-layout",
+                { staticClass: "row wrap", attrs: { "align-center": "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { staticClass: "xs12 md4 pa-0" },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "ma-3 transparent",
+                          attrs: { flat: "", height: "360px" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "accent--text text--lighten-2",
+                                  staticStyle: { "font-size": "150px" },
+                                  attrs: { "x-large": "" }
+                                },
+                                [_vm._v("mdi-calendar")]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "headline accent--text font-weight-light text-truncate"
+                                },
+                                [_vm._v("Начало обучения")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [_vm._v("25.01.2020")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [_vm._v("по субботам и воскресеньям")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _c(
+                    "v-flex",
+                    { staticClass: "xs12 md4 pa-0" },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "ma-3 transparent",
+                          attrs: { flat: "", height: "360px" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "accent--text text--lighten-2",
+                                  staticStyle: { "font-size": "150px" },
+                                  attrs: { "x-large": "" }
+                                },
+                                [_vm._v("mdi-clock")]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "headline accent--text font-weight-light text-truncate"
+                                },
+                                [_vm._v("Время обучения")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [_vm._v("с 11:00 – 16:00")]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _c(
+                    "v-flex",
+                    { staticClass: "xs12 md4 pa-0" },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "ma-3 transparent",
+                          attrs: { flat: "", height: "360px" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "accent--text text--lighten-2",
+                                  staticStyle: { "font-size": "150px" },
+                                  attrs: { "x-large": "" }
+                                },
+                                [_vm._v("mdi-message-processing")]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "headline accent--text font-weight-light text-truncate"
+                                },
+                                [_vm._v("Объём программы")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [
+                                  _vm._v(
+                                    "500 ак. часов (из них 216 аудиторных)"
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _c(
+                    "v-flex",
+                    { staticClass: "xs12 md4 pa-0" },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "ma-3 transparent",
+                          attrs: { flat: "", height: "360px" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "accent--text text--lighten-2",
+                                  staticStyle: { "font-size": "150px" },
+                                  attrs: { "x-large": "" }
+                                },
+                                [_vm._v("mdi-currency-rub")]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "headline accent--text font-weight-light text-truncate"
+                                },
+                                [_vm._v("Стоимость обучения на программе")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [_vm._v("73 300 рублей")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [_vm._v("*оплата возможна в 4 этапа")]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _c(
+                    "v-flex",
+                    { staticClass: "xs12 md4 pa-0" },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "ma-3 transparent",
+                          attrs: { flat: "", height: "360px" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "accent--text text--lighten-2",
+                                  staticStyle: { "font-size": "150px" },
+                                  attrs: { "x-large": "" }
+                                },
+                                [_vm._v("mdi-account")]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "headline accent--text font-weight-light text-truncate"
+                                },
+                                [_vm._v("Категория слушателей")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [
+                                  _vm._v(
+                                    "К освоению программы допускаются лица, имеющие или получающие среднее профессиональное и (или) высшее образование."
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _c(
+                    "v-flex",
+                    { staticClass: "xs12 md4 pa-0" },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "ma-3 transparent",
+                          attrs: { flat: "", height: "360px" }
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            { staticClass: "text-center" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "accent--text text--lighten-2",
+                                  staticStyle: { "font-size": "150px" },
+                                  attrs: { "x-large": "" }
+                                },
+                                [_vm._v("mdi-telegram")]
+                              )
+                            ],
+                            1
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "headline accent--text font-weight-light text-truncate"
+                                },
+                                [_vm._v("Контакты")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [_vm._v("8-903-105-90-17")]
+                              )
+                            ]
+                          ),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "py-0 text-center" },
+                            [
+                              _c(
+                                "h3",
+                                {
+                                  staticClass: "font-weight-light text-center"
+                                },
+                                [_vm._v("uc@mpt.ru")]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -40852,7 +41359,40 @@ var render = function() {
                         ],
                         1
                       ),
-                      _c("c-detailed-info", { attrs: { _info: _vm._item } })
+                      _c("c-detailed-info", { attrs: { _info: _vm._item } }),
+                      _c(
+                        "v-content",
+                        { staticClass: "pt-0" },
+                        [
+                          _c(
+                            "v-layout",
+                            {
+                              staticClass: "pa-4",
+                              attrs: { column: "", "align-center": "" }
+                            },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    block: "",
+                                    color: "accent",
+                                    dark: ""
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.dialog = true
+                                    }
+                                  }
+                                },
+                                [_vm._v("Подать заявку")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     ],
                     1
                   )

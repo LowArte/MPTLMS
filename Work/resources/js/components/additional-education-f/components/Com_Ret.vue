@@ -44,6 +44,9 @@
               v-toolbar-items
                 v-btn(dark text @click="dialog = true") Подать заявку
             c-detailed-info(:_info="_item")
+            v-content.pt-0
+              v-layout.pa-4(column align-center)
+                v-btn(block color="accent" dark @click="dialog = true") Подать заявку
 </template>
 
 <script>
