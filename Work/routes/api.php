@@ -25,6 +25,13 @@ Route::middleware('auth:api')->name('api.')->group(function () {
             Route::post('edit/{user_id}', 'Admin\UserManagmentController@edit')->name('set_options');
         });
 
+        Route::name('place_managment.')->prefix('place_managment')->group(function(){
+            Route::get('get_places','Admin\PlacesManagmentController@getPlaces')->name('get_places');
+            Route::post('save','Admin\PlacesManagmentController@save')->name('save');
+            Route::post('delete/{user_id}','Admin\PlacesManagmentController@delete')->name('set_options');
+            Route::post('edit/{user_id}','Admin\PlacesManagmentController@edit')->name('set_options');
+        });
+
         Route::name('timetable.')->prefix('timetable')->group(function () {
             Route::get('get_group_by_departament_id', 'Admin\TimeTableController@getGroupByDepartamentId')->name('get_group_by_departament_id');
             Route::post('save', 'Admin\TimeTableController@save')->name('get_group_by_departament_id');
