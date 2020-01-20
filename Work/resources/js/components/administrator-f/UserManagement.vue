@@ -1,5 +1,6 @@
 <template lang="pug">
     v-card.mx-auto.pa-2(width='100%' height='auto' outline)
+      c-comfirm-dialog(ref='qwestion')
       v-data-table.elevation-0.pa-0.ma-0(
         :headers="headers"
         :items="listusers"
@@ -59,13 +60,17 @@
 <script>
 import apiuser from "../../api/users"; //api для пользователей
 import { mask } from "vue-the-mask"; //маски vue
-import withSnackbar from "../mixins/withSnackbar";//Alert
+import withSnackbar from "../mixins/withSnackbar"; //Alert
 import group_api from "./../../api/group"; //Группы
+import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Группы
 
 export default {
   mixins: [withSnackbar],
   directives: {
     mask
+  },
+  components: {
+    "c-comfirm-dialog": ConfirmDialog_C
   },
   data: () => ({
     departaments_info: [], //Массив отеделений
@@ -100,7 +105,7 @@ export default {
       disabled: ""
     }, //Массив с данными учётной записи для сохранения в бд
 
-    studentItem: { 
+    studentItem: {
       id: -1,
       group: "",
       birthday: new Date().toISOString().substr(0, 10),
@@ -166,36 +171,39 @@ export default {
         });
     },
     //Вызов диалогового окна для редактирования учётной записи
-    editItem(item) 
-    {
+    editItem(item) {
       this.editedItem = Object.assign({}, item);
 
-      if(item.post_id == 2)
-      {
+      if (item.post_id == 2) {
         apiuser
-        .getStudent({id: this.editedItem.id})
-        .then(res => {
-          this.studentItem = Object.assign({}, res.data.student);
-        })
-        .catch(ex => {
-          console.log(ex);
-        });
+          .getStudent({ id: this.editedItem.id })
+          .then(res => {
+            this.studentItem = Object.assign({}, res.data.student);
+          })
+          .catch(ex => {
+            console.log(ex);
+          });
       }
 
       this.dialog = true;
     },
     //Удаление учётной записи
     deleteItem(item) {
-      confirm("Вы действительно хотите удалить данного пользователя?") &&
-        apiuser
-          .deleteUser({ id: item.id })
-          .then(res => {
-            this.showMessage("Удалён!");
-            this.initialize();
-          })
-          .catch(ex => {
-            this.showError("Удаление не было произведено!" + ex);
-          });
+      this.$refs.qwestion.pop().then(confirmResult => {
+        if (confirmResult) {
+          apiuser
+            .deleteUser({ id: item.id })
+            .then(res => {
+              this.showMessage("Удаление выполнено");
+              this.initialize();
+            })
+            .catch(ex => {
+              this.showError("Удаление не было произведено" + ex);
+            });
+        } else {
+          this.showMessage("Действие было отменено");
+        }
+      });
     },
     //Закрытие диалога
     close() {
@@ -225,19 +233,14 @@ export default {
       );
     },
     //Обработка нажатия на кнопку сохранить
-    save() 
-    {
-      if (this.editedItem.id == -1)
-      { 
+    save() {
+      if (this.editedItem.id == -1) {
         this.editedItem.id = -1;
         this.saveNew();
-      }
-      else
-        this.saveEdit();
-    }, 
+      } else this.saveEdit();
+    },
     //Сохранение нового пользователя
-    saveNew()
-    {
+    saveNew() {
       apiuser
         .saveUser({
           user: this.editedItem,
@@ -249,12 +252,11 @@ export default {
           this.close();
         })
         .catch(ex => {
-          this.showError(ex.response.data.error)
+          this.showError(ex.response.data.error);
         });
     },
     //Сохранение изменения для выбранного пользователя
-    saveEdit()
-    {
+    saveEdit() {
       apiuser //! 400 ошибка Bad Request исправить
         .saveEdit({
           id: this.editedItem.id,
@@ -267,7 +269,7 @@ export default {
           this.close();
         })
         .catch(ex => {
-          this.showError(ex.response.data.error)
+          this.showError(ex.response.data.error);
         });
     }
   }
