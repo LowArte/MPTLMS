@@ -19,17 +19,23 @@ Route::middleware('auth:api')->name('api.')->group(function () {
 
         Route::name('user_managment.')->prefix('user_managment')->group(function () {
             Route::get('get_users', 'Admin\UserManagmentController@getUsers')->name('get_users');
-
             Route::post('save', 'Admin\UserManagmentController@save')->name('save');
             Route::post('delete/{user_id}', 'Admin\UserManagmentController@delete')->name('set_options');
             Route::post('edit/{user_id}', 'Admin\UserManagmentController@edit')->name('set_options');
         });
 
         Route::name('place_managment.')->prefix('place_managment')->group(function(){
-            Route::get('get_places','Admin\PlacesManagmentController@getPlaces')->name('get_places');
-            Route::post('save','Admin\PlacesManagmentController@save')->name('save');
-            Route::post('delete/{user_id}','Admin\PlacesManagmentController@delete')->name('set_options');
-            Route::post('edit/{user_id}','Admin\PlacesManagmentController@edit')->name('set_options');
+            Route::get('get_places','Admin\PlaceManagmentController@getPlaces')->name('get_places');
+            Route::post('save','Admin\PlaceManagmentController@save')->name('save');
+            Route::post('delete/{post_id}','Admin\PlaceManagmentController@delete')->name('set_options');
+            Route::post('edit/{post_id}','Admin\PlaceManagmentController@edit')->name('set_options');
+        });
+
+        Route::name('department_managment.')->prefix('department_managment')->group(function(){
+            Route::get('get_departments','Admin\DepartmentManagmentController@getDepartments')->name('get_departments');
+            Route::post('save','Admin\DepartmentManagmentController@save')->name('save');
+            Route::post('delete/{department_id}','Admin\DepartmentManagmentController@delete')->name('set_options');
+            Route::post('edit/{department_id}','Admin\DepartmentManagmentController@edit')->name('set_options');
         });
 
         Route::name('timetable.')->prefix('timetable')->group(function () {
