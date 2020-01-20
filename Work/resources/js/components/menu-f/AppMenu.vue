@@ -57,17 +57,17 @@ export default {
               },
               {
                 text: "Отделения",
-                href: "/admin/departments_managment",
+                href: "/admin/department_managment",
                 icon: ""
               },
               {
                 text: "Группы",
-                href: "/admin/groups_managment",
+                href: "/admin/group_managment",
                 icon: ""
               },
               {
                 text: "Места проведения",
-                href: "/admin/places_managment",
+                href: "/admin/place_managment",
                 icon: ""
               },
               {
@@ -77,7 +77,7 @@ export default {
               },
               {
                 text: "Роли",
-                href: "/admin/posts_managment",
+                href: "/admin/post_managment",
                 icon: ""
               }
               /*               ,

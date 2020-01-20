@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Modifications\Create\CreatePlacesModification;
-use App\Modifications\Create\CreateUserModification;
-use App\Modifications\Delete\DeleteUserModification;
-use App\Modifications\Update\UpdateUserModification;
 use App\Repositories\PlaceRepository;
-use CreatePlacesTable;
 use Illuminate\Http\Request;
 
 
-class PlacesManagmentController extends BaseController
+class PlaceManagmentController extends BaseController
 {
      /**
      * Show the application user managment page.
@@ -21,7 +16,7 @@ class PlacesManagmentController extends BaseController
     public function index(PlaceRepository $placeRepository)
     {
         $places = $placeRepository->getPlaces();
-        return view('roles.admin.places', compact('places'));
+        return view('roles.admin.place-managment', compact('places'));
     }    
 
     /**

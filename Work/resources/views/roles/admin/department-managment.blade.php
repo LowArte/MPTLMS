@@ -2,6 +2,6 @@
 
 @section('content')
 <v-container fluid grid-list-md text-xs-center>
-    <c-places-managment :_places="{{json_encode($places) ?? null}}"></c-user-managment>
+    <c-department-managment :_departments="{{json_encode($departments) ?? null}}"></c-department-managment>
 </v-container>
 @endsection

@@ -23,10 +23,10 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/timetable','Admin\TimetableController@index')->name('timetable');
     Route::get('/callschedule','Admin\CallScheduleController@index')->name('callschedule');
     Route::get('/requestsusers','Admin\WarningController@index')->name('requestsusers');
-    Route::get('/departments_managment','Admin\WarningController@index')->name('departments');
-    Route::get('/groups_managment','Admin\WarningController@index')->name('groups');
-    Route::get('/posts_managment','Admin\WarningController@index')->name('posts');
-    Route::get('/places_managment','Admin\PlacesManagmentController@index')->name('places_managment');
+    Route::get('/department_managment','Admin\DepartmentManagmentController@index')->name('departments');
+    Route::get('/group_managment','Admin\WarningController@index')->name('groups');
+    Route::get('/post_managment','Admin\WarningController@index')->name('posts');
+    Route::get('/place_managment','Admin\PlaceManagmentController@index')->name('place_managment');
     Route::get('/additional_education_managment','Admin\WarningController@index')->name('additional_education');
 });
 
