@@ -23,7 +23,11 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/timetable','Admin\TimetableController@index')->name('timetable');
     Route::get('/callschedule','Admin\CallScheduleController@index')->name('callschedule');
     Route::get('/requestsusers','Admin\WarningController@index')->name('requestsusers');
-    
+    Route::get('/departments_managment','Admin\WarningController@index')->name('departments');
+    Route::get('/groups_managment','Admin\WarningController@index')->name('groups');
+    Route::get('/posts_managment','Admin\WarningController@index')->name('posts');
+    Route::get('/places_managment','Admin\PlacesManagmentController@index')->name('places_managment');
+    Route::get('/additional_education_managment','Admin\WarningController@index')->name('additional_education');
 });
 
 Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function(){
@@ -54,10 +58,16 @@ Route::middleware(['auth','access'])->name('admin.')->prefix('admin')->group(fun
 
     Route::name('user_managment.')->prefix('user_managment')->group(function(){
         Route::get('get_users','Admin\UserManagmentController@getUsers')->name('get_users');
-
         Route::post('save','Admin\UserManagmentController@save')->name('save');
         Route::post('delete/{user_id}','Admin\UserManagmentController@delete')->name('set_options');
         Route::post('edit/{user_id}','Admin\UserManagmentController@edit')->name('set_options');
+    });
+
+    Route::name('place_managment.')->prefix('place_managment')->group(function(){
+        Route::get('get_places','Admin\PlacesManagmentController@getPlaces')->name('get_places');
+        Route::post('save','Admin\PlacesManagmentController@save')->name('save');
+        Route::post('delete/{user_id}','Admin\PlacesManagmentController@delete')->name('set_options');
+        Route::post('edit/{user_id}','Admin\PlacesManagmentController@edit')->name('set_options');
     });
 
     Route::name('timetable.')->prefix('timetable')->group(function(){

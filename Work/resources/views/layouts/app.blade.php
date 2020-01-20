@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <snackbar></snackbar>
     <v-app id="app">
+        <snackbar></snackbar>
         <v-navigation-drawer width="300" v-model="leftdrawer" fixed clipped app>
             <c-app-menu _role="{{auth()->user()->post->slug}}"></c-app-menu>
         </v-navigation-drawer>

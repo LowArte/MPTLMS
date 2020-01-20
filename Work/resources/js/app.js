@@ -14,6 +14,7 @@ import PanelControl_C from './components/administrator-f/PanelControl'
 
 import FileManagment_C from './components/administrator-f/FileManagement'
 import UserManagment_C from './components/administrator-f/UserManagement'
+import PlacesManagment_C from './components/administrator-f/PlacesManagement'
 
 import Timetable_C from './components/timetable-f/Timetable'
 import BildTimetable_C from './components/timetable-f/Bild_Timetable'
@@ -43,13 +44,10 @@ new Vue({
       'c-retraining' : Retraining_C,
       'c-panel-control' : PanelControl_C,
       'c-user-managment' : UserManagment_C, 
-      // ! Написать фронт
-      // 'c-file-managment': FileManagment_C 
-      // ! Написать фронт
       'c-timetable':Timetable_C,
       'c-bild-timetable':BildTimetable_C,
       'c-call-schedule':CallSchedule_C,
-      'c-bild-call-schedule':BildCallSchedule_C
-      // ! Написать фронт
+      'c-bild-call-schedule':BildCallSchedule_C,
+      'c-places-managment':PlacesManagment_C
     }
 });

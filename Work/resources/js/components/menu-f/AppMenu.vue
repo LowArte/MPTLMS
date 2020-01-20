@@ -54,6 +54,31 @@ export default {
                 text: "Управление пользователями",
                 href: "/admin/user_managment",
                 icon: "accessible"
+              },
+              {
+                text: "Отделения",
+                href: "/admin/departments_managment",
+                icon: ""
+              },
+              {
+                text: "Группы",
+                href: "/admin/groups_managment",
+                icon: ""
+              },
+              {
+                text: "Места проведения",
+                href: "/admin/places_managment",
+                icon: ""
+              },
+              {
+                text: "Дополнительное образование",
+                href: "/admin/additional_education_managment",
+                icon: ""
+              },
+              {
+                text: "Роли",
+                href: "/admin/posts_managment",
+                icon: ""
               }
               /*               ,
               {
