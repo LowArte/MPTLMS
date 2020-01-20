@@ -3,7 +3,8 @@
     | {{ snackbarText }}
     br
     | {{ snackbarSubtext }}
-    v-btn(dark='' text='Закрыть' @click.native='close')
+    v-btn.ma-2.ml-0(text @click.native='close')
+      v-icon close
 </template>
 
 

@@ -17,7 +17,7 @@ class CreateUserModification extends BaseModification
     public function addUserToDatabase($data){
 
         $user = $this->startCondition()->select(['email'])->where('email',$data['email'])->toBase()->first();
-        if($user){
+        if($user != null){
             return false;
         }
 

@@ -13,8 +13,8 @@
 
 <body>
     <div id="app">
-        <snackbar></snackbar>
         <v-app>
+            <snackbar></snackbar>
             <v-app-bar app>
                 <v-toolbar-title class="text-uppercase">
                     <span class="font-weight-light" dense>

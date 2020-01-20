@@ -249,13 +249,12 @@ export default {
           this.close();
         })
         .catch(ex => {
-          this.showError("Сохранение не было произведено! " + ex);
+          this.showError(ex.response.data.error)
         });
     },
     //Сохранение изменения для выбранного пользователя
     saveEdit()
     {
-      console.log(this.editedItem); 
       apiuser //! 400 ошибка Bad Request исправить
         .saveEdit({
           id: this.editedItem.id,
@@ -268,7 +267,7 @@ export default {
           this.close();
         })
         .catch(ex => {
-          this.showError("Изменение не было произведено! " + ex);
+          this.showError(ex.response.data.error)
         });
     }
   }
