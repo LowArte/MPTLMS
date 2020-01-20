@@ -48,7 +48,7 @@ class UserManagmentController extends BaseController
         if($result){
             return response()->json(["success"=>true]);
         }
-        return response()->json([],400);
+        return response()->json(["error"=>"Такой почтовый адресс уже существует"],400);
     }
     /**
      * delete user from database
@@ -76,6 +76,6 @@ class UserManagmentController extends BaseController
         if($result){
             return response()->json(["success"=>true]);
         }
-        return response()->json([],400);
+        return response()->json(["error"=>"Такой почтовый адресс уже существует"],400);
     }
 }

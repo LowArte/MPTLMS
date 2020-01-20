@@ -15,8 +15,7 @@ class UpdateUserModification extends BaseModification
 
     public function updateUserInDatabase($id,$data){
         $user = $this->startCondition()->select('id')->where('email',$data['email'])->toBase()->first();
-        
-        if($user){
+        if($user != null){
             return false;
         }
 
