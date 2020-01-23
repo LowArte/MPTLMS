@@ -3,20 +3,20 @@
 @section('content')
 <v-tabs grow>
     <v-tab>
-        Расписание
+        Замены
     </v-tab>
     <v-tab>
         Конструктор
     </v-tab>
     <v-tab-item>
-        <c-timetable :_departaments_info="{{json_encode($departaments_info) ?? null}}" 
+        <c-replacement :_departaments_info="{{json_encode($departaments_info) ?? null}}" 
     :_groups_info="{{json_encode($groups_info) ?? null}}" 
-    :_schedule="{{json_encode($schedule) ?? null}}"></c-timetable>
+    :_schedule="{{json_encode($schedule) ?? null}}"></c-replacement>
     </v-tab-item>
     <v-tab-item>
-        <c-bild-timetable :_departaments_info="{{json_encode($departaments_info) ?? null}}" 
+        <c-bild-replacement :_departaments_info="{{json_encode($departaments_info) ?? null}}" 
     :_groups_info="{{json_encode($groups_info) ?? null}}" 
-    :_schedule="{{json_encode($schedule) ?? null}}"></c-bild-timetable>
+    :_schedule="{{json_encode($schedule) ?? null}}"></c-bild-replacement>
     </v-tab-item>
 </v-tabs>
 @endsection

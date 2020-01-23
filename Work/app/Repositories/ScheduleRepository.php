@@ -25,5 +25,4 @@ class ScheduleRepository extends BaseRepository
         }
         return $result;
     }
-
 }
