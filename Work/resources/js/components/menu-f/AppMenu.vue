@@ -30,9 +30,92 @@ export default {
     _role: {
       type: String,
       default: null
+    },
+    _disabled: {
+      type: String,
+      default: "0"
     }
   },
   mounted() {
+    if (this._disabled == 1)
+    {
+      switch (this._role) {
+        case "admin": {
+          //Администраторы
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/admin/home"
+            }
+          ]);
+        }
+        case "student": {
+          //Студент
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/student/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/student/feedback"
+            }
+          ]);
+        }
+        case "teacher": {
+          //Преподы
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/feedback"
+            }
+          ]);
+        }
+        case "unit": {
+          //Учебная часть (unit)
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/feedback"
+            }
+          ]);
+        }
+        case "lord": {
+          //Лапшина (Канцелярия)
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/lord/feedback"
+            }
+          ]);
+        }
+        default: {
+          return null;
+        }
+      }
+    }
+    else
     switch (this._role) {
       case "admin": {
         //Администраторы
