@@ -29,6 +29,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/post_managment','Admin\PostManagmentController@index')->name('posts');
     Route::get('/place_managment','Admin\PlaceManagmentController@index')->name('place_managment');
     Route::get('/retraining_managment','Admin\RetrainingManagmentController@index')->name('retraining_managment');
+    Route::get('/request','Admin\RequestController@index')->name('request');
 });
 
 Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function(){
@@ -51,7 +52,7 @@ Route::middleware(['auth','access'])->name('student.')->prefix('student')->group
     Route::get('/datastorage','Student\WarningController@index')->name('datastorage');
     Route::get('/plants','Student\WarningController@index')->name('plants');
     Route::get('/convocation','Student\WarningController@index')->name('convocation');
-    Route::get('/feedback','Student\WarningController@index')->name('feedback');
+    Route::get('/feedback','FeedbackController@index')->name('feedback');
 });
 
 Route::middleware(['profilactic','auth','access'])->name('lord.')->prefix('lord')->group(function(){
