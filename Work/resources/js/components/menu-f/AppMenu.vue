@@ -119,7 +119,7 @@ export default {
           {
             icon: "feedback",
             text: "Обращение пользователей",
-            href: "/admin/requestsusers"
+            href: "/admin/request"
           }
         ]);
       }

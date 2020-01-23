@@ -12,6 +12,9 @@ import SpecialitiesList_C from './components/information-page-f/SpecialtiesList'
 import Retraining_C from './components/additional-education-f/Retraining'
 import PanelControl_C from './components/administrator-f/PanelControl'
 
+import Request_C from './components/feedback-f/Request'
+import Feedback_C from './components/feedback-f/Feedback'
+
 import FileManagment_C from './components/administrator-f/FileManagement'
 import UserManagment_C from './components/administrator-f/UserManagement'
 import PlaceManagment_C from './components/administrator-f/PlaceManagement'
@@ -57,5 +60,7 @@ new Vue({
       'c-group-managment':GroupManagment_C,
       'c-post-managment':PostManagment_C,
       'c-retraining-management':RetrainingManagement_C,
+      'c-requests-users' :Request_C,
+      'c-feedback' :Feedback_C
     }
 });
