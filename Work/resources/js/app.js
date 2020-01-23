@@ -26,6 +26,9 @@ import RetrainingManagement_C from './components/administrator-f/Retraining_Mana
 import Timetable_C from './components/timetable-f/Timetable'
 import BildTimetable_C from './components/timetable-f/Bild_Timetable'
 
+import Replacements_C from './components/replacements-f/Replacements'
+import Bild_Replacements_C from './components/replacements-f/Bild_Replacements'
+
 import CallSchedule_C from './components/call-schedule-f/CallSchedule'
 import BildCallSchedule_C from './components/call-schedule-f/Bild_CallSchedule'
 
@@ -53,6 +56,8 @@ new Vue({
       'c-user-managment' : UserManagment_C, 
       'c-timetable':Timetable_C,
       'c-bild-timetable':BildTimetable_C,
+      'c-replacement':Replacements_C,
+      'c-bild-replacement':Bild_Replacements_C,
       'c-call-schedule':CallSchedule_C,
       'c-bild-call-schedule':BildCallSchedule_C,
       'c-place-managment':PlaceManagment_C,

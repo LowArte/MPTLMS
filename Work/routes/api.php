@@ -64,5 +64,11 @@ Route::middleware('auth:api')->name('api.')->group(function () {
             Route::post('save', 'Admin\TimeTableController@save')->name('get_group_by_departament_id');
             Route::get('get_schedule_by_group_id', 'Admin\TimeTableController@getScheduleByGroupId')->name('get_schedule_by_group_id');
         });
+
+        Route::name('replacements.')->prefix('replacements')->group(function () {
+            Route::get('get_group_by_departament_id', 'Admin\TimeTableController@getGroupByDepartamentId')->name('get_group_by_departament_id');
+            Route::post('save', 'Admin\TimeTableController@save')->name('get_group_by_departament_id');
+            Route::get('get_schedule_by_group_id', 'Admin\TimeTableController@getScheduleByGroupId')->name('get_schedule_by_group_id');
+        });
     });
 });

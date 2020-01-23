@@ -148,7 +148,7 @@ export default {
               {
                 icon: "",
                 text: "Изменеия в расписание",
-                href: "/student/changes"
+                href: "/student/replacement"
               },
               {
                 icon: "",

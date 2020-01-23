@@ -198,7 +198,7 @@ export default {
               this.initialize();
             })
             .catch(ex => {
-              this.showError("Удаление не было произведено" + ex);
+              this.showError("Удаление не было произведено " + ex);
             });
         } else {
           this.showMessage("Действие было отменено");
@@ -257,7 +257,7 @@ export default {
     },
     //Сохранение изменения для выбранного пользователя
     saveEdit() {
-      apiuser //! 400 ошибка Bad Request исправить
+      apiuser
         .saveEdit({
           id: this.editedItem.id,
           user: this.editedItem,

@@ -55,8 +55,8 @@
 import group_api from "./../../api/group";
 import schedule_api from "./../../api/schedule";
 Date.prototype.getWeek = function() {
-  const onejan = new Date(this.getFullYear(), 0, 1);
-  return Math.ceil(((this - onejan) / 86400000 + onejan.getDay() + 1) / 7);
+  const today = new Date(this.dateDialog.date);
+  return today.getWeek() % 2;
 };
 
 export default {
@@ -71,11 +71,11 @@ export default {
   },
   props: {
     _departaments_info: {
-      type: String,
+      type: Object,
       default: null
     },
     _groups_info: {
-      type: String,
+      type: Object,
       default: null
     },
     _schedule: {
@@ -139,10 +139,9 @@ export default {
     }
   },
   beforeMount() {
-    this.groups_info = JSON.parse(this._groups_info);
-    this.departaments_info = JSON.parse(this._departaments_info);
+    this.groups_info = this._groups_info;
+    this.departaments_info = this._departaments_info;
     this.schedule = this._schedule;
-    this.isToday = 0;
     this.parseSchedule();
   }
 };
