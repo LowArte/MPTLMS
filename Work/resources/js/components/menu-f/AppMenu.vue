@@ -49,7 +49,7 @@ export default {
               {
                 text: "Настройки сервера",
                 href: "/admin/panel_control",
-                icon: "settings_applications"
+                icon: ""
               }
             ]
           },
@@ -60,53 +60,53 @@ export default {
               {
                 text: "Расписание",
                 href: "/admin/timetable",
-                icon: "today"
+                icon: ""
               },
               {
                 text: "Изменения в расписании",
                 href: "/admin/replacements",
-                icon: "autorenew"
+                icon: ""
               },
               {
                 text: "Расписание звонков",
                 href: "/admin/callschedule",
-                icon: "alarm"
+                icon: ""
               }
             ]
           },
           {
             icon: 'sd_storage',
-            text: "Управление данными",
+            text: "CRUD",
             children: [
               {
-                text: "Управление пользователями",
+                text: "Пользователи",
                 href: "/admin/user_managment",
-                icon: "account_box"
+                icon: ""
               },
               {
                 text: "Отделения",
                 href: "/admin/department_managment",
-                icon: "table_chart"
+                icon: ""
               },
               {
                 text: "Группы",
                 href: "/admin/group_managment",
-                icon: "people_alt"
+                icon: ""
               },
               {
                 text: "Места проведения",
                 href: "/admin/place_managment",
-                icon: "apartment"
+                icon: ""
               },
               {
-                text: "Дополнительное образование",
+                text: "ДО",
                 href: "/admin/retraining_managment",
-                icon: "add_to_queue"
+                icon: ""
               },
               {
                 text: "Роли",
                 href: "/admin/post_managment",
-                icon: "event_seat"
+                icon: ""
               }
               /*               ,
               {
