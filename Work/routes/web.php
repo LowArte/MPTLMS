@@ -34,7 +34,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
 
 Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function(){
     Route::get('/home', 'Student\HomeController@index')->name('home');
-    Route::get('/bio','Student\WarningController@index')->name('bio');
+    Route::get('/account','Student\AccountController@index')->name('account');
     Route::get('/timetable','Student\WarningController@index')->name('timetable');
     Route::get('/changes','Student\WarningController@index')->name('changes');
     Route::get('/exams','Student\WarningController@index')->name('exams');

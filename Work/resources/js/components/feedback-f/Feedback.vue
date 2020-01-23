@@ -4,7 +4,7 @@
         v-card.mx-auto.pa-4(height="auto" width="max")
           v-card-title.ma-0.pa-0 Обратная связь
           v-form(v-model="form")
-            v-alert.my-6(type="warning" dense)
+            v-alert.my-2(text dense type="warning")
               span Опишите проблему, с которой вы столкнулись как можно более подробно, чтобы наши специалисты могли решить её в кротчайшие сроки.
             v-select.my-2(v-model="thematic" :items="thematics" label="Тема")
             v-textarea.my-2( v-model="modelmessage" :auto-grow="true" :clearable="false" :counter="255 ? 255 : false" :filled="false" :flat="true" :hint="'Описание проблемы'" :label="'Текст'"

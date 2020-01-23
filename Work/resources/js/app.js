@@ -11,6 +11,7 @@ import Panel_C from './components/expention-f/Panel'
 import SpecialitiesList_C from './components/information-page-f/SpecialtiesList'
 import Retraining_C from './components/additional-education-f/Retraining'
 import PanelControl_C from './components/administrator-f/PanelControl'
+import AccountCard_C from './components/account-card-f/AccountCard'
 
 import Request_C from './components/feedback-f/Request'
 import Feedback_C from './components/feedback-f/Feedback'
@@ -33,6 +34,9 @@ import CallSchedule_C from './components/call-schedule-f/CallSchedule'
 import BildCallSchedule_C from './components/call-schedule-f/Bild_CallSchedule'
 
 import ListCertificate_C from './components/certificate-f/ListCertificateComponent'
+
+//* Студент
+//! В данном разделе описываются компоненты для пользователя СТУДЕНТ
 
 
 
@@ -69,6 +73,7 @@ new Vue({
       'c-retraining-management':RetrainingManagement_C,
       'c-list-certificate':ListCertificate_C,
       'c-requests-users' :Request_C,
-      'c-feedback' :Feedback_C
+      'c-feedback' :Feedback_C,
+      'c-account-card' :AccountCard_C
     }
 });

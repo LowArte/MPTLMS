@@ -134,7 +134,7 @@ export default {
           {
             icon: "portrait",
             text: "Профиль",
-            href: "/student/bio"
+            href: "/student/account"
           },
           {
             text: "Учебные процесс",
