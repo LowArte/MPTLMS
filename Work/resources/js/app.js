@@ -29,6 +29,8 @@ import Bild_Replacements_C from './components/replacements-f/Bild_Replacements'
 import CallSchedule_C from './components/call-schedule-f/CallSchedule'
 import BildCallSchedule_C from './components/call-schedule-f/Bild_CallSchedule'
 
+import ListCertificate_C from './components/certificate-f/ListCertificateComponent'
+
 
 
 window.Vue = require('vue');
@@ -62,5 +64,6 @@ new Vue({
       'c-group-managment':GroupManagment_C,
       'c-post-managment':PostManagment_C,
       'c-retraining-management':RetrainingManagement_C,
+      'c-list-certificate':ListCertificate_C,
     }
 });

@@ -28,9 +28,8 @@
                 v-text-field(v-model="editedItem.name" label="Имя")
                 v-text-field(v-model="editedItem.secName" label="Отчество")
                 v-text-field(v-model="editedItem.email" label="Почта")
-                v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль')
+                v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль' @change="changePost")
                 v-autocomplete(:items="adisabled" item-value='id' item-text='name' value=item v-model="editedItem.disabled" dense solo label='Блокировка')
-                
                 //- v-combobox(v-if="editedItem.post_id==2" @change="departament_change" v-model="departaments_info.selected_departament" item-text="dep_name_full" :items="departaments_info.departaments" label="Специальность")
                 v-combobox(v-if="editedItem.post_id==2" v-model="studentItem.group" label='Группа')
                 v-dialog(v-if="editedItem.post_id==2" ref="dateDialog" v-model="dateDialog" :return-value.sync="studentItem.group" persistent width="290px")
@@ -73,7 +72,7 @@ export default {
     "c-comfirm-dialog": ConfirmDialog_C
   },
   data: () => ({
-    departaments_info: [], //Массив отеделений
+    departaments_info: [], //Массив отделений
     groups_info: [],
     listusers: [], //Массив
     arrusersposts: [], //Массив постов
@@ -157,6 +156,19 @@ export default {
         .catch(ex => {
           console.log(ex);
         });
+    },
+    //Изменение роли
+    changePost() {
+      if (item.post_id == 2) {
+        apiuser
+          .getStudent({ id: this.editedItem.id })
+          .then(res => {
+            this.studentItem = Object.assign({}, res.data.student);
+          })
+          .catch(ex => {
+            console.log(ex);
+          });
+      }
     },
     //Иницилизации данных
     initialize() {

@@ -172,7 +172,8 @@ export default {
             }
         }
     },
-    beforeMount() //Получение данных для работы на странице
+    //Получение данных для работы на странице
+    beforeMount() 
     {
         this.groups_info = this._groups_info;
         this.departaments_info = this._departaments_info;
@@ -180,7 +181,7 @@ export default {
         this.discip = JSON.parse(this._discip);
         this.teachers = JSON.parse(this._teachers);
         this.isToday = this.isChisl();
-        //caseDate();
+        //caseDate(); Требуется заменить на это. Выбор текущий даты для получения текущего расписания дня
         this.schedule = this._schedule[this.week[new Date(this.dateDialog.date).getDay()]];
         this.parseSchedule();
     }
