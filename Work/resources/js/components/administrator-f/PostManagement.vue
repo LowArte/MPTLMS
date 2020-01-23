@@ -3,7 +3,7 @@
       c-comfirm-dialog(ref='qwestion')
       v-data-table.elevation-0.pa-0.ma-0(
         :headers="headers"
-        :items="places"
+        :items="posts"
         :search="search"
         item-key="id"
         no-results-text='Нет результатов' 
@@ -13,7 +13,7 @@
         @page-count="pageCount = $event"
         :items-per-page="itemsPerPage")
         template(v-slot:top)
-          v-card-title.my-2.ma-0.py-2.text-truncate CRUD - мест проведения
+          v-card-title.my-2.ma-0.py-2.text-truncate CRUD - должностей
           v-btn.ma-2.ml-0(text @click="initialize()")
             v-icon refresh
           v-dialog(v-model="dialog" max-width="500px")
@@ -24,7 +24,7 @@
               v-card-title.headline 
                 h4.text-truncate {{ formTitle }}
               v-card-text
-                v-text-field(v-model="editedItem.thirdName" label="Место проведения")
+                v-text-field(v-model="editedItem.name" label="Наименование")
                 v-card-actions                  
                   v-btn(color="accent darken-1" text @click="close") Отмена
                   v-spacer
@@ -32,13 +32,13 @@
           v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
         template(v-slot:item.action="{ item }")
           v-icon.small(@click="editItem(item)") edit
-          v-icon.small(@click="deleteItem(item)") delete
+          //- v-icon.small(@click="deleteItem(item)") delete
       v-layout.row.text-center.pa-2.ma-2
         v-pagination(v-model="page" :length="pageCount")
 </template>
 
 <script>
-import apiplaces from "../../api/places"; //api для мест проведения
+import apiposts from "../../api/userPosts"; //api для должностей
 import { mask } from "vue-the-mask"; //маски vue
 import withSnackbar from "../mixins/withSnackbar";//Alert
 import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
@@ -52,7 +52,7 @@ export default {
     "c-comfirm-dialog": ConfirmDialog_C
   },
   data: () => ({
-    places: [], //Массив мест проведения
+    posts: [], //Массив должностей
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых строк
@@ -60,59 +60,59 @@ export default {
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
     headers: [
-      { text: "Место проведения", value: "place_name" },
+      { text: "Наименование", value: "name" },
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
     editedItem: {
       id: -1,
-      place_name: "",
-    }, //Массив с данными мест проведения для сохранения в бд
+      name: ""
+    },//Структура строки
   }),
   props: {
-    _places: {
+    _posts: {
       type: Array,
       default: null
-    }
+    } //Данные должностей
   },
 
   //Получаем данных при старте
   mounted() {
-    this.places = this._places;
+    this.posts = this._posts;
   },
 
   computed: {
     //Получение названия диалога
     formTitle() {
       return this.editedItem.id === -1
-        ? "Новое место проведения"
-        : "Редактировать место проведения";
+        ? "Новая должность"
+        : "Редактировать должность";
     }
   },
 
   methods: {
     //Иницилизации данных
     initialize() {
-      apiplaces
-        .getPlaces()
+      apiposts
+        .getPosts()
         .then(res => {
-          this.places = res.data.places;
+          this.posts = res.data.posts;
         })
         .catch(ex => {
           console.log(ex);
         });
     },
-    //Вызов диалогового окна для редактирования места проведения
+    //Вызов диалогового окна для редактирования
     editItem(item) 
     {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-    //Удаление места проведения
+    //Удаление
     deleteItem(item) {
       this.$refs.qwestion.pop().then(confirmResult => {
         if (confirmResult) {
-          apiplaces
-            .deletePlace({ id: item.id })
+          apiposts
+            .deleteDepartment({ id: item.id })
             .then(res => {
               this.showMessage("Удалено!");
               this.initialize();
@@ -128,7 +128,7 @@ export default {
     //Закрытие диалога
     close() {
       this.dialog = false;
-      this.editedItem = Object.assign({},{id: -1, place_name: ""});
+      this.editedItem = Object.assign({}, {id: -1,name: "",});
     },
     //Обработка нажатия на кнопку сохранить
     save() 
@@ -144,8 +144,8 @@ export default {
     //Сохранение нового места проведения
     saveNew()
     {
-      apiplaces
-        .savePlace({place: this.editedItem})
+      apiposts
+        .saveDepartment({post: this.editedItem})
         .then(res => {
           this.initialize();
           this.showMessage("Сохранено!");
@@ -158,9 +158,9 @@ export default {
     //Сохранение изменения для выбранного места проведения
     saveEdit()
     {
-      apiplaces
-        .editPlace({
-          place: this.editedItem
+      apiposts
+        .editDepartment({
+          post: this.editedItem
         })
         .then(res => {
           this.initialize();

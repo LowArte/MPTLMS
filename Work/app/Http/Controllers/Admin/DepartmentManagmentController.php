@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class DepartmentManagmentController extends BaseController
 {
      /**
-     * Show the application user managment page.
+     * Show the application department managment page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(DepartamentRepository $departamentRepository)
     {
-        $departments = $departamentRepository->getDepartamentsForComboBox();
+        $departments = $departamentRepository->getDepartaments();
         return view('roles.admin.department-managment', compact('departments'));
     }    
 
@@ -23,9 +23,9 @@ class DepartmentManagmentController extends BaseController
      * get departaments from database
      * @return JSON
      */
-    public function getDepartaments(DepartamentRepository $departamentRepository)
+    public function getDepartments(DepartamentRepository $departamentRepository)
     {
-        $departments = $departamentRepository->getDepartamentsForComboBox();
+        $departments = $departamentRepository->getDepartaments();
         return response()->json(compact('departments'));
     }
 }

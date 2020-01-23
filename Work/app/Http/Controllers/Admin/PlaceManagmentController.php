@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PlaceManagmentController extends BaseController
 {
      /**
-     * Show the application user managment page.
+     * Show the application place managment page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

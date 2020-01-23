@@ -3,7 +3,7 @@
       c-comfirm-dialog(ref='qwestion')
       v-data-table.elevation-0.pa-0.ma-0(
         :headers="headers"
-        :items="places"
+        :items="groups"
         :search="search"
         item-key="id"
         no-results-text='Нет результатов' 
@@ -13,7 +13,7 @@
         @page-count="pageCount = $event"
         :items-per-page="itemsPerPage")
         template(v-slot:top)
-          v-card-title.my-2.ma-0.py-2.text-truncate CRUD - мест проведения
+          v-card-title.my-2.ma-0.py-2.text-truncate CRUD - групп
           v-btn.ma-2.ml-0(text @click="initialize()")
             v-icon refresh
           v-dialog(v-model="dialog" max-width="500px")
@@ -24,7 +24,11 @@
               v-card-title.headline 
                 h4.text-truncate {{ formTitle }}
               v-card-text
-                v-text-field(v-model="editedItem.thirdName" label="Место проведения")
+                v-text-field(v-model="editedItem.group_name" label="Наименование")
+                v-text-field(v-model="editedItem.study_period" label="Срок обучения")
+                v-autocomplete(:items="arr_type_of_study" v-model="editedItem.type_of_study" dense solo label='Тип обучения')
+                v-text-field(v-model="editedItem.сurs" label="Курс")
+                v-autocomplete(:items="departments" item-value="id" item-text="dep_name_full" v-model="editedItem.type_of_study" dense solo label='Отделение')
                 v-card-actions                  
                   v-btn(color="accent darken-1" text @click="close") Отмена
                   v-spacer
@@ -38,7 +42,7 @@
 </template>
 
 <script>
-import apiplaces from "../../api/places"; //api для мест проведения
+import apigroups from "../../api/group"; //api для групп
 import { mask } from "vue-the-mask"; //маски vue
 import withSnackbar from "../mixins/withSnackbar";//Alert
 import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
@@ -52,67 +56,80 @@ export default {
     "c-comfirm-dialog": ConfirmDialog_C
   },
   data: () => ({
-    places: [], //Массив мест проведения
+    groups: [], //Массив групп
+    departments: [], //Массив отделений
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 10, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога
+    arr_type_of_study: ["Очная", "Заочная"],
     headers: [
-      { text: "Место проведения", value: "place_name" },
+      { text: "Группа", value: "group_name" },
+      { text: "Курс", value: "сurs" },
       { text: "Действия", value: "action", sortable: false }
     ], //Структура таблицы и с полями которые требуется выводить
     editedItem: {
       id: -1,
-      place_name: "",
-    }, //Массив с данными мест проведения для сохранения в бд
+      group_name: "",
+      study_period: "",
+      arr_type_of_study: "",
+      сurs: 1,
+      departaments_id: 1,
+    },//Структура строки
   }),
   props: {
-    _places: {
+    _groups: {
       type: Array,
       default: null
-    }
+    }, //Данные групп
+    _departments: {
+      type: Array,
+      default: null
+    } //Данные отделений
   },
 
   //Получаем данных при старте
   mounted() {
-    this.places = this._places;
+    this.groups = this._groups;
+    this.departments = this._departments;
   },
 
   computed: {
     //Получение названия диалога
     formTitle() {
       return this.editedItem.id === -1
-        ? "Новое место проведения"
-        : "Редактировать место проведения";
+        ? "Новая группа"
+        : "Редактировать группу";
     }
   },
 
   methods: {
     //Иницилизации данных
     initialize() {
-      apiplaces
-        .getPlaces()
+      apigroups
+        .getGroupAll()
         .then(res => {
-          this.places = res.data.places;
+          this.groups = res.data.groups;
+          this.$departments = res.data.departments;
         })
         .catch(ex => {
           console.log(ex);
         });
     },
-    //Вызов диалогового окна для редактирования места проведения
+    //Вызов диалогового окна для редактирования
     editItem(item) 
     {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-    //Удаление места проведения
+    //Удаление
     deleteItem(item) {
       this.$refs.qwestion.pop().then(confirmResult => {
         if (confirmResult) {
-          apiplaces
-            .deletePlace({ id: item.id })
+          apigroups
+            .deleteGroup({ id: item.id })
             .then(res => {
               this.showMessage("Удалено!");
               this.initialize();
@@ -128,7 +145,13 @@ export default {
     //Закрытие диалога
     close() {
       this.dialog = false;
-      this.editedItem = Object.assign({},{id: -1, place_name: ""});
+      this.editedItem = Object.assign({},
+      {id: -1,
+      group_name: "",
+      study_period: "",
+      arr_type_of_study: "",
+      curs: "",
+      departaments_id: 1});
     },
     //Обработка нажатия на кнопку сохранить
     save() 
@@ -144,8 +167,8 @@ export default {
     //Сохранение нового места проведения
     saveNew()
     {
-      apiplaces
-        .savePlace({place: this.editedItem})
+      apigroups
+        .saveGroup({group: this.editedItem})
         .then(res => {
           this.initialize();
           this.showMessage("Сохранено!");
@@ -158,9 +181,9 @@ export default {
     //Сохранение изменения для выбранного места проведения
     saveEdit()
     {
-      apiplaces
-        .editPlace({
-          place: this.editedItem
+      apigroups
+        .editGroup({
+          group: this.editedItem
         })
         .then(res => {
           this.initialize();

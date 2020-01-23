@@ -16,4 +16,11 @@ class GroupRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->where('departaments_id',$dep_id)->toBase()->get();
         return $result;
     }
+
+    public function getGroups()
+    {
+        $columns = ['id','group_name','study_period', 'type_of_study', 'сurs', 'departaments_id'];
+        $result = $this->startCondition()->select($columns)->toBase()->get();
+        return $result;
+    }
 }

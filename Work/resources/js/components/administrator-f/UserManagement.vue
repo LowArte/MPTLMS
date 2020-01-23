@@ -62,7 +62,7 @@ import apiuser from "../../api/users"; //api для пользователей
 import { mask } from "vue-the-mask"; //маски vue
 import withSnackbar from "../mixins/withSnackbar"; //Alert
 import group_api from "./../../api/group"; //Группы
-import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Группы
+import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
 
 export default {
   mixins: [withSnackbar],
@@ -79,7 +79,7 @@ export default {
     arrusersposts: [], //Массив постов
     search: "", //Поиск
     page: 1, //Текущая страница
-    itemsPerPage: 10, //Количество отображаемых пользователей
+    itemsPerPage: 10, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
     mask: "####", //Маска для количества отображаемых строк
     dialog: false, //Активатор диалога

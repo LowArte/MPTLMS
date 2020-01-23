@@ -43,52 +43,18 @@ export default {
             href: "/admin/home"
           },
           {
+            icon: "settings_brightness",
             text: "Панель управления",
             children: [
               {
                 text: "Настройки сервера",
                 href: "/admin/panel_control",
-                icon: "build"
-              },
-              {
-                text: "Управление пользователями",
-                href: "/admin/user_managment",
-                icon: "accessible"
-              },
-              {
-                text: "Отделения",
-                href: "/admin/department_managment",
-                icon: ""
-              },
-              {
-                text: "Группы",
-                href: "/admin/group_managment",
-                icon: ""
-              },
-              {
-                text: "Места проведения",
-                href: "/admin/place_managment",
-                icon: ""
-              },
-              {
-                text: "Дополнительное образование",
-                href: "/admin/additional_education_managment",
-                icon: ""
-              },
-              {
-                text: "Роли",
-                href: "/admin/post_managment",
-                icon: ""
+                icon: "settings_applications"
               }
-              /*               ,
-              {
-                text: "Управление файлами",
-                href: "/admin/file_management",
-                icon: "insert_drive_file"
-              } */
             ]
           },
           {
+            icon: "assignment",
             text: "Расписания",
             children: [
               {
@@ -106,6 +72,48 @@ export default {
                 href: "/admin/callschedule",
                 icon: "alarm"
               }
+            ]
+          },
+          {
+            icon: 'sd_storage',
+            text: "Управление данными",
+            children: [
+              {
+                text: "Управление пользователями",
+                href: "/admin/user_managment",
+                icon: "account_box"
+              },
+              {
+                text: "Отделения",
+                href: "/admin/department_managment",
+                icon: "table_chart"
+              },
+              {
+                text: "Группы",
+                href: "/admin/group_managment",
+                icon: "people_alt"
+              },
+              {
+                text: "Места проведения",
+                href: "/admin/place_managment",
+                icon: "apartment"
+              },
+              {
+                text: "Дополнительное образование",
+                href: "/admin/retraining_managment",
+                icon: "add_to_queue"
+              },
+              {
+                text: "Роли",
+                href: "/admin/post_managment",
+                icon: "event_seat"
+              }
+              /*               ,
+              {
+                text: "Управление файлами",
+                href: "/admin/file_management",
+                icon: "insert_drive_file"
+              } */
             ]
           },
           {

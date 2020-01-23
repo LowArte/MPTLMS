@@ -16,6 +16,9 @@ import FileManagment_C from './components/administrator-f/FileManagement'
 import UserManagment_C from './components/administrator-f/UserManagement'
 import PlaceManagment_C from './components/administrator-f/PlaceManagement'
 import DepartmentManagment_C from './components/administrator-f/DepartmentManagement'
+import GroupManagment_C from './components/administrator-f/GroupManagement'
+import PostManagment_C from './components/administrator-f/PostManagement'
+import RetrainingManagement_C from './components/administrator-f/Retraining_Management'
 
 import Timetable_C from './components/timetable-f/Timetable'
 import BildTimetable_C from './components/timetable-f/Bild_Timetable'
@@ -51,5 +54,8 @@ new Vue({
       'c-bild-call-schedule':BildCallSchedule_C,
       'c-place-managment':PlaceManagment_C,
       'c-department-managment':DepartmentManagment_C,
+      'c-group-managment':GroupManagment_C,
+      'c-post-managment':PostManagment_C,
+      'c-retraining-management':RetrainingManagement_C,
     }
 });

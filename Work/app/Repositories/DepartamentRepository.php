@@ -16,4 +16,11 @@ class DepartamentRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
+
+    public function getDepartaments()
+    {
+        $columns = ['id', 'dep_name', 'specialization', 'dep_name_full'];
+        $result = $this->startCondition()->select($columns)->toBase()->get();
+        return $result;
+    }
 }

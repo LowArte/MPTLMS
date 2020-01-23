@@ -38,6 +38,27 @@ Route::middleware('auth:api')->name('api.')->group(function () {
             Route::post('edit/{department_id}','Admin\DepartmentManagmentController@edit')->name('set_options');
         });
 
+        Route::name('group_managment.')->prefix('group_managment')->group(function(){
+            Route::get('get_groups','Admin\GroupManagmentController@getGroups')->name('get_groups');
+            Route::post('save','Admin\GroupManagmentController@save')->name('save');
+            Route::post('delete/{group_id}','Admin\GroupManagmentController@delete')->name('set_options');
+            Route::post('edit/group_id}','Admin\GroupManagmentController@edit')->name('set_options');
+        });
+
+        Route::name('post_managment.')->prefix('post_managment')->group(function(){
+            Route::get('get_posts','Admin\PostManagmentController@getPosts')->name('get_posts');
+            Route::post('save','Admin\PostManagmentController@save')->name('save');
+            Route::post('delete/{post_id}','Admin\PostManagmentController@delete')->name('set_options');
+            Route::post('edit/{post_id}','Admin\PostManagmentController@edit')->name('set_options');
+        });
+
+        Route::name('retraining_managment.')->prefix('retraining_managment')->group(function(){
+            Route::get('get_retrainings','Admin\RetrainingManagmentController@getRetraining')->name('get_retraining');
+            Route::post('save','Admin\RetrainingManagmentController@save')->name('save');
+            Route::post('delete/{get_retraining_id}','Admin\RetrainingManagmentController@delete')->name('set_options');
+            Route::post('edit/{get_retraining_id}','Admin\RetrainingManagmentController@edit')->name('set_options');
+        });
+
         Route::name('timetable.')->prefix('timetable')->group(function () {
             Route::get('get_group_by_departament_id', 'Admin\TimeTableController@getGroupByDepartamentId')->name('get_group_by_departament_id');
             Route::post('save', 'Admin\TimeTableController@save')->name('get_group_by_departament_id');

@@ -11,7 +11,7 @@
         v-hover(v-slot:default='{ hover }')
           v-card.pa-2.pb-0.mx-auto(:elevation='hover ? 12 : 6'  min-width="265px" max-width="265px" style="display: flex; flex-direction: column;")
             v-card-title.primary-title.pt-0.px-0.pb-5 {{day_key}} 
-            v-card-subtitle.px-0.pt-0.pb-0 {{schedule[day_key].Place}} 
+            v-card-subtitle.px-0.pt-0.pb-0 {{schedule[day_key].Place.place_name}} 
             v-divider
             v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule[day_key]" :key="'l'+lesson_index")
                 v-container.pa-0.ma-0(v-if="lesson.chisl == false") <!--Прорисовка обычной пары-->
