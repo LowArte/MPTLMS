@@ -55,6 +55,13 @@ Route::middleware(['auth','access'])->name('student.')->prefix('student')->group
     Route::get('/feedback','FeedbackController@index')->name('feedback');
 });
 
+Route::middleware(['profilactic','auth','access'])->name('lord.')->prefix('lord')->group(function(){
+    Route::get('/home', 'Chancellery\HomeController@index')->name('home');
+    Route::get('/listcertificate', 'Chancellery\ListCertificateController@index')->name('list_certificate');
+    Route::get('/feedback','Chancellery\WarningController@index')->name('feedback');
+});
+
+
 
 
 

@@ -12,8 +12,7 @@
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
         v-switch.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
         v-switch.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
-
-        //-v-flex.ma-0.mb-2.row(v-for="(replacement_key, replacement_index) in replacements" :key="replacement_index" align="center" justify="center")
+        
         v-flex.ma-0.mb-2.row(v-for="(groups_key, groups_index) in groups" :key="groups_index" align="center" justify="center" min-width="500px")
             v-flex(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
                 v-hover(v-slot:default="{ hover }")

@@ -312,7 +312,7 @@ export default {
           }
         ]);
       }
-      case 5: {
+      case "lord": {
         //Лапшина (Канцелярия)
         return (this.items = [
           {
@@ -323,12 +323,12 @@ export default {
           {
             icon: "home",
             text: "Заказ справок",
-            href: "/listcertificate"
+            href: "/lord/listcertificate"
           },
           {
             icon: "feedback",
             text: "Обратная связь",
-            href: "/feedback"
+            href: "/lord/feedback"
           }
         ]);
       }
