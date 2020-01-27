@@ -51,7 +51,7 @@
           v-card-text.ma-0.pa-0 {{adisabled[item['disabled']].name}}
         template(v-slot:item.action="{ item }")
           v-icon.small(@click="editItem(item)") edit
-          v-icon.small(@click="deleteItem(item)") delete
+          v-icon.small(v-if="item['post_id'] != 1" @click="deleteItem(item)") delete
       v-layout.row.text-center.pa-2.ma-2
         v-pagination(v-model="page" :length="pageCount")
 </template>
