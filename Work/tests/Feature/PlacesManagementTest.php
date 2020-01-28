@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\Feature;
+use Laravel\Passport\Passport;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -26,12 +27,18 @@ class PlacesManagementTest extends TestCase
      */
     public function testAdd()
     {
-        $user = User::Find(1);
-        $response = $this->actingAs($user);
+        Passport::actingAs(
+            User::Find(1),
+            ['create-servers']
+        );
 
         $place['id'] = -1;
         $place['name'] = "Жопа мира";
-        $response = $this->post('/api/admin/place_managment/save/', [$place]);
+
+        $response = $this->call('POST', '/api/admin/place_managment/save/', array(
+            'place' =>  $place,
+        ));
+        
         $response->assertStatus(500);
     }
 
@@ -41,8 +48,10 @@ class PlacesManagementTest extends TestCase
      */
     public function testDelete()
     {
-        $user = User::Find(1);
-        $response = $this->actingAs($user);
+        Passport::actingAs(
+            User::Find(1),
+            ['create-servers']
+        );
 
         $id = 3;
         $response = $this->post('/api/admin/place_managment/delete/'.$id);
@@ -55,12 +64,18 @@ class PlacesManagementTest extends TestCase
      */
     public function testEdit()
     {
-        $user = User::Find(1);
-        $response = $this->actingAs($user);
+        Passport::actingAs(
+            User::Find(1),
+            ['create-servers']
+        );
 
         $place['id'] = 3;
         $place['name'] = "Жопа мира2";
-        $response = $this->post('/api/admin/place_managment/edit/'.$place['id'], [$place]);
+
+        $response = $this->call('POST', '/api/admin/place_managment/edit/'.$place['id'], array(
+            'place' =>  $place,
+        ));
+
         $response->assertStatus(500);
     }
 }
