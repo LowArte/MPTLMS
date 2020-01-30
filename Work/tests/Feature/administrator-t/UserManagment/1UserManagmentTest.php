@@ -1,11 +1,10 @@
 <?php
 
 namespace Tests\Feature;
-
 use Tests\TestCase;
 use App\Models\User;
 
-class ExampleTest extends TestCase
+class UserManagmentTest extends TestCase
 {
     /**
      * A basic test example.
@@ -13,8 +12,10 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $user = User::Find(1);
+        $response = $this->actingAs($user);
 
+        $response = $this->get('/admin/user_managment');
         $response->assertStatus(200);
     }
 }

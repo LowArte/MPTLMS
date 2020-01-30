@@ -4,9 +4,12 @@ namespace Tests\Feature;
 use Laravel\Passport\Passport;
 use App\Models\User;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PlacesManagmentAddTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A add test example.
      * @return void
@@ -25,6 +28,6 @@ class PlacesManagmentAddTest extends TestCase
             'place' =>  $place,
         ));
         
-        $response->assertStatus(500);
+        $response->assertStatus(200);
     }
 }
