@@ -22,7 +22,7 @@ class CallScheduleSaveTest extends TestCase
         $callScheduleRepository = new CallScheduleRepository();
         $callSchedule = $callScheduleRepository->getCallSchedule();
 
-        $response = $this->get('/api/admin/callschedule/save_bildcallschedule', [$callSchedule]);
+        $response = $this->call('POST', '/api/admin/callschedule/save_bildcallschedule', [$callSchedule]);
         $response->assertStatus(200);
     }
 }
