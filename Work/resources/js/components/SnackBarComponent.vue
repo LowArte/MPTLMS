@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-snackbar(:timeout='snackbarTimeout' :color='snackbarColor' v-model='snackbarShow' :multi-line='true')
+  v-snackbar(:timeout='snackbarTimeout' :color='snackbarColor' v-model='snackbarShow' :multi-line='true' :bottom="true" :right="true")
     | {{ snackbarText }}
     br
     | {{ snackbarSubtext }}

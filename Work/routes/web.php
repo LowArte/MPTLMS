@@ -19,7 +19,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/home', 'Admin\HomeController@index')->name('home');
     Route::get('/user_management','Admin\UserManagementController@index')->name('user_management');
     Route::get('/panel_control','Admin\PanelControlController@index')->name('panel_control');
-    Route::get('/file_management','WarningController@index')->name('file_management');
+    Route::get('/file_management','Admin\FileManagmentController@index')->name('file_management');
     Route::get('/timetable','Admin\TimetableController@index')->name('timetable');
     Route::get('/replacements','Admin\ReplacementController@index')->name('replacements');
     Route::get('/callschedule','Admin\CallScheduleController@index')->name('callschedule');

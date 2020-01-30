@@ -1,5 +1,13 @@
 <template lang="pug">
   v-layout.row.wrap
+    v-flex.my-2(v-if="printing == 1")
+      v-card.mx-auto(width='420px' style='display: flex; flex-direction: column;' height='100%')
+        v-skeleton-loader(max-height='200px' type="image")
+        v-card-text.grow 
+          v-skeleton-loader.my-2.pa-0.subtitle-1.black--text(type="heading" max-height="70") 
+          v-skeleton-loader.pa-0(type="text@3") 
+        v-card-actions.ma-2.mt-0.pa-0.text--center
+          v-btn(block text small color='accent') Добавить
     c-specialtie(v-for="(item, index) in items" :key="index" :item="item")
 </template>
 
@@ -7,6 +15,7 @@
 import SpecialtiePage_C from "./components/C_SpecialtyPage";
 export default {
   data: () => ({
+    printing: 0,
     items: [
       {
         href: "https://mpt.ru/upload/iblock/bfe/1.jpg",
@@ -56,6 +65,15 @@ export default {
   }),
   components: {
     "c-specialtie": SpecialtiePage_C
+  },
+  props: {
+    _printing: {
+      type: Number,
+      default: 0
+    }
+  },
+  mounted() {
+    this.printing = this._printing;
   }
 };
 </script>

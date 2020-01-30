@@ -2,6 +2,6 @@
 
 @section('content')
 <v-container fluid grid-list-md text-xs-center>
-    <c-file-management></c-file-management>
+    <c-crud></c-crud>
 </v-container>
 @endsection

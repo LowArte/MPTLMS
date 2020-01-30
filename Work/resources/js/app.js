@@ -23,6 +23,8 @@ import DepartmentManagement_C from './components/administrator-f/DepartmentManag
 import GroupManagement_C from './components/administrator-f/GroupManagement'
 import PostManagement_C from './components/administrator-f/PostManagement'
 import RetrainingManagement_C from './components/administrator-f/Retraining_Management'
+import TestCRUD_C from './components/administrator-f/CRUDForm'
+import QuickAction_C from './components/administrator-f/QuickAction'
 
 import Timetable_C from './components/timetable-f/Timetable'
 import BildTimetable_C from './components/timetable-f/Bild_Timetable'
@@ -74,6 +76,8 @@ new Vue({
       'c-list-certificate':ListCertificate_C,
       'c-requests-users' :Request_C,
       'c-feedback' :Feedback_C,
-      'c-account-card' :AccountCard_C
+      'c-account-card' :AccountCard_C,
+      'c-crud' :TestCRUD_C,
+      'c-quick-action' :QuickAction_C
     }
 });
