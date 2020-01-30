@@ -26,7 +26,7 @@ export default {
     })
   },
 
-  deleteFile(credentials) {
+  deleteReplacement(credentials) {
     return axios.post('/delete_replacement', {
       "id": credentials.id
     })

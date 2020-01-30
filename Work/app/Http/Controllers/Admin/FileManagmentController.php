@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FileManagmentController extends BaseController
+class FileManagementController extends BaseController
 {
     /**
      * Show the application file managment  page.
@@ -14,6 +14,6 @@ class FileManagmentController extends BaseController
      */
     public function index()
     {
-        return view('roles.admin.file-managment');
+        return view('roles.admin.file-management');
     }
 }

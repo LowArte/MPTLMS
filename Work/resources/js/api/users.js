@@ -2,27 +2,27 @@ import axios from 'axios'
 
 export default {
   getUsers() {
-    return axios.get('/api/admin/user_managment/get_users');
+    return axios.get('/api/admin/user_management/get_users');
   },
 
   saveUser(user) {
-    return axios.post('/api/admin/user_managment/save', {
+    return axios.post('/api/admin/user_management/save', {
       "user": user.user
     })
   },
 
   deleteUser(user) {
-    return axios.post('/api/admin/user_managment/delete/'+user.id)
+    return axios.post('/api/admin/user_management/delete/'+user.id)
   },
 
   saveEdit(user) {
-    return axios.post('/api/admin/user_managment/edit/'+user.id, {
+    return axios.post('/api/admin/user_management/edit/'+user.id, {
       "user": user.user
     })
   },
 
   getStudent(user) {
-    return axios.post('/api/admin/user_managment/getStudent/'+user.id, {})
+    return axios.post('/api/admin/user_management/getStudent/'+user.id, {})
   },
 
   notificate(notId) {

@@ -16,7 +16,7 @@
     <v-app id="app">
         <snackbar></snackbar>
         <v-navigation-drawer width="300" v-model="leftdrawer" fixed clipped app>
-            <c-app-menu _role="{{auth()->user()->post->slug}}"></c-app-menu>
+            <c-app-menu _role="{{auth()->user()->post->slug}}" _disabled="{{auth()->user()->disabled}}"></c-app-menu>
         </v-navigation-drawer>
         <v-app-bar color="primary" dark app clipped-left clipped-right fixed>
             <div :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'" class="ml-0 pl-3">

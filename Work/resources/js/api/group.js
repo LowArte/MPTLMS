@@ -11,21 +11,21 @@ export default {
 
   getGroupAll() 
   {
-    return axios.get('/api/admin/group_managment/get_groups');
+    return axios.get('/api/admin/group_management/get_groups');
   },
 
   saveGroup(group) 
   {
-    return axios.post('/api/admin/group_managment/save', { "group": group.group })
+    return axios.post('/api/admin/group_management/save', { "group": group.group })
   },
 
   deleteGroup(group) 
   {
-    return axios.post('/api/admin/group_managment/delete/'+group.id)
+    return axios.post('/api/admin/group_management/delete/'+group.id)
   },
 
   editGroup(group) 
   {
-    return axios.post('/api/admin/group_managment/edit/'+group.group.id, {"group": group.group})
+    return axios.post('/api/admin/group_management/edit/'+group.group.id, {"group": group.group})
   },
 }

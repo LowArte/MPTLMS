@@ -79,7 +79,7 @@ export default {
         {
             confirm("Вы действительно хотите удалить замену?") &&
                 replacements_api
-                    .deleteFile({id: id})
+                    .deleteReplacement({id: id})
                     .then(res => {
                         alert("Удалена!");
                         this.changeFilter();

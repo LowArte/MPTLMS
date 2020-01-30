@@ -4,12 +4,12 @@ export default
 {
   getDepartments() 
   {
-    return axios.get('/api/admin/department_managment/get_departments');
+    return axios.get('/api/admin/department_management/get_departments');
   },
 
   saveDepartment(department) 
   {
-    return axios.post('/api/admin/department_managment/save', 
+    return axios.post('/api/admin/department_management/save', 
     {
       "department": department.department
     })
@@ -17,12 +17,12 @@ export default
 
   deleteDepartment(department) 
   {
-    return axios.post('/api/admin/department_managment/delete/'+department.id)
+    return axios.post('/api/admin/department_management/delete/'+department.id)
   },
 
   editDepartment(department) 
   {
-    return axios.post('/api/admin/department_managment/edit/'+department.department.id, 
+    return axios.post('/api/admin/department_management/edit/'+department.department.id, 
     {
       "department": department.department
     })

@@ -163,40 +163,34 @@ export default {
             children: [
               {
                 text: "Пользователи",
-                href: "/admin/user_managment",
+                href: "/admin/user_management",
                 icon: ""
               },
               {
                 text: "Отделения",
-                href: "/admin/department_managment",
+                href: "/admin/department_management",
                 icon: ""
               },
               {
                 text: "Группы",
-                href: "/admin/group_managment",
+                href: "/admin/group_management",
                 icon: ""
               },
               {
                 text: "Места проведения",
-                href: "/admin/place_managment",
+                href: "/admin/place_management",
                 icon: ""
               },
               {
                 text: "ДО",
-                href: "/admin/retraining_managment",
+                href: "/admin/retraining_management",
                 icon: ""
               },
               {
                 text: "Роли",
-                href: "/admin/post_managment",
+                href: "/admin/post_management",
                 icon: ""
               }
-              /*               ,
-              {
-                text: "Управление файлами",
-                href: "/admin/file_management",
-                icon: "insert_drive_file"
-              } */
             ]
           },
           {
@@ -231,7 +225,7 @@ export default {
               {
                 icon: "",
                 text: "Изменеия в расписание",
-                href: "/student/replacement"
+                href: "/student/replacements"
               },
               {
                 icon: "",
@@ -335,63 +329,33 @@ export default {
           }
         ]);
       }
-      case 3: {
+      case "teacher": {
         //Преподы
         return (this.items = [
           {
             icon: "home",
             text: "Главная",
-            href: "/home"
+            href: "/teacher/home"
           },
-          {
-            icon: "today",
-            text: "Расписание",
-            href: "/timetable"
-          },
-          // {
-          //   icon: 'home',
-          //   text: 'Домашнее задание',
-          //   href: '/teacherhomework'
-          // },
-          /*{
-              icon: 'layers',
-              text: 'Ведомости',
-              href: '/home'
-            },*/
-          // {
-          //   icon: 'home',
-          //   text: 'Электронный журнал',
-          //   href: '/teacheracademicperfomance'
-          // },
           {
             icon: "feedback",
             text: "Обратная связь",
-            href: "/feedback"
+            href: "/teacher/feedback"
           }
         ]);
       }
-      case 4: {
+      case "unit": {
         //Учебная часть (manager)
         return (this.items = [
           {
             icon: "home",
             text: "Главная",
-            href: "/home"
-          },
-          {
-            icon: "home",
-            text: "Расписание",
-            href: "/timetable"
-          },
-          {
-            icon: "find_replace",
-            text: "Замены",
-            href: "/replacements"
+            href: "/unit/home"
           },
           {
             icon: "feedback",
             text: "Обратная связь",
-            href: "/feedback"
+            href: "/unit/feedback"
           }
         ]);
       }
@@ -412,6 +376,21 @@ export default {
             icon: "feedback",
             text: "Обратная связь",
             href: "/lord/feedback"
+          }
+        ]);
+      }
+      case "nullfunc": {
+        //Ограниченный функционал
+        return (this.items = [
+          {
+            icon: "home",
+            text: "Главная",
+            href: "/nullfunc/home"
+          },
+          {
+            icon: "feedback",
+            text: "Обратная связь",
+            href: "/nullfunc/feedback"
           }
         ]);
       }

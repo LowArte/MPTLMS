@@ -16,12 +16,12 @@ import AccountCard_C from './components/account-card-f/AccountCard'
 import Request_C from './components/feedback-f/Request'
 import Feedback_C from './components/feedback-f/Feedback'
 
-import FileManagment_C from './components/administrator-f/FileManagement'
-import UserManagment_C from './components/administrator-f/UserManagement'
-import PlaceManagment_C from './components/administrator-f/PlaceManagement'
-import DepartmentManagment_C from './components/administrator-f/DepartmentManagement'
-import GroupManagment_C from './components/administrator-f/GroupManagement'
-import PostManagment_C from './components/administrator-f/PostManagement'
+import FileManagement_C from './components/administrator-f/FileManagement'
+import UserManagement_C from './components/administrator-f/UserManagement'
+import PlaceManagement_C from './components/administrator-f/PlaceManagement'
+import DepartmentManagement_C from './components/administrator-f/DepartmentManagement'
+import GroupManagement_C from './components/administrator-f/GroupManagement'
+import PostManagement_C from './components/administrator-f/PostManagement'
 import RetrainingManagement_C from './components/administrator-f/Retraining_Management'
 
 import Timetable_C from './components/timetable-f/Timetable'
@@ -59,17 +59,17 @@ new Vue({
       'c-specialties-list':SpecialitiesList_C,
       'c-retraining' : Retraining_C,
       'c-panel-control' : PanelControl_C,
-      'c-user-managment' : UserManagment_C, 
+      'c-user-management' : UserManagement_C, 
       'c-timetable':Timetable_C,
       'c-bild-timetable':BildTimetable_C,
       'c-replacement':Replacements_C,
       'c-bild-replacement':Bild_Replacements_C,
       'c-call-schedule':CallSchedule_C,
       'c-bild-call-schedule':BildCallSchedule_C,
-      'c-place-managment':PlaceManagment_C,
-      'c-department-managment':DepartmentManagment_C,
-      'c-group-managment':GroupManagment_C,
-      'c-post-managment':PostManagment_C,
+      'c-place-management':PlaceManagement_C,
+      'c-department-management':DepartmentManagement_C,
+      'c-group-management':GroupManagement_C,
+      'c-post-management':PostManagement_C,
       'c-retraining-management':RetrainingManagement_C,
       'c-list-certificate':ListCertificate_C,
       'c-requests-users' :Request_C,

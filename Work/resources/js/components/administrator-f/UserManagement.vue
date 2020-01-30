@@ -31,7 +31,7 @@
                 v-autocomplete(:items="arrusersposts" item-value='id' item-text='name' v-model="editedItem.post_id" dense solo label='Роль' @change="changePost")
                 v-autocomplete(:items="adisabled" item-value='id' item-text='name' value=item v-model="editedItem.disabled" dense solo label='Блокировка')
                 //- v-combobox(v-if="editedItem.post_id==2" @change="departament_change" v-model="departaments_info.selected_departament" item-text="dep_name_full" :items="departaments_info.departaments" label="Специальность")
-                v-combobox(v-if="editedItem.post_id==2" v-model="studentItem.group" label='Группа')
+                v-combobox(v-if="editedItem.post_id==2" v-model="studentItem.group_id" item_value="id" item_text="group_name" label='Группа')
                 v-dialog(v-if="editedItem.post_id==2" ref="dateDialog" v-model="dateDialog" :return-value.sync="studentItem.group" persistent width="290px")
                   template(v-slot:activator="{ on }")
                       v-text-field(v-model="studentItem.group" label="Дата" readonly v-on="on")
@@ -106,7 +106,7 @@ export default {
 
     studentItem: {
       id: -1,
-      group: "",
+      group_id: 1,
       birthday: new Date().toISOString().substr(0, 10),
       gender: "Мужской",
       type_of_financing: ""
@@ -151,7 +151,7 @@ export default {
         .getGroup(departaments_info.selected)
         .then(res => {
           this.groups_info.groups = res.data.groups;
-          this.studentItem.group = this.groups_info.groups[0];
+          this.studentItem.group_id = this.groups_info.groups[0].id;
         })
         .catch(ex => {
           console.log(ex);
@@ -237,7 +237,7 @@ export default {
         {},
         {
           id: -1,
-          group: "",
+          group_id: 1,
           birthday: new Date().toISOString().substr(0, 10),
           gender: "Мужской",
           type_of_financing: ""
