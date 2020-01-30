@@ -190,13 +190,12 @@ export default {
                 text: "Роли",
                 href: "/admin/post_managment",
                 icon: ""
-              }
-              /*               ,
+              },
               {
                 text: "Управление файлами",
                 href: "/admin/file_management",
                 icon: "insert_drive_file"
-              } */
+              }
             ]
           },
           {
