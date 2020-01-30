@@ -15,5 +15,4 @@ class PlaceRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
-
 }
