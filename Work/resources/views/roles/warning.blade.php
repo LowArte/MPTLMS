@@ -3,7 +3,7 @@
 @section('content')
 <v-layout row justify-center>
     <v-card :elevation="0" width="320">
-        <v-img src="{{asset('images/logo512.png')}}"></v-img>
+        <v-img class="mx-auto" src="{{asset('images/main-logo-non-title.png')}}" max-width="256px" height="auto"></v-img>
         <v-card-title style="color: white;" class="accent">
             Внимание
         </v-card-title>
