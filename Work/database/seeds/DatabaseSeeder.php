@@ -21,12 +21,13 @@ class DatabaseSeeder  extends Seeder
             CallSchedulesSeeder::class,
             DepartamentSeeder::class,
             GroupSeeder::class,
-            ScheduleSeeder::class
+            ScheduleSeeder::class,
+            DesciplineSeeder::class
         ]);
         
-        // $this->call([
-        //     TeachersSeeder::class,
-        //     StudentsSeeder::class
-        // ]);
+        $this->call([
+            TeachersSeeder::class,
+            StudentsSeeder::class
+        ]);
     }
 }

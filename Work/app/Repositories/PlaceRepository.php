@@ -15,4 +15,10 @@ class PlaceRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
+
+    public function getPlacesId(){
+        $columns=['id'];
+        $result = $this->startCondition()->select($columns)->toBase()->get();
+        return $result;
+    }
 }

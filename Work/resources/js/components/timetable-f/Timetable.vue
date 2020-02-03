@@ -54,8 +54,9 @@
 <script>
 import group_api from "./../../api/group"; //Api групп
 import schedule_api from "./../../api/schedule"; //Api расписания
-
+import withSnackbar from "../mixins/withSnackbar"; //Alert
 export default {
+    mixins: [withSnackbar],
   data: () => {
     return {
       groups_info: null, //Группы
@@ -92,7 +93,7 @@ export default {
           this.group_change();
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
     //Определение числителя
@@ -109,7 +110,7 @@ export default {
           this.parseSchedule();
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
     //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
@@ -135,16 +136,14 @@ export default {
           || (this.schedule[this.days[i]][j]['LessonChisl'] == '' && this.schedule[this.days[i]][j]['LessonZnam'] == null))
             tag++;
 
-          
-
           if(tag >= 7)
           {
             this.schedule[this.days[i]][1]['LessonChisl'] = "Домашнее обучение";
             this.schedule[this.days[i]][1]['time'] = "Весь день";
+            this.schedule[this.days[i]]['Place'] = [];
           }
         }
         tag = 0;
-        console.log(this.schedule[this.days[i]]);
       }
     }
   },

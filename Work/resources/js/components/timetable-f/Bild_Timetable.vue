@@ -9,16 +9,17 @@
           v-tab(v-for="(day_key,day_index) in days" :key="day_index") {{day_key}}
           v-tab-item(v-for="(day_key, day_index) in days" :key="day_index") 
             v-card.mx-auto.pa-1.max(width='100%' height='auto')
-              v-select.pa-0.mb-0.mt-2(v-model="schedule[day_key]['Place']" label="Место проведения" solo :items="places" item-text="place_name" item-value="id")
+              //- p {{schedule[day_key]}}
+              v-select.pa-0.mb-0.mt-2(v-model="schedule[day_key]['Place']" label="Место проведения" solo :items="_places" item-text="place_name" item-value="id")
               v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
                 v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
                 v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Числитель
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="discip" item-id='id' item-text='discipline_name' small-chips chips multiple)
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="teachers" item-id='id' item-text='name' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="_disciplines" item-value='id' item-text='discipline_name' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="_teachers" item-value='id' item-text='name' small-chips chips multiple)
                 v-switch(v-model="schedule[day_key][lesson_key].chisl" color="primary" inset label="Числитель/Знаменатель")
                 v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Знаменатель
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="_disciplines" item-value='id' item-text='discipline_name' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Преподаватели" :items="_teachers" item-value='id' item-text='name' small-chips chips multiple)
         v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
@@ -39,10 +40,7 @@ export default {
       groups_info: null, //Группы
       departaments_info: null, //Отделения
       schedule: null, //Расписание
-      places: null, //Места проведения
-      teachers: null, //Преподаватели
-      discip: null, //Дисциплины
-      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
     };
   },
 
@@ -56,18 +54,18 @@ export default {
       default: null
     }, //Группы
     _places: {
-      type: String,
+      type: Array,
       default: null
     }, //Места проведений
     _teachers: {
-      type: String,
+      type: Array,
       default: null
     }, //Преподаватели
-    _discip: {
-      type: String,
+    _disciplines: {
+      type: Array,
       default: null
     }, //Дисциплины
-    _schedule: {
+    _schedule_bild: {
       type: Object,
       default: null
     } //Расписание
@@ -83,30 +81,33 @@ export default {
           this.group_change();
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
     //Событие при изменении группы
-    group_change() {
+    group_change() 
+    {
       schedule_api
-        .getBildSchedule(this.groups_info.selected_group.id)
+        .getScheduleBild(this.groups_info.selected_group.id)
         .then(res => {
           this.schedule = res.data.schedule;
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
-    //Отправка запаска
-    sendQuery(){
+    //Отправка учебного расписания
+    sendQuery()
+    {
+      //Отправка на сохранение
       schedule_api
-        .saveSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule})
+        .editSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule})
         .then(res => {
           this.group_change();
           this.showMessage('Расписание сохранено!');
         })
         .catch(ex => {
-          this.showError('Расписание не сохранено!' + ex);
+          this.showError('Расписание не сохранено! ' + ex);
         });
     }
   },
@@ -114,10 +115,7 @@ export default {
   beforeMount() {
     this.groups_info = this._groups_info;
     this.departaments_info = this._departaments_info;
-    this.schedule = this._schedule;
-    this.places = JSON.parse(this._places);
-    this.teachers = JSON.parse(this._teachers);
-    this.discip = JSON.parse(this._discip);
+    this.schedule = this._schedule_bild;
   }
 };
 </script>
