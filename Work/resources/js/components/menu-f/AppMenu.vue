@@ -37,8 +37,7 @@ export default {
     }
   },
   mounted() {
-    if (this._disabled == 1)
-    {
+    if (this._disabled == 1) {
       switch (this._role) {
         case "admin": {
           //Администраторы
@@ -114,295 +113,319 @@ export default {
           return null;
         }
       }
-    }
-    else
-    switch (this._role) {
-      case "admin": {
-        //Администраторы
-        return (this.items = [
-          {
-            icon: "home",
-            text: "Главная",
-            href: "/admin/home"
-          },
-          {
-            icon: "settings_brightness",
-            text: "Панель управления",
-            children: [
-              {
-                text: "Настройки сервера",
-                href: "/admin/panel_control",
-                icon: ""
-              }
-            ]
-          },
-          {
-            icon: "assignment",
-            text: "Расписания",
-            children: [
-              {
-                text: "Расписание",
-                href: "/admin/timetable",
-                icon: ""
-              },
-              {
-                text: "Изменения в расписании",
-                href: "/admin/replacements",
-                icon: ""
-              },
-              {
-                text: "Расписание звонков",
-                href: "/admin/callschedule",
-                icon: ""
-              }
-            ]
-          },
-          {
-            icon: 'sd_storage',
-            text: "CRUD",
-            children: [
-              {
-                text: "Пользователи",
-                href: "/admin/user_management",
-                icon: ""
-              },
-              {
-                text: "Отделения",
-                href: "/admin/department_management",
-                icon: ""
-              },
-              {
-                text: "Группы",
-                href: "/admin/group_management",
-                icon: ""
-              },
-              {
-                text: "Места проведения",
-                href: "/admin/place_management",
-                icon: ""
-              },
-              {
-                text: "ДО",
-                href: "/admin/retraining_management",
-                icon: ""
-              },
-              {
-                text: "Роли",
-                href: "/admin/post_management",
-                icon: ""
-              },
-              {
-                text: "Управление файлами",
-                href: "/admin/file_management",
-                icon: ""
-              }
-            ]
-          },
-          {
-            icon: "feedback",
-            text: "Обращение пользователей",
-            href: "/admin/request"
-          }
-        ]);
+    } else
+      switch (this._role) {
+        case "admin": {
+          //Администраторы
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/admin/home"
+            },
+            {
+              icon: "settings_brightness",
+              text: "Панель управления",
+              children: [
+                {
+                  text: "Настройки сервера",
+                  href: "/admin/panel_control",
+                  icon: ""
+                }
+              ]
+            },
+            {
+              icon: "assignment",
+              text: "Расписания",
+              children: [
+                {
+                  text: "Расписание",
+                  href: "/admin/timetable",
+                  icon: ""
+                },
+                {
+                  text: "Изменения в расписании",
+                  href: "/admin/replacements",
+                  icon: ""
+                },
+                {
+                  text: "Расписание звонков",
+                  href: "/admin/callschedule",
+                  icon: ""
+                }
+              ]
+            },
+            {
+              icon: "sd_storage",
+              text: "CRUD",
+              children: [
+                {
+                  text: "Пользователи",
+                  href: "/admin/user_management",
+                  icon: ""
+                },
+                {
+                  text: "Отделения",
+                  href: "/admin/department_management",
+                  icon: ""
+                },
+                {
+                  text: "Группы",
+                  href: "/admin/group_management",
+                  icon: ""
+                },
+                {
+                  text: "Места проведения",
+                  href: "/admin/place_management",
+                  icon: ""
+                },
+                {
+                  text: "ДО",
+                  href: "/admin/retraining_management",
+                  icon: ""
+                },
+                {
+                  text: "Роли",
+                  href: "/admin/post_management",
+                  icon: ""
+                },
+                {
+                  text: "Управление файлами",
+                  href: "/admin/file_management",
+                  icon: ""
+                }
+              ]
+            },
+            {
+              icon: "feedback",
+              text: "Обращение пользователей",
+              href: "/admin/request"
+            }
+          ]);
+        }
+        case "student": {
+          //Студент
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/student/home"
+            },
+            {
+              icon: "whatshot",
+              text: "Новости",
+              href: "/student/news"
+            },
+            {
+              icon: "portrait",
+              text: "Профиль",
+              href: "/student/account"
+            },
+            {
+              text: "Учебные процесс",
+              icon: "school",
+              children: [
+                {
+                  icon: "",
+                  text: "Расписание",
+                  href: "/student/timetable"
+                },
+                {
+                  icon: "",
+                  text: "Изменеия в расписание",
+                  href: "/student/replacements"
+                },
+                {
+                  icon: "",
+                  text: "Расписание экзаменов",
+                  href: "/student/exams"
+                },
+                {
+                  icon: "",
+                  text: "Домашнее задание",
+                  href: "/student/homework"
+                },
+                {
+                  icon: "",
+                  text: "Успеваемость",
+                  href: "/student/progress"
+                },
+                {
+                  icon: "",
+                  text: "Преподаватели",
+                  href: "/student/teachers"
+                }
+              ]
+            },
+            {
+              text: "ДО",
+              icon: "business_center",
+              children: [
+                {
+                  icon: "",
+                  text: "Программы",
+                  href: "/student/blueprints"
+                },
+                {
+                  icon: "",
+                  text: "Автошкола",
+                  href: "/student/drivingschool"
+                }
+              ]
+            },
+            {
+              text: "Услуги",
+              icon: "beenhere",
+              children: [
+                {
+                  icon: "",
+                  text: "Справки и направления",
+                  href: "/student/certificate"
+                },
+                {
+                  icon: "",
+                  text: "Стипендия",
+                  href: "/student/petition"
+                },
+                {
+                  icon: "",
+                  text: "Психолог",
+                  href: "/student/psych"
+                }
+              ]
+            },
+            {
+              text: "Студенческая жизнь",
+              icon: "palette",
+              children: [
+                {
+                  icon: "",
+                  text: "Фотоархив",
+                  href: "/student/photos"
+                },
+                {
+                  icon: "",
+                  text: "Соревнования и чемпионаты",
+                  href: "/student/competitions"
+                },
+                {
+                  icon: "",
+                  text: "Спортивная жизнь",
+                  href: "/student/sportlife"
+                }
+              ]
+            },
+            {
+              icon: "cloud",
+              text: "Хранилище данных",
+              href: "/student/datastorage"
+            },
+            {
+              icon: "layers",
+              text: "Базы практики",
+              href: "/student/plants"
+            },
+            {
+              icon: "group",
+              text: "Студенческий совет",
+              href: "/student/convocation"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/student/feedback"
+            }
+          ]);
+        }
+        case "teacher": {
+          //Преподы
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/teacher/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/teacher/feedback"
+            }
+          ]);
+        }
+        case "unit": {
+          //Учебная часть (manager)
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/unit/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/unit/feedback"
+            }
+          ]);
+        }
+        case "lord": {
+          //Лапшина (Канцелярия)
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/home"
+            },
+            {
+              icon: "home",
+              text: "Заказ справок",
+              href: "/lord/listcertificate"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/lord/feedback"
+            }
+          ]);
+        }
+        case "nullfunc": {
+          //Ограниченный функционал
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/nullfunc/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/nullfunc/feedback"
+            }
+          ]);
+        }
+        case "editor": {
+          //Редактор новостей
+          return (this.items = [
+            {
+              icon: "home",
+              text: "Главная",
+              href: "/editor/home"
+            },
+            {
+              icon: "whatshot",
+              text: "Новости",
+              href: "/editor/home"
+            },
+            {
+              icon: "feedback",
+              text: "Обратная связь",
+              href: "/editor/feedback"
+            }
+          ]);
+        }
+        default: {
+          return null;
+        }
       }
-      case "student": {
-        //Студент
-        return (this.items = [
-          {
-            icon: "home",
-            text: "Главная",
-            href: "/student/home"
-          },
-          {
-            icon: "portrait",
-            text: "Профиль",
-            href: "/student/account"
-          },
-          {
-            text: "Учебные процесс",
-            icon: "school",
-            children: [
-              {
-                icon: "",
-                text: "Расписание",
-                href: "/student/timetable"
-              },
-              {
-                icon: "",
-                text: "Изменеия в расписание",
-                href: "/student/replacements"
-              },
-              {
-                icon: "",
-                text: "Расписание экзаменов",
-                href: "/student/exams"
-              },
-              {
-                icon: "",
-                text: "Домашнее задание",
-                href: "/student/homework"
-              },
-              {
-                icon: "",
-                text: "Успеваемость",
-                href: "/student/progress"
-              },
-              {
-                icon: "",
-                text: "Преподаватели",
-                href: "/student/teachers"
-              }
-            ]
-          },
-          {
-            text: "ДО",
-            icon: "business_center",
-            children: [
-              {
-                icon: "",
-                text: "Программы",
-                href: "/student/blueprints"
-              },
-              {
-                icon: "",
-                text: "Автошкола",
-                href: "/student/drivingschool"
-              }
-            ]
-          },
-          {
-            text: "Услуги",
-            icon: "beenhere",
-            children: [
-              {
-                icon: "",
-                text: "Справки и направления",
-                href: "/student/certificate"
-              },
-              {
-                icon: "",
-                text: "Стипендия",
-                href: "/student/petition"
-              },
-              {
-                icon: "",
-                text: "Психолог",
-                href: "/student/psych"
-              }
-            ]
-          },
-          {
-            text: "Студенческая жизнь",
-            icon: "palette",
-            children: [
-              {
-                icon: "",
-                text: "Фотоархив",
-                href: "/student/photos"
-              },
-              {
-                icon: "",
-                text: "Соревнования и чемпионаты",
-                href: "/student/competitions"
-              },
-              {
-                icon: "",
-                text: "Спортивная жизнь",
-                href: "/student/sportlife"
-              }
-            ]
-          },
-          {
-            icon: "cloud",
-            text: "Хранилище данных",
-            href: "/student/datastorage"
-          },
-          {
-            icon: "layers",
-            text: "Базы практики",
-            href: "/student/plants"
-          },
-          {
-            icon: "group",
-            text: "Студенческий совет",
-            href: "/student/convocation"
-          },
-          {
-            icon: "feedback",
-            text: "Обратная связь",
-            href: "/student/feedback"
-          }
-        ]);
-      }
-      case "teacher": {
-        //Преподы
-        return (this.items = [
-          {
-            icon: "home",
-            text: "Главная",
-            href: "/teacher/home"
-          },
-          {
-            icon: "feedback",
-            text: "Обратная связь",
-            href: "/teacher/feedback"
-          }
-        ]);
-      }
-      case "unit": {
-        //Учебная часть (manager)
-        return (this.items = [
-          {
-            icon: "home",
-            text: "Главная",
-            href: "/unit/home"
-          },
-          {
-            icon: "feedback",
-            text: "Обратная связь",
-            href: "/unit/feedback"
-          }
-        ]);
-      }
-      case "lord": {
-        //Лапшина (Канцелярия)
-        return (this.items = [
-          {
-            icon: "home",
-            text: "Главная",
-            href: "/home"
-          },
-          {
-            icon: "home",
-            text: "Заказ справок",
-            href: "/lord/listcertificate"
-          },
-          {
-            icon: "feedback",
-            text: "Обратная связь",
-            href: "/lord/feedback"
-          }
-        ]);
-      }
-      case "nullfunc": {
-        //Ограниченный функционал
-        return (this.items = [
-          {
-            icon: "home",
-            text: "Главная",
-            href: "/nullfunc/home"
-          },
-          {
-            icon: "feedback",
-            text: "Обратная связь",
-            href: "/nullfunc/feedback"
-          }
-        ]);
-      }
-      default: {
-        return null;
-      }
-    }
   },
   methods: {
     menuItemSelected(item) {
