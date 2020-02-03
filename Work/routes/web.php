@@ -33,6 +33,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
 
 Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function(){
     Route::get('/home', 'Student\HomeController@index')->name('home');
+    Route::get('/news','WarningController@index')->name('timetable');
     Route::get('/account','Student\AccountController@index')->name('account');
     Route::get('/timetable','WarningController@index')->name('timetable');
     Route::get('/changes','WarningController@index')->name('changes');

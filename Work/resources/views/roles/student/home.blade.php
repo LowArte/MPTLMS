@@ -5,11 +5,18 @@
     <v-layout row wrap>
         <v-flex xs12>
             <v-card :elevation="0">
-                <v-card-title class="info--text font-weight-light">
-                    <h2 class="font-weight-light text-truncate">Информация для студентов</h2>
-                </v-card-title>
-                <v-card-text class="px-5">Начало обучения в автошколе РЭУ им. Г.В.Плеханова с 1 октября 2019 г...</v-card-text>
-                <c-panel :_components_prop="{{json_encode($panel_array) ?? null}}"></c-panel>
+                <v-carousel :continuous="false" cycle :show-arrows="false" hide-delimiter-background delimiter-icon="mdi-minus" height="300">
+                    <v-carousel-item>
+                        <v-sheet height="100%" tile>
+                            <v-row class="fill-height" align="center" justify="center">
+                                <div class="subtitle">Тут будут  новости техникума</div>
+                            </v-row>
+                        </v-sheet>
+                    </v-carousel-item>
+                </v-carousel>
+                <v-btn color="info" text block>
+                    новости
+                </v-btn>
             </v-card>
         </v-flex>
     </v-layout>
