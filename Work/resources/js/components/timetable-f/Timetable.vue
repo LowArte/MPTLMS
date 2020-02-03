@@ -15,7 +15,7 @@
             v-divider
             v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule[day_key]" :key="'l'+lesson_index")
                 v-container.pa-0.ma-0(v-if="lesson.chisl == false") <!--Прорисовка обычной пары-->
-                  v-container.pa-0.ma-0(v-if="lesson.LessonChisl != null")
+                  v-container.pa-0.ma-0(v-if="lesson.LessonChisl != null && lesson.LessonChisl != ''")
                     v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                     v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
@@ -24,7 +24,7 @@
                     v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                     v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
-                    v-divider.ma-0(v-if="lesson.LessonZnam!= null")
+                    v-divider.ma-0(v-if="lesson.LessonZnam!= null && lesson.LessonZnam != ''")
                     v-expansion-panels.px-1.py-0(v-if="lesson.LessonZnam!= null" style="z-index: initial;")                    
                       v-expansion-panel.px-1.py-0
                           v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
@@ -36,7 +36,7 @@
                     v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                     v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam}} 
                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
-                    v-expansion-panels.px-1.py-0(v-if="lesson.LessonChisl!= null" style="z-index: initial;")                    
+                    v-expansion-panels.px-1.py-0(v-if="lesson.LessonChisl!= null && lesson.LessonChisl != ''" style="z-index: initial;")                    
                       v-expansion-panel.px-1.py-0
                           v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
                           v-expansion-panel-content.px-0.mx-0
@@ -52,43 +52,42 @@
 </style>
 
 <script>
-import group_api from "./../../api/group";
-import schedule_api from "./../../api/schedule";
-Date.prototype.getWeek = function() {
-  const today = new Date(this.dateDialog.date);
-  return today.getWeek() % 2;
-};
+import group_api from "./../../api/group"; //Api групп
+import schedule_api from "./../../api/schedule"; //Api расписания
 
 export default {
   data: () => {
     return {
-      groups_info: null,
-      departaments_info: null,
-      schedule: null,
-      isToday: null,
-      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+      groups_info: null, //Группы
+      departaments_info: null, //Отделения
+      schedule: null, //Расписание
+      isToday: null, //Текущий день
+      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
     };
   },
+
   props: {
     _departaments_info: {
       type: Object,
       default: null
-    },
+    }, //Отделения
     _groups_info: {
       type: Object,
       default: null
-    },
+    },//Группы
     _schedule: {
       type: Object,
       default: null
-    }
+    }//Расписания
   },
+
   methods: {
+    //Получение группы при изменении отделения
     departament_change() {
       group_api
-        .getGroup(this.departaments_info.selected_departament.id)
+        .getGroups(this.departaments_info.selected_departament.id)
         .then(res => {
-          this.groups_info.groups = res.data.groups;
+          this.groups_info.groups = res.data.groups_info.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
           this.group_change();
         })
@@ -96,10 +95,12 @@ export default {
           console.log(ex);
         });
     },
+    //Определение числителя
     isChisl() {
       const today = new Date();
       return today.getWeek() % 2;
     },
+    //Получение расписания при изменении выбранной группы
     group_change() {
       schedule_api
         .getSchedule(this.groups_info.selected_group.id)
@@ -111,6 +112,7 @@ export default {
           console.log(ex);
         });
     },
+    //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
     parseSchedule()
     {
       var tag = 0;
@@ -126,8 +128,15 @@ export default {
             this.schedule[this.days[i]][j]['TeacherChisl'] = this.schedule[this.days[i]][j]['TeacherChisl'].join(' / ');
           if(Array.isArray(this.schedule[this.days[i]][j]['TeacherZnam'])) 
             this.schedule[this.days[i]][j]['TeacherZnam'] = this.schedule[this.days[i]][j]['TeacherZnam'].join(' / ');
-          if(this.schedule[this.days[i]][j]['LessonChisl'] == null && this.schedule[this.days[i]][j]['LessonZnam'] == null)
+
+          if((this.schedule[this.days[i]][j]['LessonChisl'] == null && this.schedule[this.days[i]][j]['LessonZnam'] == null) 
+          || (this.schedule[this.days[i]][j]['LessonChisl'] == '' && this.schedule[this.days[i]][j]['LessonZnam'] == '')
+          || (this.schedule[this.days[i]][j]['LessonChisl'] == null && this.schedule[this.days[i]][j]['LessonZnam'] == '')
+          || (this.schedule[this.days[i]][j]['LessonChisl'] == '' && this.schedule[this.days[i]][j]['LessonZnam'] == null))
             tag++;
+
+          
+
           if(tag >= 7)
           {
             this.schedule[this.days[i]][1]['LessonChisl'] = "Домашнее обучение";
@@ -135,9 +144,11 @@ export default {
           }
         }
         tag = 0;
+        console.log(this.schedule[this.days[i]]);
       }
     }
   },
+  //Преднастройка
   beforeMount() {
     this.groups_info = this._groups_info;
     this.departaments_info = this._departaments_info;

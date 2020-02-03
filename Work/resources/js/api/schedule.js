@@ -1,12 +1,8 @@
 import axios from 'axios'
 
 export default {
-  getSchedule(credentials) {
-    return axios.get('/get_schedule_by_group_id', {
-      params: {
-        "group_id": credentials
-      }
-    })
+  getSchedule(id) {
+    return axios.get('/api/admin/timetable/get_schedule_by_group_id/'+id)
   },
 
   getScheduleByDay(credentials) {

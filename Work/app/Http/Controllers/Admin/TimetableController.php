@@ -6,7 +6,6 @@ use App\Repositories\DepartamentRepository;
 use App\Repositories\GroupRepository;
 use App\Repositories\PanelExtentionRepository;
 use App\Repositories\ScheduleRepository;
-use Illuminate\Http\Request;
 
 class TimetableController extends BaseController
 {
@@ -36,5 +35,30 @@ class TimetableController extends BaseController
             ),
             'schedule'=>$schedule
         ]);
+    }
+    /**
+     * Get schedule
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getScheduleByGroupId($id, ScheduleRepository $scheduleRepository)
+    {
+        $schedule = $scheduleRepository->getScheduleByGroup($id);
+        return response()->json(compact('schedule'));
+    }
+    /**
+     * Get groups
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function groupByDepartamentId($id, GroupRepository $groupRepository)
+    {
+        $groups = $groupRepository->getGroupsForComboBoxByDepartament($id);
+        return response()->json(array(
+            "groups_info"=>array(
+                "groups"=>$groups,
+                "selected_group"=>$groups[0]
+            ),
+        ));
     }
 }

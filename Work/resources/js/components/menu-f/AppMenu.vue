@@ -194,7 +194,7 @@ export default {
               {
                 text: "Управление файлами",
                 href: "/admin/file_management",
-                icon: "insert_drive_file"
+                icon: ""
               }
             ]
           },
