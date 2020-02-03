@@ -21,7 +21,7 @@ class CallScheduleRepository extends BaseRepository
         $result = collect();
         foreach ($calls as $call) {
             $result->push([
-                "place"=>$place->where('id',$call->place_id)->first()->place_name,
+                "place"=>$place->where('id',$call->place_id)->first(),
                 'schedule'=>json_decode($call->call_schedule)
             ]);
         }
@@ -45,4 +45,10 @@ class CallScheduleRepository extends BaseRepository
         return $result;
     }
 
+    public function getCallScheduleIdByPlace($place_id)
+    {
+        $columns = ['id'];
+        $result = $this->startCondition()->select($columns)->where('place_id', $place_id)->toBase()->first()->id;
+        return $result;
+    }
 }

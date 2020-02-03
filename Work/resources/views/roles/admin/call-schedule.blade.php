@@ -2,7 +2,7 @@
 
 @section('content')
 <v-card pa-0 ma-0 :elevation='0'>
-    <v-tabs light mobile-break-point="0" centered>
+    <v-tabs light mobile-break-point="0" grow>
         <v-tab>
             Расписание
         </v-tab>

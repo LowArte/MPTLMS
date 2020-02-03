@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<v-tabs grow>
+<v-tabs light mobile-break-point="0" grow>
     <v-tab>
         Расписание
     </v-tab>

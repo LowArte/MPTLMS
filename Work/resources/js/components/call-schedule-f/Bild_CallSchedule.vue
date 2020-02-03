@@ -16,7 +16,9 @@
 <script>
 import { mask } from "vue-the-mask"; //Маска
 import callScedule from "../../api/callSchedule"; //api для расписания звонков
+import withSnackbar from "../mixins/withSnackbar"; //Alert
 export default {
+  mixins: [withSnackbar],
   directives: {
     mask  //Маска
   },
@@ -35,28 +37,28 @@ export default {
     _time_table: {
       type: Array,
       default: null
-    },
+    }, //Массив с расписанием
     _places: {
       type: Array,
       default: null
-    }
+    } //Массив с местами проведения
   }, //JSON расписания звонков
   created: function() {
-    this.timeTable = this._time_table; //Массив с расписанием
+    this.timeTable = this._time_table; 
     this.mplace = this._places[0].id;
   },
   methods: {
     sendQuery() {
       //Проверка на валидацию полей, после чего происходит отправка на сохранение
-      if (this.$refs.BildCallSchedule.validate()) {
+      if (this.$refs.BildCallSchedule.validate()) 
+      {
         callScedule
-          .save({ data: this.timeTable })
+          .edit({callSchedule: this.timeTable})
           .then(res => {
-            alert("Расписание звонков принято!");
+           this.showMessage("Расписание звонков принято!");
           })
           .catch(ex => {
-            alert("Расписание не было добавлено!");
-            console.log(ex);
+            this.showError("Расписание не было добавлено! " + ex);
           });
       }
     }

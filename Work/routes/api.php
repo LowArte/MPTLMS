@@ -18,7 +18,7 @@ Route::middleware('auth:api')->name('api.')->group(function () {
         Route::post('/set_options', 'Admin\PanelControlController@setOptions')->name('set_options');
 
         Route::name('callschedule.')->prefix('callschedule')->group(function () {
-            Route::post('save_bildcallschedule', 'Admin\CallScheduleController@save')->name('save_bildcallschedule');
+            Route::post('edit_bildcallschedule', 'Admin\CallScheduleController@edit')->name('edit_bildcallschedule');
         });
 
         Route::name('user_management.')->prefix('user_management')->group(function () {
