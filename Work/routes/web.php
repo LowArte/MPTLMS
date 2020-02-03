@@ -76,3 +76,8 @@ Route::middleware(['profilactic','auth','access'])->name('nullfunc.')->prefix('n
     Route::get('/home', 'Nullfunc\HomeController@index')->name('home');
     Route::get('/feedback','WarningController@index')->name('feedback');
 });
+
+Route::middleware(['profilactic','auth','access'])->name('editor.')->prefix('editor')->group(function(){
+    Route::get('/home', 'Editor\HomeController@index')->name('home');
+    Route::get('/feedback','WarningController@index')->name('feedback');
+});

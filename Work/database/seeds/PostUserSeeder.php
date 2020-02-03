@@ -36,6 +36,10 @@ class PostUserSeeder extends Seeder
                 "name"=>"Ограниченный функционал",
                 "slug"=>"nullfunc"
             ],
+            [
+                "name"=>"Редактор новостей",
+                "slug"=>"editor"
+            ],
         );
         DB::table("users_posts")->insert($date);
     }
