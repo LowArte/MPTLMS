@@ -429,7 +429,6 @@ export default {
   },
   methods: {
     menuItemSelected(item) {
-      console.log(item.href);
       if (item.href) {
         if (item.new) {
           window.open(item.href);
