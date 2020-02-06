@@ -21,7 +21,6 @@ export default {
   mixins: [withSnackbar],
   data() {
     return {
-      //! Для запроса нужны данные ФИО и Почты
       thematic: "Другое",
       thematics: [
         "Проблемы с отображением",
@@ -41,10 +40,18 @@ export default {
       form: false
     };
   },
+
+  props: {
+    _slug: {
+      data: String,
+      default: ""
+    }
+  },
+
   methods: {
     sendQuery() {
       feedbackApi
-        .save({ type: this.thematic, text: this.modelmessage })
+        .save({ type: this.thematic, text: this.modelmessage, slug: this._slug })
         .then(res => {
           this.showMessage(
             "Ваше обращение будет рассмотрено в ближайшее время"
@@ -52,7 +59,7 @@ export default {
           this.modelmessage = "";
         })
         .catch(ex => {
-          this.showError("Что-то пошло не так");
+          this.showError("Что-то пошло не так " + ex);
         });
     }
   }
