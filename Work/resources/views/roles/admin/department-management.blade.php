@@ -3,6 +3,6 @@
 @section('content')
 <v-container fluid grid-list-md text-xs-center>
     <!-- <c-department-management :_departments="{{json_encode($departments) ?? null}}"/> -->
-    <c-crud :_flood="{{json_encode($departments) ?? null}}" :_title="{{json_encode($title = ' - Специальности')}}" :_headers="{{json_encode($headers)}}"></c-crud>
+    <c-department-management></c-department-management>
 </v-container>
 @endsection

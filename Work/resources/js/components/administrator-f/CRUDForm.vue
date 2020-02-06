@@ -41,8 +41,6 @@
                     span Удалить
         v-layout.row.text-center.pa-2.ma-2
             v-pagination(v-model="page" :length="pageCount")
-        c-add-dialog(ref='entity')
-        c-edit-dialog(ref='editing' v-bind:class="{_item:this.index}")
 </template>
 
 <script>
@@ -80,7 +78,11 @@ export default {
     _title: {
       type: String,
       default: " - Нет данных заголовка"
-    } //! Данные заголовка CRUD страницы
+    }, //! Данные заголовка CRUD страницы
+    _func_add: {
+      type: Function,
+      default: null
+    } 
   },
   mounted() {
     this.flood = this._flood;
@@ -89,32 +91,13 @@ export default {
   },
   methods: {
     add() {
-      this.$refs.entity.pop().then(result => {
-        if (result) {
-          this.showMessage("Сохранение произведено успешно");
-        } else {
-          this.showError("Действие было отменено");
-        }
-      });
+      this._func_add('пидор');
     },
     edit(item) {
-      this.index = Object.assign({}, item);
-      this.$refs.editing.pop().then(result => {
-        if (result) {
-          this.showMessage("Сохранение произведено успешно");
-        } else {
-          this.showError("Действие было отменено");
-        }
-      });
+
     },
     clear() {
-      this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) {
-          this.showMessage("Данные в таблице логически скрыты");
-        } else {
-          this.showError("Действие было отменено");
-        }
-      });
+
     },
     upload() {
       this.showMessage("Данная функция будет не доступна до релизной версии");
