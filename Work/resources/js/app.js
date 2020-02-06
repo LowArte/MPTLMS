@@ -40,6 +40,8 @@ import ListCertificate_C from './components/certificate-f/ListCertificateCompone
 //* Студент
 //! В данном разделе описываются компоненты для пользователя СТУДЕНТ
 
+
+
 window.Vue = require('vue');
 
 new Vue({

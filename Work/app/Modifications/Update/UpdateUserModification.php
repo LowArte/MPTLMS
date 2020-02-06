@@ -9,14 +9,12 @@ use Debugbar;
 
 class UpdateUserModification extends BaseModification
 {
-    protected function getModelClass()
-    {
+    protected function getModelClass(){
         return Model::class;
     }
 
-    public function updateUserInDatabase($id,$data)
-    {
-        $user = $this->startCondition()->select('id')->where([['email','=', $data['email']], ['id', '!=', $id]])->toBase()->first();
+    public function updateUserInDatabase($id,$data){
+        $user = $this->startCondition()->select('id')->where('email',$data['email'])->toBase()->first();
         if($user != null){
             return false;
         }

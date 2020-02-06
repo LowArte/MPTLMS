@@ -29,8 +29,8 @@ class PostUserSeeder extends Seeder
                 "slug"=>"unit"
             ],
             [
-                "name"=>"Канцелярия",
-                "slug"=>"chancellery"
+                "name"=>"Dark lord",
+                "slug"=>"lord"
             ],
             [
                 "name"=>"Ограниченный функционал",

@@ -18,4 +18,9 @@ class Teacher extends Model
     {
         parent::__construct($attributes);
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'user_id','id');
+    }
 }

@@ -281,10 +281,7 @@ export default {
           this.close();
         })
         .catch(ex => {
-          if (ex.response.status == 400)
-            this.showError(ex.response.data.error);
-          else
-            this.showError(ex);
+          this.showError(ex.response.data.error);
         });
     }
   }

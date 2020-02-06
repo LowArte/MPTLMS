@@ -94,7 +94,7 @@ export default {
             }
           ]);
         }
-        case "chancellery": {
+        case "lord": {
           //Лапшина (Канцелярия)
           return (this.items = [
             {
@@ -105,7 +105,7 @@ export default {
             {
               icon: "feedback",
               text: "Обратная связь",
-              href: "/chancellery/feedback"
+              href: "/lord/feedback"
             }
           ]);
         }
@@ -199,7 +199,7 @@ export default {
             {
               icon: "feedback",
               text: "Обращение пользователей",
-              href: "/admin/request_users"
+              href: "/admin/request"
             }
           ]);
         }
@@ -367,23 +367,23 @@ export default {
             }
           ]);
         }
-        case "chancellery": {
+        case "lord": {
           //Лапшина (Канцелярия)
           return (this.items = [
             {
               icon: "home",
               text: "Главная",
-              href: "/chancellery/home"
+              href: "/home"
             },
             {
               icon: "home",
               text: "Заказ справок",
-              href: "/chancellery/listcertificate"
+              href: "/lord/listcertificate"
             },
             {
               icon: "feedback",
               text: "Обратная связь",
-              href: "/chancellery/feedback"
+              href: "/lord/feedback"
             }
           ]);
         }
@@ -413,7 +413,7 @@ export default {
             {
               icon: "whatshot",
               text: "Новости",
-              href: "/editor/news"
+              href: "/editor/home"
             },
             {
               icon: "feedback",
@@ -429,6 +429,7 @@ export default {
   },
   methods: {
     menuItemSelected(item) {
+      console.log(item.href);
       if (item.href) {
         if (item.new) {
           window.open(item.href);

@@ -14,10 +14,8 @@
 Route::get('/', "WelcomeController@index")->name("default");
 
 Auth::routes(['register' => false, 'verify' => false,'confirm'=>false]);
-//Администратор системы
-Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admin')->group(function()
-{
-    Route::get('/', function () {return redirect('/admin/home');})->name('home');
+
+Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admin')->group(function(){
     Route::get('/home', 'Admin\HomeController@index')->name('home');
     Route::get('/user_management','Admin\UserManagementController@index')->name('user_management');
     Route::get('/panel_control','Admin\PanelControlController@index')->name('panel_control');
@@ -30,12 +28,10 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/post_management','Admin\PostManagementController@index')->name('posts');
     Route::get('/place_management','Admin\PlaceManagementController@index')->name('place_management');
     Route::get('/retraining_management','Admin\RetrainingManagementController@index')->name('retraining_management');
-    Route::get('/request_users','Admin\RequestFeedbackController@index')->name('request');
+    Route::get('/request','Admin\RequestController@index')->name('request');
 });
-//Студент
-Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function()
-{
-    Route::get('/', function () {return redirect('/student/home');})->name('home');
+
+Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function(){
     Route::get('/home', 'Student\HomeController@index')->name('home');
     Route::get('/news','WarningController@index')->name('timetable');
     Route::get('/account','Student\AccountController@index')->name('account');
@@ -57,42 +53,31 @@ Route::middleware(['auth','access'])->name('student.')->prefix('student')->group
     Route::get('/datastorage','WarningController@index')->name('datastorage');
     Route::get('/plants','WarningController@index')->name('plants');
     Route::get('/convocation','WarningController@index')->name('convocation');
-    Route::get('/feedback','Student\FeedbackController@index')->name('feedback');
+    Route::get('/feedback','FeedbackController@index')->name('feedback');
 });
-//Преподаватель
-Route::middleware(['profilactic','auth','access'])->name('teacher.')->prefix('teacher')->group(function()
-{
-    Route::get('/', function () {return redirect('/teacher/home');})->name('home');
+
+Route::middleware(['profilactic','auth','access'])->name('teacher.')->prefix('teacher')->group(function(){
     Route::get('/home', 'Teacher\HomeController@index')->name('home');
-    Route::get('/feedback','Teacher\FeedbackController@index')->name('feedback');
+    Route::get('/feedback','WarningController@index')->name('feedback');
 });
-//Сотрудник учебной части
-Route::middleware(['profilactic','auth','access'])->name('unit.')->prefix('unit')->group(function()
-{
-    Route::get('/', function () {return redirect('/unit/home');})->name('home');
+
+Route::middleware(['profilactic','auth','access'])->name('unit.')->prefix('unit')->group(function(){
     Route::get('/home', 'Unit\HomeController@index')->name('home');
-    Route::get('/feedback','Unit\FeedbackController@index')->name('feedback');
+    Route::get('/feedback','WarningController@index')->name('feedback');
 });
-//Сотрудник канцелярии
-Route::middleware(['profilactic','auth','access'])->name('chancellery.')->prefix('chancellery')->group(function()
-{
-    Route::get('/', function () {return redirect('/chancellery/home');})->name('home');
+
+Route::middleware(['profilactic','auth','access'])->name('lord.')->prefix('lord')->group(function(){
     Route::get('/home', 'Chancellery\HomeController@index')->name('home');
     Route::get('/listcertificate', 'Chancellery\ListCertificateController@index')->name('list_certificate');
-    Route::get('/feedback','Chancellery\FeedbackController@index')->name('feedback');
+    Route::get('/feedback','WarningController@index')->name('feedback');
 });
-//Пользователь с ограниченным функционалом
-Route::middleware(['profilactic','auth','access'])->name('nullfunc.')->prefix('nullfunc')->group(function()
-{
-    Route::get('/', function () {return redirect('/nullfunc/home');})->name('home');
+
+Route::middleware(['profilactic','auth','access'])->name('nullfunc.')->prefix('nullfunc')->group(function(){
     Route::get('/home', 'Nullfunc\HomeController@index')->name('home');
-    Route::get('/feedback','Nullfunc\FeedbackController@index')->name('feedback');
+    Route::get('/feedback','WarningController@index')->name('feedback');
 });
-//Редактор новостей
-Route::middleware(['profilactic','auth','access'])->name('editor.')->prefix('editor')->group(function()
-{
-    Route::get('/', function () {return redirect('/editor/home');})->name('home');
+
+Route::middleware(['profilactic','auth','access'])->name('editor.')->prefix('editor')->group(function(){
     Route::get('/home', 'Editor\HomeController@index')->name('home');
-    Route::get('/news','WarningController@index')->name('news');
-    Route::get('/feedback','Editor\FeedbackController@index')->name('feedback');
+    Route::get('/feedback','WarningController@index')->name('feedback');
 });

@@ -72,7 +72,7 @@ class UserManagementController extends BaseController
     public function edit($id,Request $request,UpdateUserModification $updateUserModification)
     {
         $data = $request->all();
-        $result = $updateUserModification->updateUserInDatabase($id, $data['user']);
+        $result = $updateUserModification->updateUserInDatabase($id,$data['user']);
         if($result){
             return response()->json(["success"=>true]);
         }

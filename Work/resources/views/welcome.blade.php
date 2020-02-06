@@ -7,14 +7,8 @@
                 <v-card-title class="info--text font-weight-light">
                     <h2 class="font-weight-light text-truncate">Информация для студентов</h2>
                 </v-card-title>
-                <v-card-text class="pb-0">Начало обучения в автошколе РЭУ им. Г.В.Плеханова с 1 октября 2019 г...</v-card-text>
-                <v-card-actions>
-                    <v-btn block text light color="pimary" href="/drivingschool">
-                        Подробнее об обучении
-                        <v-spacer></v-spacer>
-                        <v-icon>keyboard_arrow_right</v-icon>
-                    </v-btn>
-                </v-card-actions>
+                <v-card-text class="px-5">Начало обучения в автошколе РЭУ им. Г.В.Плеханова с 1 октября 2019 г...</v-card-text>
+                <c-panel :elevation="1" :_components_prop="{{json_encode($panel_array) ?? null}}"></c-panel>
             </v-card>
         </v-flex>
     </v-layout>
