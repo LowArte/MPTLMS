@@ -10,10 +10,12 @@ class TeacherRepository extends BaseRepository
         return Model::class;
     }
 
-    public function getTeachers()
+    public function getTeachersWithFio()
     {
-        $columns=['id', 'user_id'];
-        $result = $this->startCondition()->select($columns)->get();        
+        $result = $this->startCondition()->join('users', 'teachers.user_id', '=', 'users.id')
+                        ->selectRaw("`teachers`.id,CONCAT(users.name,users.secName,users.thirdName) as fullFio")
+                        ->toBase()
+                        ->get();      
         return $result;
     }
 }
