@@ -26,19 +26,25 @@ class TimetableController extends BaseController
                           ScheduleRepository $scheduleRepository,
                           PlaceRepository $placeRepository,
                           DisciplineRepository $disciplineRepository,
-                          TeacherRepository $teacherRepository
-                          )
+                          TeacherRepository $teacherRepository,
+                          UserRepository $userRepository)
     {
         $departaments = $departamentRepository->getDepartamentsForComboBox();
         $groups = $groupRepository->getGroupsForComboBoxByDepartament($departaments[0]->id);
         $panel_array = $panelExtentionRepository->getPanelForCallSchedule();
 
+        $schedule = $scheduleRepository->getScheduleByGroup($groups[0]->id);
+        $schedule_bild = $scheduleRepository->getScheduleBildByGroup($groups[0]->id);
+
         $places = $placeRepository->getPlaces();
         $disciplines = $disciplineRepository->getDisciplines();
-        $teachers = $teacherRepository->getTeachersWithFio();
+        $teachers = $teacherRepository->getTeachers();
 
-        $schedule_bild = $scheduleRepository->getScheduleBildByGroup($groups[0]->id,$teachers,$disciplines);      
-        $schedule = $scheduleRepository->getScheduleByGroup($groups[0]->id);
+        $teachersFIO = array();
+        for ($i = 0; $i < count($teachers); $i++) {
+            $user = $userRepository->getUserFIO($teachers[$i]['user_id']);
+            array_push($teachersFIO, ['id' => $user['id'], 'name' => $user['name'] . " " . $user['secName'] . " " . $user['thirdName']]);
+        };
 
         return view('roles.admin.timetable',[
             "panel_array"=>$panel_array,
@@ -54,7 +60,7 @@ class TimetableController extends BaseController
             'schedule_bild'=>$schedule_bild,
             'places'=>$places,
             'disciplines'=>$disciplines,
-            'teachers'=>$teachers
+            'teachers'=>$teachersFIO
         ]);
     }
     /**

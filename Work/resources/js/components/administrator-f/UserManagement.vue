@@ -281,7 +281,10 @@ export default {
           this.close();
         })
         .catch(ex => {
-          this.showError(ex.response.data.error);
+          if (ex.response.status == 400)
+            this.showError(ex.response.data.error);
+          else
+            this.showError(ex);
         });
     }
   }

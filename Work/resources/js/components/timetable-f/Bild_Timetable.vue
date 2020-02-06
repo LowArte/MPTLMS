@@ -15,11 +15,11 @@
                 v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
                 v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Числитель
                 v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="_disciplines" item-value='id' item-text='discipline_name' small-chips chips multiple)
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="_teachers" item-value='id' item-text='fullFio' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="_teachers" item-value='id' item-text='name' small-chips chips multiple)
                 v-switch(v-model="schedule[day_key][lesson_key].chisl" color="primary" inset label="Числитель/Знаменатель")
                 v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Знаменатель
                 v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="_disciplines" item-value='id' item-text='discipline_name' small-chips chips multiple)
-                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Преподаватели" :items="_teachers" item-value='id' item-text='fullFio' small-chips chips multiple)
+                v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Преподаватели" :items="_teachers" item-value='id' item-text='name' small-chips chips multiple)
         v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 

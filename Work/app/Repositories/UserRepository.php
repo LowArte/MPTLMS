@@ -17,8 +17,7 @@ class UserRepository extends BaseRepository
     }
 
     public function getUserFIO($id)
-    {   
-        $columns = ['id','name','secName','thirdName'];
+    {   $columns = ['id','name','secName','thirdName'];
         $result = $this->startCondition()->select($columns)->where('id', $id)->first();
         return $result;
     }

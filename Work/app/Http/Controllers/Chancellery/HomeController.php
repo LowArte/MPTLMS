@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Chancellery;
 
 use App\Repositories\PanelExtentionRepository;
 use App\Repositories\RetrainingInfoRepository;
-use Illuminate\Http\Request;
 
 class HomeController extends BaseController
 {

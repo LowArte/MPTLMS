@@ -20,4 +20,8 @@ export default {
       "retraining": retraining.retraining
     })
   },
+
+  detailRetraining(retraining) {
+    
+  }
 }

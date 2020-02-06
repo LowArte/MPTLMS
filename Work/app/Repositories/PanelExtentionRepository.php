@@ -33,7 +33,7 @@ class PanelExtentionRepository extends BaseRepository
             array(
                 "header"  => "Расписание звонков",
                 "content" => "call-schedule-f/CallSchedule",
-                "props"   => array('_time_table'=>$calls)
+                "props"   => array('_time_table'=>json_encode($calls))
             )
         );
     }
