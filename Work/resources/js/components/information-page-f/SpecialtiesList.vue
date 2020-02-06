@@ -1,18 +1,12 @@
 <template lang="pug">
   v-layout.row.wrap
-    v-flex.my-2(v-if="printing == 1")
-      v-card.mx-auto(width='420px' style='display: flex; flex-direction: column;' height='100%')
-        v-skeleton-loader(max-height='200px' type="image")
-        v-card-text.grow 
-          v-skeleton-loader.my-2.pa-0.subtitle-1.black--text(type="heading" max-height="70") 
-          v-skeleton-loader.pa-0(type="text@3") 
-        v-card-actions.ma-2.mt-0.pa-0.text--center
-          v-btn(block text small color='accent' @click="add") Добавить
+    c-add-new-specialtie(v-if="printing == 1" :_add="add")
     c-specialtie(v-for="(item, index) in items" :key="index" :item="item")
 </template>
 
 <script>
 import SpecialtiePage_C from "./components/C_SpecialtyPage";
+import C_AddNewSpecialties from "./components/C_AddNewSpecialties";
 export default {
   data: () => ({
     printing: 0,
@@ -113,7 +107,8 @@ export default {
     ]
   }),
   components: {
-    "c-specialtie": SpecialtiePage_C
+    "c-specialtie": SpecialtiePage_C,
+    "c-add-new-specialtie": C_AddNewSpecialties
   },
   props: {
     _printing: {
@@ -125,16 +120,9 @@ export default {
     this.printing = this._printing;
   },
   methods: {
-    add() {
-      this.items.unshift({
-        href: "",
-        title: "",
-        qualification: "",
-        certifications: [],
-        skills: [],
-        learning: [],
-        text: ""
-      });
+    add(item) {
+      this.items.unshift(item);
+      console.log(item);
     }
   }
 };

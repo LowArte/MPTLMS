@@ -2,16 +2,15 @@
 <template lang="pug">
   v-flex.my-2
     v-card.mx-auto(max-width='420px' style='display: flex; flex-direction: column;' height='100%')
-      v-img(v-if='item.href != null' v-bind:src='item.href' max-height='200px')
+      v-img(v-bind:src='item.href' max-height='200px')
         template(v-slot:placeholder)
           v-row(class="fill-height ma-0" align="center" justify="center")
             v-progress-circular(indeterminate color="grey lighten-5")
-      v-btn(v-if='item.href == null' block) Добавить изображение
-      v-card-text.grow 
+      v-card-text.grow
         v-card-text.my-2.pa-0.subtitle-1.black--text(style='color: #FF3D00' max-height="70") {{item.title}}
-        v-card-text.pa-0 {{item.text}}
-      v-card-actions.ma-2.mt-0.pa-0.text--center 
-        v-dialog( v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+        v-card-text.pa-0() {{item.text}}
+      v-card-actions.ma-2.mt-0.pa-0.text--center
+        v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
           template(v-slot:activator="{ on }")
             v-btn(block text small color='accent' v-on="on") Подробнее
           v-card
