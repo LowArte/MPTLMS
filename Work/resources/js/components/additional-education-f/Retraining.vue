@@ -9,11 +9,11 @@
           v-skeleton-loader.my-1.subtitle-1.black--text.pa-3(type="text@3")
         v-card-actions(wrap)
           v-btn.mx-auto(text small block color="accent") Добавить
-    c-retraining(v-for="(item, index) in _info" :key="index" :_user="_user" :_item="item")
+    c-retraining-cards(v-for="(item, index) in _info" :key="index" :_user="_user" :_item="item")
 </template>
 
 <script>
-import Retraining_C from "./components/Com_Ret";
+import Retraining_C from "./components/C_Retraining";
 export default {
   data: () => ({
     printing: 0
@@ -33,7 +33,7 @@ export default {
     }
   },
   components: {
-    "c-retraining": Retraining_C
+    "c-retraining-cards": Retraining_C
   },
   mounted() {
     this.printing = this._printing;
