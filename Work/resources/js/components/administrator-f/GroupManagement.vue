@@ -49,12 +49,17 @@ import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог con
 
 export default {
   mixins: [withSnackbar],
-  directives: {
+
+  directives: 
+  {
     mask
   },
-  components: {
+
+  components: 
+  {
     "c-comfirm-dialog": ConfirmDialog_C
   },
+
   data: () => ({
     groups: [], //Массив групп
     departments: [], //Массив отделений
@@ -79,7 +84,9 @@ export default {
       departaments_id: 1,
     },//Структура строки
   }),
-  props: {
+
+  props: 
+  {
     _groups: {
       type: Array,
       default: null
@@ -87,27 +94,36 @@ export default {
     _departments: {
       type: Array,
       default: null
-    } //Данные отделений
+    }, //Данные отделений
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
 
   //Получаем данных при старте
-  mounted() {
+  mounted() 
+  {
     this.groups = this._groups;
     this.departments = this._departments;
   },
 
-  computed: {
+  computed: 
+  {
     //Получение названия диалога
-    formTitle() {
+    formTitle() 
+    {
       return this.editedItem.id === -1
         ? "Новая группа"
         : "Редактировать группу";
     }
   },
 
-  methods: {
+  methods: 
+  {
     //Иницилизации данных
-    initialize() {
+    initialize() 
+    {
       apigroups
         .getGroupAll()
         .then(res => {
@@ -115,21 +131,25 @@ export default {
           this.$departments = res.data.departments;
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
+
     //Вызов диалогового окна для редактирования
     editItem(item) 
     {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
+
     //Удаление
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) {
+        if (confirmResult) 
+        {
           apigroups
-            .deleteGroup({ id: item.id })
+            .deleteGroup({ id: item.id, slug: this._slug })
             .then(res => {
               this.showMessage("Удалено!");
               this.initialize();
@@ -137,13 +157,17 @@ export default {
             .catch(ex => {
               this.showError("Удаление не было произведено!" + ex);
             })
-        } else {
+        } 
+        else 
+        {
           this.showMessage("Действие было отменено");
         }
       });
     },
+    
     //Закрытие диалога
-    close() {
+    close() 
+    {
       this.dialog = false;
       this.editedItem = Object.assign({},
       {id: -1,
@@ -153,6 +177,7 @@ export default {
       curs: "",
       departaments_id: 1});
     },
+
     //Обработка нажатия на кнопку сохранить
     save() 
     {
@@ -164,6 +189,7 @@ export default {
       else
         this.saveEdit();
     }, 
+
     //Сохранение нового места проведения
     saveNew()
     {
@@ -178,13 +204,12 @@ export default {
           this.showError("Сохранение не было произведено! " + ex);
         });
     },
+
     //Сохранение изменения для выбранного места проведения
     saveEdit()
     {
       apigroups
-        .editGroup({
-          group: this.editedItem
-        })
+        .editGroup({group: this.editedItem, slug: this._slug})
         .then(res => {
           this.initialize();
           this.showMessage("Изменён!");

@@ -2,6 +2,7 @@
 
 @section('content')
 <v-container fluid grid-list-md text-xs-center>
-    <c-panel-control :_options="{{json_encode($options) ?? null}}"></c-panel-control>
+    <c-panel-control :_options="{{json_encode($options) ?? null}}"
+                     _slug="{{auth()->user()->post->slug}}"/>
 </v-container>
 @endsection

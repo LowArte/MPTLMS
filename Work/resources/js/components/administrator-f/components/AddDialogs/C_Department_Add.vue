@@ -38,18 +38,26 @@ export default {
       ]
     };
   },
+
   mixins: [withSnackbar],
-  methods: {
-    pop() {
+
+  methods: 
+  {
+    pop() 
+    {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
-    clickSave() {
+
+    clickSave() 
+    {
       this.item.full = this.item.code + " " + this.item.name;
-      if (this.item.code != "") {
-        if (this.item.name != "") {
+      if (this.item.code != "") 
+      {
+        if (this.item.name != "") 
+        {
           apidepartments
             .saveDepartment({ department: this.item })
             .then(result => {
@@ -64,7 +72,9 @@ export default {
         }
       }
     },
-    clickCancel() {
+    
+    clickCancel() 
+    {
       this.dialog = false;
       this.resolve(false);
     }

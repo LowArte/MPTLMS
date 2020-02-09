@@ -1,30 +1,33 @@
+//Api для работы с учебными отделениями
+
 import axios from 'axios'
 
 export default 
 {
-  getDepartments() 
+  //Получение отделений
+  getDepartments(data) 
   {
-    return axios.get('/api/admin/department_management/get_departments');
+    return axios.get('/api/'+data.slug+'/department_management/get_departments');
   },
-
-  saveDepartment(department) 
+  //Сохранение отделений
+  saveDepartment(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/department_management/save', 
+    return axios.post('/api/'+data.slug+'/department_management/save', 
     {
-      "department": department.department
-    })
+      "department": data.department
+    });
   },
-
-  deleteDepartment(department) 
+  //Удаление отделений
+  deleteDepartment(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/department_management/delete/'+department.id)
+    return axios.post('/api/'+data.slug+'/department_management/delete/'+data.id);
   },
-
-  editDepartment(department) 
+  //Редактирование отделений
+  editDepartment(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/department_management/edit/'+department.department.id, 
+    return axios.post('/api/'+data.slug+'/department_management/edit/'+department.department.id, 
     {
-      "department": department.department
-    })
-  },
+      "department": data.department
+    });
+  }
 }

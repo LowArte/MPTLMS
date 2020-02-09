@@ -29,7 +29,6 @@
                                         v-btn.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
                 .text-center.pt-2.mx-auto.pa-0
                     v-pagination(v-model='page' :length='pageCount')
-                    v-text-field(:value='itemsPerPage' label='Кол-во' v-mask='mask' @input='itemsPerPage = parseIntLoc($event)')
 </template>
 
 <script>
@@ -38,10 +37,14 @@ import withSnackbar from "../mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
-  directives: {
+
+  directives: 
+  {
     mask
   },
-  data() {
+
+  data() 
+  {
     return {
       modelmessage: "",
       messageRules: [
@@ -66,18 +69,28 @@ export default {
       items: []
     };
   },
-  props: {
+
+  props: 
+  {
     _requests: {
       data: String,
       default: ""
-    }
+    },
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
-  mounted() {
+
+  mounted() 
+  {
     this.items = JSON.parse(this._requests);
-    console.log(this.items);
   },
-  methods: {
-    sendQuery(email) {
+
+  methods: 
+  {
+    sendQuery(email) 
+    {
       feedbackApi
         .sendEmail({
           mail: email,
@@ -93,12 +106,6 @@ export default {
         });
       this.modelmessage = "";
     },
-    parseIntLoc(val) {
-      if (val == "" || val == null || val == "0") {
-        return 1;
-      }
-      return parseInt(val);
-    }
   }
 };
 </script>

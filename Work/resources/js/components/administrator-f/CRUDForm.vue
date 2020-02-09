@@ -60,12 +60,16 @@ export default {
     headers: [], //Структура таблицы и с полями которые требуется выводить
     index: Object
   }),
+
   mixins: [withSnackbar],
-  components: {
+
+  components: 
+  {
     "c-comfirm-dialog": ConfirmDialog_C,
     "c-add-dialog": AddDialog_C,
     "c-edit-dialog": EditDialog_C
   },
+
   props: {
     _flood: {
       type: Array,
@@ -82,27 +86,43 @@ export default {
     _func_add: {
       type: Function,
       default: null
-    } 
+    },
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
+
   mounted() {
     this.flood = this._flood;
     this.headers = this._headers;
     this.title = this._title;
   },
-  methods: {
-    add() {
+
+  methods: 
+  {
+    add() 
+    {
       this._func_add('пидор');
     },
-    edit(item) {
+
+    edit(item) 
+    {
 
     },
-    clear() {
+
+    clear() 
+    {
 
     },
-    upload() {
+
+    upload() 
+    {
       this.showMessage("Данная функция будет не доступна до релизной версии");
     },
-    download() {
+
+    download() 
+    {
       this.showMessage("Данная функция будет не доступна до релизной версии");
     }
   }

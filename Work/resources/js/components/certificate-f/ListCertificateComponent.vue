@@ -64,14 +64,22 @@ export default {
       ]
     };
   },
-  props: {
+
+  props: 
+  {
     _requests: {
       data: Object,
       default: null
-    } //Заказы справок
+    }, //Заказы справок
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
+
   //Получение данных
-  mounted() {
+  mounted() 
+  {
     //this.items = this._requests;
   }
 };

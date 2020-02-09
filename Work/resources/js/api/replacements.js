@@ -1,46 +1,56 @@
+//Api для работы с заменами в учебном расписании групп
+
 import axios from 'axios'
 
-export default {
-  getReplacements(credentials) {
-    return axios.get('/get_replacements_by_group_id_by_date', {
-      params: {
-        "group_id": credentials.group_id,
-        "date": credentials.date,
+export default 
+{
+  //Получение всех замен
+  getReplacements(data)
+  {
+    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements', 
+    {
+      params:{
+        "date": data.date
       }
-    })
+    });
   },
-
-  getAllReplacementsByGroup(credentials) {
-    return axios.get('/get_all_replacements_by_group', {
-      params: {
-        "group_id": credentials.group_id
+  //Получение замен для определённой даты и группы
+  getReplacementsByGroupByDate(data)
+  {
+    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements_by_group_by_date/'+data.group_id, 
+    {
+      params:{
+        "date": data.date
       }
-    })
+    });
   },
-
-  getAllReplacementsByDate(credentials) {
-    return axios.get('/get_all_replacements_by_date', {
-      params: {
-        "date": credentials.date
+  //Получение замен для определённой группы
+  getReplacementsByGroup(data)
+  {
+    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements_by_group/'+data.group_id);
+  },
+  //Получение замен для определённой даты
+  getReplacementsByDate(data)
+  {
+    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements_by_date', 
+    {
+      params:{
+        "date": data.date
       }
-    })
+    });
   },
-
-  deleteReplacement(credentials) {
-    return axios.post('/delete_replacement', {
-      "id": credentials.id
-    })
+  //Удаление замены
+  deleteReplacement(data)
+  {
+    return axios.post('/api/'+data.slug+'/'+data.controller+'/delete_replacement/'+data.id);
   },
-  
-  getAllReplacements() {
-    return axios.get('/get_all_replacements')
-  },
-
-  saveReplacements(credentials) {
-    return axios.post('/save_replacement', {
-      "group_id": credentials.group_id,
-      "replacement": credentials.replacement,
-      "date": credentials.date
-    })
+  //Сохранение замены
+  saveReplacements(data)
+  {
+    return axios.post('/api/'+data.slug+'/'+data.controller+'/save_replacement/'+data.group_id, 
+    {
+      "replacement": data.replacement,
+      "date": data.date
+    });
   }
 }

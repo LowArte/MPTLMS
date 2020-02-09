@@ -7,6 +7,7 @@
 <script>
 import SpecialtiePage_C from "./components/C_SpecialtyPage";
 import C_AddNewSpecialties from "./components/C_AddNewSpecialties";
+
 export default {
   data: () => ({
     printing: 0,
@@ -106,23 +107,31 @@ export default {
       }
     ]
   }),
-  components: {
+
+  components: 
+  {
     "c-specialtie": SpecialtiePage_C,
     "c-add-new-specialtie": C_AddNewSpecialties
   },
-  props: {
+
+  props: 
+  {
     _printing: {
       type: Number,
       default: 0
     }
   },
-  mounted() {
+
+  mounted() 
+  {
     this.printing = this._printing;
   },
-  methods: {
-    add(item) {
+
+  methods: 
+  {
+    add(item) 
+    {
       this.items.unshift(item);
-      console.log(item);
     }
   }
 };

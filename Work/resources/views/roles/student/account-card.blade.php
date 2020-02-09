@@ -2,6 +2,6 @@
 
 @section('content')
 <v-container fluid grid-list-md text-xs-center>
-    <c-account-card></c-account-card>
+    <c-account-card />
 </v-container>
 @endsection

@@ -45,12 +45,17 @@ import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог con
 
 export default {
   mixins: [withSnackbar],
-  directives: {
+
+  directives: 
+  {
     mask
   },
-  components: {
+
+  components: 
+  {
     "c-comfirm-dialog": ConfirmDialog_C
   },
+
   data: () => ({
     posts: [], //Массив должностей
     search: "", //Поиск
@@ -68,49 +73,64 @@ export default {
       name: ""
     },//Структура строки
   }),
-  props: {
+
+  props: 
+  {
     _posts: {
       type: Array,
       default: null
-    } //Данные должностей
+    }, //Данные должностей
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
 
   //Получаем данных при старте
-  mounted() {
+  mounted() 
+  {
     this.posts = this._posts;
   },
 
-  computed: {
+  computed: 
+  {
     //Получение названия диалога
-    formTitle() {
+    formTitle() 
+    {
       return this.editedItem.id === -1
         ? "Новая должность"
         : "Редактировать должность";
     }
   },
 
-  methods: {
+  methods: 
+  {
     //Иницилизации данных
-    initialize() {
+    initialize() 
+    {
       apiposts
         .getPosts()
         .then(res => {
           this.posts = res.data.posts;
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
+
     //Вызов диалогового окна для редактирования
     editItem(item) 
     {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
+
     //Удаление
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) {
+        if (confirmResult) 
+        {
           apiposts
             .deleteDepartment({ id: item.id })
             .then(res => {
@@ -120,16 +140,21 @@ export default {
             .catch(ex => {
               this.showError("Удаление не было произведено!" + ex);
             })
-        } else {
+        } 
+        else 
+        {
           this.showMessage("Действие было отменено");
         }
       });
     },
+
     //Закрытие диалога
-    close() {
+    close() 
+    {
       this.dialog = false;
       this.editedItem = Object.assign({}, {id: -1,name: "",});
     },
+
     //Обработка нажатия на кнопку сохранить
     save() 
     {
@@ -141,6 +166,7 @@ export default {
       else
         this.saveEdit();
     }, 
+
     //Сохранение нового места проведения
     saveNew()
     {
@@ -155,6 +181,7 @@ export default {
           this.showError("Сохранение не было произведено! " + ex);
         });
     },
+    
     //Сохранение изменения для выбранного места проведения
     saveEdit()
     {

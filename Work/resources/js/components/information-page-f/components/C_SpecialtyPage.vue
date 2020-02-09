@@ -50,7 +50,9 @@ export default {
       dialog: false
     };
   },
-  props: {
+
+  props: 
+  {
     item: {
       type: Object,
       default: null

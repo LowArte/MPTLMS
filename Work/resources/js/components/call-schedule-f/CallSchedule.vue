@@ -10,10 +10,13 @@
 <script>
 import { mask } from "vue-the-mask";
 export default {
-  directives: {
+  directives: 
+  {
     mask
   },
-  props: {
+  
+  props: 
+  {
     _time_table: {
       Type: String,
       default: null

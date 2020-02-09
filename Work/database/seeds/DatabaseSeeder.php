@@ -22,6 +22,7 @@ class DatabaseSeeder  extends Seeder
             DepartamentSeeder::class,
             GroupSeeder::class,
             ScheduleSeeder::class,
+            SwapScheduleSeeder::class,
             DesciplineSeeder::class
         ]);
         

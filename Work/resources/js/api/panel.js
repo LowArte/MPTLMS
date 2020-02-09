@@ -1,7 +1,16 @@
+//Api для работы с панелью сервера
+
 import axios from 'axios'
 
-export default {
-  setOptionValue (credentials) {
-    return axios.post('/api/admin/set_options', {"id":credentials.id,'value':String(credentials.value)})
+export default 
+{
+  //Установка опций
+  setOptionValue (data) 
+  {
+    return axios.post('/api/'+data.slug+'/set_options', 
+    {
+      "id":data.id,
+      'value':String(data.value)
+    });
   }
 }

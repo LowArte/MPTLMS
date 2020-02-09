@@ -1,30 +1,33 @@
+//Api для работы с местами проведения учебного дня
+
 import axios from 'axios'
 
 export default 
 {
-  getPlaces() 
+  //Получение мест проведения
+  getPlaces(data) 
   {
-    return axios.get('/api/admin/place_management/get_places');
+    return axios.get('/api/'+data.slug+'/place_management/get_places');
   },
-
-  savePlace(place) 
+  //Сохранение мест проведения
+  savePlace(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/place_management/save', 
+    return axios.post('/api/'+data.slug+'/place_management/save', 
     {
-      "place": place.place
-    })
+      "place": data.place
+    });
   },
-
-  deletePlace(place) 
+  //Удаление мест проведения
+  deletePlace(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/place_management/delete/'+place.id)
+    return axios.post('/api/'+data.slug+'/place_management/delete/'+data.id);
   },
-
-  editPlace(place) 
+  //Редактирование мест проведения
+  editPlace(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/place_management/edit/'+place.place.id, 
+    return axios.post('/api/'+data.slug+'/place_management/edit/'+data.place.id, 
     {
-      "place": place.place
-    })
-  },
+      "place": data.place
+    });
+  }
 }

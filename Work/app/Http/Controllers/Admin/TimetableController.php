@@ -10,7 +10,6 @@ use App\Repositories\ScheduleRepository;
 use App\Repositories\PlaceRepository;
 use App\Repositories\DisciplineRepository;
 use App\Repositories\TeacherRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class TimetableController extends BaseController

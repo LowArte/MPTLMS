@@ -65,12 +65,17 @@ import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог con
 
 export default {
   mixins: [withSnackbar],
-  directives: {
+
+  directives: 
+  {
     mask
   },
-  components: {
+
+  components: 
+  {
     "c-comfirm-dialog": ConfirmDialog_C
   },
+
   data: () => ({
     departaments_info: [], //Массив отделений
     groups_info: [],
@@ -113,7 +118,9 @@ export default {
     }, //Массив с данным студента для сохранения в бд
     dateDialog: null //Диалог даты
   }),
-  props: {
+
+  props: 
+  {
     _departaments_info: {
       type: Array,
       default: null
@@ -125,17 +132,23 @@ export default {
     _arrusersposts: {
       type: Array,
       default: null
-    }
+    },
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
 
   //Получаем данные при старте
-  mounted() {
+  mounted() 
+  {
     this.listusers = this._listusers;
     this.arrusersposts = this._arrusersposts;
     this.departaments = this._departaments;
   },
 
-  computed: {
+  computed: 
+  {
     //Получение названия диалога
     formTitle() {
       return this.editedItem.id === -1
@@ -144,9 +157,11 @@ export default {
     }
   },
 
-  methods: {
+  methods: 
+  {
     //Изменение отделения
-    departament_change() {
+    departament_change() 
+    {
       group_api
         .getGroup(departaments_info.selected)
         .then(res => {
@@ -154,24 +169,29 @@ export default {
           this.studentItem.group_id = this.groups_info.groups[0].id;
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
+
     //Изменение роли
-    changePost() {
-      if (item.post_id == 2) {
+    changePost() 
+    {
+      if (item.post_id == 2) 
+      {
         apiuser
           .getStudent({ id: this.editedItem.id })
           .then(res => {
             this.studentItem = Object.assign({}, res.data.student);
           })
           .catch(ex => {
-            console.log(ex);
+            this.showError(ex);
           });
       }
     },
+
     //Иницилизации данных
-    initialize() {
+    initialize() 
+    {
       apiuser
         .getUsers()
         .then(res => {
@@ -179,30 +199,36 @@ export default {
           this.arrposts = res.data.usersposts;
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
+
     //Вызов диалогового окна для редактирования учётной записи
-    editItem(item) {
+    editItem(item) 
+    {
       this.editedItem = Object.assign({}, item);
 
-      if (item.post_id == 2) {
+      if (item.post_id == 2) 
+      {
         apiuser
           .getStudent({ id: this.editedItem.id })
           .then(res => {
             this.studentItem = Object.assign({}, res.data.student);
           })
           .catch(ex => {
-            console.log(ex);
+            this.showError(ex);
           });
       }
 
       this.dialog = true;
     },
+
     //Удаление учётной записи
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) {
+        if (confirmResult) 
+        {
           apiuser
             .deleteUser({ id: item.id })
             .then(res => {
@@ -212,13 +238,17 @@ export default {
             .catch(ex => {
               this.showError("Удаление не было произведено " + ex);
             });
-        } else {
-          this.showMessage("Действие было отменено");
+        } 
+        else 
+        {
+          this.showInfo("Действие было отменено");
         }
       });
     },
+
     //Закрытие диалога
-    close() {
+    close() 
+    {
       this.dialog = false;
       this.editedItem = Object.assign(
         {},
@@ -233,6 +263,7 @@ export default {
           disabled: ""
         }
       );
+
       this.studentItem = Object.assign(
         {},
         {
@@ -244,15 +275,22 @@ export default {
         }
       );
     },
+
     //Обработка нажатия на кнопку сохранить
-    save() {
-      if (this.editedItem.id == -1) {
+    save() 
+    {
+      if (this.editedItem.id == -1) 
+      {
         this.editedItem.id = -1;
         this.saveNew();
-      } else this.saveEdit();
+      } 
+      else 
+        this.saveEdit();
     },
+
     //Сохранение нового пользователя
-    saveNew() {
+    saveNew() 
+    {
       apiuser
         .saveUser({
           user: this.editedItem,
@@ -267,8 +305,10 @@ export default {
           this.showError(ex.response.data.error);
         });
     },
+    
     //Сохранение изменения для выбранного пользователя
-    saveEdit() {
+    saveEdit() 
+    {
       apiuser
         .saveEdit({
           id: this.editedItem.id,

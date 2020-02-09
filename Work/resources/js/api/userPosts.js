@@ -1,23 +1,33 @@
+//Api для работы с ролями системы
+
 import axios from 'axios'
 
-export default {
-  getPosts() {
-    return axios.get('/api/admin/post_management/get_posts');
+export default 
+{
+  //Получение ролей
+  getPosts(data) 
+  {
+    return axios.get('/api/'+data.slug+'/post_management/get_posts');
   },
-
-  savePost(post) {
-    return axios.post('/api/admin/post_management/save', {
-      "post": post.post
-    })
+  //Сохранение роли
+  savePost(data) //!Требуется сделать рабочим
+  {
+    return axios.post('/api/'+data.slug+'/post_management/save', 
+    {
+      "post": data.post
+    });
   },
-
-  deletePost(post) {
-    return axios.post('/api/admin/post_management/delete/'+post.id)
+  //Удаление роли
+  deletePost(data) //!Требуется сделать рабочим
+  {
+    return axios.post('/api/'+data.slug+'/post_management/delete/'+data.id);
   },
-
-  editPost(post) {
-    return axios.post('/api/admin/post_management/edit/'+post.id, {
-      "post": post.post
-    })
-  },
+  //Редактирование роли
+  editPost(data) //!Требуется сделать рабочим
+  {
+    return axios.post('/api/'+data.slug+'/post_management/edit/'+data.id, 
+    {
+      "post": data.post
+    });
+  }
 }

@@ -17,11 +17,15 @@
 import { mask } from "vue-the-mask"; //Маска
 import callScedule from "../../api/callSchedule"; //api для расписания звонков
 import withSnackbar from "../mixins/withSnackbar"; //Alert
+
 export default {
   mixins: [withSnackbar],
-  directives: {
+
+  directives:
+  {
     mask  //Маска
   },
+  
   data: () => ({
     valid: false, //Валидация формы
     mask: "##:##-##:##", //Маска расписания звонка
@@ -33,7 +37,9 @@ export default {
     mplace: null, //Выбранное место проведения
     timeTable: null, //Расписание звонков
   }),
-  props: {
+
+  props: 
+  {
     _time_table: {
       type: Array,
       default: null
@@ -41,19 +47,28 @@ export default {
     _places: {
       type: Array,
       default: null
-    } //Массив с местами проведения
+    }, //Массив с местами проведения
+    _slug: {
+      data: String,
+      default: ""
+    } //Модуль
   }, //JSON расписания звонков
-  created: function() {
+
+  created: function() 
+  {
     this.timeTable = this._time_table; 
     this.mplace = this._places[0].id;
   },
-  methods: {
-    sendQuery() {
+
+  methods: 
+  {
+    sendQuery() 
+    {
       //Проверка на валидацию полей, после чего происходит отправка на сохранение
       if (this.$refs.BildCallSchedule.validate()) 
       {
         callScedule
-          .edit({callSchedule: this.timeTable})
+          .edit({callSchedule: this.timeTable, slug: this._slug})
           .then(res => {
            this.showMessage("Расписание звонков принято!");
           })

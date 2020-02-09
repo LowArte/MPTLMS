@@ -9,38 +9,50 @@
 
 <script>
 import panelApi from "../../api/panel";
+import withSnackbar from "../mixins/withSnackbar";//Alert
 
 export default {
+  mixins: [withSnackbar],
+
   data:()=>{
     return {
       options:null
     }
   },
-  props: {
+
+  props: 
+  {
     _options: {
       data: Object,
       default: null
-    }
+    },
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
-  beforeMount() {
-    this.options = this._options
-    console.log(this.options)
-    this.options.option_value = this.options.option_value == "true"
-        console.log(this.options)
+
+  beforeMount() 
+  {
+    this.options = this._options;
+    this.options.option_value = this.options.option_value == "true";
   },
-  methods: {
-    sendQuery() {
-      console.log(this.options.option_value)
+
+  methods: 
+  {
+    sendQuery() 
+    {
       panelApi
         .setOptionValue({
           id: this.options.id,
-          value: this.options.option_value
+          value: this.options.option_value,
+          slug: this._slug
         })
         .then(res => {
-          console.log(res);
+          this.showMessage("Сохранено!");
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     }
   }

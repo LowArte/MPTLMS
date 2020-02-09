@@ -55,8 +55,10 @@
 import group_api from "./../../api/group"; //Api групп
 import schedule_api from "./../../api/schedule"; //Api расписания
 import withSnackbar from "../mixins/withSnackbar"; //Alert
+
 export default {
-    mixins: [withSnackbar],
+  mixins: [withSnackbar],
+
   data: () => {
     return {
       groups_info: null, //Группы
@@ -67,7 +69,8 @@ export default {
     };
   },
 
-  props: {
+  props: 
+  {
     _departaments_info: {
       type: Object,
       default: null
@@ -79,14 +82,24 @@ export default {
     _schedule: {
       type: Object,
       default: null
-    }//Расписания
+    },//Расписания
+    _slug: {
+      data: String,
+      default: ""
+    }, //Модуль
+    _controller: {
+      data: String,
+      default: "timetable"
+    } //Контроллер
   },
 
-  methods: {
+  methods: 
+  {
     //Получение группы при изменении отделения
-    departament_change() {
+    departament_change() 
+    {
       group_api
-        .getGroups(this.departaments_info.selected_departament.id)
+        .getGroups({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
         .then(res => {
           this.groups_info.groups = res.data.groups_info.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
@@ -96,15 +109,19 @@ export default {
           this.showError(ex);
         });
     },
+
     //Определение числителя
-    isChisl() {
+    isChisl() 
+    {
       const today = new Date();
       return today.getWeek() % 2;
     },
+
     //Получение расписания при изменении выбранной группы
-    group_change() {
+    group_change() 
+    {
       schedule_api
-        .getSchedule(this.groups_info.selected_group.id)
+        .getSchedule({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
         .then(res => {
           this.schedule = res.data.schedule;
           this.parseSchedule();
@@ -113,6 +130,7 @@ export default {
           this.showError(ex);
         });
     },
+
     //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
     parseSchedule()
     {
@@ -147,8 +165,10 @@ export default {
       }
     }
   },
+
   //Преднастройка
-  beforeMount() {
+  beforeMount() 
+  {
     this.groups_info = this._groups_info;
     this.departaments_info = this._departaments_info;
     this.schedule = this._schedule;

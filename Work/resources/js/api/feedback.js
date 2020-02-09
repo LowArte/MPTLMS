@@ -1,14 +1,21 @@
+//Api для работы с обратной связью системы
+
 import axios from 'axios'
 
 export default 
 {
+  //Сохранения обращения обратной связи
   save (data) 
   {
-    return axios.post('/api/'+data.slug+'/feedback/save', {"text":data.text,"type":data.type})
+    return axios.post('/api/'+data.slug+'/feedback/save', 
+    {
+      "text":data.text,
+      "type":data.type
+    });
   },
-
-  sendEmail (data) 
+  //Оправка сообщений на почту
+  sendEmail (data) //!Требуется сделать рабочим
   {
-    return axios.post('/send_email', {"text":data.text,"to":data.mail,'id':data.id})
+    return axios.post('/api/'+data.slug+'/feedback/send_email', {"text":data.text,"to":data.mail,'id':data.id});
   }
 }

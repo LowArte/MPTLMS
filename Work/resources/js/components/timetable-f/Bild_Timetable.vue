@@ -33,8 +33,10 @@
 import group_api from "./../../api/group"; //Группы api
 import schedule_api from "./../../api/schedule"; //Расписание api
 import withSnackbar from "../mixins/withSnackbar"; //Alert
+
 export default {
-    mixins: [withSnackbar],
+  mixins: [withSnackbar],
+
   data: () => {
     return {
       groups_info: null, //Группы
@@ -44,7 +46,8 @@ export default {
     };
   },
 
-  props: {
+  props: 
+  {
     _departaments_info: {
       type: Object,
       default: null
@@ -68,13 +71,24 @@ export default {
     _schedule_bild: {
       type: Object,
       default: null
-    } //Расписание
+    }, //Расписание
+    _slug: {
+      data: String,
+      default: ""
+    }, //Модуль
+    _controller: {
+      data: String,
+      default: "timetable"
+    } //Контроллер
   },
-  methods: {
+
+  methods: 
+  {
     //Событие при изменении отделении
-    departament_change() {
+    departament_change() 
+    {
       group_api
-        .getGroup(this.departaments_info.selected_departament.id)
+        .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
         .then(res => {
           this.groups_info.groups = res.data.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
@@ -84,11 +98,12 @@ export default {
           this.showError(ex);
         });
     },
+
     //Событие при изменении группы
     group_change() 
     {
       schedule_api
-        .getScheduleBild(this.groups_info.selected_group.id)
+        .getScheduleBild({group_id: this.groups_info.selected_group.id, slug: this._slug, this: this._controller})
         .then(res => {
           this.schedule = res.data.schedule;
         })
@@ -96,12 +111,13 @@ export default {
           this.showError(ex);
         });
     },
+
     //Отправка учебного расписания
     sendQuery()
     {
       //Отправка на сохранение
       schedule_api
-        .editSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule})
+        .editSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule, slug: this._slug, controller: this._controller})
         .then(res => {
           this.group_change();
           this.showMessage('Расписание сохранено!');
@@ -111,8 +127,10 @@ export default {
         });
     }
   },
+  
   //Получение данных при старте
-  beforeMount() {
+  beforeMount() 
+  {
     this.groups_info = this._groups_info;
     this.departaments_info = this._departaments_info;
     this.schedule = this._schedule_bild;

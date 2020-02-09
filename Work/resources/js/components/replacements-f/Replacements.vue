@@ -1,5 +1,6 @@
 <template lang="pug">
     v-layout.column.wrap
+        c-comfirm-dialog(ref='qwestion')
         v-flex.ma-2.mb-0.pa-0.row
             v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
             v-combobox.ma-1(label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
@@ -14,7 +15,7 @@
         v-switch.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
         
         v-flex.ma-0.mb-2.row(v-for="(groups_key, groups_index) in groups" :key="groups_index" align="center" justify="center" min-width="500px")
-            v-flex(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
+            v-flex.ma-2(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
                 v-hover(v-slot:default="{ hover }")
                     v-card.ma-0(:elevation="hover ? 12 : 6" width="100%")
                         v-card-title.subtitle-1(style="color: #FF3D00;") {{groups_key}} - {{date_key}}
@@ -22,11 +23,11 @@
                         v-simple-table(min-width="500px")
                             thead
                                 tr
-                                    th.text-left №
+                                    th.text-left № пары
                                     th.text-left Что заменяют
                                     th.text-left На что заменяют
                                     th.text-left Дата замены
-                                    th.text-left
+                                    th.text-left Действие
                             tbody
                                 tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                                     td {{ replacement_key['swap']['caselesson'] }}
@@ -42,9 +43,19 @@
 </template>
 
 <script>
-import group_api from "./../../api/group";
-import replacements_api from "./../../api/replacements";
+import group_api from "./../../api/group"; //api групп
+import replacements_api from "./../../api/replacements"; //api замен
+import withSnackbar from "../mixins/withSnackbar"; //Alert
+import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
+
 export default {
+    mixins: [withSnackbar],
+
+    components: 
+    {
+        "c-comfirm-dialog": ConfirmDialog_C
+    },
+
     data: () => ({
         groups_info: null, //Группы
         departaments_info: null, //Отделения
@@ -59,7 +70,9 @@ export default {
             date: new Date().toISOString().substr(0, 10),
         } //Диалог даты
     }),
-    props: {
+
+    props: 
+    {
         _departaments_info: {
             type: Object,
             default: null
@@ -69,95 +82,115 @@ export default {
             default: null
         }, //JSON групп
         _replacements: {
-            type: String,
+            type: Array,
             default: null
-        } //JSON замен
+        }, //JSON замен
+        _slug: {
+            data: String,
+            default: ""
+        }, //Модуль
+        _controller: {
+            data: String,
+            default: "replacements"
+        } //Контроллер
     },
-    methods:{
+
+    methods:
+    {
         //Удаление замены
         deleteItem(id)
         {
-            confirm("Вы действительно хотите удалить замену?") &&
-                replacements_api
-                    .deleteReplacement({id: id})
-                    .then(res => {
-                        alert("Удалена!");
-                        this.changeFilter();
-                    })
-                    .catch(ex => {
-                        console.log(ex);
-                    });
+            this.$refs.qwestion.pop().then(confirmResult => {
+                if (confirmResult) 
+                {
+                    replacements_api
+                    .deleteReplacement({id: id, slug: this._slug, controller: this._controller})
+                        .then(res => {
+                            this.showMessage("Удалена!");
+                            this.changeFilter();
+                        })
+                        .catch(ex => {
+                            this.showError(ex);
+                        });
+                } 
+                else 
+                {
+                    this.showInfo("Действие было отменено");
+                }
+            });
         },
+
         //Получение групп для отделения
         departament_change() 
         {
             group_api
-            .getGroup(this.departaments_info.selected_departament.id)
-            .then(res => {
-                this.groups_info.groups = res.data.groups;
-                this.groups_info.selected_group = this.groups_info.groups[0];
-                this.group_change();
-            })
-            .catch(ex => {
-                console.log(ex);
-            });
+                .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
+                .then(res => {
+                    this.groups_info.groups = res.data.groups_info.groups;
+                    this.groups_info.selected_group = this.groups_info.groups[0];
+                    this.changeFilter();
+                })
+                .catch(ex => {
+                    this.showError(ex);
+                });
         },
+
         //Получение замен с учётом фильтров
         changeFilter() 
         {
             if(this.checkAllGroup && this.checkAllDate) //Получить все замены для всех дат и групп
             {
                 replacements_api
-                .getAllReplacements()
-                .then(res => {
-                    this.replacements = res.data.replacements;
-                    console.log(res.data);
-                    this.parseReplacement();
-                })
-                .catch(ex => {
-                    console.log(ex);
-                });
+                    .getReplacements({slug: this._slug, controller: this._controller})
+                    .then(res => {
+                        this.replacements = res.data.replacements;
+                        this.parseReplacement();
+                    })
+                    .catch(ex => {
+                        this.showError(ex);
+                    });
             }
             else
-            if (this.checkAllGroup)
+            if (this.checkAllGroup) //Получить замены для всех групп
             {
                 replacements_api
-                .getAllReplacementsByDate({date: this.dateDialog.date})
-                .then(res => {
-                    this.replacements = res.data.replacements;
-                    this.parseReplacement();
-                })
-                .catch(ex => {
-                    console.log(ex);
-                });
+                    .getReplacementsByDate({date: this.dateDialog.date, slug: this._slug, controller: this._controller})
+                    .then(res => {
+                        this.replacements = res.data.replacements;
+                        this.parseReplacement();
+                    })
+                    .catch(ex => {
+                        this.showError(ex);
+                    });
             }
             else
-            if (this.checkAllDate)
+            if (this.checkAllDate) //Получить все замены для всех дат
             {
                 replacements_api
-                .getAllReplacementsByGroup({group_id: this.groups_info.selected_group.id})
-                .then(res => {
-                    this.replacements = res.data.replacements;
-                    this.parseReplacement();
-                })
-                .catch(ex => {
-                    console.log(ex);
-                });
+                    .getReplacementsByGroup({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
+                    .then(res => {
+                        this.replacements = res.data.replacements;
+                        this.parseReplacement();
+                    })
+                    .catch(ex => {
+                        this.showError(ex);
+                    });
             }
-            else
+            else 
             {
                 replacements_api
-                .getReplacements({group_id: this.groups_info.selected_group.id, date: this.dateDialog.date})
-                .then(res => {
-                    this.replacements = res.data.replacements;
-                    this.parseReplacement();
-                })
-                .catch(ex => {
-                    console.log(ex);
-                });
+                    .getReplacementsByGroupByDate({group_id: this.groups_info.selected_group.id, date: this.dateDialog.date, slug: this._slug, controller: this._controller})
+                    .then(res => {
+                        this.replacements = res.data.replacements;
+                        this.parseReplacement();
+                    })
+                    .catch(ex => {
+                        this.showError(ex);
+                    });
             }
         },
-        //Перевод json в массив
+
+        //Перевод массив для вывода
         parseReplacement()
         {
             this.groups = [];
@@ -193,11 +226,13 @@ export default {
             }
         }
     },
+    
     //Начальный метод
-    beforeMount() {
+    beforeMount() 
+    {
         this.groups_info = this._groups_info;
         this.departaments_info = this._departaments_info;
-        this.replacements = JSON.parse(this._replacements);
+        this.replacements = this._replacements;
         this.parseReplacement();
     }
 };

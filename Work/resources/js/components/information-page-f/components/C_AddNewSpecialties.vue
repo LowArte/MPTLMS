@@ -43,14 +43,19 @@ export default {
       },
     };
   },
-  props: {
+
+  props: 
+  {
     _add: {
       type: Function,
       default: null
     }
   },
-  methods: {
-      add() {
+
+  methods: 
+  {
+      add() 
+      {
         this.item.href = this._href;
         this.item.title = this._title;
         this.item.qualification = this._qualification;

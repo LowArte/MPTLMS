@@ -81,14 +81,18 @@ export default {
       ]
     };
   },
+
   mixins: [withSnackbar],
-  mounted() {
+
+  mounted() 
+  {
     this.name = this._user == null ? "" : this._user.name;
     this.secName = this._user == null ? "" : this._user.secName;
     this.thirdName = this._user == null ? "" : this._user.thirdName;
     this.email = this._user == null ? "" : this._user.email;
     this.visible = this._user == null;
   },
+
   props: {
     _item: {
       type: Object,
@@ -99,14 +103,19 @@ export default {
       default: null
     }
   },
-  methods: {
-    detail() {
+
+  methods: 
+  {
+    detail() 
+    {
       if (this._user != null && this._item != null)
         window.open('/retraining/information');
       else
         this.showInfo("На данный момент доступно только авторизованному пользователю");
     },
-    send() {
+
+    send() 
+    {
       /**
        * ! Отправлять данные в базу
        * * Присылать уведомление на почту подавшему заявку

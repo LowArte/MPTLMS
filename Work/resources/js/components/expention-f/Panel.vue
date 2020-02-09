@@ -8,21 +8,25 @@
 
 <script>
 export default {
-  props: {
+  props: 
+  {
     _components_prop: { type: Array, default: null }
   },
+
   data() {
     return {
       panel: [],
       components:[]
     };
   },
+
   mounted(){
     this.components = this._components_prop;
      for (var i = 0; i < this.components.length; i++) {
       this.components[i].component = this.loader(this.components[i].content);
     }
   },
+
   methods: {
     loader: function(value) {
       return () => import("../" + `${value}`);
@@ -30,4 +34,3 @@ export default {
   }
 };
 </script>
-

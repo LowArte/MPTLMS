@@ -19,6 +19,7 @@ import withSnackbar from "../mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
+
   data() {
     return {
       thematic: "Другое",
@@ -41,15 +42,18 @@ export default {
     };
   },
 
-  props: {
+  props: 
+  {
     _slug: {
       data: String,
       default: ""
-    }
+    } //Модуль
   },
 
-  methods: {
-    sendQuery() {
+  methods: 
+  {
+    sendQuery() 
+    {
       feedbackApi
         .save({ type: this.thematic, text: this.modelmessage, slug: this._slug })
         .then(res => {

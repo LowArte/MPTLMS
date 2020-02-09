@@ -45,12 +45,17 @@ import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог con
 
 export default {
   mixins: [withSnackbar],
-  directives: {
+
+  directives: 
+  {
     mask
   },
-  components: {
+
+  components: 
+  {
     "c-comfirm-dialog": ConfirmDialog_C
   },
+
   data: () => ({
     places: [], //Массив мест проведения
     search: "", //Поиск
@@ -68,49 +73,64 @@ export default {
       place_name: "",
     }, //Массив с данными мест проведения для сохранения в бд
   }),
-  props: {
+
+  props:
+  {
     _places: {
       type: Array,
       default: null
-    }
+    },
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
 
   //Получаем данных при старте
-  mounted() {
+  mounted() 
+  {
     this.places = this._places;
   },
 
-  computed: {
+  computed: 
+  {
     //Получение названия диалога
-    formTitle() {
+    formTitle() 
+    {
       return this.editedItem.id === -1
         ? "Новое место проведения"
         : "Редактировать место проведения";
     }
   },
 
-  methods: {
+  methods: 
+  {
     //Иницилизации данных
-    initialize() {
+    initialize() 
+    {
       apiplaces
         .getPlaces()
         .then(res => {
           this.places = res.data.places;
         })
         .catch(ex => {
-          console.log(ex);
+          this.showError(ex);
         });
     },
+
     //Вызов диалогового окна для редактирования места проведения
     editItem(item) 
     {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
+
     //Удаление места проведения
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) {
+        if (confirmResult) 
+        {
           apiplaces
             .deletePlace({ id: item.id })
             .then(res => {
@@ -120,16 +140,20 @@ export default {
             .catch(ex => {
               this.showError("Удаление не было произведено!" + ex);
             })
-        } else {
+        } 
+        else 
+        {
           this.showMessage("Действие было отменено");
         }
       });
     },
+
     //Закрытие диалога
     close() {
       this.dialog = false;
       this.editedItem = Object.assign({},{id: -1, place_name: ""});
     },
+
     //Обработка нажатия на кнопку сохранить
     save() 
     {
@@ -141,6 +165,7 @@ export default {
       else
         this.saveEdit();
     }, 
+
     //Сохранение нового места проведения
     saveNew()
     {
@@ -155,6 +180,7 @@ export default {
           this.showError("Сохранение не было произведено! " + ex);
         });
     },
+    
     //Сохранение изменения для выбранного места проведения
     saveEdit()
     {

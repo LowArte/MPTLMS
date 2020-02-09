@@ -89,9 +89,14 @@ Route::middleware('auth:api')->name('api.')->group(function ()
 
         Route::name('replacements.')->prefix('replacements')->group(function () 
         {
-            Route::get('get_group_by_departament_id', 'Admin\TimeTableController@getGroupByDepartamentId')->name('get_group_by_departament_id');
-            Route::post('save', 'Admin\TimeTableController@save')->name('get_group_by_departament_id');
-            Route::get('get_schedule_by_group_id', 'Admin\TimeTableController@getScheduleByGroupId')->name('get_schedule_by_group_id');
+            Route::get('get_group_by_departament_id/{department_id}', 'Admin\ReplacementController@getGroupByDepartamentId')->name('get_group_by_departament_id');
+            Route::get('get_replacements_by_group_by_date/{group_id}', 'Admin\ReplacementController@replacementsByGroupByDate')->name('get_replacements_by_group_by_date');
+            Route::get('get_replacements_by_group/{group_id}', 'Admin\ReplacementController@replacementsByGroup')->name('get_replacements_by_group');
+            Route::get('get_replacements_by_date', 'Admin\ReplacementController@replacementsByDate')->name('get_replacements_by_date');
+            Route::get('get_replacements', 'Admin\ReplacementController@replacements')->name('get_replacements');
+            Route::get('get_schedule_by_group_id/{group_id}', 'Admin\ReplacementController@getScheduleByGroupId')->name('get_schedule_by_group_id');
+            Route::post('save_replacement/{group_id}', 'Admin\ReplacementController@save')->name('save_replacement');
+            Route::post('delete_replacement/{group_id}', 'Admin\ReplacementController@delete')->name('delete_replacement');
         });
     });
     //Студент

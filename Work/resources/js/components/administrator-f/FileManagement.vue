@@ -55,9 +55,11 @@ import { mask } from "vue-the-mask"; //маски vue
 import FileDownload  from "js-file-download"; //Требуется для скачивания файла
 
 export default {
-  directives: {
+  directives: 
+  {
     mask
   },
+
   data: () => ({
     files: [],
     search: "", //Поиск
@@ -87,29 +89,41 @@ export default {
       file: null,
     } //Массив с данным для сохранения в бд
   }),
-  props: {
+  
+  props: 
+  {
     _files: {
       data: String,
       default: null
     }, //JSON пользователей
+    _slug: {
+      type: String,
+      default: ""
+    } //Модуль
   },
+
   //Получаем данные при старте
-  mounted() {
+  mounted() 
+  {
     this.files = JSON.parse(this._files);
   },
 
-  computed: {
+  computed: 
+  {
     //Получение названия диалога
-    formTitle() {
+    formTitle() 
+    {
       return this.editedIndex === -1
         ? "Новый файл"
         : "Редактировать файл";
     }
   },
 
-  methods: {
+  methods: 
+  {
     //Иницилизации данных
-    initialize(){
+    initialize()
+    {
       apifiles
         .getFiles()
         .then(res => {
@@ -119,6 +133,7 @@ export default {
           console.log(ex);
         });
     },
+
     //Редактирование файла
     editItem(item) 
     {
@@ -126,6 +141,7 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
+
     //Удаление файла
     deleteItem(item) 
     {
@@ -140,6 +156,7 @@ export default {
           console.log(ex);
         });
     },
+
     //Загрузка файлов
     downloadItem(item) 
     {
@@ -150,8 +167,10 @@ export default {
             FileDownload(res.data, name.split("/").pop())
         })
     },
+
     //Закрытие диалога
-    close() {
+    close() 
+    {
       this.dialog = false;
       setTimeout(() => {
         this.editedItem = Object.assign({}, {
@@ -162,8 +181,10 @@ export default {
         this.editedIndex = -1;
       }, 300);
     },
+
     //Сохранение файла
-    save() {
+    save() 
+    {
       if (this.editedIndex == -1) this.editedItem.id = -1;
       if (this.$refs.SaveDialog.validate())
       apifiles
@@ -188,8 +209,10 @@ export default {
           console.log(ex);
         });
     },
+
     //Требуется для определения количества страниц
-    parseIntLoc(val) {
+    parseIntLoc(val) 
+    {
       if (val == "" || val == null || val == "0")
         return 1;
       return parseInt(val);

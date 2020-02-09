@@ -38,7 +38,9 @@ export default {
       ]
     };
   },
-  props: {
+
+  props: 
+  {
     _item: {
       type: Object,
       default: {
@@ -49,21 +51,31 @@ export default {
       }
     } //! Данные
   },
-  mounted() {
+
+  mounted() 
+  {
     this.item = this._item;
   },
+
   mixins: [withSnackbar],
-  methods: {
-    pop() {
+
+  methods: 
+  {
+    pop() 
+    {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
-    clickEdit() {
+
+    clickEdit() 
+    {
       this.item.full = this.item.code + " " + this.item.name;
-      if (this.item.code != "") {
-        if (this.item.name != "") {
+      if (this.item.code != "") 
+      {
+        if (this.item.name != "") 
+        {
           apidepartments
             .editDepartment({ department: this.item })
             .then(result => {
@@ -80,7 +92,9 @@ export default {
         }
       }
     },
-    clickCancel() {
+    
+    clickCancel() 
+    {
       this.dialog = false;
       this.resolve(false);
     }

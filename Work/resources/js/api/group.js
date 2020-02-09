@@ -1,27 +1,38 @@
+//Api для работы с учебными группами отделений
+
 import axios from 'axios'
 
-export default {
-  getGroups(id) {
-    return axios.get('/api/admin/timetable/get_group_by_departament_id/'+id)
-  },
-
-  getGroupAll() 
+export default 
+{
+  //Получение групп по id отделению
+  getGroup(data) 
   {
-    return axios.get('/api/admin/group_management/get_groups');
+    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_group_by_departament_id/'+data.department_id);
   },
-
-  saveGroup(group) 
+  //Получение всех групп
+  getGroupAll(data) 
   {
-    return axios.post('/api/admin/group_management/save', { "group": group.group })
+    return axios.get('/api/'+data.slug+'/group_management/get_groups');
   },
-
-  deleteGroup(group) 
+  //Сохранение группы
+  saveGroup(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/group_management/delete/'+group.id)
+    return axios.post('/api/'+data.slug+'/group_management/save', 
+    { 
+      "group": data.group 
+    });
   },
-
-  editGroup(group) 
+  //Удаление группы
+  deleteGroup(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/group_management/edit/'+group.group.id, {"group": group.group})
+    return axios.post('/api/'+data.slug+'/group_management/delete/'+data.id);
   },
+  //Редактирование группы
+  editGroup(data) //!Требуется сделать рабочим
+  {
+    return axios.post('/api/'+data.slug+'/group_management/edit/'+data.group.id, 
+    {
+      "group": data.group
+    });
+  }
 }

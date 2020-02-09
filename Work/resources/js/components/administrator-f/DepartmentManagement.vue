@@ -11,11 +11,16 @@ import CRUD_C from "./CRUDForm"; //Диалог confirm
 
 export default {
   mixins: [withSnackbar],
-  components: {
+
+  components: 
+  {
     'c-crud-form': CRUD_C
   },
-  methods: {
-    add(id) {
+
+  methods: 
+  {
+    add(id) 
+    {
       console.log(id);
     }
   }

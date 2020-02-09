@@ -17,22 +17,30 @@ export default {
       resolve: null
     };
   },
-  methods: {
-    pop() {
+
+  methods: 
+  {
+    pop() 
+    {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
-    clickYes() {
+
+    clickYes() 
+    {
       this.dialog = false;
       this.resolve(true);
     },
-    clickNot() {
+
+    clickNot() 
+    {
       this.dialog = false;
       this.resolve(false);
     }
   },
+
   props: {
     _title: {
       type: String,
@@ -45,6 +53,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

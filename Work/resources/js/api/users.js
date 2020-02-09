@@ -1,31 +1,37 @@
+//Api для работы с пользователями системы
+
 import axios from 'axios'
 
-export default {
-  getUsers() {
-    return axios.get('/api/admin/user_management/get_users');
+export default 
+{
+  //Получение пользователей
+  getUsers(data) 
+  {
+    return axios.get('/api/'+data.slug+'/user_management/get_users');
   },
-
-  saveUser(user) {
-    return axios.post('/api/admin/user_management/save', {
-      "user": user.user
-    })
+  //Сохранение пользователя
+  saveUser(data) 
+  {
+    return axios.post('/api/'+data.slug+'/user_management/save', 
+    {
+      "user": data.user
+    });
   },
-
-  deleteUser(user) {
-    return axios.post('/api/admin/user_management/delete/'+user.id)
+  //Удаление пользователя
+  deleteUser(data) 
+  {
+    return axios.post('/api/'+data.slug+'/user_management/delete/'+data.id);
   },
+  //Редактирование пользователя
+  editUser(data) 
+  {
+    return axios.post('/api/'+data.slug+'/user_management/edit/'+data.id, 
+    {
+      "user": data.user
+    });
+  }
 
-  saveEdit(user) {
-    return axios.post('/api/admin/user_management/edit/'+user.id, {
-      "user": user.user
-    })
-  },
-
-  getStudent(user) {
-    return axios.post('/api/admin/user_management/getStudent/'+user.id, {})
-  },
-
-  notificate(notId) {
+  /*notificate(notId) { //! Не понятная хрень
     return axios.post("/setNotificationAsRead", {
       "id": notId
     })
@@ -37,5 +43,5 @@ export default {
         "file_name":file_name
       }
     })
-  },
+  },*/
 }

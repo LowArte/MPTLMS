@@ -18,6 +18,7 @@ export default {
   data: () => ({
     printing: 0
   }),
+  
   props: {
     _info: {
       type: Array,
@@ -32,10 +33,14 @@ export default {
       default: 0
     }
   },
-  components: {
+
+  components: 
+  {
     "c-retraining-cards": Retraining_C
   },
-  mounted() {
+
+  mounted() 
+  {
     this.printing = this._printing;
   }
 };

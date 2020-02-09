@@ -13,7 +13,8 @@
   import * as mutations from '../store/mutation-types'
 
   export default {
-    computed: {
+    computed: 
+    {
       ...mapGetters([
         'snackbarShow',
         'snackbarColor',
@@ -22,8 +23,11 @@
         'snackbarTimeout'
       ])
     },
-    methods: {
-      close () {
+
+    methods: 
+    {
+      close () 
+      {
         this.$store.commit(mutations.SET_SNACKBAR_SHOW, false)
       }
     }

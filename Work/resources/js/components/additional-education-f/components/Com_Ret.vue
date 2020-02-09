@@ -73,13 +73,16 @@ export default {
       ]
     };
   },
-  mounted(){
+
+  mounted()
+  {
       this.name =  this._user == null ? "" : this._user.name
       this.secName = this._user == null ? "" : this._user.secName
       this.thirdName = this._user == null ? "" : this._user.thirdName
       this.email = this._user == null ? "" :  this._user.email
       this.visible =  this._user == null
   },
+
   props: {
     _item: {
       type: Object,
@@ -90,8 +93,11 @@ export default {
       default:null
     }
   },
-  methods: {
-    send() {
+
+  methods: 
+  {
+    send() 
+    {
       /**
        * ! Отправлять данные в базу
        * * Присылать уведомление на почту подавшему заявку
@@ -99,7 +105,9 @@ export default {
        */
     }
   },
-  components:{
+  
+  components:
+  {
     "c-detailed-info": DetailedInformation_C
   }
 };

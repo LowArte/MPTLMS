@@ -18,20 +18,21 @@
                         v-card-actions.pa-0(v-for="(lesson,lesson_index) in schedule" :key="'l'+lesson_index" v-if="lesson_index < 8")
                             v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-if="((isToday == 0) && (lesson.LessonChisl != null)) || ((lesson.chisl == false) && (lesson.LessonChisl != null))") 
                                 strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
-                                | {{lesson.LessonChisl}} ({{ lesson.TeacherChisl }})
+                                | {{lesson.LessonChisl}} {{ lesson.TeacherChisl }}
                             v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else-if="(isToday == 1) && (lesson.LessonZnam != null)") 
                                 strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
-                                | {{lesson.LessonZnam}} ({{ lesson.TeacherZnam }})
+                                | {{lesson.LessonZnam}} {{ lesson.TeacherZnam }}
                             v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else) 
                                 strong.accent--text.font-weight-light {{lesson.time}}
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
                         v-card-title.primary-title.pt-0.px-0 Формирование замены
+                        v-container(v-if="")
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-0.mt-2(v-model="replacement.caselesson" :rules="rules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
-                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="discip" item-text='discipline_name' small-chips chips multiple)
-                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="teachers" item-text='name' small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' small-chips chips multiple)
                         v-card-text.pa-0.wrap.text-black {{ replacement.oldlesson }} 
                         v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ replacement.oldteacher }}
                         v-btn.mb-2.justify-center(color="accent" block dark @click="sendQuery") Принять
@@ -39,31 +40,34 @@
 </template>
 
 <script>
-import group_api from "./../../api/group";
-import schedule_api from "./../../api/schedule";
-import replacements_api from "./../../api/replacements";
+import group_api from "./../../api/group"; //Api групп
+import schedule_api from "./../../api/schedule"; //Api расписания
+import replacements_api from "./../../api/replacements"; //Api замен
 import withSnackbar from "../mixins/withSnackbar"; //Alert
+
 export default {
     mixins: [withSnackbar],
+
     data: () => ({
         rules: [
             v => !!v || "Пара не указана!",
         ],
         lessons: ["1","2","3","4","5","6","7"],
         replacement:{caselesson: null, lesson: null, teacher: null, oldlesson: null, oldteacher: null},  //Замена которая потом будет сохранена 
-        discip: null, //Дисциплины
-        teachers: null, //Преподаватели
         groups_info: null, //Группы
         departaments_info: null, //Отделения
         schedule: null, //Расписание выбранного дня
         week: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'], //Неделя
         isToday: null, //Текущая четность недели
+        date_week: 0,
         dateDialog: {
             model: false,
             date: new Date().toISOString().substr(0, 10),
         }, //Диалог даты
     }),
-    props: {
+
+    props: 
+    {
         _departaments_info: {
             type: Object,
             default: null
@@ -73,75 +77,89 @@ export default {
             default: null
         }, //JSON групп
         _teachers: {
-            type: String,
+            type: Array,
             default: null
         }, //JSON учителей
-        _discip: {
-            type: String,
+        _disciplines: {
+            type: Array,
             default: null
         }, //JSON дисциплин
         _schedule: {
             type: Object,
             default: null
         }, //JSON дисциплин
+        _slug: {
+            data: String,
+            default: ""
+        }, //Модуль
+        _controller: {
+            data: String,
+            default: "replacements"
+        } //Контроллер
     },
-    methods:{
+
+    methods:
+    {
         //Получение групп при изменении отдела
         departament_change() 
         {
             group_api
-                .getGroup(this.departaments_info.selected_departament.id)
+                .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
                 .then(res => {
                     this.groups_info.groups = res.data.groups;
                     this.groups_info.selected_group = this.groups_info.groups[0];
-                    this.group_change();
+                    this.caseDate();
                 })
                 .catch(ex => {
-                    console.log(ex);
+                    this.showError(ex);
                 });
         },
+
         //При выборе даты получать расписание выбранного дня
         caseDate() 
         {
-            var date = new Date(this.dateDialog.date);
-            if(date.getDay() == 0)
+            this.date_week = (new Date(this.dateDialog.date)).getDay();
+            if(this.date_week == 0)
             {
                 this.dateDialog.date = new Date().toISOString().substr(0, 10);
-                this.showError("На воскресенье нет расписания!");
+                this.showInfo("На воскресенье нет расписания!");
             }
             else
             {
                 schedule_api
-                    .getScheduleByDay({group_id: this.groups_info.selected_group.id, day: this.week[date.getDay()]})
+                    .getSchedule({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
                     .then(res => {
-                        this.schedule = res.data.schedule;
+                        this.schedule = res.data.schedule[this.week[this.date_week]];
                         this.isToday = this.isChisl();
                         this.parseSchedule();
                     })
                     .catch(ex => {
-                        console.log(ex);
+                        this.showError(ex);
                     });
             }
         },
+
         //Определения числителя/знаменателя недели
         isChisl() 
         {
             const today = new Date(this.dateDialog.date);
-            return today.getWeek() % 2;
+            return today.getWeek % 2;
         },
+        
         //Сохранение замены
         sendQuery() 
         {
             if (this.$refs.BildReplacement.validate())
             replacements_api
-            .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date})
-            .then(res => {
-                this.showMessage('Замена сохранена!');
-            })
-            .catch(ex => {
-                this.showError("Замена не принята!" + ex);
-            });
+                .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date, slug: this._slug, controller: this._controller})
+                .then(res => {
+                    this.showMessage('Замена сохранена!');
+                })
+                .catch(ex => {
+                    this.showError("Замена не принята! " + ex);
+                });
         },
+
         //Выбор пары
         caseLesson(number)
         {
@@ -157,8 +175,11 @@ export default {
                 this.replacement.oldteacher = this.schedule[number].TeacherZnam;
             }
         },
+
+        //Формирование расписания для вывода
         parseSchedule()
         {
+            if (this.schedule != null)
             for(var j = 1; j <= 7; j++)
             {
                 if(Array.isArray(this.schedule[j]['LessonChisl'])) 
@@ -172,18 +193,16 @@ export default {
             }
         }
     },
+    
     //Получение данных для работы на странице
     beforeMount() 
     {
+        this.date_week = (new Date(this.dateDialog.date)).getDay();
         this.groups_info = this._groups_info;
         this.departaments_info = this._departaments_info;
         this.replacements = this._replacements;
-        this.discip = JSON.parse(this._discip);
-        this.teachers = JSON.parse(this._teachers);
         this.isToday = this.isChisl();
-        //caseDate(); Требуется заменить на это. Выбор текущий даты для получения текущего расписания дня
-        this.schedule = this._schedule[this.week[new Date(this.dateDialog.date).getDay()]];
-        this.parseSchedule();
+        this.schedule = this._schedule[this.week[this.date_week]];
     }
 }
 </script>
