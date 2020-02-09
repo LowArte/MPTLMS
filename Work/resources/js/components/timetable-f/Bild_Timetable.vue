@@ -103,7 +103,7 @@ export default {
     group_change() 
     {
       schedule_api
-        .getScheduleBild({group_id: this.groups_info.selected_group.id, slug: this._slug, this: this._controller})
+        .getScheduleBild({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
         .then(res => {
           this.schedule = res.data.schedule;
         })

@@ -99,7 +99,7 @@ export default {
     departament_change() 
     {
       group_api
-        .getGroups({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
+        .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
         .then(res => {
           this.groups_info.groups = res.data.groups_info.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
