@@ -74,12 +74,8 @@ new Vue({
         //?----------------------------------------------
         //!                CRUD - COM
         //?----------------------------------------------
-        'c-retraining-management': Retraining_CRUD_C,
-        'c-post-management': Post_CRUD_C,
-        'c-place-management': Place_CRUD_C,
         'c-department-crud': Department_CRUD_C,
         'c-group-management': Group_CRUD_C,
-        'c-user-management': User_CRUD_C,
 
         //?----------------------------------------------
         //!                FOR ALL COM
