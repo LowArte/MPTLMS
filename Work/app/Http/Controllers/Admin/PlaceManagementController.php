@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\PlaceRepository;
+use App\Repositories\ModelRepository\PlaceRepository;
 use Illuminate\Http\Request;
 
 

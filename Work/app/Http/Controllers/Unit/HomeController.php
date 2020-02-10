@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Unit;
 
-use App\Repositories\PanelExtentionRepository;
-use App\Repositories\RetrainingInfoRepository;
+use App\Repositories\ControllerRepository\HomeRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends BaseController
@@ -13,10 +12,9 @@ class HomeController extends BaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(PanelExtentionRepository $pannel_repository, RetrainingInfoRepository $retraining_repository)
+    public function index(HomeRepository $homeRepository)
     {
-        $panel_array = $pannel_repository->getPanelForDrivingSchool();
-        $retraining = $retraining_repository->getRetrainingInfo();
-        return view('roles.unit.home', compact('panel_array', 'retraining'));
+        $data = $homeRepository->getDataForDefaultHomePage();
+        return view('roles.unit.home',  $data);
     }
 }

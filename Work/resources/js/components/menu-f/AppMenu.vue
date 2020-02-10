@@ -279,7 +279,7 @@ export default {
               children: [
                 {
                   icon: "",
-                  text: "Справки и направления",
+                  text: "Справки и характеристики",
                   href: "/student/certificate"
                 },
                 {

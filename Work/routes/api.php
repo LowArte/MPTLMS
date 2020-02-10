@@ -106,6 +106,11 @@ Route::middleware('auth:api')->name('api.')->group(function ()
         {
             Route::post('save', 'Student\FeedbackController@save')->name('save_feedback');
         });
+
+        Route::name('certificate.')->prefix('certificate')->group(function () 
+        {
+            Route::post('save', 'Student\CertificateController@save')->name('save_certificate');
+        });
     });
     //Преподаватель
     Route::name('teacher.')->prefix('teacher')->group(function () 

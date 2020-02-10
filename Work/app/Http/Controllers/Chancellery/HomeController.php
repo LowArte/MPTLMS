@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Chancellery;
 
+use App\Repositories\ControllerRepository\HomeRepository;
+use App\Repositories\DepartamentRepository;
 use App\Repositories\PanelExtentionRepository;
 use App\Repositories\RetrainingInfoRepository;
 
@@ -12,10 +14,9 @@ class HomeController extends BaseController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(PanelExtentionRepository $pannel_repository, RetrainingInfoRepository $retraining_repository)
-    {
-        $panel_array = $pannel_repository->getPanelForDrivingSchool();
-        $retraining = $retraining_repository->getRetrainingInfo();
-        return view('roles.chancellery.home', compact('panel_array', 'retraining'));
+    public function index(HomeRepository $homeRepository)
+    {        
+        $data = $homeRepository->getDataForDefaultHomePage();
+        return view('roles.chancellery.home', $data);
     }
 }

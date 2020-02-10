@@ -53,6 +53,8 @@ import BildCallSchedule_C from './components/call-schedule-f/Bild_CallSchedule'
 //!                 СПРАВКИ
 //?----------------------------------------------
 import ListCertificate_C from './components/certificate-f/ListCertificateComponent'
+import Certificate_C from './components/certificate-f/Certificate'
+import Characteristic_C from './components/certificate-f/Characteristic'
 
 //* Студент
 //! В данном разделе описываются компоненты для пользователя СТУДЕНТ
@@ -104,6 +106,8 @@ new Vue({
         'c-call-schedule': CallSchedule_C,
         'c-bild-call-schedule': BildCallSchedule_C,
         'c-list-certificate': ListCertificate_C,
+        'c-certificate':Certificate_C,
+        'c-characteristic':Characteristic_C,
         'c-requests-users': Request_C,
         'c-feedback': Feedback_C,
         'c-account-card': AccountCard_C,

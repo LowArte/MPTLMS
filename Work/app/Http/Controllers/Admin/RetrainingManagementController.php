@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\RetrainingInfoRepository;
+use App\Repositories\ModelRepository\RetrainingInfoRepository;
 use Illuminate\Http\Request;
 
 

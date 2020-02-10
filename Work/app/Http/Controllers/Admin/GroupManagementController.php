@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\GroupRepository;
-use App\Repositories\DepartamentRepository;
+use App\Repositories\ModelRepository\DepartamentRepository;
+use App\Repositories\ModelRepository\GroupRepository;
 use Illuminate\Http\Request;
 
 

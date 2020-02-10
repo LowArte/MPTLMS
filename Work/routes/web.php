@@ -48,7 +48,7 @@ Route::middleware(['auth','access'])->name('student.')->prefix('student')->group
     Route::get('/replacements','WarningController@index')->name('replacements');
     Route::get('/blueprints','WarningController@index')->name('blueprints');
     Route::get('/drivingschool','WarningController@index')->name('drivingschool');
-    Route::get('/certificate','WarningController@index')->name('certificate');
+    Route::get('/certificate','Student\CertificateController@index')->name('certificate');
     Route::get('/petition','WarningController@index')->name('petition');
     Route::get('/psych','WarningController@index')->name('psych');
     Route::get('/photos','WarningController@index')->name('photos');

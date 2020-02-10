@@ -28,14 +28,15 @@
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
                         v-card-title.primary-title.pt-0.px-0 Формирование замены
-                        v-container(v-if="")
+                        v-select.pa-0.mb-0.mt-2(v-model="typeReplacement" label="Вид замены" item-text="name" item-value="id" :items="arrTypeReplacement")
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-0.mt-2(v-model="replacement.caselesson" :rules="rules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
-                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' small-chips chips multiple)
-                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' item-value='id' small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' item-value='id' small-chips chips multiple)
                         v-card-text.pa-0.wrap.text-black {{ replacement.oldlesson }} 
                         v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ replacement.oldteacher }}
                         v-btn.mb-2.justify-center(color="accent" block dark @click="sendQuery") Принять
+                        p {{replacement}}
                         v-divider
 </template>
 
@@ -49,11 +50,24 @@ export default {
     mixins: [withSnackbar],
 
     data: () => ({
+        arrTypeReplacement: [
+            {id: 1, name: "Обычная замена"},
+            {id: 2, name: "Отмена занятия"},
+            {id: 3, name: "Перенос занятия"},
+            {id: 4, name: "Дополнительное занятие"},
+        ],
+        typeReplacement: 1,
         rules: [
             v => !!v || "Пара не указана!",
         ],
         lessons: ["1","2","3","4","5","6","7"],
-        replacement:{caselesson: null, lesson: null, teacher: null, oldlesson: null, oldteacher: null},  //Замена которая потом будет сохранена 
+        replacement:{
+            caselesson: null, 
+            lesson: null, 
+            teacher: null, 
+            oldlesson: null, 
+            oldteacher: null
+        },  //Замена которая потом будет сохранена 
         groups_info: null, //Группы
         departaments_info: null, //Отделения
         schedule: null, //Расписание выбранного дня
@@ -164,15 +178,24 @@ export default {
         caseLesson(number)
         {
             this.replacement.caselesson = number;
-            if(this.isToday == 0)
+            console.log(this.schedule[number]);
+            if (!this.schedule[number].chisl)
             {
                 this.replacement.oldlesson = this.schedule[number].LessonChisl;
-                this.replacement.oldteacher = this.schedule[number].TeacherChisl;    
+                this.replacement.oldteacher = this.schedule[number].TeacherChisl;
             }
             else
             {
-                this.replacement.oldlesson = this.schedule[number].LessonZnam;
-                this.replacement.oldteacher = this.schedule[number].TeacherZnam;
+                if(this.isChisl() == 0)
+                {
+                    this.replacement.oldlesson = this.schedule[number].LessonChisl;
+                    this.replacement.oldteacher = this.schedule[number].TeacherChisl;    
+                }
+                else
+                {
+                    this.replacement.oldlesson = this.schedule[number].LessonZnam;
+                    this.replacement.oldteacher = this.schedule[number].TeacherZnam;
+                }
             }
         },
 
@@ -206,7 +229,6 @@ export default {
         this.groups_info = this._groups_info;
         this.departaments_info = this._departaments_info;
         this.replacements = this._replacements;
-        this.isToday = this.isChisl();
         this.schedule = this._schedule[this.week[this.date_week]];
         this.parseSchedule();
     }

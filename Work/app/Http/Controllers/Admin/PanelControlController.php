@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Modifications\Update\UpdateSiteOptionsModification;
-use App\Repositories\SiteOptionsRepository;
+use App\Repositories\ModelRepository\SiteOptionsRepository;
 use Illuminate\Http\Request;
 
 class PanelControlController extends BaseController
