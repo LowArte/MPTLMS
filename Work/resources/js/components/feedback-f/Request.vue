@@ -17,7 +17,7 @@
                             span Ответить всем
                         v-text-field.ma-0(v-model='search' label='Поиск' single-line hide-details)
                     template(v-slot:item="{ item }")
-                      v-chip(:color="getColor(item.calories)") dark>{{ item.calories }}
+                      v-chip(:color="red" dark)
                     template(v-slot:expanded-item='{ headers }')
                         td(:colspan='headers.length' v-if='expanded.length > 0')
                             v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].fio}}
@@ -89,6 +89,7 @@ export default {
   mounted() 
   {
     this.items = this._requests; //нужно мыло и фио
+    console.log();
   },
 
   methods: 
