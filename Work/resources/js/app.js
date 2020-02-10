@@ -22,12 +22,12 @@ import Feedback_C from './components/feedback-f/Feedback'
 //?----------------------------------------------
 //!                    CRUD
 //?----------------------------------------------
-import User_CRUD_C from './components/administrator-f/UserManagement'
-import Place_CRUD_C from './components/administrator-f/PlaceManagement'
-import Department_CRUD_C from './components/administrator-f/DepartmentManagement'
-import Group_CRUD_C from './components/administrator-f/GroupManagement'
-import Post_CRUD_C from './components/administrator-f/PostManagement'
-import Retraining_CRUD_C from './components/administrator-f/Retraining_Management'
+/* import User_CRUD_C from './components/administrator-f/CRUD/CRUDUser'
+import Place_CRUD_C from './components/administrator-f/CRUD/CRUDPlace' */
+import Department_CRUD_C from './components/administrator-f/CRUD/CRUDDepartment'
+import Group_CRUD_C from './components/administrator-f/CRUD/CRUDGroup'
+/* import Post_CRUD_C from './components/administrator-f/CRUD/CRUDPost'
+import Retraining_CRUD_C from './components/administrator-f/CRUD/CRUDRetraining' */
 
 import QuickAction_C from './components/administrator-f/QuickAction'
 

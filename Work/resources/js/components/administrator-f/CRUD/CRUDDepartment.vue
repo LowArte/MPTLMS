@@ -1,67 +1,58 @@
 <template lang="pug">
   div
-    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_groups" :_headers="headers" :_title="'Группы'")
-    c-comfirm-dialog(ref="qwestion")
+    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_departments" :_headers="headers" :_title="'Отделения'")
+    c-add-dialog(ref='new')
+    c-comfirm-dialog(ref='qwestion')
+    c-edit-dialog(ref='revue')
+    c-remove-dialog(ref='rem')
 </template>
 
 <script>
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import apidepartments from "../../api/departments"; //api для отделений
+import apidepartments from "../../../api/departments"; //api для отделений
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../mixins/withSnackbar"; //Alert
+import withSnackbar from "../../mixins/withSnackbar"; //Alert
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
 //?----------------------------------------------
-import CRUD_C from "./CRUDpattern";
-
+import CRUD_C from "../CRUDpattern";
+ 
 //?----------------------------------------------
 //!           Подключение диалогов CRUD
 //?----------------------------------------------
-import confirmDialog_C from "./../expention-f/ConfirmDialog";
+import addDialog_C from "./../components/AddDialogs/C_Department_Add";
+import editDialog_C from "./../components/EditDialogs/C_Department_Edit";
+import removeDialog_C from "./../components/DeleteDialogs/C_Department_Delete";
+import confirmDialog_C from "./../../expention-f/ConfirmDialog";
 
 export default {
   mixins: [withSnackbar],
-  components: {
-    "c-crud-form": CRUD_C,
-    "c-comfirm-dialog": confirmDialog_C
-  },
   data: () => ({
     headers: [
-      { text: "Группа", value: "group_name" },
-      { text: "Курс", value: "сurs" },
+      { text: "Код", value: "dep_name" },
+      { text: "Наименование", value: "specialization" },
       { text: "Действия", value: "action", sortable: false }
     ]
-    /*     editedItem: {
-      id: -1,
-      group_name: "",
-      study_period: "",
-      arr_type_of_study: "",
-      сurs: 1,
-      departaments_id: 1
-    } //Структура строки */
   }),
-
+  components: {
+    "c-crud-form": CRUD_C,
+    "c-add-dialog": addDialog_C,
+    "c-comfirm-dialog": confirmDialog_C,
+    "c-edit-dialog": editDialog_C,
+    "c-remove-dialog": removeDialog_C
+  },
   props: {
-    _groups: {
-      type: Array,
-      default: null
-    }, //Данные групп
     _departments: {
       type: Array,
       default: null
-    }, //Данные отделений
-    _slug: {
-      type: String,
-      default: ""
-    } //Модуль
+    }
   },
-
   methods: {
     //?----------------------------------------------
     //!           Добавление объекта
@@ -69,6 +60,13 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
+          apidepartments
+            .saveDepartment({ department: result })
+            .catch(exception => {
+              this.showError(
+                "Сохранение не было произведено по причине: " + exception
+              );
+            });
           this.showMessage("Действие было выполнено успешно");
         } else {
           this.showError("Действие было отменено");
@@ -81,6 +79,13 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
+          apidepartments
+            .editDepartment({ department: result })
+            .catch(exception => {
+              this.showError(
+                "Сохранение не было произведено по причине: " + exception
+              );
+            });
           this.showMessage("Действие было выполнено успешно");
         } else {
           this.showError("Действие было отменено");
@@ -93,6 +98,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
+          apidepartments.dropDepartment();
           this.showMessage("Действие было выполнено успешно");
         } else {
           this.showError("Действие было отменено");
@@ -105,6 +111,14 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
+          apidepartments
+            .deleteDepartment({ department: result })
+            .then(result => {})
+            .catch(exception => {
+              this.showError(
+                "Удаление не было произведено по причине: " + exception
+              );
+            });
           this.showMessage("Действие было выполнено успешно");
         } else {
           this.showError("Действие было отменено");
