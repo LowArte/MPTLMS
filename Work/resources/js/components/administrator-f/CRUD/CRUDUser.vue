@@ -57,11 +57,7 @@
 </template>
 
 <script>
-import apiuser from "../../api/users"; //api для пользователей
-import { mask } from "vue-the-mask"; //маски vue
-import withSnackbar from "../mixins/withSnackbar"; //Alert
-import group_api from "./../../api/group"; //Группы
-import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
+
 
 export default {
   mixins: [withSnackbar],

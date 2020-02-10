@@ -19,18 +19,18 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
 {
     Route::get('/', function () {return redirect('/admin/home');})->name('home');
     Route::get('/home', 'Admin\HomeController@index')->name('home');
-    Route::get('/user_management','Admin\UserManagementController@index')->name('user_management');
+    Route::get('/user-crud','Admin\UserManagementController@index')->name('user-crud');
     Route::get('/panel_control','Admin\PanelControlController@index')->name('panel_control');
-    Route::get('/file_management','Admin\FileManagementController@index')->name('file_management');
+    Route::get('/file-crud','WarningController@index')->name('file-crud');
     Route::get('/timetable','Admin\TimetableController@index')->name('timetable');
     Route::get('/replacements','Admin\ReplacementController@index')->name('replacements');
     Route::get('/callschedule','Admin\CallScheduleController@index')->name('callschedule');
-    Route::get('/department_management','Admin\DepartmentManagementController@index')->name('departments');
-    Route::get('/group_management','Admin\GroupManagementController@index')->name('groups');
-    Route::get('/post_management','Admin\PostManagementController@index')->name('posts');
-    Route::get('/place_management','Admin\PlaceManagementController@index')->name('place_management');
-    Route::get('/retraining_management','Admin\RetrainingManagementController@index')->name('retraining_management');
-    Route::get('/request_users','Admin\RequestFeedbackController@index')->name('request');
+    Route::get('/department-crud','Admin\DepartmentManagementController@index')->name('departments-crud');
+    Route::get('/group-crud','Admin\GroupManagementController@index')->name('groups-crud');
+    Route::get('/post-crud','Admin\PostManagementController@index')->name('posts-crud');
+    Route::get('/place-crud','Admin\PlaceManagementController@index')->name('place-crud');
+    Route::get('/retraining-crud','Admin\RetrainingManagementController@index')->name('retraining-crud');
+    Route::get('/request','Admin\RequestFeedbackController@index')->name('request');
 });
 //Студент
 Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function()

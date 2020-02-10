@@ -29,5 +29,10 @@ export default
     {
       "department": data.department
     });
+  },
+
+  dropDepartment() //!Требуется сделать рабочим
+  {
+    
   }
 }

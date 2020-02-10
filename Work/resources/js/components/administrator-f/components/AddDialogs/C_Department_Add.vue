@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-dialog(v-model="dialog" max-width="500px")
+    v-dialog(v-model="dialog" persistent max-width="500px")
         v-card.ma-0.pa-0
             v-card-title.headline 
                 h4.text-truncate Новое отделение
@@ -14,67 +14,43 @@
 </template>
 
 <script>
-import apidepartments from "../../../../api/departments"; //*api для отделений
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
 import withSnackbar from "../../../mixins/withSnackbar"; //*Оповещения
 
 export default {
+  mixins: [withSnackbar],
   data() {
     return {
       dialog: false,
       item: {
-        id: -1,
-        code: "",
-        name: "",
-        full: ""
+        dep_name: null,
+        specialization: null,
+        dep_name_full: null
       },
       resolve: null,
-      codeRules: [
-        v => !!v || "Поле не должно оставаться пустым",
-        v => v.length <= 255 || "Максимальное кол-во символов 255"
-      ],
-      nameRules: [
-        v => !!v || "Поле не должно оставаться пустым",
-        v => v.length <= 255 || "Максимальное кол-во символов 255"
-      ]
+      codeRules: [v => !!v || "Поле не должно оставаться пустым"],
+      nameRules: [v => !!v || "Поле не должно оставаться пустым"]
     };
   },
-
-  mixins: [withSnackbar],
-
-  methods: 
-  {
-    pop() 
-    {
+  methods: {
+    pop() {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
-
-    clickSave() 
-    {
-      this.item.full = this.item.code + " " + this.item.name;
-      if (this.item.code != "") 
-      {
-        if (this.item.name != "") 
-        {
-          apidepartments
-            .saveDepartment({ department: this.item })
-            .then(result => {
-              this.dialog = false;
-              this.resolve(true);
-            })
-            .catch(exception => {
-              this.showError("Сохранение не было произведено по причине: " + exception);
-              this.dialog = false;
-              this.resolve(false);
-            });
-        }
+    clickSave() {
+      this.item.dep_name_full = this.item.dep_name + " " + this.item.specialization;
+      if (this.item.dep_name != null && this.item.specialization != null) {
+        this.dialog = false;
+        this.resolve(this.item);
+      } else {
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
       }
     },
-    
-    clickCancel() 
-    {
+    clickCancel() {
       this.dialog = false;
       this.resolve(false);
     }
