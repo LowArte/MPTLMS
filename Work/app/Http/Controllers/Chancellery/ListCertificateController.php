@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Chancellery;
 
-use App\Repositories\CertificateRepository;
+use App\Repositories\ModelRepository\CertificateRepository;
 use Illuminate\Http\Request;
 
 class ListCertificateController extends BaseController

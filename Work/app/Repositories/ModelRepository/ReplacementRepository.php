@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepository;
 
 use App\Models\ScheduleSwap as Model;
 

@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\SiteOptions;
-use App\Repositories\SiteOptionsRepository;
+use App\Repositories\ModelRepository\SiteOptionsRepository;
 use Closure;
 
 use Illuminate\Support\Facades\Auth;

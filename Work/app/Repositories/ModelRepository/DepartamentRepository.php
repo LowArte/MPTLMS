@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepository;
 
 use App\Models\Departament as Model;
 
@@ -17,9 +17,17 @@ class DepartamentRepository extends BaseRepository
         return $result;
     }
 
-    public function getDepartaments()
+    public function getDepartamentsForCRUD()
     {
-        $columns = ['id', 'dep_name', 'specialization', 'dep_name_full'];
+        $columns = ['id', 'dep_name', 'qualification', 'dep_name_full'];
+        $result = $this->startCondition()->select($columns)->toBase()->get();
+        return $result;
+    }
+
+    
+    public function getDepartamentsForDepartamentsInfo()
+    {
+        $columns = ['id', 'dep_name', 'qualification', 'dep_name_full','about','image','info'];
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }

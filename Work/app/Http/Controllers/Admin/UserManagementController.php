@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Admin;
 use App\Modifications\Create\CreateUserModification;
 use App\Modifications\Delete\DeleteUserModification;
 use App\Modifications\Update\UpdateUserModification;
-use App\Repositories\UserRepository;
-use App\Repositories\UsersPostRepository;
+use App\Repositories\ModelRepository\UserRepository;
+use App\Repositories\ModelRepository\UsersPostRepository;
 use Illuminate\Http\Request;
 
 

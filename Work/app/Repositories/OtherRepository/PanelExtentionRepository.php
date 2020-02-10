@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\OtherRepository;
+
+use App\Repositories\ModelRepository\CallScheduleRepository;
 
 class PanelExtentionRepository extends BaseRepository
 {

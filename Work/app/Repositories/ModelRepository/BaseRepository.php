@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepository;
 
 abstract class BaseRepository
 {
@@ -10,7 +10,7 @@ abstract class BaseRepository
     protected $model;
 
     public function __construct() {
-        $this->model = $this->getModelClass()!="" ? app($this->getModelClass()) : null;
+        $this->model = app($this->getModelClass());
     }
 
     /**

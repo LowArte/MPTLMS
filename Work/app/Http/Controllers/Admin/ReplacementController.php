@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Modifications\Create\CreateReplacementModification;
 use App\Modifications\Delete\DeleteReplacementModification;
-use App\Repositories\DepartamentRepository;
-use App\Repositories\GroupRepository;
-use App\Repositories\ScheduleRepository;
-use App\Repositories\ReplacementRepository;
-use App\Repositories\DisciplineRepository;
-use App\Repositories\TeacherRepository;
+use App\Repositories\ModelRepository\DepartamentRepository;
+use App\Repositories\ModelRepository\DisciplineRepository;
+use App\Repositories\ModelRepository\GroupRepository;
+use App\Repositories\ModelRepository\ReplacementRepository;
+use App\Repositories\ModelRepository\ScheduleRepository;
+use App\Repositories\ModelRepository\TeacherRepository;
 use Illuminate\Http\Request;
 
 class ReplacementController extends BaseController
