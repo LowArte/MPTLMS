@@ -1,7 +1,6 @@
 <template lang="pug">
     v-layout.row.wrap
       v-card.mx-auto.pa-3(height='auto' width='100%')
-        c-comfirm-dialog(ref='qwestion')
         v-data-table.elevation-0.pa-0.ma-0(:headers="headers" :items="flood" :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
                 v-card-title.my-2.ma-0.py-2.text-truncate CRUD {{title}}
@@ -32,21 +31,21 @@
                 v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
             template(v-slot:item.action="{ item }")
                 v-tooltip(bottom)
-                    template(v-slot:activator="{ on }" @click="edit(item)")
-                        v-icon.small(v-on="on") edit
+                    template(v-slot:activator="{ on }")
+                        v-icon.small(v-on="on" @click="edit(item)") edit
                     span Редактировать
                 v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
-                        v-icon.small(v-on="on") mdi-delete
+                        v-icon.small(v-on="on" @click="remove(item)") mdi-delete
                     span Удалить
         v-layout.row.text-center.pa-2.ma-2
             v-pagination(v-model="page" :length="pageCount")
 </template>
 
 <script>
-import AddDialog_C from "./components/AddDialogs/C_Department_Add"; //*Диалог add
-import EditDialog_C from "./components/EditDialogs/C_Department_Edit"; //*Диалог edit
-import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //*Диалог валидации
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
 import withSnackbar from "../mixins/withSnackbar"; //*Оповещения
 
 export default {
@@ -58,19 +57,17 @@ export default {
     itemsPerPage: 30, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
     headers: [], //Структура таблицы и с полями которые требуется выводить
-    index: Object
+    index: {
+      dep_name: null,
+      specialization: null,
+      dep_name_full: null
+    }
   }),
-
   mixins: [withSnackbar],
-
-  components: 
-  {
-    "c-comfirm-dialog": ConfirmDialog_C,
-    "c-add-dialog": AddDialog_C,
-    "c-edit-dialog": EditDialog_C
-  },
-
   props: {
+    //?----------------------------------------------
+    //!           Данные
+    //?----------------------------------------------
     _flood: {
       type: Array,
       default: null
@@ -83,46 +80,68 @@ export default {
       type: String,
       default: " - Нет данных заголовка"
     }, //! Данные заголовка CRUD страницы
+    //?----------------------------------------------
+    //!           Функциональная часть
+    //?----------------------------------------------
     _func_add: {
       type: Function,
       default: null
     },
+    _func_clear: {
+      type: Function,
+      default: null
+    },
+    _func_edit: {
+      type: Function,
+      default: null
+    },
+    _func_remove: {
+      type: Function,
+      default: null
+    },
+    _func_upload: {
+      type: Function,
+      default: null
+    },
+    _func_download: {
+      type: Function,
+      default: null
+    },
+    //?----------------------------------------------
+    //!           Ранговая система
+    //?----------------------------------------------
     _slug: {
       type: String,
       default: ""
-    } //Модуль
+    }
   },
-
   mounted() {
     this.flood = this._flood;
     this.headers = this._headers;
     this.title = this._title;
   },
-
-  methods: 
-  {
-    add() 
-    {
-      this._func_add('пидор');
+  methods: {
+    add() {
+      this._func_add();
     },
 
-    edit(item) 
-    {
-
+    edit(item) {
+      this._func_edit(item);
     },
 
-    clear() 
-    {
-
+    clear() {
+      this._func_clear();
     },
 
-    upload() 
-    {
+    remove(item) {
+      this._func_remove(item);
+    },
+
+    upload() {
       this.showMessage("Данная функция будет не доступна до релизной версии");
     },
 
-    download() 
-    {
+    download() {
       this.showMessage("Данная функция будет не доступна до релизной версии");
     }
   }

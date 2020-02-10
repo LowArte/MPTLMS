@@ -161,37 +161,37 @@ export default {
               children: [
                 {
                   text: "Пользователи",
-                  href: "/admin/user_management",
+                  href: "/admin/user-crud",
                   icon: ""
                 },
                 {
                   text: "Отделения",
-                  href: "/admin/department_management",
+                  href: "/admin/department-crud",
                   icon: ""
                 },
                 {
                   text: "Группы",
-                  href: "/admin/group_management",
+                  href: "/admin/group-crud",
                   icon: ""
                 },
                 {
                   text: "Места проведения",
-                  href: "/admin/place_management",
+                  href: "/admin/place-crud",
                   icon: ""
                 },
                 {
                   text: "ДО",
-                  href: "/admin/retraining_management",
+                  href: "/admin/retraining-crud",
                   icon: ""
                 },
                 {
                   text: "Роли",
-                  href: "/admin/post_management",
+                  href: "/admin/post-crud",
                   icon: ""
                 },
                 {
                   text: "Управление файлами",
-                  href: "/admin/file_management",
+                  href: "/admin/file-crud",
                   icon: ""
                 }
               ]
