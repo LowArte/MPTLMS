@@ -190,6 +190,11 @@ export default {
                     this.schedule[j]['TeacherChisl'] = this.schedule[j]['TeacherChisl'].join(' / ');
                 if(Array.isArray(this.schedule[j]['TeacherZnam'])) 
                     this.schedule[j]['TeacherZnam'] = this.schedule[j]['TeacherZnam'].join(' / ');
+
+                if (this.schedule[j]['TeacherChisl'] != "")
+                    this.schedule[j]['TeacherChisl'] = "(" + this.schedule[j]['TeacherChisl'] + ")";
+                if (this.schedule[j]['TeacherZnam'] != "")
+                    this.schedule[j]['TeacherZnam'] = "(" + this.schedule[j]['TeacherZnam'] + ")";
             }
         }
     },
@@ -203,6 +208,7 @@ export default {
         this.replacements = this._replacements;
         this.isToday = this.isChisl();
         this.schedule = this._schedule[this.week[this.date_week]];
+        this.parseSchedule();
     }
 }
 </script>
