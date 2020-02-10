@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\DepartamentRepository;
+use App\Repositories\ModelRepository\DepartamentRepository;
 use Illuminate\Http\Request;
 
 
@@ -15,7 +15,7 @@ class DepartmentManagementController extends BaseController
      */
     public function index(DepartamentRepository $departamentRepository)
     {
-        $departments = $departamentRepository->getDepartaments();
+        $departments = $departamentRepository->getDepartamentsForCRUD();
         
         $headers = [['text' => "Наименование", 'value' => "dep_name_full"],['text' => "Действия", 'value' => "action", 'sortable' => false]];
         return view('roles.admin.department-management', compact('departments'), compact('headers'));
@@ -27,7 +27,7 @@ class DepartmentManagementController extends BaseController
      */
     public function getDepartments(DepartamentRepository $departamentRepository)
     {
-        $departments = $departamentRepository->getDepartaments();
+        $departments = $departamentRepository->getDepartamentsForCRUD();
         return response()->json(compact('departments'));
     }
 }

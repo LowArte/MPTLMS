@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ModelRepository;
 
 use App\Models\RetrainingInfo as Model;
 use Illuminate\Database\Eloquent\Collection;

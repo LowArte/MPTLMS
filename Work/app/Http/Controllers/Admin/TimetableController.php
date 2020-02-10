@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Modifications\Update\UpdateScheduleModification;
-use App\Repositories\DepartamentRepository;
-use App\Repositories\GroupRepository;
-use App\Repositories\PanelExtentionRepository;
-use App\Repositories\ScheduleRepository;
-use App\Repositories\PlaceRepository;
-use App\Repositories\DisciplineRepository;
-use App\Repositories\TeacherRepository;
+use App\Repositories\ModelRepository\DepartamentRepository;
+use App\Repositories\ModelRepository\DisciplineRepository;
+use App\Repositories\ModelRepository\GroupRepository;
+use App\Repositories\ModelRepository\PlaceRepository;
+use App\Repositories\ModelRepository\ScheduleRepository;
+use App\Repositories\ModelRepository\TeacherRepository;
+use App\Repositories\OtherRepository\PanelExtentionRepository;
 use Illuminate\Http\Request;
 
 class TimetableController extends BaseController

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\FeedbackRepository;
+use App\Repositories\ModelRepository\FeedbackRepository;
 use Illuminate\Http\Request;
 
 class RequestFeedbackController extends BaseController

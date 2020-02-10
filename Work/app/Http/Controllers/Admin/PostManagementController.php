@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\UsersPostRepository;
+use App\Repositories\ModelRepository\UsersPostRepository;
 use Illuminate\Http\Request;
 
 
