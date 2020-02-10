@@ -36,6 +36,8 @@ import CallSchedule_C from './components/call-schedule-f/CallSchedule'
 import BildCallSchedule_C from './components/call-schedule-f/Bild_CallSchedule'
 
 import ListCertificate_C from './components/certificate-f/ListCertificateComponent'
+import Certificate_C from './components/certificate-f/Certificate'
+import Characteristic_C from './components/certificate-f/Characteristic'
 
 //* Студент
 //! В данном разделе описываются компоненты для пользователя СТУДЕНТ
@@ -72,6 +74,8 @@ new Vue({
       'c-post-management':PostManagement_C,
       'c-retraining-management':RetrainingManagement_C,
       'c-list-certificate':ListCertificate_C,
+      'c-certificate':Certificate_C,
+      'c-characteristic':Characteristic_C,
       'c-requests-users' :Request_C,
       'c-feedback' :Feedback_C,
       'c-account-card' :AccountCard_C,
