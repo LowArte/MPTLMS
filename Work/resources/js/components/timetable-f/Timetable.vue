@@ -55,6 +55,10 @@
 import group_api from "./../../api/group"; //Api групп
 import schedule_api from "./../../api/schedule"; //Api расписания
 import withSnackbar from "../mixins/withSnackbar"; //Alert
+Date.prototype.getWeek = function() {
+  const onejan = new Date(this.getFullYear(), 0, 1);
+  return Math.ceil((((this - onejan) / 86400000) + 1) / 7);
+};
 
 export default {
   mixins: [withSnackbar],
@@ -113,7 +117,7 @@ export default {
     //Определение числителя
     isChisl() 
     {
-      const today = new Date();
+      var today = new Date(new Date().getTime() + 8 * (24*60*60*1000));
       return today.getWeek() % 2;
     },
 
@@ -172,6 +176,7 @@ export default {
     this.groups_info = this._groups_info;
     this.departaments_info = this._departaments_info;
     this.schedule = this._schedule;
+    this.isToday = this.isChisl();
     this.parseSchedule();
   }
 };

@@ -16,11 +16,9 @@
                                     v-icon mdi-reply-all
                             span Ответить всем
                         v-text-field.ma-0(v-model='search' label='Поиск' single-line hide-details)
-                    template(v-slot:item="{ item }")
-                      v-chip(:color="red" dark)
                     template(v-slot:expanded-item='{ headers }')
                         td(:colspan='headers.length' v-if='expanded.length > 0')
-                            v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].fio}}
+                            v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
                             v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
                             br
                             v-form.mt-0.pt-0(v-model='form')
@@ -65,8 +63,7 @@ export default {
       itemsPerPage: 10,
       headers: [
         { text: "Тема", value: "type" },
-        { text: "E-mail", value: "user_id" },
-        //{ text: "E-mail", value: "email" },
+        { text: "E-mail", value: "user.email" },
         { text: "Дата", value: "created_at" },
         { text: "", value: "data-table-expand" }
       ],
@@ -88,8 +85,7 @@ export default {
 
   mounted() 
   {
-    this.items = this._requests; //нужно мыло и фио
-    console.log();
+    this.items = this._requests; //!нужно мыло и фио
   },
 
   methods: 
@@ -100,7 +96,8 @@ export default {
         .sendEmail({
           mail: email,
           text: this.modelmessage,
-          id: this.expanded[0].id
+          id: this.expanded[0].id,
+          slug: this._slug
         })
         .then(res => {
           this.showMessage("Ответ отправлен");

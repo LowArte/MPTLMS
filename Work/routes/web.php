@@ -30,7 +30,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/post-crud','Admin\PostManagementController@index')->name('posts-crud');
     Route::get('/place-crud','Admin\PlaceManagementController@index')->name('place-crud');
     Route::get('/retraining-crud','Admin\RetrainingManagementController@index')->name('retraining-crud');
-    Route::get('/request','Admin\RequestFeedbackController@index')->name('request');
+    Route::get('/request_users','Admin\RequestFeedbackController@index')->name('request_users');
 });
 //Студент
 Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function()

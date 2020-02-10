@@ -31,11 +31,11 @@
                             tbody
                                 tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                                     td {{ replacement_key['swap']['caselesson'] }}
-                                    td(v-if="replacement_key['swap']['oldteacher'] != null") {{ replacement_key['swap']['oldlesson'] }} ({{ replacement_key['swap']['oldteacher'] }})
-                                    td(v-else-if="replacement_key['swap']['oldlesson'] != null") {{ replacement_key['swap']['oldlesson'] }}
+                                    td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} {{ replacement_key['swap']['oldteacher'] }}
+                                    td(v-else-if="replacement_key['swap']['oldlesson'] != null && replacement_key['swap']['oldlesson'] != ''") {{ replacement_key['swap']['oldlesson'] }}
                                     td(v-else) Дополнительное занятие
-                                    td(v-if="replacement_key['swap']['teacher'] != null") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
-                                    td(v-else-if="replacement_key['swap']['lesson'] != null") {{ replacement_key['swap']['lesson'] }}
+                                    td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} {{ replacement_key['swap']['teacher'] }}
+                                    td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
                                     td(v-else) Занятие отменено
                                     td {{ replacement_key['created_at'] }}
                                     td 

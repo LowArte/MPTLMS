@@ -14,29 +14,27 @@
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
-                        v-card-title.primary-title.pt-0.px-0 Расписание на {{dateDialog.date}}
-                        v-card-actions.pa-0(v-for="(lesson,lesson_index) in schedule" :key="'l'+lesson_index" v-if="lesson_index < 8")
-                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-if="((isToday == 0) && (lesson.LessonChisl != null)) || ((lesson.chisl == false) && (lesson.LessonChisl != null))") 
+                        v-card-title.primary-title.pt-0.px-0 Расписание на {{dateDialog.date}} {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
+                        v-card-actions.pa-0(v-for="(lesson,lesson_index) in schedule" :key="'l'+lesson_index" v-if="lesson_index < 8 && lesson != null")
+                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-if="lesson.chisl == false") 
                                 strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
                                 | {{lesson.LessonChisl}} {{ lesson.TeacherChisl }}
-                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else-if="(isToday == 1) && (lesson.LessonZnam != null)") 
+                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else-if="isToday == 1") 
                                 strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
                                 | {{lesson.LessonZnam}} {{ lesson.TeacherZnam }}
-                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else) 
-                                strong.accent--text.font-weight-light {{lesson.time}}
+                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else-if="isToday == 0") 
+                                strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
+                                | {{lesson.LessonChisl}} {{ lesson.TeacherChisl }}
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
                         v-card-title.primary-title.pt-0.px-0 Формирование замены
-                        v-select.pa-0.mb-0.mt-2(v-model="typeReplacement" label="Вид замены" item-text="name" item-value="id" :items="arrTypeReplacement")
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-0.mt-2(v-model="replacement.caselesson" :rules="rules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
-                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' item-value='id' small-chips chips multiple)
-                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' item-value='id' small-chips chips multiple)
-                        v-card-text.pa-0.wrap.text-black {{ replacement.oldlesson }} 
-                        v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ replacement.oldteacher }}
-                        v-btn.mb-2.justify-center(color="accent" block dark @click="sendQuery") Принять
-                        p {{replacement}}
+                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' small-chips chips multiple)
+                        v-card-text.pa-2.wrap.text-black {{ replacement.oldlesson }} {{ replacement.oldteacher }}
+                        v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
 </template>
 
@@ -45,28 +43,26 @@ import group_api from "./../../api/group"; //Api групп
 import schedule_api from "./../../api/schedule"; //Api расписания
 import replacements_api from "./../../api/replacements"; //Api замен
 import withSnackbar from "../mixins/withSnackbar"; //Alert
+Date.prototype.getWeek = function() {
+  const onejan = new Date(this.getFullYear(), 0, 1);
+  return Math.ceil((((this - onejan) / 86400000) + 1) / 7);
+};
 
 export default {
     mixins: [withSnackbar],
 
     data: () => ({
-        arrTypeReplacement: [
-            {id: 1, name: "Обычная замена"},
-            {id: 2, name: "Отмена занятия"},
-            {id: 3, name: "Перенос занятия"},
-            {id: 4, name: "Дополнительное занятие"},
-        ],
         typeReplacement: 1,
         rules: [
             v => !!v || "Пара не указана!",
         ],
         lessons: ["1","2","3","4","5","6","7"],
         replacement:{
-            caselesson: null, 
-            lesson: null, 
-            teacher: null, 
-            oldlesson: null, 
-            oldteacher: null
+            caselesson: "", 
+            lesson: [], 
+            teacher: [], 
+            oldlesson: "", 
+            oldteacher: ""
         },  //Замена которая потом будет сохранена 
         groups_info: null, //Группы
         departaments_info: null, //Отделения
@@ -114,6 +110,13 @@ export default {
 
     methods:
     {
+        //Определение числителя
+        isChisl() 
+        {
+            var today = new Date(new Date(this.dateDialog.date).getTime() + 8 * (24*60*60*1000));
+            return today.getWeek() % 2;
+        },
+        
         //Получение групп при изменении отдела
         departament_change() 
         {
@@ -129,14 +132,16 @@ export default {
                 });
         },
 
-        //При выборе даты получать расписание выбранного дня
+        //При выборе даты получать расписание выбранного дня, если воскресенье то за день
         caseDate() 
         {
             this.date_week = (new Date(this.dateDialog.date)).getDay();
             if(this.date_week == 0)
             {
-                this.dateDialog.date = new Date().toISOString().substr(0, 10);
+                this.dateDialog.date = new Date((new Date(this.dateDialog.date)).getTime() - (24*60*60*1000)).toISOString().substr(0, 10);
+                this.$refs.dateDialog.save(this.dateDialog.date);
                 this.showInfo("На воскресенье нет расписания!");
+                this.caseDate();
             }
             else
             {
@@ -144,7 +149,6 @@ export default {
                     .getSchedule({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
                     .then(res => {
                         this.schedule = res.data.schedule[this.week[this.date_week]];
-                        this.isToday = this.isChisl();
                         this.parseSchedule();
                     })
                     .catch(ex => {
@@ -153,13 +157,6 @@ export default {
             }
         },
 
-        //Определения числителя/знаменателя недели
-        isChisl() 
-        {
-            const today = new Date(this.dateDialog.date);
-            return today.getWeek % 2;
-        },
-        
         //Сохранение замены
         sendQuery() 
         {
@@ -174,11 +171,11 @@ export default {
                 });
         },
 
-        //Выбор пары
+        //Выбор пары 
         caseLesson(number)
         {
             this.replacement.caselesson = number;
-            console.log(this.schedule[number]);
+            if (this.schedule != null)
             if (!this.schedule[number].chisl)
             {
                 this.replacement.oldlesson = this.schedule[number].LessonChisl;
@@ -202,6 +199,7 @@ export default {
         //Формирование расписания для вывода
         parseSchedule()
         {
+            this.isToday = this.isChisl();
             if (this.schedule != null)
             for(var j = 1; j <= 7; j++)
             {
@@ -219,6 +217,9 @@ export default {
                 if (this.schedule[j]['TeacherZnam'] != "")
                     this.schedule[j]['TeacherZnam'] = "(" + this.schedule[j]['TeacherZnam'] + ")";
             }
+
+            if (this.replacement.caselesson != "")
+                this.caseLesson(this.replacement.caselesson);
         }
     },
     
@@ -226,10 +227,10 @@ export default {
     beforeMount() 
     {
         this.date_week = (new Date(this.dateDialog.date)).getDay();
+        this.schedule = this._schedule[this.week[this.date_week]];
         this.groups_info = this._groups_info;
         this.departaments_info = this._departaments_info;
         this.replacements = this._replacements;
-        this.schedule = this._schedule[this.week[this.date_week]];
         this.parseSchedule();
     }
 }
