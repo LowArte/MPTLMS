@@ -59,11 +59,6 @@
                 | – в отделе по работе со студентами (Стремянный пер, д. 36, 3 корп, каб 100 (7 и 8 комн.) тел. 8-499-237-81-04).
 
           v-form(v-model="form")
-            v-text-field(v-model="FIO" label="Фамилия, Имя, Отчество студента" readonly)
-            v-text-field(v-model="special" label="Специальность" readonly)
-            v-text-field(v-model="group" label="Группа" readonly)
-            v-text-field(v-model="datebirth" label="Дата рождения" persistent-hint readonly)
-            v-text-field(v-model="email" label="E-mail" required readonly)
             v-textarea(
                   v-model="text"
                   :auto-grow="true"
@@ -99,11 +94,6 @@ export default {
   
   data: () => ({
     text: "",
-    special: "",
-    group: "",
-    FIO: "",
-    email: "",
-    datebirth: "",
     enabled: false,
     orderRules: [
       v => v.length > 0 || "Текст заявки не указан",
@@ -118,7 +108,7 @@ export default {
     sendQuery() 
     {
       cerificateApi
-        .save({ text: this.text, type: "Справка" })
+        .save({ data: {"Текст заявки": this.text}, type: "Справка", slug: "student" })
         .then(res => {
           this.showMessage("Справка отправленна");
           this.cleardata();

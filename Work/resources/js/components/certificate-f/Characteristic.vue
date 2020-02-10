@@ -3,20 +3,16 @@
     v-col(cols="12")
       v-card.mx-auto.pa-4(height="auto" width="max")
           v-form(v-model="form")
-            v-text-field(v-model="FIO" label="Фамилия, Имя, Отчество студента" readonly)
-            v-text-field(v-model="special" label="Специальность" readonly)
-            v-text-field(v-model="group" label="Группа" readonly)
-            v-text-field(v-model="datebirth" label="Дата рождения" persistent-hint readonly)
-            v-text-field(v-model="email" label="E-mail" required readonly)
             v-text-field(:rules="notEmtyRules" v-model="school" label="Школа")
             v-text-field(
                   :rules="yearMptRules"
                   v-model="yearmpt"
                   v-mask="mask"
                   label="Год поступления в учебное заведение")
-            v-text-field(
+            v-select(
                   :rules="notEmtyRules"
                   v-model="postofgroup"
+                  :items="arrPostOfGroup"
                   label="Обязанности в группе")
             v-textarea(
                   v-model="modelprogress"
@@ -80,17 +76,13 @@ export default {
   mixins: [withSnackbar],
   data: vm => ({
     mask: "####",
-    group: "",
-    FIO: "",
     modelprogress: "",
     modelorder: "",
-    special: "",
     school: "",
-    datebirth: "",
     dateendschool: "",
     yearmpt: "",
-    email: "",
     postofgroup: "",
+    arrPostOfGroup: ["Староста", "Ответственный за успеваемость", "Ответственный за посещаемость", "Культ-орг", "Физ-орг", "Студент"],
     notEmtyRules: [v => v.length > 0 || "Поле не заполнено"],
     progressRules: [
       v => v.length > 0 || "Успеваемость не указана",
@@ -108,13 +100,6 @@ export default {
     ],
     form: false
   }),
-
-  mounted() 
-  {
-    /*this.special = this._info.dep.dep_name_full;
-    this.group = this._info.group.group_name;
-    this.datebirth = _info.student.birthday;*/
-  },
 
   props: 
   {
@@ -137,7 +122,8 @@ export default {
             "Успеваемость": this.modelprogress,
             "Куда нужна характеристика": this.modelorder
           },
-          type: "Характеристика"
+          type: "Характеристика", 
+          slug: "student"
         })
         .then(res => {
           this.showMessage("Характеристика сохранена");
