@@ -10,30 +10,58 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
+            v-layout.row.wrap
         v-layout.row.wrap
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
                         v-card-title.primary-title.pt-0.px-0 Расписание на {{dateDialog.date}} {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
-                        v-card-actions.pa-0(v-for="(lesson,lesson_index) in schedule" :key="'l'+lesson_index" v-if="lesson_index < 8 && lesson != null")
-                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-if="lesson.chisl == false") 
-                                strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
-                                | {{lesson.LessonChisl}} {{ lesson.TeacherChisl }}
-                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else-if="isToday == 1") 
-                                strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
-                                | {{lesson.LessonZnam}} {{ lesson.TeacherZnam }}
-                            v-card-text.pa-0.pt-1.ml-1.text-black(@click="caseLesson(lesson_index)" v-else-if="isToday == 0") 
-                                strong.accent--text.font-weight-light.mr-2 {{lesson.time}}
-                                | {{lesson.LessonChisl}} {{ lesson.TeacherChisl }}
+                        v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule" :key="'l'+lesson_index" v-if="lesson_index < 8 && lesson != null")
+                            v-container.pa-0.ma-0(v-if="lesson.chisl == false") <!--Прорисовка обычной пары-->
+                                v-btn.ma-0.pa-0(text @click="caseLesson(lesson_index)") 
+                                    v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                                v-card-text.pa-0.wrap.text-black(v-if="lesson.LessonChisl != ''") {{lesson.LessonChisl}} 
+                                v-card-text.pa-0.wrap.text-black(v-else) Дополнительное занятие 
+                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                            v-container.pa-0.ma-0(v-else) <!--Прорисовка числителя/знаменателя-->
+                                v-container.pa-0.ma-0(v-if="isToday == 0")
+                                    v-btn.ma-0.pa-0(text @click="caseLesson(lesson_index)") 
+                                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                                    v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
+                                    v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                                    v-divider.ma-0(v-if="lesson.LessonZnam!= null && lesson.LessonZnam != ''")
+                                    v-expansion-panels.px-1.py-0(v-if="lesson.LessonZnam!= null" style="z-index: initial;")                    
+                                        v-expansion-panel.px-1.py-0(v-if="lesson.LessonZnam != '' && lesson.LessonZnam != null")
+                                            v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
+                                            v-expansion-panel-content.px-0.mx-0
+                                                v-card-text.pa-0.wrap.text-black {{ lesson.LessonZnam }} 
+                                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
+                                    v-divider.ma-0(v-if="lesson.LessonZnam!= null")
+                                v-container.pa-0.ma-0(v-else)
+                                    v-btn.ma-0.pa-0(text @click="caseLesson(lesson_index)") 
+                                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                                    v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam}} 
+                                    v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
+                                    v-expansion-panels.px-1.py-0(v-if="lesson.LessonChisl!= null && lesson.LessonChisl != ''" style="z-index: initial;")                    
+                                        v-expansion-panel.px-1.py-0(v-if="lesson.LessonChisl != '' && lesson.LessonChisl != null")
+                                            v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
+                                            v-expansion-panel-content.px-0.mx-0
+                                                v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl }} 
+                                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                                    v-divider.ma-0
+            
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
                         v-card-title.primary-title.pt-0.px-0 Формирование замены
+                        v-card-text.ma-0.pa-0(v-if="replacement.lesson.length == 0 || replacement.lesson == null") Отмена занятия
+                        v-card-text.ma-0.pb-1.pa-0(v-if="replacement.oldlesson == '' || replacement.oldlesson == null") Дополнительное занятие
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-0.mt-2(v-model="replacement.caselesson" :rules="rules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
                             v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' small-chips chips multiple)
                             v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' small-chips chips multiple)
-                        v-card-text.pa-2.wrap.text-black {{ replacement.oldlesson }} {{ replacement.oldteacher }}
+                        v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
+                        v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") {{ replacement.oldlesson }} {{ replacement.oldteacher }}
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
 </template>
