@@ -17,7 +17,6 @@
                               :_disciplines="_disciplines"
                               :_teachers="_teachers"
                               :_slug="_slug")
-
     v-flex.ma-2.mb-0.row
         v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
         v-combobox.ma-1.mb-0(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")

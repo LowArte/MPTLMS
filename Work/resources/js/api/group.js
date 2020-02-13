@@ -5,7 +5,7 @@ import {
     mapGetters
 } from 'vuex'
 
-let slug = this.$store.getters.slug
+let slug = mapGetters(["slug"]).slug
 
 export default {
     //Получение групп по id отделению
