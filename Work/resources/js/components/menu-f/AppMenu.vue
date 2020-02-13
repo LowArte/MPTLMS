@@ -139,7 +139,7 @@ export default {
               text: "Расписания",
               children: [
                 {
-                  text: "Расписание",
+                  text: "Учебное расписание",
                   href: "/admin/timetable",
                   icon: ""
                 },
