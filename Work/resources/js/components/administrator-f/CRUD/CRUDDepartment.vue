@@ -22,7 +22,7 @@ import withSnackbar from "../../mixins/withSnackbar"; //Alert
 //!           Подключение шаблона CRUD
 //?----------------------------------------------
 import CRUD_C from "../CRUDpattern";
- 
+
 //?----------------------------------------------
 //!           Подключение диалогов CRUD
 //?----------------------------------------------
@@ -36,7 +36,7 @@ export default {
   data: () => ({
     headers: [
       { text: "Код", value: "dep_name" },
-      { text: "Наименование", value: "specialization" },
+      { text: "Наименование", value: "qualification" },
       { text: "Действия", value: "action", sortable: false }
     ]
   }),

@@ -34,7 +34,7 @@ export default {
             }
             this.$store.commit(mutations.SET_SNACKBAR_TEXT, message.message)
             if (message.response) this.$store.commit(mutations.SET_SNACKBAR_SUBTEXT, message.response.data.message)
-                this.cleanState()
+            this.cleanState()
         }
     }
 }

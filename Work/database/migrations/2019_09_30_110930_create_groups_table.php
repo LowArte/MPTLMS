@@ -18,8 +18,8 @@ class CreateGroupsTable extends Migration
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('group_name');
-                $table->string('study_period');
-                $table->string('type_of_study');
+                $table->string('group_number');
+                $table->string('group_year');
                 $table->string('сurs');
                 $table->unsignedBigInteger('departaments_id');
                 $table->foreign('departaments_id')->references('id')->on('departaments');

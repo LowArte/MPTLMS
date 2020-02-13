@@ -1,11 +1,11 @@
 require('./bootstrap');
 
-import withSnackbar from './components/mixins/withSnackbar'
 import store from './store'
 import vuetify from './vuetify'
 
 import SnackBar from './components/SnackBarComponent'
 import Login_C from './components/auth-f/Login'
+import Logout_C from './components/auth-f/Logout'
 import AppMenu_C from './components/menu-f/AppMenu'
 import Panel_C from './components/expention-f/Panel'
 import SpecialitiesList_C from './components/information-page-f/SpecialtiesList'
@@ -22,8 +22,8 @@ import Feedback_C from './components/feedback-f/Feedback'
 //?----------------------------------------------
 //!                    CRUD
 //?----------------------------------------------
-/* import User_CRUD_C from './components/administrator-f/CRUD/CRUDUser'
-import Place_CRUD_C from './components/administrator-f/CRUD/CRUDPlace' */
+import User_CRUD_C from './components/administrator-f/CRUD/CRUDUser'
+//import Place_CRUD_C from './components/administrator-f/CRUD/CRUDPlace'
 import Department_CRUD_C from './components/administrator-f/CRUD/CRUDDepartment'
 import Group_CRUD_C from './components/administrator-f/CRUD/CRUDGroup'
 /* import Post_CRUD_C from './components/administrator-f/CRUD/CRUDPost'
@@ -61,21 +61,29 @@ import Characteristic_C from './components/certificate-f/Characteristic'
 
 window.Vue = require('vue');
 
+import * as mutations from './store/mutation-types'
+
+
 new Vue({
     el: '#app',
     vuetify,
     store,
-    mixins: [withSnackbar],
     data: () => ({
         rightdrawer: false,
         leftdrawer: false
     }),
+    created() {
+        var element = document.querySelector('meta[property~="slug"]')
+        var doc = element && element.getAttribute("content")
+        this.$store.commit(mutations.SET_SLUG, doc)
+    },
     components: {
         //?----------------------------------------------
         //!                CRUD - COM
         //?----------------------------------------------
         'c-department-crud': Department_CRUD_C,
-        'c-group-management': Group_CRUD_C,
+        'c-group-crud': Group_CRUD_C,
+        'c-user-crud': User_CRUD_C,
 
         //?----------------------------------------------
         //!                FOR ALL COM
@@ -90,6 +98,7 @@ new Vue({
         //!                EXOTIC COM
         //?----------------------------------------------
         'c-panel': Panel_C,
+        'c-logout': Logout_C,
 
         //?----------------------------------------------
         //!                OTHER COM
@@ -102,8 +111,8 @@ new Vue({
         'c-call-schedule': CallSchedule_C,
         'c-bild-call-schedule': BildCallSchedule_C,
         'c-list-certificate': ListCertificate_C,
-        'c-certificate':Certificate_C,
-        'c-characteristic':Characteristic_C,
+        'c-certificate': Certificate_C,
+        'c-characteristic': Characteristic_C,
         'c-requests-users': Request_C,
         'c-feedback': Feedback_C,
         'c-account-card': AccountCard_C,

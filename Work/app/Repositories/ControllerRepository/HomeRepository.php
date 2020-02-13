@@ -9,21 +9,24 @@ use App\Repositories\OtherRepository\PanelExtentionRepository;
 
 class HomeRepository extends BaseRepository
 {
-    public function getDataForDefaultHomePage(){
+    public function getDataForDefaultHomePage()
+    {
         $pannel_repository = app(PanelExtentionRepository::class);
-        $retraining_repository =app(RetrainingInfoRepository::class);
+        $retraining_repository = app(RetrainingInfoRepository::class);
         $departamentRepository = app(DepartamentRepository::class);
 
         $departaments = $departamentRepository->getDepartamentsForDepartamentsInfo();
         $panel_array = $pannel_repository->getPanelForDrivingSchool();
         $retraining = $retraining_repository->getRetrainingInfo();
+        $slug = auth()->user()->post->slug;
 
-        return compact('panel_array','retraining','departaments');
+        return compact('panel_array', 'retraining', 'departaments', 'slug');
     }
 
-    public function getDataForWelcomeHomePage(){
+    public function getDataForWelcomeHomePage()
+    {
         $pannel_repository = app(PanelExtentionRepository::class);
-        $retraining_repository =app(RetrainingInfoRepository::class);
+        $retraining_repository = app(RetrainingInfoRepository::class);
         $departamentRepository = app(DepartamentRepository::class);
         $siteOptionsRepository = app(SiteOptionsRepository::class);
 
@@ -33,7 +36,6 @@ class HomeRepository extends BaseRepository
         $departaments = $departamentRepository->getDepartamentsForDepartamentsInfo();
         $profilactic = $siteOptionsRepository->getIsProfilactic();
 
-        return compact('panel_array','retraining','profilactic','departaments');
+        return compact('panel_array', 'retraining', 'profilactic', 'departaments');
     }
-
 }

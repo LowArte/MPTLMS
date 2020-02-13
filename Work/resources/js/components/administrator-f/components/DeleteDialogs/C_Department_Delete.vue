@@ -2,7 +2,7 @@
     v-dialog(v-model="dialog" persistent max-width="500px")
         v-card.ma-0.pa-0
             v-card-title.headline 
-                h4.text-truncate Новое отделение
+                h4.text-truncate Удалить запись
             v-form
               v-card-text
                   v-text-field(v-model="item.dep_name" :rules="codeRules" label="Код отделения" disabled)

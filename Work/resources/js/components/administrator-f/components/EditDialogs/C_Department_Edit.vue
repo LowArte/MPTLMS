@@ -2,7 +2,7 @@
     v-dialog(v-model="dialog" persistent max-width="500px")
         v-card.ma-0.pa-0
             v-card-title.headline 
-                h4.text-truncate Редактирование
+                h4.text-truncate Изменить запись
             v-form
               v-card-text
                   v-text-field(v-model="item.dep_name" :rules="codeRules" label="Код отделения")
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     pop(item) {
-      this.item = item;
+      this.item = Object.assign({}, item);
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;

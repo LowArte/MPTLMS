@@ -33,7 +33,7 @@ Route::middleware(['profilactic','auth','access'])->name('admin.')->prefix('admi
     Route::get('/request_users','Admin\RequestFeedbackController@index')->name('request_users');
 });
 //Студент
-Route::middleware(['auth','access'])->name('student.')->prefix('student')->group(function()
+Route::middleware(['auth','access','profilactic'])->name('student.')->prefix('student')->group(function()
 {
     Route::get('/', function () {return redirect('/student/home');})->name('home');
     Route::get('/home', 'Student\HomeController@index')->name('home');

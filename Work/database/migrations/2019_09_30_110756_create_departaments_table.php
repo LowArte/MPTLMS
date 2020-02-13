@@ -22,6 +22,7 @@ class CreateDepartamentsTable extends Migration
                 $table->string('qualification');
                 $table->string('about');
                 $table->string('image');
+                $table->string('studysperiod');
                 $table->json('info');
                 $table->timestamps();
                 $table->softDeletes();

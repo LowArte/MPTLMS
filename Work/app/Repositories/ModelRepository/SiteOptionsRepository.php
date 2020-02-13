@@ -26,6 +26,6 @@ class SiteOptionsRepository extends BaseRepository
     public function getIsProfilactic(){
         $columns = ['option_value'];
         $result = $this->startCondition()->select($columns)->where("id",1)->toBase()->first()->option_value;
-        return $result == "1";
+        return $result == "true";
     }
 }

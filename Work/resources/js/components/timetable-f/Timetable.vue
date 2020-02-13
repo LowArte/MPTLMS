@@ -3,7 +3,7 @@
     v-flex.ma-2.mb-0.row
         v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
         v-combobox.ma-1.mb-0(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
-    v-flex.ma-2.mt-0.row
+    v-flex.ma-2.mt-0.row //! Перенести в ===
       v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
         template(v-slot:activator="{ on }")
           v-btn.justify-center(color="accent" block dark v-on="on") {{titleDialog}}
@@ -20,7 +20,6 @@
                           :_disciplines="_disciplines"
                           :_teachers="_teachers"
                           :_slug="_slug")
-    
     v-card-title.primary-title.pt-0.px-0.ml-4
         v-chip.pa-2.ml-4(label) 
           v-card-title.pa-0.accent--text.font-weight-light.text-truncate.title Неделя {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
@@ -76,13 +75,13 @@ import withSnackbar from "../mixins/withSnackbar"; //Alert
 import bildTimetable from "./Bild_Timetable"; //Конструктор замен
 Date.prototype.getWeek = function() {
   const onejan = new Date(this.getFullYear(), 0, 1);
-  return Math.ceil((((this - onejan) / 86400000) + 1) / 7);
+  return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
 };
 
 export default {
   mixins: [withSnackbar],
 
-  components:{
+  components: {
     c_bildTimetable: bildTimetable
   },
 
@@ -98,8 +97,7 @@ export default {
     };
   },
 
-  props: 
-  {
+  props: {
     _departaments_info: {
       type: Object,
       default: null
@@ -107,11 +105,11 @@ export default {
     _groups_info: {
       type: Object,
       default: null
-    },//Группы
+    }, //Группы
     _schedule: {
       type: Object,
       default: null
-    },//Расписания
+    }, //Расписания
     _slug: {
       data: String,
       default: ""
@@ -135,16 +133,18 @@ export default {
     _schedule_bild: {
       type: Object,
       default: null
-    }, //Расписание
+    } //Расписание
   },
 
-  methods: 
-  {
+  methods: {
     //Получение группы при изменении отделения
-    departament_change() 
-    {
+    departament_change() {
       group_api
-        .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
+        .getGroup({
+          department_id: this.departaments_info.selected_departament.id,
+          slug: this._slug,
+          controller: this._controller
+        })
         .then(res => {
           this.groups_info.groups = res.data.groups_info.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
@@ -156,17 +156,19 @@ export default {
     },
 
     //Определение числителя
-    isChisl() 
-    {
-      var today = new Date(new Date().getTime() + 8 * (24*60*60*1000));
+    isChisl() {
+      var today = new Date(new Date().getTime() + 8 * (24 * 60 * 60 * 1000));
       return today.getWeek() % 2;
     },
 
     //Получение расписания при изменении выбранной группы
-    group_change() 
-    {
+    group_change() {
       schedule_api
-        .getSchedule({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
+        .getSchedule({
+          group_id: this.groups_info.selected_group.id,
+          slug: this._slug,
+          controller: this._controller
+        })
         .then(res => {
           this.schedule = res.data.schedule;
           this.parseSchedule();
@@ -177,33 +179,43 @@ export default {
     },
 
     //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
-    parseSchedule()
-    {
+    parseSchedule() {
       var tag = 0;
-      for(var i = 0; i < this.days.length; i++)
-      {
-        for(var j = 1; j <= 7; j++)
-        {
-          if(Array.isArray(this.schedule[this.days[i]][j]['LessonChisl'])) 
-            this.schedule[this.days[i]][j]['LessonChisl'] = this.schedule[this.days[i]][j]['LessonChisl'].join(' / ');
-          if(Array.isArray(this.schedule[this.days[i]][j]['LessonZnam'])) 
-            this.schedule[this.days[i]][j]['LessonZnam'] = this.schedule[this.days[i]][j]['LessonZnam'].join(' / ');
-          if(Array.isArray(this.schedule[this.days[i]][j]['TeacherChisl'])) 
-            this.schedule[this.days[i]][j]['TeacherChisl'] = this.schedule[this.days[i]][j]['TeacherChisl'].join(' / ');
-          if(Array.isArray(this.schedule[this.days[i]][j]['TeacherZnam'])) 
-            this.schedule[this.days[i]][j]['TeacherZnam'] = this.schedule[this.days[i]][j]['TeacherZnam'].join(' / ');
+      for (var i = 0; i < this.days.length; i++) {
+        for (var j = 1; j <= 7; j++) {
+          if (Array.isArray(this.schedule[this.days[i]][j]["LessonChisl"]))
+            this.schedule[this.days[i]][j]["LessonChisl"] = this.schedule[
+              this.days[i]
+            ][j]["LessonChisl"].join(" / ");
+          if (Array.isArray(this.schedule[this.days[i]][j]["LessonZnam"]))
+            this.schedule[this.days[i]][j]["LessonZnam"] = this.schedule[
+              this.days[i]
+            ][j]["LessonZnam"].join(" / ");
+          if (Array.isArray(this.schedule[this.days[i]][j]["TeacherChisl"]))
+            this.schedule[this.days[i]][j]["TeacherChisl"] = this.schedule[
+              this.days[i]
+            ][j]["TeacherChisl"].join(" / ");
+          if (Array.isArray(this.schedule[this.days[i]][j]["TeacherZnam"]))
+            this.schedule[this.days[i]][j]["TeacherZnam"] = this.schedule[
+              this.days[i]
+            ][j]["TeacherZnam"].join(" / ");
 
-          if((this.schedule[this.days[i]][j]['LessonChisl'] == null && this.schedule[this.days[i]][j]['LessonZnam'] == null) 
-          || (this.schedule[this.days[i]][j]['LessonChisl'] == '' && this.schedule[this.days[i]][j]['LessonZnam'] == '')
-          || (this.schedule[this.days[i]][j]['LessonChisl'] == null && this.schedule[this.days[i]][j]['LessonZnam'] == '')
-          || (this.schedule[this.days[i]][j]['LessonChisl'] == '' && this.schedule[this.days[i]][j]['LessonZnam'] == null))
+          if (
+            (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
+              this.schedule[this.days[i]][j]["LessonZnam"] == null) ||
+            (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
+              this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
+            (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
+              this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
+            (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
+              this.schedule[this.days[i]][j]["LessonZnam"] == null)
+          )
             tag++;
 
-          if(tag >= 7)
-          {
-            this.schedule[this.days[i]][1]['LessonChisl'] = "Домашнее обучение";
-            this.schedule[this.days[i]][1]['time'] = "Весь день";
-            this.schedule[this.days[i]]['Place'] = [];
+          if (tag >= 7) {
+            this.schedule[this.days[i]][1]["LessonChisl"] = "Домашнее обучение";
+            this.schedule[this.days[i]][1]["time"] = "Весь день";
+            this.schedule[this.days[i]]["Place"] = [];
           }
         }
         tag = 0;
@@ -212,8 +224,7 @@ export default {
   },
 
   //Преднастройка
-  beforeMount() 
-  {
+  beforeMount() {
     this.groups_info = this._groups_info;
     this.departaments_info = this._departaments_info;
     this.schedule = this._schedule;
