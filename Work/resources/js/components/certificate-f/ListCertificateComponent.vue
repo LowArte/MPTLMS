@@ -25,9 +25,8 @@
             v-text-field.ma-0.pa-0(v-model='search' label='Поиск' single-line='' hide-details='')
       template(v-slot:expanded-item="{ headers }")
         td(:colspan="headers.length" v-if="expanded.length > 0")
-          div
-            v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].fio}}
-            v-card-text.my-1.ma-0.pa-0.text(v-for="(info,i) in Object.keys(expanded[0].body)" :key="i") {{info}} : {{expanded[0].body[info]}}</v-card-text>
+          v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].fio}}
+          v-card-text.my-1.ma-0.pa-0.text(v-for="(info,i) in Object.keys(expanded[0].certificates_data)" :key="i") {{info}} : {{expanded[0].certificates_data[info]}}
     v-layout.row.text-center.pa-2.ma-2
       v-pagination(v-model="page" :length="pageCount")
 </template>
@@ -44,9 +43,9 @@ export default {
       itemsPerPage: 10, //Количество строк
       headers: [
         { text: "Номер обращения", value: "id" },
-        { text: "Тематика", value: "name" },
+        { text: "Тематика", value: "type" },
         { text: "Почта", value: "email" },
-        { text: "Дата обращения", value: "date" },
+        { text: "Дата обращения", value: "created_at" },
         { text: "", value: "data-table-expand" }
       ], //Заголовок
       items: [
@@ -80,7 +79,9 @@ export default {
   //Получение данных
   mounted() 
   {
-    //this.items = this._requests;
+    this.items = this._requests;
+    for(var i = 0; i < this.items.length; i++)
+      this.items[i].certificates_data = JSON.parse(this.items[i].certificates_data);
   }
 };
 </script>

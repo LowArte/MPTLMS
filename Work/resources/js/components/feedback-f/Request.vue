@@ -107,8 +107,8 @@ export default {
           this.showMessage("Ответ отправлен");
           this.items.splice(this.expanded[0]);
         })
-        .catch(exp => {
-          this.showError("Произошла ошибка");
+        .catch(ex => {
+          this.showError("Произошла ошибка! " + ex);
         });
       this.modelmessage = "";
     },

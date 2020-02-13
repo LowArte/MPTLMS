@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Repositories\ModelRepository\CertificateRepository;
+use App\Modifications\Create\CreateCertificateModification;
 use Illuminate\Http\Request;
 
 
@@ -22,8 +23,10 @@ class CertificateController extends BaseController
      * save from database
      * @return JSON
      */
-    public function save()
+    public function save(Request $request, CreateCertificateModification $createCertificateModification)
     {
-        return response()->json();
+        $result = $createCertificateModification->addCertificateToDatabase($request);
+        if ($result)
+            return response()->json(["success"=>true]);
     }
 }

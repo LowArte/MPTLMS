@@ -232,7 +232,7 @@ export default {
                 },
                 {
                   icon: "",
-                  text: "Изменеия в расписание",
+                  text: "Измения в расписание",
                   href: "/student/replacements"
                 },
                 {

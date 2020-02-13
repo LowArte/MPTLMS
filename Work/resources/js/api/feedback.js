@@ -16,6 +16,6 @@ export default
   //Оправка сообщений на почту
   sendEmail (data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/feedback/send_email', {"text":data.text,"to":data.mail,'id':data.id});
+    return axios.post('/api/'+data.slug+'/request_users/send_email', {"text":data.text,"to":data.mail,'id':data.id});
   }
 }
