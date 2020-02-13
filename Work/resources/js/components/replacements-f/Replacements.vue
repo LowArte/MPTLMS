@@ -1,6 +1,22 @@
 <template lang="pug">
     v-layout.column.wrap
         c-comfirm-dialog(ref='qwestion')
+        v-flex.ma-2.mt-0.row
+          v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+            template(v-slot:activator="{ on }")
+              v-btn.justify-center(color="accent" block dark v-on="on") {{titleDialog}}
+            v-card
+              v-toolbar(dark color="primary")
+                v-btn(icon dark @click="dialog = false; changeFilter()")
+                  v-icon mdi-close
+                v-toolbar-title {{titleDialog}}
+                v-spacer
+              c_bildReplacement(:_departaments_info="_departaments_info" 
+                              :_groups_info="_groups_info" 
+                              :_schedule="_schedule"
+                              :_disciplines="_disciplines"
+                              :_teachers="_teachers"
+                              :_slug="_slug")
         v-flex.ma-2.mb-0.pa-0.row
             v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
             v-combobox.ma-1(label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
@@ -34,7 +50,7 @@
                                     td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} {{ replacement_key['swap']['oldteacher'] }}
                                     td(v-else-if="replacement_key['swap']['oldlesson'] != null && replacement_key['swap']['oldlesson'] != ''") {{ replacement_key['swap']['oldlesson'] }}
                                     td(v-else) Дополнительное занятие
-                                    td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} {{ replacement_key['swap']['teacher'] }}
+                                    td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
                                     td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
                                     td(v-else) Занятие отменено
                                     td {{ replacement_key['created_at'] }}
@@ -47,13 +63,15 @@ import group_api from "./../../api/group"; //api групп
 import replacements_api from "./../../api/replacements"; //api замен
 import withSnackbar from "../mixins/withSnackbar"; //Alert
 import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
+import BildReplacement from "./Bild_Replacements"; //Конструктор замен
 
 export default {
     mixins: [withSnackbar],
 
     components: 
     {
-        "c-comfirm-dialog": ConfirmDialog_C
+        "c-comfirm-dialog": ConfirmDialog_C,
+        "c_bildReplacement": BildReplacement
     },
 
     data: () => ({
@@ -65,6 +83,8 @@ export default {
         checkAllDate: false, //Все даты
         groups: [], 
         date: [], 
+        titleDialog: "Конструктор замен",
+        dialog: false,
         dateDialog: {
             model: false,
             date: new Date().toISOString().substr(0, 10),
@@ -85,6 +105,18 @@ export default {
             type: Array,
             default: null
         }, //JSON замен
+        _teachers: {
+            type: Array,
+            default: null
+        }, //JSON учителей
+        _disciplines: {
+            type: Array,
+            default: null
+        }, //JSON дисциплин
+        _schedule: {
+            type: Object,
+            default: null
+        }, //JSON дисциплин
         _slug: {
             data: String,
             default: ""

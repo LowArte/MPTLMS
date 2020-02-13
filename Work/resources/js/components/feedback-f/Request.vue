@@ -16,9 +16,12 @@
                                     v-icon mdi-reply-all
                             span Ответить всем
                         v-text-field.ma-0(v-model='search' label='Поиск' single-line hide-details)
+                    template(v-slot:item.answered="{ item }")
+                      v-card-text.ma-0.pa-0(v-if="item['answered']") Да
+                      v-card-text.ma-0.pa-0(v-else) Нет
                     template(v-slot:expanded-item='{ headers }')
                         td(:colspan='headers.length' v-if='expanded.length > 0')
-                            v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
+                            //- v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
                             v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
                             br
                             v-form.mt-0.pt-0(v-model='form')
@@ -64,6 +67,7 @@ export default {
       headers: [
         { text: "Тема", value: "type" },
         { text: "E-mail", value: "user.email" },
+        { text: "Отвечено", value: "answered" },
         { text: "Дата", value: "created_at" },
         { text: "", value: "data-table-expand" }
       ],
@@ -103,8 +107,8 @@ export default {
           this.showMessage("Ответ отправлен");
           this.items.splice(this.expanded[0]);
         })
-        .catch(exp => {
-          this.showError("Произошла ошибка");
+        .catch(ex => {
+          this.showError("Произошла ошибка! " + ex);
         });
       this.modelmessage = "";
     },

@@ -12,8 +12,8 @@ class CertificateRepository extends BaseRepository
 
     public function getCertificates()
     {
-        $columns = ['id','user_id','type', 'certificates_data'];
-        $result = $this->startCondition()->select($columns)->toBase()->get();
+        $columns = ['id','user_id','type', 'certificates_data', 'created_at'];
+        $result = $this->startCondition()->select($columns)->orderBy('id', 'desc')->toBase()->get();
         return $result;
     }
 }

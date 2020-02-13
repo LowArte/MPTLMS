@@ -22,7 +22,7 @@ Route::middleware('auth:api')->name('api.')->group(function ()
 
         Route::name('request_users.')->prefix('request_users')->group(function () 
         {
-
+            Route::post('send_email', 'Admin\RequestFeedbackController@sendEmail')->name('send_email');
         });
 
         Route::name('callschedule.')->prefix('callschedule')->group(function () 

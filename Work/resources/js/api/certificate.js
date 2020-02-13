@@ -7,7 +7,7 @@ export default
   //Заказ нового документа
   save (data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/certificate/save_certificate', 
+    return axios.post('/api/'+data.slug+'/certificate/save', 
     {
       "data":data.data,
       "type":data.type
