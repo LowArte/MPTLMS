@@ -2,7 +2,7 @@
   div
     c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_listusers" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
-    c-add-dialog(ref='new' :_slug="_slug" :_usersposts="_usersposts")
+    c-add-dialog(ref='new' :_slug="_slug")
     c-edit-dialog(ref='revue')
     c-remove-dialog(ref='rem')
 </template>
