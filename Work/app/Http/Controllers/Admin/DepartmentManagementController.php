@@ -20,14 +20,4 @@ class DepartmentManagementController extends BaseController
         $headers = [['text' => "Наименование", 'value' => "dep_name_full"],['text' => "Действия", 'value' => "action", 'sortable' => false]];
         return view('roles.admin.department-management', compact('departments'), compact('headers'));
     }    
-
-    /**
-     * get departaments from database
-     * @return JSON
-     */
-    public function getDepartments(DepartamentRepository $departamentRepository)
-    {
-        $departments = $departamentRepository->getDepartamentsForCRUD();
-        return response()->json(compact('departments'));
-    }
 }

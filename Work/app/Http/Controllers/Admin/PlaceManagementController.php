@@ -18,14 +18,4 @@ class PlaceManagementController extends BaseController
         $places = $placeRepository->getPlaces();
         return view('roles.admin.place-management', compact('places'));
     }    
-
-    /**
-     * get places from database
-     * @return JSON
-     */
-    public function getPlaces(PlaceRepository $placeRepository)
-    {
-        $places = $placeRepository->getPlaces();
-        return response()->json(compact('places'));
-    }
 }

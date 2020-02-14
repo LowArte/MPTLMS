@@ -18,14 +18,4 @@ class PostManagementController extends BaseController
         $posts = $usersPostRepository->getPosts();
         return view('roles.admin.post-management', compact('posts'));
     }    
-
-    /**
-     * get posts from database
-     * @return JSON
-     */
-    public function getPosts(UsersPostRepository $usersPostRepository)
-    {
-        $posts = $usersPostRepository->getPosts();
-        return response()->json(compact('posts'));
-    }
 }

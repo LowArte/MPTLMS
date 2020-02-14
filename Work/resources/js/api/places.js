@@ -7,7 +7,7 @@ export default
   //Получение мест проведения
   getPlaces(data) 
   {
-    return axios.get('/api/'+data.slug+'/place_management/get_places');
+    return axios.get('api/getters/places');
   },
   //Сохранение мест проведения
   savePlace(data) //!Требуется сделать рабочим

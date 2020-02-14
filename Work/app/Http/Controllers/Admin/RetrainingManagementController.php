@@ -18,14 +18,4 @@ class RetrainingManagementController extends BaseController
         $retraining = $retrainingInfoRepository->getRetrainingInfo();
         return view('roles.admin.retraining-management', compact('retraining'));
     }    
-
-    /**
-     * get RetrainingInfo from database
-     * @return JSON
-     */
-    public function getRetraining(RetrainingInfoRepository $retrainingInfoRepository)
-    {
-        $retraining = $retrainingInfoRepository->getRetrainingInfo();
-        return response()->json(compact('retraining'));
-    }
 }

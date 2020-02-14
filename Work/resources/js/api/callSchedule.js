@@ -7,7 +7,7 @@ export default
   //Редактирование расписания звонков
   edit (data) 
   {
-    return axios.post('/api/'+data.slug+'/callschedule/edit_bildcallschedule', 
+    return axios.post('api/edit/callschedule ', 
     {
       'callSchedule': data.callSchedule
     });

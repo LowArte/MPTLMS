@@ -7,7 +7,7 @@ export default
   //Получение ролей
   getPosts(data) 
   {
-    return axios.get('/api/'+data.slug+'/post_management/get_posts');
+    return axios.get('api/getters/posts');
   },
   //Сохранение роли
   savePost(data) //!Требуется сделать рабочим

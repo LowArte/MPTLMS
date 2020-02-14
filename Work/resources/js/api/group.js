@@ -9,12 +9,12 @@ let slug = mapGetters(["slug"]).slug
 
 export default {
     //Получение групп по id отделению
-    getGroup(data) {
-        return axios.get('/api/' + slug + '/' + data.controller + '/get_group_by_departament_id/' + data.department_id);
+    getGroupByDepartamentId(data) {
+        return axios.get('api/getters/group_by_departament_id/' + data.department_id);
     },
     //Получение всех групп
-    getGroupAll(data) {
-        return axios.get('/api/' + slug + '/group_management/get_groups');
+    getGroups(data) {
+        return axios.get(' api/getters/groups ');
     },
     //Сохранение группы
     saveGroup(data) //!Требуется сделать рабочим

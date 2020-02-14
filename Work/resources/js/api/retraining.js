@@ -7,7 +7,7 @@ export default
   //Получение дополнительного образования
   getRetrainings(data) 
   {
-    return axios.get('/api/'+data.slug+'/retraining_management/get_retrainings');
+    return axios.get('api/getters/retrainings');
   },
   //Сохранение дополнительного образования
   saveRetraining(data) //!Требуется сделать рабочим

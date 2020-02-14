@@ -7,7 +7,7 @@ export default
   //Получение всех замен
   getReplacements(data)
   {
-    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements', 
+    return axios.get('api/getters/replacements', 
     {
       params:{
         "date": data.date
@@ -17,37 +17,27 @@ export default
   //Получение замен для определённой даты и группы
   getReplacementsByGroupByDate(data)
   {
-    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements_by_group_by_date/'+data.group_id, 
-    {
-      params:{
-        "date": data.date
-      }
-    });
+    return axios.get('api/getters/replacements_by_group_by_date/'+data.group_id+'/'+data.date);
   },
   //Получение замен для определённой группы
   getReplacementsByGroup(data)
   {
-    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements_by_group/'+data.group_id);
+    return axios.get('api/getters/replacements_by_group/'+data.group_id);
   },
   //Получение замен для определённой даты
   getReplacementsByDate(data)
   {
-    return axios.get('/api/'+data.slug+'/'+data.controller+'/get_replacements_by_date', 
-    {
-      params:{
-        "date": data.date
-      }
-    });
+    return axios.get('api/getters/replacements_by_date/' + data.date);
   },
   //Удаление замены
   deleteReplacement(data)
   {
-    return axios.post('/api/'+data.slug+'/'+data.controller+'/delete_replacement/'+data.id);
+    return axios.post('api/delete/replacement/'+data.id);
   },
   //Сохранение замены
   saveReplacements(data)
   {
-    return axios.post('/api/'+data.slug+'/'+data.controller+'/save_replacement/'+data.group_id, 
+    return axios.post('api/save/replacement/' +data.group_id, 
     {
       "replacement": data.replacement,
       "date": data.date

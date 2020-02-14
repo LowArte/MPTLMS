@@ -18,9 +18,8 @@ class HomeRepository extends BaseRepository
         $departaments = $departamentRepository->getDepartamentsForDepartamentsInfo();
         $panel_array = $pannel_repository->getPanelForDrivingSchool();
         $retraining = $retraining_repository->getRetrainingInfo();
-        $slug = auth()->user()->post->slug;
 
-        return compact('panel_array', 'retraining', 'departaments', 'slug');
+        return compact('panel_array', 'retraining', 'departaments');
     }
 
     public function getDataForWelcomeHomePage()

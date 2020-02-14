@@ -7,7 +7,7 @@ export default
   //Получение отделений
   getDepartments(data) 
   {
-    return axios.get('/api/'+data.slug+'/department_management/get_departments');
+    return axios.get('api/getters/department');
   },
   //Сохранение отделений
   saveDepartment(data) //!Требуется сделать рабочим
