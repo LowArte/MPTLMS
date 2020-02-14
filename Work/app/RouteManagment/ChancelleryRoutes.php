@@ -18,7 +18,9 @@ class ChancelleryRoutes
             });
         });
     }
-
+    /**
+     * Отвечает за получени маршрутных роутов
+     */
     public static function getWebRoutes()
     {
         Route::middleware(['profilactic','auth','access'])->name('chancellery.')->prefix('chancellery')->group(function()

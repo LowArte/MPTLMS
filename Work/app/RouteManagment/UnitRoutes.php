@@ -18,7 +18,9 @@ class UnitRoutes
             });
         });
     }
-
+    /**
+     * Отвечает за получени маршрутных роутов
+     */
     public static function getWebRoutes()
     {
         Route::middleware(['profilactic','auth','access'])->name('unit.')->prefix('unit')->group(function()

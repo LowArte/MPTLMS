@@ -24,7 +24,9 @@ class StudentRoutes
             });
         });
     }
-
+    /**
+     * Отвечает за получени маршрутных роутов
+     */
     public static function getWebRoutes()
     {
         Route::middleware(['auth', 'access', 'profilactic'])->name('student.')->prefix('student')->group(function () {

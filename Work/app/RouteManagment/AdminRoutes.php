@@ -65,7 +65,9 @@ class AdminRoutes
             });
         });
     }
-
+    /**
+     * Отвечает за получени маршрутных роутов
+     */
     public static function getWebRoutes()
     {
         Route::middleware(['auth','access','profilactic'])->name('admin.')->prefix('admin')->group(function()

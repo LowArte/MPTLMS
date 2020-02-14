@@ -7,7 +7,7 @@ export default
   //Получение пользователей
   getUsers(data) 
   {
-    return axios.get('/api/'+data.slug+'/user_management/get_users');
+    return axios.get('api/getters/users');
   },
   //Сохранение пользователя
   saveUser(data) 
