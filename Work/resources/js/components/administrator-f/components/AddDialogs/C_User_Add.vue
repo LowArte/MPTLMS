@@ -1,40 +1,36 @@
 <template lang="pug">
-    v-dialog(v-model="dialog" persistent max-width="550px")
+    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" persistent max-width="550px")
         v-card.ma-0.pa-0
-            v-card-title.headline 
-                h4.text-truncate Добавить запись
-            v-form
-              v-card-text
-                v-text-field(v-model="item.thirdName" :rules="famRules" label="Фамилия")
-                v-text-field(v-model="item.name" :rules="nameRules" label="Имя")
-                v-text-field(v-model="item.secName" label="Отчество")
-                v-text-field(v-model="item.email" :rules="emailRules" label="Почта")
-                v-autocomplete(v-model="item.post_id" :items="posts" item-value='id' item-text='name' dense solo label='Роль')
-                v-autocomplete(v-model="item.disabled" :items="adisabled" dense solo label='Блокировка')
-
-                v-combobox(v-if="item.post_id==2" :items="groups" item-value='id' item-text='group_name' label='Специальность')
-                v-combobox(v-if="item.post_id==2" :items="groups" item-value='id' item-text='group_name' label='Группа')
-                v-dialog(v-if="item.post_id==2" ref="dateDialog" v-model="dateDialog" :return-value.sync="studentItem.group" persistent width="290px")
-                  template(v-slot:activator="{ on }")
-                      v-text-field(v-model="studentItem.group" label="Дата" readonly v-on="on")
-                  v-date-picker(v-model="studentItem.group" scrollable :first-day-of-week="1" locale="ru-Ru")
-                      v-btn(text color="primary" @click="dateDialog = false") Отмена
-                      v-btn(text color="primary" @click="$refs.dateDialog.save(studentItem.group);") Принять
-                v-radio-group(v-if="item.post_id==2" v-model="studentItem.gender" :mandatory="false")
-                  v-radio(label="Мужской" value="Мужской")
-                  v-radio(label="Женский" value="Женский")
-                v-autocomplete(v-if="item.post_id==2" :items="arrfinancings" v-model="studentItem.type_of_financing" dense solo label='Вид финансирования')
-              v-card-actions              
-                  v-btn(color="accent darken-1" text @click="clickCancel") Отмена
-                  v-spacer
-                  v-btn(color="info darken-1" text @click="clickSave") Сохранить
+          v-toolbar(color="white")
+            v-btn(icon dark @click="dialog = false")
+              v-icon(color="primary") mdi-close
+            v-spacer
+            v-btn(color="info darken-1" text @click="clickSave") Сохранить
+          v-form.ma-3
+            v-stepper(v-model="steps" vertical)
+              v-stepper-step(:complete="steps > 1" step="1") Роль пользователя
+                small Тукущая роль: {{ post_name }}
+              v-stepper-content(step="1")
+                v-card(:elevation="0")
+                  v-autocomplete(v-model="item.post_id" item-value="id" item-text="name" :items="posts" label="Роль нового пользователя")
+                  v-card-actions
+                    v-btn(color="accent" text @click="steps = 2") Далее
+              v-stepper-step(:complete="steps > 2" step="2") Биограифческие данные
+              v-stepper-content(step="2")
+                v-card(class="mb-12" height="200px" :elevation="0")
+                  v-text-field(label="sl,fksmdfl")
+                  v-autocomplete(v-model="item" :items="adisabled" cache-items flat hide-no-data hide-details label="Какую роль вы хотите выбрать?" solo-inverted)
+                  v-card-actions
+                    v-btn(color="accent" text @click="steps = 3") Далее
+                    v-spacer
+                    v-btn(text @click="steps = 1") Назад
 </template>
 
 <script>
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import apigroup from "../../../../api/group";
+//import apigroup from "../../../../api/group";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -46,24 +42,26 @@ export default {
   data() {
     return {
       dialog: false,
+      post_name: null,
       departaments: [],
       posts: [],
       groups: [{ id: -1, name: "" }],
+      steps: 1,
       item: {
-        secName: "",
-        name: "",
-        thirdName: "",
-        email: "",
-        password: "",
-        post_id: "",
+        secName: null,
+        name: null,
+        thirdName: null,
+        email: null,
+        password: null,
+        post_id: null,
         gender: "Мужской",
         birthday: new Date().toISOString().substr(0, 10),
 
-        dep_name: "",
+        dep_name: null,
         group_id: 1,
-        type_of_financing: "",
+        type_of_financing: null,
 
-        disabled: ""
+        disabled: null
       },
       adisabled: ["Разблокирован", "Заблокирован"],
       resolve: null,
@@ -85,18 +83,6 @@ export default {
   methods: {
     pop(posts) {
       this.posts = posts;
-      group_api
-        .getGroup(departaments_info.selected)
-        .then(res => {
-          this.groups_info.groups = res.data.groups;
-          this.studentItem.group_id = this.groups_info.groups[0].id;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
-      groups.forEach(element => {
-        this.groups.id = element.id;
-      });
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
