@@ -69,7 +69,7 @@ export default {
             });
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     },
@@ -88,7 +88,7 @@ export default {
             });
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     },
@@ -101,7 +101,7 @@ export default {
           apidepartments.dropDepartment();
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     },
@@ -121,7 +121,7 @@ export default {
             });
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     }

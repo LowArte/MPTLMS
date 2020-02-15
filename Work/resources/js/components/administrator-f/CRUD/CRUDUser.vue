@@ -77,7 +77,7 @@ export default {
         if (result) {
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     },
@@ -89,7 +89,7 @@ export default {
         if (result) {
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     },
@@ -101,7 +101,7 @@ export default {
         if (result) {
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     },
@@ -113,7 +113,7 @@ export default {
         if (result) {
           this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showError("Действие было отменено");
+          this.showInfo("Действие было отменено пользователем");
         }
       });
     }

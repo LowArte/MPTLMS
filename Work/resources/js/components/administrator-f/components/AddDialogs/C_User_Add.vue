@@ -2,28 +2,48 @@
     v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" persistent max-width="550px")
         v-card.ma-0.pa-0
           v-toolbar(color="white")
-            v-btn(icon dark @click="dialog = false")
+            v-btn(icon dark @click="clickCancel")
               v-icon(color="primary") mdi-close
             v-spacer
             v-btn(color="info darken-1" text @click="clickSave") Сохранить
           v-form.ma-3
             v-stepper(v-model="steps" vertical)
-              v-stepper-step(:complete="steps > 1" step="1") Роль пользователя
-                small Тукущая роль: {{ post_name }}
+              v-stepper-step(:complete="steps > 1" step="1" @click="change(1)") Роль пользователя
+                small Текущая роль: {{ post_name.name }}
               v-stepper-content(step="1")
                 v-card(:elevation="0")
-                  v-autocomplete(v-model="item.post_id" item-value="id" item-text="name" :items="posts" label="Роль нового пользователя")
+                  v-autocomplete.mt-3(v-model="item.post_id" item-value="id" item-text="name" :items="posts" dense label="Роль нового пользователя" @change="changePost")
                   v-card-actions
-                    v-btn(color="accent" text @click="steps = 2") Далее
-              v-stepper-step(:complete="steps > 2" step="2") Биограифческие данные
-              v-stepper-content(step="2")
-                v-card(class="mb-12" height="200px" :elevation="0")
-                  v-text-field(label="sl,fksmdfl")
-                  v-autocomplete(v-model="item" :items="adisabled" cache-items flat hide-no-data hide-details label="Какую роль вы хотите выбрать?" solo-inverted)
-                  v-card-actions
-                    v-btn(color="accent" text @click="steps = 3") Далее
                     v-spacer
-                    v-btn(text @click="steps = 1") Назад
+                    v-btn(v-if="post_name.id != null" color="accent" text @click="change(2)") Далее
+              v-stepper-step(:complete="steps > 2" step="2" @click="change(2)") Биограифческие данные
+              v-stepper-content(step="2")
+                v-card(:elevation="0")
+                  v-text-field(v-model="item.thirdName" :rules="famRules" label="Фамилия")
+                  v-text-field(v-model="item.name" :rules="nameRules" label="Имя")
+                  v-text-field(v-model="item.secName" label="Отчество")
+                  v-text-field(v-model="item.email" :rules="emailRules" label="Почта")
+                  v-dialog(ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
+                    template(v-slot:activator="{ on }")
+                        v-text-field(v-model="item.birthday" label="Дата рождения" readonly v-on="on")
+                    v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
+                        v-btn(text color="primary" @click="dateDialog = false") Отмена
+                        v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
+                  v-autocomplete.mt-3(v-model="item.gender" :items="gender" dense label="Гендерная принадлежность")
+                  v-card-actions
+                    v-btn(text @click="change(1)") Назад
+                    v-spacer
+                    v-btn(color="accent" text @click="change(3)") Далее
+              v-stepper-step(v-if="item.post_id == 2" :complete="steps > 3" step="3" @click="change(3)") Дополнительно
+              v-stepper-content(v-if="item.post_id == 2" step="3")
+                v-card(:elevation="0")
+                  v-combobox(v-model="item.dep_name" label="Специальность")
+                  v-combobox(v-model="item.group_id" label='Группа')
+                  v-autocomplete(:items="financings" dense label='Вид финансирования')
+                  v-card-actions
+                    v-btn(text @click="change(2)") Назад
+                    v-spacer
+                    v-btn(color="accent" text @click="change(4)") Далее
 </template>
 
 <script>
@@ -42,9 +62,11 @@ export default {
   data() {
     return {
       dialog: false,
-      post_name: null,
+      post_name: [{ name: "", id: null }],
       departaments: [],
+      financings: ["Бюджет", "Платное"],
       posts: [],
+      gender: ["Мужской", "Женский", "Другое"],
       groups: [{ id: -1, name: "" }],
       steps: 1,
       item: {
@@ -57,17 +79,22 @@ export default {
         gender: "Мужской",
         birthday: new Date().toISOString().substr(0, 10),
 
-        dep_name: null,
-        group_id: 1,
-        type_of_financing: null,
+        dep_name: null, //! Получать по api
+        group_id: 1, //! Получать по api сограсно выбранной специальности
+        type_of_financing: "Бюджет",
 
-        disabled: null
+        disabled: 0
       },
-      adisabled: ["Разблокирован", "Заблокирован"],
+      adisabled: [
+        { id: 0, name: "Разблокирован" },
+        { id: 1, name: "Заблокирован" }
+      ],
       resolve: null,
       emailRules: [
         v => !!v || "Поле не должно оставаться пустым",
-        v => /.+@.+\..+/.test(v) || "Только буквы в верхнем регистре"
+        v =>
+          /^[^@]+@[^@.]+\.[^@]+$/.test(v) ||
+          "Формат текста не соотвествует почте"
       ],
       nameRules: [v => !!v || "Поле не должно оставаться пустым"],
       famRules: [v => !!v || "Поле не должно оставаться пустым"],
@@ -90,20 +117,41 @@ export default {
     },
     clickSave() {
       if (
-        this.item.group_name != null &&
-        this.item.group_number != null &&
-        this.item.group_year != null &&
-        this.item.departaments_id != null
+        this.item.name != null &&
+        this.item.secName != null &&
+        this.item.thirdName != null &&
+        this.item.post_id != null &&
+        this.item.email != null
       ) {
         this.dialog = false;
+        this.item - null;
         this.resolve(this.item);
       } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля");
       }
     },
     clickCancel() {
       this.dialog = false;
+      this.item - null;
       this.resolve(false);
+    },
+    changePost() {
+      this.post_name = this.posts[this.item.post_id - 1];
+    },
+    change(id) {
+      switch (id) {
+        case 1:
+          this.steps = 1;
+          break;
+        case 2:
+          if (this.post_name.id != null) this.steps = 2;
+          break;
+        case 3:
+          if (this.post_name.id != null) this.steps = 3;
+          break;
+        default:
+          break;
+      }
     }
   }
 };
