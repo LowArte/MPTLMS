@@ -42,16 +42,19 @@ export default {
       });
     },
     clickSave() {
-      this.item.dep_name_full = this.item.dep_name + " " + this.item.specialization;
+      this.item.dep_name_full =
+        this.item.dep_name + " " + this.item.specialization;
       if (this.item.dep_name != null && this.item.specialization != null) {
         this.dialog = false;
         this.resolve(this.item);
+        this.item = Object.assign({}, null);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
       }
     },
     clickCancel() {
       this.dialog = false;
+      this.item = Object.assign({}, null);
       this.resolve(false);
     }
   }

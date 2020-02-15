@@ -5,7 +5,11 @@
             v-btn(icon dark @click="clickCancel")
               v-icon(color="primary") mdi-close
             v-spacer
-            v-btn(color="info darken-1" text @click="clickSave") Сохранить
+            v-btn(color="info darken-1" text @click="clickSave") Отправить
+          v-card-title.headline 
+            h4.text-truncate Новый запись
+          v-alert.ma-3.px-3(dense type="info") В любой момент данные, внесённые в поля, можно изменить, нажав на соотвествующий пункт ниже.
+          v-alert.ma-3.px-3(dense type="warning") Будьте внимательны при заполнении данной формы.
           v-form.ma-3
             v-stepper(v-model="steps" vertical)
               v-stepper-step(:complete="steps > 1" step="1" @click="change(1)") Роль пользователя
@@ -43,7 +47,8 @@
                   v-card-actions
                     v-btn(text @click="change(2)") Назад
                     v-spacer
-                    v-btn(color="accent" text @click="change(4)") Далее
+                    v-btn(color="accent" text @click="change(4)") Применить
+              v-alert.mx-3.px-3(v-if="steps == 4" dense type="success") Действия были применены. Чтобы отправить форму нажмите "Отправить" в заголовке формы.
 </template>
 
 <script>
@@ -78,11 +83,9 @@ export default {
         post_id: null,
         gender: "Мужской",
         birthday: new Date().toISOString().substr(0, 10),
-
         dep_name: null, //! Получать по api
         group_id: 1, //! Получать по api сограсно выбранной специальности
         type_of_financing: "Бюджет",
-
         disabled: 0
       },
       adisabled: [
@@ -101,12 +104,6 @@ export default {
       dateDialog: null
     };
   },
-  props: {
-    _slug: {
-      type: String,
-      default: ""
-    }
-  },
   methods: {
     pop(posts) {
       this.posts = posts;
@@ -124,15 +121,15 @@ export default {
         this.item.email != null
       ) {
         this.dialog = false;
-        this.item - null;
         this.resolve(this.item);
+        this.item = Object.assign({}, null);
       } else {
         this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.item - null;
+      this.item = Object.assign({}, null);
       this.resolve(false);
     },
     changePost() {
@@ -147,7 +144,12 @@ export default {
           if (this.post_name.id != null) this.steps = 2;
           break;
         case 3:
-          if (this.post_name.id != null) this.steps = 3;
+          if (this.post_name.id != null && this.post_name.id == 2)
+            this.steps = 3;
+          else this.steps = 4;
+          break;
+        case 4:
+          if (this.post_name.id != null) this.steps = 4;
           break;
         default:
           break;

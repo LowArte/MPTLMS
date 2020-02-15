@@ -81,12 +81,14 @@ export default {
       ) {
         this.dialog = false;
         this.resolve(this.item);
+        this.item = Object.assign({}, null);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
       }
     },
     clickCancel() {
       this.dialog = false;
+      this.item = Object.assign({}, null);
       this.resolve(false);
     }
   }

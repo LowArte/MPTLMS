@@ -23,11 +23,10 @@ import Feedback_C from './components/feedback-f/Feedback'
 //!                    CRUD
 //?----------------------------------------------
 import User_CRUD_C from './components/administrator-f/CRUD/CRUDUser'
-//import Place_CRUD_C from './components/administrator-f/CRUD/CRUDPlace'
+import Place_CRUD_C from './components/administrator-f/CRUD/CRUDPlace'
 import Department_CRUD_C from './components/administrator-f/CRUD/CRUDDepartment'
 import Group_CRUD_C from './components/administrator-f/CRUD/CRUDGroup'
-/* import Post_CRUD_C from './components/administrator-f/CRUD/CRUDPost'
-import Retraining_CRUD_C from './components/administrator-f/CRUD/CRUDRetraining' */
+import Post_CRUD_C from './components/administrator-f/CRUD/CRUDPost'
 
 import QuickAction_C from './components/administrator-f/QuickAction'
 
@@ -84,6 +83,8 @@ new Vue({
         'c-department-crud': Department_CRUD_C,
         'c-group-crud': Group_CRUD_C,
         'c-user-crud': User_CRUD_C,
+        'c-place-crud': Place_CRUD_C,
+        'c-post-crud': Post_CRUD_C,
 
         //?----------------------------------------------
         //!                FOR ALL COM

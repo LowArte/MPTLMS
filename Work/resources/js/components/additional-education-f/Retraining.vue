@@ -1,24 +1,18 @@
 <template lang="pug">
   v-layout.row.wrap
-    v-flex.my-2(v-if="printing == 1")
-      v-card.mx-auto(width="420px" style="display: flex; flex-direction: column;" height="100%")
-        v-skeleton-loader(max-height='200px' type="image")
-        v-skeleton-loader.grow
-          v-skeleton-loader.my-1.subtitle-1.black--text.pa-3(type="heading" max-height="70")
-          v-skeleton-loader.my-1.subtitle-1.black--text.pa-3(type="text@3")
-          v-skeleton-loader.my-1.subtitle-1.black--text.pa-3(type="text@3")
-        v-card-actions(wrap)
-          v-btn.mx-auto(text small block color="accent") Добавить
+    c-new-do(v-if="printing == 1" :_add="add")
     c-retraining-cards(v-for="(item, index) in _info" :key="index" :_user="_user" :_item="item")
 </template>
 
 <script>
 import Retraining_C from "./components/C_Retraining";
+import NewDO_C from "./components/C_NewDO";
+
 export default {
   data: () => ({
     printing: 0
   }),
-  
+
   props: {
     _info: {
       type: Array,
@@ -34,14 +28,19 @@ export default {
     }
   },
 
-  components: 
-  {
-    "c-retraining-cards": Retraining_C
+  components: {
+    "c-retraining-cards": Retraining_C,
+    "c-new-do": NewDO_C
   },
 
-  mounted() 
-  {
+  mounted() {
     this.printing = this._printing;
+  },
+
+  methods: {
+    add(item) {
+      this._info.unshift(item);
+    }
   }
 };
 </script>

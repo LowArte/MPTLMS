@@ -1,27 +1,21 @@
 <template lang="pug">
-  v-layout.row.wrap
-      v-card.mx-auto.pa-3(height='auto' width='100%')
-        v-card-text.my-2.ma-0.pa-0.title Панель управления
-        v-divider
-        v-switch.mx-2(v-model='options.option_value' label='Режим профилактики' color='accent')
-        v-btn(color='accent' block @click='sendQuery') Применить
+  v-switch.mx-2(v-model='options.option_value' label='Режим профилактики' color='accent' @click='sendQuery')
 </template>
 
 <script>
 import panelApi from "../../api/panel";
-import withSnackbar from "../mixins/withSnackbar";//Alert
+import withSnackbar from "../mixins/withSnackbar"; //Alert
 
 export default {
   mixins: [withSnackbar],
 
-  data:()=>{
+  data: () => {
     return {
-      options:null
-    }
+      options: null
+    };
   },
 
-  props: 
-  {
+  props: {
     _options: {
       data: Object,
       default: null
@@ -29,19 +23,16 @@ export default {
     _slug: {
       type: String,
       default: ""
-    } //Модуль
+    }
   },
 
-  beforeMount() 
-  {
+  beforeMount() {
     this.options = this._options;
     this.options.option_value = this.options.option_value == "true";
   },
 
-  methods: 
-  {
-    sendQuery() 
-    {
+  methods: {
+    sendQuery() {
       panelApi
         .setOptionValue({
           id: this.options.id,

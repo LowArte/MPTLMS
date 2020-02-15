@@ -1,54 +1,65 @@
 <template lang="pug">
-    v-layout.row.wrap(align='center' justify='center')
-        v-col(cols='12')
-            v-card.mx-auto.pa-2(outline height='auto' width='max')
-                v-data-table.pa-0(:headers='headers' :items='items' :single-expand='true' no-results-text='Нет результатов' no-data-text='Нет результатов' :expanded.sync='expanded' item-key='id' show-expand :page.sync='page' hide-default-footer @page-count='pageCount = $event' :search='search' :items-per-page='itemsPerPage')
-                    template(v-slot:top)
-                        v-card-title.ma-0.pa-0 Обращение пользователей
-                        v-tooltip(bottom)
-                            template(v-slot:activator="{ on }")
-                                v-btn.ma-2.ml-1(text v-on="on")
-                                    v-icon mdi-delete
-                            span Очистить
-                        v-tooltip(bottom)
-                            template(v-slot:activator="{ on }")
-                                v-btn.ma-2.ml-1(text v-on="on")
-                                    v-icon mdi-reply-all
-                            span Ответить всем
-                        v-text-field.ma-0(v-model='search' label='Поиск' single-line hide-details)
-                    template(v-slot:item.answered="{ item }")
-                      v-card-text.ma-0.pa-0(v-if="item['answered']") Да
-                      v-card-text.ma-0.pa-0(v-else) Нет
-                    template(v-slot:expanded-item='{ headers }')
-                        td(:colspan='headers.length' v-if='expanded.length > 0')
-                            //- v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
-                            v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
-                            br
-                            v-form.mt-0.pt-0(v-model='form')
-                                v-container.mt-0.pt-0
-                                    v-row.mt-0.pt-0
-                                        v-textarea.mt-0.pt-0(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
-                                    v-row.pa-2.justify-center
-                                        v-btn.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
-                .text-center.pt-2.mx-auto.pa-0
-                    v-pagination(v-model='page' :length='pageCount')
+  v-layout.row.wrap(align='center' justify='center')
+    v-col(cols='12')
+      c-comfirm-dialog(ref="qwestion")
+      v-card.mx-auto.pa-2(outline height='auto' width='max')
+        v-data-table.pa-0(:headers='headers' :items='items' :single-expand='true' no-results-text='Нет результатов' no-data-text='Нет результатов' :expanded.sync='expanded' item-key='id' show-expand :page.sync='page' hide-default-footer @page-count='pageCount = $event' :search='search' :items-per-page='itemsPerPage')
+          template(v-slot:top)
+            v-card-title.ma-0.pa-0 Обращение пользователей
+            v-tooltip(bottom)
+              template(v-slot:activator="{ on }")
+                v-btn.ma-2.ml-1(text color="red" v-on="on" @click="clear")
+                  v-icon mdi-delete
+                  span.ma-2 Удалить все записи
+              span Удалить все
+            v-text-field.ma-0(v-model='search' label='Поиск' single-line hide-details)
+          template(v-slot:item.answered="{ item }")
+            v-card-text.ma-0.pa-0(v-if="item['answered']") Да
+            v-card-text.ma-0.pa-0(v-else) Нет
+          template(v-slot:expanded-item='{ headers }')
+            td(:colspan='headers.length' v-if='expanded.length > 0')
+              //- v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
+              v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
+              br
+              v-form.mt-0.pt-0(v-model='form')
+                v-container.mt-0.pt-0
+                  v-row.mt-0.pt-0
+                    v-textarea.mt-0.pt-0(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
+                  v-row.pa-2.justify-center
+                    v-btn.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
+        .text-center.pt-2.mx-auto.pa-0
+            v-pagination(v-model='page' :length='pageCount')
 </template>
 
 <script>
+//?----------------------------------------------
+//!           Подключение масок vue
+//?----------------------------------------------
 import { mask } from "vue-the-mask"; //Маска
-import withSnackbar from "../mixins/withSnackbar";//Alert
-import feedbackApi from "../../api/feedback"; //Api обратной связи
+
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
+import withSnackbar from "../mixins/withSnackbar";
+
+//?----------------------------------------------
+//!           Подключение api
+//?----------------------------------------------
+import feedbackApi from "../../api/feedback";
+
+//?----------------------------------------------
+//!           Подключение диалогов
+//?----------------------------------------------
+import confirmDialog_C from "./../expention-f/ConfirmDialog";
 
 export default {
   mixins: [withSnackbar],
 
-  directives: 
-  {
+  directives: {
     mask
   },
 
-  data() 
-  {
+  data() {
     return {
       modelmessage: "",
       messageRules: [
@@ -75,8 +86,11 @@ export default {
     };
   },
 
-  props: 
-  {
+  components: {
+    "c-comfirm-dialog": confirmDialog_C
+  },
+
+  props: {
     _requests: {
       data: Object,
       default: ""
@@ -87,15 +101,21 @@ export default {
     } //Модуль
   },
 
-  mounted() 
-  {
+  mounted() {
     this.items = this._requests; //!нужно мыло и фио
   },
 
-  methods: 
-  {
-    sendQuery(email) 
-    {
+  methods: {
+    clear() {
+      this.$refs.qwestion.pop().then(result => {
+        if (result) {
+          this.showMessage("Действие было выполнено успешно");
+        } else {
+          this.showInfo("Действие было отменено пользователем");
+        }
+      });
+    },
+    sendQuery(email) {
       feedbackApi
         .sendEmail({
           mail: email,
@@ -103,15 +123,15 @@ export default {
           id: this.expanded[0].id,
           slug: this._slug
         })
-        .then(res => {
-          this.showMessage("Ответ отправлен");
+        .then(result => {
+          this.showMessage("Сообщение отправлено");
           this.items.splice(this.expanded[0]);
         })
-        .catch(ex => {
-          this.showError("Произошла ошибка! " + ex);
+        .catch(exception => {
+          this.showError("Произошла следующая ошибка: " + exception);
         });
       this.modelmessage = "";
-    },
+    }
   }
 };
 </script>

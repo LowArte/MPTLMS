@@ -2,7 +2,7 @@
   div
     c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_listusers" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
-    c-add-dialog(ref='new' :_slug="_slug")
+    c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
     c-remove-dialog(ref='rem')
 </template>
@@ -28,8 +28,8 @@ import CRUD_C from "../CRUDpattern";
 //?----------------------------------------------
 import confirmDialog_C from "./../../expention-f/ConfirmDialog";
 import addDialog_C from "./../components/AddDialogs/C_User_Add";
-import editDialog_C from "./../components/EditDialogs/C_Group_Edit";
-import removeDialog_C from "./../components/DeleteDialogs/C_Group_Delete";
+import editDialog_C from "./../components/EditDialogs/C_User_Edit";
+import removeDialog_C from "./../components/DeleteDialogs/C_User_Delete";
 
 export default {
   mixins: [withSnackbar],
@@ -44,7 +44,7 @@ export default {
     headers: [
       { text: "Почта", value: "email" },
       { text: "Роль", value: "post.name" },
-      { text: "Блокировка", value: "text-disabled" },
+      { text: "Блокировка", value: "disabled" },
       { text: "Действия", value: "action", sortable: false }
     ]
   }),
@@ -61,10 +61,6 @@ export default {
     _usersposts: {
       type: Array,
       default: null
-    },
-    _slug: {
-      type: String,
-      default: ""
     }
   },
 
@@ -85,7 +81,7 @@ export default {
     //!           Изменение объекта
     //?----------------------------------------------
     edit(item) {
-      this.$refs.revue.pop(item).then(result => {
+      this.$refs.revue.pop(this._usersposts, item).then(result => {
         if (result) {
           this.showMessage("Действие было выполнено успешно");
         } else {

@@ -165,6 +165,11 @@ export default {
                   icon: ""
                 },
                 {
+                  text: "Роли",
+                  href: "/admin/post-crud",
+                  icon: ""
+                },
+                {
                   text: "Отделения",
                   href: "/admin/department-crud",
                   icon: ""
@@ -177,21 +182,6 @@ export default {
                 {
                   text: "Места проведения",
                   href: "/admin/place-crud",
-                  icon: ""
-                },
-                {
-                  text: "ДО",
-                  href: "/admin/retraining-crud",
-                  icon: ""
-                },
-                {
-                  text: "Роли",
-                  href: "/admin/post-crud",
-                  icon: ""
-                },
-                {
-                  text: "Управление файлами",
-                  href: "/admin/file-crud",
                   icon: ""
                 }
               ]

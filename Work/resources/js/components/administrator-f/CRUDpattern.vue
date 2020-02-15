@@ -56,12 +56,7 @@ export default {
     page: 1, //Текущая страница
     itemsPerPage: 30, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
-    headers: [], //Структура таблицы и с полями которые требуется выводить
-    index: {
-      dep_name: null,
-      specialization: null,
-      dep_name_full: null
-    }
+    headers: [] //Структура таблицы и с полями которые требуется выводить
   }),
   mixins: [withSnackbar],
   props: {
@@ -106,13 +101,6 @@ export default {
     _func_download: {
       type: Function,
       default: null
-    },
-    //?----------------------------------------------
-    //!           Ранговая система
-    //?----------------------------------------------
-    _slug: {
-      type: String,
-      default: ""
     }
   },
   mounted() {
