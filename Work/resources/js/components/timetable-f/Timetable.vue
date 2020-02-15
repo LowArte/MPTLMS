@@ -1,27 +1,27 @@
 <template lang="pug">
   v-layout.column.wrap
     v-flex.ma-2.mt-0.row
-          v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
-            template(v-slot:activator="{ on }")
-              v-btn.justify-center(color="accent" block dark v-on="on") {{titleDialog}}
-            v-card
-              v-toolbar(dark color="primary")
-                v-btn(icon dark @click="dialog = false; group_change()")
-                  v-icon mdi-close
-                v-toolbar-title {{titleDialog}}
-                v-spacer
-              c_bildTimetable(:_departaments_info="_departaments_info" 
-                              :_groups_info="_groups_info" 
-                              :_schedule_bild="_schedule_bild"
-                              :_places="_places"
-                              :_disciplines="_disciplines"
-                              :_teachers="_teachers"
-                              :_slug="_slug")
     v-flex.ma-2.mb-0.row
         v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
         v-combobox.ma-1.mb-0(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
-    v-card-title.primary-title.pt-0.px-0.ml-4
-        v-chip.pa-2.ml-4(label) 
+    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+      template(v-slot:activator="{ on }")
+        v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
+      v-card
+        v-toolbar(dark color="primary")
+          v-btn(icon dark @click="dialog = false; group_change()")
+            v-icon mdi-close
+          v-toolbar-title {{titleDialog}}
+          v-spacer
+        c_bildTimetable(:_departaments_info="_departaments_info" 
+                        :_groups_info="_groups_info" 
+                        :_schedule_bild="_schedule_bild"
+                        :_places="_places"
+                        :_disciplines="_disciplines"
+                        :_teachers="_teachers"
+                        :_slug="_slug")
+    v-card-title.primary-title.pt-0.px-0.ml-3
+        v-chip.pa-2.ml-3(label) 
           v-card-title.pa-0.accent--text.font-weight-light.text-truncate.title Неделя {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
     v-layout.row.wrap
       v-flex.ma-2(v-for="(day_key,day_index) in days" :key="day_index")
