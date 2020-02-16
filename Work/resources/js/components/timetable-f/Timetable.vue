@@ -13,7 +13,7 @@
             v-icon mdi-close
           v-toolbar-title {{titleDialog}}
           v-spacer
-        c_bildTimetable(:_departaments_info="_departaments_info" 
+        c_bildTimetable.pa-2(:_departaments_info="_departaments_info" 
                         :_groups_info="_groups_info" 
                         :_schedule_bild="_schedule_bild"
                         :_places="_places"

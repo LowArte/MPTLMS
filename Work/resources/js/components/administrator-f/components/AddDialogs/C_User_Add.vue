@@ -20,7 +20,7 @@
                   v-card-actions
                     v-spacer
                     v-btn(v-if="post_name.id != null" color="accent" text @click="change(2)") Далее
-              v-stepper-step(:complete="steps > 2" step="2" @click="change(2)") Биограифческие данные
+              v-stepper-step(:complete="steps > 2" step="2" @click="change(2)") Биографические данные
               v-stepper-content(step="2")
                 v-card(:elevation="0")
                   v-text-field(v-model="item.thirdName" :rules="famRules" label="Фамилия")

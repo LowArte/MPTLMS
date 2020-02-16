@@ -11,7 +11,7 @@
                   v-icon mdi-close
                 v-toolbar-title {{titleDialog}}
                 v-spacer
-              c_bildReplacement(:_departaments_info="_departaments_info" 
+              c_bildReplacement.pa-2(:_departaments_info="_departaments_info" 
                               :_groups_info="_groups_info" 
                               :_schedule="_schedule"
                               :_disciplines="_disciplines"
