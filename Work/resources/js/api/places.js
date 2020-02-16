@@ -5,27 +5,30 @@ import axios from 'axios'
 export default 
 {
   //Получение мест проведения
-  getPlaces(data) 
+  getPlaces() 
   {
-    return axios.get('api/getters/places');
+    return axios.get('/api/getters/places');
   },
+
   //Сохранение мест проведения
-  savePlace(data) //!Требуется сделать рабочим
+  savePlace(place) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/place_management/save', 
+    return axios.post('/api/admin/place_management/save', 
     {
-      "place": data.place
+      "place": place
     });
   },
+
   //Удаление мест проведения
-  deletePlace(data) //!Требуется сделать рабочим
+  deletePlace(place_id) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/place_management/delete/'+data.id);
+    return axios.post('/api/admin/place_management/delete/'+place_id);
   },
+
   //Редактирование мест проведения
   editPlace(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/place_management/edit/'+data.place.id, 
+    return axios.post('/api/admin/place_management/edit/'+data.place.id, 
     {
       "place": data.place
     });

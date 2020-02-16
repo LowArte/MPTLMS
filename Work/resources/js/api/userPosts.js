@@ -5,27 +5,30 @@ import axios from 'axios'
 export default 
 {
   //Получение ролей
-  getPosts(data) 
+  getPosts() 
   {
-    return axios.get('api/getters/posts');
+    return axios.get('/api/getters/posts');
   },
+
   //Сохранение роли
   savePost(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/post_management/save', 
+    return axios.post('/api/admin/post_management/save', 
     {
       "post": data.post
     });
   },
+
   //Удаление роли
-  deletePost(data) //!Требуется сделать рабочим
+  deletePost(post_id) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/post_management/delete/'+data.id);
+    return axios.post('/api/admin/post_management/delete/'+post_id);
   },
+
   //Редактирование роли
   editPost(data) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/post_management/edit/'+data.id, 
+    return axios.post('/api/admin/post_management/edit/'+data.post_id, 
     {
       "post": data.post
     });

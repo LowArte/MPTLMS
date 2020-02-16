@@ -5,29 +5,32 @@ import axios from 'axios'
 export default 
 {
   //Получение отделений
-  getDepartments(data) 
+  getDepartments() 
   {
-    return axios.get('api/getters/department');
+    return axios.get('/api/getters/department');
   },
+
   //Сохранение отделений
-  saveDepartment(data) //!Требуется сделать рабочим
+  saveDepartment(department) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/department_management/save', 
+    return axios.post('/api/admin/department_management/save', 
     {
-      "department": data.department
+      "department": department
     });
   },
+
   //Удаление отделений
-  deleteDepartment(data) //!Требуется сделать рабочим
+  deleteDepartment(id) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/department_management/delete/'+data.id);
+    return axios.post('/api/admin/department_management/delete/'+id);
   },
+
   //Редактирование отделений
-  editDepartment(data) //!Требуется сделать рабочим
+  editDepartment(department) //!Требуется сделать рабочим
   {
-    return axios.post('/api/'+data.slug+'/department_management/edit/'+department.department.id, 
+    return axios.post('/api/admin/department_management/edit/'+department.id, 
     {
-      "department": data.department
+      "department": department
     });
   },
 

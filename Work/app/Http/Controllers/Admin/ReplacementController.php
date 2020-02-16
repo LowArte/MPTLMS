@@ -31,6 +31,7 @@ class ReplacementController extends BaseController
         $disciplines = $disciplineRepository->getDisciplines();
         $teachers = $teacherRepository->getTeachersWithFio();
         $schedule = $scheduleRepository->getScheduleByGroup($groups[0]->id);
+        $schedule_bild = $scheduleRepository->getScheduleBildByGroup($groups[0]->id);
         $replacements = $replacementRepository->getReplacements([
             ["swap_date", '=', date("Y-m-d")],
             ["schedule_id", '=', $scheduleRepository->getScheduleIdByGroup($groups[0]->id)],
@@ -48,7 +49,8 @@ class ReplacementController extends BaseController
             'replacements'=>$replacements,
             'disciplines'=>$disciplines,
             'teachers'=>$teachers,
-            'schedule'=>$schedule
+            'schedule'=>$schedule,
+            'schedule_bild'=>$schedule_bild
         ]);
     }
     

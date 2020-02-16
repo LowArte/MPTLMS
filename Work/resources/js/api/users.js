@@ -5,27 +5,30 @@ import axios from 'axios'
 export default 
 {
   //Получение пользователей
-  getUsers(data) 
+  getUsers() 
   {
-    return axios.get('api/getters/users');
+    return axios.get('/api/getters/users');
   },
+
   //Сохранение пользователя
-  saveUser(data) 
+  saveUser(user) 
   {
-    return axios.post('/api/'+data.slug+'/user_management/save', 
+    return axios.post('/api/admin/user_management/save', 
     {
-      "user": data.user
+      "user": user
     });
   },
+
   //Удаление пользователя
-  deleteUser(data) 
+  deleteUser(user_id) 
   {
-    return axios.post('/api/'+data.slug+'/user_management/delete/'+data.id);
+    return axios.post('/api/admin/user_management/delete/'+user_id);
   },
+  
   //Редактирование пользователя
   editUser(data) 
   {
-    return axios.post('/api/'+data.slug+'/user_management/edit/'+data.id, 
+    return axios.post('/api/admin/user_management/edit/'+data.user_id, 
     {
       "user": data.user
     });

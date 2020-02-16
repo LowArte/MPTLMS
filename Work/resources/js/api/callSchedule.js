@@ -5,11 +5,11 @@ import axios from 'axios'
 export default 
 {
   //Редактирование расписания звонков
-  edit (data) 
+  edit (callSchedule) 
   {
-    return axios.post('api/edit/callschedule ', 
+    return axios.post('/api/edit/callschedule', 
     {
-      'callSchedule': data.callSchedule
+      'callSchedule': callSchedule
     });
   }
 }

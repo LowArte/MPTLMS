@@ -1,22 +1,6 @@
 <template lang="pug">
     v-layout.column.wrap
-        c-comfirm-dialog(ref='qwestion')
-        v-flex.ma-2.mt-0.row
-          v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
-            template(v-slot:activator="{ on }")
-              v-btn.justify-center(color="accent" block dark v-on="on") {{titleDialog}}
-            v-card
-              v-toolbar(dark color="primary")
-                v-btn(icon dark @click="dialog = false; changeFilter()")
-                  v-icon mdi-close
-                v-toolbar-title {{titleDialog}}
-                v-spacer
-              c_bildReplacement.pa-2(:_departaments_info="_departaments_info" 
-                              :_groups_info="_groups_info" 
-                              :_schedule="_schedule"
-                              :_disciplines="_disciplines"
-                              :_teachers="_teachers"
-                              :_slug="_slug")
+        c-comfirm-dialog(ref='qwestion')              
         v-flex.ma-2.mb-0.pa-0.row
             v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
             v-combobox.ma-1(label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
@@ -27,9 +11,23 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
-        v-switch.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
-        v-switch.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
-        
+            v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+                template(v-slot:activator="{ on }")
+                    v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
+                v-card
+                    v-toolbar(dark color="primary")
+                        v-btn(icon dark @click="dialog = false; changeFilter()")
+                            v-icon mdi-close
+                        v-toolbar-title {{titleDialog}}
+                        v-spacer
+                    c_bildReplacement.pa-2(:_departaments_info="_departaments_info" 
+                                    :_groups_info="_groups_info" 
+                                    :_schedule="_schedule"
+                                    :_schedule_bild="_schedule_bild"
+                                    :_disciplines="_disciplines"
+                                    :_teachers="_teachers")
+        v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
+        v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
         v-flex.ma-0.mb-2.row(v-for="(groups_key, groups_index) in groups" :key="groups_index" align="center" justify="center" min-width="500px")
             v-flex.ma-2(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
                 v-hover(v-slot:default="{ hover }")
@@ -47,7 +45,7 @@
                             tbody
                                 tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                                     td {{ replacement_key['swap']['caselesson'] }}
-                                    td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} {{ replacement_key['swap']['oldteacher'] }}
+                                    td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} ({{ replacement_key['swap']['oldteacher'] }})
                                     td(v-else-if="replacement_key['swap']['oldlesson'] != null && replacement_key['swap']['oldlesson'] != ''") {{ replacement_key['swap']['oldlesson'] }}
                                     td(v-else) Дополнительное занятие
                                     td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
@@ -117,14 +115,10 @@ export default {
             type: Object,
             default: null
         }, //JSON дисциплин
-        _slug: {
-            data: String,
-            default: ""
-        }, //Модуль
-        _controller: {
-            data: String,
-            default: "replacements"
-        } //Контроллер
+        _schedule_bild: {
+            type: Object,
+            default: null
+        } //Расписание
     },
 
     methods:
@@ -136,7 +130,7 @@ export default {
                 if (confirmResult) 
                 {
                     replacements_api
-                    .deleteReplacement({id: id, slug: this._slug, controller: this._controller})
+                    .deleteReplacement(id)
                         .then(res => {
                             this.showMessage("Удалена!");
                             this.changeFilter();
@@ -156,7 +150,7 @@ export default {
         departament_change() 
         {
             group_api
-                .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
+                .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
                 .then(res => {
                     this.groups_info.groups = res.data.groups_info.groups;
                     this.groups_info.selected_group = this.groups_info.groups[0];
@@ -173,7 +167,7 @@ export default {
             if(this.checkAllGroup && this.checkAllDate) //Получить все замены для всех дат и групп
             {
                 replacements_api
-                    .getReplacements({slug: this._slug, controller: this._controller})
+                    .getReplacements()
                     .then(res => {
                         this.replacements = res.data.replacements;
                         this.parseReplacement();
@@ -186,7 +180,7 @@ export default {
             if (this.checkAllGroup) //Получить замены для всех групп
             {
                 replacements_api
-                    .getReplacementsByDate({date: this.dateDialog.date, slug: this._slug, controller: this._controller})
+                    .getReplacementsByDate(this.dateDialog.date)
                     .then(res => {
                         this.replacements = res.data.replacements;
                         this.parseReplacement();
@@ -199,7 +193,7 @@ export default {
             if (this.checkAllDate) //Получить все замены для всех дат
             {
                 replacements_api
-                    .getReplacementsByGroup({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
+                    .getReplacementsByGroup(this.groups_info.selected_group.id)
                     .then(res => {
                         this.replacements = res.data.replacements;
                         this.parseReplacement();
@@ -211,7 +205,7 @@ export default {
             else 
             {
                 replacements_api
-                    .getReplacementsByGroupByDate({group_id: this.groups_info.selected_group.id, date: this.dateDialog.date, slug: this._slug, controller: this._controller})
+                    .getReplacementsByGroupByDate({group_id: this.groups_info.selected_group.id, date: this.dateDialog.date})
                     .then(res => {
                         this.replacements = res.data.replacements;
                         this.parseReplacement();

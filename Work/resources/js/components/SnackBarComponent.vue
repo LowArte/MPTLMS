@@ -3,7 +3,7 @@
     | {{ snackbarText }}
     br
     | {{ snackbarSubtext }}
-    v-btn.ma-2.ml-0(text @click.native='close')
+    v-btn.ma-2.ml-0(text @click='close')
       v-icon mdi-close
 </template>
 

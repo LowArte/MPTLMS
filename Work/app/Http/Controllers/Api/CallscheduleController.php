@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Modifications\Update\UpdateCallScheduleModification;
 use App\Repositories\ModelRepository\CallScheduleRepository;
-use Request;
+use Illuminate\Http\Request;
 
 class CallscheduleController extends BaseController
 { 

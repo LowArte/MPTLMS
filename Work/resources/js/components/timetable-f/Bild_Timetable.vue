@@ -9,7 +9,6 @@
           v-tab(v-for="(day_key,day_index) in days" :key="day_index") {{day_key}}
           v-tab-item(v-for="(day_key, day_index) in days" :key="day_index") 
             v-card.mx-auto.pa-1.max(width='100%' height='auto')
-              //- p {{schedule[day_key]}}
               v-select.pa-0.mb-0.mt-2(v-model="schedule[day_key]['Place']" label="Место проведения" solo :items="_places" item-text="place_name" item-value="id")
               v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
                 v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
@@ -71,15 +70,7 @@ export default {
     _schedule_bild: {
       type: Object,
       default: null
-    }, //Расписание
-    _slug: {
-      data: String,
-      default: ""
-    }, //Модуль
-    _controller: {
-      data: String,
-      default: "timetable"
-    } //Контроллер
+    } //Расписание
   },
 
   methods: 
@@ -88,9 +79,9 @@ export default {
     departament_change() 
     {
       group_api
-        .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
+        .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
         .then(res => {
-          this.groups_info.groups = res.data.groups;
+          this.groups_info.groups = res.data.groups_info.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
           this.group_change();
         })
@@ -103,7 +94,7 @@ export default {
     group_change() 
     {
       schedule_api
-        .getScheduleBild({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
+        .getScheduleBildByGroupId(this.groups_info.selected_group.id)
         .then(res => {
           this.schedule = res.data.schedule;
         })
@@ -119,12 +110,12 @@ export default {
       schedule_api
         .editSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule, slug: this._slug, controller: this._controller})
         .then(res => {
-          this.group_change();
           this.showMessage('Расписание сохранено!');
         })
         .catch(ex => {
           this.showError('Расписание не сохранено! ' + ex);
         });
+      this.group_change();
     }
   },
   

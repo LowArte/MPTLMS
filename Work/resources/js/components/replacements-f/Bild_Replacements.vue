@@ -10,7 +10,6 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
-            v-layout.row.wrap
         v-layout.row.wrap
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
@@ -58,10 +57,10 @@
                         v-card-text.ma-0.pb-1.pa-0(v-if="replacement.oldlesson == '' || replacement.oldlesson == null") Дополнительное занятие
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-0.mt-2(v-model="replacement.caselesson" :rules="rules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
-                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' small-chips chips multiple)
-                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' item-value="id" small-chips chips multiple)
+                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' item-value="id" small-chips chips multiple)
                         v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
-                        v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") {{ replacement.oldlesson }} {{ replacement.oldteacher }}
+                        p {{replacement}}
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
 </template>
@@ -89,12 +88,13 @@ export default {
             caselesson: "", 
             lesson: [], 
             teacher: [], 
-            oldlesson: "", 
-            oldteacher: ""
+            oldlesson: [], 
+            oldteacher: []
         },  //Замена которая потом будет сохранена 
         groups_info: null, //Группы
         departaments_info: null, //Отделения
         schedule: null, //Расписание выбранного дня
+        schedule_bild: null, //Расписание выбранного дня
         week: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'], //Неделя
         isToday: null, //Текущая четность недели
         date_week: 0,
@@ -126,14 +126,10 @@ export default {
             type: Object,
             default: null
         }, //JSON дисциплин
-        _slug: {
-            data: String,
-            default: ""
-        }, //Модуль
-        _controller: {
-            data: String,
-            default: "replacements"
-        } //Контроллер
+        _schedule_bild: {
+            type: Object,
+            default: null
+        } //Расписание
     },
 
     methods:
@@ -149,9 +145,9 @@ export default {
         departament_change() 
         {
             group_api
-                .getGroup({department_id: this.departaments_info.selected_departament.id, slug: this._slug, controller: this._controller})
+                .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
                 .then(res => {
-                    this.groups_info.groups = res.data.groups;
+                    this.groups_info.groups = res.data.groups_info.groups;
                     this.groups_info.selected_group = this.groups_info.groups[0];
                     this.caseDate();
                 })
@@ -174,9 +170,19 @@ export default {
             else
             {
                 schedule_api
-                    .getSchedule({group_id: this.groups_info.selected_group.id, slug: this._slug, controller: this._controller})
+                    .getScheduleByGroupId(this.groups_info.selected_group.id)
                     .then(res => {
                         this.schedule = res.data.schedule[this.week[this.date_week]];
+                        this.parseSchedule();
+                    })
+                    .catch(ex => {
+                        this.showError(ex);
+                    });
+
+                schedule_api
+                    .getScheduleBildByGroupId(this.groups_info.selected_group.id)
+                    .then(res => {
+                        this.schedule_bild = res.data.schedule[this.week[this.date_week]];
                         this.parseSchedule();
                     })
                     .catch(ex => {
@@ -190,7 +196,7 @@ export default {
         {
             if (this.$refs.BildReplacement.validate())
             replacements_api
-                .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date, slug: this._slug, controller: this._controller})
+                .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date})
                 .then(res => {
                     this.showMessage('Замена сохранена!');
                 })
@@ -206,20 +212,20 @@ export default {
             if (this.schedule != null)
             if (!this.schedule[number].chisl)
             {
-                this.replacement.oldlesson = this.schedule[number].LessonChisl;
-                this.replacement.oldteacher = this.schedule[number].TeacherChisl;
+                this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
+                this.replacement.oldteacher = this.schedule_bild[number].TeacherChisl;
             }
             else
             {
                 if(this.isChisl() == 0)
                 {
-                    this.replacement.oldlesson = this.schedule[number].LessonChisl;
-                    this.replacement.oldteacher = this.schedule[number].TeacherChisl;    
+                    this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
+                    this.replacement.oldteacher = this.schedule_bild[number].TeacherChisl;    
                 }
                 else
                 {
-                    this.replacement.oldlesson = this.schedule[number].LessonZnam;
-                    this.replacement.oldteacher = this.schedule[number].TeacherZnam;
+                    this.replacement.oldlesson = this.schedule_bild[number].LessonZnam;
+                    this.replacement.oldteacher = this.schedule_bild[number].TeacherZnam;
                 }
             }
         },
@@ -239,11 +245,6 @@ export default {
                     this.schedule[j]['TeacherChisl'] = this.schedule[j]['TeacherChisl'].join(' / ');
                 if(Array.isArray(this.schedule[j]['TeacherZnam'])) 
                     this.schedule[j]['TeacherZnam'] = this.schedule[j]['TeacherZnam'].join(' / ');
-
-                if (this.schedule[j]['TeacherChisl'] != "")
-                    this.schedule[j]['TeacherChisl'] = "(" + this.schedule[j]['TeacherChisl'] + ")";
-                if (this.schedule[j]['TeacherZnam'] != "")
-                    this.schedule[j]['TeacherZnam'] = "(" + this.schedule[j]['TeacherZnam'] + ")";
             }
 
             if (this.replacement.caselesson != "")
@@ -256,10 +257,17 @@ export default {
     {
         this.date_week = (new Date(this.dateDialog.date)).getDay();
         this.schedule = this._schedule[this.week[this.date_week]];
+        this.schedule_bild = this._schedule_bild[this.week[this.date_week]];
         this.groups_info = this._groups_info;
         this.departaments_info = this._departaments_info;
         this.replacements = this._replacements;
         this.parseSchedule();
+    },
+
+    mounted()
+    {
+        if((new Date(this.dateDialog.date)).getDay() == 0)
+            this.caseDate();
     }
 }
 </script>

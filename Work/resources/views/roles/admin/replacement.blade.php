@@ -8,6 +8,6 @@
         :_disciplines="{{json_encode($disciplines) ?? null}}"
         :_teachers="{{json_encode($teachers) ?? null}}"
         :_schedule="{{json_encode($schedule) ?? null}}"
-        _slug="{{auth()->user()->post->slug}}"/>
+        :_schedule_bild="{{json_encode($schedule_bild) ?? null}}"/>
 </v-container>
 @endsection

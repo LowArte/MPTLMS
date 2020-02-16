@@ -12,11 +12,11 @@ class CreateReplacementModification extends BaseModification
         return Model::class;
     }
 
-    public function addReplacementToDatabase($data, $id)
+    public function addReplacementToDatabase($newreplacement, $date,  $id)
     {
         $replacement = new Model();
-        $replacement->swap_date = $data['date'];
-        $replacement->swap = json_encode($data['replacement']);
+        $replacement->swap_date = $date;
+        $replacement->swap = json_encode($newreplacement);
         $replacement->schedule_id = $id;
         $replacement->save();
         

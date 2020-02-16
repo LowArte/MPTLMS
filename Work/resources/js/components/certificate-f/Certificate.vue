@@ -110,8 +110,8 @@ export default {
       cerificateApi
         .save({ data: {"Текст заявки": this.text}, type: "Справка", slug: "student" })
         .then(res => {
-          this.showMessage("Справка отправленна");
           this.cleardata();
+          this.showMessage("Справка отправленна");
         })
         .catch(exp => {
           this.showError("Произошла ошибка");
@@ -119,7 +119,8 @@ export default {
         });
     },
     cleardata() {
-      this.model = "";
+      this.text = "";
+      this.enabled = false;
     }
   },
 

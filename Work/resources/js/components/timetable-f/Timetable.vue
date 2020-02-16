@@ -18,8 +18,7 @@
                         :_schedule_bild="_schedule_bild"
                         :_places="_places"
                         :_disciplines="_disciplines"
-                        :_teachers="_teachers"
-                        :_slug="_slug")
+                        :_teachers="_teachers")
     v-card-title.primary-title.pt-0.px-0.ml-3
         v-chip.pa-2.ml-3(label) 
           v-card-title.pa-0.accent--text.font-weight-light.text-truncate.title Неделя {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
@@ -110,10 +109,6 @@ export default {
       type: Object,
       default: null
     }, //Расписания
-    _slug: {
-      data: String,
-      default: ""
-    }, //Модуль
     _controller: {
       data: String,
       default: "timetable"
@@ -140,11 +135,7 @@ export default {
     //Получение группы при изменении отделения
     departament_change() {
       group_api
-        .getGroup({
-          department_id: this.departaments_info.selected_departament.id,
-          slug: this._slug,
-          controller: this._controller
-        })
+        .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
         .then(res => {
           this.groups_info.groups = res.data.groups_info.groups;
           this.groups_info.selected_group = this.groups_info.groups[0];
@@ -164,11 +155,7 @@ export default {
     //Получение расписания при изменении выбранной группы
     group_change() {
       schedule_api
-        .getSchedule({
-          group_id: this.groups_info.selected_group.id,
-          slug: this._slug,
-          controller: this._controller
-        })
+        .getScheduleByGroupId(this.groups_info.selected_group.id)
         .then(res => {
           this.schedule = res.data.schedule;
           this.parseSchedule();

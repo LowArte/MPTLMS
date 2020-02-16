@@ -7,7 +7,7 @@ export default
   //Установка опций
   setOptionValue (data) 
   {
-    return axios.post('api/admin/options/set_options ', 
+    return axios.post('/api/admin/options/set_options', 
     {
       'id':data.id,
       'value':String(data.value)

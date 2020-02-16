@@ -6,7 +6,7 @@ use App\Modifications\Create\CreateReplacementModification;
 use App\Modifications\Delete\DeleteReplacementModification;
 use App\Repositories\ModelRepository\ReplacementRepository;
 use App\Repositories\ModelRepository\ScheduleRepository;
-use Request;
+use Illuminate\Http\Request;
 
 class ReplacementController extends BaseController
 { 
@@ -62,10 +62,10 @@ class ReplacementController extends BaseController
      * @param id schedule id
      * @return JSON
      */
-    public function save($id, Request $request, ScheduleRepository $scheduleRepository, CreateReplacementModification $createReplacementModification)
+    public function save($id, $date, Request $request, ScheduleRepository $scheduleRepository, CreateReplacementModification $createReplacementModification)
     {
         $scheduleId = $scheduleRepository->getScheduleIdByGroup($id);
-        $result = $createReplacementModification->addReplacementToDatabase($request, $scheduleId);
+        $result = $createReplacementModification->addReplacementToDatabase($request['replacement'], $date, $scheduleId);
 
         if($result)
             return response()->json(["success"=>true]);

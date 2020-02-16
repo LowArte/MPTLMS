@@ -41,14 +41,14 @@ class ApiRoutes
          * Методы отвечаюшие за добавление общих данных
          */
         Route::name('save.')->prefix('save')->group(function () {
-            Route::post('replacement/{group_id}', 'Api\ReplacementController@save')->name('replacement');
+            Route::post('replacement/{group_id}/{date}', 'Api\ReplacementController@save')->name('replacement');
         });
         /**
          * Методы отвечаюшие за изменения общих данных
          */
 
         Route::name('edit.')->prefix('edit')->group(function () {
-            Route::post('callschedule', 'Admin\CallScheduleController@edit')->name('callschedule'); 
+            Route::post('callschedule', 'Api\CallScheduleController@edit')->name('callschedule'); 
 
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
         });

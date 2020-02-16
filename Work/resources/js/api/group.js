@@ -1,37 +1,36 @@
 //Api для работы с учебными группами отделений
 
 import axios from 'axios'
-import {
-    mapGetters
-} from 'vuex'
-
-let slug = mapGetters(["slug"]).slug
 
 export default {
     //Получение групп по id отделению
-    getGroupByDepartamentId(data) {
-        return axios.get('api/getters/group_by_departament_id/' + data.department_id);
+    getGroupsByDepartamentId(department_id) {
+        return axios.get('/api/getters/group_by_departament_id/' + department_id);
     },
+
     //Получение всех групп
-    getGroups(data) {
-        return axios.get(' api/getters/groups ');
+    getGroups() {
+        return axios.get('/api/getters/groups');
     },
+
     //Сохранение группы
-    saveGroup(data) //!Требуется сделать рабочим
+    saveGroup(group) //!Требуется сделать рабочим
     {
-        return axios.post('/api/' + slug + '/group_management/save', {
-            "group": data.group
+        return axios.post('/api/admin/group_management/save', {
+            "group": group
         });
     },
+
     //Удаление группы
-    deleteGroup(data) //!Требуется сделать рабочим
+    deleteGroup(group_id) //!Требуется сделать рабочим
     {
-        return axios.post('/api/' + slug + '/group_management/delete/' + data.id);
+        return axios.post('/api/admin/group_management/delete/' + group_id);
     },
+
     //Редактирование группы
     editGroup(data) //!Требуется сделать рабочим
     {
-        return axios.post('/api/' + slug + '/group_management/edit/' + data.group.id, {
+        return axios.post('/api/admin/group_management/edit/' + data.group.id, {
             "group": data.group
         });
     }

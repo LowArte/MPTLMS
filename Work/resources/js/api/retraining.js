@@ -7,8 +7,9 @@ export default
   //Получение дополнительного образования
   getRetrainings(data) 
   {
-    return axios.get('api/getters/retrainings');
+    return axios.get('/api/getters/retrainings');
   },
+
   //Сохранение дополнительного образования
   saveRetraining(data) //!Требуется сделать рабочим
   {
@@ -17,11 +18,13 @@ export default
       "retraining": data.retraining
     });
   },
+
   //Удаление дополнительного образования
   deleteRetraining(data) //!Требуется сделать рабочим
   {
     return axios.post('/api/'+data.slug+'/retraining_management/delete/'+data.id);
   },
+
   //Редактирование дополнительного образования
   editRetraining(data) //!Требуется сделать рабочим
   {
@@ -30,6 +33,7 @@ export default
       "retraining": data.retraining
     });
   },
+
   //Подробнее об дополнительном образовании
   detailRetraining(data) //!Требуется сделать рабочим
   {

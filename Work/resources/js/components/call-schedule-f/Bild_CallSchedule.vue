@@ -68,7 +68,7 @@ export default {
       if (this.$refs.BildCallSchedule.validate()) 
       {
         callScedule
-          .edit({callSchedule: this.timeTable, slug: this._slug})
+          .edit(this.timeTable)
           .then(res => {
            this.showMessage("Расписание звонков принято!");
           })

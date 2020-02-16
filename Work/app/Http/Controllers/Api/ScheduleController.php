@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Modifications\Update\UpdateScheduleModification;
 use App\Repositories\ModelRepository\ScheduleRepository;
-use Request;
+use Illuminate\Http\Request;
 
 class ScheduleController extends BaseController
 { 
