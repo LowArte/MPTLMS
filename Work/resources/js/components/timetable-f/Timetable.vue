@@ -4,7 +4,7 @@
     v-flex.ma-2.mb-0.row
         v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
         v-combobox.ma-1.mb-0(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
-    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" v-if="_schedule_bild != null")
       template(v-slot:activator="{ on }")
         v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
       v-card

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Modifications\Update\UpdateScheduleModification;
 use App\Repositories\ModelRepository\DepartamentRepository;
 use App\Repositories\ModelRepository\DisciplineRepository;
 use App\Repositories\ModelRepository\GroupRepository;

@@ -26,6 +26,8 @@ class TeacherRoutes
         Route::middleware(['profilactic','auth','access'])->name('teacher.')->prefix('teacher')->group(function()
         {
             Route::get('/home', 'Teacher\HomeController@index')->name('home');
+            Route::get('/timetable','Teacher\TimetableController@index')->name('timetable');
+            Route::get('/replacements', 'Teacher\ReplacementController@index')->name('replacements');
             Route::get('/feedback','Teacher\FeedbackController@index')->name('feedback');
         });
     }

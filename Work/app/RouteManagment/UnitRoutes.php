@@ -26,6 +26,9 @@ class UnitRoutes
         Route::middleware(['profilactic','auth','access'])->name('unit.')->prefix('unit')->group(function()
         {
             Route::get('/home', 'Unit\HomeController@index')->name('home');
+            Route::get('/timetable','Unit\TimetableController@index')->name('timetable');
+            Route::get('/replacements', 'Unit\ReplacementController@index')->name('replacements');
+            Route::get('/callschedule','Unit\CallScheduleController@index')->name('callschedule');
             Route::get('/feedback','Unit\FeedbackController@index')->name('feedback');
         });
     }

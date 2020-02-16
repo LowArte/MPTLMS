@@ -11,7 +11,7 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
-            v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+            v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" v-if="_schedule != null")
                 template(v-slot:activator="{ on }")
                     v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
                 v-card
@@ -41,7 +41,7 @@
                                     th.text-left Что заменяют
                                     th.text-left На что заменяют
                                     th.text-left Дата замены
-                                    th.text-left Действие
+                                    th.text-left(v-if="_schedule != null") Действие
                             tbody
                                 tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                                     td {{ replacement_key['swap']['caselesson'] }}
@@ -52,7 +52,7 @@
                                     td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
                                     td(v-else) Занятие отменено
                                     td {{ replacement_key['created_at'] }}
-                                    td 
+                                    td(v-if="_schedule != null")
                                         v-icon.small(@click="deleteItem(replacement_key['id'])") delete
 </template>
 

@@ -217,12 +217,12 @@ export default {
               children: [
                 {
                   icon: "",
-                  text: "Расписание",
+                  text: "Учебное расписание",
                   href: "/student/timetable"
                 },
                 {
                   icon: "",
-                  text: "Измения в расписание",
+                  text: "Измения в расписании",
                   href: "/student/replacements"
                 },
                 {
@@ -336,6 +336,22 @@ export default {
               href: "/teacher/home"
             },
             {
+              text: "Учебный процесс",
+              icon: "school",
+              children: [
+                {
+                  icon: "",
+                  text: "Учебное раписание",
+                  href: "/teacher/timetable"
+                },
+                {
+                  icon: "",
+                  text: "Измения в расписании",
+                  href: "/teacher/replacements"
+                }
+              ]
+            },
+            {
               icon: "feedback",
               text: "Обратная связь",
               href: "/teacher/feedback"
@@ -349,6 +365,27 @@ export default {
               icon: "home",
               text: "Главная",
               href: "/unit/home"
+            },
+            {
+              icon: "assignment",
+              text: "Расписания",
+              children: [
+                {
+                  text: "Учебное расписание",
+                  href: "/unit/timetable",
+                  icon: ""
+                },
+                {
+                  text: "Изменения в расписании",
+                  href: "/unit/replacements",
+                  icon: ""
+                },
+                {
+                  text: "Расписание звонков",
+                  href: "/unit/callschedule",
+                  icon: ""
+                }
+              ]
             },
             {
               icon: "feedback",

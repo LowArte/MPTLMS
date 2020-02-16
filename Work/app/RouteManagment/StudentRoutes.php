@@ -33,13 +33,13 @@ class StudentRoutes
             Route::get('/home', 'Student\HomeController@index')->name('home');
             Route::get('/news', 'WarningController@index')->name('timetable');
             Route::get('/account', 'Student\AccountController@index')->name('account');
-            Route::get('/timetable', 'WarningController@index')->name('timetable');
+            Route::get('/timetable', 'Student\TimetableController@index')->name('timetable');
             Route::get('/changes', 'WarningController@index')->name('changes');
             Route::get('/exams', 'WarningController@index')->name('exams');
             Route::get('/homework', 'WarningController@index')->name('homework');
             Route::get('/progress', 'WarningController@index')->name('progress');
             Route::get('/teachers', 'WarningController@index')->name('teachers');
-            Route::get('/replacements', 'WarningController@index')->name('replacements');
+            Route::get('/replacements', 'Student\ReplacementController@index')->name('replacements');
             Route::get('/blueprints', 'WarningController@index')->name('blueprints');
             Route::get('/drivingschool', 'WarningController@index')->name('drivingschool');
             Route::get('/certificate', 'Student\CertificateController@index')->name('certificate');

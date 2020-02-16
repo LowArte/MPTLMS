@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Modifications\Update\UpdateCallScheduleModification;
 use App\Repositories\ModelRepository\CallScheduleRepository;
 use App\Repositories\ModelRepository\PlaceRepository;
 use Illuminate\Http\Request;
