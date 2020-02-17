@@ -23,7 +23,7 @@
               v-btn.ma-2.ml-1(text v-on="on" @click="Update()")
                   v-icon replay
                   span.ma-2 Обновить
-          span Новая запись
+          span Обновить таблицу
         v-card-title.ma-0.ml-4.mr-4.pa-0
           v-text-field.ma-0.pa-0(v-model='search' label='Поиск' single-line='' hide-details='')
       template(v-slot:item.done="{ item }")

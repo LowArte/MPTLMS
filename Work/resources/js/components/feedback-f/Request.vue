@@ -11,7 +11,7 @@
                   v-btn.ma-2.ml-1(text v-on="on" @click="Update()")
                       v-icon replay
                       span.ma-2 Обновить
-              span Новая запись
+              span Обновить таблицу
             v-tooltip(bottom)
               template(v-slot:activator="{ on }")
                 v-btn.ma-2.ml-1(text color="red" v-on="on" @click="clear")
