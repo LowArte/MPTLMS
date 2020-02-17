@@ -403,8 +403,8 @@ export default {
               href: "/chancellery/home"
             },
             {
-              icon: "home",
-              text: "Заказ справок",
+              icon: "library_books",
+              text: "Заказанные справки",
               href: "/chancellery/listcertificate"
             },
             {

@@ -113,9 +113,9 @@ export default {
           this.cleardata();
           this.showMessage("Справка отправленна");
         })
-        .catch(exp => {
-          this.showError("Произошла ошибка");
+        .catch(ex => {
           this.cleardata();
+          this.showError("Произошла ошибка! " + ex);
         });
     },
     cleardata() {

@@ -8,6 +8,12 @@
             v-card-title.ma-0.pa-0 Обращение пользователей
             v-tooltip(bottom)
               template(v-slot:activator="{ on }")
+                  v-btn.ma-2.ml-1(text v-on="on" @click="Update()")
+                      v-icon replay
+                      span.ma-2 Обновить
+              span Новая запись
+            v-tooltip(bottom)
+              template(v-slot:activator="{ on }")
                 v-btn.ma-2.ml-1(text color="red" v-on="on" @click="clear")
                   v-icon mdi-delete
                   span.ma-2 Удалить все записи
@@ -20,13 +26,9 @@
             td(:colspan='headers.length' v-if='expanded.length > 0')
               //- v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
               v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
-              br
-              v-form.mt-0.pt-0(v-model='form')
-                v-container.mt-0.pt-0
-                  v-row.mt-0.pt-0
-                    v-textarea.mt-0.pt-0(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
-                  v-row.pa-2.justify-center
-                    v-btn.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
+              v-form.ma-2.pt-2(v-model='form')
+                v-textarea.mt-0.pt-0(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
+                v-btn.ma-1.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
         .text-center.pt-2.mx-auto.pa-0
             v-pagination(v-model='page' :length='pageCount')
 </template>
@@ -94,11 +96,7 @@ export default {
     _requests: {
       data: Object,
       default: ""
-    },
-    _slug: {
-      type: String,
-      default: ""
-    } //Модуль
+    }
   },
 
   mounted() {
@@ -120,17 +118,29 @@ export default {
         .sendEmail({
           mail: email,
           text: this.modelmessage,
-          id: this.expanded[0].id,
-          slug: this._slug
+          id: this.expanded[0].id
         })
         .then(result => {
           this.showMessage("Сообщение отправлено");
           this.items.splice(this.expanded[0]);
         })
-        .catch(exception => {
-          this.showError("Произошла следующая ошибка: " + exception);
+        .catch(ex => {
+          this.showError("Произошла следующая ошибка! " + ex);
         });
       this.modelmessage = "";
+    },
+
+    //Отправка сообщения о том, что справка готова
+    Update() 
+    {
+        feedbackApi
+          .getFeedbackRequests()
+          .then(res => {
+            this.items = res.data.feedback;
+          })
+          .catch(ex => {
+            this.showError("Произошла ошибка! " + ex);
+          });
     }
   }
 };

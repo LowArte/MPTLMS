@@ -17,14 +17,14 @@ class SwapScheduleSeeder extends Seeder
             "swap_date" => new DateTime(),
             "schedule_id" => 1,
             "swap" =>  json_encode(array(
-                "schedyle_number" => "1",
+                "caselesson" => "1",
                 "schedule_new" => array(
-                    "Lesson" => "",
-                    "Teacher" => ""
+                    "Lesson" => "1",
+                    "Teacher" => "1"
                 ),
                 "schedule_old" => array(
-                    "Lesson" => "",
-                    "Teacher" => ""
+                    "Lesson" => "2",
+                    "Teacher" => "1"
                 )
             ))
         ];

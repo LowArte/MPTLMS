@@ -12,7 +12,7 @@ class CertificateRepository extends BaseRepository
 
     public function getCertificates()
     {
-        $columns = ['id','user_id','type', 'certificates_data', 'created_at'];
+        $columns = ['id','user_id','type', 'certificates_data', 'done', 'created_at'];
         $result = $this->startCondition()->select($columns)->orderBy('id', 'desc')->toBase()->get();
         return $result;
     }

@@ -18,6 +18,7 @@ class CreateCertificatesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string("type");
             $table->json('certificates_data');
+            $table->boolean("done");
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();

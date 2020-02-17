@@ -26,6 +26,10 @@ class ApiRoutes
 
             Route::get('retrainings','Api\RetrainingController@getRetraining')->name('retrainings');
 
+            Route::get('get_certificates', 'Api\CertificateController@getCertificates')->name('getCertificates');
+            
+            Route::get('get_feedback_requests', 'Api\FeedbackController@getFeedbackRequests')->name('get_feedback_requests');
+
             Route::get('group_by_departament_id/{departament_id}', 'Api\GroupController@groupByDepartamentId')->name('group_by_departament_id');
             Route::get('groups','Api\GroupController@getGroups')->name('groups'); 
 

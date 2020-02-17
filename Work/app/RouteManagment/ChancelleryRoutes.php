@@ -16,6 +16,12 @@ class ChancelleryRoutes
             {
                 Route::post('save', 'Chancellery\FeedbackController@save')->name('save_feedback');
             });
+
+            Route::name('certificate.')->prefix('certificate')->group(function () 
+            {
+                Route::post('sendEmailAnswer/{id}/{email}', 'Chancellery\CertificateController@sendEmailAnswer')->name('sendEmailAnswer');
+                Route::post('sendEmailDone/{id}/{email}', 'Chancellery\CertificateController@sendEmailDone')->name('sendEmailDone');
+            });
         });
     }
     /**
