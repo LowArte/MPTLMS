@@ -8,8 +8,8 @@ export default {
         return axios.get('/api/getters/posts');
     },
 
-    //Получение ролей
-    getPost(id) { //!Требуется сделать рабочим
+    //*Получение роли
+    getPost(id) { //! Получение должности по ID
         return axios.get('/api/admin/getters/posts' + id);
     },
 

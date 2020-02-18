@@ -82,7 +82,7 @@ export default {
     //!           Изменение объекта
     //?----------------------------------------------
     edit(item) {
-      this.$refs.revue.pop(this._usersposts, item).then(result => {
+      this.$refs.revue.pop(item).then(result => {
         if (result) {
           this.showMessage("Действие было выполнено успешно");
         } else {

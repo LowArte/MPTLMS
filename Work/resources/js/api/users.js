@@ -9,8 +9,8 @@ export default {
     },
 
     //Получение пользователей
-    getUser(id) {
-        return axios.get('/api/admin/getters/users/' + id);
+    getUser(user_id) { //!
+        return axios.get('/api/admin/getters/users/' + user_id);
     },
 
     //Сохранение пользователя

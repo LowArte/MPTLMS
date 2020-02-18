@@ -33,7 +33,7 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-//import apigroup from "../../../../api/group";
+import apiposts from "../../../../api/userPosts";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -81,9 +81,35 @@ export default {
       dateDialog: null
     };
   },
+  mounted() {
+    apiposts
+      .getPosts()
+      .then(result => {
+        this.posts = result.data.posts;
+      })
+      .catch(exception => {
+        this.showInfo("Данные не получены в следствии: " + exception);
+      });
+    apidepartments
+      .getDepartments()
+      .then(result => {
+        this.departaments = result.data;
+        console.log(result.data);
+      })
+      .catch(exception => {
+        this.showInfo("Данные не получены в следствии: " + exception);
+      });
+    apigroup
+      .getGroupsByDepartamentId(this.item.dep_id)
+      .then(result => {
+        this.groups = result.data.groups_info.groups;
+      })
+      .catch(exception => {
+        this.showError(exception);
+      });
+  },
   methods: {
-    pop(posts, item) {
-      this.posts = posts;
+    pop(item) {
       this.item = Object.assign({}, item);
       this.dialog = true;
       return new Promise((resolve, reject) => {

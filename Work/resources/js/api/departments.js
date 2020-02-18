@@ -3,13 +3,13 @@
 import axios from 'axios'
 
 export default {
-    //Получение отделений
-    getDepartments() {
+    //*Получение отделений
+    getDepartments() { //! Не работает
         return axios.get('/api/getters/department');
     },
 
-    //Получение отделений
-    getDepartment(id) {
+    //*Получение отделеня
+    getDepartment(id) { //! Нужно получать department по ID
         return axios.get('/api/admin/getters/department' + id);
     },
 
