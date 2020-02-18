@@ -11,7 +11,7 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-//import api from "../../../api/";
+import api from "../../../api/places";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -51,7 +51,7 @@ export default {
     _places: {
       type: Array,
       default: null
-    },
+    }
   },
 
   methods: {
@@ -61,7 +61,14 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .savePlace(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo("Действие было отклонено по причине: " + exception);
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -73,7 +80,14 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .editPlace(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo("Действие было отклонено по причине: " + exception);
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -97,7 +111,14 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .deletePlace(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo("Действие было отклонено по причине: " + exception);
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

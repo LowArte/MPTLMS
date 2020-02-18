@@ -54,15 +54,7 @@ export default {
     _groups: {
       type: Array,
       default: null
-    }, //Данные групп
-    _departments: {
-      type: Array,
-      default: null
-    }, //Данные отделений
-    _slug: {
-      type: String,
-      default: ""
-    } //Модуль
+    }
   },
 
   methods: {

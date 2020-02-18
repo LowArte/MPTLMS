@@ -33,5 +33,10 @@ export default {
         return axios.post('/api/admin/group_management/edit/' + data.group.id, {
             "group": data.group
         });
+    },
+
+    dropGroup() //!Требуется сделать рабочим
+    {
+
     }
 }

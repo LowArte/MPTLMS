@@ -32,5 +32,10 @@ export default
     {
       "place": data.place
     });
+  },
+
+  dropPlace() //!Требуется сделать рабочим
+  {
+
   }
 }

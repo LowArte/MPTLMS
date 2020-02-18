@@ -3,7 +3,7 @@
       v-card.mx-auto.pa-3(height='auto' width='100%')
         v-data-table.elevation-0.pa-0.ma-0(:headers="headers" :items="flood" :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
-                v-card-title.my-2.ma-0.py-2.text-truncate CRUD {{title}}
+                v-card-title.my-2.ma-0.py-2.text-truncate Менеджмент {{title}}
                 v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
                         v-btn.ma-2.ml-1(text v-on="on" @click="add")

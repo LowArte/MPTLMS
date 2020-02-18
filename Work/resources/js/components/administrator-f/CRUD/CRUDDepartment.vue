@@ -11,7 +11,7 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import apidepartments from "../../../api/departments"; //api для отделений
+import api from "../../../api/departments"; //api для отделений
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -60,7 +60,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          apidepartments
+          api
             .saveDepartment({ department: result })
             .catch(exception => {
               this.showError(
@@ -79,7 +79,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          apidepartments
+          api
             .editDepartment({ department: result })
             .catch(exception => {
               this.showError(
@@ -98,7 +98,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          apidepartments.dropDepartment();
+          api.dropDepartment();
           this.showMessage("Действие было выполнено успешно");
         } else {
           this.showInfo("Действие было отменено пользователем");
@@ -111,7 +111,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          apidepartments
+          api
             .deleteDepartment({ department: result })
             .then(result => {})
             .catch(exception => {

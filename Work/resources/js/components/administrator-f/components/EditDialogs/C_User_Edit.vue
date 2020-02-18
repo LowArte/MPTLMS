@@ -52,6 +52,7 @@ export default {
       groups: [{ id: -1, name: "" }],
       steps: 1,
       item: {
+        id: null,
         secName: null,
         name: null,
         thirdName: null,

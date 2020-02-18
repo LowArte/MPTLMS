@@ -31,6 +31,7 @@ export default {
     return {
       dialog: false,
       item: {
+        id: null,
         place_name: null,
         place_index: null,
         place_country: null,
@@ -51,7 +52,7 @@ export default {
       });
     },
     clickDelete() {
-      this.resolve(this.item);
+      this.resolve(this.item.id);
     },
     clickCancel() {
       this.dialog = false;
