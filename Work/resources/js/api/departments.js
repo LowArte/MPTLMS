@@ -5,7 +5,7 @@ import axios from 'axios'
 export default {
     //*Получение отделений
     getDepartments() { //! Не работает
-        return axios.get('/api/getters/department');
+        return axios.get('/api/getters/departments');
     },
 
     //*Получение отделеня
