@@ -2,40 +2,41 @@
 
 import axios from 'axios'
 
-export default 
-{
-  //Получение отделений
-  getDepartments() 
-  {
-    return axios.get('/api/getters/department');
-  },
+export default {
+    //Получение отделений
+    getDepartments() {
+        return axios.get('/api/getters/department');
+    },
 
-  //Сохранение отделений
-  saveDepartment(department) //!Требуется сделать рабочим
-  {
-    return axios.post('/api/admin/department_management/save', 
+    //Получение отделений
+    getDepartment(id) {
+        return axios.get('/api/admin/getters/department' + id);
+    },
+
+    //Сохранение отделений
+    saveDepartment(department) //!Требуется сделать рабочим
     {
-      "department": department
-    });
-  },
+        return axios.post('/api/admin/department_management/save', {
+            "department": department
+        });
+    },
 
-  //Удаление отделений
-  deleteDepartment(id) //!Требуется сделать рабочим
-  {
-    return axios.post('/api/admin/department_management/delete/'+id);
-  },
-
-  //Редактирование отделений
-  editDepartment(department) //!Требуется сделать рабочим
-  {
-    return axios.post('/api/admin/department_management/edit/'+department.id, 
+    //Удаление отделений
+    deleteDepartment(id) //!Требуется сделать рабочим
     {
-      "department": department
-    });
-  },
+        return axios.post('/api/admin/department_management/delete/' + id);
+    },
 
-  dropDepartment() //!Требуется сделать рабочим
-  {
-    
-  }
+    //Редактирование отделений
+    editDepartment(department) //!Требуется сделать рабочим
+    {
+        return axios.post('/api/admin/department_management/edit/' + department.id, {
+            "department": department
+        });
+    },
+
+    dropDepartment() //!Требуется сделать рабочим
+    {
+
+    }
 }

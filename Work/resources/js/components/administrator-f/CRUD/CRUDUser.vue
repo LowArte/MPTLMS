@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_listusers" :_headers="headers" :_title="'Учетные записи пользователей'")
+    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_users" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -11,7 +11,7 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-//import api from "../../../api/";
+import api from "../../../api/users";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -50,16 +50,8 @@ export default {
   }),
 
   props: {
-    _departaments: {
-      type: Array,
-      default: null
-    },
-    _listusers: {
+    _users: {
       data: Array,
-      default: null
-    },
-    _usersposts: {
-      type: Array,
       default: null
     }
   },
@@ -69,9 +61,18 @@ export default {
     //!           Добавление объекта
     //?----------------------------------------------
     add() {
-      this.$refs.new.pop(this._usersposts).then(result => {
+      this.$refs.new.pop().then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .saveUser(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo(
+                "Действие было отклонено в следствии: " + exception
+              );
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -107,7 +108,16 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .deleteUser(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo(
+                "Действие было отклонено в следствии: " + exception
+              );
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
