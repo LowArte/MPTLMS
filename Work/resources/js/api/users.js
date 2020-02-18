@@ -25,8 +25,8 @@ export default {
         return axios.post('/api/admin/user_management/delete/' + user_id);
     },
 
-    //Редактирование пользователя
-    editUser(user) {
+    //*Редактирование пользователя
+    editUser(user) { //! Необходимо проверить работоспособность
         return axios.post('/api/admin/user_management/edit/' + user.user_id, {
             "user": user
         });

@@ -84,6 +84,16 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
+          api
+            .editUser(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo(
+                "Действие было отклонено в следствии: " + exception
+              );
+            });
           this.showMessage("Действие было выполнено успешно");
         } else {
           this.showInfo("Действие было отменено пользователем");
