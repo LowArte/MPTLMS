@@ -7,7 +7,6 @@
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
           v-text-field(v-model="item.name" label="Наименование" disabled)
-          v-text-field(v-model="item.slug" label="Кодовое наименование" disabled)
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -26,6 +25,7 @@ export default {
     return {
       dialog: false,
       item: {
+        id: null,
         name: null,
         slug: null
       },
@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     pop(item) {
+      console.log(item);
       this.item = Object.assign({}, item);
       this.dialog = true;
       return new Promise((resolve, reject) => {
@@ -51,7 +52,7 @@ export default {
     clickDelete() {
       if (this.item.name != null && this.item.slug != null) {
         this.dialog = false;
-        this.resolve(this.item);
+        this.resolve(this.item.id);
         this.item = Object.assign({}, null);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля");

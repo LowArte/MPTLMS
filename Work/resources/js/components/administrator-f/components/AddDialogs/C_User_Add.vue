@@ -41,8 +41,8 @@
               v-stepper-step(v-if="item.post_id == 2" :complete="steps > 3" step="3" @click="change(3)") Дополнительно
               v-stepper-content(v-if="item.post_id == 2" step="3")
                 v-card(:elevation="0")
-                  v-combobox(v-model="item.dep_name" label="Специальность")
-                  v-combobox(v-model="item.group_id" label='Группа')
+                  v-combobox(v-model="item.dep_id" item-value="id" label="Специальность" @change="depChange" item-text="dep_name_full" :items="departaments")
+                  v-combobox(v-model="item.group_id" item-value="id" item-text="group_name" :items="groups" label='Группа')
                   v-autocomplete(:items="financings" dense label='Вид финансирования')
                   v-card-actions
                     v-btn(text @click="change(2)") Назад
@@ -56,6 +56,9 @@
 //!           Подключение api
 //?----------------------------------------------
 //import apigroup from "../../../../api/group";
+import apiposts from "../../../../api/userPosts";
+import apigroup from "../../../../api/group";
+import apidepartments from "../../../../api/departments";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -72,7 +75,7 @@ export default {
       financings: ["Бюджет", "Платное"],
       posts: [],
       gender: ["Мужской", "Женский", "Другое"],
-      groups: [{ id: -1, name: "" }],
+      groups: [],
       steps: 1,
       item: {
         secName: null,
@@ -83,7 +86,7 @@ export default {
         post_id: null,
         gender: "Мужской",
         birthday: new Date().toISOString().substr(0, 10),
-        dep_name: null, //! Получать по api
+        dep_id: null, //! Получать по api
         group_id: 1, //! Получать по api сограсно выбранной специальности
         type_of_financing: "Бюджет",
         disabled: 0
@@ -104,9 +107,37 @@ export default {
       dateDialog: null
     };
   },
+  mounted() {
+    apidepartments
+      .getDepartments()
+      .then(result => {
+        this.departaments = result.data;
+        console.log(result.data);
+      })
+      .catch(exception => {
+        this.showInfo("Данные не получены в следствии: " + exception);
+      });
+    apiposts
+      .getPosts()
+      .then(result => {
+        this.posts = result.data.posts;
+      })
+      .catch(exception => {
+        this.showInfo("Данные не получены в следствии: " + exception);
+      });
+  },
+  depChange() {
+    apigroup
+      .getGroupsByDepartamentId(this.item.dep_id)
+      .then(result => {
+        this.groups = result.data.groups_info.groups;
+      })
+      .catch(exception => {
+        this.showError(exception);
+      });
+  },
   methods: {
-    pop(posts) {
-      this.posts = posts;
+    pop() {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;

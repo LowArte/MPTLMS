@@ -11,7 +11,7 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-//import api from "../../../api/";
+import api from "../../../api/userPosts";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -61,7 +61,14 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .savePost(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo("Действие было отклонено по причине: " + exception);
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -73,7 +80,14 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .editPost(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo("Действие было отклонено по причине: " + exception);
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -92,12 +106,19 @@ export default {
       });
     },
     //?----------------------------------------------
-    //!           Удаление всех объектa
+    //!           Удаление объектa
     //?----------------------------------------------
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .deletePost(result)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно");
+            })
+            .catch(exception => {
+              this.showInfo("Действие было отклонено по причине: " + exception);
+            });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

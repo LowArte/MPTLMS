@@ -4,10 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Panoscape\History\HasHistories;
 
 class Schedule extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasHistories;
+
+    public function getModelLabel()
+    {
+        return $this->display_name;
+    }
     public $timestamps = true;
 
     protected $hidden = [

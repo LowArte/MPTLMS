@@ -7,10 +7,12 @@ use Laravel\Passport\HasApiTokens;
 use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Panoscape\History\HasOperations;
+use Panoscape\History\HasHistories;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasApiTokens;
+    use Notifiable,HasApiTokens,HasOperations,HasHistories;
 
     /**
      * The attributes that are mass assignable.
@@ -44,6 +46,11 @@ class User extends Authenticatable
         return $this->hasOne(UsersPost::class,'id','post_id');
     }
 
+    public function getModelLabel()
+    {
+        return $this->display_name;
+    }
+    
         /**
      * Sending password reset Notification
      * 

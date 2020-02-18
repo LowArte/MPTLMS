@@ -10,6 +10,8 @@ use App\Repositories\ModelRepository\UserRepository;
 use App\Repositories\ModelRepository\UsersPostRepository;
 use Illuminate\Http\Request;
 
+use Debugbar;
+
 
 class UserManagementController extends BaseController
 {
@@ -33,6 +35,7 @@ class UserManagementController extends BaseController
     {
         $data = $request->all();
         $result = $createUserModification->addUserToDatabase($data['user']);
+        Debugbar::info($result);
         if($result){
             return response()->json(["success"=>true]);
         }

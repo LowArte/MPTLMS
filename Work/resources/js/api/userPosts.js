@@ -2,35 +2,41 @@
 
 import axios from 'axios'
 
-export default 
-{
-  //Получение ролей
-  getPosts() 
-  {
-    return axios.get('/api/getters/posts');
-  },
+export default {
+    //Получение ролей
+    getPosts() {
+        return axios.get('/api/getters/posts');
+    },
 
-  //Сохранение роли
-  savePost(data) //!Требуется сделать рабочим
-  {
-    return axios.post('/api/admin/post_management/save', 
+    //*Получение роли
+    getPost(id) { //! Получение должности по ID
+        return axios.get('/api/admin/getters/posts' + id);
+    },
+
+    //*Сохранение роли
+    savePost(post) //!Требуется сделать рабочим
     {
-      "post": data.post
-    });
-  },
+        return axios.post('/api/admin/post_management/save', {
+            "post": post
+        });
+    },
 
-  //Удаление роли
-  deletePost(post_id) //!Требуется сделать рабочим
-  {
-    return axios.post('/api/admin/post_management/delete/'+post_id);
-  },
-
-  //Редактирование роли
-  editPost(data) //!Требуется сделать рабочим
-  {
-    return axios.post('/api/admin/post_management/edit/'+data.post_id, 
+    //*Удаление роли
+    deletePost(post_id) //!Требуется сделать рабочим
     {
-      "post": data.post
-    });
-  }
+        return axios.post('/api/admin/post_management/delete/' + post_id);
+    },
+
+    //*Редактирование роли
+    editPost(post) //!Требуется сделать рабочим
+    {
+        return axios.post('/api/admin/post_management/edit/' + post.post_id, {
+            "post": post
+        });
+    },
+
+    dropPost() //!Требуется сделать рабочим
+    {
+
+    }
 }
