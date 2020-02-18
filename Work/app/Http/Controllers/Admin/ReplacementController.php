@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Modifications\Create\CreateReplacementModification;
-use App\Modifications\Delete\DeleteReplacementModification;
 use App\Repositories\ModelRepository\DepartamentRepository;
 use App\Repositories\ModelRepository\DisciplineRepository;
 use App\Repositories\ModelRepository\GroupRepository;
@@ -52,6 +50,5 @@ class ReplacementController extends BaseController
             'schedule'=>$schedule,
             'schedule_bild'=>$schedule_bild
         ]);
-    }
-    
+    }  
 }

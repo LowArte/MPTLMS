@@ -17,44 +17,24 @@
             v-textarea(
                   v-model="modelprogress"
                   :auto-grow="true"
-                  :clearable="false"
                   :counter="255 ? 255 : false"
-                  :filled="false"
                   :flat="true"
                   :hint="'Не более 255 символов'"
                   :label="'Успеваемость'"
-                  :loading="false"
-                  :no-resize="false"
-                  :outlined="false"
                   :persistent-hint="false"
                   :placeholder="''"
-                  :rounded="false"
                   :row-height="24"
                   :rows="1"
-                  :shaped="false"
-                  :single-line="false"
-                  :solo="false"
                   :rules="progressRules")
             v-textarea(
                   v-model="modelorder"
                   :auto-grow="true"
-                  :clearable="false"
                   :counter="255 ? 255 : false"
-                  :filled="false"
                   :flat="true"
                   :hint="'Не более 255 символов'"
                   :label="'Куда нужна характеристика'"
-                  :loading="false"
-                  :no-resize="false"
-                  :outlined="false"
-                  :persistent-hint="false"
-                  :placeholder="''"
-                  :rounded="false"
                   :row-height="24"
                   :rows="3"
-                  :shaped="false"
-                  :single-line="false"
-                  :solo="false"
                   :rules="orderRules")
             v-btn.mt-2.justify-center.white--text(
                   :disabled="!form"
@@ -100,14 +80,6 @@ export default {
     ],
     form: false
   }),
-
-  props: 
-  {
-    _info: {
-      data: Object,
-      default: null
-    }
-  },
 
   methods: 
   {

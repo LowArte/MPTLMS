@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
 class RequestController extends BaseController
 {
     /**
-     * Show the application welcome page.
+     * Show the application request of user page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

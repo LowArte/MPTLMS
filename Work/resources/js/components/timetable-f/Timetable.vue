@@ -109,10 +109,6 @@ export default {
       type: Object,
       default: null
     }, //Расписания
-    _controller: {
-      data: String,
-      default: "timetable"
-    }, //Контроллер
     _places: {
       type: Array,
       default: null

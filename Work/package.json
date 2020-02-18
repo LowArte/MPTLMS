@@ -28,6 +28,7 @@
     "dependencies": {
         "@mdi/font": "^4.7.95",
         "css-loader": "^3.4.1",
+        "graphviz": "0.0.9",
         "js-file-download": "^0.4.9",
         "pug": "^2.0.4",
         "pug-plain-loader": "^1.0.0",

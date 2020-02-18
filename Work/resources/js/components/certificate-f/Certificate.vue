@@ -122,14 +122,6 @@ export default {
       this.text = "";
       this.enabled = false;
     }
-  },
-
-  props: 
-  {
-    _info: {
-      data: String,
-      default: null
-    }
   }
 };
 </script>

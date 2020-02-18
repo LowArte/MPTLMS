@@ -47,12 +47,8 @@ export default {
     _places: {
       type: Array,
       default: null
-    }, //Массив с местами проведения
-    _slug: {
-      data: String,
-      default: ""
-    } //Модуль
-  }, //JSON расписания звонков
+    } //Массив с местами проведения
+  },
 
   created: function() 
   {

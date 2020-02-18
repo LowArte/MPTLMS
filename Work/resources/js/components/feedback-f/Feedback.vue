@@ -42,14 +42,6 @@ export default {
     };
   },
 
-  props: 
-  {
-    _slug: {
-      data: String,
-      default: ""
-    } //Модуль
-  },
-
   methods: 
   {
     sendQuery() 
