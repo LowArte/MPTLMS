@@ -30,6 +30,11 @@ export default {
         return axios.post('/api/admin/user_management/edit/' + user.user_id, {
             "user": user
         });
+    },
+
+    dropUsers() //!Требуется сделать рабочим
+    {
+
     }
 
     /*notificate(notId) { //! Не понятная хрень

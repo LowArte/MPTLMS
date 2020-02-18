@@ -157,7 +157,7 @@ export default {
             },
             {
               icon: "sd_storage",
-              text: "CRUD",
+              text: "База данных",
               children: [
                 {
                   text: "Пользователи",

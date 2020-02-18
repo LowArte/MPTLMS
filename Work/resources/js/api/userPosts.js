@@ -13,25 +13,30 @@ export default {
         return axios.get('/api/admin/getters/posts' + id);
     },
 
-    //Сохранение роли
-    savePost(data) //!Требуется сделать рабочим
+    //*Сохранение роли
+    savePost(post) //!Требуется сделать рабочим
     {
         return axios.post('/api/admin/post_management/save', {
-            "post": data.post
+            "post": post
         });
     },
 
-    //Удаление роли
+    //*Удаление роли
     deletePost(post_id) //!Требуется сделать рабочим
     {
         return axios.post('/api/admin/post_management/delete/' + post_id);
     },
 
-    //Редактирование роли
-    editPost(data) //!Требуется сделать рабочим
+    //*Редактирование роли
+    editPost(post) //!Требуется сделать рабочим
     {
-        return axios.post('/api/admin/post_management/edit/' + data.post_id, {
-            "post": data.post
+        return axios.post('/api/admin/post_management/edit/' + post.post_id, {
+            "post": post
         });
+    },
+
+    dropPost() //!Требуется сделать рабочим
+    {
+
     }
 }

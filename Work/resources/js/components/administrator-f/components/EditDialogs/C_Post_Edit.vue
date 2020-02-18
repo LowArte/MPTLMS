@@ -25,6 +25,7 @@ export default {
     return {
       dialog: false,
       item: {
+        id: null,
         name: null,
         slug: null
       },

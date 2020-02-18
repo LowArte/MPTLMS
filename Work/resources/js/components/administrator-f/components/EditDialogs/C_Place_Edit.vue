@@ -30,6 +30,7 @@ export default {
     return {
       dialog: false,
       item: {
+        id: null,
         place_name: null,
         place_index: null,
         place_country: null,
