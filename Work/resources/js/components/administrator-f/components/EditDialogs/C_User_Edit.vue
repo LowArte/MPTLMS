@@ -19,13 +19,13 @@
                     v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
               v-autocomplete.mt-3(v-model="item.gender" :items="gender" dense label="Гендерная принадлежность")
               v-combobox(v-model="item.disabled" label="Блокировка")
-              v-combobox(v-if="item.post_id == 2" v-model="item.dep_name" label="Специальность")
-              v-combobox(v-if="item.post_id == 2" v-model="item.group_id" label='Группа')
+              v-combobox(v-if="item.post_id == 2" v-model="item.dep_name" :items="departaments" label="Специальность")
+              v-combobox(v-if="item.post_id == 2" v-model="item.group_id" :items="groups" label='Группа')
               v-autocomplete(v-if="item.post_id == 2" v-model="item.type_of_financing" :items="financings" dense label='Вид финансирования')
             v-card-actions
               v-btn(color="red" text @click="clickCancel") Отмена
               v-spacer
-              v-btn(color="info" text @click="clickEdit") Удалить
+              v-btn(color="info" text @click="clickEdit") Изменить
               
 </template>
 
@@ -34,6 +34,8 @@
 //!           Подключение api
 //?----------------------------------------------
 import apiposts from "../../../../api/userPosts";
+import apidepartments from "../../../../api/departments";
+import apigroup from "../../../../api/group";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -49,7 +51,7 @@ export default {
       financings: ["Бюджет", "Платное"],
       posts: [],
       gender: ["Мужской", "Женский", "Другое"],
-      groups: [{ id: -1, name: "" }],
+      groups: [],
       steps: 1,
       item: {
         id: null,
@@ -88,26 +90,29 @@ export default {
       .then(result => {
         this.posts = result.data.posts;
       })
-      .catch(exception => {
-        this.showInfo("Данные не получены в следствии: " + exception);
+      .catch(ex => {
+        this.showInfo("Данные не получены в следствии: " + ex);
       });
-    apidepartments
-      .getDepartments()
-      .then(result => {
-        this.departaments = result.data;
-        console.log(result.data);
-      })
-      .catch(exception => {
-        this.showInfo("Данные не получены в следствии: " + exception);
-      });
-    apigroup
-      .getGroupsByDepartamentId(this.item.dep_id)
-      .then(result => {
-        this.groups = result.data.groups_info.groups;
-      })
-      .catch(exception => {
-        this.showError(exception);
-      });
+    
+    if(this.item.post_id == 2) //!Требуется вызывать данное условие ПРИ ОТКРЫТИИ диалога, а не в mounted. Mounted срабатывает сразу при загрузке страницы
+    {
+      apidepartments
+        .getDepartments()
+        .then(result => {
+          this.departaments = result.data.departments;
+        })
+        .catch(ex => {
+          this.showInfo("Данные не получены в следствии: " + ex);
+        });
+      apigroup
+        .getGroupsByDepartamentId(this.item.dep_id)
+        .then(result => {
+          this.groups = result.data.groups_info.groups;
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    }
   },
   methods: {
     pop(item) {

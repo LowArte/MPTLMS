@@ -21,7 +21,7 @@ class UpdateCallScheduleModification extends BaseModification
         }
 
         $callSchedule = $this->startCondition()->find($id);
-        $callSchedule->call_schedule = $data;
+        $callSchedule->call_schedule = json_encode($data);
         $callSchedule->save();
         return true;
     }

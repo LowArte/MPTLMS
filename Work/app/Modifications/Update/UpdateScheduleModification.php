@@ -21,7 +21,7 @@ class UpdateScheduleModification extends BaseModification
         }
 
         $schedule = $this->startCondition()->find($id);
-        $schedule->schedule = $data;
+        $schedule->schedule = json_encode($data);
         $schedule->save();
         return true;
     }

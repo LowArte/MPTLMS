@@ -25,7 +25,7 @@
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
                   v-spacer
-                  v-btn(color="info darken-1" text @click="clickEdit") Сохранить
+                  v-btn(color="info darken-1" text @click="clickEdit") Изменить
 </template>
 
 <script>
