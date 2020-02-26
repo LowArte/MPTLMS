@@ -11,7 +11,7 @@
                   v-btn.ma-2.ml-1(text v-on="on" @click="Update()")
                       v-icon replay
                       span.ma-2 Обновить
-              span Обновить таблицуё
+              span Обновить таблицу
             v-text-field.ma-0(v-model='search' label='Поиск' single-line hide-details)
           template(v-slot:item.answered="{ item }")
             v-card-text.ma-0.pa-0(v-if="item['answered']") Да

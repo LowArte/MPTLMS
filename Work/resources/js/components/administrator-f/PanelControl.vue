@@ -1,5 +1,10 @@
 <template lang="pug">
-  v-switch.mx-2(v-model='options.option_value' label='Режим профилактики' color='accent' @click='sendQuery')
+  v-layout.row.wrap
+    v-card.mx-auto.pa-3(height='auto' width='100%')
+      v-card-text.my-2.ma-0.pa-0.title Панель управления
+      v-divider
+      v-switch.mx-2(v-model='options.option_value' label='Режим профилактики' color='accent')
+      v-btn.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
 <script>
@@ -40,7 +45,7 @@ export default {
           slug: this._slug
         })
         .then(res => {
-          this.showMessage("Сохранено!");
+          this.showMessage("Настройки сохранены!");
         })
         .catch(ex => {
           this.showError(ex);

@@ -18,14 +18,10 @@ class SwapScheduleSeeder extends Seeder
             "schedule_id" => 1,
             "swap" =>  json_encode(array(
                 "caselesson" => "1",
-                "schedule_new" => array(
-                    "Lesson" => "1",
-                    "Teacher" => "1"
-                ),
-                "schedule_old" => array(
-                    "Lesson" => "2",
-                    "Teacher" => "1"
-                )
+                "lesson" => [1],
+                "teacher" => [1],
+                "oldlesson" => [1],
+                "oldteacher" => [1]
             ))
         ];
         DB::table("schedule_swaps")->insert($data);
