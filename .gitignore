@@ -4,6 +4,7 @@ Work/npm-debug.log
 Work/public/css
 Work/public/fonts
 Work/public/js
+Work/public/js/app.js
 Work/public/.htaccess
 Work/public/0.js
 Work/public/1.js
@@ -46,3 +47,5 @@ Work/package-lock.json
 Work/package.json
 Work/public/0.js
 Work/public/js/app.js
+Work/.phpstorm.meta.php
+Work/_ide_helper.php
