@@ -3,6 +3,9 @@ require('./bootstrap');
 import store from './store'
 import vuetify from './vuetify'
 
+//?----------------------------------------------
+//!           СИСТЕМНЫЕ КОМПОНЕНТЫ
+//?----------------------------------------------
 import SnackBar from './components/SnackBarComponent'
 import Login_C from './components/auth-f/Login'
 import Logout_C from './components/auth-f/Logout'
