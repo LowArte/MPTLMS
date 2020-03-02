@@ -29,7 +29,7 @@
                 @endif
                 <v-btn text href="">Обратная связь</v-btn>
                 @else
-                <v-btn color="primary mr-5" text href="{{'\\'.auth()->user()->post->slug}}\home">НАЗАД</v-btn>
+                <v-btn color="primary mr-5" text href="{{'\\'.auth()->user()->post->slug}}\home">в кабинет</v-btn>
                 <v-form method="post" action="{{route('logout')}}">
                     @csrf
                     <v-btn block text color="accent" type="submit">ВЫХОД</v-btn>

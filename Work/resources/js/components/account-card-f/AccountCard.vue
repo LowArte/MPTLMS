@@ -1,6 +1,6 @@
 <template lang="pug">
 v-content.pa-0
-    v-alert.my-2(text dense type="warning")
+    v-alert.my-2(border="left" dense type="warning")
         span.subtitle-1(primary--text) Данный раздел может содержать ошибки, так как находится в процесссе разработки. Если найдёте какие-либо ошибки, сообщите нам. Спасибо!
     v-layout.row.wrap
         v-flex
@@ -37,8 +37,8 @@ v-content.pa-0
                         v-card-text.py-2 Срок обучения: 3г 10м
         v-flex
             v-card.mx-auto
-                v-card-title Уведомления
-                v-divider
+                v-system-bar(color="pimary")
+                    small Уведомления
                 v-card-text Тут будут уведомления
                 v-divider
                 v-card-actions
@@ -62,8 +62,8 @@ v-content.pa-0
     v-layout.row.wrap
         v-flex
             v-card.mx-auto
-                v-card-title Направления
-                v-divider
+                v-system-bar(color="pimary")
+                    small Направления
                 v-card-text Нет открытых направлений
                 v-divider
                 v-card-actions
@@ -82,7 +82,8 @@ v-content.pa-0
     v-layout.row.wrap
         v-flex
             v-card
-                v-card-title Успеваемость
+                v-system-bar(color="pimary")
+                    small Успеваемость
                 v-card-text Средний бал
                     div.text-center.ma-3
                         p.text-center.display-1.ma-0 {{rating}}
@@ -97,7 +98,8 @@ v-content.pa-0
                         span Подробнее
         v-flex
             v-card
-                v-card-title Посещаемость
+                v-system-bar(color="pimary")
+                    small Посещаемость
                 v-card-text Кол-во пропущенных часов
                     div.text-center.ma-3
                         p.text-center.display-1.ma-0 {{hours}}
@@ -113,8 +115,8 @@ v-content.pa-0
     v-layout.row.wrap
         v-flex
             v-card
-                v-card-title Преподаватели
-                v-divider
+                v-system-bar(color="pimary")
+                    small Преподаватели
                 v-card-text Тут ещё нет преподавателей
                 v-divider
                 v-card-actions
@@ -123,10 +125,11 @@ v-content.pa-0
                         template(v-slot:activator="{ on }")
                             v-btn(block text light v-on="on" color="pimary") Показать всех
                         span Показать всех
+    v-layout.row.wrap
         v-flex
             v-card
-                v-card-title Ваши одногруппники
-                v-divider
+                v-system-bar(color="pimary")
+                    small Ваши одногруппники
                 v-card-text Тут ещё никого нет
                 v-divider
                 v-card-actions
@@ -138,8 +141,8 @@ v-content.pa-0
     v-layout.row.wrap
         v-flex
             v-card
-                v-card-title Услуги
-                v-divider
+                v-system-bar(color="pimary")
+                    small Услуги
                 v-card-text.body-1 Услуги по заказу справок и характеристик для организаций/военных комиссариатов
                 v-card-actions
                     v-tooltip(bottom)

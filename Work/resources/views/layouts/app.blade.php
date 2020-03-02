@@ -30,8 +30,13 @@
             </div>
             @endif
             <div class="d-flex align-center" style="margin-left: auto">
-                <v-btn @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
-                    {{auth()->user()->name}}
+                <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
+                    <small class="white--text">
+                        {{auth()->user()->name}}
+                    </small>
+                    <v-avatar class="ml-2" size="32" color="white">
+                        <v-icon>account_circle</v-icon>
+                    </v-avatar>
                 </v-btn>
             </div>
         </v-app-bar>

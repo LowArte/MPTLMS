@@ -73,8 +73,7 @@ export default {
     };
   },
 
-  props: 
-  {
+  props: {
     _requests: {
       data: Object,
       default: null
@@ -82,14 +81,15 @@ export default {
   },
 
   //Получение данных
-  mounted() 
-  {
+  mounted() {
     this.items = this._requests;
-    for(var i = 0; i < this.items.length; i++)
-      this.items[i].certificates_data = JSON.parse(this.items[i].certificates_data);
-  }, 
+    for (var i = 0; i < this.items.length; i++)
+      this.items[i].certificates_data = JSON.parse(
+        this.items[i].certificates_data
+      );
+  },
 
-  methods:{
+  methods: {
     //Отправка сообщения-ответа от канцелярии, без фиксации того что справка выполнена
     sendEmailAnswer(email) {
       cerificateApi
@@ -110,35 +110,36 @@ export default {
 
     //Отправка сообщения о том, что справка готова
     sendEmailDone(email) {
-        cerificateApi
-          .sendEmailDone({
-            email: email,
-            id: this.expanded[0].id
-          })
-          .then(result => {
-            this.showMessage("Сообщение отправлено");
-            this.expanded[0].done = true;
-            this.Update();
-          })
-          .catch(ex => {
-            this.showError("Произошла ошибка! " + ex);
-          });
-        this.modelmessage = "";
+      cerificateApi
+        .sendEmailDone({
+          email: email,
+          id: this.expanded[0].id
+        })
+        .then(result => {
+          this.showMessage("Сообщение отправлено");
+          this.expanded[0].done = true;
+          this.Update();
+        })
+        .catch(ex => {
+          this.showError("Произошла ошибка! " + ex);
+        });
+      this.modelmessage = "";
     },
 
     //Отправка сообщения о том, что справка готова
-    Update() 
-    {
-        cerificateApi
-          .getCertificates()
-          .then(res => {
-            this.items = res.data.certificates;
-            for(var i = 0; i < this.items.length; i++)
-              this.items[i].certificates_data = JSON.parse(this.items[i].certificates_data);
-          })
-          .catch(ex => {
-            this.showError("Произошла ошибка! " + ex);
-          });
+    Update() {
+      cerificateApi
+        .getCertificates()
+        .then(res => {
+          this.items = res.data.certificates;
+          for (var i = 0; i < this.items.length; i++)
+            this.items[i].certificates_data = JSON.parse(
+              this.items[i].certificates_data
+            );
+        })
+        .catch(ex => {
+          this.showError("Произошла ошибка! " + ex);
+        });
     }
   }
 };

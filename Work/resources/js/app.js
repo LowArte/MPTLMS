@@ -12,7 +12,6 @@ import Logout_C from './components/auth-f/Logout'
 import AppMenu_C from './components/menu-f/AppMenu'
 import Panel_C from './components/expention-f/Panel'
 import SpecialitiesList_C from './components/information-page-f/SpecialtiesList'
-import Retraining_C from './components/additional-education-f/Retraining'
 import PanelControl_C from './components/administrator-f/PanelControl'
 import AccountCard_C from './components/account-card-f/AccountCard'
 
@@ -96,7 +95,6 @@ new Vue({
         'c-login': Login_C,
         'c-app-menu': AppMenu_C,
         'c-specialties-list': SpecialitiesList_C,
-        'c-retraining': Retraining_C,
 
         //?----------------------------------------------
         //!                EXOTIC COM

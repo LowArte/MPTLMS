@@ -202,14 +202,14 @@ export default {
               href: "/student/home"
             },
             {
+              icon: "portrait",
+              text: "Мой профиль",
+              href: "/student/account"
+            },
+            {
               icon: "whatshot",
               text: "Новости",
               href: "/student/news"
-            },
-            {
-              icon: "portrait",
-              text: "Профиль",
-              href: "/student/account"
             },
             {
               text: "Учебные процесс",
@@ -217,7 +217,7 @@ export default {
               children: [
                 {
                   icon: "",
-                  text: "Учебное расписание",
+                  text: "Расписание занятий",
                   href: "/student/timetable"
                 },
                 {
@@ -232,34 +232,18 @@ export default {
                 },
                 {
                   icon: "",
-                  text: "Домашнее задание",
-                  href: "/student/homework"
-                },
-                {
-                  icon: "",
                   text: "Успеваемость",
                   href: "/student/progress"
                 },
                 {
                   icon: "",
-                  text: "Преподаватели",
-                  href: "/student/teachers"
-                }
-              ]
-            },
-            {
-              text: "ДО",
-              icon: "business_center",
-              children: [
-                {
-                  icon: "",
-                  text: "Программы",
-                  href: "/student/blueprints"
+                  text: "Домашнее задание",
+                  href: "/student/homework"
                 },
                 {
                   icon: "",
-                  text: "Автошкола",
-                  href: "/student/drivingschool"
+                  text: "Преподаватели",
+                  href: "/student/teachers"
                 }
               ]
             },
@@ -274,34 +258,8 @@ export default {
                 },
                 {
                   icon: "",
-                  text: "Стипендия",
-                  href: "/student/petition"
-                },
-                {
-                  icon: "",
                   text: "Психолог",
                   href: "/student/psych"
-                }
-              ]
-            },
-            {
-              text: "Студенческая жизнь",
-              icon: "palette",
-              children: [
-                {
-                  icon: "",
-                  text: "Фотоархив",
-                  href: "/student/photos"
-                },
-                {
-                  icon: "",
-                  text: "Соревнования и чемпионаты",
-                  href: "/student/competitions"
-                },
-                {
-                  icon: "",
-                  text: "Спортивная жизнь",
-                  href: "/student/sportlife"
                 }
               ]
             },
@@ -314,11 +272,6 @@ export default {
               icon: "layers",
               text: "Базы практики",
               href: "/student/plants"
-            },
-            {
-              icon: "group",
-              text: "Студенческий совет",
-              href: "/student/convocation"
             },
             {
               icon: "feedback",
@@ -350,6 +303,11 @@ export default {
                   href: "/teacher/replacements"
                 }
               ]
+            },
+            {
+              icon: "class",
+              text: "Учебные журналы",
+              href: "/teacher/journals"
             },
             {
               icon: "feedback",
