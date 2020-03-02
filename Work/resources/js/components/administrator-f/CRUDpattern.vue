@@ -119,6 +119,10 @@ export default {
     this.title = this._title;
   },
   methods: {
+    refresh(data){
+      this.flood = data;
+    },
+
     add() {
       this._func_add();
     },
@@ -141,11 +145,11 @@ export default {
     },
 
     upload() {
-      this.showMessage("Данная функция будет не доступна до релизной версии");
+      this.showInfo("Данная функция будет не доступна до релизной версии!");
     },
 
     download() {
-      this.showMessage("Данная функция будет не доступна до релизной версии");
+      this.showInfo("Данная функция будет не доступна до релизной версии!");
     }
   }
 };

@@ -8,7 +8,6 @@ Work/package.json
 
 # Laravel 4 specific
 Work/bootstrap/compiled.php
-Work/app/storage/
 
 # Laravel 5 & Lumen specific
 Work/storage/*.key

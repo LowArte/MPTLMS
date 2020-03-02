@@ -35,8 +35,9 @@ export default {
         });
     },
 
-    dropPost() //!Требуется сделать рабочим
+    //Полное удаление должностей
+    dropPosts() //!Требуется сделать рабочим
     {
-
+        return axios.post('/api/admin/post_management/deleteAll');
     }
 }

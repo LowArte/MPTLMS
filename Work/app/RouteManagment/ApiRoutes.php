@@ -21,6 +21,7 @@ class ApiRoutes
             Route::get('places','Api\PlaceController@getPlaces')->name('places');
 
             Route::get('departments','Api\DepartamentController@getDepartments')->name('departments');
+            Route::get('departments_for_combobox','Api\DepartamentController@getDepartmentsForCombobox')->name('departments_for_combobox');
 
             Route::get('posts','Api\PostController@getPosts')->name('posts');
 

@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_post" :_headers="headers" :_title="'Роли'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_post" :_headers="headers" :_title="'Роли'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -56,6 +56,19 @@ export default {
   },
   methods: {
     //?----------------------------------------------
+    //!           Обновление
+    //?----------------------------------------------
+    update() {
+      api
+        .getPosts()
+        .then(result => {
+          this.$refs.crud.refresh(result.data.posts);
+        })
+        .catch(exception => {
+          this.showError("Ошибка обновления! " + exception);
+        });
+    },
+    //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
     add() {
@@ -99,9 +112,16 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .dropPosts()
+            .then(res => {
+              this.showMessage("Действие было выполнено успешно!");
+            })
+            .catch(exception => {
+              this.showError("Ошибка выполнения! " + exception);
+            });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },

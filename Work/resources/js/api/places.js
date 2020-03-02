@@ -34,8 +34,9 @@ export default
     });
   },
 
-  dropPlace() //!Требуется сделать рабочим
+  //Полное удаление мест проведений
+  dropPlaces() //!Требуется сделать рабочим
   {
-
+      return axios.post('/api/admin/place_management/deleteAll');
   }
 }
