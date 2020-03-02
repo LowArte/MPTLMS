@@ -102,7 +102,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo(
+              this.showError(
                 "Действие было отклонено в следствии: " + exception
               );
             });
@@ -143,7 +143,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo(
+              this.showError(
                 "Действие было отклонено в следствии: " + exception
               );
             });

@@ -80,7 +80,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo("Действие было отклонено по причине: " + exception);
+              this.showError("Действие было отклонено по причине: " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");
@@ -99,7 +99,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo("Действие было отклонено по причине: " + exception);
+              this.showError("Действие было отклонено по причине: " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");
@@ -126,7 +126,7 @@ export default {
       });
     },
     //?----------------------------------------------
-    //!           Удаление всех объектa
+    //!           Удаление объектa
     //?----------------------------------------------
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
@@ -137,7 +137,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo("Действие было отклонено по причине: " + exception);
+              this.showError("Действие было отклонено по причине: " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");

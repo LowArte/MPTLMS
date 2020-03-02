@@ -60,7 +60,7 @@ export default {
     //?----------------------------------------------
     update() {
       api
-        .getPosts()
+        .getPostsForManagement()
         .then(result => {
           this.$refs.crud.refresh(result.data.posts);
         })
@@ -74,13 +74,14 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
+          console.log(result);
           api
             .savePost(result)
             .then(result => {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo("Действие было отклонено по причине: " + exception);
+              this.showError("Действие было отклонено по причине: " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");
@@ -93,13 +94,14 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
+          console.log(result);
           api
             .editPost(result)
             .then(result => {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo("Действие было отклонено по причине: " + exception);
+              this.showError("Действие было отклонено по причине: " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");
@@ -137,7 +139,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo("Действие было отклонено по причине: " + exception);
+              this.showError("Действие было отклонено по причине: " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");

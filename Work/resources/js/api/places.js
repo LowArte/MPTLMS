@@ -26,11 +26,11 @@ export default
   },
 
   //Редактирование мест проведения
-  editPlace(data) //!Требуется сделать рабочим
+  editPlace(place) //!Требуется сделать рабочим
   {
-    return axios.post('/api/admin/place_management/edit/'+data.place.id, 
+    return axios.post('/api/admin/place_management/edit/'+place.id, 
     {
-      "place": data.place
+      "place": place
     });
   },
 

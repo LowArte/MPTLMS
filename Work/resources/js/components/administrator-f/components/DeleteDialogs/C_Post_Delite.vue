@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     pop(item) {
-      console.log(item);
       this.item = Object.assign({}, item);
       this.dialog = true;
       return new Promise((resolve, reject) => {
@@ -50,13 +49,8 @@ export default {
       });
     },
     clickDelete() {
-      if (this.item.name != null && this.item.slug != null) {
         this.dialog = false;
         this.resolve(this.item.id);
-        this.item = Object.assign({}, null);
-      } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
-      }
     },
     clickCancel() {
       this.dialog = false;
