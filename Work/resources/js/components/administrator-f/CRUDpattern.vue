@@ -11,6 +11,12 @@
                             span.ma-2 Добавить запись
                     span Новая запись
                 v-tooltip(bottom)
+                  template(v-slot:activator="{ on }")
+                      v-btn.ma-2.ml-1(text v-on="on" @click="update")
+                          v-icon replay
+                          span.ma-2 Обновить
+                  span Обновить таблицу
+                v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
                         v-btn.ma-2.ml-1(text color="red" v-on="on" @click="clear")
                             v-icon mdi-delete
@@ -82,6 +88,10 @@ export default {
       type: Function,
       default: null
     },
+    _func_update: {
+      type: Function,
+      default: null
+    },
     _func_clear: {
       type: Function,
       default: null
@@ -109,6 +119,10 @@ export default {
     this.title = this._title;
   },
   methods: {
+    refresh(data){
+      this.flood = data;
+    },
+
     add() {
       this._func_add();
     },
@@ -125,12 +139,17 @@ export default {
       this._func_remove(item);
     },
 
+    update() 
+    {
+      this.flood = this._func_update();
+    },
+
     upload() {
-      this.showMessage("Данная функция будет не доступна до релизной версии");
+      this.showInfo("Данная функция будет не доступна до релизной версии!");
     },
 
     download() {
-      this.showMessage("Данная функция будет не доступна до релизной версии");
+      this.showInfo("Данная функция будет не доступна до релизной версии!");
     }
   }
 };

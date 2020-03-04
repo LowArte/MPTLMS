@@ -20,7 +20,7 @@
                 v-alert(text dense border="left" colored-border type="warning") В поле <strong>Отделение</strong> указывается отделение, к которому прикреплена данная группа <br>
                     strong Например: 
                             i П-3-16 - (09.02.03 Программирование в компьютерных системах)
-                v-combobox.my-3(v-model="item.departaments_id" :items="departaments" :rules="specRules" label="Отделение" dense)
+                v-autocomplete.my-3(:items="departaments" v-model="item.departaments_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
                 v-combobox.my-3(v-model="item.сurs" :items="curses" :rules="cursRules" label="Текущий курс" dense)
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
@@ -33,6 +33,11 @@
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "../../../mixins/withSnackbar";
+
+//?----------------------------------------------
+//!           Подключение api для получения отделений
+//?----------------------------------------------
+import apiDepartment from "../../../../api/departments";
 
 export default {
   mixins: [withSnackbar],
@@ -65,6 +70,18 @@ export default {
       cursRules: [v => !!v || "Поле не должно оставаться пустым"]
     };
   },
+
+  beforeMount(){
+      apiDepartment
+        .getDepartmentsForCombobox()
+        .then(res => {
+          this.departaments = res.data.departaments;
+        })
+        .catch(ex => {
+          this.showError('Отделения не получены! ' + ex);
+        });
+    },
+
   methods: {
     pop(item) {
       this.item = Object.assign({}, item);

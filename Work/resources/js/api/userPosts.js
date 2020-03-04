@@ -8,6 +8,11 @@ export default {
         return axios.get('/api/getters/posts');
     },
 
+    //Получение ролей для менеджемента
+    getPostsForManagement() {
+        return axios.get('/api/getters/posts_for_management');
+    },
+    
     //*Получение роли
     getPost(id) { //! Получение должности по ID
         return axios.get('/api/admin/getters/posts' + id);
@@ -30,13 +35,14 @@ export default {
     //*Редактирование роли
     editPost(post) //!Требуется сделать рабочим
     {
-        return axios.post('/api/admin/post_management/edit/' + post.post_id, {
+        return axios.post('/api/admin/post_management/edit/' + post.id, {
             "post": post
         });
     },
 
-    dropPost() //!Требуется сделать рабочим
+    //Полное удаление должностей
+    dropPosts() //!Требуется сделать рабочим
     {
-
+        return axios.post('/api/admin/post_management/deleteAll');
     }
 }

@@ -112,7 +112,6 @@ export default {
       .getDepartments()
       .then(result => {
         this.departaments = result.data;
-        console.log(result.data);
       })
       .catch(exception => {
         this.showInfo("Данные не получены в следствии: " + exception);

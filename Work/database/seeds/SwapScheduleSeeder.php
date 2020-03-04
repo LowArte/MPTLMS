@@ -22,7 +22,8 @@ class SwapScheduleSeeder extends Seeder
                 "teacher" => [1],
                 "oldlesson" => [1],
                 "oldteacher" => [1]
-            ))
+            )),
+            "created_at" => "2020-02-22 09:49:48"            
         ];
         DB::table("schedule_swaps")->insert($data);
     }

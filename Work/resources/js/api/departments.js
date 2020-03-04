@@ -3,14 +3,19 @@
 import axios from 'axios'
 
 export default {
-    //*Получение отделений
-    getDepartments() { //! Не работает
+    //Получение отделений
+    getDepartments() {
         return axios.get('/api/getters/departments');
+    },
+
+    //Получение отделений для комбобокса
+    getDepartmentsForCombobox() {
+        return axios.get('/api/getters/departments_for_combobox');
     },
 
     //*Получение отделеня
     getDepartment(id) { //! Нужно получать department по ID
-        return axios.get('/api/admin/getters/department' + id);
+        return axios.get('/api/admin/getters/department/' + id);
     },
 
     //Сохранение отделений
@@ -35,8 +40,9 @@ export default {
         });
     },
 
-    dropDepartment() //!Требуется сделать рабочим
+    //Полное удаление отделений
+    dropDepartments() //!Требуется сделать рабочим
     {
-
+        return axios.post('/api/admin/department_management/deleteAll');
     }
 }

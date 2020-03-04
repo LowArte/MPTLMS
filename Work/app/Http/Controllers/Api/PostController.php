@@ -16,4 +16,14 @@ class PostController extends BaseController
         $posts = $usersPostRepository->getPosts();
         return response()->json(compact('posts'));
     }
+
+    /**
+     * get posts from database
+     * @return JSON
+     */
+    public function getPostsForManagement(UsersPostRepository $usersPostRepository)
+    {
+        $posts = $usersPostRepository->getPostsForManagement();
+        return response()->json(compact('posts'));
+    }
 }

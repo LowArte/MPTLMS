@@ -5,8 +5,8 @@
                 h4.text-truncate Добавить запись
             v-form
               v-card-text
-                  v-text-field(v-model="item.code" :rules="codeRules" label="Код отделения")
-                  v-text-field(v-model="item.name" :rules="nameRules" label="Наименование")
+                  v-text-field(v-model="item.dep_name" :rules="codeRules" label="Код отделения")
+                  v-text-field(v-model="item.qualification" :rules="nameRules" label="Наименование")
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
                   v-spacer
@@ -26,7 +26,7 @@ export default {
       dialog: false,
       item: {
         dep_name: null,
-        specialization: null,
+        qualification: null,
         dep_name_full: null
       },
       resolve: null,
@@ -43,8 +43,8 @@ export default {
     },
     clickSave() {
       this.item.dep_name_full =
-        this.item.dep_name + " " + this.item.specialization;
-      if (this.item.dep_name != null && this.item.specialization != null) {
+        this.item.dep_name + " " + this.item.qualification;
+      if (this.item.dep_name != null && this.item.qualification != null) {
         this.dialog = false;
         this.resolve(this.item);
         this.item = Object.assign({}, null);

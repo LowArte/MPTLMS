@@ -15,4 +15,10 @@ class UsersPostRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
+
+    public function getPostsForManagement()
+    {   $columns = ['id', 'name', 'slug'];
+        $result = $this->startCondition()->select($columns)->toBase()->get();
+        return $result;
+    }
 }

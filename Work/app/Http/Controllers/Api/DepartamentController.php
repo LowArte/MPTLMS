@@ -15,4 +15,14 @@ class DepartamentController extends BaseController
         $departments = $departamentRepository->getDepartamentsForCRUD();
         return response()->json(compact('departments'));
     }
+
+     /**
+     * get departaments for combobox from database
+     * @return JSON
+     */
+    public function getDepartmentsForCombobox(DepartamentRepository $departamentRepository)
+    {
+        $departaments = $departamentRepository->getDepartamentsForComboBox();
+        return response()->json(compact('departaments'));
+    }
 }

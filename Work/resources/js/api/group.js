@@ -28,15 +28,16 @@ export default {
     },
 
     //Редактирование группы
-    editGroup(data) //!Требуется сделать рабочим
+    editGroup(group) //!Требуется сделать рабочим
     {
-        return axios.post('/api/admin/group_management/edit/' + data.group.id, {
-            "group": data.group
+        return axios.post('/api/admin/group_management/edit/' + group.id, {
+            "group": group
         });
     },
 
-    dropGroup() //!Требуется сделать рабочим
+    //Полное удаление групп
+    dropGroups() //!Требуется сделать рабочим
     {
-
+        return axios.post('/api/admin/group_management/deleteAll');
     }
 }

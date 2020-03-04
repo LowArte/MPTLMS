@@ -1,8 +1,7 @@
-<template>
-  <div>
-    <v-btn block text color="accent" type="submit">Выход</v-btn>
-    <v-btn block text color="info" type="submit" :href="_link" @click="logout">Сменить пароль</v-btn>
-  </div>
+<template lang="pug">
+  div
+    v-btn(block text color="accent" type="submit") Выход
+    v-btn(block text color="info" type="submit" :href="_link" @click="logout") Сменить пароль
 </template>
 
 <script>

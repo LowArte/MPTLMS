@@ -32,9 +32,10 @@ export default {
         });
     },
 
+    //Полное удаление пользователей
     dropUsers() //!Требуется сделать рабочим
     {
-
+        return axios.post('/api/admin/user_management/deleteAll');
     }
 
     /*notificate(notId) { //! Не понятная хрень

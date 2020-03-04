@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_departments" :_headers="headers" :_title="'Отделения'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_departments" :_headers="headers" :_title="'Отделения'")
     c-add-dialog(ref='new')
     c-comfirm-dialog(ref='qwestion')
     c-edit-dialog(ref='revue')
@@ -55,21 +55,36 @@ export default {
   },
   methods: {
     //?----------------------------------------------
+    //!           Обновление
+    //?----------------------------------------------
+    update() {
+      api
+        .getDepartments()
+        .then(result => {
+          this.$refs.crud.refresh(result.data.departments);
+        })
+        .catch(exception => {
+          this.showError("Ошибка обновления! " + exception);
+        });
+    },
+    //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
           api
-            .saveDepartment({ department: result })
+            .saveDepartment(result)
+            .then(res => {
+              this.showMessage("Действие было выполнено успешно!");
+            })
             .catch(exception => {
               this.showError(
                 "Сохранение не было произведено по причине: " + exception
               );
             });
-          this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },
@@ -80,15 +95,17 @@ export default {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
           api
-            .editDepartment({ department: result })
+            .editDepartment(item)
+            .then(res => {
+              this.showMessage("Действие было выполнено успешно!");
+            })
             .catch(exception => {
               this.showError(
                 "Сохранение не было произведено по причине: " + exception
               );
             });
-          this.showMessage("Действие было выполнено успешно");
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },
@@ -98,28 +115,35 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api.dropDepartment();
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .dropDepartments()
+            .then(res => {
+              this.showMessage("Действие было выполнено успешно!");
+            })
+            .catch(exception => {
+              this.showError("Ошибка выполнения! " + exception);
+            });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },
     //?----------------------------------------------
-    //!           Удаление всех объектa
+    //!           Удаление объектa
     //?----------------------------------------------
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
           api
-            .deleteDepartment({ department: result })
-            .then(result => {})
+            .deleteDepartment(item.id)
+            .then(result => {
+              this.showMessage("Действие было выполнено успешно!");
+            })
             .catch(exception => {
               this.showError(
                 "Удаление не было произведено по причине: " + exception
               );
             });
-          this.showMessage("Действие было выполнено успешно");
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(:_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_users" :_headers="headers" :_title="'Учетные записи пользователей'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_users" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -41,6 +41,7 @@ export default {
     "c-remove-dialog": removeDialog_C
   },
   data: () => ({
+    users: [],
     headers: [
       { text: "Почта", value: "email" },
       { text: "Роль", value: "post.name" },
@@ -58,6 +59,19 @@ export default {
 
   methods: {
     //?----------------------------------------------
+    //!           Обновление
+    //?----------------------------------------------
+    update() {
+      api
+        .getUsers()
+        .then(result => {
+          this.$refs.crud.refresh(result.data.users);
+        })
+        .catch(exception => {
+          this.showError("Ошибка обновления! " + exception);
+        });
+    },
+    //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
     add() {
@@ -69,9 +83,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo(
-                "Действие было отклонено в следствии: " + exception
-              );
+              this.showError("Ошибка выполнения! " + exception);
             });
         } else {
           this.showInfo("Действие было отменено пользователем");
@@ -90,7 +102,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo(
+              this.showError(
                 "Действие было отклонено в следствии: " + exception
               );
             });
@@ -106,9 +118,16 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          this.showMessage("Действие было выполнено успешно");
+          api
+            .dropUsers()
+            .then(res => {
+              this.showMessage("Действие было выполнено успешно!");
+            })
+            .catch(exception => {
+              this.showError("Ошибка выполнения! " + exception);
+            });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },
@@ -124,7 +143,7 @@ export default {
               this.showMessage("Действие было выполнено успешно");
             })
             .catch(exception => {
-              this.showInfo(
+              this.showError(
                 "Действие было отклонено в следствии: " + exception
               );
             });
