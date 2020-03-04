@@ -439,8 +439,8 @@ export default {
             },
             {
               icon: "whatshot",
-              text: "Новости",
-              href: "/editor/news"
+              text: "Конструктор новостей",
+              href: "/editor/news-constructor"
             },
             {
               icon: "feedback",

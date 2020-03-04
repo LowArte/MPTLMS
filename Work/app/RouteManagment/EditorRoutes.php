@@ -28,6 +28,7 @@ class EditorRoutes
             Route::get('/', function () {return redirect('/editor/home');})->name('home');
             Route::get('/home', 'Editor\HomeController@index')->name('home');
             Route::get('/news','WarningController@index')->name('news');
+            Route::get('/news-constructor','Editor\NewsConstructorController@index')->name('newsconstructor');
             Route::get('/feedback','Editor\FeedbackController@index')->name('feedback');
         });
     }
