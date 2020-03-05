@@ -17,8 +17,9 @@ class CreateCertificateModification extends BaseModification
     {
         $cer = new Model();
         $cer->user_id = Auth::user()->id;
-        $cer->type = $request['type'];
         $cer->done = false;
+
+        $cer->type = $request['type'];
         $cer->certificates_data = json_encode($request['data']);
         $cer->save();
         return true;

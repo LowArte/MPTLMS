@@ -10,7 +10,6 @@ Work/package.json
 Work/bootstrap/compiled.php
 
 # Laravel 5 & Lumen specific
-Work/storage/*.key
 .env.*.php
 .env.php
 .env

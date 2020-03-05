@@ -14,10 +14,15 @@ class Departament extends Model
     {
         return $this->display_name;
     }
+
     public $timestamps = true;
 
     protected $hidden = [
         'created_at','deleted_at','updated_at'
+    ];
+
+    protected $fillable  = [
+        'dep_name_full','qualification','about','image','info','studysperiod'
     ];
 
     public function __construct($attributes = array())

@@ -17,10 +17,8 @@ class CreateDepartamentsTable extends Migration
             'departaments',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('dep_name');
                 $table->string('dep_name_full');
                 $table->string('qualification');
-                $table->string('about');
                 $table->string('image');
                 $table->string('studysperiod');
                 $table->json('info');

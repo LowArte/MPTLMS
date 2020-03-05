@@ -14,7 +14,6 @@ class GroupManagementTest extends TestCase
     {
         $user = User::Find(1);
         $response = $this->actingAs($user);
-
         $response = $this->get('/admin/group_management');
         $response->assertStatus(200);
     }

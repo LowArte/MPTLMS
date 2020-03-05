@@ -25,43 +25,44 @@ class AdminRoutes
             Route::name('user_management.')->prefix('user_management')->group(function () 
             {
                 Route::post('save', 'Admin\UserManagementController@save')->name('save');
-                Route::post('delete/{user_id}', 'Admin\UserManagementController@delete')->name('set_options');
-                Route::post('edit/{user_id}', 'Admin\UserManagementController@edit')->name('set_options');
+                Route::post('delete/{user_id}', 'Admin\UserManagementController@delete')->name('delete');
+                Route::post('edit', 'Admin\UserManagementController@edit')->name('edit');
             });
     
             Route::name('place_management.')->prefix('place_management')->group(function()
             {
                 Route::post('save','Admin\PlaceManagementController@save')->name('save');
-                Route::post('delete/{post_id}','Admin\PlaceManagementController@delete')->name('set_options');
-                Route::post('edit/{post_id}','Admin\PlaceManagementController@edit')->name('set_options');
+                Route::post('delete/{place_id}','Admin\PlaceManagementController@delete')->name('delete');
+                Route::post('edit','Admin\PlaceManagementController@edit')->name('edit');
             });
     
             Route::name('department_management.')->prefix('department_management')->group(function()
             {
                 Route::post('save','Admin\DepartmentManagementController@save')->name('save');
-                Route::post('delete/{department_id}','Admin\DepartmentManagementController@delete')->name('set_options');
-                Route::post('edit/{department_id}','Admin\DepartmentManagementController@edit')->name('set_options');
+                Route::post('delete/{departament_id}','Admin\DepartmentManagementController@delete')->name('delete');
+                Route::post('deleteAll','Admin\DepartmentManagementController@deleteAll')->name('deleteAll');
+                Route::post('edit','Admin\DepartmentManagementController@edit')->name('edit');
             });
     
             Route::name('group_management.')->prefix('group_management')->group(function()
             {
                 Route::post('save','Admin\GroupManagementController@save')->name('save');
-                Route::post('delete/{group_id}','Admin\GroupManagementController@delete')->name('set_options');
-                Route::post('edit/{group_id}','Admin\GroupManagementController@edit')->name('set_options');
+                Route::post('delete/{group_id}','Admin\GroupManagementController@delete')->name('delete');
+                Route::post('edit','Admin\GroupManagementController@edit')->name('edit');
             });
     
             Route::name('post_management.')->prefix('post_management')->group(function()
             {
                 Route::post('save','Admin\PostManagementController@save')->name('save');
-                Route::post('delete/{post_id}','Admin\PostManagementController@delete')->name('set_options');
-                Route::post('edit/{post_id}','Admin\PostManagementController@edit')->name('set_options');
+                Route::post('delete/{post_id}','Admin\PostManagementController@delete')->name('delete');
+                Route::post('edit','Admin\PostManagementController@edit')->name('edit');
             });
     
             Route::name('retraining_management.')->prefix('retraining_management')->group(function()
             {
                 Route::post('save','Admin\RetrainingManagementController@save')->name('save');
-                Route::post('delete/{get_retraining_id}','Admin\RetrainingManagementController@delete')->name('set_options');
-                Route::post('edit/{get_retraining_id}','Admin\RetrainingManagementController@edit')->name('set_options');
+                Route::post('delete/{retraining_id}','Admin\RetrainingManagementController@delete')->name('delete');
+                Route::post('edit','Admin\RetrainingManagementController@edit')->name('edit');
             });
         });
     }
