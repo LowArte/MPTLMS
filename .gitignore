@@ -16,6 +16,14 @@ Work/bootstrap/compiled.php
 Homestead.yaml
 Homestead.json
 
+Work/storage/debugbar
+Work/storage/framework
+Work/storage/logs
+
+Work/storage/*.key
+
+Work/package-lock.json
+
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 
