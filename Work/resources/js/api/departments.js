@@ -1,4 +1,20 @@
-//Api для работы с учебными отделениями
+//? Документация к api ------------------------
+
+//! Описание
+// Api для работы с учебными отделениями
+
+//! Таблицы базы данных
+//
+
+//! Метод 
+/**
+ * 
+ */
+
+//! Метод 
+/**
+ * 
+ */
 
 import axios from 'axios'
 
@@ -71,8 +87,7 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    saveDepartment(department)
-    {
+    saveDepartment(department) {
         return axios.post('/api/admin/department_management/save/', department);
     },
 
@@ -83,8 +98,7 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deleteDepartment(id)
-    {
+    deleteDepartment(id) {
         return axios.post('/api/admin/department_management/delete/' + id);
     },
 
@@ -95,8 +109,7 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    editDepartment(department) //!Требуется сделать рабочим
-    {
+    editDepartment(department) {
         return axios.post('/api/admin/department_management/edit/' + department.id, {
             "department": department
         });
@@ -105,7 +118,7 @@ export default {
 
 
 
-    
+
     //*----------------------------------------
     //!         Очистка таблицы
     //*----------------------------------------
@@ -115,8 +128,7 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropDepartments()
-    {
+    dropDepartments() {
         return axios.post('/api/admin/department_management/deleteAll');
     }
 }

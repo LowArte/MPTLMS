@@ -1,45 +1,111 @@
-//Api для работы с заменами в учебном расписании групп
+//? Документация к api ------------------------
+
+//! Описание
+// Api для работы с заменами в учебном расписании групп
+
+//! Таблицы базы данных
+//
+
+//! Метод 
+/**
+ * 
+ */
+
+//! Метод 
+/**
+ * 
+ */
 
 import axios from 'axios'
 
-export default 
-{
-  //Получение всех замен
-  getReplacements(data)
-  {
-    return axios.get('/api/getters/replacements');
-  },
+export default {
+    //*----------------------------------------
+    //!         Модель данных
+    //*----------------------------------------
+    /**
+     * id - BIGINT
+     * swap_date - DATE - no null
+     * swap - JSON - no null
+     * schedule_id - int - not null - FK
+     */
+    //*----------------------------------------
 
-  //Получение замен для определённой даты и группы
-  getReplacementsByGroupByDate(data)
-  {
-    return axios.get('/api/getters/replacements_by_group_by_date/'+data.group_id+'/'+data.date);
-  },
 
-  //Получение замен для определённой группы
-  getReplacementsByGroup(group_id)
-  {
-    return axios.get('/api/getters/replacements_by_group/'+group_id);
-  },
 
-  //Получение замен для определённой даты
-  getReplacementsByDate(date)
-  {
-    return axios.get('/api/getters/replacements_by_date/' + date);
-  },
 
-  //Удаление замены
-  deleteReplacement(replacement_id)
-  {
-    return axios.post('/api/delete/replacement/'+replacement_id);
-  },
+    //*----------------------------------------
+    //!         Получение данных
+    //*----------------------------------------
+    //*Получение всех замен
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //! Отсутсвует
+    //!----------------------------------------
+    getReplacements(data) {
+        return axios.get('/api/getters/replacements');
+    },
 
-  //Сохранение замены
-  saveReplacements(data)
-  {
-    return axios.post('/api/save/replacement/' +data.group_id +'/'+data.date, 
-    {
-      "replacement": data.replacement
-    });
-  }
+    //*Получение замен для определённой даты и группы
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
+    //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
+    //! Требование ----------------------------
+    //! Отсутсвует
+    //!----------------------------------------
+    getReplacementsByGroupByDate(data) {
+        return axios.get('/api/getters/replacements_by_group_by_date/' + data.group_id + '/' + data.date);
+    },
+
+    //*Получение замен для определённой группы
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
+    //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
+    //! Требование ----------------------------
+    //! Отсутсвует
+    //!----------------------------------------
+    getReplacementsByGroup(group_id) {
+        return axios.get('/api/getters/replacements_by_group/' + group_id);
+    },
+
+    //*Получение замен для определённой даты
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
+    //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
+    //! Требование ----------------------------
+    //! Отсутсвует
+    //!----------------------------------------
+    getReplacementsByDate(date) {
+        return axios.get('/api/getters/replacements_by_date/' + date);
+    },
+
+
+
+
+    //*----------------------------------------
+    //!         Работа с данными
+    //*----------------------------------------
+    //*Сохранение замены
+    //! Комментарий ---------------------------
+    //? Реализуется сохранение данных в таблице *SCHEDULE_SWAPS* (Замены)
+    //? Передается объект
+    //! Требование ----------------------------
+    //! Уточнить струткуру данных
+    //!----------------------------------------
+    saveReplacements(data) {
+        return axios.post('/api/save/replacement/' + data.group_id + '/' + data.date, {
+            "replacement": data.replacement
+        });
+    },
+
+    //*Логическое удаление замены
+    //? Реализуется стирание данных в таблице *SCHEDULE_SWAPS* (Замены)
+    //? Передается id замены
+    //! Требование ----------------------------
+    //! Отсутсвует
+    //!----------------------------------------
+    deleteReplacement(replacement_id) {
+        return axios.post('/api/delete/replacement/' + replacement_id);
+    },
 }
