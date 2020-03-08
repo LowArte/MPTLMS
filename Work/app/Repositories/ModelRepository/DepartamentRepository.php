@@ -20,7 +20,7 @@ class DepartamentRepository extends BaseRepository
 
     public function getDepartamentsForCRUD()
     {
-        $columns = ['id', 'qualification', 'dep_name_full'];
+        $columns = ['id','qualification', 'dep_name_full'];
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }

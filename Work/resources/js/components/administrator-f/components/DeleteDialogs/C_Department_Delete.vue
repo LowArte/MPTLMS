@@ -6,8 +6,8 @@
       v-form
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
-          v-text-field(v-model="item.dep_name" :rules="codeRules" label="Код отделения" disabled)
-          v-text-field(v-model="item.specialization" :rules="nameRules" label="Наименование" disabled)
+          v-text-field(v-model="item.id" :rules="codeRules" label="Код отделения" disabled)
+          v-text-field(v-model="item.dep_name_full" :rules="nameRules" label="Наименование" disabled)
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer

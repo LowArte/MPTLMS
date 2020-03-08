@@ -21,8 +21,8 @@ class CreateGroupsTable extends Migration
                 $table->string('group_number');
                 $table->string('group_year');
                 $table->string('сurs');
-                $table->unsignedBigInteger('departaments_id');
-                $table->foreign('departaments_id')->references('id')->on('departaments');
+                $table->unsignedBigInteger('departament_id');
+                $table->foreign('departament_id')->references('id')->on('departaments');
                 $table->timestamps();
                 $table->softDeletes();
             }

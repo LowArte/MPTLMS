@@ -12,7 +12,8 @@ class DeleteDepartamentModification extends BaseModification
     }
 
     public function deleteDepartamentFromDatabase($id){
-        $result = $this->startCondition()->find($id)->delete();
+        $departament = $this->startCondition()->find($id);
+        $result = $departament->delete();
         return $result;
     }
 

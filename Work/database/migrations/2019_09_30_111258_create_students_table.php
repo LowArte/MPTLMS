@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id');
-                $table->unsignedBigInteger('group_id');
+                $table->unsignedBigInteger('group_id')->nullable();
                 $table->string('birthday');
                 $table->string('gender');
                 $table->string('type_of_financing');

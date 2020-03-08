@@ -35,8 +35,8 @@ export default {
   mixins: [withSnackbar],
   data: () => ({
     headers: [
-      { text: "Код", value: "dep_name" },
-      { text: "Наименование", value: "qualification" },
+      { text: "Наименование", value: "dep_name_full" },
+      { text: "Квалификация", value: "qualification" },
       { text: "Действия", value: "action", sortable: false }
     ]
   }),
@@ -138,6 +138,7 @@ export default {
             .deleteDepartment(item.id)
             .then(result => {
               this.showMessage("Действие было выполнено успешно!");
+              this.update();
             })
             .catch(exception => {
               this.showError(

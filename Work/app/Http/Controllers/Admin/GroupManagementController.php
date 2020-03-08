@@ -18,6 +18,7 @@ class GroupManagementController extends BaseController
     {
         $groups = $groupRepository->getGroups();
         $departments = $departamentRepository->getDepartamentsForComboBox();
+
         return view('roles.admin.group-management', compact('groups', 'departments'));
     }    
 }
