@@ -57,8 +57,11 @@ import ListCertificate_C from './components/certificate-f/ListCertificateCompone
 import Certificate_C from './components/certificate-f/Certificate'
 import Characteristic_C from './components/certificate-f/Characteristic'
 
-//* Студент
-//! В данном разделе описываются компоненты для пользователя СТУДЕНТ
+//?----------------------------------------------
+//!             НОВОСТНАЯ ЛЕНТА
+//?----------------------------------------------
+import NewsFeed_C from './components/news-f/NewsFeed'
+import NewsConstructor_C from './components/news-f/NewsConstructor'
 
 window.Vue = require('vue');
 
@@ -118,6 +121,8 @@ new Vue({
         'c-requests-users': Request_C,
         'c-feedback': Feedback_C,
         'c-account-card': AccountCard_C,
-        'c-quick-action': QuickAction_C
+        'c-quick-action': QuickAction_C,
+        'c-news-feed': NewsFeed_C,
+        'c-news-construcor': NewsConstructor_C
     }
 });
