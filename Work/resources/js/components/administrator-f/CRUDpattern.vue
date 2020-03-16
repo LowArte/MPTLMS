@@ -4,7 +4,7 @@
         v-data-table.elevation-0.pa-0.ma-0(:headers="headers" :items="flood" :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
                 v-card-title.my-2.ma-0.py-2.text-truncate Менеджмент {{title}}
-                v-tooltip(bottom)
+                v-tooltip(bottom v-if="_func_add != null")
                     template(v-slot:activator="{ on }")
                         v-btn.ma-2.ml-1(text v-on="on" @click="add")
                             v-icon add
@@ -16,7 +16,7 @@
                           v-icon replay
                           span.ma-2 Обновить
                   span Обновить таблицу
-                v-tooltip(bottom)
+                v-tooltip(bottom v-if="_func_clear != null")
                     template(v-slot:activator="{ on }")
                         v-btn.ma-2.ml-1(text color="red" v-on="on" @click="clear")
                             v-icon mdi-delete
@@ -35,12 +35,24 @@
                             span.ma-2 Выгрузить документ
                     span Скачать файл с данными
                 v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
+            //-Обозначение блокировки пользователя
+            template(v-slot:item.disabled="{ item }") 
+              v-tooltip(bottom v-if="item['disabled'] == 1")
+                  template(v-slot:activator="{ on }")
+                    v-btn.ma-2.ml-1(text v-on="on")
+                      v-icon done
+                  span Заблокирован
+              v-tooltip(bottom v-if="item['disabled'] == 0")
+                  template(v-slot:activator="{ on }")
+                    v-btn.ma-2.ml-1(text v-on="on")
+                      v-icon close
+                  span Не заблокирован                  
             template(v-slot:item.action="{ item }")
-                v-tooltip(bottom)
+                v-tooltip(bottom v-if="_func_edit != null")
                     template(v-slot:activator="{ on }")
                         v-icon.small(v-on="on" @click="edit(item)") edit
                     span Редактировать
-                v-tooltip(bottom)
+                v-tooltip(bottom v-if="_func_remove != null")
                     template(v-slot:activator="{ on }")
                         v-icon.small(v-on="on" @click="remove(item)") mdi-delete
                     span Удалить

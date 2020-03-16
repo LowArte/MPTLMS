@@ -6,8 +6,6 @@ use Tests\TestCase;
 use Laravel\Passport\Passport;
 use App\Models\User;
 use App\Repositories\ModelRepository\PlaceRepository;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class test extends TestCase

@@ -4,22 +4,23 @@
           v-card-title.headline 
             h4.text-truncate Редактирование запись
           v-alert.ma-3.px-3(dense type="warning") Будьте внимательны при заполнении данной формы.
-          v-form.ma-3.mb-0
+          v-form.ma-3.mb-0(ref='form')
             v-card-text
               v-autocomplete.mt-3(v-model="item.post_id" item-value="id" item-text="name" :items="posts" dense label="Роль пользователя")
               v-text-field(v-model="item.thirdName" :rules="famRules" label="Фамилия")
               v-text-field(v-model="item.name" :rules="nameRules" label="Имя")
               v-text-field(v-model="item.secName" label="Отчество")
               v-text-field(v-model="item.email" :rules="emailRules" label="Почта")
-              v-dialog(ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
+              v-autocomplete(:items="adisabled" item-value='id' item-text='name' value=item v-model="item.disabled" label='Блокировка')
+              
+              v-dialog(v-if="item.post_id == 2" ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
                 template(v-slot:activator="{ on }")
-                    v-text-field(v-model="item.birthday" label="Дата рождения" readonly v-on="on")
+                    v-text-field(v-model="item.birthday" label="Дата рождения" :rules="birthdayRules" readonly v-on="on")
                 v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog = false") Отмена
                     v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
-              v-autocomplete.mt-3(v-model="item.gender" :items="gender" dense label="Гендерная принадлежность")
-              v-combobox(v-model="item.disabled" label="Блокировка")
-              v-combobox(v-if="item.post_id == 2" v-model="item.dep_name" :items="departaments" label="Специальность")
+              v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="item.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
+              v-combobox(v-if="item.post_id == 2" v-model="item.dep_name" :items="departaments" label="Отделение")
               v-combobox(v-if="item.post_id == 2" v-model="item.group_id" :items="groups" label='Группа')
               v-autocomplete(v-if="item.post_id == 2" v-model="item.type_of_financing" :items="financings" dense label='Вид финансирования')
             v-card-actions
@@ -81,6 +82,8 @@ export default {
       ],
       nameRules: [v => !!v || "Поле не должно оставаться пустым"],
       famRules: [v => !!v || "Поле не должно оставаться пустым"],
+      genderRules: [v => !!v || "Поле не должно оставаться пустым"],
+      birthdayRules: [v => !!v || "Поле не должно оставаться пустым"],
       dateDialog: null
     };
   },
@@ -123,13 +126,8 @@ export default {
       });
     },
     clickEdit() {
-      if (
-        this.item.name != null &&
-        this.item.secName != null &&
-        this.item.thirdName != null &&
-        this.item.post_id != null &&
-        this.item.email != null
-      ) {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
         this.resolve(this.item);
       } else {

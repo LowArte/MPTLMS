@@ -23,13 +23,6 @@
 
 <script>
 //?----------------------------------------------
-//!           Подключение api
-//?----------------------------------------------
-import apiposts from "../../../../api/userPosts";
-import apigroup from "../../../../api/group";
-import apidepartments from "../../../../api/departments";
-
-//?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "../../../mixins/withSnackbar";
@@ -60,32 +53,6 @@ export default {
   methods: {
     pop(item) {
       this.item = Object.assign({}, item);
-      if (this.item.post_id == 2) {
-        apiposts
-          .getPost(this.item.post_id)
-          .then(result => {
-            this.item.post_id = result;
-          })
-          .catch(exception => {
-            this.showInfo("Данные не получены в следствии: " + exception);
-          });
-        apigroup
-          .getGroupsByDepartamentId(this.item.group_id)
-          .then(result => {
-            this.item.group_id = result;
-          })
-          .catch(exception => {
-            this.showInfo("Данные не получены в следствии: " + exception);
-          });
-        apidepartments
-          .getDepartment(this.item.dep_name)
-          .then(result => {
-            this.item.dep_name = result;
-          })
-          .catch(exception => {
-            this.showInfo("Данные не получены в следствии: " + exception);
-          });
-      }
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;

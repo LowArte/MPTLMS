@@ -3,15 +3,15 @@
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Добавить запись
-      v-form
+      v-form(ref='form')
         v-card-text
-          v-text-field(v-model="item.place_name" :rules="codeRules" label="Наименование места проведения")
-          v-text-field(v-model="item.place_index" :rules="codeRules" label="Индекс")
-          v-text-field(v-model="item.place_country" :rules="codeRules" label="Страна")
-          v-text-field(v-model="item.place_city" :rules="codeRules" label="Город")
-          v-text-field(v-model="item.place_street" :rules="codeRules" label="Улица")
-          v-text-field(v-model="item.place_building_number" :rules="codeRules" label="Номер здания")
-          v-text-field(v-model="item.place_piy" :rules="codeRules" label="Корпус")
+          v-text-field(v-model="item.place_name" :rules="place_nameRules" label="Наименование места проведения")
+          v-text-field(v-model="item.place_country" :rules="place_countryRules" label="Страна")
+          v-text-field(v-model="item.place_index" :rules="place_indexRules" label="Почтовый индекс")
+          v-text-field(v-model="item.place_city" :rules="place_cityRules" label="Город")
+          v-text-field(v-model="item.place_street" :rules="place_streetRules" label="Улица")
+          v-text-field(v-model="item.place_building_number" :rules="place_building_numberRules" label="Номер здания")
+          v-text-field(v-model="item.place_piy" label="Корпус")    
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -40,10 +40,22 @@ export default {
         place_piy: null
       },
       resolve: null,
-      codeRules: [
+            place_nameRules: [
         v => !!v || "Поле не должно оставаться пустым",
-        v => /^[А-Я && а-я]*$/.test(v) || "Только буквы в верхнем регистре"
-      ]
+        v => /^[А-Я && а-я]*$/.test(v) || "Только буквы"
+      ],
+      place_indexRules: [
+        v => !!v || "Поле не должно оставаться пустым",
+        v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
+      ],
+      place_countryRules: [v => !!v || "Поле не должно оставаться пустым"],
+      place_cityRules: [v => !!v || "Поле не должно оставаться пустым"],
+      place_streetRules: [v => !!v || "Поле не должно оставаться пустым"],
+      place_building_numberRules: [
+        v => !!v || "Поле не должно оставаться пустым", 
+        v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
+      ],
+      place_piyRules: [v => !!v || "Поле не должно оставаться пустым"],
     };
   },
   methods: {
@@ -55,7 +67,8 @@ export default {
       });
     },
     clickEdit() {
-      if (this.item.place_name != null) {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
         this.resolve(this.item);
       } else {

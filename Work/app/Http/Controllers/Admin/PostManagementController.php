@@ -15,7 +15,7 @@ class PostManagementController extends BaseController
      */
     public function index(UsersPostRepository $usersPostRepository)
     {
-        $posts = $usersPostRepository->getPostsForManagement();
+        $posts = $usersPostRepository->getPosts();
         return view('roles.admin.post-management', compact('posts'));
     }    
 }

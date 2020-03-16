@@ -10,7 +10,7 @@
             h4.text-truncate Новый запись
           v-alert.ma-3.px-3(dense type="info") В любой момент данные, внесённые в поля, можно изменить, нажав на соотвествующий пункт ниже.
           v-alert.ma-3.px-3(dense type="warning") Будьте внимательны при заполнении данной формы.
-          v-form.ma-3
+          v-form.ma-3(ref='form')
             v-stepper(v-model="steps" vertical)
               v-stepper-step(:complete="steps > 1" step="1" @click="change(1)") Роль пользователя
                 small Текущая роль: {{ post_name.name }}
@@ -27,13 +27,6 @@
                   v-text-field(v-model="item.name" :rules="nameRules" label="Имя")
                   v-text-field(v-model="item.secName" label="Отчество")
                   v-text-field(v-model="item.email" :rules="emailRules" label="Почта")
-                  v-dialog(ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
-                    template(v-slot:activator="{ on }")
-                        v-text-field(v-model="item.birthday" label="Дата рождения" readonly v-on="on")
-                    v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
-                        v-btn(text color="primary" @click="dateDialog = false") Отмена
-                        v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
-                  v-autocomplete.mt-3(v-model="item.gender" :items="gender" dense label="Гендерная принадлежность")
                   v-card-actions
                     v-btn(text @click="change(1)") Назад
                     v-spacer
@@ -41,7 +34,14 @@
               v-stepper-step(v-if="item.post_id == 2" :complete="steps > 3" step="3" @click="change(3)") Дополнительно
               v-stepper-content(v-if="item.post_id == 2" step="3")
                 v-card(:elevation="0")
-                  v-combobox(v-model="item.dep_id" item-value="id" label="Специальность" @change="depChange" item-text="dep_name_full" :items="departaments")
+                  v-dialog(v-if="item.post_id == 2" ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
+                    template(v-slot:activator="{ on }")
+                        v-text-field(v-model="item.birthday" label="Дата рождения" :rules="birthdayRules" readonly v-on="on")
+                    v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
+                        v-btn(text color="primary" @click="dateDialog = false") Отмена
+                        v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
+                  v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="item.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
+                  v-combobox(v-if="item.post_id == 2" v-model="item.dep_name" :items="departaments" label="Отделение")
                   v-combobox(v-model="item.group_id" item-value="id" item-text="group_name" :items="groups" label='Группа')
                   v-autocomplete(:items="financings" dense label='Вид финансирования')
                   v-card-actions
@@ -55,7 +55,6 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-//import apigroup from "../../../../api/group";
 import apiposts from "../../../../api/userPosts";
 import apigroup from "../../../../api/group";
 import apidepartments from "../../../../api/departments";
@@ -104,6 +103,7 @@ export default {
       ],
       nameRules: [v => !!v || "Поле не должно оставаться пустым"],
       famRules: [v => !!v || "Поле не должно оставаться пустым"],
+      genderRules: [v => !!v || "Поле не должно оставаться пустым"],
       dateDialog: null
     };
   },
@@ -114,7 +114,7 @@ export default {
         this.departaments = result.data;
       })
       .catch(exception => {
-        this.showInfo("Данные не получены в следствии: " + exception);
+        this.showInfo("Данные не получены! " + exception);
       });
     apiposts
       .getPosts()
@@ -122,7 +122,7 @@ export default {
         this.posts = result.data.posts;
       })
       .catch(exception => {
-        this.showInfo("Данные не получены в следствии: " + exception);
+        this.showInfo("Данные не получены! " + exception);
       });
   },
   depChange() {
@@ -143,18 +143,13 @@ export default {
       });
     },
     clickSave() {
-      if (
-        this.item.name != null &&
-        this.item.secName != null &&
-        this.item.thirdName != null &&
-        this.item.post_id != null &&
-        this.item.email != null
-      ) {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
         this.resolve(this.item);
         this.item = Object.assign({}, null);
       } else {
-        this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {

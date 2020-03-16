@@ -3,7 +3,7 @@
         v-card.ma-0.pa-0
             v-card-title.headline 
                 h4.text-truncate Изменить запись
-            v-form
+            v-form(ref='form')
               v-card-text
                 v-alert(text dense border="left" colored-border type="warning") В поле <strong>Код</strong> необходимо ввести краткое именование отделения. <br>
                     strong Например: 
@@ -20,7 +20,7 @@
                 v-alert(text dense border="left" colored-border type="warning") В поле <strong>Отделение</strong> указывается отделение, к которому прикреплена данная группа <br>
                     strong Например: 
                             i П-3-16 - (09.02.03 Программирование в компьютерных системах)
-                v-autocomplete.my-3(:items="departaments" v-model="item.departaments_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
+                v-autocomplete.my-3(:items="departaments" v-model="item.departament_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
                 v-combobox.my-3(v-model="item.сurs" :items="curses" :rules="cursRules" label="Текущий курс" dense)
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
@@ -56,15 +56,15 @@ export default {
       resolve: null,
       codeRules: [
         v => !!v || "Поле не должно оставаться пустым",
-        v => /^[A-Z && А-Я]*$/.test(v) || "Только буквы в верхнем регистре"
+        v => /^[A-Z && А-Я && 0-9]*$/.test(v) || "Только буквы в верхнем регистре или целочисленные значения (0-9)"
       ],
       countRules: [
         v => !!v || "Поле не должно оставаться пустым",
-        v => /^[1-9]*$/.test(v) || "Только целочисленные значения (1-9)"
+        v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
       ],
       yearRules: [
         v => !!v || "Поле не должно оставаться пустым",
-        v => /^[1-9]*$/.test(v) || "Только целочисленные значения (1-9)"
+        v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
       ],
       specRules: [v => !!v || "Поле не должно оставаться пустым"],
       cursRules: [v => !!v || "Поле не должно оставаться пустым"]
@@ -91,12 +91,8 @@ export default {
       });
     },
     clickEdit() {
-      if (
-        this.item.group_name != null &&
-        this.item.group_number != null &&
-        this.item.group_year != null &&
-        this.item.departaments_id != null
-      ) {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
         this.resolve(this.item);
       } else {

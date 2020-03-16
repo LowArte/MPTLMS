@@ -36,6 +36,12 @@
                   :row-height="24"
                   :rows="3"
                   :rules="orderRules")
+            v-switch.shrink.mr-2.mt-2(
+                  v-model="enabled"
+                  color="primary"
+                  value="primary"
+                  :rules="policyRules"
+                  label="Отправляя заявку на характеристику подтверждаю, что с условиями заказа справок ознакомлен")
             v-btn.mt-2.justify-center.white--text(
                   :disabled="!form"
                   color="blue"
@@ -78,6 +84,7 @@ export default {
       v => v.length > 0 || "Текст заявки не указан",
       v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
     ],
+    policyRules: [v => !!v || "Подтвердите!"],
     form: false
   }),
 
