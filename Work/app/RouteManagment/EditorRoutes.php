@@ -25,10 +25,10 @@ class EditorRoutes
     {
         Route::middleware(['profilactic','auth','access'])->name('editor.')->prefix('editor')->group(function()
         {
-            Route::get('/', function () {return redirect('/editor/home');})->name('home');
-            Route::get('/home', 'Editor\HomeController@index')->name('home');
-            Route::get('/news','WarningController@index')->name('news');
+            Route::get('/home', function () {return redirect('/editor/news-feed');})->name('news-feed');
+            Route::get('/news-feed', 'Editor\HomeController@index')->name('news-feed');
             Route::get('/news-constructor','Editor\NewsConstructorController@index')->name('newsconstructor');
+            Route::get('/news-statistics','WarningController@index')->name('news-statistics');
             Route::get('/feedback','Editor\FeedbackController@index')->name('feedback');
         });
     }
