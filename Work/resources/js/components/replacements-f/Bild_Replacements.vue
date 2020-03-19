@@ -53,14 +53,13 @@
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
                         v-card-title.primary-title.pt-0.px-0 Формирование замены
-                        v-card-text.ma-0.pa-0(v-if="replacement.lesson.length == 0 || replacement.lesson == null") Отмена занятия
                         v-card-text.ma-0.pb-1.pa-0(v-if="replacement.oldlesson == '' || replacement.oldlesson == null") Дополнительное занятие
                         v-form(ref="BildReplacement")
-                            v-select.pa-0.mb-0.mt-2(v-model="replacement.caselesson" :rules="rules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
-                            v-autocomplete(v-model="replacement.lesson" label="Дисциплины" :items="_disciplines" item-text='discipline_name' item-value="id" small-chips chips multiple)
-                            v-autocomplete(v-model="replacement.teacher" label="Преподаватели" :items="_teachers" item-text='fullFio' item-value="id" small-chips chips multiple)
+                            v-select.pa-0.mb-2.mt-2(v-model="replacement.caselesson" :rules="numberLessonRules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
+                            v-switch(v-model="cancel" color="primary" inset label="Отменить занятие!")
+                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" :rules="[DiscipRules.required]" label="Дисциплины" :items="_disciplines" item-text='discipline_name' item-value="id" small-chips chips multiple)
+                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" :rules="[TeacherRules.required]" label="Преподаватели" :items="_teachers" item-text='fullFio' item-value="id" small-chips chips multiple)
                         v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
-                        //- p {{replacement}}
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
 </template>
@@ -80,9 +79,20 @@ export default {
 
     data: () => ({
         typeReplacement: 1,
-        rules: [
+        cancel: false,
+        numberLessonRules: [
             v => !!v || "Пара не указана!",
         ],
+        TeacherRules: {
+            required: value => {
+                return !!value.length || "Преподаватель не указан!";
+            },
+        },
+        DiscipRules: {
+            required: value => {
+                return !!value.length || "Дисциплина не указана!";
+            },
+        },
         lessons: ["1","2","3","4","5","6","7"],
         replacement:{
             caselesson: "", 
@@ -194,15 +204,27 @@ export default {
         //Сохранение замены
         sendQuery() 
         {
+            if (this.cancel && this.replacement.oldlesson.length == 0)
+                this.showInfo("Нельзя отменить пару, которой нет!");
+            else
             if (this.$refs.BildReplacement.validate())
-            replacements_api
-                .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date})
-                .then(res => {
-                    this.showMessage('Замена сохранена!');
-                })
-                .catch(ex => {
-                    this.showError("Замена не принята! " + ex);
-                });
+            {
+                if(this.cancel)
+                {
+                    this.replacement.lesson = [];
+                    this.replacement.teacher = [];
+                }
+                replacements_api
+                    .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date})
+                    .then(res => {
+                        this.showMessage('Замена сохранена!');
+                    })
+                    .catch(ex => {
+                        this.showError("Замена не принята! " + ex);
+                    });
+            }
+            else
+                this.showError("Форма заполнена не верно!");
         },
 
         //Выбор пары 
