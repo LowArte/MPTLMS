@@ -58,11 +58,11 @@
 </template>
 
 <script>
-import group_api from "./../../api/group"; //api групп
-import replacements_api from "./../../api/replacements"; //api замен
-import withSnackbar from "../mixins/withSnackbar"; //Alert
-import ConfirmDialog_C from "./../expention-f/ConfirmDialog"; //Диалог confirm
-import BildReplacement from "./Bild_Replacements"; //Конструктор замен
+import group_api from "@/js/api/group"; //api групп
+import replacements_api from "@/js/api/replacements"; //api замен
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог confirm
+import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //Конструктор замен
 
 export default {
     mixins: [withSnackbar],

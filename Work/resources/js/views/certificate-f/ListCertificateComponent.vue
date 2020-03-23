@@ -42,10 +42,14 @@
 </template>
 
 <script>
-import cerificateApi from "../../api/certificate";
-import withSnackbar from "../mixins/withSnackbar";
+import cerificateApi from "@/js/api/certificate";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
+  post_name: {
+    name: "Просмотр сертивикатов",
+    url: "list_certificate"
+  },
   mixins: [withSnackbar],
   data() {
     return {

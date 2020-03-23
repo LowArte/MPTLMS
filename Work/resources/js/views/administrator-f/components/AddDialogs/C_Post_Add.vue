@@ -16,7 +16,7 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../../../mixins/withSnackbar";
+import withSnackbar from "@/js/components/mixins/withSnackbar"
 
 export default {
   mixins: [withSnackbar],

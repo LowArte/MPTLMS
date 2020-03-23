@@ -40,6 +40,7 @@
 
 <script>
 import SpecialitiesList_C from "@/js/components/information-page-f/SpecialtiesList";
+
 export default {
   components: {
     "c-specialties-list": SpecialitiesList_C

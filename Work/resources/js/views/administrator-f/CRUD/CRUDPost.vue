@@ -11,27 +11,31 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "../../../api/userPosts";
+import api from "@/js/api/userPosts";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../../mixins/withSnackbar";
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
 //?----------------------------------------------
-import CRUD_C from "../CRUDpattern";
+import CRUD_C from "@/js/views/administrator-f/CRUDpattern";
 
 //?----------------------------------------------
 //!           Подключение диалогов CRUD
 //?----------------------------------------------
-import confirmDialog_C from "./../../expention-f/ConfirmDialog";
-import addDialog_C from "./../components/AddDialogs/C_Post_Add";
-import editDialog_C from "./../components/EditDialogs/C_Post_Edit";
-import removeDialog_C from "./../components/DeleteDialogs/C_Post_Delite";
+import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
+import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Post_Add";
+import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Post_Edit";
+import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Post_Delite";
 
 export default {
+  post_name: {
+    name: "CRUD должностей",
+    url: "posts_crud"
+  },
   mixins: [withSnackbar],
   components: {
     "c-crud-form": CRUD_C,

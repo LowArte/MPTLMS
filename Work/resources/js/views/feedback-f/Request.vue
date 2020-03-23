@@ -36,19 +36,23 @@ import { mask } from "vue-the-mask"; //Маска
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../mixins/withSnackbar";
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import feedbackApi from "../../api/feedback";
+import feedbackApi from "@/js/api/feedback";
 
 //?----------------------------------------------
 //!           Подключение диалогов
 //?----------------------------------------------
-import confirmDialog_C from "./../expention-f/ConfirmDialog";
+import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
 export default {
+  post_name: {
+    name: "Просмотр обращений пользователей",
+    url: "requests"
+  },
   mixins: [withSnackbar],
 
   directives: {

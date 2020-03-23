@@ -34,14 +34,14 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import apiposts from "../../../../api/userPosts";
-import apidepartments from "../../../../api/departments";
-import apigroup from "../../../../api/group";
+import apiposts from "@/js/api/userPosts";
+import apidepartments from "@/js/api/departments";
+import apigroup from "@/js/api/group";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../../../mixins/withSnackbar";
+import withSnackbar from "@/js/components/mixins/withSnackbar"
 
 export default {
   mixins: [withSnackbar],

@@ -11,27 +11,31 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "../../../api/departments"; //api для отделений
+import api from "@/js/api/departments"; //api для отделений
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../../mixins/withSnackbar"; //Alert
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
 //?----------------------------------------------
-import CRUD_C from "../CRUDpattern";
+import CRUD_C from "@/js/views/administrator-f/CRUDpattern";
 
 //?----------------------------------------------
 //!           Подключение диалогов CRUD
 //?----------------------------------------------
-import addDialog_C from "./../components/AddDialogs/C_Department_Add";
-import editDialog_C from "./../components/EditDialogs/C_Department_Edit";
-import removeDialog_C from "./../components/DeleteDialogs/C_Department_Delete";
-import confirmDialog_C from "./../../expention-f/ConfirmDialog";
+import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Department_Add";
+import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Department_Edit";
+import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Department_Delete";
+import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
 export default {
+  post_name: {
+    name: "CRUD Отделений",
+    url: "departaments_crud"
+  },
   mixins: [withSnackbar],
   data: () => ({
     headers: [

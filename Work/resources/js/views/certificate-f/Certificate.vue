@@ -28,12 +28,15 @@
 </template>
 
 <script>
-import cerificateApi from "../../api/certificate";
-import withSnackbar from "../mixins/withSnackbar";
+import cerificateApi from "@/js/api/certificate";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
+  post_name: {
+    name: "Справки",
+    url: "certificate"
+  },
   mixins: [withSnackbar],
-
   data: () => ({
     text: "",
     enabled: false,

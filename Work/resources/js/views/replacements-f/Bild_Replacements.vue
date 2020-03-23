@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import group_api from "./../../api/group"; //Api групп
-import schedule_api from "./../../api/schedule"; //Api расписания
-import replacements_api from "./../../api/replacements"; //Api замен
-import withSnackbar from "../mixins/withSnackbar"; //Alert
+import group_api from "@/js/api/group"; //Api групп
+import schedule_api from "@/js/api/schedule"; //Api расписания
+import replacements_api from "@/js/api/replacements"; //Api замен
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 Date.prototype.getWeek = function() {
   const onejan = new Date(this.getFullYear(), 0, 1);
   return Math.ceil((((this - onejan) / 86400000) + 1) / 7);

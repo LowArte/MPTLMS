@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import feedbackApi from "../../api/feedback";
-import withSnackbar from "../mixins/withSnackbar";
+import feedbackApi from "@/js/api/feedback";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
   mixins: [withSnackbar],

@@ -15,10 +15,14 @@
 
 <script>
 import { mask } from "vue-the-mask"; //Маска
-import callScedule from "../../api/callSchedule"; //api для расписания звонков
-import withSnackbar from "../mixins/withSnackbar"; //Alert
+import callScedule from "@/js/api/callSchedule"; //api для расписания звонков
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
+  post_name: {
+    name: "Конструктор звонков",
+    url: "bild_call_schedule"
+  },
   mixins: [withSnackbar],
 
   directives:

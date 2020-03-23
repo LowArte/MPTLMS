@@ -32,12 +32,12 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../../../mixins/withSnackbar";
+import withSnackbar from "@/js/components/mixins/withSnackbar"
 
 //?----------------------------------------------
 //!           Подключение api для получения отделений
 //?----------------------------------------------
-import apiDepartment from "../../../../api/departments";
+import apiDepartment from "@/js/api/departments";
 
 export default {
   mixins: [withSnackbar],

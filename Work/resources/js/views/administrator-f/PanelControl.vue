@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import panelApi from "../../api/panel";
-import withSnackbar from "../mixins/withSnackbar"; //Alert
+import panelApi from "@/js/api/panel";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
   mixins: [withSnackbar],

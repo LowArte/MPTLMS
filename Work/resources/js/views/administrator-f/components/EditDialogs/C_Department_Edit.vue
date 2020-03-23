@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import withSnackbar from "../../../mixins/withSnackbar"; //*Оповещения
+import withSnackbar from "@/js/components/mixins/withSnackbar"
 
 export default {
   mixins: [withSnackbar],

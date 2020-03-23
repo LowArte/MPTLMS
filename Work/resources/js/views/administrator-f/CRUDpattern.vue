@@ -64,7 +64,7 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "../mixins/withSnackbar"; //*Оповещения
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
   data: () => ({

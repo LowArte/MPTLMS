@@ -52,10 +52,14 @@
 
 <script>
 import { mask } from "vue-the-mask";
-import cerificateApi from "../../api/certificate";
-import withSnackbar from "../mixins/withSnackbar";
+import cerificateApi from "@/js/api/certificate";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
+  post_name: {
+    name: "Характеристика",
+    url: "characteristic"
+  },
   directives: {
     mask
   },

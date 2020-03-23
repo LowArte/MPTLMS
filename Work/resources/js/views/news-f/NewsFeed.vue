@@ -29,6 +29,10 @@
 
 <script>
 export default {
+  post_name: {
+    name: "Лента новостей",
+    url: "news"
+  },
   data: () => {
     return {
       items: [

@@ -10,6 +10,10 @@
 <script>
 import { mask } from "vue-the-mask";
 export default {
+  post_name: {
+    name: "Просмотр звонков",
+    url: "callschedule"
+  },
   directives: 
   {
     mask

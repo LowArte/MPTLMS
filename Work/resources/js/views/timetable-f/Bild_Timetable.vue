@@ -29,9 +29,9 @@
 </style>
 
 <script>
-import group_api from "./../../api/group"; //Группы api
-import schedule_api from "./../../api/schedule"; //Расписание api
-import withSnackbar from "../mixins/withSnackbar"; //Alert
+import group_api from "@/js/api/group"; //Группы api
+import schedule_api from "@/js/api/schedule"; //Расписание api
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {
   mixins: [withSnackbar],
