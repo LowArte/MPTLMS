@@ -12,14 +12,13 @@ class DeleteDepartamentModification extends BaseModification
     }
 
     public function deleteDepartamentFromDatabase($id){
-        $departament = $this->startCondition()->find($id);
-        $result = $departament->delete();
+        $result = $this->startCondition()->find($id)->delete();
         return $result;
     }
 
-    public function deleteAllDepartamentFromDatabase(){
-        $result = Model::query()->truncate();
-        print_r($result);
-        return true;
-    }
+    // public function deleteAllDepartamentFromDatabase(){
+    //     $result = \App\Models\Departament::tr;
+    //     print_r($result);
+    //     return true;
+    // }
 }

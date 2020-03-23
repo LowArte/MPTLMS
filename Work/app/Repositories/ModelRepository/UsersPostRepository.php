@@ -10,6 +10,12 @@ class UsersPostRepository extends BaseRepository
         return Model::class;
     }
 
+    public function getPostsFull()
+    {   $columns = ['name','id','privilegies'];
+        $result = $this->startCondition()->select($columns)->get();
+        return $result;
+    }
+
     public function getPosts()
     {   $columns = ['name','id'];
         $result = $this->startCondition()->select($columns)->toBase()->get();

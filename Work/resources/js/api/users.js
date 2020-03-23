@@ -111,5 +111,14 @@ export default {
     dropUsers() //!Требуется сделать рабочим
     {
         return axios.post('/api/admin/user_management/deleteAll');
+    },
+
+    login(data)
+    {
+        return axios.post('/login',data)
+    },
+
+    init(){
+        return axios.post('/getToken')
     }
 }
