@@ -65,202 +65,199 @@ import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Ди�
 import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //Конструктор замен
 
 export default {
-    mixins: [withSnackbar],
+  post_name: {
+    name: "Замены рассписения",
+    url: "replacements"
+  },
+  mixins: [withSnackbar],
 
-    components: 
-    {
-        "c-comfirm-dialog": ConfirmDialog_C,
-        "c_bildReplacement": BildReplacement
-    },
+  components: {
+    "c-comfirm-dialog": ConfirmDialog_C,
+    c_bildReplacement: BildReplacement
+  },
 
-    data: () => ({
-        groups_info: null, //Группы
-        departaments_info: null, //Отделения
-        parseReplacements: null, //Замены
-        replacements: null, //Замены
-        checkAllGroup: false, //Все группы
-        checkAllDate: false, //Все даты
-        groups: [], 
-        date: [], 
-        titleDialog: "Конструктор замен",
-        dialog: false,
-        dateDialog: {
-            model: false,
-            date: new Date().toISOString().substr(0, 10),
-        } //Диалог даты
-    }),
+  data: () => ({
+    groups_info: null, //Группы
+    departaments_info: null, //Отделения
+    parseReplacements: null, //Замены
+    replacements: null, //Замены
+    checkAllGroup: false, //Все группы
+    checkAllDate: false, //Все даты
+    groups: [],
+    date: [],
+    titleDialog: "Конструктор замен",
+    dialog: false,
+    dateDialog: {
+      model: false,
+      date: new Date().toISOString().substr(0, 10)
+    } //Диалог даты
+  }),
 
-    props: 
-    {
-        _departaments_info: {
-            type: Object,
-            default: null
-        }, //JSON отделений
-        _groups_info: {
-            type: Object,
-            default: null
-        }, //JSON групп
-        _replacements: {
-            type: Array,
-            default: null
-        }, //JSON замен
-        _teachers: {
-            type: Array,
-            default: null
-        }, //JSON учителей
-        _disciplines: {
-            type: Array,
-            default: null
-        }, //JSON дисциплин
-        _schedule: {
-            type: Object,
-            default: null
-        }, //JSON дисциплин
-        _schedule_bild: {
-            type: Object,
-            default: null
-        } //Расписание
-    },
+  props: {
+    _departaments_info: {
+      type: Object,
+      default: null
+    }, //JSON отделений
+    _groups_info: {
+      type: Object,
+      default: null
+    }, //JSON групп
+    _replacements: {
+      type: Array,
+      default: null
+    }, //JSON замен
+    _teachers: {
+      type: Array,
+      default: null
+    }, //JSON учителей
+    _disciplines: {
+      type: Array,
+      default: null
+    }, //JSON дисциплин
+    _schedule: {
+      type: Object,
+      default: null
+    }, //JSON дисциплин
+    _schedule_bild: {
+      type: Object,
+      default: null
+    } //Расписание
+  },
 
-    methods:
-    {
-        //Удаление замены
-        deleteItem(id)
-        {
-            this.$refs.qwestion.pop().then(confirmResult => {
-                if (confirmResult) 
-                {
-                    replacements_api
-                    .deleteReplacement(id)
-                        .then(res => {
-                            this.showMessage("Удалена!");
-                            this.changeFilter();
-                        })
-                        .catch(ex => {
-                            this.showError(ex);
-                        });
-                } 
-                else 
-                {
-                    this.showInfo("Действие было отменено");
-                }
+  methods: {
+    //Удаление замены
+    deleteItem(id) {
+      this.$refs.qwestion.pop().then(confirmResult => {
+        if (confirmResult) {
+          replacements_api
+            .deleteReplacement(id)
+            .then(res => {
+              this.showMessage("Удалена!");
+              this.changeFilter();
+            })
+            .catch(ex => {
+              this.showError(ex);
             });
-        },
-
-        //Получение групп для отделения
-        departament_change() 
-        {
-            group_api
-                .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
-                .then(res => {
-                    this.groups_info.groups = res.data.groups_info.groups;
-                    this.groups_info.selected_group = this.groups_info.groups[0];
-                    this.changeFilter();
-                })
-                .catch(ex => {
-                    this.showError(ex);
-                });
-        },
-
-        //Получение замен с учётом фильтров
-        changeFilter() 
-        {
-            if(this.checkAllGroup && this.checkAllDate) //Получить все замены для всех дат и групп
-            {
-                replacements_api
-                    .getReplacements()
-                    .then(res => {
-                        this.replacements = res.data.replacements;
-                        this.parseReplacement();
-                    })
-                    .catch(ex => {
-                        this.showError(ex);
-                    });
-            }
-            else
-            if (this.checkAllGroup) //Получить замены для всех групп
-            {
-                replacements_api
-                    .getReplacementsByDate(this.dateDialog.date)
-                    .then(res => {
-                        this.replacements = res.data.replacements;
-                        this.parseReplacement();
-                    })
-                    .catch(ex => {
-                        this.showError(ex);
-                    });
-            }
-            else
-            if (this.checkAllDate) //Получить все замены для всех дат
-            {
-                replacements_api
-                    .getReplacementsByGroup(this.groups_info.selected_group.id)
-                    .then(res => {
-                        this.replacements = res.data.replacements;
-                        this.parseReplacement();
-                    })
-                    .catch(ex => {
-                        this.showError(ex);
-                    });
-            }
-            else 
-            {
-                replacements_api
-                    .getReplacementsByGroupByDate({group_id: this.groups_info.selected_group.id, date: this.dateDialog.date})
-                    .then(res => {
-                        this.replacements = res.data.replacements;
-                        this.parseReplacement();
-                    })
-                    .catch(ex => {
-                        this.showError(ex);
-                    });
-            }
-        },
-
-        //Перевод массив для вывода
-        parseReplacement()
-        {
-            this.groups = [];
-            this.date = [];
-            this.parseReplacements = [];
-            var j = -1; //Индекс группы
-            var l = -1; //Индекс даты
-            for(var i = 0; i < this.replacements.length; i++)
-            {
-                this.replacements[i]['swap'] = JSON.parse(this.replacements[i]['swap']);
-                if(Array.isArray(this.replacements[i]['swap']['lesson'])) this.replacements[i]['swap']['lesson'] = this.replacements[i]['swap']['lesson'].join(' / ');
-                if(Array.isArray(this.replacements[i]['swap']['oldlesson'])) this.replacements[i]['swap']['oldlesson'] = this.replacements[i]['swap']['oldlesson'].join(' / ');
-                if(Array.isArray(this.replacements[i]['swap']['teacher'])) this.replacements[i]['swap']['teacher'] = this.replacements[i]['swap']['teacher'].join(' / ');
-                if(Array.isArray(this.replacements[i]['swap']['oldteacher'])) this.replacements[i]['swap']['oldteacher'] = this.replacements[i]['swap']['oldteacher'].join(' / ');
-                j = this.groups.indexOf(this.replacements[i]['group_name']);
-                if(j == -1)
-                {
-                    this.groups.push(this.replacements[i]['group_name']);
-                    this.date.push([this.replacements[i]['swap_date']]);
-                    this.parseReplacements.push([[this.replacements[i]]]);
-                }
-                else
-                {
-                    l = this.date[j].indexOf(this.replacements[i]['swap_date']);
-                    if(l == -1)
-                    {
-                        this.date[j].push(this.replacements[i]['swap_date']);
-                        this.parseReplacements[j].push([this.replacements[i]]);
-                    }
-                    else
-                        this.parseReplacements[j][l].push(this.replacements[i]);
-                }
-            }
+        } else {
+          this.showInfo("Действие было отменено");
         }
+      });
     },
-    
-    //Начальный метод
-    beforeMount() 
-    {
-        this.groups_info = this._groups_info;
-        this.departaments_info = this._departaments_info;
-        this.replacements = this._replacements;
-        this.parseReplacement();
+
+    //Получение групп для отделения
+    departament_change() {
+      group_api
+        .getGroupsByDepartamentId(
+          this.departaments_info.selected_departament.id
+        )
+        .then(res => {
+          this.groups_info.groups = res.data.groups_info.groups;
+          this.groups_info.selected_group = this.groups_info.groups[0];
+          this.changeFilter();
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    },
+
+    //Получение замен с учётом фильтров
+    changeFilter() {
+      if (this.checkAllGroup && this.checkAllDate) {
+        //Получить все замены для всех дат и групп
+        replacements_api
+          .getReplacements()
+          .then(res => {
+            this.replacements = res.data.replacements;
+            this.parseReplacement();
+          })
+          .catch(ex => {
+            this.showError(ex);
+          });
+      } else if (this.checkAllGroup) {
+        //Получить замены для всех групп
+        replacements_api
+          .getReplacementsByDate(this.dateDialog.date)
+          .then(res => {
+            this.replacements = res.data.replacements;
+            this.parseReplacement();
+          })
+          .catch(ex => {
+            this.showError(ex);
+          });
+      } else if (this.checkAllDate) {
+        //Получить все замены для всех дат
+        replacements_api
+          .getReplacementsByGroup(this.groups_info.selected_group.id)
+          .then(res => {
+            this.replacements = res.data.replacements;
+            this.parseReplacement();
+          })
+          .catch(ex => {
+            this.showError(ex);
+          });
+      } else {
+        replacements_api
+          .getReplacementsByGroupByDate({
+            group_id: this.groups_info.selected_group.id,
+            date: this.dateDialog.date
+          })
+          .then(res => {
+            this.replacements = res.data.replacements;
+            this.parseReplacement();
+          })
+          .catch(ex => {
+            this.showError(ex);
+          });
+      }
+    },
+
+    //Перевод массив для вывода
+    parseReplacement() {
+      this.groups = [];
+      this.date = [];
+      this.parseReplacements = [];
+      var j = -1; //Индекс группы
+      var l = -1; //Индекс даты
+      for (var i = 0; i < this.replacements.length; i++) {
+        this.replacements[i]["swap"] = JSON.parse(this.replacements[i]["swap"]);
+        if (Array.isArray(this.replacements[i]["swap"]["lesson"]))
+          this.replacements[i]["swap"]["lesson"] = this.replacements[i]["swap"][
+            "lesson"
+          ].join(" / ");
+        if (Array.isArray(this.replacements[i]["swap"]["oldlesson"]))
+          this.replacements[i]["swap"]["oldlesson"] = this.replacements[i][
+            "swap"
+          ]["oldlesson"].join(" / ");
+        if (Array.isArray(this.replacements[i]["swap"]["teacher"]))
+          this.replacements[i]["swap"]["teacher"] = this.replacements[i][
+            "swap"
+          ]["teacher"].join(" / ");
+        if (Array.isArray(this.replacements[i]["swap"]["oldteacher"]))
+          this.replacements[i]["swap"]["oldteacher"] = this.replacements[i][
+            "swap"
+          ]["oldteacher"].join(" / ");
+        j = this.groups.indexOf(this.replacements[i]["group_name"]);
+        if (j == -1) {
+          this.groups.push(this.replacements[i]["group_name"]);
+          this.date.push([this.replacements[i]["swap_date"]]);
+          this.parseReplacements.push([[this.replacements[i]]]);
+        } else {
+          l = this.date[j].indexOf(this.replacements[i]["swap_date"]);
+          if (l == -1) {
+            this.date[j].push(this.replacements[i]["swap_date"]);
+            this.parseReplacements[j].push([this.replacements[i]]);
+          } else this.parseReplacements[j][l].push(this.replacements[i]);
+        }
+      }
     }
+  },
+
+  //Начальный метод
+  beforeMount() {
+    this.groups_info = this._groups_info;
+    this.departaments_info = this._departaments_info;
+    this.replacements = this._replacements;
+    this.parseReplacement();
+  }
 };
 </script>

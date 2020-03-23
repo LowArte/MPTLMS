@@ -35,8 +35,11 @@ import schedule_api from "@/js/api/schedule"; //Расписание api
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {
+  post_name: {
+    name: "Конструктор учебного рассписения",
+    url: "bild_timetable"
+  },
   mixins: [withSnackbar],
-
   data: () => {
     return {
       TeacherRules: {

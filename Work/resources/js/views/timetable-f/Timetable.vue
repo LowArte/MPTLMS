@@ -83,7 +83,10 @@ Date.prototype.getWeek = function() {
 
 export default {
   mixins: [withSnackbar],
-
+  post_name: {
+    name: "Учебное рассписение",
+    url: "timetable"
+  },
   components: {
     c_bildTimetable: bildTimetable
   },

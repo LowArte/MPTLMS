@@ -33,7 +33,7 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 
 export default {
   post_name: {
-    name: "CRUD должностей",
+    name: "CRUD роли",
     url: "posts_crud"
   },
   mixins: [withSnackbar],
