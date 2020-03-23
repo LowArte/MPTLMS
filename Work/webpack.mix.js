@@ -14,6 +14,9 @@ const mix = require('laravel-mix');
 
 
 mix.webpackConfig({
+    output: {
+        chunkFilename: 'js/[name].js',
+    },
     resolve:{
         extensions:['.js','.vue'],
         alias:{

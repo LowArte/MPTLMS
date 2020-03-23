@@ -22,6 +22,8 @@ use App\RouteManagment\UnitRoutes;
 //Default page
 Route::get('/', "WelcomeController@index")->name("default");
 Route::get('/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
+Route::get('/admin/{any}', "SystemController@index")->name("app")->where("{any}",'*');
+Route::get('/admin/', "SystemController@index")->name("app")->where("{any}",'*');
 Route::get('/password/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
 
 Route::post('/login', "Auth\LoginController@login")->name("login");

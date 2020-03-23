@@ -25,7 +25,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "@/js/views/homes-f/AdminHome"
                         ],
                         "default" => true
                     ],
@@ -38,7 +38,13 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Настройки сервера",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Настройки сервера",
+                                        "url"=> "server_settings"
+                                    ],
+                                    "path" => "@/js/views/administrator-f/PanelControl"
+                                ],
                                 "default" => true
                             ]
                         ]
@@ -51,20 +57,36 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное расписание",
-                                "component" => null,
-
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Учебное рассписение",
+                                        "url"=> "timetable"
+                                    ],
+                                    "path" => "@/js/views/timetable-f/Timetable"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Замены рассписения",
+                                        "url"=> "replacements"
+                                    ],
+                                    "path" => "@/js/views/replacements-f/Replacements"
+                                ],
 
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание звонков",
-                                "component" => null,
-
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Рассписание звонков",
+                                        "url"=> "callschedule"
+                                    ],
+                                    "path" => "@/js/views/call-schedule-f/CallSchedule"
+                                 ],
                             ]
                         ],
 
@@ -77,32 +99,58 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Пользователи",
-                                "component" => null,
-
+                                "component" => [
+                                    "info" => [
+                                        "name" => "CRUD пользователей",
+                                        "url"=> "users_crud"
+                                    ],
+                                    "path" => "@/js/views/administrator-f/CRUD/CRUDUser"
+                                 ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Роли",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "CRUD роли",
+                                        "url"=> "posts_crud"
+                                    ],
+                                    "path" => "@/js/views/administrator-f/CRUD/CRUDPost"
+                                 ],
 
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Отделения",
-                                "component" => null,
-
+                                "component" => [
+                                    "info" => [
+                                        "name" => "CRUD отделений",
+                                        "url"=> "departaments_crud"
+                                    ],
+                                    "path" => "@/js/views/administrator-f/CRUD/CRUDDepartament"
+                                 ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Группы",
-                                "component" => null,
-
+                                "component" => [
+                                    "info" => [
+                                        "name" => "CRUD групп",
+                                        "url"=> "groups_crud"
+                                    ],
+                                    "path" => "@/js/views/administrator-f/CRUD/CRUDGroup"
+                                 ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Места проведения",
-                                "component" => null,
-
+                                "component" => [
+                                    "info" => [
+                                        "name" => "CRUD мест проведения",
+                                        "url"=> "places_crud"
+                                    ],
+                                    "path" => "@/js/views/administrator-f/CRUD/CRUDPlace"
+                                 ],
                             ]
                         ],
 
@@ -112,7 +160,13 @@ class PostUserSeeder extends Seeder
                         "icon" => "feedback",
                         "text" => "Обращение пользователей",
                         "children" => [],
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Просмотр обращений пользователей",
+                                "url"=> "requests"
+                            ],
+                            "path" => "@/js/views/feedback-f/Request"
+                         ],
                     ]
                 ])
             ],
@@ -129,7 +183,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "@/js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],

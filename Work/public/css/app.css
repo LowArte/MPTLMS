@@ -64,6 +64,7 @@ var map = {
 	"./certificate-f/ListCertificateComponent.vue": "./resources/js/views/certificate-f/ListCertificateComponent.vue",
 	"./feedback-f/Feedback.vue": "./resources/js/views/feedback-f/Feedback.vue",
 	"./feedback-f/Request.vue": "./resources/js/views/feedback-f/Request.vue",
+	"./homes-f/DefaultHome.vue": "./resources/js/views/homes-f/DefaultHome.vue",
 	"./news-f/NewsFeed.vue": "./resources/js/views/news-f/NewsFeed.vue",
 	"./other-f/Welcome.vue": "./resources/js/views/other-f/Welcome.vue",
 	"./posts-f/Bild_RolesPrivilegies.vue": "./resources/js/views/posts-f/Bild_RolesPrivilegies.vue",
