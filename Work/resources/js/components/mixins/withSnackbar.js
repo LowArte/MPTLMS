@@ -1,7 +1,5 @@
 import * as mutations from '../../store/mutation-types'
-import {
-    mapGetters
-} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
     computed: {
@@ -22,7 +20,7 @@ export default {
         cleanState() {
             setTimeout(() => {
                 this.$store.commit(mutations.SET_SNACKBAR_SHOW, false)
-            }, this.snackbarTimeout)
+            },  this.snackbarTimeout)
         },
         showSnackBar(message, color) {
             this.$store.commit(mutations.SET_SNACKBAR_SHOW, true)

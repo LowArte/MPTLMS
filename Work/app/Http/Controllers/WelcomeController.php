@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ControllerRepository\HomeRepository;
-
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -13,10 +11,8 @@ class WelcomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(HomeRepository $homeRepository)
-    {
-        $data = $homeRepository->getDataForWelcomeHomePage();
-        
-        return view('welcome',$data);
+    public function index()
+    {    
+        return view('layouts.notregister');
     }
 }

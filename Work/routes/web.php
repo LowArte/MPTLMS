@@ -21,19 +21,27 @@ use App\RouteManagment\UnitRoutes;
 
 //Default page
 Route::get('/', "WelcomeController@index")->name("default");
+Route::get('/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
+Route::get('/password/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
+
+Route::post('/login', "Auth\LoginController@login")->name("login");
+Route::post('/getToken', "Auth\LoginController@getToken")->name("token");
+
+
 //Маршруты авторизации
-Auth::routes(['register' => false, 'verify' => false,'confirm'=>false]);
+
+// Auth::routes(['register' => false, 'verify' => false,'confirm'=>false]);
 //Администратор системы
 AdminRoutes::getWebRoutes();
-//Студент
-StudentRoutes::getWebRoutes();
-//Преподаватель
-TeacherRoutes::getWebRoutes();
-//Сотрудник учебной части
-UnitRoutes::getWebRoutes();
-//Сотрудник канцелярии
-ChancelleryRoutes::getWebRoutes();
-//Пользователь с ограниченным функционалом
-NullFuncRoutes::getWebRoutes();
-//Редактор новостей
-EditorRoutes::getWebRoutes();
+// //Студент
+// StudentRoutes::getWebRoutes();
+// //Преподаватель
+// TeacherRoutes::getWebRoutes();
+// //Сотрудник учебной части
+// UnitRoutes::getWebRoutes();
+// //Сотрудник канцелярии
+// ChancelleryRoutes::getWebRoutes();
+// //Пользователь с ограниченным функционалом
+// NullFuncRoutes::getWebRoutes();
+// //Редактор новостей
+// EditorRoutes::getWebRoutes();

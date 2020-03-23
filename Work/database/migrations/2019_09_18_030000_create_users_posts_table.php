@@ -17,6 +17,7 @@ class CreateUsersPostsTable extends Migration
             $table->bigIncrements('id');
             $table->mediumText('name');
             $table->mediumText('slug');
+            $table->json('privilegies');
             $table->timestamps();
             $table->softDeletes();
         });

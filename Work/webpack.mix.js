@@ -11,10 +11,15 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+
 
 mix.webpackConfig({
+    resolve:{
+        extensions:['.js','.vue'],
+        alias:{
+            '@':__dirname+'/resources'
+        }
+    },
     module: {
         rules: [{
                 test: /\.pug$/,
@@ -26,8 +31,10 @@ mix.webpackConfig({
                         use: ['raw-loader', 'pug-plain-loader']
                     }
                 ]
-            },
-           
+            },        
         ]
     }
 })
+
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css').sourceMaps()

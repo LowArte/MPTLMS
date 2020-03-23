@@ -3,40 +3,40 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\User;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+
+use Hash;
+
+use Debugbar;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    public function redirectTo(){
-        return RouteServiceProvider::GetHOME();
+    public function login(Request $request)
+    {
+        $credentials = request(['email', 'password']);
+        if (!auth()->attempt($credentials))
+            return response()->json([
+                'message' => 'Bad data'
+            ], 401);
+        $user = $request->user();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        $token->save();
+        return response()->json([
+            'user' => $user,
+            'routes' =>$user->post->privilegies,
+            'slug'=>$user->post->slug
+        ]);
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+    public function getToken(Request $request){
+        $user = auth()->user();
+        if(!$user){
+            return response()->json(["success"=>false],200);
+        }
+        return response()->json(["success"=>true,"user"=>$user,'routes' =>$user->post->privilegies,'slug'=>$user->post->slug]);
     }
 }
