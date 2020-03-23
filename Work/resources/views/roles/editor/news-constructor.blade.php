@@ -2,6 +2,6 @@
 
 @section('content')
 <v-container fluid grid-list-md text-xs-center>
-    хуй
+    <c-news-construcor></c-news-construcor>
 </v-container>
 @endsection

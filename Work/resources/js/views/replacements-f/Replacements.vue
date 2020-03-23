@@ -4,7 +4,7 @@
         v-flex.ma-2.mb-0.pa-0.row
             v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
             v-combobox.ma-1(label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
-        v-flex.ma-2.mt-0.pa-0.row
+        v-flex.flex-grow-0.ma-2.mt-0.pa-0.row
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                 template(v-slot:activator="{ on }")
                     v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
@@ -28,13 +28,14 @@
                                     :_teachers="_teachers")
         v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
         v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
-        v-flex.ma-0.mb-2.row(v-for="(groups_key, groups_index) in groups" :key="groups_index" align="center" justify="center" min-width="500px")
-            v-flex.ma-2(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
-                v-hover(v-slot:default="{ hover }")
-                    v-card.ma-0(:elevation="hover ? 12 : 6" width="100%")
+        //- Отрисовка замен
+        v-layout.row.wrap(v-for="(groups_key, groups_index) in groups" :key="groups_index")
+            v-flex.ma-1(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
+                v-hover(v-slot:default='{ hover }')
+                    v-card.pa-2.pb-0.mx-auto(:elevation='hover ? 12 : 6'  min-width="300px" max-width="650px" style="display: flex; flex-direction: column;")
                         v-card-title.subtitle-1(style="color: #FF3D00;") {{groups_key}} - {{date_key}}
                         v-divider
-                        v-simple-table(min-width="500px")
+                        v-simple-table()
                             thead
                                 tr
                                     th.text-left № пары
@@ -53,7 +54,7 @@
                                     td(v-else) Занятие отменено
                                     td {{ replacement_key['created_at'] }}
                                     td(v-if="_schedule != null")
-                                        v-icon.small(@click="deleteItem(replacement_key['id'])") delete
+                                        v-icon.small(@click="deleteItem(replacement_key['id'])") delete        
 </template>
 
 <script>

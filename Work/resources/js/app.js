@@ -7,7 +7,6 @@ import router from './router'
 import user_api from '@/js/api/users'
 import * as mutations from '@/js/store/mutation-types'
 
-import NotRegister_Layouts_C from '@/js/layouts/NotRegister'
 
 window.Vue = require('vue');
 
@@ -49,6 +48,5 @@ new Vue({
     store,
     router: router,
     components: {
-        'c-notregister': NotRegister_Layouts_C
     }
 })

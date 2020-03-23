@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_post" :_headers="headers" :_title="'Роли'")
+    c-crud-form(ref='crud' :_func_update="update" :_flood="_post" :_headers="headers" :_title="'Роли'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -42,9 +42,7 @@ export default {
   },
   data: () => ({
     headers: [
-      { text: "Наименование", value: "name" },
-      { text: "Кодовое наименование", value: "slug" },
-      { text: "Действия", value: "action", sortable: false }
+      { text: "Наименование", value: "name" }
     ]
   }),
 
@@ -60,7 +58,7 @@ export default {
     //?----------------------------------------------
     update() {
       api
-        .getPostsForManagement()
+        .getPosts()
         .then(result => {
           this.$refs.crud.refresh(result.data.posts);
         })
@@ -74,7 +72,6 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          console.log(result);
           api
             .savePost(result)
             .then(result => {
@@ -94,7 +91,6 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          console.log(result);
           api
             .editPost(result)
             .then(result => {

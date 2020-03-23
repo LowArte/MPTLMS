@@ -391,14 +391,19 @@ export default {
           //Редактор новостей
           return (this.items = [
             {
-              icon: "home",
-              text: "Главная",
-              href: "/editor/home"
+              icon: "whatshot",
+              text: "Новости",
+              href: "/editor/news-feed"
             },
             {
-              icon: "whatshot",
-              text: "Конструктор новостей",
+              icon: "create",
+              text: "Создать новость",
               href: "/editor/news-constructor"
+            },
+            {
+              icon: "bar_chart",
+              text: "Статистика",
+              href: "/editor/news-statistics"
             },
             {
               icon: "feedback",

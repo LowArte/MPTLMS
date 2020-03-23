@@ -97,7 +97,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editUser(user) {
-        return axios.post('/api/admin/user_management/edit/' + user.user_id, {
+        return axios.post('/api/admin/user_management/edit/', {
             "user": user
         });
     },

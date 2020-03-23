@@ -86,7 +86,7 @@ export default {
               this.showError("Ошибка выполнения! " + exception);
             });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },
@@ -99,16 +99,16 @@ export default {
           api
             .editUser(result)
             .then(result => {
-              this.showMessage("Действие было выполнено успешно");
+              this.showMessage("Действие было выполнено успешно!");
             })
             .catch(exception => {
               this.showError(
                 "Действие было отклонено в следствии: " + exception
               );
             });
-          this.showMessage("Действие было выполнено успешно");
+          this.showMessage("Действие было выполнено успешно!");
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     },
@@ -144,11 +144,11 @@ export default {
             })
             .catch(exception => {
               this.showError(
-                "Действие было отклонено в следствии: " + exception
+                "Действие не было выполнено! " + exception
               );
             });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     }

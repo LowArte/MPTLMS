@@ -31,9 +31,9 @@
         v-icon.small(v-else) close
       template(v-slot:expanded-item="{ headers }")
         td(:colspan="headers.length" v-if="expanded.length > 0")
-          v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].fio}}
+          v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
           v-card-text.my-1.ma-0.pa-0.text(v-for="(info,i) in Object.keys(expanded[0].certificates_data)" :key="i") {{info}} : {{expanded[0].certificates_data[info]}}
-          v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
+          v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].text != null") Текст: {{expanded[0].text}}
             v-form.ma-2.pt-2(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
             v-btn.ma-1.white--text(:disabled='!form' color='blue' depressed @click='sendEmailAnswer(expanded[0].email)') Ответить
             v-btn.ma-1.white--text(color='blue' depressed @click='sendEmailDone(expanded[0].email)') Выполнено

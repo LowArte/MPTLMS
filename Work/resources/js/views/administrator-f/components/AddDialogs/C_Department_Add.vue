@@ -3,10 +3,13 @@
         v-card.ma-0.pa-0
             v-card-title.headline 
                 h4.text-truncate Добавить запись
-            v-form
+            v-form(ref='form')
               v-card-text
-                  v-text-field(v-model="item.dep_name" :rules="codeRules" label="Код отделения")
-                  v-text-field(v-model="item.qualification" :rules="nameRules" label="Наименование")
+                  v-text-field(v-model="item.dep_name_full" :rules="dep_name_fullRules" label="Наименование")
+                  v-text-field(v-model="item.qualification" :rules="qualificationRules" label="Квалификация") 
+                  v-text-field(v-model="item.image" :rules="imageRules" label="Ссылка на изображение") 
+                  v-text-field(v-model="item.info" :rules="infoRules" label="Информация об отделении") 
+                  v-text-field(v-model="item.studysperiod" :rules="studysperiodRules" label="Период обучения") 
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
                   v-spacer
@@ -25,13 +28,18 @@ export default {
     return {
       dialog: false,
       item: {
-        dep_name: null,
+        dep_name_full: null,
         qualification: null,
-        dep_name_full: null
+        image: null,
+        info: null,
+        studysperiod: null
       },
       resolve: null,
-      codeRules: [v => !!v || "Поле не должно оставаться пустым"],
-      nameRules: [v => !!v || "Поле не должно оставаться пустым"]
+      dep_name_fullRules: [v => !!v || "Поле не должно оставаться пустым"],
+      qualificationRules: [v => !!v || "Поле не должно оставаться пустым"],
+      imageRules: [v => !!v || "Поле не должно оставаться пустым"],
+      infoRules: [v => !!v || "Поле не должно оставаться пустым"],
+      studysperiodRules: [v => !!v || "Поле не должно оставаться пустым"],
     };
   },
   methods: {
@@ -41,10 +49,10 @@ export default {
         this.resolve = resolve;
       });
     },
-    clickSave() {
-      this.item.dep_name_full =
-        this.item.dep_name + " " + this.item.qualification;
-      if (this.item.dep_name != null && this.item.qualification != null) {
+    clickSave() 
+    {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
         this.resolve(this.item);
         this.item = Object.assign({}, null);

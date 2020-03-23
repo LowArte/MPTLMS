@@ -3,10 +3,9 @@
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Добавить запись
-      v-form
+      v-form(ref='form')
         v-card-text
           v-text-field(v-model="item.name" :rules="nameRules" label="Наименование")
-          v-text-field(v-model="item.slug" :rules="codeRules" label="Кодовое наименование")
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -34,10 +33,6 @@ export default {
         v => !!v || "Поле не должно оставаться пустым",
         v => /^[А-Я && а-я]*$/.test(v) || "Только кирилические символы"
       ],
-      codeRules: [
-        v => !!v || "Поле не должно оставаться пустым",
-        v => /^[A-Z && a-z]*$/.test(v) || "Только латинские символы"
-      ]
     };
   },
   methods: {
@@ -49,7 +44,8 @@ export default {
       });
     },
     clickSave() {
-      if (this.item.name != null && this.item.slug != null) {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
         this.resolve(this.item);
         this.item = Object.assign({}, null);

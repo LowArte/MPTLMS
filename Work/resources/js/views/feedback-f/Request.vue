@@ -18,7 +18,7 @@
             v-card-text.ma-0.pa-0(v-else) Нет
           template(v-slot:expanded-item='{ headers }')
             td(:colspan='headers.length' v-if='expanded.length > 0')
-              //- v-card-text.my-1.ma-0.pa-0.text ФИО: {{expanded[0].user.fio}}
+              v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
               v-card-text.my-1.ma-0.pa-0.text Текст: {{expanded[0].text}}
               v-form.ma-2.pt-2(v-model='form')
                 v-textarea.mt-0.pt-0(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')

@@ -6,8 +6,11 @@
       v-form
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
-          v-text-field(v-model="item.id" :rules="codeRules" label="Код отделения" disabled)
-          v-text-field(v-model="item.dep_name_full" :rules="nameRules" label="Наименование" disabled)
+          v-text-field(v-model="item.dep_name_full" label="Наименование" disabled)
+          v-text-field(v-model="item.qualification" label="Квалификация" disabled) 
+          v-text-field(v-model="item.image" label="Ссылка на изображение" disabled) 
+          v-text-field(v-model="item.info" label="Информация об отделении" disabled) 
+          v-text-field(v-model="item.studysperiod" label="Период обучения" disabled) 
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -26,13 +29,13 @@ export default {
     return {
       dialog: false,
       item: {
-        dep_name: null,
-        specialization: null,
-        dep_name_full: null
+        dep_name_full: null,
+        qualification: null,
+        image: null,
+        info: null,
+        studysperiod: null
       },
-      resolve: null,
-      codeRules: [v => !!v || "Поле не должно оставаться пустым"],
-      nameRules: [v => !!v || "Поле не должно оставаться пустым"]
+      resolve: null
     };
   },
 

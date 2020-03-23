@@ -52,6 +52,7 @@ export default {
       });
     },
     clickDelete() {
+      this.dialog = false;
       this.resolve(this.item.id);
     },
     clickCancel() {
