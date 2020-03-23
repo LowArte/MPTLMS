@@ -27,13 +27,12 @@ class ReplacementRepository extends BaseRepository
             $disciplines = $disciplineRepository->getDisciplines();
         }
 
-        $columns = ['schedule_swaps.id', 'schedule_swaps.swap_date', 'schedule_swaps.swap', 'schedule_swaps.created_at', 'groups.group_name'];
         $result = $this->startCondition()
         ->where($where)
         ->join('schedules', 'schedule_swaps.schedule_id', '=', 'schedules.id')
         ->join('groups', 'schedules.group_id', '=', 'groups.id')
         ->orderBy('groups.id', 'asc')
-        ->select($columns)
+        ->selectRaw("schedule_swaps.id, schedule_swaps.swap_date, schedule_swaps.swap, schedule_swaps.created_at, CONCAT(group_name, '-', group_number, '-', group_year) as group_name")
         ->orderBy('swap_date', 'desc')
         ->toBase()->get();
         foreach($result as $item)

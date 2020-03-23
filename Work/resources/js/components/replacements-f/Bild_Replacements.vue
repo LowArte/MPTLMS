@@ -26,27 +26,16 @@
                                 v-container.pa-0.ma-0(v-if="isToday == 0")
                                     v-btn.ma-0.pa-0(text @click="caseLesson(lesson_index)") 
                                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
-                                    v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
+                                    v-card-text.pa-0.wrap.text-black(v-if="lesson.LessonChisl != ''") {{lesson.LessonChisl}} 
+                                    v-card-text.pa-0.wrap.text-black(v-else) Дополнительное занятие 
                                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
-                                    v-divider.ma-0(v-if="lesson.LessonZnam!= null && lesson.LessonZnam != ''")
-                                    v-expansion-panels.px-1.py-0(v-if="lesson.LessonZnam!= null" style="z-index: initial;")                    
-                                        v-expansion-panel.px-1.py-0(v-if="lesson.LessonZnam != '' && lesson.LessonZnam != null")
-                                            v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
-                                            v-expansion-panel-content.px-0.mx-0
-                                                v-card-text.pa-0.wrap.text-black {{ lesson.LessonZnam }} 
-                                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
-                                    v-divider.ma-0(v-if="lesson.LessonZnam!= null")
+                                    v-divider.ma-0
                                 v-container.pa-0.ma-0(v-else)
                                     v-btn.ma-0.pa-0(text @click="caseLesson(lesson_index)") 
                                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
-                                    v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam}} 
+                                    v-card-text.pa-0.wrap.text-black(v-if="lesson.LessonZnam != ''") {{lesson.LessonZnam}} 
+                                    v-card-text.pa-0.wrap.text-black(v-else) Дополнительное занятие 
                                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
-                                    v-expansion-panels.px-1.py-0(v-if="lesson.LessonChisl!= null && lesson.LessonChisl != ''" style="z-index: initial;")                    
-                                        v-expansion-panel.px-1.py-0(v-if="lesson.LessonChisl != '' && lesson.LessonChisl != null")
-                                            v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
-                                            v-expansion-panel-content.px-0.mx-0
-                                                v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl }} 
-                                                v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
                                     v-divider.ma-0
             
             v-flex.my-2.ma-2.col
