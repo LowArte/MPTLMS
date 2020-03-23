@@ -44,8 +44,8 @@
         <v-navigation-drawer v-model="rightdrawer" fixed right clipped app>
             <v-card outlined style="border: none;" flat>
                 {{-- <v-form method="post" action="{{route("logout")}}">
-                    @csrf
-                    <c-logout _link="{{route("password.request")}}"></c-logout>
+                @csrf
+                <c-logout _link="{{route("password.request")}}"></c-logout>
                 </v-form> --}}
             </v-card>
         </v-navigation-drawer>
@@ -53,9 +53,9 @@
         <v-content style="background: white;">
             <transition>
                 <keep-alive>
-                  <router-view></router-view>
+                    <router-view></router-view>
                 </keep-alive>
-              </transition>
+            </transition>
         </v-content>
     </v-app>
     @stack('beforeScripts')
