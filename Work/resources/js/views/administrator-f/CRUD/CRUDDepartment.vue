@@ -33,7 +33,7 @@ import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
 export default {
   post_name: {
-    name: "CRUD Отделений",
+    name: "CRUD отделений",
     url: "departaments_crud"
   },
   mixins: [withSnackbar],

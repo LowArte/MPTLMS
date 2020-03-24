@@ -11,7 +11,7 @@
 import { mask } from "vue-the-mask";
 export default {
   post_name: {
-    name: "Просмотр звонков",
+    name: "Рассписание звонков",
     url: "callschedule"
   },
   directives: 

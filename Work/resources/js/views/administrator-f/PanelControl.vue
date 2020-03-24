@@ -13,7 +13,10 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещ�
 
 export default {
   mixins: [withSnackbar],
-
+  post_name: {
+    name: "Настройки сервера",
+    url: "server_settings"
+  },
   data: () => {
     return {
       options: null
