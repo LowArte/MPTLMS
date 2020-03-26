@@ -23,7 +23,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
-                                "url" => "/"
+                                "url" => ""
                             ],
                             "path" => "js/views/homes-f/AdminHome"
                         ],

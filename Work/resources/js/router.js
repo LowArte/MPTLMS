@@ -20,13 +20,21 @@ const defaultRoutes = [{
         component: () => import( /* webpackChunkName: "views-posts-f-build-rolesprivilegies" */ '@/js/views/posts-f/Bild_RolesPrivilegies.vue')
     },
     {
-        path: '/password_reset',
+        path: '/password_reset/',
         name: 'Reset',
         component: () => import( /* webpackChunkName: "views-auth-f-reset" */ '@/js/views/auth-f/Reset.vue')
     }
 ]
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: defaultRoutes
 })
+
+router.beforeEach((to, from, next) => {
+    console.log(to)
+    next()
+  })
+
+
+export default router

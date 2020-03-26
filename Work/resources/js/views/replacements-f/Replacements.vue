@@ -67,7 +67,7 @@ import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //К�
 export default {
   post_name: {
     name: "Замены рассписения",
-    url: "replacements"
+    url: "/replacements"
   },
   mixins: [withSnackbar],
 

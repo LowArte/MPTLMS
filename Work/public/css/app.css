@@ -155,6 +155,12 @@ webpackContext.id = "./resources/js/views sync recursive \\.vue$";var map = {
 	"./mixins/withSnackbar.js": [
 		"./resources/js/components/mixins/withSnackbar.js",
 		16
+	],
+	"./notifications-menu-f/NotificationsBar": [
+		"./resources/js/components/notifications-menu-f/NotificationsBar.vue"
+	],
+	"./notifications-menu-f/NotificationsBar.vue": [
+		"./resources/js/components/notifications-menu-f/NotificationsBar.vue"
 	]
 };
 function webpackAsyncContext(req) {
