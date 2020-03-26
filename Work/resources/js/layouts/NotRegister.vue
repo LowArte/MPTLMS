@@ -6,9 +6,7 @@
         <span class="font-weight-light" dense>{{ _name }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <router-link class="nounderline" to="/admin/timetable">
-          <v-btn color="accent" text>czxczzxczcz</v-btn>
-        </router-link>
+      <c-notification-bar></c-notification-bar>
       <div v-if="!isAuthenticated">
         <router-link v-if="currentRoute.name !='Login'" class="nounderline" to="/login">
           <v-btn color="accent" text>ВОЙТИ</v-btn>
@@ -45,6 +43,7 @@
 
 <script>
 import snackbar from "@/js/components/SnackBarComponent";
+import notificationsBar from "@/js/components/notifications-menu-f/NotificationsBar";
 import { mapGetters } from "vuex";
 
 export default {
@@ -62,7 +61,8 @@ export default {
     }
   },
   components: {
-    snackbar
+    snackbar,
+    "c-notification-bar": notificationsBar
   }
 };
 </script>
