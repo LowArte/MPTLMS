@@ -15,7 +15,7 @@ export default {
   mixins: [withSnackbar],
   post_name: {
     name: "Настройки сервера",
-    url: "server_settings"
+    url: "/server_settings"
   },
   data: () => {
     return {
