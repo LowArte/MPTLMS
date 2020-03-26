@@ -35,7 +35,7 @@
                     v-card-text.pa-0 Обратитесь в Центр по работе со студентами - Вам выдадут временный пароль для входа в личный кабинет. При себе необходимо иметь студенческий билет.
                     v-card-text.subtitle-1.pa-0.py-2.font-weight-medium Забыли пароль?
                     router-link(class='nounderline' to="/password/reset") 
-                      a.ma-0.pa-0.pb-2(color="font-weight-light" style="color: #FE532C; text-decoration: none;") Восстанвовление пароля на сайте
+                      a.ma-0.pa-0.pb-2(color="font-weight-light" style="color: #FE532C; text-decoration: none;") Восстановление пароля на сайте
                     v-card-text.pa-0 Либо вы можете обратиться в Центр по работе со студентами или к админестратору сайта (преподавателям)
                   v-spacer
                   v-btn(class="mt-6 text-center" text color="red" @click="sheet = !sheet") Закрыть

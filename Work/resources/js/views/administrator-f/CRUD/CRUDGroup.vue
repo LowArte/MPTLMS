@@ -46,9 +46,7 @@ export default {
   },
   data: () => ({
     headers: [
-      { text: "Код группы", value: "group_name" },
-      { text: "Номер", value: "group_number" },
-      { text: "Год поступления", value: "group_year" },
+      { text: "Группа", value: "full_group_name" },
       { text: "Курс", value: "сurs" },
       { text: "Действия", value: "action", sortable: false }
     ]
