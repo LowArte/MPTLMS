@@ -37,7 +37,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 export default {
   post_name: {
     name: "Конструктор учебного рассписения",
-    url: "/bild_timetable"
+    url: "bild_timetable"
   },
   mixins: [withSnackbar],
   data: () => {

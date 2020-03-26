@@ -39,7 +39,7 @@ import post_api from "@/js/api/userPosts";
 export default {
   post_name: {
     name: "Конструктор привилегий ролей",
-    url: "/bild_post_privilegies"
+    url: "bild_post_privilegies"
   },
   mounted() {
     this.init();

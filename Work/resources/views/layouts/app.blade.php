@@ -14,7 +14,7 @@
 
 <body>
     <v-app id="app">
-        <c-app></c-app>
+        <c-layouts></c-layouts>
     </v-app>
     @stack('beforeScripts')
     <script src="{{ mix('js/app.js') }}"></script>

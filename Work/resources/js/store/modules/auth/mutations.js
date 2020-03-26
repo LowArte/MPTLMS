@@ -10,5 +10,8 @@ export default {
     state.user = null
     state.routes = null
     state.slug = null
+  },
+  [types.SET_LAYOUT](state,data){
+    state.layout = data
   }
 }

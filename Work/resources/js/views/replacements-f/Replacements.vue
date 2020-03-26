@@ -51,7 +51,7 @@ import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Ди�
 export default {
   post_name: {
     name: "Замены рассписения",
-    url: "/replacements"
+    url: "replacements"
   },
   mixins: [withSnackbar],
 

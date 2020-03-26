@@ -69,7 +69,7 @@ export default {
   mixins: [withSnackbar],
   post_name: {
     name: "Учебное рассписение",
-    url: "/timetable"
+    url: "timetable"
   },
 
   data: () => {

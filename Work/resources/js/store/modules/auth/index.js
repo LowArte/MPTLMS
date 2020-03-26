@@ -5,7 +5,8 @@ const state = {
   isAuthenticated:false,
   user:null,
   routes:null,
-  slug:null
+  slug:null,
+  layout:{name:"NOT_REGISTER",component:()=>import("@/js/layouts/NotRegister")}
 }
 
 export default {

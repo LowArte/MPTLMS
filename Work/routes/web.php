@@ -20,12 +20,11 @@ use App\RouteManagment\TeacherRoutes;
 use App\RouteManagment\UnitRoutes;
 
 //Default page
-Route::get('/', "WelcomeController@index")->name("default");
+Route::get('/', "AppController@index")->name("default");
 
-Route::get('/admin/{any}', "SystemController@index")->name("admin.any")->where("{any}",'*');
-Route::get('/admin', "SystemController@index")->name("admin");
+Route::get('/{any}/{any2}', "AppController@index")->name("any")->where("{any}",'*')->where("{any2}",'*');
 
-Route::get('/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
+Route::get('/{any}', "AppController@index")->name("any")->where("{any}",'*');
 
 Route::post('/login', "Auth\LoginController@login")->name("login");
 Route::post('/getToken', "Auth\LoginController@getToken")->name("token");

@@ -2,13 +2,14 @@ require('./bootstrap');
 
 import store from './store'
 import vuetify from './vuetify'
-import router from './router'
+import {createRouter} from './router'
 
 import user_api from '@/js/api/users'
 import * as mutations from '@/js/store/mutation-types'
 
-import C_NotRegistered from '@/js/layouts/NotRegister'
-import C_App from '@/js/layouts/App'
+import C_Layouts from '@/js/views/Layouts'
+
+let router = createRouter(store)
 
 window.Vue = require('vue');
 
@@ -21,18 +22,18 @@ user_api.init().then((res) => {
         res.data.routes.forEach(element => {
             if (element.children) {
                 element.children.forEach(child => {
-                    if(child.component != null)
-                    items.push({
-                        path: '/' + slug + child.component.info.url,
-                        name: child.component.info.name,
-                        component: ()=>import( /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`)
-                    })
+                    if (child.component != null)
+                        items.push({
+                            path: '/' + slug + "/" + child.component.info.url,
+                            name: child.component.info.name,
+                            component: () => import( /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`)
+                        })
                 })
             } else {
                 items.push({
-                    path: '/' + slug  + element.component.info.url,
+                    path: '/' + slug + "/" + element.component.info.url,
                     name: element.component.info.name,
-                    component: ()=>import( /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`)
+                    component: () => import( /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`)
                 })
             }
         })
@@ -42,14 +43,12 @@ user_api.init().then((res) => {
     }
 })
 
-
 new Vue({
     el: '#app',
     vuetify,
     store,
     router: router,
     components: {
-        "c-notregister": C_NotRegistered,
-        "c-app": C_App
+        "c-layouts": C_Layouts,
     }
 })

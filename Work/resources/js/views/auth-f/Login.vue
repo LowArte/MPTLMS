@@ -65,48 +65,45 @@ export default {
   },
   methods: {
     login() {
-      if (this.$refs.Login.validate())
-      {
-      user_api
-        .login({ email: this.email, password: this.password })
-        .then(res => {
-          console.log(res.data.routes);
-          this.$store.commit(mutations.SET_AUTH, res.data);
-          let slug = res.data.slug;
-          let items = [];
-          res.data.routes.forEach(element => {
-            let com = import("@/js/views/posts-f/Bild_RolesPrivilegies");
-            if (element.children) {
-              element.children.forEach(child => {
+      if (this.$refs.Login.validate()) {
+        user_api
+          .login({ email: this.email, password: this.password })
+          .then(res => {
+            this.$store.commit(mutations.SET_AUTH, res.data);
+            let slug = res.data.slug;
+            let items = [];
+            res.data.routes.forEach(element => {
+              if (element.children) {
+                element.children.forEach(child => {
+                  if (child.component != null)
+                    items.push({
+                      path: "/" + slug + "/" + child.component.info.url,
+                      name: child.component.info.name,
+                      component: () =>
+                        import(
+                          /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`
+                        )
+                    });
+                });
+              } else {
                 items.push({
-                  path: "/" + slug + "/" + child.component.info.url,
-                  name: child.component.info.name,
+                  path: "/" + slug + "/" + element.component.info.url,
+                  name: element.component.info.name,
                   component: () =>
                     import(
-                      /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`
+                      /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`
                     )
                 });
-              });
-            } else {
-              items.push({
-                path: "/" + slug + "/" + element.component.info.url,
-                name: element.component.info.name,
-                component: () =>
-                  import(
-                    /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`
-                  )
-              });
-            }
+              }
+            });
+            this.$router.addRoutes(items);
+            this.$router.push("/" + slug);
+          })
+          .catch(er => {
+            this.password = "";
+            this.showError("Вход не произведён!");
           });
-          this.$router.addRoutes(items);
-        })
-        .catch(er => {
-          this.password = "";
-          this.showError("Вход не произведён!");
-        });
-      }
-      else
-        this.showError("Заполните корректно поля!");
+      } else this.showError("Заполните корректно поля!");
     }
   }
 };

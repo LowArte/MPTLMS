@@ -67,7 +67,7 @@ export default {
     mixins: [withSnackbar],
     post_name: {
         name: "Замены рассписения",
-        url: "/bild_replacements"
+        url: "bild_replacements"
      },
     data: () => ({
         typeReplacement: 1,
