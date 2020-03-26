@@ -22,8 +22,10 @@ class GroupRepository extends BaseRepository
 
     public function getGroups()
     {
-        $columns = ['id','group_name','group_number', 'group_year', 'сurs', 'departament_id'];
-        $result = $this->startCondition()->select($columns)->toBase()->get();
+        $result = $this->startCondition()
+                        ->selectRaw("id, group_name, group_number, group_year, сurs, departament_id, CONCAT(group_name, '-', group_number, '-', group_year) as full_group_name")
+                        ->toBase()
+                        ->get();
         return $result;
     }
 }
