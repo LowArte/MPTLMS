@@ -27,10 +27,6 @@ export default {
     _options: {
       data: Object,
       default: null
-    },
-    _slug: {
-      type: String,
-      default: ""
     }
   },
 
@@ -44,8 +40,7 @@ export default {
       panelApi
         .setOptionValue({
           id: this.options.id,
-          value: this.options.option_value,
-          slug: this._slug
+          value: this.options.option_value
         })
         .then(res => {
           this.showMessage("Настройки сохранены!");

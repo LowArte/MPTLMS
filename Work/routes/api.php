@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::name('api.')->group(function () 
+Route::middleware('auth:api')->name('api.')->group(function () 
 {
     Route::name('getters.')->prefix('getters')->group(function () {
         Route::get('users', 'Api\UserController@getUsers')->name('users'); 

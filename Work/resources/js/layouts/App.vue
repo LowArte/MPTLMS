@@ -13,11 +13,11 @@
           <v-icon>menu</v-icon>
         </v-btn>
       </div>
-      <!-- @if(auth()->user()->disabled) -->
+      <!-- @if(auth()->user()->disabled)
       <div class="d-flex align-center" style="margin-left: auto">
         <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Вы заблокированы!</v-card-title>
       </div>
-      <!-- @endif -->
+      @endif -->
       <div class="d-flex align-center" style="margin-left: auto">
         <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
           <small class="white--text">

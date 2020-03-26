@@ -11,21 +11,6 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
-            v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" v-if="_schedule != null")
-                template(v-slot:activator="{ on }")
-                    v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
-                v-card
-                    v-toolbar(dark color="primary")
-                        v-btn(icon dark @click="dialog = false; changeFilter()")
-                            v-icon mdi-close
-                        v-toolbar-title {{titleDialog}}
-                        v-spacer
-                    c_bildReplacement.pa-2(:_departaments_info="_departaments_info" 
-                                    :_groups_info="_groups_info" 
-                                    :_schedule="_schedule"
-                                    :_schedule_bild="_schedule_bild"
-                                    :_disciplines="_disciplines"
-                                    :_teachers="_teachers")
         v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
         v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
         //- Отрисовка замен
@@ -62,7 +47,6 @@ import group_api from "@/js/api/group"; //api групп
 import replacements_api from "@/js/api/replacements"; //api замен
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог confirm
-import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //Конструктор замен
 
 export default {
   post_name: {
@@ -73,7 +57,6 @@ export default {
 
   components: {
     "c-comfirm-dialog": ConfirmDialog_C,
-    c_bildReplacement: BildReplacement
   },
 
   data: () => ({

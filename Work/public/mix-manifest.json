@@ -46,5 +46,10 @@
     "/js/js-views-timetable-f-Timetable-vue.bundle.js": "/js/js-views-timetable-f-Timetable-vue.bundle.js",
     "/js/views-auth-f-login.bundle.js": "/js/views-auth-f-login.bundle.js",
     "/js/views-auth-f-reset.bundle.js": "/js/views-auth-f-reset.bundle.js",
-    "/js/views-other-f-welcome.bundle.js": "/js/views-other-f-welcome.bundle.js"
+    "/js/views-other-f-welcome.bundle.js": "/js/views-other-f-welcome.bundle.js",
+    "/js/js-views-replacements-f-Replacements-copy-vue.bundle.js": "/js/js-views-replacements-f-Replacements-copy-vue.bundle.js",
+    "/js/js-views-replacements-f-ReplacementsRoot-vue.bundle.js": "/js/js-views-replacements-f-ReplacementsRoot-vue.bundle.js",
+    "/js/js-views-timetable-f-Timetable-copy-vue.bundle.js": "/js/js-views-timetable-f-Timetable-copy-vue.bundle.js",
+    "/js/js-views-timetable-f-TimetableRoot-vue.bundle.js": "/js/js-views-timetable-f-TimetableRoot-vue.bundle.js",
+    "/js/js-views-certificate-f-TabCertificate-vue.bundle.js": "/js/js-views-certificate-f-TabCertificate-vue.bundle.js"
 }

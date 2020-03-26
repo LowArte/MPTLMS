@@ -21,6 +21,7 @@ user_api.init().then((res) => {
         res.data.routes.forEach(element => {
             if (element.children) {
                 element.children.forEach(child => {
+                    if(child.component != null)
                     items.push({
                         path: '/' + slug + child.component.info.url,
                         name: child.component.info.name,
