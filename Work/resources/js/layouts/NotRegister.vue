@@ -6,7 +6,6 @@
         <span class="font-weight-light" dense>{{ _name }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <c-notification-bar></c-notification-bar>
       <div v-if="!isAuthenticated">
         <router-link v-if="currentRoute.name !='Login'" class="nounderline" to="/login">
           <v-btn color="accent" text>ВОЙТИ</v-btn>
@@ -26,10 +25,9 @@
       <v-container fluid grid-list-md text-xs-center>
         <!-- @if ($profilactic ?? false) -->
         <v-alert class="my-2" text dense type="warning">
-          <span
-            class="primary--text subtitle-1"
-          >Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.</span>
+          <span class="primary--text subtitle-1" >Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.</span>
         </v-alert>
+        <t1></t1>
         <!-- @endif -->
         <transition>
           <keep-alive>
@@ -43,7 +41,7 @@
 
 <script>
 import snackbar from "@/js/components/SnackBarComponent";
-import notificationsBar from "@/js/components/notifications-menu-f/NotificationsBar";
+import t1 from "@/js/views/timetable-f/TestNewTimetable";
 import { mapGetters } from "vuex";
 
 export default {
@@ -62,7 +60,7 @@ export default {
   },
   components: {
     snackbar,
-    "c-notification-bar": notificationsBar
+    t1
   }
 };
 </script>

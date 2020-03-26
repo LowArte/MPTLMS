@@ -64,7 +64,6 @@ var map = {
 	"./certificate-f/ListCertificateComponent.vue": "./resources/js/views/certificate-f/ListCertificateComponent.vue",
 	"./feedback-f/Feedback.vue": "./resources/js/views/feedback-f/Feedback.vue",
 	"./feedback-f/Request.vue": "./resources/js/views/feedback-f/Request.vue",
-	"./homes-f/AdminHome.vue": "./resources/js/views/homes-f/AdminHome.vue",
 	"./homes-f/DefaultHome.vue": "./resources/js/views/homes-f/DefaultHome.vue",
 	"./news-f/NewsFeed.vue": "./resources/js/views/news-f/NewsFeed.vue",
 	"./other-f/Welcome.vue": "./resources/js/views/other-f/Welcome.vue",
@@ -72,6 +71,7 @@ var map = {
 	"./replacements-f/Bild_Replacements.vue": "./resources/js/views/replacements-f/Bild_Replacements.vue",
 	"./replacements-f/Replacements.vue": "./resources/js/views/replacements-f/Replacements.vue",
 	"./timetable-f/Bild_Timetable.vue": "./resources/js/views/timetable-f/Bild_Timetable.vue",
+	"./timetable-f/TestNewTimetable.vue": "./resources/js/views/timetable-f/TestNewTimetable.vue",
 	"./timetable-f/Timetable.vue": "./resources/js/views/timetable-f/Timetable.vue"
 };
 
@@ -155,6 +155,14 @@ webpackContext.id = "./resources/js/views sync recursive \\.vue$";var map = {
 	"./mixins/withSnackbar.js": [
 		"./resources/js/components/mixins/withSnackbar.js",
 		16
+	],
+	"./notifications-menu-f/NotificationsBar": [
+		"./resources/js/components/notifications-menu-f/NotificationsBar.vue",
+		"js-components-notifications-menu-f-NotificationsBar-vue"
+	],
+	"./notifications-menu-f/NotificationsBar.vue": [
+		"./resources/js/components/notifications-menu-f/NotificationsBar.vue",
+		"js-components-notifications-menu-f-NotificationsBar-vue"
 	]
 };
 function webpackAsyncContext(req) {
