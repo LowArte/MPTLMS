@@ -23,21 +23,20 @@ user_api.init().then((res) => {
             if (element.children) {
                 element.children.forEach(child => {
                     items.push({
-                        path: '/'+slug+'/' + child.component.info.url,
+                        path: '/' + slug + '/' + child.component.info.url,
                         name: child.component.info.name,
-                        component: () => import("@"+child.component.path.replace('@',''))
+                        component: ()=>import( /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`)
                     })
                 })
             } else {
                 items.push({
-                  path: '/'+slug+'/' + element.component.info.url,
-                  name: element.component.info.name,
-                  component: () => import("@"+element.component.path.replace('@',''))
+                    path: '/' + slug + '/' + element.component.info.url,
+                    name: element.component.info.name,
+                    component: ()=>import( /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`)
                 })
             }
         })
         router.addRoutes(items)
-
     } else {
         console.log("not_auth")
     }
@@ -50,7 +49,7 @@ new Vue({
     store,
     router: router,
     components: {
-        "c-notregister" : C_NotRegistered,
-        "c-app" : C_App
+        "c-notregister": C_NotRegistered,
+        "c-app": C_App
     }
 })

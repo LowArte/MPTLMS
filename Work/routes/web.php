@@ -21,10 +21,11 @@ use App\RouteManagment\UnitRoutes;
 
 //Default page
 Route::get('/', "WelcomeController@index")->name("default");
+
+Route::get('/admin/{any}', "SystemController@index")->name("admin.any")->where("{any}",'*');
+Route::get('/admin', "SystemController@index")->name("admin");
+
 Route::get('/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
-Route::get('/admin/{any}', "SystemController@index")->name("app")->where("{any}",'*');
-Route::get('/admin/', "SystemController@index")->name("app")->where("{any}",'*');
-Route::get('/password/{any}', "WelcomeController@index")->name("default")->where("{any}",'*');
 
 Route::post('/login', "Auth\LoginController@login")->name("login");
 Route::post('/getToken', "Auth\LoginController@getToken")->name("token");
@@ -34,7 +35,7 @@ Route::post('/getToken', "Auth\LoginController@getToken")->name("token");
 
 // Auth::routes(['register' => false, 'verify' => false,'confirm'=>false]);
 //Администратор системы
-AdminRoutes::getWebRoutes();
+// AdminRoutes::getWebRoutes();
 // //Студент
 // StudentRoutes::getWebRoutes();
 // //Преподаватель

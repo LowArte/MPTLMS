@@ -11,33 +11,31 @@ const mix = require('laravel-mix');
  |
  */
 
-
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css').sourceMaps()
 
 mix.webpackConfig({
     output: {
-        chunkFilename: 'js/[name].js',
+        chunkFilename: 'js/[name].bundle.js',
+        publicPath: '/',
     },
-    resolve:{
-        extensions:['.js','.vue'],
-        alias:{
-            '@':__dirname+'/resources'
+    resolve: {
+        extensions: ['.js', '.vue'],
+        alias: {
+            '@': __dirname + '/resources'
         }
     },
     module: {
         rules: [{
-                test: /\.pug$/,
-                oneOf: [{
-                        resourceQuery: /^\?vue/,
-                        use: ['pug-plain-loader']
-                    },
-                    {
-                        use: ['raw-loader', 'pug-plain-loader']
-                    }
-                ]
-            },        
-        ]
+            test: /\.pug$/,
+            oneOf: [{
+                    resourceQuery: /^\?vue/,
+                    use: ['pug-plain-loader']
+                },
+                {
+                    use: ['raw-loader', 'pug-plain-loader']
+                }
+            ]
+        }, ]
     }
 })
-
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css').sourceMaps()

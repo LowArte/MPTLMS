@@ -64,6 +64,7 @@ var map = {
 	"./certificate-f/ListCertificateComponent.vue": "./resources/js/views/certificate-f/ListCertificateComponent.vue",
 	"./feedback-f/Feedback.vue": "./resources/js/views/feedback-f/Feedback.vue",
 	"./feedback-f/Request.vue": "./resources/js/views/feedback-f/Request.vue",
+	"./homes-f/AdminHome.vue": "./resources/js/views/homes-f/AdminHome.vue",
 	"./homes-f/DefaultHome.vue": "./resources/js/views/homes-f/DefaultHome.vue",
 	"./news-f/NewsFeed.vue": "./resources/js/views/news-f/NewsFeed.vue",
 	"./other-f/Welcome.vue": "./resources/js/views/other-f/Welcome.vue",
@@ -92,4 +93,86 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = "./resources/js/views sync recursive \\.vue$";
+webpackContext.id = "./resources/js/views sync recursive \\.vue$";var map = {
+	"./SnackBarComponent": [
+		"./resources/js/components/SnackBarComponent.vue"
+	],
+	"./SnackBarComponent.vue": [
+		"./resources/js/components/SnackBarComponent.vue"
+	],
+	"./expention-f/ConfirmDialog": [
+		"./resources/js/components/expention-f/ConfirmDialog.vue",
+		"js-components-expention-f-ConfirmDialog-vue"
+	],
+	"./expention-f/ConfirmDialog.vue": [
+		"./resources/js/components/expention-f/ConfirmDialog.vue",
+		"js-components-expention-f-ConfirmDialog-vue"
+	],
+	"./expention-f/Panel": [
+		"./resources/js/components/expention-f/Panel.vue"
+	],
+	"./expention-f/Panel.vue": [
+		"./resources/js/components/expention-f/Panel.vue"
+	],
+	"./information-page-f/SpecialtiesList": [
+		"./resources/js/components/information-page-f/SpecialtiesList.vue",
+		"js-components-information-page-f-components-C_SpecialtyPage-vue",
+		"js-components-information-page-f-components-C_AddNewSpecialties-vue",
+		"js-components-information-page-f-SpecialtiesList-vue"
+	],
+	"./information-page-f/SpecialtiesList.vue": [
+		"./resources/js/components/information-page-f/SpecialtiesList.vue",
+		"js-components-information-page-f-components-C_SpecialtyPage-vue",
+		"js-components-information-page-f-components-C_AddNewSpecialties-vue",
+		"js-components-information-page-f-SpecialtiesList-vue"
+	],
+	"./information-page-f/components/C_AddNewSpecialties": [
+		"./resources/js/components/information-page-f/components/C_AddNewSpecialties.vue",
+		"js-components-information-page-f-components-C_AddNewSpecialties-vue"
+	],
+	"./information-page-f/components/C_AddNewSpecialties.vue": [
+		"./resources/js/components/information-page-f/components/C_AddNewSpecialties.vue",
+		"js-components-information-page-f-components-C_AddNewSpecialties-vue"
+	],
+	"./information-page-f/components/C_SpecialtyPage": [
+		"./resources/js/components/information-page-f/components/C_SpecialtyPage.vue",
+		"js-components-information-page-f-components-C_SpecialtyPage-vue"
+	],
+	"./information-page-f/components/C_SpecialtyPage.vue": [
+		"./resources/js/components/information-page-f/components/C_SpecialtyPage.vue",
+		"js-components-information-page-f-components-C_SpecialtyPage-vue"
+	],
+	"./menu-f/AppMenu": [
+		"./resources/js/components/menu-f/AppMenu.vue"
+	],
+	"./menu-f/AppMenu.vue": [
+		"./resources/js/components/menu-f/AppMenu.vue"
+	],
+	"./mixins/withSnackbar": [
+		"./resources/js/components/mixins/withSnackbar.js",
+		16
+	],
+	"./mixins/withSnackbar.js": [
+		"./resources/js/components/mixins/withSnackbar.js",
+		16
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./resources/js/components lazy recursive ^\\.\\/.*$";
+module.exports = webpackAsyncContext;
