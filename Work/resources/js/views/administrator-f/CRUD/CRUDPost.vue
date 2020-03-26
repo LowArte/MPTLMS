@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_flood="_post" :_headers="headers" :_title="'Роли'")
+    c-crud-form(ref='crud' :_func_update="update" :_headers="headers" :_title="'Роли'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -50,19 +50,13 @@ export default {
     ]
   }),
 
-  props: {
-    _post: {
-      type: Array,
-      default: null
-    }
-  },
   methods: {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
     update() {
       api
-        .getPosts()
+        .getPostsFull()
         .then(result => {
           this.$refs.crud.refresh(result.data.posts);
         })

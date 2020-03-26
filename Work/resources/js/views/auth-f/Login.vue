@@ -12,7 +12,7 @@
         v-card-text.pa-0.subtitle-1(justify-center text-center centered)
             center Один аккаунт. Много возможностей.
         v-container(pa-0 text-center)
-          v-form
+          v-form(ref="Login")
             v-row
               v-col.pt-0.pb-0(cols="12")
                 v-text-field(v-model="email" :rules="emailRules"  label="Email" required)
@@ -45,8 +45,10 @@
 <script>
 import user_api from "@/js/api/users";
 import * as mutations from "@/js/store/mutation-types";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {
+  mixins: [withSnackbar],
   data() {
     return {
       sheet: false,
@@ -63,6 +65,8 @@ export default {
   },
   methods: {
     login() {
+      if (this.$refs.Login.validate())
+      {
       user_api
         .login({ email: this.email, password: this.password })
         .then(res => {
@@ -96,7 +100,13 @@ export default {
           });
           this.$router.addRoutes(items);
         })
-        .catch(er => {});
+        .catch(er => {
+          this.password = "";
+          this.showError("Вход не произведён!");
+        });
+      }
+      else
+        this.showError("Заполните корректно поля!");
     }
   }
 };

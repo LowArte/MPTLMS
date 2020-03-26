@@ -117,7 +117,7 @@ export default {
         this.showInfo("Данные не получены! " + exception);
       });
     apiposts
-      .getPosts()
+      .getPostsFull()
       .then(result => {
         this.posts = result.data.posts;
       })
