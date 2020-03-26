@@ -66,6 +66,7 @@ export default {
       user_api
         .login({ email: this.email, password: this.password })
         .then(res => {
+          console.log(res.data.routes);
           this.$store.commit(mutations.SET_AUTH, res.data);
           let slug = res.data.slug;
           let items = [];
@@ -74,21 +75,26 @@ export default {
             if (element.children) {
               element.children.forEach(child => {
                 items.push({
-                  path: "/" + slug + "/" + child.id,
-                  name: child.id,
-                  component: () => com
+                  path: "/" + slug + "/" + child.component.info.url,
+                  name: child.component.info.name,
+                  component: () =>
+                    import(
+                      /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`
+                    )
                 });
               });
             } else {
-              console.log(element.id);
               items.push({
-                path: "/" + slug + "/" + element.id,
-                name: element.id,
-                component: () => com
+                path: "/" + slug + "/" + element.component.info.url,
+                name: element.component.info.name,
+                component: () =>
+                  import(
+                    /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`
+                  )
               });
             }
           });
-          router.addRoutes(items);
+          this.$router.addRoutes(items);
         })
         .catch(er => {});
     }

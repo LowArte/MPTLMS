@@ -2,7 +2,7 @@
   <div>
     <snackbar></snackbar>
     <v-navigation-drawer width="300" v-model="leftdrawer" fixed clipped app>
-      <!-- <c-app-menu _role="{{auth()->user()->post->slug}}" _disabled="{{auth()->user()->disabled}}"></c-app-menu> -->
+      <c-app-menu></c-app-menu>
     </v-navigation-drawer>
     <v-app-bar color="primary" dark app clipped-left clipped-right fixed>
       <div
@@ -39,11 +39,27 @@
     </v-navigation-drawer>
 
     <v-content style="background: white;">
-      <transition>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </transition>
+        <transition>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
+        </transition>
     </v-content>
   </div>
 </template>
+
+<script>
+import snackbar from "@/js/components/SnackBarComponent"
+import C_AppMenu from "@/js/components/menu-f/AppMenu"
+
+export default {
+  data: () => ({
+    leftdrawer:false,
+    rightdrawer:false,
+  }),
+  components:{
+    snackbar,
+    "c-app-menu":C_AppMenu
+  }
+}
+</script>

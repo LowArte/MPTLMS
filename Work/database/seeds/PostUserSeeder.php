@@ -23,9 +23,9 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
-                                "url" => ""
+                                "url" => "/"
                             ],
-                            "path" => "@/js/views/homes-f/AdminHome"
+                            "path" => "js/views/homes-f/AdminHome"
                         ],
                         "default" => true
                     ],
@@ -43,7 +43,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Настройки сервера",
                                         "url"=> "server_settings"
                                     ],
-                                    "path" => "@/js/views/administrator-f/PanelControl"
+                                    "path" => "js/views/administrator-f/PanelControl"
                                 ],
                                 "default" => true
                             ]
@@ -62,7 +62,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Учебное рассписение",
                                         "url"=> "timetable"
                                     ],
-                                    "path" => "@/js/views/timetable-f/Timetable"
+                                    "path" => "js/views/timetable-f/Timetable"
                                 ],
                             ],
                             [
@@ -73,7 +73,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Замены рассписения",
                                         "url"=> "replacements"
                                     ],
-                                    "path" => "@/js/views/replacements-f/Replacements"
+                                    "path" => "js/views/replacements-f/Replacements"
                                 ],
 
                             ],
@@ -85,7 +85,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Рассписание звонков",
                                         "url"=> "callschedule"
                                     ],
-                                    "path" => "@/js/views/call-schedule-f/CallSchedule"
+                                    "path" => "js/views/call-schedule-f/CallSchedule"
                                  ],
                             ]
                         ],
@@ -104,7 +104,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "CRUD пользователей",
                                         "url"=> "users_crud"
                                     ],
-                                    "path" => "@/js/views/administrator-f/CRUD/CRUDUser"
+                                    "path" => "js/views/administrator-f/CRUD/CRUDUser"
                                  ],
                             ],
                             [
@@ -115,7 +115,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "CRUD роли",
                                         "url"=> "posts_crud"
                                     ],
-                                    "path" => "@/js/views/administrator-f/CRUD/CRUDPost"
+                                    "path" => "js/views/administrator-f/CRUD/CRUDPost"
                                  ],
 
                             ],
@@ -127,7 +127,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "CRUD отделений",
                                         "url"=> "departaments_crud"
                                     ],
-                                    "path" => "@/js/views/administrator-f/CRUD/CRUDDepartament"
+                                    "path" => "js/views/administrator-f/CRUD/CRUDDepartment"
                                  ],
                             ],
                             [
@@ -138,7 +138,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "CRUD групп",
                                         "url"=> "groups_crud"
                                     ],
-                                    "path" => "@/js/views/administrator-f/CRUD/CRUDGroup"
+                                    "path" => "js/views/administrator-f/CRUD/CRUDGroup"
                                  ],
                             ],
                             [
@@ -149,7 +149,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "CRUD мест проведения",
                                         "url"=> "places_crud"
                                     ],
-                                    "path" => "@/js/views/administrator-f/CRUD/CRUDPlace"
+                                    "path" => "js/views/administrator-f/CRUD/CRUDPlace"
                                  ],
                             ]
                         ],
@@ -165,7 +165,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Просмотр обращений пользователей",
                                 "url"=> "requests"
                             ],
-                            "path" => "@/js/views/feedback-f/Request"
+                            "path" => "js/views/feedback-f/Request"
                          ],
                     ]
                 ])
@@ -183,7 +183,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/DefaultHome"
+                            "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],
@@ -291,7 +291,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/Home"
                         ],
                         "default" => true
                     ],
@@ -341,7 +341,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/Home"
                         ],
                         "default" => true
                     ],
@@ -389,7 +389,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/Home"
                         ],
                         "default" => true
                     ],
@@ -422,7 +422,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/Home"
                         ],
                         "default" => true
                     ],
@@ -448,7 +448,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "@/js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/Home"
                         ],
                         "default" => true
                     ],

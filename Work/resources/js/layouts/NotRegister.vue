@@ -6,6 +6,9 @@
         <span class="font-weight-light" dense>{{ _name }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+        <router-link class="nounderline" to="/admin/timetable">
+          <v-btn color="accent" text>czxczzxczcz</v-btn>
+        </router-link>
       <div v-if="!isAuthenticated">
         <router-link v-if="currentRoute.name !='Login'" class="nounderline" to="/login">
           <v-btn color="accent" text>ВОЙТИ</v-btn>
