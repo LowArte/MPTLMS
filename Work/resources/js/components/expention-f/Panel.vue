@@ -8,11 +8,6 @@
 
 <script>
 export default {
-  props: 
-  {
-    _components_prop: { type: Array, default: null }
-  },
-
   data() {
     return {
       panel: [],
@@ -20,17 +15,18 @@ export default {
     };
   },
 
-  mounted(){
-    this.components = this._components_prop;
-     for (var i = 0; i < this.components.length; i++) {
-      this.components[i].component = this.loader(this.components[i].content);
-    }
-  },
-
   methods: {
+    //Компонент для вывода
     loader: function(value) {
-      return () => import("../" + `${value}`);
-    }
+      return () => import("@/js/views/" + `${value}`);
+    }, 
+    //Загрузка данных
+    loadData(item){
+      this.components = item;
+      for (var i = 0; i < this.components.length; i++) {
+        this.components[i].component = this.loader(this.components[i].content);
+      }
+    },
   }
 };
 </script>

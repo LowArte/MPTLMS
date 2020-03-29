@@ -59,8 +59,8 @@ class PostUserSeeder extends Seeder
                                 "text" => "Учебное расписание",
                                 "component" => [
                                     "info" => [
-                                        "name" => "Учебное рассписение",
-                                        "url"=> "timetable"
+                                        "name" => "Учебное расписание",
+                                        "url"=> "timetableRoot"
                                     ],
                                     "path" => "js/views/timetable-f/TimetableRoot"
                                 ],
@@ -70,8 +70,8 @@ class PostUserSeeder extends Seeder
                                 "text" => "Изменения в расписании",
                                 "component" => [
                                     "info" => [
-                                        "name" => "Замены рассписения",
-                                        "url"=> "replacements"
+                                        "name" => "Замены расписания",
+                                        "url"=> "replacementsRoot"
                                     ],
                                     "path" => "js/views/replacements-f/ReplacementsRoot"
                                 ],
@@ -82,14 +82,13 @@ class PostUserSeeder extends Seeder
                                 "text" => "Расписание звонков",
                                 "component" => [
                                     "info" => [
-                                        "name" => "Рассписание звонков",
-                                        "url"=> "callschedule"
+                                        "name" => "Расписание звонков",
+                                        "url"=> "bild_call_schedule"
                                     ],
-                                    "path" => "js/views/call-schedule-f/CallSchedule"
+                                    "path" => "js/views/call-schedule-f/Bild_CallSchedule"
                                  ],
                             ]
                         ],
-
                     ],
                     [
                         "id" => uniqid(),
@@ -240,22 +239,46 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание экзаменов",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Успеваемость",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Домашнее задание",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Преподаватели",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ]
                         ],
                     ],
@@ -278,7 +301,13 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Психолог",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ]
                         ],
                     ],
@@ -286,15 +315,25 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "cloud",
                         "text" => "Хранилище данных",
-                        "children" => null,
-                        "children" => []   
+                        "component" => [
+                            "info" => [
+                                "name" => "warning",
+                                "url"=> "warning"
+                            ],
+                            "path" => "js/views/other-f/Warning"
+                        ],  
                     ],
                     [
                         "id" => uniqid(),
                         "icon" => "layers",
                         "text" => "Базы практики",
-                        "children" => null,
-                        "children" => []   
+                        "component" => [
+                            "info" => [
+                                "name" => "warning",
+                                "url"=> "warning"
+                            ],
+                            "path" => "js/views/other-f/Warning"
+                        ],
                     ],
                     [
                         "id" => uniqid(),
@@ -336,12 +375,24 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное раписание",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                         ],
                     ],
@@ -349,8 +400,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "class",
                         "text" => "Учебные журналы",
-                        "component" => null,
-                        "children" => []   
+                        "component" => [
+                            "info" => [
+                                "name" => "warning",
+                                "url"=> "warning"
+                            ],
+                            "path" => "js/views/other-f/Warning"
+                        ],   
                     ],
                     [
                         "id" => uniqid(),
@@ -392,17 +448,35 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное раписание",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание звонков",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "warning",
+                                        "url"=> "warning"
+                                    ],
+                                    "path" => "js/views/other-f/Warning"
+                                ],
                             ]
                         ],
                     ],
@@ -520,26 +594,39 @@ class PostUserSeeder extends Seeder
                         "text" => "Новости",
                         "component" => [
                             "info" => [
-                                "name" => "Новости",
-                                "url"=> "news"
+                                "name" => "warning",
+                                "url"=> "warning"
                             ],
-                            "path" => "js/views/news-f/NewsFeed"
-                        ],  
+                            "path" => "js/views/other-f/Warning"
+                        ],
+                        "children"=>[], 
                     ],
                     [
                         "id" => uniqid(),
                         "icon" => "create",
                         "text" => "Создать новость",
-                        "component" => null,
-                        "default" => true,
-                        "children"=>[]
+                        "component" => [
+                            "info" => [
+                                "name" => "warning",
+                                "url"=> "warning"
+                            ],
+                            "path" => "js/views/other-f/Warning"
+                        ],
+                        "children"=>[],
+                        "default" => true
                     ],
                     [
                         "id" => uniqid(),
                         "icon" => "bar_chart",
                         "text" => "Статистика",
-                        "component" => null,
-                        "children"=>[]
+                        "component" => [
+                            "info" => [
+                                "name" => "warning",
+                                "url"=> "warning"
+                            ],
+                            "path" => "js/views/other-f/Warning"
+                        ],
+                        "children"=>[],
                     ],
                     [
                         "id" => uniqid(),

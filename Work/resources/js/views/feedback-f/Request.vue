@@ -90,15 +90,9 @@ export default {
     "c-comfirm-dialog": confirmDialog_C
   },
 
-  props: {
-    _requests: {
-      data: Object,
-      default: ""
-    }
-  },
-
-  mounted() {
-    this.items = this._requests; //!нужно мыло и фио
+  //Преднастройка
+  beforeMount() {
+    this.Update();
   },
 
   methods: {

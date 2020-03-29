@@ -6,7 +6,7 @@
           <v-card-title class="info--text font-weight-light">
             <h2 class="font-weight-light">Быстрые действия</h2>
           </v-card-title>
-          <c-quick-action></c-quick-action>
+          <!-- <c-quick-action></c-quick-action> -->
         </v-card>
       </v-flex>
     </v-layout>
@@ -42,5 +42,14 @@
 </template>
 
 <script>
-export default {};
+import SpecialitiesList_C from "@/js/components/information-page-f/SpecialtiesList";
+export default {
+  components: {
+    "c-specialties-list": SpecialitiesList_C
+  },
+  post_name: {
+    name: "Домашняя страница",
+    url: ""
+  },
+};
 </script>

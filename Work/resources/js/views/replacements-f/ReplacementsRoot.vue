@@ -11,7 +11,7 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
-            v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" v-if="_schedule != null")
+            v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
                 template(v-slot:activator="{ on }")
                     v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
                 v-card
@@ -20,12 +20,7 @@
                             v-icon mdi-close
                         v-toolbar-title {{titleDialog}}
                         v-spacer
-                    c_bildReplacement.pa-2(:_departaments_info="_departaments_info" 
-                                    :_groups_info="_groups_info" 
-                                    :_schedule="_schedule"
-                                    :_schedule_bild="_schedule_bild"
-                                    :_disciplines="_disciplines"
-                                    :_teachers="_teachers")
+                    c_bildReplacement.pa-2()
         v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
         v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
         //- Отрисовка замен
@@ -42,7 +37,7 @@
                                     th.text-left Что заменяют
                                     th.text-left На что заменяют
                                     th.text-left Дата замены
-                                    th.text-left(v-if="_schedule != null") Действие
+                                    th.text-left() Действие
                             tbody
                                 tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                                     td {{ replacement_key['swap']['caselesson'] }}
@@ -53,7 +48,7 @@
                                     td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
                                     td(v-else) Занятие отменено
                                     td {{ replacement_key['created_at'] }}
-                                    td(v-if="_schedule != null")
+                                    td
                                         v-icon.small(@click="deleteItem(replacement_key['id'])") delete        
 </template>
 
@@ -61,13 +56,14 @@
 import group_api from "@/js/api/group"; //api групп
 import replacements_api from "@/js/api/replacements"; //api замен
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import departament_api from "@/js/api/departments"; //Api отделения
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог confirm
 import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //Конструктор замен
 
 export default {
   post_name: {
-    name: "Замены рассписения",
-    url: "replacements"
+    name: "Замены расписания",
+    url: "replacementsRoot"
   },
   mixins: [withSnackbar],
 
@@ -77,8 +73,8 @@ export default {
   },
 
   data: () => ({
-    groups_info: null, //Группы
-    departaments_info: null, //Отделения
+    groups_info: {groups:null, selected_group:null}, //Группы
+    departaments_info: {departaments:null, selected_departament:null}, //Отделения
     parseReplacements: null, //Замены
     replacements: null, //Замены
     checkAllGroup: false, //Все группы
@@ -93,38 +89,22 @@ export default {
     } //Диалог даты
   }),
 
-  props: {
-    _departaments_info: {
-      type: Object,
-      default: null
-    }, //JSON отделений
-    _groups_info: {
-      type: Object,
-      default: null
-    }, //JSON групп
-    _replacements: {
-      type: Array,
-      default: null
-    }, //JSON замен
-    _teachers: {
-      type: Array,
-      default: null
-    }, //JSON учителей
-    _disciplines: {
-      type: Array,
-      default: null
-    }, //JSON дисциплин
-    _schedule: {
-      type: Object,
-      default: null
-    }, //JSON дисциплин
-    _schedule_bild: {
-      type: Object,
-      default: null
-    } //Расписание
-  },
-
   methods: {
+    //Получение отделений
+    getDepartament()
+    {
+      departament_api
+        .getDepartmentsForCombobox()
+        .then(res => {
+          this.departaments_info.departaments = res.data.departaments;
+          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+          this.departament_change();
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    }, 
+
     //Удаление замены
     deleteItem(id) {
       this.$refs.qwestion.pop().then(confirmResult => {
@@ -254,10 +234,7 @@ export default {
 
   //Начальный метод
   beforeMount() {
-    this.groups_info = this._groups_info;
-    this.departaments_info = this._departaments_info;
-    this.replacements = this._replacements;
-    this.parseReplacement();
+    this.getDepartament();
   }
 };
 </script>

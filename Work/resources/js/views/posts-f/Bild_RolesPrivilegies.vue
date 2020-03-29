@@ -68,7 +68,6 @@ export default {
       post_api
         .getPostsFull()
         .then(res => {
-          console.log(res.data);
           this.posts = res.data.posts;
           this.selectedPost = this.posts[0];
         })

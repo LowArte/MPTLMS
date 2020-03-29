@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Modifications\Update\UpdateCallScheduleModification;
 use App\Repositories\ModelRepository\CallScheduleRepository;
+use App\Repositories\OtherRepository\PanelExtentionRepository;
 use Illuminate\Http\Request;
 
 class CallscheduleController extends BaseController
@@ -24,5 +25,27 @@ class CallscheduleController extends BaseController
                 return response()->json(["error"=>"Расписание не сохранено"],400);
         }
         return response()->json(["success"=>true]);
+    }
+
+    /**
+     * get call schedule for component
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getCallScheduleForPanel(PanelExtentionRepository $panelExtentionRepository)
+    {
+        $panel_array = $panelExtentionRepository->getPanelForCallSchedule();
+        return response()->json(compact('panel_array'));
+    }
+
+    /**
+     * get call schedule
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getCallSchedule(CallScheduleRepository $callScheduleRepository)
+    {
+        $timeTable = $callScheduleRepository->getCallSchedule();
+        return response()->json(compact('timeTable'));
     }
 }
