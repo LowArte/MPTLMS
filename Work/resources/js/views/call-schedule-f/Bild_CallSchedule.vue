@@ -21,7 +21,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещ�
 export default {
   post_name: {
     name: "Конструктор звонков",
-    url: "bild_call_schedule"
+    url: "/bild_call_schedule"
   },
   mixins: [withSnackbar],
 

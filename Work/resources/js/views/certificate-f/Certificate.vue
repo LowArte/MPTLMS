@@ -34,7 +34,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещ�
 export default {
   post_name: {
     name: "Справки",
-    url: "certificate"
+    url: "/certificate"
   },
   mixins: [withSnackbar],
   data: () => ({

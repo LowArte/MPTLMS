@@ -81,10 +81,6 @@ export default {
     //?----------------------------------------------
     //!           Данные
     //?----------------------------------------------
-    _flood: {
-      type: Array,
-      default: null
-    }, //! Табличные данные
     _headers: {
       type: Array,
       default: null
@@ -130,6 +126,11 @@ export default {
     this.headers = this._headers;
     this.title = this._title;
   },
+
+  beforeMount(){
+    this.update();
+  },
+  
   methods: {
     refresh(data){
       this.flood = data;

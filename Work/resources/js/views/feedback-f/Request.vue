@@ -51,7 +51,7 @@ import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 export default {
   post_name: {
     name: "Просмотр обращений пользователей",
-    url: "requests"
+    url: "/requests"
   },
   mixins: [withSnackbar],
 

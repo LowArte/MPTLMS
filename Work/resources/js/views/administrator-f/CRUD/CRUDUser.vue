@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_users" :_headers="headers" :_title="'Учетные записи пользователей'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -34,7 +34,7 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 export default {
   post_name: {
     name: "CRUD пользователей",
-    url: "users_crud"
+    url: "/users_crud"
   },
   mixins: [withSnackbar],
   components: {
@@ -53,13 +53,6 @@ export default {
       { text: "Действия", value: "action", sortable: false }
     ]
   }),
-
-  props: {
-    _users: {
-      data: Array,
-      default: null
-    }
-  },
 
   methods: {
     //?----------------------------------------------

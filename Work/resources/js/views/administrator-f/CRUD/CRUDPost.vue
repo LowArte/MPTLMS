@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_flood="_post" :_headers="headers" :_title="'Роли'")
+    c-crud-form(ref='crud' :_func_update="update" :_headers="headers" :_title="'Роли'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -34,7 +34,7 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 export default {
   post_name: {
     name: "CRUD роли",
-    url: "posts_crud"
+    url: "/posts_crud"
   },
   mixins: [withSnackbar],
   components: {
@@ -50,19 +50,13 @@ export default {
     ]
   }),
 
-  props: {
-    _post: {
-      type: Array,
-      default: null
-    }
-  },
   methods: {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
     update() {
       api
-        .getPosts()
+        .getPostsFull()
         .then(result => {
           this.$refs.crud.refresh(result.data.posts);
         })

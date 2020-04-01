@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_groups" :_headers="headers" :_title="'Группы'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -34,7 +34,7 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 export default {
   post_name: {
     name: "CRUD групп",
-    url: "groups_crud"
+    url: "/groups_crud"
   },
   mixins: [withSnackbar],
   components: {
@@ -51,13 +51,6 @@ export default {
       { text: "Действия", value: "action", sortable: false }
     ]
   }),
-
-  props: {
-    _groups: {
-      type: Array,
-      default: null
-    }
-  },
 
   methods: {
     //?----------------------------------------------
@@ -100,7 +93,6 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          console.log(result);
           api
             .editGroup(result)
             .then(res => {

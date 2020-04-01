@@ -31,7 +31,7 @@
 export default {
   post_name: {
     name: "Лента новостей",
-    url: "news"
+    url: "/news"
   },
   data: () => {
     return {

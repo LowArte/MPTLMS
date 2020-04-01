@@ -19,18 +19,18 @@ user_api.init().then((res) => {
         let slug = res.data.slug
         let items = [];
         res.data.routes.forEach(element => {
-            let com = import('@/js/views/posts-f/Bild_RolesPrivilegies')
             if (element.children) {
                 element.children.forEach(child => {
+                    if(child.component != null)
                     items.push({
-                        path: '/' + slug + '/' + child.component.info.url,
+                        path: '/' + slug + child.component.info.url,
                         name: child.component.info.name,
                         component: ()=>import( /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`)
                     })
                 })
             } else {
                 items.push({
-                    path: '/' + slug + '/' + element.component.info.url,
+                    path: '/' + slug  + element.component.info.url,
                     name: element.component.info.name,
                     component: ()=>import( /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`)
                 })

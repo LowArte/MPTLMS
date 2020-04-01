@@ -23,7 +23,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
-                                "url" => "/"
+                                "url" => ""
                             ],
                             "path" => "js/views/homes-f/AdminHome"
                         ],
@@ -62,7 +62,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Учебное рассписение",
                                         "url"=> "timetable"
                                     ],
-                                    "path" => "js/views/timetable-f/Timetable"
+                                    "path" => "js/views/timetable-f/TimetableRoot"
                                 ],
                             ],
                             [
@@ -73,7 +73,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Замены рассписения",
                                         "url"=> "replacements"
                                     ],
-                                    "path" => "js/views/replacements-f/Replacements"
+                                    "path" => "js/views/replacements-f/ReplacementsRoot"
                                 ],
 
                             ],
@@ -159,7 +159,6 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обращение пользователей",
-                        "children" => [],
                         "component" => [
                             "info" => [
                                 "name" => "Просмотр обращений пользователей",
@@ -191,15 +190,25 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "portrait",
                         "text" => "Мой профиль",
-                        "component" => null,
-                        "children" => []   
+                        "component" => [
+                            "info" => [
+                                "name" => "Мой профиль",
+                                "url"=> "profile"
+                            ],
+                            "path" => "js/views/account-card-f/AccountCard"
+                        ],  
                     ],
                     [
                         "id" => uniqid(),
                         "icon" => "whatshot",
                         "text" => "Новости",
-                        "component" => null,
-                        "children" => []   
+                        "component" => [
+                            "info" => [
+                                "name" => "Новости",
+                                "url"=> "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],   
                     ],
                     [
                         "id" => uniqid(),
@@ -209,12 +218,24 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание занятий",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Расписание занятий",
+                                        "url"=> "timetable"
+                                    ],
+                                    "path" => "js/views/timetable-f/Timetable"
+                                ], 
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Расписание занятий",
+                                        "url"=> "timetable"
+                                    ],
+                                    "path" => "js/views/replacements-f/Replacements"
+                                ], 
                             ],
                             [
                                 "id" => uniqid(),
@@ -246,7 +267,13 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Справки и характеристики",
-                                "component" => null,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Справки и характеристики",
+                                        "url"=> "certificate"
+                                    ],
+                                    "path" => "js/views/replacements-f/TabCertificate"
+                                ], 
                             ],
                             [
                                 "id" => uniqid(),
@@ -273,7 +300,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Обратная связь",
+                                "url"=> "feedback"
+                            ],
+                            "path" => "js/views/feedback-f/Feedback"
+                        ], 
                         "default" => true
                     ]
                 ]),
@@ -291,7 +324,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],
@@ -323,7 +356,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Обратная связь",
+                                "url"=> "feedback"
+                            ],
+                            "path" => "js/views/feedback-f/Feedback"
+                        ], 
                         "default" => true
                     ]
                 ]),
@@ -341,7 +380,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],
@@ -371,7 +410,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Обратная связь",
+                                "url"=> "feedback"
+                            ],
+                            "path" => "js/views/feedback-f/Feedback"
+                        ], 
                         "default" => true
                     ]
                 ]),
@@ -389,7 +434,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],
@@ -397,14 +442,25 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "library_books",
                         "text" => "Заказанные справки",
-                        "component" => null,
-                        "children"=>[]
+                        "component" => [
+                            "info" => [
+                                "name" => "Заказанные справки",
+                                "url"=> "listcertificate"
+                            ],
+                            "path" => "js/views/certificate-f/ListCertificateComponent"
+                        ],   
                     ],
                     [
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Обратная связь",
+                                "url"=> "feedback"
+                            ],
+                            "path" => "js/views/feedback-f/Feedback"
+                        ], 
                         "default" => true
                     ]
                 ]),
@@ -422,7 +478,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],
@@ -430,7 +486,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Обратная связь",
+                                "url"=> "feedback"
+                            ],
+                            "path" => "js/views/feedback-f/Feedback"
+                        ], 
                         "default" => true
                     ]
                 ]),
@@ -448,7 +510,7 @@ class PostUserSeeder extends Seeder
                                 "name" => "Домашняя страница",
                                 "url" => ""
                             ],
-                            "path" => "js/views/homes-f/Home"
+                            "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true
                     ],
@@ -456,9 +518,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "whatshot",
                         "text" => "Новости",
-                        "component" => null,
-                        "default" => true,
-                        "children"=>[]
+                        "component" => [
+                            "info" => [
+                                "name" => "Новости",
+                                "url"=> "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],  
                     ],
                     [
                         "id" => uniqid(),
@@ -479,7 +545,13 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "component" => null,
+                        "component" => [
+                            "info" => [
+                                "name" => "Обратная связь",
+                                "url"=> "feedback"
+                            ],
+                            "path" => "js/views/feedback-f/Feedback"
+                        ], 
                         "default" => true
                     ],
                 ]),

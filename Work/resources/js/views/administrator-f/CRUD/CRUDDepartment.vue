@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_flood="_departments" :_headers="headers" :_title="'Отделения'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
     c-add-dialog(ref='new')
     c-comfirm-dialog(ref='qwestion')
     c-edit-dialog(ref='revue')
@@ -34,7 +34,7 @@ import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 export default {
   post_name: {
     name: "CRUD отделений",
-    url: "departaments_crud"
+    url: "/departaments_crud"
   },
   mixins: [withSnackbar],
   data: () => ({
@@ -51,12 +51,7 @@ export default {
     "c-edit-dialog": editDialog_C,
     "c-remove-dialog": removeDialog_C
   },
-  props: {
-    _departments: {
-      type: Array,
-      default: null
-    }
-  },
+
   methods: {
     //?----------------------------------------------
     //!           Обновление

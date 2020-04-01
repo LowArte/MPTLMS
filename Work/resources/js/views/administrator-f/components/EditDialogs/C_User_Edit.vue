@@ -89,7 +89,7 @@ export default {
   },
   mounted() {
     apiposts
-      .getPosts()
+      .getPostsFull()
       .then(result => {
         this.posts = result.data.posts;
       })
