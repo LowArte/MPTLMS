@@ -50,6 +50,6 @@ export default {
   post_name: {
     name: "Домашняя страница",
     url: ""
-  },
+  }
 };
 </script>
