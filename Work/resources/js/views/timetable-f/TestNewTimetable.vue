@@ -24,10 +24,11 @@
                     v-chip.ma-3(label) Территория 
                     v-divider
                     v-list(subheader three-line)
-                        v-list-item.mt-2
+                        v-list-item.mt-2(v-if="!item.zamena")
                             v-list-item-content.pa-0
                                 span Компьютерное делопроизводство
                                 v-list-item-subtitle(small) Преподаватель / Преподаватель / Преподаватель
+
                     
 </template>
 
@@ -53,7 +54,9 @@ export default {
           this.$refs.panel.loadData(res.data.panel_array);
         })
         .catch(ex => {
-          this.showError("Ошибка инициализации раписания звонков. Причина: " + ex);
+          this.showError(
+            "Ошибка инициализации раписания звонков. Причина: " + ex
+          );
         });
     },
     getPlaces() {

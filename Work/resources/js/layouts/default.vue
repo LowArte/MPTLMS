@@ -27,7 +27,6 @@
         <v-alert class="my-2" text dense type="warning">
           <span class="primary--text subtitle-1" >Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.</span>
         </v-alert>
-        <t1></t1>
         <!-- @endif -->
         <transition>
           <keep-alive>

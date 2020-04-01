@@ -26,7 +26,7 @@ export function createRouter() {
         {
             path: '/test/',
             name: 'Test',
-            component: () => import( /* webpackChunkName: "views-posts-f-build-rolesprivilegies" */ '@/js/views/posts-f/Bild_RolesPrivilegies.vue'),
+            component: () => import( /* webpackChunkName: "views-timetable-f-testnewtimetable" */ '@/js/views/timetable-f/TestNewTimetable.vue'),
             meta:{
                 layout:"default"
             }
