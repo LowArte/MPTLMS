@@ -8,11 +8,12 @@
 </template>
 
 <script>
+import callSchedule_api from "@/js/api/callSchedule"; //api для расписания звонков
 import { mask } from "vue-the-mask";
 export default {
   post_name: {
-    name: "Рассписание звонков",
-    url: "/callschedule"
+    name: "Расписание звонков",
+    url: "callschedule"
   },
   directives: 
   {
@@ -24,6 +25,13 @@ export default {
     _time_table: {
       Type: String,
       default: null
+    }
+  },
+
+  methods: {
+    update()
+    {
+      
     }
   }
 };

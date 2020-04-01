@@ -1,9 +1,9 @@
 <template lang="pug">
-  v-layout.row.wrap
+  v-layout.row.wrap.pa-3
     v-card.mx-auto.pa-3(height='auto' width='100%')
       v-card-text.my-2.ma-0.pa-0.title Панель управления
       v-divider
-      v-switch.mx-2(v-model='options.option_value' label='Режим профилактики' color='accent')
+      v-switch.mx-2(v-if="options != null" v-model='options.option_value' label='Режим профилактики' color='accent')
       v-btn.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
@@ -17,25 +17,32 @@ export default {
     name: "Настройки сервера",
     url: "/server_settings"
   },
+
   data: () => {
     return {
       options: null
     };
   },
 
-  props: {
-    _options: {
-      data: Object,
-      default: null
-    }
-  },
-
   beforeMount() {
-    this.options = this._options;
-    this.options.option_value = this.options.option_value == "true";
+    this.update();
   },
 
   methods: {
+    //Получение данных настроек сервера
+    update()
+    {
+      panelApi
+        .getSiteOptions({})
+        .then(res => {
+          this.options = res.data.siteOptions;
+          this.options.option_value = this.options.option_value == "true";
+        })
+        .catch(ex => {
+          this.showError("Ошибка получения данных! " + ex);
+        });
+    },
+
     sendQuery() {
       panelApi
         .setOptionValue({

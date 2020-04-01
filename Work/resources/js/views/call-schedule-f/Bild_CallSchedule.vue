@@ -1,27 +1,28 @@
 <template lang="pug">
   v-layout.row
     v-card.mx-auto.pa-2(width='100%' height='auto')
-      v-form(ref="BildCallSchedule" v-model="valid")
+      v-form(ref="BildCallSchedule" v-model="valid" v-if="timeTable != null")
         v-card-text(text-center title) Расписание звонков
-          v-select.pa-0.mb-0.mt-2(v-model="mplace" label="Место проведения" solo :items="_places" item-value='id' item-text='place_name')
-          v-card.pa-2(width='100%' outlined tile v-for="(value) in Object.keys(timeTable[mplace-1].schedule)" :key="value") {{value}} пара
-            v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
-              v-model="timeTable[mplace-1].schedule[value]"
-              v-mask="mask"
-              :rules="inputRules"
-              label="Начало/конец пары")
-          v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
+        v-select.pa-0.mb-0.mt-2(v-model="mplace" label="Место проведения" solo :items="places" item-value='id' item-text='place_name')
+        v-card.pa-2(width='100%' outlined tile v-for="(value) in Object.keys(timeTable[mplace-1].schedule)" :key="value") {{value}} пара
+          v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
+            v-model="timeTable[mplace-1].schedule[value]"
+            v-mask="mask"
+            :rules="inputRules"
+            label="Начало/конец пары")
+        v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
 <script>
 import { mask } from "vue-the-mask"; //Маска
-import callScedule from "@/js/api/callSchedule"; //api для расписания звонков
+import callSchedule_api from "@/js/api/callSchedule"; //api для расписания звонков
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
+import places_api from "@/js/api/places"; //Api мест проведений
 
 export default {
   post_name: {
     name: "Конструктор звонков",
-    url: "/bild_call_schedule"
+    url: "bild_call_schedule"
   },
   mixins: [withSnackbar],
 
@@ -39,35 +40,50 @@ export default {
         "Не соответствует формату времени"
     ], //Правила для прохождения валидации
     mplace: null, //Выбранное место проведения
+    places: null, //Выбранное место проведения
     timeTable: null, //Расписание звонков
   }),
 
-  props: 
-  {
-    _time_table: {
-      type: Array,
-      default: null
-    }, //Массив с расписанием
-    _places: {
-      type: Array,
-      default: null
-    } //Массив с местами проведения
-  },
-
-  created: function() 
-  {
-    this.timeTable = this._time_table; 
-    this.mplace = this._places[0].id;
+  //Преднастройка
+  beforeMount(){
+    this.getPlaces();
+    this.getCallSchedule();
   },
 
   methods: 
   {
+    //Получение мест проведений
+    getPlaces()
+    {
+      places_api
+        .getPlaces()
+        .then(res => {
+          this.places = res.data.places;
+          this.mplace = this.places[0].id;
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    },
+
+    getCallSchedule()
+    {
+      callSchedule_api
+        .getCallSchedule()
+        .then(res => {
+          this.timeTable = res.data.timeTable;
+        })
+        .catch(ex => {
+          this.showError("Произошла ошибка при получении данных! " + ex);
+        });
+    },
+
     sendQuery() 
     {
       //Проверка на валидацию полей, после чего происходит отправка на сохранение
       if (this.$refs.BildCallSchedule.validate()) 
       {
-        callScedule
+        callSchedule_api
           .edit(this.timeTable)
           .then(res => {
            this.showMessage("Расписание звонков принято!");

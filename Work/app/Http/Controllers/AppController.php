@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class WelcomeController extends Controller
+class AppController extends Controller
 {
-    /**
+        /**
      * Show the application welcome page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {    
-        return view('layouts.notregister');
+        return view('layouts.app');
     }
 }

@@ -10,7 +10,7 @@
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
-        v-layout.row.wrap
+        v-layout.row.wrap(v-if="date_week != 0")
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")
@@ -46,18 +46,21 @@
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-2.mt-2(v-model="replacement.caselesson" :rules="numberLessonRules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
                             v-switch(v-model="cancel" color="primary" inset label="Отменить занятие!")
-                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" :rules="[DiscipRules.required]" label="Дисциплины" :items="_disciplines" item-text='discipline_name' item-value="id" small-chips chips multiple)
-                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" :rules="[TeacherRules.required]" label="Преподаватели" :items="_teachers" item-text='fullFio' item-value="id" small-chips chips multiple)
+                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" :rules="[DiscipRules.required]" label="Дисциплины" :items="disciplines" item-text='discipline_name' item-value="id" small-chips chips multiple)
+                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" :rules="[TeacherRules.required]" label="Преподаватели" :items="teachers" item-text='fullFio' item-value="id" small-chips chips multiple)
                         v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
 </template>
 
 <script>
-import group_api from "@/js/api/group"; //Api групп
 import schedule_api from "@/js/api/schedule"; //Api расписания
-import replacements_api from "@/js/api/replacements"; //Api замен
+import group_api from "@/js/api/group"; //api групп
+import replacements_api from "@/js/api/replacements"; //api замен
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import teacher_api from "@/js/api/teacher"; //Api преподавателей
+import discipline_api from "@/js/api/discipline"; //Api дисциплин
+import departament_api from "@/js/api/departments"; //Api отделения
 Date.prototype.getWeek = function() {
   const onejan = new Date(this.getFullYear(), 0, 1);
   return Math.ceil((((this - onejan) / 86400000) + 1) / 7);
@@ -66,8 +69,8 @@ Date.prototype.getWeek = function() {
 export default {
     mixins: [withSnackbar],
     post_name: {
-        name: "Замены рассписения",
-        url: "/bild_replacements"
+        name: "Замены расписания",
+        url: "bild_replacements"
      },
     data: () => ({
         typeReplacement: 1,
@@ -93,49 +96,64 @@ export default {
             oldlesson: [], 
             oldteacher: []
         },  //Замена которая потом будет сохранена 
-        groups_info: null, //Группы
-        departaments_info: null, //Отделения
+        groups_info: {groups:null, selected_group:null}, //Группы
+        departaments_info: {departaments:null, selected_departament:null}, //Отделения
         schedule: null, //Расписание выбранного дня
         schedule_bild: null, //Расписание выбранного дня
         week: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'], //Неделя
         isToday: null, //Текущая четность недели
         date_week: 0,
+        disciplines: [],
+        teachers: [],
         dateDialog: {
             model: false,
             date: new Date().toISOString().substr(0, 10),
         }, //Диалог даты
     }),
 
-    props: 
-    {
-        _departaments_info: {
-            type: Object,
-            default: null
-        }, //JSON отделений
-        _groups_info: {
-            type: Object,
-            default: null
-        }, //JSON групп
-        _teachers: {
-            type: Array,
-            default: null
-        }, //JSON учителей
-        _disciplines: {
-            type: Array,
-            default: null
-        }, //JSON дисциплин
-        _schedule: {
-            type: Object,
-            default: null
-        }, //JSON дисциплин
-        _schedule_bild: {
-            type: Object,
-            default: null
-        } //Расписание
-    },
-
     methods:
     {
+        //Получение отделений
+        getDepartament()
+        {
+        departament_api
+            .getDepartmentsForCombobox()
+            .then(res => {
+            this.departaments_info.departaments = res.data.departaments;
+            this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+            this.departament_change();
+            })
+            .catch(ex => {
+            this.showError(ex);
+            });
+        }, 
+
+        //Получение всех преподавателей
+        getTeachers()
+        {
+        teacher_api
+            .getTeachers()
+            .then(res => {
+            this.teachers = res.data.teachers;
+            })
+            .catch(ex => {
+            this.showError(ex);
+            });
+        },
+
+        //Получение всех дисциплин
+        getDisciplines()
+        {
+        discipline_api
+            .getDisciplines()
+            .then(res => {
+            this.disciplines = res.data.disciplines;
+            })
+            .catch(ex => {
+            this.showError(ex);
+            });
+        },
+
         //Определение числителя
         isChisl() 
         {
@@ -270,17 +288,15 @@ export default {
     beforeMount() 
     {
         this.date_week = (new Date(this.dateDialog.date)).getDay();
-        this.schedule = this._schedule[this.week[this.date_week]];
-        this.schedule_bild = this._schedule_bild[this.week[this.date_week]];
-        this.groups_info = this._groups_info;
-        this.departaments_info = this._departaments_info;
-        this.replacements = this._replacements;
+        this.getDepartament();
         this.parseSchedule();
+        this.getDisciplines();
+        this.getTeachers();
     },
 
     mounted()
     {
-        if((new Date(this.dateDialog.date)).getDay() == 0)
+        if(this.date_week != 0)
             this.caseDate();
     }
 }

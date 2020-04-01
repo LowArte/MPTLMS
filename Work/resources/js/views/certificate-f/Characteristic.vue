@@ -58,7 +58,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещ�
 export default {
   post_name: {
     name: "Характеристика",
-    url: "/characteristic"
+    url: "characteristic"
   },
   directives: {
     mask

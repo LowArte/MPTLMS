@@ -51,7 +51,7 @@ import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 export default {
   post_name: {
     name: "Просмотр обращений пользователей",
-    url: "/requests"
+    url: "requests"
   },
   mixins: [withSnackbar],
 
@@ -90,15 +90,9 @@ export default {
     "c-comfirm-dialog": confirmDialog_C
   },
 
-  props: {
-    _requests: {
-      data: Object,
-      default: ""
-    }
-  },
-
-  mounted() {
-    this.items = this._requests; //!нужно мыло и фио
+  //Преднастройка
+  beforeMount() {
+    this.Update();
   },
 
   methods: {

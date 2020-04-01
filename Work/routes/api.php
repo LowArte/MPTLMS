@@ -46,6 +46,15 @@ Route::middleware('auth:api')->name('api.')->group(function ()
 
         Route::get('schedule_bild_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleBildByGroupId')->name('schedule_bild_by_group_id');
         Route::get('schedule_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleByGroupId')->name('schedule_by_group_id');
+
+        Route::get('get_call_schedule', 'Api\CallscheduleController@getCallSchedule')->name('get_call_schedule');
+        Route::get('get_call_schedule_for_panel', 'Api\CallscheduleController@getCallScheduleForPanel')->name('get_call_schedule_for_panel');
+
+        Route::get('get_teachers', 'Api\TeacherController@getTeachers')->name('get_teachers');
+
+        Route::get('get_disciplines', 'Api\DisciplineController@getDisciplines')->name('get_disciplines');
+
+        Route::get('get_site_options', 'Api\SiteOptionsController@getSiteOptions')->name('get_site_options');
         
         Route::get('replacements', 'Api\ReplacementController@replacements')->name('replacements');
         Route::get('replacements_by_group/{group_id}', 'Api\ReplacementController@replacementsByGroup')->name('replacements_by_group');

@@ -1,10 +1,11 @@
 <template lang="pug">
   v-layout.column.wrap
     v-flex.ma-2.mt-0.row
+      c_panel_control(ref="panel")
     v-flex.ma-2.mb-0.row
         v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
-        v-combobox.ma-1.mb-0(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
-    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" v-if="_schedule_bild != null")
+        v-combobox.ma-1.mb-0(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups" v-model="groups_info.selected_group")
+    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
       template(v-slot:activator="{ on }")
         v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
       v-card
@@ -13,17 +14,12 @@
             v-icon mdi-close
           v-toolbar-title {{titleDialog}}
           v-spacer
-        c_bildTimetable.pa-2(:_departaments_info="_departaments_info" 
-                        :_groups_info="_groups_info" 
-                        :_schedule_bild="_schedule_bild"
-                        :_places="_places"
-                        :_disciplines="_disciplines"
-                        :_teachers="_teachers")
+        c_bildTimetable.pa-2()
     v-card-title.primary-title.pt-0.px-0.ml-3
         v-chip.pa-2.ml-3(label) 
           v-card-title.pa-0.accent--text.font-weight-light.text-truncate.title Неделя {{ isToday ==0 ? "Числитель" :"Знаменатель" }}
     v-layout.row.wrap
-      v-flex.ma-2(v-for="(day_key,day_index) in days" :key="day_index")
+      v-flex.ma-2(v-for="(day_key,day_index) in days" :key="day_index" v-if="schedule != null")
         v-hover(v-slot:default='{ hover }')
           v-card.pa-2.pb-0.mx-auto(:elevation='hover ? 12 : 6'  min-width="265px" max-width="265px" style="display: flex; flex-direction: column;")
             v-card-title.primary-title.pt-0.px-0.pb-5 {{day_key}} 
@@ -72,10 +68,15 @@
 </style>
 
 <script>
+import places_api from "@/js/api/places"; //Api мест проведений
+import callSchedule_api from "@/js/api/callSchedule"; //Api мест проведений
+import departament_api from "@/js/api/departments"; //Api отделения
 import group_api from "@/js/api/group"; //Api групп
 import schedule_api from "@/js/api/schedule"; //Api расписания
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 import bildTimetable from "@/js/views/timetable-f/Bild_Timetable"; //Конструктор замен
+import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
+
 Date.prototype.getWeek = function() {
   const onejan = new Date(this.getFullYear(), 0, 1);
   return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
@@ -84,57 +85,68 @@ Date.prototype.getWeek = function() {
 export default {
   mixins: [withSnackbar],
   post_name: {
-    name: "Учебное рассписение",
-    url: "/timetable"
+    name: "Учебное расписание",
+    url: "timetableRoot"
   },
   components: {
-    c_bildTimetable: bildTimetable
+    c_bildTimetable: bildTimetable,
+    c_panel_control: PanelControl_C,
   },
 
   data: () => {
     return {
-      groups_info: null, //Группы
-      departaments_info: null, //Отделения
+      groups_info: {groups:null, selected_group:null}, //Группы
+      departaments_info: {departaments:null, selected_departament:null}, //Отделения
       schedule: null, //Расписание
       isToday: null, //Текущий день
       titleDialog: "Конструктор расписания",
       dialog: false,
+      places: null, 
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
     };
   },
 
-  props: {
-    _departaments_info: {
-      type: Object,
-      default: null
-    }, //Отделения
-    _groups_info: {
-      type: Object,
-      default: null
-    }, //Группы
-    _schedule: {
-      type: Object,
-      default: null
-    }, //Расписания
-    _places: {
-      type: Array,
-      default: null
-    }, //Места проведений
-    _teachers: {
-      type: Array,
-      default: null
-    }, //Преподаватели
-    _disciplines: {
-      type: Array,
-      default: null
-    }, //Дисциплины
-    _schedule_bild: {
-      type: Object,
-      default: null
-    } //Расписание
-  },
-
   methods: {
+    getCallScheduleForPanel()
+    {
+      callSchedule_api
+        .getCallScheduleForPanel()
+        .then(res => {
+          this.$refs.panel.loadData(res.data.panel_array);
+        })
+        .catch(ex => {
+          this.showError('Ошибка получения расписания звонков! ' + ex);
+        });
+    },
+
+    //Получение мест проведений
+    getPlaces()
+    {
+      places_api
+        .getPlaces()
+        .then(res => {
+          this.places = res.data.places;
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    },
+
+    //Получение отделений
+    getDepartament()
+    {
+      departament_api
+        .getDepartmentsForCombobox()
+        .then(res => {
+          this.departaments_info.departaments = res.data.departaments;
+          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+          this.departament_change();
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    }, 
+
     //Получение группы при изменении отделения
     departament_change() {
       group_api
@@ -215,11 +227,10 @@ export default {
 
   //Преднастройка
   beforeMount() {
-    this.groups_info = this._groups_info;
-    this.departaments_info = this._departaments_info;
-    this.schedule = this._schedule;
+    this.getCallScheduleForPanel();
     this.isToday = this.isChisl();
-    this.parseSchedule();
+    this.getDepartament();
+    this.getPlaces();
   }
 };
 </script>
