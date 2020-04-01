@@ -39,7 +39,14 @@ Date.prototype.getWeek = function() {
 
 export default {
   data: () => ({
-    isToday: null
+    isToday: null,
+    groups_info: { groups: null, selected_group: null }, //Группы
+    departaments_info: { departaments: null, selected_departament: null }, //Отделения
+    schedule: null, //Расписание
+    titleDialog: "Конструктор расписания",
+    dialog: false,
+    places: null,
+    days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
   }),
   methods: {
     isChisl() {
@@ -53,7 +60,9 @@ export default {
           this.$refs.panel.loadData(res.data.panel_array);
         })
         .catch(ex => {
-          this.showError("Ошибка инициализации раписания звонков. Причина: " + ex);
+          this.showError(
+            "Ошибка инициализации раписания звонков. Причина: " + ex
+          );
         });
     },
     getPlaces() {
