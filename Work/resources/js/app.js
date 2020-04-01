@@ -2,14 +2,16 @@ require('./bootstrap');
 
 import store from './store'
 import vuetify from './vuetify'
-import {createRouter} from './router'
+import {
+    createRouter
+} from './router'
 
 import user_api from '@/js/api/users'
 import * as mutations from '@/js/store/mutation-types'
 
-import C_Layouts from '@/js/views/Layouts'
+import C_Layouts from '@/js/Layouts'
 
-let router = createRouter(store)
+let router = createRouter()
 
 window.Vue = require('vue');
 
@@ -26,14 +28,20 @@ user_api.init().then((res) => {
                         items.push({
                             path: '/' + slug + "/" + child.component.info.url,
                             name: child.component.info.name,
-                            component: () => import( /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`)
+                            meta: {
+                                layout: 'main'
+                            },
+                            component: () => import( /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`),
                         })
                 })
             } else {
                 items.push({
                     path: '/' + slug + "/" + element.component.info.url,
                     name: element.component.info.name,
-                    component: () => import( /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`)
+                    meta: {
+                        layout: 'main'
+                    },
+                    component: () => import( /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`),
                 })
             }
         })

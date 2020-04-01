@@ -35,6 +35,7 @@
 <script>
 import { getIcons } from "@/js/materialDesignIcons";
 import post_api from "@/js/api/userPosts";
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
   post_name: {
@@ -111,7 +112,11 @@ export default {
         children: []
       };
       if (this.selectedPost.id != 1) {
-        this.selectedPost.privilegies.splice(this.selectedPost.privilegies.length - 1,0,element);
+        this.selectedPost.privilegies.splice(
+          this.selectedPost.privilegies.length - 1,
+          0,
+          element
+        );
       } else {
         this.selectedPost.privilegies.push(element);
       }
@@ -157,7 +162,7 @@ export default {
           privilegies: this.selectedPost.privilegies
         })
         .then(res => {
-          console.log(res);
+          
         })
         .catch(ex => {
           console.log(ex);
