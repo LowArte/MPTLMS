@@ -69,6 +69,7 @@ export default {
         user_api
           .login({ email: this.email, password: this.password })
           .then(res => {
+            console.log(res.data.routes);
             this.$store.commit(mutations.SET_AUTH, res.data);
             let slug = res.data.slug;
             let items = [];
@@ -79,6 +80,9 @@ export default {
                     items.push({
                       path: "/" + slug + "/" + child.component.info.url,
                       name: child.component.info.name,
+                      meta: {
+                        layout: "main"
+                      },
                       component: () =>
                         import(
                           /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`
@@ -89,6 +93,9 @@ export default {
                 items.push({
                   path: "/" + slug + "/" + element.component.info.url,
                   name: element.component.info.name,
+                  meta: {
+                    layout: "main"
+                  },
                   component: () =>
                     import(
                       /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`

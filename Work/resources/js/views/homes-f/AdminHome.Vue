@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md text-xs-center>
+      <v-container fluid grid-list-md text-xs-center>
     <v-layout row wrap>
       <v-flex xs12>
         <v-card :elevation="0">
@@ -50,6 +50,6 @@ export default {
   post_name: {
     name: "Домашняя страница",
     url: ""
-  },
+  }
 };
 </script>

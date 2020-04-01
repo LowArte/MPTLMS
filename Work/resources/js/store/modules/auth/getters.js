@@ -3,5 +3,4 @@ export default {
   user:state=>state.user,
   routes:state=>state.routes,
   slug:state=>state.slug,
-  layout:state=>state.layout,
 }

@@ -8,7 +8,6 @@ export const SET_SNACKBAR_TIMEOUT = 'SET_SNACKBAR_TIMEOUT'
 export const SET_AUTH = 'SET_AUTH'
 export const SET_NOTAUTH = 'SET_NOTAUTH'
 
-export const SET_LAYOUT = 'SET_LAYOUT'
 
 
 
