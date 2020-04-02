@@ -1,8 +1,8 @@
 <template lang="pug">
   v-row.ma-2(align="center" justify="center")
-    v-col.pa-auto(justify="center" align="center")
-      v-card.pa-3.pt-0.mx-auto(:elevation="0" max-width="320")
-        v-img.mx-auto.pt-0(:src="loadImg('main-logo.png')" max-width="192px" height="auto")
+    v-col.pa-0(justify="center" align="center")
+      v-card.pa-0.mx-auto(:elevation="0" max-width="320")
+        v-img.mx-auto(:src="loadImg('main-logo.png')" max-width="128px" height="auto")
         v-card-text.pa-0.subtitle-1
           span Один аккаунт. Много возможностей.
         v-form(ref="Login")
@@ -10,13 +10,13 @@
           v-text-field(v-model="password" :rules="passwordRules" label="Пароль" type="password" required)
           v-card-actions
             router-link(class='nounderline' to="/") 
-              v-btn(color="accent"  text) Отмена
+              v-btn(color="accent" text) ОТМЕНА
             v-spacer
-            v-btn( @click="login" color="blue darken-1" text) ВОЙТИ
+            v-btn(@click="login" color="blue darken-1" text) ВОЙТИ
         v-bottom-sheet.pa-3(v-model="sheet" scrollable max-height="300px")
           template(v-slot:activator="{ on }")
             v-btn(text block x-small color="primary font-weight-light" v-on="on") Проблемы со входом?
-          v-card.mx-auto(:elevation="0" )
+          v-card.mx-auto(:elevation="0")
             v-card-title.pa-3.font-weight-black Проблемы со входом
             v-card-text
               v-card-text.subtitle-1.pa-0.pb-2.font-weight-medium Для обучающегося

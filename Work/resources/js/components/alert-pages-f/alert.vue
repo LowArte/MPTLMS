@@ -16,23 +16,26 @@
  */
 
 <template lang="pug">
-    v-row.ma-2(align="center" justify="center")
-        v-col.pa-auto(justify="center")
-            v-card.mx-auto(dark flat max-width="320" color="red")
-                v-card-title.pa-3
-                    v-icon(large left) mdi-alert
-                    span(title font-weight-light) {{error.code}}
-                v-card-text.px-0
-                    span {{error.annotation}}
-                v-card-actions
-                    router-link(class='nounderline' to="/") 
-                        v-btn(small block dark color="red lighten-1") ГЛАВНАЯ
-                        
+    v-row.ma-0(align="center" justify="center" style="background-color: #1e2124")
+        v-col.pa-auto(align="center" justify="center" style="background-color: transparent")
+            v-flex
+                v-card(:elevation="0" style="background-color: transparent" dark)
+                    p.ma-0.display-4.font-weight-bold 404
+                    v-card-text Кажется у нас проблемы, Хюстон! 
+                    v-card-actions
+                        v-spacer
+                        v-btn(x-small text) Обрнатно на помойку
+                        v-spacer
+                                                
 </template>
 
 <script>
 export default {
-  props: ["error"]
+  props: ["error"],
+  methods: {
+    loadImg: function(path) {
+      return require(`@img/${path}`);
+    }
+  }
 };
 </script>
-

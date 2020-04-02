@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12>
         <v-card :elevation="0" max-width="620px" class="mx-auto mt-4">
-          <v-img class="mx-auto" max-width="192px" height="auto"></v-img>
+          <v-img class="mx-auto" :src="loadImg('main-logo.png')" max-width="192px" height="auto"></v-img>
           <v-card-text class="pt-3 subtitle-1">
             <center>Московский приборостроительный техникум</center>
             <center>РЭУ имени Г.В. Плеханова</center>
@@ -44,6 +44,11 @@ import SpecialitiesList_C from "@/js/components/information-page-f/SpecialtiesLi
 export default {
   components: {
     "c-specialties-list": SpecialitiesList_C
+  },
+  methods: {
+    loadImg: function(path) {
+      return require(`@img/${path}`);
+    }
   }
 };
 </script>
