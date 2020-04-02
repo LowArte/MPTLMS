@@ -22,7 +22,8 @@ mix.webpackConfig({
     resolve: {
         extensions: ['.js', '.vue'],
         alias: {
-            '@': __dirname + '/resources'
+            '@': __dirname + '/resources',
+            '@img':__dirname+'/storage/app/public/images'
         }
     },
     module: {

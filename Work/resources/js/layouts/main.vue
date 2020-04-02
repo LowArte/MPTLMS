@@ -13,15 +13,13 @@
           <v-icon>menu</v-icon>
         </v-btn>
       </div>
-      <!-- @if(auth()->user()->disabled)
-      <div class="d-flex align-center" style="margin-left: auto">
-        <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Вы заблокированы!</v-card-title>
-      </div>
-      @endif -->
       <div class="d-flex align-center" style="margin-left: auto">
         <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
           <small class="white--text">
-            <!-- {{auth()->user()->name}} -->
+            {{user.name}}
+          </small>
+          <small v-if="user.disabled == 1" class="red--text">
+            {{Заблокирован}}
           </small>
           <v-avatar class="ml-2" size="32" color="white">
             <v-icon>account_circle</v-icon>
@@ -32,9 +30,7 @@
 
     <v-navigation-drawer v-model="rightdrawer" fixed right clipped app>
       <v-card outlined style="border: none;" flat>
-        <!-- <v-form method="post" action="{{route("logout")}}">
-                    <c-logout _link="{{route("password.request")}}"></c-logout>
-        </v-form> --}}-->
+        <c-logout></c-logout>
       </v-card>
     </v-navigation-drawer>
 
@@ -51,15 +47,23 @@
 <script>
 import snackbar from "@/js/components/SnackBarComponent"
 import C_AppMenu from "@/js/components/menu-f/AppMenu"
+import C_Logout from "@/js/components/buttons-f/logout"
+import { mapGetters } from "vuex";
 
 export default {
+  computed: {
+    ...mapGetters(["user"]),
+  },
+
   data: () => ({
     leftdrawer:false,
     rightdrawer:false,
   }),
+
   components:{
     snackbar,
-    "c-app-menu":C_AppMenu
+    "c-app-menu":C_AppMenu,
+    "c-logout":C_Logout
   }
 }
 </script>

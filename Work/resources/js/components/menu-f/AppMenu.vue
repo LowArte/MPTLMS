@@ -1,9 +1,9 @@
 <template lang='pug'>
-    v-treeview(v-if="routes" :items="routes" open-on-click)              
+    v-treeview(v-if="user" :items="user.post.privilegies" open-on-click)              
       template(v-slot:prepend="{ item }") 
         v-icon(v-if="item.icon") {{item.icon}}
       template(v-slot:label="{item}" )
-        div(v-if="item.component" @click="navigate(slug+'/'+item.component.info.url)")
+        div(v-if="item.component" @click="navigate(user.post.slug+'/'+item.component.info.url)")
           span {{item.text}} 
         span(v-else) {{item.text}}
 </template>
@@ -12,7 +12,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["routes", "slug"])
+    ...mapGetters(["user"])
   },
   methods: {
     navigate(path) {

@@ -1,6 +1,4 @@
 export default {
-  isAuthenticated: state => state.accessToken!=null,
+  isAuthenticated: state => state.user!=null,
   user:state=>state.user,
-  routes:state=>state.routes,
-  slug:state=>state.slug,
 }

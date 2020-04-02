@@ -2,8 +2,8 @@ import getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  isAuthenticated:false,
-  user:null,
+  isProfilactic:false,
+  name:null,
 }
 
 export default {

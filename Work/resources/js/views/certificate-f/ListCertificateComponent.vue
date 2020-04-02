@@ -47,7 +47,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещ�
 
 export default {
   post_name: {
-    name: "Просмотр сертивикатов",
+    name: "Просмотр заказанных справок",
     url: "list_certificate"
   },
   mixins: [withSnackbar],
@@ -77,20 +77,9 @@ export default {
     };
   },
 
-  props: {
-    _requests: {
-      data: Object,
-      default: null
-    }
-  },
-
-  //Получение данных
-  mounted() {
-    this.items = this._requests;
-    for (var i = 0; i < this.items.length; i++)
-      this.items[i].certificates_data = JSON.parse(
-        this.items[i].certificates_data
-      );
+  //Преднастройка
+  beforeMount() {
+    this.Update();
   },
 
   methods: {

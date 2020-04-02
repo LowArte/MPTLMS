@@ -27,9 +27,7 @@
                         v-list-item.mt-2(v-if="!item.zamena")
                             v-list-item-content.pa-0
                                 span Компьютерное делопроизводство
-                                v-list-item-subtitle(small) Преподаватель / Преподаватель / Преподаватель
-
-                    
+                                v-list-item-subtitle(small) Преподаватель / Преподаватель / Преподаватель                  
 </template>
 
 <script>
@@ -40,14 +38,7 @@ Date.prototype.getWeek = function() {
 
 export default {
   data: () => ({
-    isToday: null,
-    groups_info: { groups: null, selected_group: null }, //Группы
-    departaments_info: { departaments: null, selected_departament: null }, //Отделения
-    schedule: null, //Расписание
-    titleDialog: "Конструктор расписания",
-    dialog: false,
-    places: null,
-    days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
+    isToday: null
   }),
   methods: {
     isChisl() {

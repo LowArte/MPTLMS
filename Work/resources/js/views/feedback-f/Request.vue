@@ -122,7 +122,7 @@ export default {
       this.modelmessage = "";
     },
 
-    //Отправка сообщения о том, что справка готова
+    //Получение обращений пользователя
     Update() 
     {
         feedbackApi

@@ -29,9 +29,6 @@ export default {
     //*----------------------------------------
 
 
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -56,9 +53,6 @@ export default {
     getUser(user_id) {
         return axios.get('/api/admin/getters/users/' + user_id);
     },
-
-
-
 
 
     //*----------------------------------------
@@ -120,5 +114,9 @@ export default {
 
     init(){
         return axios.post('/getToken')
+    },
+
+    logout(){
+        return axios.post('/logout')
     }
 }

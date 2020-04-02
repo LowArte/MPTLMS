@@ -231,7 +231,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание занятий",
-                                        "url"=> "timetable"
+                                        "url"=> "replacements"
                                     ],
                                     "path" => "js/views/replacements-f/Replacements"
                                 ], 
@@ -515,10 +515,10 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "icon" => "library_books",
-                        "text" => "Заказанные справки",
+                        "text" => "list_certificate",
                         "component" => [
                             "info" => [
-                                "name" => "Заказанные справки",
+                                "name" => "Просмотр заказанных справок",
                                 "url"=> "listcertificate"
                             ],
                             "path" => "js/views/certificate-f/ListCertificateComponent"

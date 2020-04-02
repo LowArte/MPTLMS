@@ -3,7 +3,7 @@
     <snackbar></snackbar>
     <v-app-bar app>
       <v-toolbar-title class="text-uppercase">
-        <span class="font-weight-light" dense>{{ _name }}</span>
+        <span class="font-weight-light" dense>{{ name }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="!isAuthenticated">
@@ -11,23 +11,26 @@
           <v-btn color="accent" text>ВОЙТИ</v-btn>
         </router-link>
         <v-layout vertical v-if="isAuthenticated">
-          <v-btn color="primary mr-5" text>в кабинет</v-btn>
-          <v-btn text color="accent">ВЫХОД</v-btn>
+          <router-link class="nounderline" :to="`/${user.post.slug}`">
+            <v-btn color="primary mr-5" text>в кабинет</v-btn>
+          </router-link>
+          <c-logout></c-logout>
         </v-layout>
       </div>
       <v-layout vertical v-else>
-        <v-btn color="primary mr-5" text>в кабинет</v-btn>
-        <v-btn text color="accent">ВЫХОД</v-btn>
+        <router-link class="nounderline" :to="`/${user.post.slug}`">
+          <v-btn color="primary mr-5" text>в кабинет</v-btn>
+        </router-link>
+        <c-logout></c-logout>
       </v-layout>
-      <v-btn text href>Обратная связь</v-btn>
     </v-app-bar>
     <v-content style="background: white;">
       <v-container fluid grid-list-md text-xs-center>
-        <!-- @if ($profilactic ?? false) -->
-        <v-alert class="my-2" text dense type="warning">
-          <span class="primary--text subtitle-1" >Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.</span>
+        <v-alert v-if="isProfilactic" class="my-2" text dense type="warning">
+          <span
+            class="primary--text subtitle-1"
+          >Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.</span>
         </v-alert>
-        <!-- @endif -->
         <transition>
           <keep-alive>
             <router-view></router-view>
@@ -41,25 +44,20 @@
 <script>
 import snackbar from "@/js/components/SnackBarComponent";
 import t1 from "@/js/views/timetable-f/TestNewTimetable";
+import C_Logout from "@/js/components/buttons-f/logout"
 import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated"]),
+    ...mapGetters(["isAuthenticated", "user","isProfilactic","name"]),
     currentRoute: function() {
       return this.$route;
     }
   },
-
-  props: {
-    _name: {
-      type: String,
-      default: "ass"
-    }
-  },
   components: {
     snackbar,
-    t1
+    t1,
+    "c-logout":C_Logout
   }
 };
 </script>

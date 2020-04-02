@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repositories\ModelRepository\SiteOptionsRepository;
 
 class AppController extends Controller
 {
@@ -11,8 +11,9 @@ class AppController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(SiteOptionsRepository $siteOptionsRepository)
     {    
-        return view('layouts.app');
+        $Profilactic = $siteOptionsRepository->getIsProfilactic();
+        return view('layouts.app',["Profilactic"=>$Profilactic]);
     }
 }

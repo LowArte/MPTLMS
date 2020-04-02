@@ -47,7 +47,7 @@ export default {
     sendQuery() 
     {
       feedbackApi
-        .save({ type: this.thematic, text: this.modelmessage, slug: this._slug })
+        .save({ type: this.thematic, text: this.modelmessage })
         .then(res => {
           this.showMessage(
             "Ваше обращение будет рассмотрено в ближайшее время"
