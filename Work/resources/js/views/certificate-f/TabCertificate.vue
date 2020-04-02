@@ -36,10 +36,10 @@
                     <div><b>Копия аттестата</b> – в отделе по работе со студентами (Стремянный пер, д. 36, корп. 3, каб 100 (7 и 8 комн.) тел. 8-499-237-81-04).</div>
                 </v-card-text>
             </v-card>
-            <c-certificate></c-certificate>
+            <certificate></certificate>
         </v-tab-item>
         <v-tab-item class="pa-4">
-            <c-characteristic></c-characteristic>
+            <characteristic></characteristic>
         </v-tab-item>
     </v-tabs>
 </template>
@@ -50,8 +50,8 @@ import Characteristic from "@/js/views/certificate-f/Characteristic";
 
 export default {
     components: {
-        c_certificate: Certificate,
-        c_characteristic: Characteristic
+        certificate: Certificate,
+        characteristic: Characteristic
     },
 }
 </script>

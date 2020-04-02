@@ -72,6 +72,8 @@ export default {
             console.log(res.data.routes);
             this.$store.commit(mutations.SET_AUTH, res.data);
             let slug = res.data.slug;
+            if(res.data.user.disabled == 1)
+              this.showError("Вас заблокировали!");
             let items = [];
             res.data.routes.forEach(element => {
               if (element.children) {

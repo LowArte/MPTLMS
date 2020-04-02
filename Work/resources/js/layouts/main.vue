@@ -13,15 +13,13 @@
           <v-icon>menu</v-icon>
         </v-btn>
       </div>
-      <!-- @if(auth()->user()->disabled)
-      <div class="d-flex align-center" style="margin-left: auto">
-        <v-card-title class="mb-0 pb-0" style="color: #FF3D00;">Вы заблокированы!</v-card-title>
-      </div>
-      @endif -->
       <div class="d-flex align-center" style="margin-left: auto">
         <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
           <small class="white--text">
-            <!-- {{auth()->user()->name}} -->
+            {{user.name}}
+          </small>
+          <small v-if="user.disabled == 1" class="red--text">
+            (Заблокирован)
           </small>
           <v-avatar class="ml-2" size="32" color="white">
             <v-icon>account_circle</v-icon>
@@ -51,12 +49,19 @@
 <script>
 import snackbar from "@/js/components/SnackBarComponent"
 import C_AppMenu from "@/js/components/menu-f/AppMenu"
+import { mapGetters } from "vuex";
 
 export default {
+
+  computed: {
+    ...mapGetters(["user"]),
+  },
+
   data: () => ({
     leftdrawer:false,
     rightdrawer:false,
   }),
+
   components:{
     snackbar,
     "c-app-menu":C_AppMenu
