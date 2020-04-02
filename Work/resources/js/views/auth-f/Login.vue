@@ -65,8 +65,9 @@ export default {
           .then(res => {
             console.log(res.data.routes);
             this.$store.commit(mutations.SET_AUTH, res.data);
-            let slug = res.data.user.post.slug;
-            if (res.data.user.disabled) this.showError("Доступ заблокирован");
+            let slug = res.data.slug;
+            if (res.data.user.disabled == 1)
+              this.showError("Вас заблокировали!");
             let items = [];
             res.data.user.post.privilegies.forEach(element => {
               if (element.children) {

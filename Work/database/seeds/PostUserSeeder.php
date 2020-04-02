@@ -203,7 +203,7 @@ class PostUserSeeder extends Seeder
                         "text" => "Новости",
                         "component" => [
                             "info" => [
-                                "name" => "Новости",
+                                "name" => "Лента новостей",
                                 "url"=> "news"
                             ],
                             "path" => "js/views/news-f/NewsFeed"
@@ -230,7 +230,7 @@ class PostUserSeeder extends Seeder
                                 "text" => "Изменения в расписании",
                                 "component" => [
                                     "info" => [
-                                        "name" => "Расписание занятий",
+                                        "name" => "Изменения в расписании",
                                         "url"=> "replacements"
                                     ],
                                     "path" => "js/views/replacements-f/Replacements"
@@ -295,7 +295,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Справки и характеристики",
                                         "url"=> "certificate"
                                     ],
-                                    "path" => "js/views/replacements-f/TabCertificate"
+                                    "path" => "js/views/certificate-f/TabCertificate"
                                 ], 
                             ],
                             [
@@ -447,13 +447,13 @@ class PostUserSeeder extends Seeder
                         "children" => [
                             [
                                 "id" => uniqid(),
-                                "text" => "Учебное раписание",
+                                "text" => "Учебное расписание",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
-                                        "url"=> "warning"
+                                        "name" => "Учебное расписание",
+                                        "url"=> "timetableRoot"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
+                                    "path" => "js/views/timetable-f/TimetableRoot"
                                 ],
                             ],
                             [
@@ -461,22 +461,23 @@ class PostUserSeeder extends Seeder
                                 "text" => "Изменения в расписании",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
-                                        "url"=> "warning"
+                                        "name" => "Замены расписания",
+                                        "url"=> "replacementsRoot"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
+                                    "path" => "js/views/replacements-f/ReplacementsRoot"
                                 ],
+
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание звонков",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
-                                        "url"=> "warning"
+                                        "name" => "Расписание звонков",
+                                        "url"=> "bild_call_schedule"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
-                                ],
+                                    "path" => "js/views/call-schedule-f/Bild_CallSchedule"
+                                 ],
                             ]
                         ],
                     ],
@@ -594,11 +595,11 @@ class PostUserSeeder extends Seeder
                         "text" => "Новости",
                         "component" => [
                             "info" => [
-                                "name" => "warning",
-                                "url"=> "warning"
+                                "name" => "Лента новостей",
+                                "url"=> "news"
                             ],
-                            "path" => "js/views/other-f/Warning"
-                        ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],   
                         "children"=>[], 
                     ],
                     [
