@@ -66,15 +66,10 @@ export default {
       this.files = this.importAll(
         require.context("@/js/views", true, /\.vue$/)
       );
-      post_api
-        .getPostsFull()
-        .then(res => {
-          this.posts = res.data.posts;
-          this.selectedPost = this.posts[0];
-        })
-        .catch(ex => {
-          console.log(ex);
-        });
+      this.posts = post_api.getPostsFull();
+      if (this.posts) {
+        this.selectedPost = this.posts[0];
+      }
     },
     postChange() {
       this.active = [];
@@ -161,9 +156,7 @@ export default {
           id: this.selectedPost.id,
           privilegies: this.selectedPost.privilegies
         })
-        .then(res => {
-          
-        })
+        .then(res => {})
         .catch(ex => {
           console.log(ex);
         });

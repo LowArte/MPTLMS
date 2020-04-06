@@ -1,7 +1,7 @@
 <template lang="pug">
     v-layout.row.wrap
       v-card.mx-auto.pa-3(height='auto' width='100%')
-        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" :items="flood" :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
+        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="flood" :items="flood" :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
                 v-card-title.my-2.ma-0.py-2.text-truncate Менеджмент {{title}}
                 v-tooltip(bottom v-if="_func_add != null")
@@ -61,22 +61,16 @@
 </template>
 
 <script>
-//?----------------------------------------------
-//!           Подключение системы уведомлений
-//?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
-
 export default {
   data: () => ({
     title: "", //Заголовок страницы
-    flood: [], //Массив данных
+    flood: null, //Массив данных
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 30, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
     headers: [] //Структура таблицы и с полями которые требуется выводить
   }),
-  mixins: [withSnackbar],
   props: {
     //?----------------------------------------------
     //!           Данные
@@ -121,21 +115,17 @@ export default {
       default: null
     }
   },
-  mounted() {
-    this.flood = this._flood;
+  mounted(){
     this.headers = this._headers;
     this.title = this._title;
   },
 
-  beforeMount(){
-    this.update();
+  async beforeMount() {
+    await this.update();
+    console.log("MOUNTED")
   },
-  
-  methods: {
-    refresh(data){
-      this.flood = data;
-    },
 
+  methods: {
     add() {
       this._func_add();
     },
@@ -152,9 +142,9 @@ export default {
       this._func_remove(item);
     },
 
-    update() 
-    {
-      this.flood = this._func_update();
+    async update() {
+      this.flood = await this._func_update();
+      console.log("UPDATE")
     },
 
     upload() {

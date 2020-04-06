@@ -12,8 +12,10 @@
  */
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -38,6 +40,8 @@ export default {
     //! Отсутсвуют
     //!----------------------------------------
     getTeachers() {
-        return axios.get('/api/getters/get_teachers');
+        axios.get('/api/getters/get_teachers')
+        .then(res => {return res.data.teachers;})
+        .catch(ex => {this.showError(ex);});
     },
 }

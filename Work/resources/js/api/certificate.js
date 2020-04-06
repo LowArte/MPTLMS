@@ -11,14 +11,11 @@
  * 
  */
 
-//! Метод 
-/**
- * 
- */
-
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -43,7 +40,9 @@ export default {
     //! Отсутсвуют
     //!----------------------------------------
     getCertificates() {
-        return axios.get('/api/getters/get_certificates');
+        axios.get('/api/getters/get_certificates')
+        .then(res => {return res.data.certificates;})
+        .catch(ex => {this.showError("Произошла ошибка получения данных: " + ex);});
     },
 
 
@@ -59,9 +58,14 @@ export default {
     //! Уточнить структуру данных. 
     //!----------------------------------------
     save(data) {
-        return axios.post('/api/student/certificate/save', {
-            "data": data.data,
-            "type": data.type
+        return axios.post('/api/student/certificate/save', {"data": data.data, "type": data.type})
+        .then(res => {
+            this.showMessage("Запрос отправлен");
+            return true;
+        })
+        .catch(exp => {
+            this.showError("Произошла ошибка: " + exp);
+            return false;
         });
     },
 
@@ -73,7 +77,12 @@ export default {
     //! Реализовать back-end для api 
     //!----------------------------------------
     sendEmailDone(answer) {
-        return axios.post('/api/chancellery/certificate/sendEmailDone/' + answer.id + '/' + answer.email);
+        axios.post('/api/chancellery/certificate/sendEmailDone/' + answer.id + '/' + answer.email)
+        .then(result => {
+            this.showMessage("Сообщение отправлено");
+            return true;
+        })
+        .catch(ex => {this.showError("Произошла ошибка: " + ex); return false;});
     },
 
     //*Ответ канцелярии заказчику, в случае если справку нельзя сделать, при том, что справка не будет зафиксирована о выполнении
@@ -84,8 +93,14 @@ export default {
     //! Реализовать back-end для api 
     //!----------------------------------------
     sendEmailAnswer(answer) {
-        return axios.post('/api/chancellery/certificate/sendEmailAnswer/' + answer.id + '/' + answer.email, {
-            "answer": answer.text
+        axios.post('/api/chancellery/certificate/sendEmailAnswer/' + answer.id + '/' + answer.email, {"answer": answer.text})
+        .then(result => {
+            this.showMessage("Сообщение отправлено!");
+            return true;
+        })
+        .catch(ex => {
+            this.showError("Произошла ошибка: " + ex);
+            return false;
         });
     }
 }

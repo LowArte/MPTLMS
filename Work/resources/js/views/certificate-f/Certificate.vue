@@ -50,20 +50,11 @@ export default {
 
   methods: {
     sendQuery() {
-      cerificateApi
-        .save({
+      if (cerificateApi.save({
           data: { "Текст заявки": this.text },
-          type: "Справка",
-          slug: "student"
-        })
-        .then(res => {
-          this.cleardata();
-          this.showMessage("Справка отправленна");
-        })
-        .catch(ex => {
-          this.cleardata();
-          this.showError("Произошла ошибка! " + ex);
-        });
+          type: "Справка"
+        }))
+          this.cleardata();        
     },
     cleardata() {
       this.text = "";

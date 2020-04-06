@@ -13,7 +13,7 @@
           <v-icon>menu</v-icon>
         </v-btn>
       </div>
-      <div class="d-flex align-center" style="margin-left: auto">
+      <div v-if="user" class="d-flex align-center" style="margin-left: auto">
         <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
           <small class="white--text">
             {{user.name}}

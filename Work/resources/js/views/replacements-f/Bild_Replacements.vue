@@ -63,241 +63,213 @@ import discipline_api from "@/js/api/discipline"; //Api дисциплин
 import departament_api from "@/js/api/departments"; //Api отделения
 Date.prototype.getWeek = function() {
   const onejan = new Date(this.getFullYear(), 0, 1);
-  return Math.ceil((((this - onejan) / 86400000) + 1) / 7);
+  return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
 };
 
 export default {
-    mixins: [withSnackbar],
-    post_name: {
-        name: "Замены расписания",
-        url: "bild_replacements"
-     },
-    data: () => ({
-        typeReplacement: 1,
-        cancel: false,
-        numberLessonRules: [
-            v => !!v || "Пара не указана!",
-        ],
-        TeacherRules: {
-            required: value => {
-                return !!value.length || "Преподаватель не указан!";
-            },
-        },
-        DiscipRules: {
-            required: value => {
-                return !!value.length || "Дисциплина не указана!";
-            },
-        },
-        lessons: ["1","2","3","4","5","6","7"],
-        replacement:{
-            caselesson: "", 
-            lesson: [], 
-            teacher: [], 
-            oldlesson: [], 
-            oldteacher: []
-        },  //Замена которая потом будет сохранена 
-        groups_info: {groups:null, selected_group:null}, //Группы
-        departaments_info: {departaments:null, selected_departament:null}, //Отделения
-        schedule: null, //Расписание выбранного дня
-        schedule_bild: null, //Расписание выбранного дня
-        week: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'], //Неделя
-        isToday: null, //Текущая четность недели
-        date_week: 0,
-        disciplines: [],
-        teachers: [],
-        dateDialog: {
-            model: false,
-            date: new Date().toISOString().substr(0, 10),
-        }, //Диалог даты
-    }),
+  mixins: [withSnackbar],
+  post_name: {
+    name: "Замены расписания",
+    url: "bild_replacements"
+  },
+  data: () => ({
+    typeReplacement: 1,
+    cancel: false,
+    numberLessonRules: [v => !!v || "Пара не указана!"],
+    TeacherRules: {
+      required: value => {
+        return !!value.length || "Преподаватель не указан!";
+      }
+    },
+    DiscipRules: {
+      required: value => {
+        return !!value.length || "Дисциплина не указана!";
+      }
+    },
+    lessons: ["1", "2", "3", "4", "5", "6", "7"],
+    replacement: {
+      caselesson: "",
+      lesson: [],
+      teacher: [],
+      oldlesson: [],
+      oldteacher: []
+    }, //Замена которая потом будет сохранена
+    groups_info: { groups: null, selected_group: null }, //Группы
+    departaments_info: { departaments: null, selected_departament: null }, //Отделения
+    schedule: null, //Расписание выбранного дня
+    schedule_bild: null, //Расписание выбранного дня
+    week: [
+      "Воскресенье",
+      "Понедельник",
+      "Вторник",
+      "Среда",
+      "Четверг",
+      "Пятница",
+      "Суббота"
+    ], //Неделя
+    isToday: null, //Текущая четность недели
+    date_week: 0,
+    disciplines: [],
+    teachers: [],
+    dateDialog: {
+      model: false,
+      date: new Date().toISOString().substr(0, 10)
+    } //Диалог даты
+  }),
 
-    methods:
-    {
-        //Получение отделений
-        getDepartament()
+  methods: {
+    //Получение отделений
+    getDepartament() {
+      departament_api
+        .getDepartmentsForCombobox()
+        .then(res => {
+          this.departaments_info.departaments = res.data.departaments;
+          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+          this.departament_change();
+        })
+        .catch(ex => {
+          this.showError(ex);
+        });
+    },
+
+    //Получение всех преподавателей
+    getTeachers() {
+      this.teachers = teacher_api.getTeachers();
+    },
+
+    //Получение всех дисциплин
+    getDisciplines() {
+      this.disciplines = discipline_api.getDisciplines();
+    },
+
+    //Определение числителя
+    isChisl() {
+      var today = new Date(
+        new Date(this.dateDialog.date).getTime() + 8 * (24 * 60 * 60 * 1000)
+      );
+      return today.getWeek() % 2;
+    },
+
+    //Получение групп при изменении отдела
+    departament_change() {
+      this.groups_info.groups = group_api.getGroupsByDepartamentId(
+        this.departaments_info.selected_departament.id
+      );
+      if (this.groups_info) {
+        this.groups_info.selected_group = this.groups_info.groups[0];
+        this.caseDate();
+      }
+    },
+
+    //При выборе даты получать расписание выбранного дня, если воскресенье то за день
+    caseDate() {
+      this.date_week = new Date(this.dateDialog.date).getDay();
+      if (this.date_week == 0) {
+        this.dateDialog.date = new Date(
+          new Date(this.dateDialog.date).getTime() - 24 * 60 * 60 * 1000
+        )
+          .toISOString()
+          .substr(0, 10);
+        this.$refs.dateDialog.save(this.dateDialog.date);
+        this.showInfo("Данные отсутствуют");
+        this.caseDate();
+      } 
+      else 
+      {
+        this.schedule = schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id);
+        if(this.schedule)
         {
-        departament_api
-            .getDepartmentsForCombobox()
-            .then(res => {
-            this.departaments_info.departaments = res.data.departaments;
-            this.departaments_info.selected_departament = this.departaments_info.departaments[0];
-            this.departament_change();
-            })
-            .catch(ex => {
-            this.showError(ex);
-            });
-        }, 
+            this.schedule = res.data.schedule[this.week[this.date_week]];
+            this.parseSchedule();
+        }
 
-        //Получение всех преподавателей
-        getTeachers()
+        this.schedule_bild = schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id);
+        if(this.schedule_bild)
         {
-        teacher_api
-            .getTeachers()
-            .then(res => {
-            this.teachers = res.data.teachers;
-            })
-            .catch(ex => {
-            this.showError(ex);
-            });
-        },
+            this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
+            this.parseSchedule();
+        }
+      }
+    },
 
-        //Получение всех дисциплин
-        getDisciplines()
-        {
-        discipline_api
-            .getDisciplines()
-            .then(res => {
-            this.disciplines = res.data.disciplines;
-            })
-            .catch(ex => {
-            this.showError(ex);
-            });
-        },
+    //Сохранение замены
+    sendQuery() {
+      if (this.cancel && this.replacement.oldlesson.length == 0)
+        this.showInfo("Нельзя отменить пару, которой нет!");
+      else if (this.$refs.BildReplacement.validate()) {
+        if (this.cancel) {
+          this.replacement.lesson = [];
+          this.replacement.teacher = [];
+        }
+        replacements_api.saveReplacements({
+          group_id: this.groups_info.selected_group.id,
+          replacement: this.replacement,
+          date: this.dateDialog.date
+        });
+      } else this.showError("Форма заполнена не верно!");
+    },
 
-        //Определение числителя
-        isChisl() 
-        {
-            var today = new Date(new Date(this.dateDialog.date).getTime() + 8 * (24*60*60*1000));
-            return today.getWeek() % 2;
-        },
-        
-        //Получение групп при изменении отдела
-        departament_change() 
-        {
-            group_api
-                .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
-                .then(res => {
-                    this.groups_info.groups = res.data.groups_info.groups;
-                    this.groups_info.selected_group = this.groups_info.groups[0];
-                    this.caseDate();
-                })
-                .catch(ex => {
-                    this.showError(ex);
-                });
-        },
-
-        //При выборе даты получать расписание выбранного дня, если воскресенье то за день
-        caseDate() 
-        {
-            this.date_week = (new Date(this.dateDialog.date)).getDay();
-            if(this.date_week == 0)
-            {
-                this.dateDialog.date = new Date((new Date(this.dateDialog.date)).getTime() - (24*60*60*1000)).toISOString().substr(0, 10);
-                this.$refs.dateDialog.save(this.dateDialog.date);
-                this.showInfo("На воскресенье нет расписания!");
-                this.caseDate();
-            }
-            else
-            {
-                schedule_api
-                    .getScheduleByGroupId(this.groups_info.selected_group.id)
-                    .then(res => {
-                        this.schedule = res.data.schedule[this.week[this.date_week]];
-                        this.parseSchedule();
-                    })
-                    .catch(ex => {
-                        this.showError(ex);
-                    });
-
-                schedule_api
-                    .getScheduleBildByGroupId(this.groups_info.selected_group.id)
-                    .then(res => {
-                        this.schedule_bild = res.data.schedule[this.week[this.date_week]];
-                        this.parseSchedule();
-                    })
-                    .catch(ex => {
-                        this.showError(ex);
-                    });
-            }
-        },
-
-        //Сохранение замены
-        sendQuery() 
-        {
-            if (this.cancel && this.replacement.oldlesson.length == 0)
-                this.showInfo("Нельзя отменить пару, которой нет!");
-            else
-            if (this.$refs.BildReplacement.validate())
-            {
-                if(this.cancel)
-                {
-                    this.replacement.lesson = [];
-                    this.replacement.teacher = [];
-                }
-                replacements_api
-                    .saveReplacements({group_id: this.groups_info.selected_group.id, replacement: this.replacement, date: this.dateDialog.date})
-                    .then(res => {
-                        this.showMessage('Замена сохранена!');
-                    })
-                    .catch(ex => {
-                        this.showError("Замена не принята! " + ex);
-                    });
-            }
-            else
-                this.showError("Форма заполнена не верно!");
-        },
-
-        //Выбор пары 
-        caseLesson(number)
-        {
-            this.replacement.caselesson = number;
-            if (this.schedule != null)
-            if (!this.schedule[number].chisl)
-            {
-                this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
-                this.replacement.oldteacher = this.schedule_bild[number].TeacherChisl;
-            }
-            else
-            {
-                if(this.isChisl() == 0)
-                {
-                    this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
-                    this.replacement.oldteacher = this.schedule_bild[number].TeacherChisl;    
-                }
-                else
-                {
-                    this.replacement.oldlesson = this.schedule_bild[number].LessonZnam;
-                    this.replacement.oldteacher = this.schedule_bild[number].TeacherZnam;
-                }
-            }
-        },
-
-        //Формирование расписания для вывода
-        parseSchedule()
-        {
-            this.isToday = this.isChisl();
-            if (this.schedule != null)
-            for(var j = 1; j <= 7; j++)
-            {
-                if(Array.isArray(this.schedule[j]['LessonChisl'])) 
-                    this.schedule[j]['LessonChisl'] = this.schedule[j]['LessonChisl'].join(' / ');
-                if(Array.isArray(this.schedule[j]['LessonZnam'])) 
-                    this.schedule[j]['LessonZnam'] = this.schedule[j]['LessonZnam'].join(' / ');
-                if(Array.isArray(this.schedule[j]['TeacherChisl'])) 
-                    this.schedule[j]['TeacherChisl'] = this.schedule[j]['TeacherChisl'].join(' / ');
-                if(Array.isArray(this.schedule[j]['TeacherZnam'])) 
-                    this.schedule[j]['TeacherZnam'] = this.schedule[j]['TeacherZnam'].join(' / ');
-            }
-
-            if (this.replacement.caselesson != "")
-                this.caseLesson(this.replacement.caselesson);
+    //Выбор пары
+    caseLesson(number) {
+      this.replacement.caselesson = number;
+      if (this.schedule != null)
+        if (!this.schedule[number].chisl) {
+          this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
+          this.replacement.oldteacher = this.schedule_bild[number].TeacherChisl;
+        } else {
+          if (this.isChisl() == 0) {
+            this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
+            this.replacement.oldteacher = this.schedule_bild[
+              number
+            ].TeacherChisl;
+          } else {
+            this.replacement.oldlesson = this.schedule_bild[number].LessonZnam;
+            this.replacement.oldteacher = this.schedule_bild[
+              number
+            ].TeacherZnam;
+          }
         }
     },
-    
-    //Получение данных для работы на странице
-    beforeMount() 
-    {
-        this.date_week = (new Date(this.dateDialog.date)).getDay();
-        this.getDepartament();
-        this.parseSchedule();
-        this.getDisciplines();
-        this.getTeachers();
-    },
 
-    mounted()
-    {
-        if(this.date_week != 0)
-            this.caseDate();
+    //Формирование расписания для вывода
+    parseSchedule() {
+      this.isToday = this.isChisl();
+      if (this.schedule != null)
+        for (var j = 1; j <= 7; j++) {
+          if (Array.isArray(this.schedule[j]["LessonChisl"]))
+            this.schedule[j]["LessonChisl"] = this.schedule[j][
+              "LessonChisl"
+            ].join(" / ");
+          if (Array.isArray(this.schedule[j]["LessonZnam"]))
+            this.schedule[j]["LessonZnam"] = this.schedule[j][
+              "LessonZnam"
+            ].join(" / ");
+          if (Array.isArray(this.schedule[j]["TeacherChisl"]))
+            this.schedule[j]["TeacherChisl"] = this.schedule[j][
+              "TeacherChisl"
+            ].join(" / ");
+          if (Array.isArray(this.schedule[j]["TeacherZnam"]))
+            this.schedule[j]["TeacherZnam"] = this.schedule[j][
+              "TeacherZnam"
+            ].join(" / ");
+        }
+
+      if (this.replacement.caselesson != "")
+        this.caseLesson(this.replacement.caselesson);
     }
-}
+  },
+
+  //Получение данных для работы на странице
+  beforeMount() {
+    this.date_week = new Date(this.dateDialog.date).getDay();
+    this.getDepartament();
+    this.parseSchedule();
+    this.getDisciplines();
+    this.getTeachers();
+  },
+
+  mounted() {
+    if (this.date_week != 0) this.caseDate();
+  }
+};
 </script>

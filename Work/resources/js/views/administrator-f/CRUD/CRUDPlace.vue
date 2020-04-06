@@ -55,15 +55,9 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
-    update() {
-      api
-        .getPlaces()
-        .then(result => {
-          this.$refs.crud.refresh(result.data.places);
-        })
-        .catch(exception => {
-          this.showError("Ошибка обновления! " + exception);
-        });
+    async update() {
+      let data = await api.getPlaces();
+      return data
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -71,16 +65,9 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api
-            .savePlace(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Действие было отклонено по причине: " + exception);
-            });
+          api.savePlace(result);
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     },
@@ -90,14 +77,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api
-            .editPlace(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Действие было отклонено по причине: " + exception);
-            });
+          api.editPlace(result);
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -109,14 +89,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api
-            .dropPlaces()
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError("Ошибка выполнения! " + exception);
-            });
+          api.dropPlaces();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -128,14 +101,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api
-            .deletePlace(item.id)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Действие было отклонено по причине: " + exception);
-            });
+          api.deletePlace(item.id);
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

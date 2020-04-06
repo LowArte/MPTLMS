@@ -58,54 +58,22 @@ export default {
     loadImg: function(path) {
       return require(`@img/${path}`);
     },
-    login() {
+    async login() {
       if (this.$refs.Login.validate()) {
-        user_api
-          .login({ email: this.email, password: this.password })
-          .then(res => {
-            console.log(res.data.routes);
-            this.$store.commit(mutations.SET_AUTH, res.data);
-            let slug = res.data.slug;
-            if (res.data.user.disabled == 1)
-              this.showError("Вас заблокировали!");
-            let items = [];
-            res.data.user.post.privilegies.forEach(element => {
-              if (element.children) {
-                element.children.forEach(child => {
-                  if (child.component != null)
-                    items.push({
-                      path: "/" + slug + "/" + child.component.info.url,
-                      name: child.component.info.name,
-                      meta: {
-                        layout: "main"
-                      },
-                      component: () =>
-                        import(
-                          /* webpackChunkName: "[request]" */ `@/${child.component.path}.vue`
-                        )
-                    });
-                });
-              } else {
-                items.push({
-                  path: "/" + slug + "/" + element.component.info.url,
-                  name: element.component.info.name,
-                  meta: {
-                    layout: "main"
-                  },
-                  component: () =>
-                    import(
-                      /* webpackChunkName: "[request]" */ `@/${element.component.path}.vue`
-                    )
-                });
-              }
-            });
-            this.$router.addRoutes(items);
-            this.$router.push("/" + slug);
-          })
-          .catch(er => {
-            this.password = "";
-            this.showError("Ошибка входа");
-          });
+        let info = await user_api.login({
+          email: this.email,
+          password: this.password
+        });
+        console.log(info)
+        if (info) {
+          this.$store.commit(mutations.SET_AUTH, info);
+          window.axios.defaults.headers.common["Authorization"] =
+            "Bearer " + info.token;
+          this.$router.addRoutes(info.items);
+          this.$router.push("/" + info.slug);
+        } else {
+          this.showError("Не верные данные");
+        }
       } else this.showError("Поля заполнены не корректно");
     }
   }

@@ -92,58 +92,38 @@ export default {
   },
 
   methods: {
+    //Получение панели с расписанием 
     getCallScheduleForPanel()
     {
-      callSchedule_api
-        .getCallScheduleForPanel()
-        .then(res => {
-          this.$refs.panel.loadData(res.data.panel_array);
-        })
-        .catch(ex => {
-          this.showError('Ошибка получения расписания звонков! ' + ex);
-        });
+      this.$refs.panel.loadData(callSchedule_api.getCallScheduleForPanel());
     },
 
     //Получение мест проведений
     getPlaces()
     {
-      places_api
-        .getPlaces()
-        .then(res => {
-          this.places = res.data.places;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.places = places_api.getPlaces();
     },
 
     //Получение отделений
     getDepartament()
     {
-      departament_api
-        .getDepartmentsForCombobox()
-        .then(res => {
-          this.departaments_info.departaments = res.data.departaments;
-          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
-          this.departament_change();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.departaments_info.departaments = departament_api.getDepartmentsForCombobox();
+      if(this.departaments_info.departaments)
+      {
+        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.departament_change();
+      }
     }, 
 
     //Получение группы при изменении отделения
-    departament_change() {
-      group_api
-        .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
-        .then(res => {
-          this.groups_info.groups = res.data.groups_info.groups;
-          this.groups_info.selected_group = this.groups_info.groups[0];
-          this.group_change();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+    departament_change() 
+    {
+      this.groups_info.groups = group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
+      if(this.groups_info.groups)
+      {
+        this.groups_info.selected_group = this.groups_info.groups[0];
+        this.changeFilter();
+      }
     },
 
     //Определение числителя
@@ -153,16 +133,11 @@ export default {
     },
 
     //Получение расписания при изменении выбранной группы
-    group_change() {
-      schedule_api
-        .getScheduleByGroupId(this.groups_info.selected_group.id)
-        .then(res => {
-          this.schedule = res.data.schedule;
-          this.parseSchedule();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+    group_change() 
+    {
+      this.schedule = schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id);
+      if(this.schedule)
+        this.parseSchedule();
     },
 
     //Парсировка данных для вывода, перевод массивов с данными в строки для вывода

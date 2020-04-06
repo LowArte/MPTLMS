@@ -43,7 +43,6 @@
 
 <script>
 import snackbar from "@/js/components/SnackBarComponent";
-import t1 from "@/js/views/timetable-f/TestNewTimetable";
 import C_Logout from "@/js/components/buttons-f/logout"
 import { mapGetters } from "vuex";
 
@@ -56,7 +55,6 @@ export default {
   },
   components: {
     snackbar,
-    t1,
     "c-logout":C_Logout
   }
 };

@@ -85,54 +85,32 @@ export default {
   methods: {
     //Отправка сообщения-ответа от канцелярии, без фиксации того что справка выполнена
     sendEmailAnswer(email) {
-      cerificateApi
-        .sendEmailAnswer({
-          email: email,
-          text: this.modelmessage,
-          id: this.expanded[0].id
-        })
-        .then(result => {
-          this.showMessage("Сообщение отправлено");
-          this.items.splice(this.expanded[0]);
-        })
-        .catch(ex => {
-          this.showError("Произошла ошибка! " + ex);
-        });
-      this.modelmessage = "";
+      if(cerificateApi.sendEmailAnswer({email: email, text: this.modelmessage, id: this.expanded[0].id}))
+      {
+        this.items.splice(this.expanded[0]);
+        this.modelmessage = "";
+      }
     },
 
     //Отправка сообщения о том, что справка готова
     sendEmailDone(email) {
-      cerificateApi
-        .sendEmailDone({
-          email: email,
-          id: this.expanded[0].id
-        })
-        .then(result => {
-          this.showMessage("Сообщение отправлено");
-          this.expanded[0].done = true;
-          this.Update();
-        })
-        .catch(ex => {
-          this.showError("Произошла ошибка! " + ex);
-        });
-      this.modelmessage = "";
+      if(cerificateApi.sendEmailDone({email: email,id: this.expanded[0].id}))
+      {
+        this.expanded[0].done = true;
+        this.Update();
+        this.modelmessage = "";
+      }
     },
 
     //Отправка сообщения о том, что справка готова
-    Update() {
-      cerificateApi
-        .getCertificates()
-        .then(res => {
-          this.items = res.data.certificates;
-          for (var i = 0; i < this.items.length; i++)
-            this.items[i].certificates_data = JSON.parse(
-              this.items[i].certificates_data
-            );
-        })
-        .catch(ex => {
-          this.showError("Произошла ошибка! " + ex);
-        });
+    Update() 
+    {
+      this.items = cerificateApi.getCertificates();
+      if(this.items != null)
+      {
+        for (var i = 0; i < this.items.length; i++)
+          this.items[i].certificates_data = JSON.parse(this.items[i].certificates_data);
+      }
     }
   }
 };

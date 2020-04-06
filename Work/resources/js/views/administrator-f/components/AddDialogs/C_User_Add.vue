@@ -62,7 +62,7 @@ import apidepartments from "@/js/api/departments";
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
@@ -108,32 +108,11 @@ export default {
     };
   },
   mounted() {
-    apidepartments
-      .getDepartments()
-      .then(result => {
-        this.departaments = result.data;
-      })
-      .catch(exception => {
-        this.showInfo("Данные не получены! " + exception);
-      });
-    apiposts
-      .getPostsFull()
-      .then(result => {
-        this.posts = result.data.posts;
-      })
-      .catch(exception => {
-        this.showInfo("Данные не получены! " + exception);
-      });
+    this.departaments = apidepartments.getDepartments();
+    this.posts = apiposts.getPostsFull();
   },
   depChange() {
-    apigroup
-      .getGroupsByDepartamentId(this.item.dep_id)
-      .then(result => {
-        this.groups = result.data.groups_info.groups;
-      })
-      .catch(exception => {
-        this.showError(exception);
-      });
+    this.groups = apigroup.getGroupsByDepartamentId(this.item.dep_id);
   },
   methods: {
     pop() {
@@ -143,8 +122,7 @@ export default {
       });
     },
     clickSave() {
-      if (this.$refs.form.validate()) 
-      {
+      if (this.$refs.form.validate()) {
         this.dialog = false;
         this.resolve(this.item);
         this.item = Object.assign({}, null);

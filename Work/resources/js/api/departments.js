@@ -17,8 +17,10 @@
  */
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -48,7 +50,9 @@ export default {
     //! Отсутсвуют
     //!----------------------------------------
     getDepartments() {
-        return axios.get('/api/getters/departments');
+        return axios.get('/api/getters/departments')
+        .then(result => { return result.data.departments; })
+        .catch(exception => { this.showError("Произошёл сбой: " + exception); return undefined;});
     },
 
     //*Получение отделений для комбобокса
@@ -59,7 +63,9 @@ export default {
     //! Отсутсвуют
     //!----------------------------------------
     getDepartmentsForCombobox() {
-        return axios.get('/api/getters/departments_for_combobox');
+        axios.get('/api/getters/departments_for_combobox')
+        .then(res => { return res.data.departaments; })
+        .catch(ex => { this.showError('Произошёл сбой: ' + ex); });
     },
 
     //*Получение отделеня
@@ -70,7 +76,9 @@ export default {
     //! Нужно получать department по ID
     //!----------------------------------------
     getDepartment(id) {
-        return axios.get('/api/admin/getters/department/' + id);
+        return axios.get('/api/admin/getters/department/' + id)
+        .then(result => { return result.data; })
+        .catch(exception => { this.showInfo("Произошёл сбой: " + exception); });
     },
 
 
@@ -88,7 +96,9 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     saveDepartment(department) {
-        return axios.post('/api/admin/department_management/save/', department);
+        axios.post('/api/admin/department_management/save/', department)
+        .then(res => { this.showMessage("Действие выполнено успешно"); })
+        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
     },
 
     //*Удаление отделений
@@ -99,7 +109,9 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deleteDepartment(id) {
-        return axios.post('/api/admin/department_management/delete/' + id);
+        axios.post('/api/admin/department_management/delete/' + id)
+        .then(result => { this.showMessage("Действие выполнено успешно"); })
+        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
     },
 
     //*Редактирование отделений
@@ -110,9 +122,9 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editDepartment(department) {
-        return axios.post('/api/admin/department_management/edit/' + department.id, {
-            "department": department
-        });
+        axios.post('/api/admin/department_management/edit/' + department.id, { "department": department })
+        .then(res => { this.showMessage("Действие выполнено успешно!"); })
+        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
     },
 
 
@@ -129,6 +141,8 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     dropDepartments() {
-        return axios.post('/api/admin/department_management/deleteAll');
+        axios.post('/api/admin/department_management/deleteAll')
+        .then(res => { this.showMessage("Действие выполнено успешно"); })
+        .catch(exception => { this.showError("Произошёл сбой: " + exception); });
     }
 }

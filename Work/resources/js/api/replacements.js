@@ -12,8 +12,10 @@
  */
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -34,12 +36,14 @@ export default {
     //*Получение всех замен
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
-    //? Возвращается полная таблица данных JSON формата
+    //? Возвращается полная таблица данных JSON форматаd
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
     getReplacements(data) {
-        return axios.get('/api/getters/replacements');
+        axios.get('/api/getters/replacements')
+        .then(res => {return res.data.replacements;})
+        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
     },
 
     //*Получение замен для определённой даты и группы
@@ -50,7 +54,9 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getReplacementsByGroupByDate(data) {
-        return axios.get('/api/getters/replacements_by_group_by_date/' + data.group_id + '/' + data.date);
+        axios.get('/api/getters/replacements_by_group_by_date/' + data.group_id + '/' + data.date)
+        .then(res => {return res.data.replacements;})
+        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
     },
 
     //*Получение замен для определённой группы
@@ -61,7 +67,9 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getReplacementsByGroup(group_id) {
-        return axios.get('/api/getters/replacements_by_group/' + group_id);
+        axios.get('/api/getters/replacements_by_group/' + group_id)
+        .then(res => {return res.data.replacements;})
+        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
     },
 
     //*Получение замен для определённой даты
@@ -72,7 +80,9 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getReplacementsByDate(date) {
-        return axios.get('/api/getters/replacements_by_date/' + date);
+        return axios.get('/api/getters/replacements_by_date/' + date)
+        .then(res => {return res.data.replacements;})
+        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
     },
 
 
@@ -89,9 +99,9 @@ export default {
     //! Уточнить струткуру данных
     //!----------------------------------------
     saveReplacements(data) {
-        return axios.post('/api/save/replacement/' + data.group_id + '/' + data.date, {
-            "replacement": data.replacement
-        });
+        axios.post('/api/save/replacement/' + data.group_id + '/' + data.date, {"replacement": data.replacement})
+        .then(res => {this.showMessage('Замена сохранена!');})
+        .catch(ex => {this.showError("Ошибка выполнения: " + ex);});
     },
 
     //*Логическое удаление замены
@@ -101,6 +111,8 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     deleteReplacement(replacement_id) {
-        return axios.post('/api/delete/replacement/' + replacement_id);
+        axios.post('/api/delete/replacement/' + replacement_id)
+        .then(res => {this.showMessage("Удалена!"); return true;})
+        .catch(ex => {this.showError("Ошибка выполнения: " + ex); return false;});
     },
 }

@@ -1,8 +1,10 @@
 //Api для работы с ролями системы
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -10,7 +12,7 @@ export default {
      * id - BIGINT
      * name - string - not null
      * slud - string - not null
-     * privilegie - json not null
+     * privilegie - json - not null
      */
     //*----------------------------------------
     
@@ -46,7 +48,9 @@ export default {
     //! Отсутсвуют
     //!---------------------------------------
     getPostsFull() {
-        return axios.get('/api/getters/posts_full');
+        return axios.get('/api/getters/posts_full')
+        .then(result => { return result.data.posts;})
+        .catch(exception => { this.showError("Произошёл сбой: " + exception); return undefined;});
     },
     
     //*Получение роли
@@ -58,6 +62,75 @@ export default {
     //!----------------------------------------
     getPost(id) {
         return axios.get('/api/admin/getters/posts' + id);
+    },
+    
+    //*Сохранение роли
+    //! Комментарий ---------------------------
+    //? Реализуется запись данных в таблицу *USERSPOST* (Роли)
+    //! Требование ----------------------------
+    //! Реализовать back-end для api
+    //!----------------------------------------
+    savePost(post) {
+        axios.get('/api/admin/getters/save', {
+            "post": post
+        }).then(result => {
+            this.showMessage("Действие выполнено успешно");
+        })
+        .catch(exception => {
+            this.showError("Произошёл сбой: " + exception);
+        });
+    },
+
+    //*Удаление роли
+    //! Комментарий ---------------------------
+    //? Реализуется удаление данных из таблицы *USERSPOST* (Роли)
+    //? Передаётся id в функцию
+    //! Требование ----------------------------
+    //! Реализовать back-end для api
+    //!----------------------------------------
+    deletePost(post_id) {
+        axios.post('/api/admin/***/delete/' + post_id)
+        .then(result => {
+            this.showMessage("Действие выполнено успешно");
+        })
+        .catch(exception => {
+            this.showError("Произошёл сбой: " + exception);
+        });
+    },
+
+    //*Редактирование роли
+    //! Комментарий ---------------------------
+    //? Реализуется редактирование данных в таблице *USERSPOST* (Роли)
+    //? Передаётся ОДИН экземпляр записи 
+    //! Требование ----------------------------
+    //! Реализовать back-end для api
+    //!----------------------------------------
+    editPost(post) {
+        axios.post('/api/admin/***/edit/', {
+            "user": post
+        }).then(result => {
+            this.showMessage("Действие выполнено успешно");
+        })
+        .catch(exception => {
+            this.showError("Произошёл сбой: " + exception);
+        });
+    },
+
+    //*Логическое удаление роли
+    //! Комментарий ---------------------------
+    //? Реализуется стирание данных в таблице *USERSPOST* (Роли) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
+    //! Требование ----------------------------
+    //! Реализовать back-end для api
+    //!----------------------------------------
+    dropPosts()
+    {
+        axios.post('/api/admin/***/deleteAll')
+        .then(result => {
+            this.showMessage("Действие выполнено успешно");
+        })
+        .catch(exception => {
+            this.showError("Произошёл сбой: " + exception);
+        });
     },
 }
 

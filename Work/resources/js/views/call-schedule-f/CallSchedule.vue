@@ -27,12 +27,5 @@ export default {
       default: null
     }
   },
-
-  methods: {
-    update()
-    {
-      
-    }
-  }
 };
 </script>

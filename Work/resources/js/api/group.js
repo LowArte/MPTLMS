@@ -11,11 +11,6 @@
  * 
  */
 
-//! Метод 
-/**
- * 
- */
-
 import axios from 'axios'
 
 export default {
@@ -33,8 +28,6 @@ export default {
     //*----------------------------------------
 
 
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -46,7 +39,13 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getGroups() {
-        return axios.get('/api/getters/groups');
+        return axios.get('/api/getters/groups')
+            .then(result => {
+                return result.data.groups;
+            })
+            .catch(exception => {
+                return null
+            });
     },
 
     //*Получение групп по id отделению
@@ -57,11 +56,14 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getGroupsByDepartamentId(department_id) {
-        return axios.get('/api/getters/group_by_departament_id/' + department_id);
+        axios.get('/api/getters/group_by_departament_id/' + department_id)
+            .then(result => {
+                return result.data.groups_info.groups;
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     },
-
-
-
 
     //*----------------------------------------
     //!         Работа с данными
@@ -74,9 +76,15 @@ export default {
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
     saveGroup(group) {
-        return axios.post('/api/admin/group_management/save', {
-            "group": group
-        });
+        axios.post('/api/admin/group_management/save', {
+                "group": group
+            })
+            .then(res => {
+                this.showMessage("Действие выполнено успешно!");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     },
 
     //*Редактирование группы
@@ -87,9 +95,15 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editGroup(group) {
-        return axios.post('/api/admin/group_management/edit/' + group.id, {
-            "group": group
-        });
+        axios.post('/api/admin/group_management/edit/' + group.id, {
+                "group": group
+            })
+            .then(res => {
+                this.showMessage("Действие выполнено успешно");
+            })
+            .catch(exception => {
+                this.showError("Произошел сбой: " + exception);
+            });
     },
 
     //*Логическое удаление группы
@@ -100,7 +114,13 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deleteGroup(group_id) {
-        return axios.post('/api/admin/group_management/delete/' + group_id);
+        axios.post('/api/admin/group_management/delete/' + group_id)
+            .then(result => {
+                this.showMessage("Действие выполнено успешно!");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбоё: " + exception);
+            });
     },
 
     //*Логическое удаление всех записей
@@ -110,6 +130,12 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     dropGroups() {
-        return axios.post('/api/admin/group_management/deleteAll');
+        axios.post('/api/admin/group_management/deleteAll')
+            .then(res => {
+                this.showMessage("Действие выполнено успешно");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     }
 }

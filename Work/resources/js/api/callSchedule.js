@@ -12,8 +12,10 @@
  */
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -37,9 +39,9 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     edit(callSchedule) {
-        return axios.post('/api/edit/callschedule', {
-            'callSchedule': callSchedule
-        });
+        axios.post('/api/edit/callschedule', {'callSchedule': callSchedule})
+        .then(res => {return res.data.timeTable;})
+        .catch(ex => {this.showError("Произошла ошибка при получении данных: " + ex);});
     },
 
     //*Получение расписания звонков
@@ -49,16 +51,20 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getCallSchedule() {
-        return axios.get('/api/getters/get_call_schedule');
+        axios.get('/api/getters/get_call_schedule')
+        .then(res => {return res.data.places;})
+        .catch(ex => {this.showError("Ошибка получения данных: " + ex);});
     },
 
     //*Получение расписания звонков для панели
     //! Комментарий ---------------------------
-    //? Реализуется редактирование данных в таблицe *CALLSHEDULE* (Расписание звонков)
+    //? Реализуется получения данных в таблицe *CALLSHEDULE* (Расписание звонков)
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
     getCallScheduleForPanel() {
-        return axios.get('/api/getters/get_call_schedule_for_panel');
+        axios.get('/api/getters/get_call_schedule_for_panel')
+        .then(res => {return res.data.panel_array;})
+        .catch(ex => {this.showError('Ошибка получения данных: ' + ex);});
     }
 }

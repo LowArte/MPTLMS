@@ -17,8 +17,14 @@
  */
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
+import {
+    resetRouter
+} from "@/js/router/router";
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -40,7 +46,13 @@ export default {
     //! Отсутсвуют
     //!----------------------------------------
     getUsers() {
-        return axios.get('/api/getters/users');
+        return axios.get('/api/getters/users').then(result => {
+                return result.data.users;
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой:  " + exception);
+                return undefined
+            });
     },
 
     //*Получение пользователей
@@ -67,9 +79,14 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     saveUser(user) {
-        return axios.post('/api/admin/user_management/save', {
-            "user": user
-        });
+        axios.post('/api/admin/user_management/save', {
+                "user": user
+            }).then(result => {
+                this.showMessage("Действие выполнено успешно");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     },
 
     //*Удаление пользователя
@@ -80,7 +97,13 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     deleteUser(user_id) {
-        return axios.post('/api/admin/user_management/delete/' + user_id);
+        axios.post('/api/admin/user_management/delete/' + user_id)
+            .then(result => {
+                this.showMessage("Действие выполнено успешно");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     },
 
     //*Редактирование пользователя
@@ -91,9 +114,14 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editUser(user) {
-        return axios.post('/api/admin/user_management/edit/', {
-            "user": user
-        });
+        axios.post('/api/admin/user_management/edit/', {
+                "user": user
+            }).then(result => {
+                this.showMessage("Действие выполнено успешно");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     },
 
     //*Логическое удаление пользователей
@@ -102,21 +130,80 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropUsers() //!Требуется сделать рабочим
-    {
-        return axios.post('/api/admin/user_management/deleteAll');
+    dropUsers() {
+        axios.post('/api/admin/user_management/deleteAll')
+            .then(result => {
+                this.showMessage("Действие выполнено успешно");
+            })
+            .catch(exception => {
+                this.showError("Произошёл сбой: " + exception);
+            });
     },
 
-    login(data)
-    {
-        return axios.post('/login',data)
+    login(data) {
+        return axios.post('/login', data).then(res => {
+            const slug = res.data.user.post.slug;
+            const items = this.makeRoutes(res.data.user.post.privilegies,slug);
+            const user = res.data.user;
+            const token = res.data.token;
+            return {
+                items,
+                slug,
+                user,
+                token
+            }
+        }).catch(ex => {
+            console.log(ex)
+            return undefined;
+        })
     },
 
-    init(){
+    init() {
         return axios.post('/getToken')
     },
 
-    logout(){
-        return axios.post('/logout')
+    logout() {
+        axios.post('/logout').then(res => {
+            resetRouter()
+            this.$store.commit(mutations.SET_NOTAUTH)
+            this.$router.push("/")
+        }).catch(ex => {});
+    },
+
+    makeRoutes(privilegies,slug) {
+        let items = [];
+        privilegies.forEach(element => {
+            if (element.children) {
+                element.children.forEach(child => {
+                    if (child.component != null)
+                        items.push({
+                            path: "/" + slug + "/" + child.component.info.url,
+                            name: child.component.info.name,
+                            meta: {
+                                layout: "main"
+                            },
+                            component: () =>
+                                import(
+                                    /* webpackChunkName: "[request]" */
+                                    `@/${child.component.path}.vue`
+                                )
+                        });
+                });
+            } else {
+                items.push({
+                    path: "/" + slug + "/" + element.component.info.url,
+                    name: element.component.info.name,
+                    meta: {
+                        layout: "main"
+                    },
+                    component: () =>
+                        import(
+                            /* webpackChunkName: "[request]" */
+                            `@/${element.component.path}.vue`
+                        )
+                });
+            }
+        });
+        return items;
     }
 }
