@@ -25,37 +25,39 @@
             v-card-subtitle.px-0.pt-0.pb-0 {{schedule[day_key].Place.place_name}} 
             v-divider
             v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule[day_key]" :key="'l'+lesson_index")
-                v-container.pa-0.ma-0(v-if="lesson.chisl == false") <!--Прорисовка обычной пары-->
+                v-container.pa-0.ma-0(v-if="lesson.chisl == false && lesson_index != 'Place'") <!--Прорисовка обычной пары-->
                   v-container.pa-0.ma-0(v-if="lesson.LessonChisl != null && lesson.LessonChisl != ''")
+                    v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                     v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                     v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
-                v-container.pa-0.ma-0(v-else) <!--Прорисовка числителя/знаменателя-->
+                v-container.pa-0.ma-0(v-else-if="lesson_index != 'Place'") <!--Прорисовка числителя/знаменателя-->
                   v-container.pa-0.ma-0(v-if="isToday == 0 && (lesson.LessonChisl !='' || lesson.LessonZnam !='')")
+                    v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                     v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                     v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
-                    v-expansion-panels.pa-0(v-if="lesson.LessonZnam!= null")                    
+                    v-expansion-panels.pa-0(v-if="lesson.LessonZnam!= null && lesson.LessonZnam != ''" style="z-index: initial;")                    
                       v-expansion-panel.pa-0
                           v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
                           v-expansion-panel-content.px-0.mx-0(v-if="lesson.LessonZnam != ''")
                             v-card-text.pa-0.wrap.text-black {{ lesson.LessonZnam }} 
                             v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
                           v-expansion-panel-content.px-0.mx-0(v-else)
-                            v-card-text.pa-0.wrap.text-black Отсутствует 
+                            v-card-text.pa-0.wrap.text-black Отсутствует
                   v-container.pa-0.ma-0(v-else-if="lesson.LessonChisl !='' || lesson.LessonZnam !=''")
+                    v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                     v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                     v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam}} 
                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
-                    v-expansion-panels.pa-0(v-if="lesson.LessonChisl!= null && lesson.LessonChisl != ''")                    
+                    v-expansion-panels.pa-0(v-if="lesson.LessonChisl!= null && lesson.LessonChisl != ''" style="z-index: initial;")                    
                       v-expansion-panel.pa-0
                           v-expansion-panel-header.px-1.py-0 {{ isToday == 0 ? "Знаменатель" :"Числитель" }}                 
                           v-expansion-panel-content.px-0.mx-0(v-if="lesson.LessonChisl != ''")
                             v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl }} 
                             v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
                           v-expansion-panel-content.px-0.mx-0(v-else)
-                            v-card-text.pa-0.wrap.text-black Отсутствует 
-                v-divider.ma-0.mt-1
+                            v-card-text.pa-0.wrap.text-black Отсутствует
 </template>
 
 <style scoped>

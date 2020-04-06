@@ -24,7 +24,7 @@
                     v-card-text Кажется у нас проблемы, Хюстон! 
                     v-card-actions
                         v-spacer
-                        v-btn(x-small text) Обрнатно на помойку
+                        v-btn(x-small text) Обратно на помойку
                         v-spacer
                                                 
 </template>
