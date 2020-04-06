@@ -242,7 +242,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
-                                        "url"=> "warning"
+                                        "url"=> "exams"
                                     ],
                                     "path" => "js/views/other-f/Warning"
                                 ],
@@ -253,7 +253,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
-                                        "url"=> "warning"
+                                        "url"=> "progress"
                                     ],
                                     "path" => "js/views/other-f/Warning"
                                 ],
@@ -264,7 +264,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
-                                        "url"=> "warning"
+                                        "url"=> "homework"
                                     ],
                                     "path" => "js/views/other-f/Warning"
                                 ],
@@ -275,7 +275,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
-                                        "url"=> "warning"
+                                        "url"=> "teachers"
                                     ],
                                     "path" => "js/views/other-f/Warning"
                                 ],
@@ -304,7 +304,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
-                                        "url"=> "warning"
+                                        "url"=> "psych"
                                     ],
                                     "path" => "js/views/other-f/Warning"
                                 ],
@@ -318,7 +318,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "warning",
-                                "url"=> "warning"
+                                "url"=> "datastorage"
                             ],
                             "path" => "js/views/other-f/Warning"
                         ],  
@@ -330,7 +330,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "warning",
-                                "url"=> "warning"
+                                "url"=> "plants"
                             ],
                             "path" => "js/views/other-f/Warning"
                         ],
@@ -374,25 +374,25 @@ class PostUserSeeder extends Seeder
                         "children" => [
                             [
                                 "id" => uniqid(),
-                                "text" => "Учебное раписание",
+                                "text" => "Расписание занятий",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
-                                        "url"=> "warning"
+                                        "name" => "Расписание занятий",
+                                        "url"=> "timetable"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
-                                ],
+                                    "path" => "js/views/timetable-f/Timetable"
+                                ], 
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
-                                        "url"=> "warning"
+                                        "name" => "Изменения в расписании",
+                                        "url"=> "replacements"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
-                                ],
+                                    "path" => "js/views/replacements-f/Replacements"
+                                ], 
                             ],
                         ],
                     ],
@@ -403,7 +403,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "warning",
-                                "url"=> "warning"
+                                "url"=> "journals"
                             ],
                             "path" => "js/views/other-f/Warning"
                         ],   
@@ -609,7 +609,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "warning",
-                                "url"=> "warning"
+                                "url"=> "news-constructor"
                             ],
                             "path" => "js/views/other-f/Warning"
                         ],
@@ -623,7 +623,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "warning",
-                                "url"=> "warning"
+                                "url"=> "news-statistics"
                             ],
                             "path" => "js/views/other-f/Warning"
                         ],
