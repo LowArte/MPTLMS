@@ -58,15 +58,9 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
-    update() {
-      api
-        .getUsers()
-        .then(result => {
-          this.$refs.crud.refresh(result.data.users);
-        })
-        .catch(exception => {
-          this.showError("Ошибка обновления! " + exception);
-        });
+    async update() {
+      let data = await api.getUsers();
+      return data
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -74,16 +68,9 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api
-            .saveUser(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Ошибка выполнения! " + exception);
-            });
+          api.saveUser(result);
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     },
@@ -93,19 +80,10 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api
-            .editUser(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError(
-                "Действие было отклонено в следствии: " + exception
-              );
-            });
-          this.showMessage("Действие было выполнено успешно!");
+          api.editUser(result);
+          this.showMessage("Действие выполнено успешно");
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     },
@@ -115,16 +93,9 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api
-            .dropUsers()
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError("Ошибка выполнения! " + exception);
-            });
+          api.dropUsers();
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     },
@@ -134,18 +105,9 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api
-            .deleteUser(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError(
-                "Действие не было выполнено! " + exception
-              );
-            });
+          api.deleteUser(result);
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     }

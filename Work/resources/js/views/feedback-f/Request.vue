@@ -106,33 +106,18 @@ export default {
       });
     },
     sendQuery(email) {
-      feedbackApi
-        .sendEmail({
-          mail: email,
-          text: this.modelmessage,
-          id: this.expanded[0].id
-        })
-        .then(result => {
-          this.showMessage("Сообщение отправлено");
-          this.items.splice(this.expanded[0]);
-        })
-        .catch(ex => {
-          this.showError("Произошла следующая ошибка! " + ex);
-        });
-      this.modelmessage = "";
+      if (feedbackApi.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}))
+      {
+         this.items.splice(this.expanded[0]);
+         this.modelmessage = "";
+      }
+      
     },
 
     //Получение обращений пользователя
     Update() 
     {
-        feedbackApi
-          .getFeedbackRequests()
-          .then(res => {
-            this.items = res.data.feedback;
-          })
-          .catch(ex => {
-            this.showError("Произошла ошибка! " + ex);
-          });
+        this.items = feedbackApi.getFeedbackRequests();
     }
   }
 };

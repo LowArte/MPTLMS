@@ -46,17 +46,8 @@ export default {
   {
     sendQuery() 
     {
-      feedbackApi
-        .save({ type: this.thematic, text: this.modelmessage })
-        .then(res => {
-          this.showMessage(
-            "Ваше обращение будет рассмотрено в ближайшее время"
-          );
-          this.modelmessage = "";
-        })
-        .catch(ex => {
-          this.showError("Что-то пошло не так " + ex);
-        });
+      if(feedbackApi.save({ type: this.thematic, text: this.modelmessage }))
+        this.modelmessage = "";        
     }
   }
 };

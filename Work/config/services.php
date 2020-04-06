@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'passport' => [
+        'id' => env('VUE_CLIENT_ID'),
+        'secret' => env('VUE_CLIENT_SECRET'),
+        'end_point' => env('VUE_LOGIN_ENDPOINT'),
+    ],
+
 ];

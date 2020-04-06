@@ -68,86 +68,50 @@ export default {
 
   methods: 
   {
-    //Получение всех дисциплин
-    getDisciplines()
-    {
-      discipline_api
-        .getDisciplines()
-        .then(res => {
-          this.disciplines = res.data.disciplines;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
-    },
-
     //Получение всех преподавателей
     getTeachers()
     {
-      teacher_api
-        .getTeachers()
-        .then(res => {
-          this.teachers = res.data.teachers;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+        this.teachers = teacher_api.getTeachers();
+    },
+
+    //Получение всех дисциплин
+    getDisciplines()
+    {
+        this.disciplines = discipline_api.getDisciplines();
     },
 
     //Получение мест проведений
     getPlaces()
     {
-      places_api
-        .getPlaces()
-        .then(res => {
-          this.places = res.data.places;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.places = places_api.getPlaces();
     },
 
     //Получение отделений
     getDepartament()
     {
-      departament_api
-        .getDepartmentsForCombobox()
-        .then(res => {
-          this.departaments_info.departaments = res.data.departaments;
-          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
-          this.departament_change();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.departaments_info.departaments = departament_api.getDepartmentsForCombobox();
+      if(this.departaments_info.departaments)
+      {
+        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.departament_change();
+      }
     }, 
 
     //Событие при изменении отделении
     departament_change() 
     {
-      group_api
-        .getGroupsByDepartamentId(this.departaments_info.selected_departament.id)
-        .then(res => {
-          this.groups_info.groups = res.data.groups_info.groups;
-          this.groups_info.selected_group = this.groups_info.groups[0];
-          this.group_change();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.groups_info.groups = group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
+      if(this.groups_info.groups)
+      {
+        this.groups_info.selected_group = this.groups_info.groups[0];
+        this.group_change();
+      }
     },
 
     //Событие при изменении группы
     group_change() 
     {
-      schedule_api
-        .getScheduleBildByGroupId(this.groups_info.selected_group.id)
-        .then(res => {
-          this.schedule = res.data.schedule;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.schedule = schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id);
     },
 
     //Отправка учебного расписания на сохранение
@@ -155,15 +119,12 @@ export default {
     {
       if (this.$refs.BildTimetable.validate())
       {
-        schedule_api
-          .editSchedule({group_id: this.groups_info.selected_group.id, schedule: this.schedule, slug: this._slug, controller: this._controller})
-          .then(res => {
-            this.showMessage('Расписание сохранено!');
-          })
-          .catch(ex => {
-            this.showError('Расписание не сохранено! ' + ex);
-          });
-        this.group_change();
+        if (schedule_api.editSchedule(
+        {
+          group_id: this.groups_info.selected_group.id, 
+          schedule: this.schedule,
+        }))
+          this.group_change();
       }
       else
         this.showError('Поля заполнены не корректно!');

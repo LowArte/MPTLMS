@@ -55,27 +55,14 @@ export default {
     //Получение мест проведений
     getPlaces()
     {
-      places_api
-        .getPlaces()
-        .then(res => {
-          this.places = res.data.places;
-          this.mplace = this.places[0].id;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.places = places_api.getPlaces();
+      if (this.places != null)
+        this.mplace = this.places[0].id;
     },
 
     getCallSchedule()
     {
-      callSchedule_api
-        .getCallSchedule()
-        .then(res => {
-          this.timeTable = res.data.timeTable;
-        })
-        .catch(ex => {
-          this.showError("Произошла ошибка при получении данных! " + ex);
-        });
+      this.timeTable = callSchedule_api.getCallSchedule();
     },
 
     sendQuery() 

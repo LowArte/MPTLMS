@@ -78,102 +78,48 @@ export default {
     //Получение отделений
     getDepartament()
     {
-      departament_api
-        .getDepartmentsForCombobox()
-        .then(res => {
-          this.departaments_info.departaments = res.data.departaments;
-          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
-          this.departament_change();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.departaments_info.departaments = departament_api.getDepartmentsForCombobox();
+      if(this.departaments_info.departaments != null)
+      {
+        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.departament_change();
+      }
     }, 
-
-    //Удаление замены
-    deleteItem(id) {
-      this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) {
-          replacements_api
-            .deleteReplacement(id)
-            .then(res => {
-              this.showMessage("Удалена!");
-              this.changeFilter();
-            })
-            .catch(ex => {
-              this.showError(ex);
-            });
-        } else {
-          this.showInfo("Действие было отменено");
-        }
-      });
-    },
 
     //Получение групп для отделения
     departament_change() {
-      group_api
-        .getGroupsByDepartamentId(
-          this.departaments_info.selected_departament.id
-        )
-        .then(res => {
-          this.groups_info.groups = res.data.groups_info.groups;
-          this.groups_info.selected_group = this.groups_info.groups[0];
-          this.changeFilter();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+      this.groups_info.groups = group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
+      if(this.groups_info.groups != null)
+      {
+        this.groups_info.selected_group = this.groups_info.groups[0];
+        this.changeFilter();
+      }
     },
 
     //Получение замен с учётом фильтров
     changeFilter() {
-      if (this.checkAllGroup && this.checkAllDate) {
+      if (this.checkAllGroup && this.checkAllDate) 
         //Получить все замены для всех дат и групп
-        replacements_api
-          .getReplacements()
-          .then(res => {
-            this.replacements = res.data.replacements;
-            this.parseReplacement();
-          })
-          .catch(ex => {
-            this.showError(ex);
-          });
-      } else if (this.checkAllGroup) {
+        this.replacements = replacements_api.getReplacements()
+      else 
+      if (this.checkAllGroup) 
         //Получить замены для всех групп
-        replacements_api
-          .getReplacementsByDate(this.dateDialog.date)
-          .then(res => {
-            this.replacements = res.data.replacements;
-            this.parseReplacement();
-          })
-          .catch(ex => {
-            this.showError(ex);
-          });
-      } else if (this.checkAllDate) {
+        this.replacements = replacements_api.getReplacementsByDate(this.dateDialog.date)
+      else 
+      if (this.checkAllDate) 
         //Получить все замены для всех дат
-        replacements_api
-          .getReplacementsByGroup(this.groups_info.selected_group.id)
-          .then(res => {
-            this.replacements = res.data.replacements;
-            this.parseReplacement();
-          })
-          .catch(ex => {
-            this.showError(ex);
-          });
-      } else {
-        replacements_api
-          .getReplacementsByGroupByDate({
-            group_id: this.groups_info.selected_group.id,
-            date: this.dateDialog.date
-          })
-          .then(res => {
-            this.replacements = res.data.replacements;
-            this.parseReplacement();
-          })
-          .catch(ex => {
-            this.showError(ex);
-          });
+        this.replacements = replacements_api.getReplacementsByGroup(this.groups_info.selected_group.id);
+      else 
+      {
+        this.replacements = replacements_api.getReplacementsByGroupByDate(
+        {
+          group_id: this.groups_info.selected_group.id,
+          date: this.dateDialog.date
+        });
       }
+
+      if (this.replacements != null)
+          this.parseReplacement();
     },
 
     //Перевод массив для вывода

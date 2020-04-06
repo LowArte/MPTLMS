@@ -56,15 +56,9 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
-    update() {
-      api
-        .getDepartments()
-        .then(result => {
-          this.$refs.crud.refresh(result.data.departments);
-        })
-        .catch(exception => {
-          this.showError("Ошибка обновления! " + exception);
-        });
+    async update() {
+      let data = await api.getDepartments();
+      return data
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -72,16 +66,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api
-            .saveDepartment(result)
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError(
-                "Сохранение не было произведено по причине: " + exception
-              );
-            });
+          api.saveDepartment(result);
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -93,16 +78,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api
-            .editDepartment(item)
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError(
-                "Сохранение не было произведено по причине: " + exception
-              );
-            });
+          api.editDepartment(item);
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -114,14 +90,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api
-            .dropDepartments()
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError("Ошибка выполнения! " + exception);
-            });
+          api.dropDepartments();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -133,17 +102,8 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api
-            .deleteDepartment(item.id)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно!");
-              this.update();
-            })
-            .catch(exception => {
-              this.showError(
-                "Удаление не было произведено по причине: " + exception
-              );
-            });
+          api.deleteDepartment(item.id);
+          this.update();
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

@@ -13,14 +13,13 @@ export default {
       type: String,
       default: "Личный кабинет"
     },
-    _isProfilactic:{
+    _is_profilactic:{
       type:Boolean,
       default:false
     }
   },
   mounted(){
-    console.log(this._isProfilactic)
-    this.$store.commit(mutations.SET_SERVER,{isProfilactic:this._isProfilactic,name:this._name})
+    this.$store.commit(mutations.SET_SERVER,{isProfilactic:this._is_profilactic,name:this._name})
   },
 };
 </script>

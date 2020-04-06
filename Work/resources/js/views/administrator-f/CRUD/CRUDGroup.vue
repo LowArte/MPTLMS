@@ -56,15 +56,15 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
-    update() {
-      api
-        .getGroups()
-        .then(result => {
-          this.$refs.crud.refresh(result.data.groups);
-        })
-        .catch(exception => {
-          this.showError("Ошибка обновления! " + exception);
-        });
+    async update() {
+      let data = await api.getGroups();
+      if (data) {
+        return data;
+      }
+      else {
+        this.showError("Произошёл сбой");
+        return null;
+      }
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -72,18 +72,9 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api
-            .saveGroup(result)
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError(
-                "Сохранение не было произведено по причине: " + exception
-              );
-            });
+          api.saveGroup(result);
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -93,18 +84,9 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api
-            .editGroup(result)
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError(
-                "Сохранение не было произведено по причине: " + exception
-              );
-            });
+          api.editGroup(result);
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -114,16 +96,9 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api
-            .dropGroups()
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError("Ошибка выполнения! " + exception);
-            });
+          api.dropGroups();
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -133,18 +108,9 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api
-            .deleteGroup(item.id)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError(
-                "Удаление не было произведено по причине: " + exception
-              );
-            });
+          api.deleteGroup(item.id);
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     }

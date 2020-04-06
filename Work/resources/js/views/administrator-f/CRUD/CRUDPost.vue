@@ -45,24 +45,16 @@ export default {
     "c-remove-dialog": removeDialog_C
   },
   data: () => ({
-    headers: [
-      { text: "Наименование", value: "name" }
-    ]
+    headers: [{ text: "Наименование", value: "name" }]
   }),
 
   methods: {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
-    update() {
-      api
-        .getPostsFull()
-        .then(result => {
-          this.$refs.crud.refresh(result.data.posts);
-        })
-        .catch(exception => {
-          this.showError("Ошибка обновления! " + exception);
-        });
+    async update() {
+      let data = await api.getPostsFull();
+      return data
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -70,16 +62,9 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api
-            .savePost(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Действие было отклонено по причине: " + exception);
-            });
+          api.savePost(result);
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     },
@@ -89,16 +74,9 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api
-            .editPost(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Действие было отклонено по причине: " + exception);
-            });
+          api.editPost(result);
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     },
@@ -108,16 +86,9 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api
-            .dropPosts()
-            .then(res => {
-              this.showMessage("Действие было выполнено успешно!");
-            })
-            .catch(exception => {
-              this.showError("Ошибка выполнения! " + exception);
-            });
+          api.dropPosts();
         } else {
-          this.showInfo("Действие было отменено пользователем!");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -127,16 +98,9 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api
-            .deletePost(result)
-            .then(result => {
-              this.showMessage("Действие было выполнено успешно");
-            })
-            .catch(exception => {
-              this.showError("Действие было отклонено по причине: " + exception);
-            });
+          api.deletePost(result);
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие отменено пользователем");
         }
       });
     }

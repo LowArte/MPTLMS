@@ -96,8 +96,7 @@ export default {
   {
     sendQuery() 
     {
-      cerificateApi
-        .save({
+      if (cerificateApi.save({
           data: {
             "Год поступления": this.yearmpt,
             "Школа": this.school,
@@ -105,17 +104,9 @@ export default {
             "Успеваемость": this.modelprogress,
             "Куда нужна характеристика": this.modelorder
           },
-          type: "Характеристика", 
-          slug: "student"
-        })
-        .then(res => {
-          this.showMessage("Характеристика сохранена");
+          type: "Характеристика"
+        }))
           this.cleardata();
-        })
-        .catch(exp => {
-          this.showError("Произошла ошибка");
-          this.cleardata();
-        });
     },
 
     cleardata() {

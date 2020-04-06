@@ -41,7 +41,7 @@ import apigroup from "@/js/api/group";
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
@@ -88,33 +88,12 @@ export default {
     };
   },
   mounted() {
-    apiposts
-      .getPostsFull()
-      .then(result => {
-        this.posts = result.data.posts;
-      })
-      .catch(ex => {
-        this.showInfo("Данные не получены в следствии: " + ex);
-      });
-    
-    if(this.item.post_id == 2) //!Требуется вызывать данное условие ПРИ ОТКРЫТИИ диалога, а не в mounted. Mounted срабатывает сразу при загрузке страницы
-    {
-      apidepartments
-        .getDepartments()
-        .then(result => {
-          this.departaments = result.data.departments;
-        })
-        .catch(ex => {
-          this.showInfo("Данные не получены в следствии: " + ex);
-        });
-      apigroup
-        .getGroupsByDepartamentId(this.item.dep_id)
-        .then(result => {
-          this.groups = result.data.groups_info.groups;
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
+    this.posts = apiposts.getPostsFull();
+
+    if (this.item.post_id == 2) {
+      //!Требуется вызывать данное условие ПРИ ОТКРЫТИИ диалога, а не в mounted. Mounted срабатывает сразу при загрузке страницы
+      this.departaments = apidepartments.getDepartments();
+      this.groups = apigroup.getGroupsByDepartamentId(this.item.dep_id);
     }
   },
   methods: {
@@ -126,8 +105,7 @@ export default {
       });
     },
     clickEdit() {
-      if (this.$refs.form.validate()) 
-      {
+      if (this.$refs.form.validate()) {
         this.dialog = false;
         this.resolve(this.item);
       } else {

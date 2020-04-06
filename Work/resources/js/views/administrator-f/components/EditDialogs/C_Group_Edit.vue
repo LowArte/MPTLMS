@@ -32,7 +32,7 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 //?----------------------------------------------
 //!           Подключение api для получения отделений
@@ -56,7 +56,9 @@ export default {
       resolve: null,
       codeRules: [
         v => !!v || "Поле не должно оставаться пустым",
-        v => /^[A-Z && А-Я && 0-9]*$/.test(v) || "Только буквы в верхнем регистре или целочисленные значения (0-9)"
+        v =>
+          /^[A-Z && А-Я && 0-9]*$/.test(v) ||
+          "Только буквы в верхнем регистре или целочисленные значения (0-9)"
       ],
       countRules: [
         v => !!v || "Поле не должно оставаться пустым",
@@ -71,16 +73,9 @@ export default {
     };
   },
 
-  beforeMount(){
-      apiDepartment
-        .getDepartmentsForCombobox()
-        .then(res => {
-          this.departaments = res.data.departaments;
-        })
-        .catch(ex => {
-          this.showError('Отделения не получены! ' + ex);
-        });
-    },
+  beforeMount() {
+    this.departaments = apiDepartment.getDepartmentsForCombobox();
+  },
 
   methods: {
     pop(item) {
@@ -91,8 +86,7 @@ export default {
       });
     },
     clickEdit() {
-      if (this.$refs.form.validate()) 
-      {
+      if (this.$refs.form.validate()) {
         this.dialog = false;
         this.resolve(this.item);
       } else {

@@ -17,8 +17,10 @@
  */
 
 import axios from 'axios'
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -42,7 +44,9 @@ export default {
     //! Отсутсвуют
     //!----------------------------------------
     getScheduleByGroupId(group_id) {
-        return axios.get('/api/getters/schedule_by_group_id/' + group_id);
+        axios.get('/api/getters/schedule_by_group_id/' + group_id)
+        .then(res => {return res.data.schedule;})
+        .catch(ex => {this.showError("Произошла ошибка" + ex);});
     },
 
     //*Получение учебного расписания для группы
@@ -53,7 +57,9 @@ export default {
     //! А нужно ли, если есть метод выше?
     //!----------------------------------------
     getScheduleBildByGroupId(group_id) {
-        return axios.get('/api/getters/schedule_bild_by_group_id/' + group_id);
+        axios.get('/api/getters/schedule_bild_by_group_id/' + group_id)
+        .then(res => {return res.data.schedule;})
+        .catch(ex => {this.showError("Произошла ошибка" + ex);});
     },
 
     //*----------------------------------------
@@ -66,8 +72,8 @@ export default {
     //! Отсутсвуют 
     //!----------------------------------------
     editSchedule(data) {
-        return axios.post('/api/edit/schedule/' + data.group_id, {
-            "schedule": data.schedule
-        });
+        return axios.post('/api/edit/schedule/' + data.group_id, {"schedule": data.schedule})
+        .then(res => {this.showMessage('Расписание сохранено!');return true;})
+        .catch(ex => {this.showError('Произошла ошибка: ' + ex);return false;});
     }
 }
