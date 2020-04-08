@@ -1,7 +1,7 @@
 <template lang="pug">
     v-layout.row.wrap
       v-card.mx-auto.pa-3(height='auto' width='100%')
-        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="flood" :items="flood" :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
+        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="flood" :items="flood" :search="search" sort-by-text="Сортировать" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
                 v-card-title.my-2.ma-0.py-2.text-truncate Менеджмент {{title}}
                 v-tooltip(bottom v-if="_func_add != null")
@@ -122,7 +122,6 @@ export default {
 
   async beforeMount() {
     await this.update();
-    console.log("MOUNTED")
   },
 
   methods: {
@@ -144,7 +143,6 @@ export default {
 
     async update() {
       this.flood = await this._func_update();
-      console.log("UPDATE")
     },
 
     upload() {

@@ -12,7 +12,7 @@
             router-link(class='nounderline' to="/") 
               v-btn(color="accent" text) ОТМЕНА
             v-spacer
-            v-btn(@click="login" color="blue darken-1" text) ВОЙТИ
+            v-btn(@click="login" color="blue darken-1" text :loading="loading" :disabled="loading") ВОЙТИ
         v-bottom-sheet.pa-3(v-model="sheet" scrollable max-height="300px")
           template(v-slot:activator="{ on }")
             v-btn(text block x-small color="primary font-weight-light" v-on="on") Проблемы со входом?
@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       sheet: false,
+      loading: false,
       email: "",
       password: "",
       emailRules: [
@@ -59,6 +60,7 @@ export default {
       return require(`@img/${path}`);
     },
     async login() {
+      this.loading = true;
       if (this.$refs.Login.validate()) {
         let info = await user_api.login({
           email: this.email,
@@ -75,6 +77,7 @@ export default {
           this.showError("Не верные данные");
         }
       } else this.showError("Поля заполнены не корректно");
+      this.loading = false;
     }
   }
 };

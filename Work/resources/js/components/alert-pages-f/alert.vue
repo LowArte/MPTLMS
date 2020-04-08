@@ -24,7 +24,8 @@
                     v-card-text Кажется у нас проблемы, Хюстон! 
                     v-card-actions
                         v-spacer
-                        v-btn(x-small text) Обратно в интернет
+                        router-link(to="/") 
+                          v-btn(x-small text) Обратно в интернет
                         v-spacer
                                                 
 </template>

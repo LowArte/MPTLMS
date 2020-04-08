@@ -56,7 +56,7 @@ export default {
     //!           Обновление
     //?----------------------------------------------
     async update() {
-      let data = await api.getPlaces();
+      let data = await api.getPlaces(this);
       return data
     },
     //?----------------------------------------------
@@ -65,7 +65,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.savePlace(result);
+          api.savePlace(result, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }
@@ -77,7 +77,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editPlace(result);
+          api.editPlace(result, this);
         } else {
           this.showInfo("Действие было отменено пользователем");
         }
@@ -89,7 +89,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api.dropPlaces();
+          api.dropPlaces(this);
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -101,7 +101,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deletePlace(item.id);
+          api.deletePlace(item.id, this);
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

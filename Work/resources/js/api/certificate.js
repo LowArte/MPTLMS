@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -39,10 +37,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!----------------------------------------
-    getCertificates() {
-        axios.get('/api/getters/get_certificates')
+    getCertificates(_this) {
+        return axios.get('/api/getters/get_certificates')
         .then(res => {return res.data.certificates;})
-        .catch(ex => {this.showError("Произошла ошибка получения данных: " + ex);});
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 
 
@@ -57,16 +55,10 @@ export default {
     //! Требование ----------------------------
     //! Уточнить структуру данных. 
     //!----------------------------------------
-    save(data) {
+    save(data, _this) {
         return axios.post('/api/student/certificate/save', {"data": data.data, "type": data.type})
-        .then(res => {
-            this.showMessage("Запрос отправлен");
-            return true;
-        })
-        .catch(exp => {
-            this.showError("Произошла ошибка: " + exp);
-            return false;
-        });
+        .then(res => {_this.showMessage("Выполнено!"); return true;})
+        .catch(exp => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Уведомление и фикусация о выполнении
@@ -76,13 +68,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmailDone(answer) {
-        axios.post('/api/chancellery/certificate/sendEmailDone/' + answer.id + '/' + answer.email)
-        .then(result => {
-            this.showMessage("Сообщение отправлено");
-            return true;
-        })
-        .catch(ex => {this.showError("Произошла ошибка: " + ex); return false;});
+    sendEmailDone(answer, _this) {
+        return axios.post('/api/chancellery/certificate/sendEmailDone/' + answer.id + '/' + answer.email)
+        .then(result =>{_this.showMessage("Отправлено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
     },
 
     //*Ответ канцелярии заказчику, в случае если справку нельзя сделать, при том, что справка не будет зафиксирована о выполнении
@@ -92,15 +81,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmailAnswer(answer) {
-        axios.post('/api/chancellery/certificate/sendEmailAnswer/' + answer.id + '/' + answer.email, {"answer": answer.text})
-        .then(result => {
-            this.showMessage("Сообщение отправлено!");
-            return true;
-        })
-        .catch(ex => {
-            this.showError("Произошла ошибка: " + ex);
-            return false;
-        });
+    sendEmailAnswer(answer, _this) {
+        return axios.post('/api/chancellery/certificate/sendEmailAnswer/' + answer.id + '/' + answer.email, {"answer": answer.text})
+        .then(result => {_this.showMessage("Отправлено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
     }
 }

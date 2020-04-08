@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-btn( @click="logout" ) ВЫХОД
+    v-btn.ma-1(@click="logout()" block text primary ) ВЫХОД
 </template>
 
 <script>

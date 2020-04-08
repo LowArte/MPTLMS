@@ -80,7 +80,7 @@ export default {
     c_panel_control: PanelControl_C,
   },
 
-  data: () => {
+data: () => {
     return {
       groups_info: {groups:null, selected_group:null}, //Группы
       departaments_info: {departaments:null, selected_departament:null}, //Отделения
@@ -95,21 +95,21 @@ export default {
 
   methods: {
     //Получение панели с расписанием 
-    getCallScheduleForPanel()
+    async getCallScheduleForPanel()
     {
-      this.$refs.panel.loadData(callSchedule_api.getCallScheduleForPanel());
+      this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
     },
 
     //Получение мест проведений
-    getPlaces()
+    async getPlaces()
     {
-      this.places = places_api.getPlaces();
+      this.places = await places_api.getPlaces(this);
     },
 
     //Получение отделений
-    getDepartament()
+    async getDepartament()
     {
-      this.departaments_info.departaments = departament_api.getDepartmentsForCombobox();
+      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -118,13 +118,13 @@ export default {
     }, 
 
     //Получение группы при изменении отделения
-    departament_change() 
+    async departament_change() 
     {
-      this.groups_info.groups = group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
+      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
       if(this.groups_info.groups)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
-        this.changeFilter();
+        this.group_change();
       }
     },
 
@@ -135,9 +135,10 @@ export default {
     },
 
     //Получение расписания при изменении выбранной группы
-    group_change() 
+    async group_change() 
     {
-      this.schedule = schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id);
+      this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
+      console.log(this.schedule);
       if(this.schedule)
         this.parseSchedule();
     },
@@ -189,10 +190,13 @@ export default {
 
   //Преднастройка
   beforeMount() {
-    this.getCallScheduleForPanel();
     this.isToday = this.isChisl();
     this.getDepartament();
     this.getPlaces();
+  },
+
+  mounted(){
+    this.getCallScheduleForPanel();
   }
 };
 </script>

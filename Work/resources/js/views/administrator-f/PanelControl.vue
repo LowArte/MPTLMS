@@ -9,8 +9,10 @@
 
 <script>
 import api from "@/js/api/panel";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {
+  mixins: [withSnackbar],
   post_name: {
     name: "Настройки сервера",
     url: "/server_settings"
@@ -23,7 +25,7 @@ export default {
   },
 
   beforeMount() {
-    this.options = api.getSiteOptions();
+    this.options = api.getSiteOptions(this);
     if (this.options != null)
       this.options.option_value = this.options.option_value == "true";
   },
@@ -33,7 +35,7 @@ export default {
       api.setOptionValue({
         id: this.options.id,
         value: this.options.option_value
-      });
+      }, this);
     }
   }
 };

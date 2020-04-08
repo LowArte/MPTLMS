@@ -105,8 +105,9 @@ export default {
         }
       });
     },
-    sendQuery(email) {
-      if (feedbackApi.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}))
+
+    async sendQuery(email) {
+      if (await feedbackApi.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}, this))
       {
          this.items.splice(this.expanded[0]);
          this.modelmessage = "";
@@ -115,9 +116,9 @@ export default {
     },
 
     //Получение обращений пользователя
-    Update() 
+    async Update() 
     {
-        this.items = feedbackApi.getFeedbackRequests();
+        this.items = await feedbackApi.getFeedbackRequests(this);
     }
   }
 };

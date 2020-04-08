@@ -57,14 +57,8 @@ export default {
     //!           Обновление
     //?----------------------------------------------
     async update() {
-      let data = await api.getGroups();
-      if (data) {
-        return data;
-      }
-      else {
-        this.showError("Произошёл сбой");
-        return null;
-      }
+      let data = await api.getGroups(this);
+      return data;
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -72,7 +66,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.saveGroup(result);
+          api.saveGroup(result, this);
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -84,7 +78,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editGroup(result);
+          api.editGroup(result, this);
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -96,7 +90,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api.dropGroups();
+          api.dropGroups(this);
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -108,7 +102,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deleteGroup(item.id);
+          api.deleteGroup(item.id, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }

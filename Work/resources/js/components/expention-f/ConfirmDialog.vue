@@ -10,7 +10,9 @@
 </template>
 
 <script>
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 export default {
+  mixins: [withSnackbar],
   data() {
     return {
       dialog: false,
@@ -36,6 +38,7 @@ export default {
 
     clickNot() 
     {
+      this.showInfo("Действие было отменено пользователем");
       this.dialog = false;
       this.resolve(false);
     }

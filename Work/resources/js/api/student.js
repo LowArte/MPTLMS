@@ -11,16 +11,9 @@
  * 
  */
 
-//! Метод 
-/**
- * 
- */
-
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -47,8 +40,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getStudents() {
-        return axios.get('/api/admin/user_management/get_users');
+    getStudents(_this) {
+        return axios.get('/api/admin/user_management/get_users')
+        .then(result => {return true;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*Получение студента
@@ -58,7 +53,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getStudent(student_id) {
-        return axios.post('/api/admin/user_management/get_student/' + student_id);
+    getStudent(student_id, _this) {
+        return axios.post('/api/admin/user_management/get_student/' + student_id)
+        .then(result => {return true;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     }
 }

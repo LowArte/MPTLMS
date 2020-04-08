@@ -38,14 +38,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getGroups() {
+    getGroups(_this) {
         return axios.get('/api/getters/groups')
-            .then(result => {
-                return result.data.groups;
-            })
-            .catch(exception => {
-                return null
-            });
+        .then(result => {return result.data.groups;})
+        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined});
     },
 
     //*Получение групп по id отделению
@@ -55,14 +51,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getGroupsByDepartamentId(department_id) {
-        axios.get('/api/getters/group_by_departament_id/' + department_id)
-            .then(result => {
-                return result.data.groups_info.groups;
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    getGroupsByDepartamentId(department_id, _this) {
+        return axios.get('/api/getters/group_by_departament_id/' + department_id)
+        .then(result => {return result.data.groups_info.groups;})
+        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*----------------------------------------
@@ -75,16 +67,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
-    saveGroup(group) {
-        axios.post('/api/admin/group_management/save', {
-                "group": group
-            })
-            .then(res => {
-                this.showMessage("Действие выполнено успешно!");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    saveGroup(group, _this) {
+        return axios.post('/api/admin/group_management/save', {"group": group})
+        .then(res => {_this.showMessage("Выполнено!"); return true;})
+        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Редактирование группы
@@ -94,16 +80,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    editGroup(group) {
-        axios.post('/api/admin/group_management/edit/' + group.id, {
-                "group": group
-            })
-            .then(res => {
-                this.showMessage("Действие выполнено успешно");
-            })
-            .catch(exception => {
-                this.showError("Произошел сбой: " + exception);
-            });
+    editGroup(group, _this) {
+        return axios.post('/api/admin/group_management/edit/' + group.id, {"group": group})
+        .then(res => {_this.showMessage("Выполнено!"); return true;})
+        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Логическое удаление группы
@@ -113,14 +93,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deleteGroup(group_id) {
-        axios.post('/api/admin/group_management/delete/' + group_id)
-            .then(result => {
-                this.showMessage("Действие выполнено успешно!");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбоё: " + exception);
-            });
+    deleteGroup(group_id, _this) {
+        return axios.post('/api/admin/group_management/delete/' + group_id)
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Логическое удаление всех записей
@@ -129,13 +105,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropGroups() {
-        axios.post('/api/admin/group_management/deleteAll')
-            .then(res => {
-                this.showMessage("Действие выполнено успешно");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    dropGroups(_this) {
+        return axios.post('/api/admin/group_management/deleteAll')
+        .then(res => {_this.showMessage("Выполнено!"); return true;})
+        .catch(exception => {_this.showError("Ошибка выполнения!"); return false});
     }
 }

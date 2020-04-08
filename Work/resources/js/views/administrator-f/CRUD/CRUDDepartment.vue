@@ -57,7 +57,7 @@ export default {
     //!           Обновление
     //?----------------------------------------------
     async update() {
-      let data = await api.getDepartments();
+      let data = await api.getDepartments(this);
       return data
     },
     //?----------------------------------------------
@@ -66,7 +66,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.saveDepartment(result);
+          api.saveDepartment(result, this);
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -78,7 +78,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editDepartment(item);
+          api.editDepartment(item, this);
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -90,7 +90,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api.dropDepartments();
+          api.dropDepartments(this);
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -102,7 +102,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deleteDepartment(item.id);
+          api.deleteDepartment(item.id, this);
           this.update();
         } else {
           this.showInfo("Действие было отменено пользователем");

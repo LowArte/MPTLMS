@@ -46,38 +46,31 @@ export default {
 
   //Преднастройка
   beforeMount(){
-    this.getPlaces();
-    this.getCallSchedule();
+    this.getPlaces(this);
+    this.getCallSchedule(this);
   },
 
   methods: 
   {
     //Получение мест проведений
-    getPlaces()
+    async getPlaces()
     {
-      this.places = places_api.getPlaces();
+      this.places = await places_api.getPlaces(this);
       if (this.places != null)
         this.mplace = this.places[0].id;
     },
 
-    getCallSchedule()
+    async getCallSchedule()
     {
-      this.timeTable = callSchedule_api.getCallSchedule();
+      this.timeTable = await callSchedule_api.getCallSchedule(this);
     },
 
-    sendQuery() 
+    async sendQuery() 
     {
       //Проверка на валидацию полей, после чего происходит отправка на сохранение
       if (this.$refs.BildCallSchedule.validate()) 
       {
-        callSchedule_api
-          .edit(this.timeTable)
-          .then(res => {
-           this.showMessage("Расписание звонков принято!");
-          })
-          .catch(ex => {
-            this.showError("Расписание не было добавлено! " + ex);
-          });
+        await callSchedule_api.edit(this.timeTable, this)
       }
     }
   }

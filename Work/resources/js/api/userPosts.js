@@ -1,10 +1,8 @@
 //Api для работы с ролями системы
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -32,8 +30,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!---------------------------------------
-    setPostPrivilegies(data) {
-        return axios.post('/api/edit/post', data);
+    setPostPrivilegies(data, _this) {
+        return axios.post('/api/edit/post', data)
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
 
@@ -47,10 +47,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!---------------------------------------
-    getPostsFull() {
+    getPostsFull(_this) {
         return axios.get('/api/getters/posts_full')
         .then(result => { return result.data.posts;})
-        .catch(exception => { this.showError("Произошёл сбой: " + exception); return undefined;});
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
     
     //*Получение роли
@@ -60,8 +60,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getPost(id) {
-        return axios.get('/api/admin/getters/posts' + id);
+    getPost(id, _this) {
+        return axios.get('/api/admin/getters/posts' + id)
+        .then(res => {return res.data.post;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
     
     //*Сохранение роли
@@ -70,15 +72,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    savePost(post) {
-        axios.get('/api/admin/getters/save', {
-            "post": post
-        }).then(result => {
-            this.showMessage("Действие выполнено успешно");
-        })
-        .catch(exception => {
-            this.showError("Произошёл сбой: " + exception);
-        });
+    savePost(post, _this) {
+        return axios.get('/api/admin/getters/save', {"post": post})
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Удаление роли
@@ -88,14 +85,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deletePost(post_id) {
-        axios.post('/api/admin/***/delete/' + post_id)
-        .then(result => {
-            this.showMessage("Действие выполнено успешно");
-        })
-        .catch(exception => {
-            this.showError("Произошёл сбой: " + exception);
-        });
+    deletePost(post_id, _this) {
+        return axios.post('/api/admin/***/delete/' + post_id)
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Редактирование роли
@@ -105,15 +98,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    editPost(post) {
-        axios.post('/api/admin/***/edit/', {
-            "user": post
-        }).then(result => {
-            this.showMessage("Действие выполнено успешно");
-        })
-        .catch(exception => {
-            this.showError("Произошёл сбой: " + exception);
-        });
+    editPost(post, _this) {
+        return axios.post('/api/admin/***/edit/', {"user": post})
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Логическое удаление роли
@@ -122,15 +110,11 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropPosts()
+    dropPosts(_this)
     {
-        axios.post('/api/admin/***/deleteAll')
-        .then(result => {
-            this.showMessage("Действие выполнено успешно");
-        })
-        .catch(exception => {
-            this.showError("Произошёл сбой: " + exception);
-        });
+        return axios.post('/api/admin/***/deleteAll')
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 }
 

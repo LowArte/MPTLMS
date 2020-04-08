@@ -11,16 +11,9 @@
  * 
  */
 
-//! Метод 
-/**
- * 
- */
-
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -44,9 +37,9 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!----------------------------------------
-    getDisciplines() {
-        axios.get('/api/getters/get_disciplines')
+    getDisciplines(_this) {
+        return axios.get('/api/getters/get_disciplines')
         .then(res => {return res.data.disciplines;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 }

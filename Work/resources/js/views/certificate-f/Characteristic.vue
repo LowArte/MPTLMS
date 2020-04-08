@@ -94,9 +94,9 @@ export default {
 
   methods: 
   {
-    sendQuery() 
+    async sendQuery() 
     {
-      if (cerificateApi.save({
+      if (await cerificateApi.save({
           data: {
             "Год поступления": this.yearmpt,
             "Школа": this.school,
@@ -105,7 +105,7 @@ export default {
             "Куда нужна характеристика": this.modelorder
           },
           type: "Характеристика"
-        }))
+        }, this))
           this.cleardata();
     },
 

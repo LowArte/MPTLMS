@@ -14,7 +14,7 @@
 
 <body>
     <v-app id="app">
-        <c-layouts :_is_profilactic="{{$Profilactic ? 'true' : 'false'}}" _name="{{config('app.name', 'Laravel')}}"></c-layouts>
+        <c-layouts class="ma-1" :_is_profilactic="{{$Profilactic ? 'true' : 'false'}}" _name="{{config('app.name', 'Laravel')}}"></c-layouts>
     </v-app>
     @stack('beforeScripts')
     <script src="{{ mix('js/app.js') }}"></script>

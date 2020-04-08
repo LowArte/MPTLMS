@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Функции управления
     //*----------------------------------------
@@ -25,13 +23,13 @@ export default {
     //! Требование ----------------------------
     //! Уточнить структуру данных, пердаваемых в back-end
     //!----------------------------------------
-    setOptionValue(data) {
+    setOptionValue(data, _this) {
         return axios.post('/api/admin/options/set_options', {
             'id': data.id,
             'value': String(data.value)
         })
-        .then(result => { this.showMessage("Изменения сохранены"); })
-        .catch(exception => { this.showError("Произошла ошибка: " + exception); });
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Получение опция для панели администратора
@@ -41,9 +39,9 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getSiteOptions() {
-        axios.get('/api/getters/get_site_options')
+    getSiteOptions(_this) {
+        return axios.get('/api/getters/get_site_options')
         .then(result => { return result.data.siteOptions; })
-        .catch(exception => { this.showError("Произошёл сбой: данные не были получены из-за " + exception); });
+        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined; });
     },
 }

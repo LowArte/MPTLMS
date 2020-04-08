@@ -53,7 +53,7 @@ export default {
     //!           Обновление
     //?----------------------------------------------
     async update() {
-      let data = await api.getPostsFull();
+      let data = await api.getPostsFull(this);
       return data
     },
     //?----------------------------------------------
@@ -62,7 +62,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.savePost(result);
+          api.savePost(result, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }
@@ -74,7 +74,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editPost(result);
+          api.editPost(result, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }
@@ -86,7 +86,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api.dropPosts();
+          api.dropPosts(this);
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -98,7 +98,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deletePost(result);
+          api.deletePost(result, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }

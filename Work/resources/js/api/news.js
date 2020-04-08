@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -38,8 +36,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getNews() {
-        return axios.get('/api/getters/news');
+    getNews(_this) {
+        return axios.get('/api/getters/news')
+        .then(result => {return true;})
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
     },
 
     //*Получение постов по фильтру тегов
@@ -49,8 +49,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getNewsFiltered(filter) {
-        return axios.get('/api/getters/news_filtered/' + filter);
+    getNewsFiltered(filter, _this) {
+        return axios.get('/api/getters/news_filtered/' + filter)
+        .then(result => {return true;})
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
     },
 
     //*Получение постов по тексту
@@ -60,8 +62,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getNewsSearching(searching_text) {
-        return axios.get('/api/getters/news_searching/' + searching_text);
+    getNewsSearching(searching_text, _this) {
+        return axios.get('/api/getters/news_searching/' + searching_text)
+        .then(result => {return true;})
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
     }, 
     
     //*Получение поста по id
@@ -71,8 +75,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getNewsById(id) {
-        return axios.get('/api/getters/news_by_id/' + id);
+    getNewsById(id, _this) {
+        return axios.get('/api/getters/news_by_id/' + id)
+        .then(result => {return true;})
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
     },
 
 
@@ -87,8 +93,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    insertNews(data) {
-        return axios.post('/api/editor/news/insert', data);
+    insertNews(data, _this) {
+        return axios.post('/api/editor/news/insert', data)
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Редактирование записи
@@ -97,8 +105,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    updateNews(data) {
-        return axios.post('/api/editor/news/update', data);
+    updateNews(data, _this) {
+        return axios.post('/api/editor/news/update', data)
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Логическое удаление записи
@@ -107,8 +117,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deleteNews(id) {
-        return axios.post('/api/editor/news/delete/' + id);
+    deleteNews(id, _this) {
+        return axios.post('/api/editor/news/delete/' + id)
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Логическое удаление записей
@@ -117,8 +129,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropNews() {
-        return axios.post('/api/editor/news/drop');
+    dropNews(_this) {
+        return axios.post('/api/editor/news/drop')
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Отправка жалобы на запись
@@ -127,7 +141,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    complaintNews(complaint) {
-        return axios.post('/api/editor/news/complaint', complaint);
+    complaintNews(complaint, _this) {
+        return axios.post('/api/editor/news/complaint', complaint)
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     }
 }

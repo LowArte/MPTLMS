@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -41,10 +39,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!----------------------------------------
-    getFeedbackRequests() {
-        axios.get('/api/getters/get_feedback_requests')
+    getFeedbackRequests(_this) {
+        return axios.get('/api/getters/get_feedback_requests')
         .then(res => {return res.data.feedback;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 
 
@@ -59,10 +57,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api 
     //!----------------------------------------
-    save(data) {
-        axios.post('/api/student/feedback/save', {"text": data.text, "type": data.type})
-        .then(res => {this.showMessage("Ваше обращение будет рассмотрено в ближайшее время"); return true;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex); return false;});
+    save(data, _this) {
+        return axios.post('/api/student/feedback/save', {"text": data.text, "type": data.type})
+        .then(res => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Не выполнено!"); return false;});
     },
 
     //*Оправка сообщений на почту
@@ -72,13 +70,13 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmail(data)
+    sendEmail(data, _this)
     {
-        axios.post('/api/admin/request_users/send_email/' + data.id, {
+        return axios.post('/api/admin/request_users/send_email/' + data.id, {
             "text": data.text,
             "to": data.mail,
         })
-        .then(result => {this.showMessage("Сообщение отправлено");return true;})
-        .catch(ex => {this.showError("Произошла следующая ошибка! " + ex); return false;});
+        .then(result => {_this.showMessage("Выполнено!"); return true;})
+        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
 }

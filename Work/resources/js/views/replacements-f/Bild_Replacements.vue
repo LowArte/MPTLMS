@@ -119,27 +119,24 @@ export default {
 
   methods: {
     //Получение отделений
-    getDepartament() {
-      departament_api
-        .getDepartmentsForCombobox()
-        .then(res => {
-          this.departaments_info.departaments = res.data.departaments;
-          this.departaments_info.selected_departament = this.departaments_info.departaments[0];
-          this.departament_change();
-        })
-        .catch(ex => {
-          this.showError(ex);
-        });
-    },
+    async getDepartament()
+    {
+      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+      if(this.departaments_info.departaments)
+      {
+        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.departament_change();
+      }
+    }, 
 
     //Получение всех преподавателей
-    getTeachers() {
-      this.teachers = teacher_api.getTeachers();
+    async getTeachers() {
+      this.teachers = await teacher_api.getTeachers(this);
     },
 
     //Получение всех дисциплин
-    getDisciplines() {
-      this.disciplines = discipline_api.getDisciplines();
+    async getDisciplines() {
+      this.disciplines = await discipline_api.getDisciplines(this);
     },
 
     //Определение числителя
@@ -151,18 +148,18 @@ export default {
     },
 
     //Получение групп при изменении отдела
-    departament_change() {
-      this.groups_info.groups = group_api.getGroupsByDepartamentId(
-        this.departaments_info.selected_departament.id
+    async departament_change() {
+      this.groups_info.groups = await group_api.getGroupsByDepartamentId(
+        this.departaments_info.selected_departament.id, this
       );
-      if (this.groups_info) {
+      if (this.groups_info.groups) {
         this.groups_info.selected_group = this.groups_info.groups[0];
         this.caseDate();
       }
     },
 
     //При выборе даты получать расписание выбранного дня, если воскресенье то за день
-    caseDate() {
+    async caseDate() {
       this.date_week = new Date(this.dateDialog.date).getDay();
       if (this.date_week == 0) {
         this.dateDialog.date = new Date(
@@ -171,29 +168,26 @@ export default {
           .toISOString()
           .substr(0, 10);
         this.$refs.dateDialog.save(this.dateDialog.date);
-        this.showInfo("Данные отсутствуют");
+        this.showInfo("Данные отсутствуют!");
         this.caseDate();
       } 
       else 
       {
-        this.schedule = schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id);
+        this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
         if(this.schedule)
         {
-            this.schedule = res.data.schedule[this.week[this.date_week]];
+            this.schedule = this.schedule[this.week[this.date_week]];
             this.parseSchedule();
         }
 
-        this.schedule_bild = schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id);
+        this.schedule_bild = await schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id, this);
         if(this.schedule_bild)
-        {
             this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
-            this.parseSchedule();
-        }
       }
     },
 
     //Сохранение замены
-    sendQuery() {
+    async sendQuery() {
       if (this.cancel && this.replacement.oldlesson.length == 0)
         this.showInfo("Нельзя отменить пару, которой нет!");
       else if (this.$refs.BildReplacement.validate()) {
@@ -201,11 +195,11 @@ export default {
           this.replacement.lesson = [];
           this.replacement.teacher = [];
         }
-        replacements_api.saveReplacements({
+        await replacements_api.saveReplacements({
           group_id: this.groups_info.selected_group.id,
           replacement: this.replacement,
           date: this.dateDialog.date
-        });
+        }, this);
       } else this.showError("Форма заполнена не верно!");
     },
 
@@ -267,9 +261,5 @@ export default {
     this.getDisciplines();
     this.getTeachers();
   },
-
-  mounted() {
-    if (this.date_week != 0) this.caseDate();
-  }
 };
 </script>

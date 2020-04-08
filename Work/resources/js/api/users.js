@@ -11,20 +11,13 @@
  * 
  */
 
-//! Метод 
-/**
- * 
- */
-
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 import {
     resetRouter
 } from "@/js/router/router";
 import * as mutations from "@/js/store/mutation-types";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -45,14 +38,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!----------------------------------------
-    getUsers() {
-        return axios.get('/api/getters/users').then(result => {
-                return result.data.users;
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой:  " + exception);
-                return undefined
-            });
+    getUsers(_this) {
+        return axios.get('/api/getters/users')
+        .then(result => {return result.data.users;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*Получение пользователей
@@ -62,8 +51,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getUser(user_id) {
-        return axios.get('/api/admin/getters/users/' + user_id);
+    getUser(user_id, _this) {
+        return axios.get('/api/admin/getters/users/' + user_id)
+        .then(result => {return true;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
 
@@ -78,15 +69,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    saveUser(user) {
-        axios.post('/api/admin/user_management/save', {
-                "user": user
-            }).then(result => {
-                this.showMessage("Действие выполнено успешно");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    saveUser(user, _this) {
+        return axios.post('/api/admin/user_management/save', {"user": user})
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Удаление пользователя
@@ -96,14 +82,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    deleteUser(user_id) {
-        axios.post('/api/admin/user_management/delete/' + user_id)
-            .then(result => {
-                this.showMessage("Действие выполнено успешно");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    deleteUser(user_id, _this) {
+        return axios.post('/api/admin/user_management/delete/' + user_id)
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Редактирование пользователя
@@ -113,15 +95,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    editUser(user) {
-        axios.post('/api/admin/user_management/edit/', {
-                "user": user
-            }).then(result => {
-                this.showMessage("Действие выполнено успешно");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    editUser(user, _this) {
+        return axios.post('/api/admin/user_management/edit/', {"user": user})
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Логическое удаление пользователей
@@ -130,14 +107,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropUsers() {
-        axios.post('/api/admin/user_management/deleteAll')
-            .then(result => {
-                this.showMessage("Действие выполнено успешно");
-            })
-            .catch(exception => {
-                this.showError("Произошёл сбой: " + exception);
-            });
+    dropUsers(_this) {
+        return axios.post('/api/admin/user_management/deleteAll')
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     login(data) {
@@ -163,11 +136,11 @@ export default {
     },
 
     logout() {
-        axios.post('/logout').then(res => {
+        return axios.post('/logout').then(res => {
             resetRouter()
             this.$store.commit(mutations.SET_NOTAUTH)
             this.$router.push("/")
-        }).catch(ex => {});
+        }).catch(ex => {console.log(ex);});
     },
 
     makeRoutes(privilegies,slug) {

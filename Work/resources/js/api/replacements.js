@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -40,10 +38,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getReplacements(data) {
-        axios.get('/api/getters/replacements')
+    getReplacements(_this) {
+        return axios.get('/api/getters/replacements')
         .then(res => {return res.data.replacements;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
+        .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
     },
 
     //*Получение замен для определённой даты и группы
@@ -53,10 +51,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getReplacementsByGroupByDate(data) {
-        axios.get('/api/getters/replacements_by_group_by_date/' + data.group_id + '/' + data.date)
+    getReplacementsByGroupByDate(data, _this) {
+        return axios.get('/api/getters/replacements_by_group_by_date/' + data.group_id + '/' + data.date)
         .then(res => {return res.data.replacements;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
+        .catch(ex => {_this.showError("Ошибка выполнения данных!"); return undefined;});
     },
 
     //*Получение замен для определённой группы
@@ -66,10 +64,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getReplacementsByGroup(group_id) {
-        axios.get('/api/getters/replacements_by_group/' + group_id)
+    getReplacementsByGroup(group_id, _this) {
+        return axios.get('/api/getters/replacements_by_group/' + group_id)
         .then(res => {return res.data.replacements;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
+        .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
     },
 
     //*Получение замен для определённой даты
@@ -79,10 +77,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getReplacementsByDate(date) {
+    getReplacementsByDate(date, _this) {
         return axios.get('/api/getters/replacements_by_date/' + date)
         .then(res => {return res.data.replacements;})
-        .catch(ex => {this.showError("Произошла ошибка: " + ex);});
+        .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
     },
 
 
@@ -98,10 +96,10 @@ export default {
     //! Требование ----------------------------
     //! Уточнить струткуру данных
     //!----------------------------------------
-    saveReplacements(data) {
-        axios.post('/api/save/replacement/' + data.group_id + '/' + data.date, {"replacement": data.replacement})
-        .then(res => {this.showMessage('Замена сохранена!');})
-        .catch(ex => {this.showError("Ошибка выполнения: " + ex);});
+    saveReplacements(data, _this) {
+        return axios.post('/api/save/replacement/' + data.group_id + '/' + data.date, {"replacement": data.replacement})
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Логическое удаление замены
@@ -110,9 +108,9 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    deleteReplacement(replacement_id) {
-        axios.post('/api/delete/replacement/' + replacement_id)
-        .then(res => {this.showMessage("Удалена!"); return true;})
-        .catch(ex => {this.showError("Ошибка выполнения: " + ex); return false;});
+    deleteReplacement(replacement_id, _this) {
+        return axios.post('/api/delete/replacement/' + replacement_id)
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 }

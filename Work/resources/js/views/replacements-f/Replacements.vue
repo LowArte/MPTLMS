@@ -76,9 +76,9 @@ export default {
 
   methods: {
     //Получение отделений
-    getDepartament()
+    async getDepartament()
     {
-      this.departaments_info.departaments = departament_api.getDepartmentsForCombobox();
+      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
       if(this.departaments_info.departaments != null)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -87,8 +87,8 @@ export default {
     }, 
 
     //Получение групп для отделения
-    departament_change() {
-      this.groups_info.groups = group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
+    async departament_change() {
+      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
       if(this.groups_info.groups != null)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
@@ -97,25 +97,25 @@ export default {
     },
 
     //Получение замен с учётом фильтров
-    changeFilter() {
+    async changeFilter() {
       if (this.checkAllGroup && this.checkAllDate) 
         //Получить все замены для всех дат и групп
-        this.replacements = replacements_api.getReplacements()
+        this.replacements = await replacements_api.getReplacements(this)
       else 
       if (this.checkAllGroup) 
         //Получить замены для всех групп
-        this.replacements = replacements_api.getReplacementsByDate(this.dateDialog.date)
+        this.replacements = await replacements_api.getReplacementsByDate(this.dateDialog.date, this)
       else 
       if (this.checkAllDate) 
         //Получить все замены для всех дат
-        this.replacements = replacements_api.getReplacementsByGroup(this.groups_info.selected_group.id);
+        this.replacements = await replacements_api.getReplacementsByGroup(this.groups_info.selected_group.id, this);
       else 
       {
-        this.replacements = replacements_api.getReplacementsByGroupByDate(
+        this.replacements = await replacements_api.getReplacementsByGroupByDate(
         {
           group_id: this.groups_info.selected_group.id,
           date: this.dateDialog.date
-        });
+        }, this);
       }
 
       if (this.replacements != null)

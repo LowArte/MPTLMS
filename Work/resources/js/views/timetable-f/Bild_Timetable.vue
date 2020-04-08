@@ -69,27 +69,27 @@ export default {
   methods: 
   {
     //Получение всех преподавателей
-    getTeachers()
+    async getTeachers()
     {
-        this.teachers = teacher_api.getTeachers();
+        this.teachers = await teacher_api.getTeachers(this);
     },
 
     //Получение всех дисциплин
-    getDisciplines()
+    async getDisciplines()
     {
-        this.disciplines = discipline_api.getDisciplines();
+        this.disciplines = await discipline_api.getDisciplines(this);
     },
 
     //Получение мест проведений
-    getPlaces()
+    async getPlaces()
     {
-      this.places = places_api.getPlaces();
+      this.places = await places_api.getPlaces(this);
     },
 
     //Получение отделений
-    getDepartament()
+    async getDepartament()
     {
-      this.departaments_info.departaments = departament_api.getDepartmentsForCombobox();
+      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -98,9 +98,9 @@ export default {
     }, 
 
     //Событие при изменении отделении
-    departament_change() 
+    async departament_change() 
     {
-      this.groups_info.groups = group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
+      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
       if(this.groups_info.groups)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
@@ -109,9 +109,9 @@ export default {
     },
 
     //Событие при изменении группы
-    group_change() 
+    async group_change() 
     {
-      this.schedule = schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id);
+      this.schedule = await schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id, this);
     },
 
     //Отправка учебного расписания на сохранение
@@ -123,7 +123,7 @@ export default {
         {
           group_id: this.groups_info.selected_group.id, 
           schedule: this.schedule,
-        }))
+        }, this))
           this.group_change();
       }
       else

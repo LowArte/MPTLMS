@@ -59,7 +59,7 @@ export default {
     //!           Обновление
     //?----------------------------------------------
     async update() {
-      let data = await api.getUsers();
+      let data = await api.getUsers(this);
       return data
     },
     //?----------------------------------------------
@@ -68,7 +68,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.saveUser(result);
+          api.saveUser(result, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }
@@ -80,7 +80,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editUser(result);
+          api.editUser(result, this);
           this.showMessage("Действие выполнено успешно");
         } else {
           this.showInfo("Действие отменено пользователем");
@@ -93,7 +93,7 @@ export default {
     clear() {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
-          api.dropUsers();
+          api.dropUsers(this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }
@@ -105,7 +105,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deleteUser(result);
+          api.deleteUser(result, this);
         } else {
           this.showInfo("Действие отменено пользователем");
         }

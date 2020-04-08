@@ -11,16 +11,9 @@
  * 
  */
 
-//! Метод 
-/**
- * 
- */
-
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -36,9 +29,6 @@ export default {
     //*----------------------------------------
 
 
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -49,10 +39,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!----------------------------------------
-    getDepartments() {
+    getDepartments(_this) {
         return axios.get('/api/getters/departments')
         .then(result => { return result.data.departments; })
-        .catch(exception => { this.showError("Произошёл сбой: " + exception); return undefined;});
+        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*Получение отделений для комбобокса
@@ -62,10 +52,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!----------------------------------------
-    getDepartmentsForCombobox() {
-        axios.get('/api/getters/departments_for_combobox')
+    getDepartmentsForCombobox(_this) {
+        return axios.get('/api/getters/departments_for_combobox')
         .then(res => { return res.data.departaments; })
-        .catch(ex => { this.showError('Произошёл сбой: ' + ex); });
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined; });
     },
 
     //*Получение отделеня
@@ -75,10 +65,10 @@ export default {
     //! Требование ----------------------------
     //! Нужно получать department по ID
     //!----------------------------------------
-    getDepartment(id) {
+    getDepartment(id, _this) {
         return axios.get('/api/admin/getters/department/' + id)
         .then(result => { return result.data; })
-        .catch(exception => { this.showInfo("Произошёл сбой: " + exception); });
+        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined; });
     },
 
 
@@ -95,10 +85,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    saveDepartment(department) {
-        axios.post('/api/admin/department_management/save/', department)
-        .then(res => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
+    saveDepartment(department, _this) {
+        return axios.post('/api/admin/department_management/save/', department)
+        .then(res => { _this.showMessage("Сохранено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполения"); return false; });
     },
 
     //*Удаление отделений
@@ -108,10 +98,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deleteDepartment(id) {
-        axios.post('/api/admin/department_management/delete/' + id)
-        .then(result => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
+    deleteDepartment(id, _this) {
+        return axios.post('/api/admin/department_management/delete/' + id)
+        .then(result => { _this.showMessage("Удалено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Редактирование отделений
@@ -121,10 +111,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    editDepartment(department) {
-        axios.post('/api/admin/department_management/edit/' + department.id, { "department": department })
-        .then(res => { this.showMessage("Действие выполнено успешно!"); })
-        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
+    editDepartment(department, _this) {
+        return axios.post('/api/admin/department_management/edit/' + department.id, { "department": department })
+        .then(res => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
 
@@ -140,9 +130,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropDepartments() {
-        axios.post('/api/admin/department_management/deleteAll')
-        .then(res => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError("Произошёл сбой: " + exception); });
+    dropDepartments(_this) {
+        return axios.post('/api/admin/department_management/deleteAll')
+        .then(res => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     }
 }

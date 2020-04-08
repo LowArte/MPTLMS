@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -38,10 +36,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    edit(callSchedule) {
-        axios.post('/api/edit/callschedule', {'callSchedule': callSchedule})
-        .then(res => {return res.data.timeTable;})
-        .catch(ex => {this.showError("Произошла ошибка при получении данных: " + ex);});
+    edit(callSchedule, _this) {
+        return axios.post('/api/edit/callschedule', {'callSchedule': callSchedule})
+        .then(res => {_this.showMessage("Выполнено!"); return res.data.timeTable;})
+        .catch(ex => {_this.showError("Произошла ошибка выолнения!"); return undefined;});
     },
 
     //*Получение расписания звонков
@@ -50,10 +48,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getCallSchedule() {
-        axios.get('/api/getters/get_call_schedule')
-        .then(res => {return res.data.places;})
-        .catch(ex => {this.showError("Ошибка получения данных: " + ex);});
+    getCallSchedule(_this) {
+        return axios.get('/api/getters/get_call_schedule')
+        .then(res => { return res.data.timeTable;})
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*Получение расписания звонков для панели
@@ -62,9 +60,9 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getCallScheduleForPanel() {
-        axios.get('/api/getters/get_call_schedule_for_panel')
+    getCallScheduleForPanel(_this) {
+        return axios.get('/api/getters/get_call_schedule_for_panel')
         .then(res => {return res.data.panel_array;})
-        .catch(ex => {this.showError('Ошибка получения данных: ' + ex);});
+        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
     }
 }

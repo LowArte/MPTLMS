@@ -44,9 +44,9 @@ export default {
 
   methods: 
   {
-    sendQuery() 
+    async sendQuery() 
     {
-      if(feedbackApi.save({ type: this.thematic, text: this.modelmessage }))
+      if(await feedbackApi.save({ type: this.thematic, text: this.modelmessage }, this))
         this.modelmessage = "";        
     }
   }

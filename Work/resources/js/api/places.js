@@ -12,10 +12,8 @@
  */
 
 import axios from 'axios'
-import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
-    mixins: [withSnackbar],
     //*----------------------------------------
     //!         Модель данных
     //*----------------------------------------
@@ -38,10 +36,10 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    getPlaces() {
+    getPlaces(_this) {
         return axios.get('/api/getters/places')
         .then(result => { return result.data.places; })
-        .catch(exception => { this.showError("Произошёл сбой: " + exception); return undefined;});
+        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*----------------------------------------
@@ -54,10 +52,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
-    savePlace(place) {
-        axios.post('/api/admin/place_management/save', { "place": place })
-        .then(result => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError( "Произошёл сбой: " + exception ); });
+    savePlace(place, _this) {
+        return axios.post('/api/admin/place_management/save', { "place": place })
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Редактирование мест проведения
@@ -67,10 +65,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
-    editPlace(place) {
-        axios.post('/api/admin/place_management/edit/' + place.id, { "place": place })
-        .then(result => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError("Произошёл сбой: " + exception); });
+    editPlace(place, _this) {
+        return axios.post('/api/admin/place_management/edit/' + place.id, { "place": place })
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Логическое удаление места проведения
@@ -80,10 +78,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deletePlace(place_id) {
-        axios.post('/api/admin/place_management/delete/' + place_id)
-        .then(result => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError("Произошёл сбой: " + exception);});
+    deletePlace(place_id, _this) {
+        return axios.post('/api/admin/place_management/delete/' + place_id)
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Логическое удаление мест проведения
@@ -92,9 +90,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropPlaces() {
-        axios.post('/api/admin/place_management/deleteAll')
-        .then(result => { this.showMessage("Действие выполнено успешно"); })
-        .catch(exception => { this.showError("Произошёл сбой: " + exception); });
+    dropPlaces(_this) {
+        return axios.post('/api/admin/place_management/deleteAll')
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     }
 }

@@ -36,8 +36,10 @@
 import { getIcons } from "@/js/materialDesignIcons";
 import post_api from "@/js/api/userPosts";
 import * as mutations from "@/js/store/mutation-types";
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {
+  mixins: [withSnackbar],
   post_name: {
     name: "Конструктор привилегий ролей",
     url: "bild_post_privilegies"
@@ -66,7 +68,7 @@ export default {
       this.files = this.importAll(
         require.context("@/js/views", true, /\.vue$/)
       );
-      this.posts = post_api.getPostsFull();
+      this.posts = post_api.getPostsFull(this);
       if (this.posts) {
         this.selectedPost = this.posts[0];
       }
@@ -155,7 +157,7 @@ export default {
         .setPostPrivilegies({
           id: this.selectedPost.id,
           privilegies: this.selectedPost.privilegies
-        })
+        }, this)
         .then(res => {})
         .catch(ex => {
           console.log(ex);
