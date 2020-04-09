@@ -14,7 +14,7 @@ v-content.ma-0.pa-2
     v-flex
       v-layout.row.wrap
         v-flex(v-for="(day_key,day_index) in days" :key="day_index" v-if="schedule != null")
-          v-card.mx-auto(min-width="300px" max-width="300px" style="display: flex; flex-direction: column;")
+          v-card.mx-auto(min-width="300px" style="display: flex; flex-direction: column;")
             v-system-bar
               span {{day_key}} 
             v-chip.ma-2(label) {{schedule[day_key].Place.place_name}} 
