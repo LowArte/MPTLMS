@@ -12,10 +12,6 @@
  */
 
 import axios from 'axios'
-import {
-    resetRouter
-} from "@/js/router/router";
-import * as mutations from "@/js/store/mutation-types";
 
 export default {
     //*----------------------------------------
@@ -136,11 +132,9 @@ export default {
     },
 
     logout() {
-        return axios.post('/logout').then(res => {
-            resetRouter()
-            this.$store.commit(mutations.SET_NOTAUTH)
-            this.$router.push("/")
-        }).catch(ex => {console.log(ex);});
+        return axios.post('/logout')
+        .then(res => {return true;})
+        .catch(ex => {return false;});
     },
 
     makeRoutes(privilegies,slug) {

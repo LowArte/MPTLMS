@@ -1,30 +1,28 @@
 <template lang="pug">
-  v-layout.row.wrap
-    v-col(cols="12")
-      v-card.mx-auto.pa-4(height="auto" width="max")
-          v-form(v-model="form")
-            v-textarea(
-                  v-model="text"
-                  :auto-grow="true"
-                  :counter="255 ? 255 : false"
-                  :flat="true"
-                  :hint="'Не более 255 символов'"
-                  :label="'Текст заявки'"
-                  :row-height="24"
-                  :rows="3"
-                  :rules="orderRules")
-            v-switch.shrink.mr-2.mt-2(
-                  v-model="enabled"
-                  color="primary"
-                  value="primary"
-                  :rules="policyRules"
-                  label="Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен")
-            v-btn.mt-2.justify-center.white--text(
-                  :disabled="!form"
-                  color="blue"
-                  block
-                  depressed
-                  @click="sendQuery") Заказать
+v-card.mx-auto.pa-4.mt-2(height="auto" width="max")
+    v-form(v-model="form")
+      v-textarea(
+            v-model="text"
+            :auto-grow="true"
+            :counter="255 ? 255 : false"
+            :flat="true"
+            :hint="'Не более 255 символов'"
+            :label="'Текст заявки'"
+            :row-height="24"
+            :rows="3"
+            :rules="orderRules")
+      v-switch.shrink.mr-2.mt-2(
+            v-model="enabled"
+            color="primary"
+            value="primary"
+            :rules="policyRules"
+            label="Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен")
+      v-btn.mt-2.justify-center.white--text(
+            :disabled="!form"
+            color="blue"
+            block
+            depressed
+            @click="sendQuery") Заказать
 </template>
 
 <script>
@@ -50,11 +48,16 @@ export default {
 
   methods: {
     async sendQuery() {
-      if (await cerificateApi.save({
-          data: { "Текст заявки": this.text },
-          type: "Справка"
-        }, this))
-          this.cleardata();        
+      if (
+        await cerificateApi.save(
+          {
+            data: { "Текст заявки": this.text },
+            type: "Справка"
+          },
+          this
+        )
+      )
+        this.cleardata();
     },
     cleardata() {
       this.text = "";

@@ -241,7 +241,7 @@ class PostUserSeeder extends Seeder
                                 "text" => "Расписание экзаменов",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
+                                        "name" => "Расписание экзаменов",
                                         "url"=> "exams"
                                     ],
                                     "path" => "js/views/other-f/Warning"
@@ -252,7 +252,7 @@ class PostUserSeeder extends Seeder
                                 "text" => "Успеваемость",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
+                                        "name" => "Успеваемость",
                                         "url"=> "progress"
                                     ],
                                     "path" => "js/views/other-f/Warning"
@@ -263,7 +263,7 @@ class PostUserSeeder extends Seeder
                                 "text" => "Домашнее задание",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
+                                        "name" => "Домашнее задание",
                                         "url"=> "homework"
                                     ],
                                     "path" => "js/views/other-f/Warning"
@@ -274,7 +274,7 @@ class PostUserSeeder extends Seeder
                                 "text" => "Преподаватели",
                                 "component" => [
                                     "info" => [
-                                        "name" => "warning",
+                                        "name" => "Преподаватели",
                                         "url"=> "teachers"
                                     ],
                                     "path" => "js/views/other-f/Warning"
@@ -317,23 +317,11 @@ class PostUserSeeder extends Seeder
                         "text" => "Хранилище данных",
                         "component" => [
                             "info" => [
-                                "name" => "warning",
+                                "name" => "Хранилище данных",
                                 "url"=> "datastorage"
                             ],
                             "path" => "js/views/other-f/Warning"
                         ],  
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "icon" => "layers",
-                        "text" => "Базы практики",
-                        "component" => [
-                            "info" => [
-                                "name" => "warning",
-                                "url"=> "plants"
-                            ],
-                            "path" => "js/views/other-f/Warning"
-                        ],
                     ],
                     [
                         "id" => uniqid(),
@@ -402,7 +390,7 @@ class PostUserSeeder extends Seeder
                         "text" => "Учебные журналы",
                         "component" => [
                             "info" => [
-                                "name" => "warning",
+                                "name" => "Учебные журналы",
                                 "url"=> "journals"
                             ],
                             "path" => "js/views/other-f/Warning"
@@ -608,7 +596,7 @@ class PostUserSeeder extends Seeder
                         "text" => "Создать новость",
                         "component" => [
                             "info" => [
-                                "name" => "warning",
+                                "name" => "Создать новость",
                                 "url"=> "news-constructor"
                             ],
                             "path" => "js/views/other-f/Warning"
@@ -622,7 +610,7 @@ class PostUserSeeder extends Seeder
                         "text" => "Статистика",
                         "component" => [
                             "info" => [
-                                "name" => "warning",
+                                "name" => "Статистика",
                                 "url"=> "news-statistics"
                             ],
                             "path" => "js/views/other-f/Warning"

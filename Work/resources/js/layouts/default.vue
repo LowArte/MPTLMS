@@ -1,28 +1,16 @@
 <template>
   <v-app>
     <snackbar></snackbar>
-    <v-app-bar app>
-      <v-toolbar-title class="text-uppercase">
-        <span class="font-weight-light" dense>{{ name }}</span>
-      </v-toolbar-title>
+    <v-app-bar app elevate-on-scroll color="white">
+      <v-toolbar-title>{{ name }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <div v-if="!isAuthenticated">
-        <router-link v-if="currentRoute.name !='Login'" class="nounderline" to="/login">
-          <v-btn color="accent" text>ВОЙТИ</v-btn>
-        </router-link>
-        <v-layout vertical v-if="isAuthenticated">
-          <router-link class="nounderline" :to="`/${user.post.slug}`">
-            <v-btn color="primary mr-5" text>в кабинет</v-btn>
-          </router-link>
-          <c-logout></c-logout>
-        </v-layout>
-      </div>
-      <v-layout vertical v-else>
-        <router-link class="nounderline" :to="`/${user.post.slug}`">
-          <v-btn color="primary mr-5" text>в кабинет</v-btn>
-        </router-link>
-        <c-logout></c-logout>
-      </v-layout>
+      <router-link v-if="currentRoute.name !='Login' && !isAuthenticated" class="nounderline" to="/login">
+        <v-btn color="accent" text small>ВОЙТИ</v-btn>
+      </router-link>
+      <router-link v-if="isAuthenticated" class="nounderline" :to="`/${user.post.slug}`">
+        <v-btn color="primary mr-5" text small>В КАБИНЕТ</v-btn>
+      </router-link>
+      <c-logout-default v-if="isAuthenticated"></c-logout-default>
     </v-app-bar>
     <v-content style="background: white;">
       <v-container fluid grid-list-md text-xs-center>
@@ -43,19 +31,19 @@
 
 <script>
 import snackbar from "@/js/components/SnackBarComponent";
-import C_Logout from "@/js/components/buttons-f/logout"
+import C_Logout from "@/js/components/buttons-f/logout-default";
 import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["isAuthenticated", "user","isProfilactic","name"]),
+    ...mapGetters(["isAuthenticated", "user", "isProfilactic", "name"]),
     currentRoute: function() {
       return this.$route;
     }
   },
   components: {
     snackbar,
-    "c-logout":C_Logout
+    "c-logout-default": C_Logout
   }
 };
 </script>

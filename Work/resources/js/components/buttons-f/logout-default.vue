@@ -1,5 +1,6 @@
 <template lang="pug">
-  v-btn(@click="logout()" block text :loading="loading" :disabled="loading") ВЫХОД
+  v-btn(@click="logout()" text :loading="loading" :disabled="loading" icon small)
+    v-icon mdi-location-exit
 </template>
 
 <script>
@@ -24,6 +25,6 @@ export default {
       }
       this.loading = false;
     }
-  }
+  } 
 };
 </script>

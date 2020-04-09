@@ -1,6 +1,7 @@
 <template>
   <div>
     <snackbar></snackbar>
+    <overlayloader></overlayloader>
     <v-navigation-drawer width="300" v-model="leftdrawer" fixed clipped app>
       <c-app-menu></c-app-menu>
     </v-navigation-drawer>
@@ -15,12 +16,8 @@
       </div>
       <div v-if="user" class="d-flex align-center" style="margin-left: auto">
         <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
-          <small class="white--text">
-            {{user.name}}
-          </small>
-          <small v-if="user.disabled == 1" class="red--text">
-            {{Заблокирован}}
-          </small>
+          <small class="white--text">{{user.name}}</small>
+          <small v-if="user.disabled == 1" class="red--text">{{Заблокирован}}</small>
           <v-avatar class="ml-2" size="32" color="white">
             <v-icon>account_circle</v-icon>
           </v-avatar>
@@ -35,35 +32,39 @@
     </v-navigation-drawer>
 
     <v-content style="background: white;">
+      <v-container fluid grid-list-md text-xs-center>
         <transition>
           <keep-alive>
             <router-view></router-view>
           </keep-alive>
         </transition>
+      </v-container>
     </v-content>
   </div>
 </template>
 
 <script>
-import snackbar from "@/js/components/SnackBarComponent"
-import C_AppMenu from "@/js/components/menu-f/AppMenu"
-import C_Logout from "@/js/components/buttons-f/logout"
+import snackbar from "@/js/components/SnackBarComponent";
+import overlayloader from "@/js/components/OverlayLoaderComponent";
+import C_AppMenu from "@/js/components/menu-f/AppMenu";
+import C_Logout from "@/js/components/buttons-f/logout";
 import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["user"]),
+    ...mapGetters(["user"])
   },
 
   data: () => ({
-    leftdrawer:false,
-    rightdrawer:false,
+    leftdrawer: false,
+    rightdrawer: false
   }),
 
-  components:{
+  components: {
     snackbar,
-    "c-app-menu":C_AppMenu,
-    "c-logout":C_Logout
+    overlayloader,
+    "c-app-menu": C_AppMenu,
+    "c-logout": C_Logout
   }
-}
+};
 </script>

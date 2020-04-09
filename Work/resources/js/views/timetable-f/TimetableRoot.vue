@@ -73,6 +73,7 @@ import departament_api from "@/js/api/departments"; //Api отделения
 import group_api from "@/js/api/group"; //Api групп
 import schedule_api from "@/js/api/schedule"; //Api расписания
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 import bildTimetable from "@/js/views/timetable-f/Bild_Timetable"; //Конструктор замен
 import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
 
@@ -82,7 +83,7 @@ Date.prototype.getWeek = function() {
 };
 
 export default {
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   post_name: {
     name: "Учебное расписание",
     url: "timetableRoot"
@@ -109,19 +110,25 @@ export default {
     //Получение панели с расписанием 
     async getCallScheduleForPanel()
     {
+      this.showLoading("Получение расписания звонков");
       this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
+      this.closeLoading();
     },
 
     //Получение мест проведений
     async getPlaces()
     {
+      this.showLoading("Получение мест проведения");
       this.places = await places_api.getPlaces(this);
+      this.closeLoading();
     },
 
     //Получение отделений
     async getDepartament()
     {
+      this.showLoading("Получение отделений");
       this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+      this.closeLoading();
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -132,7 +139,9 @@ export default {
     //Получение группы при изменении отделения
     async departament_change() 
     {
+      this.showLoading("Получение групп");
       this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
+      this.closeLoading();
       if(this.groups_info.groups)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
@@ -149,8 +158,9 @@ export default {
     //Получение расписания при изменении выбранной группы
     async group_change() 
     {
+      this.showLoading("Получение расписания");
       this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
-      console.log(this.schedule);
+      this.closeLoading();
       if(this.schedule)
         this.parseSchedule();
     },
@@ -208,7 +218,7 @@ export default {
   },
 
   mounted(){
-    this.getCallScheduleForPanel();
+    //this.getCallScheduleForPanel();
   }
 };
 </script>
