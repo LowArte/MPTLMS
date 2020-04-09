@@ -4,6 +4,7 @@ import snackbar from './modules/snackbar'
 import overlayLoading from './modules/overlayLoading'
 import auth from './modules/auth'
 import server from './modules/server'
+import specialitie from './modules/specialities'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     snackbar,
     overlayLoading,
     auth,
-    server
+    server,
+    specialitie
   },
   strict: debug
 })

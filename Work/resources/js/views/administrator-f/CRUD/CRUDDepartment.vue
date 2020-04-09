@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
+    c-crud-form(ref='crud' :_func_update="update" _flood="specialities" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
     c-add-dialog(ref='new')
     c-comfirm-dialog(ref='qwestion')
     c-edit-dialog(ref='revue')
@@ -31,14 +31,21 @@ import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_De
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Department_Delete";
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
   post_name: {
     name: "CRUD отделений",
     url: "departaments_crud"
   },
+  computed: {
+    ...mapGetters(["specialities"]),
+  },
   mixins: [withSnackbar],
   data: () => ({
     headers: [
+      { text: "id", value: "id" },
       { text: "Наименование", value: "dep_name_full" },
       { text: "Квалификация", value: "qualification" },
       { text: "Действия", value: "action", sortable: false }
@@ -56,9 +63,14 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
+    async init() {
+      if (this.specialities == null) 
+        await this.update();
+    },
+
     async update() {
-      let data = await api.getDepartments(this);
-      return data
+      let items = await api.getDepartments();
+      this.$store.commit(mutations.SET_SPECIALITIES_FULL,items)
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -66,7 +78,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.saveDepartment(result, this);
+          this.$store.dispatch(mutations.ADD_SPECIALITIE,{ context: this, result: result });
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -78,7 +90,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editDepartment(item, this);
+          this.$store.dispatch(mutations.EDIT_SPECIALITIE,{ context: this, result: result });
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -102,8 +114,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deleteDepartment(item.id, this);
-          this.update();
+          this.$store.dispatch(mutations.DELETE_SPECIALITIE,{ context: this, result: result });
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -31,7 +31,13 @@ import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Grou
 import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Group_Edit";
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Group_Delete";
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
+  computed: {
+    ...mapGetters(["groups"])
+  },
   post_name: {
     name: "CRUD групп",
     url: "groups_crud"
@@ -56,6 +62,14 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
+
+    async init() {
+      if (this.groups == null)
+        return this.update();
+      else
+        return this.groups;
+    },
+
     async update() {
       let data = await api.getGroups(this);
       return data;

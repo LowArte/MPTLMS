@@ -14,15 +14,16 @@
               v-btn(color="success" @click="add") Сохранить
             v-content.pa-0
               v-card.ma-2.pt-3
-                v-text-field.ma-2(v-model="item.href" label="Ссылка")
-                v-text-field.ma-2(v-model="item.title" label="Название специальности")
+                v-text-field.ma-2(v-model="item.image" label="Ссылка на картинку")
+                v-text-field.ma-2(v-model="item.dep_name_full" label="Название специальности")
                 v-text-field.ma-2(v-model="item.qualification" label="Квалификация")
-                v-textarea.ma-2(outlined v-model="item.text" label="Описание")
+                v-textarea.ma-2(outlined v-model="item.info.text" label="Описание")
+                v-autocomplete.ma-2(v-model="item.studysperiod" :items="studysperiods" label="Период обучения")
                 v-alert.mx-2(text dense type="warning")
                   span Перечислите все необходимые спецификации через запятую
-                v-textarea.ma-2(outlined multi-line label="Профессиональные сертификации")
-                v-textarea.ma-2(outlined multi-line label="Наши выпускники умеют")
-                v-textarea.ma-2(outlined multi-line label="На специальности изучаются")
+                v-textarea.ma-2(v-model="item.info.certifications" outlined multi-line label="Профессиональные сертификации")
+                v-textarea.ma-2(v-model="item.info.skills" outlined multi-line label="Наши выпускники умеют")
+                v-textarea.ma-2(v-model="item.info.learning" outlined multi-line label="На специальности изучаются")
 </template>
 
 <script>
@@ -30,33 +31,52 @@ export default {
   data() {
     return {
       dialog: false,
+      studysperiods:[
+        "3 года 10 месяцев",
+        "2 года 10 месяцев",
+        "1 год 10 месяцев",
+      ],
       item: {
-        href: null,
-        title: null,
+        dep_name_full: null,
+        image: null,
         qualification: null,
-        certifications: [],
-        skills: [],
-        learning: [],
-        text: null
-      },
+        studysperiod:"3 года 10 месяцев",
+        info: {
+          certifications: [],
+          skills: [],
+          learning: [],
+          text: null
+        }
+      }
     };
   },
 
-  props: 
-  {
+  props: {
     _add: {
       type: Function,
       default: null
     }
   },
 
-  methods: 
-  {
-      add(item) 
-      {
-        this._add(this.item);
-        this.dialog = false;
-      }
+  methods: {
+    add(item) {
+      this.item.info.certifications = this.item.info.certifications.split(",");
+      this.item.info.skills = this.item.info.skills.split(",");
+      this.item.info.learning = this.item.info.learning.split(",");
+      this._add(this.item);
+      this.item = {
+        dep_name_full: null,
+        image: null,
+        qualification: null,
+        info: {
+          certifications: [],
+          skills: [],
+          learning: [],
+          text: null
+        }
+      };
+      this.dialog = false;
+    }
   }
 };
 </script>

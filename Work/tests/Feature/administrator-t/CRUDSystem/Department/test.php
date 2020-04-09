@@ -48,7 +48,7 @@ class test extends TestCase
         );
         $rep = new DepartamentRepository();
 
-        $department = $rep->getDepartamentsForCRUDByID(1);
+        $department = $rep->getDepartamentsByID(1);
         $department->dep_name_full = "09.02.03 Программиовоние в комьютерных системах";
         $department->qualification = "Программист-техник";
         $department->image = "http://image";
@@ -73,7 +73,7 @@ class test extends TestCase
             ['create-servers']
         );
         $rep = new DepartamentRepository();
-        $department = $rep->getDepartamentsForCRUDByID(2);
+        $department = $rep->getDepartamentsByID(2);
         $response = $this->call('POST', '/api/admin/department_management/delete/'.$department->id);        
         $response->assertStatus(200); //Проверка на ответ
     }

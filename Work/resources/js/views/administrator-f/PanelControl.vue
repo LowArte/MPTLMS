@@ -10,6 +10,7 @@
 <script>
 import api from "@/js/api/panel";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
   mixins: [withSnackbar],
@@ -24,18 +25,22 @@ export default {
     };
   },
 
-  beforeMount() {
-    this.options = api.getSiteOptions(this);
+  async beforeMount() {
+    this.options = await api.getSiteOptions(this);
+    console.log(this.options);
     if (this.options != null)
       this.options.option_value = this.options.option_value == "true";
   },
 
   methods: {
-    send() {
-      api.setOptionValue({
+    async send() {
+      let result = await api.setOptionValue({
         id: this.options.id,
         value: this.options.option_value
       }, this);
+      if(result){
+        this.$store.commit(mutations.SET_PROFILACTIC,this.options.option_value)
+      }
     }
   }
 };

@@ -24,7 +24,7 @@ export default {
     //! Уточнить структуру данных, пердаваемых в back-end
     //!----------------------------------------
     setOptionValue(data, _this) {
-        return axios.post('/api/admin/options/set_options', {
+        return axios.post('/api/save/options', {
             'id': data.id,
             'value': String(data.value)
         })
@@ -40,7 +40,7 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     getSiteOptions(_this) {
-        return axios.get('/api/getters/get_site_options')
+        return axios.get('/api/getters/options')
         .then(result => { return result.data.siteOptions; })
         .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined; });
     },

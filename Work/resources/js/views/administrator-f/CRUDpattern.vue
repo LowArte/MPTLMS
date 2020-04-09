@@ -1,7 +1,7 @@
 <template lang="pug">
     v-layout.row.wrap
       v-card.mx-auto.pa-3(height='auto' width='100%')
-        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="flood" :items="flood" :search="search" sort-by-text="Сортировать" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
+        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="items" :items="items"  :search="search" sort-by-text="Сортировать" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
                 v-card-title.my-2.ma-0.py-2.text-truncate Менеджмент {{title}}
                 v-tooltip(bottom v-if="_func_add != null")
@@ -61,10 +61,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data: () => ({
     title: "", //Заголовок страницы
-    flood: null, //Массив данных
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 30, //Количество отображаемых строк
@@ -75,6 +76,10 @@ export default {
     //?----------------------------------------------
     //!           Данные
     //?----------------------------------------------
+    _flood:{
+      type:String,
+      default:null
+    },
     _headers: {
       type: Array,
       default: null
@@ -87,6 +92,10 @@ export default {
     //!           Функциональная часть
     //?----------------------------------------------
     _func_add: {
+      type: Function,
+      default: null
+    },
+    _func_init: {
       type: Function,
       default: null
     },
@@ -115,13 +124,19 @@ export default {
       default: null
     }
   },
+  computed:{
+    items(){
+      console.log(this.$store.getters[this._flood]);
+       return this.$store.getters[this._flood];
+    }
+  },
   mounted(){
     this.headers = this._headers;
     this.title = this._title;
   },
 
   async beforeMount() {
-    await this.update();
+    await this.init();
   },
 
   methods: {
@@ -141,8 +156,12 @@ export default {
       this._func_remove(item);
     },
 
-    async update() {
-      this.flood = await this._func_update();
+    async init() {
+      await this._func_init();
+    },
+
+    async update(){
+      await this._func_update();
     },
 
     upload() {

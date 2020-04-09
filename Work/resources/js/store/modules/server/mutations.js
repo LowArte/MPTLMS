@@ -5,4 +5,7 @@ export default {
     state.isProfilactic = data.isProfilactic
     state.name = data.name
   },
+  [ types.SET_PROFILACTIC ] (state, data) {
+    state.isProfilactic = data
+  },
 }

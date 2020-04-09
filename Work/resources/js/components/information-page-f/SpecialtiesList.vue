@@ -1,137 +1,57 @@
 <template lang="pug">
   v-layout.row.wrap
     c-add-new-specialtie(v-if="printing == 1" :_add="add")
-    c-specialtie(v-for="(item, index) in items" :key="index" :item="item")
+    c-specialtie(v-for="(item, index) in specialities" :key="index" :item="item")
 </template>
 
 <script>
 import SpecialtiePage_C from "./components/C_SpecialtyPage";
 import C_AddNewSpecialties from "./components/C_AddNewSpecialties";
+import departament_api from "@/js/api/departments"; //Api отделения
+
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
   data: () => ({
     printing: 0,
-    items: [
-      {
-        href: "https://mpt.ru/upload/iblock/bfe/1.jpg",
-        title: "Программирование в компьютерных системах",
-        qualification: "техник-программист",
-        certifications: [
-          "Участник Microsoft IT Academy",
-          "Сертификация по продуктам Microsoft",
-          "Участник академии Касперского",
-          "Сертификация по антивирусным системам",
-          "Обучение по международным учебным программам компании VMWare",
-          "Участник образовательной инициативы Sybase. Проектирование корпоративных информационных систем: обучение и сертификация",
-          "Сертификация по официальным экзаменам компании Certiport"
-        ],
-        skills: [
-          "Свободно ориентироваться в мире компьютеров и компьютерных технологий",
-          "Совершенно владеть современным программным обеспечением",
-          "Самостоятельно создавать новые программные продукты",
-          "Использовать средства систем мультимедиа и компьютерной графики",
-          "Разрабатывать и обслуживать автоматизированные банковские технологии"
-        ],
-        learning: [
-          "Языки программирования('Паскаль','Ассемблер','Си')",
-          "Оператор ЭВМ",
-          "Базы данных",
-          "Технология разработки программных продуктов",
-          "Программное обеспечение компьютерных сетей",
-          "Преддипломная практика и стажировка"
-        ],
-        text:
-          "В цикле профессиональных дисциплин студенты изучают безопасность информационных систем, техническое обслуживание и ремонт компьютеров, администрирование сетей, диагностику и системное программирование, WEB-дизайн и графическое моделирование объектов."
-      },
-      {
-        href:
-          "https://mpt.ru/upload/iblock/33d/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg",
-        title: "Информационные системы (по отраслям)",
-        qualification: "",
-        certifications: ["", "", ""],
-        skills: ["", "", ""],
-        learning: ["", "", ""],
-        text:
-          "Студенты изучают функционирование вычислительных систем, операционные системы, компьютерные сети, метрологию, стандартизацию, сертификацию и техническое документоведение. Среди профессиональных модулей — эксплуатация и модификация информационных систем (куда входят методы и средства их проектирования), участие в разработке информационных систем."
-      },
-      {
-        href: "https://mpt.ru/upload/iblock/886/1.jpg",
-        title: "Прикладная информатика (по отраслям)",
-        qualification: "",
-        certifications: ["", "", ""],
-        skills: ["", "", ""],
-        learning: ["", "", ""],
-        text:
-          "Будущему технику-программисту нужно знать языки программирования, уметь создавать веб-страницы, владеть иностранным языком (английским как минимум). Студентов учат разрабатывать программы для различных целей и задач."
-      },
-      {
-        href: "https://mpt.ru/upload/iblock/f65/3.jpg",
-        title: "Право и организация социального обеспечения",
-        qualification: "",
-        certifications: ["", "", ""],
-        skills: ["", "", ""],
-        learning: ["", "", ""],
-        text:
-          "Важные предметы, которые предстоит изучить будущим юристам, — право социального обеспечения, финансовое, семейное, трудовое, экологическое, конституционное право, страховое дело, гражданский процесс."
-      },
-      {
-        href: "https://mpt.ru/upload/iblock/88b/2.jpg",
-        title: "Компьютерные сети",
-        qualification: "",
-        certifications: ["", "", ""],
-        skills: ["", "", ""],
-        learning: ["", "", ""],
-        text:
-          "Студенты изучают устройство и обслуживание локальных компьютерных сетей, установку и настройку аппаратных и программных средств доступа в сеть Интернет, информационную безопасность компьютеров и сетей, подключение и настройку сетевого оборудования, проведение диагностики и устранение неисправностей сетевого оборудования."
-      },
-      {
-        href: "https://mpt.ru/upload/iblock/a16/4.jpg",
-        title: "Информационная безопасность автоматизированных систем",
-        qualification: "",
-        certifications: ["", "", ""],
-        skills: ["", "", ""],
-        learning: ["", "", ""],
-        text:
-          "В профессиональном цикле дисциплин будущие специалисты по защите информации практикуются в языках программирования, проходят технологии и методы программирования, безопасность операционных систем и сетей."
-      },
-      {
-        href:
-          "https://mpt.ru/upload/iblock/aee/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg",
-        title: "Компьютерные системы и комплексы",
-        qualification: "",
-        certifications: ["", "", ""],
-        skills: ["", "", ""],
-        learning: ["", "", ""],
-        text:
-          "Программа обучения предусматривает изучение архитектуры ЭВМ, периферийных устройств, системного, прикладного ПО, микропроцессорных цифровых устройств, средств обеспечения информационной безопасности в компьютерных системах, принципов построения компьютерных сетей, администрирования Windows, Unix."
-      }
-    ]
+    items: []
   }),
+  mixins: [withSnackbar],
 
-  components: 
-  {
+  computed: {
+    ...mapGetters(["specialities"])
+  },
+
+  components: {
     "c-specialtie": SpecialtiePage_C,
     "c-add-new-specialtie": C_AddNewSpecialties
   },
 
-  props: 
-  {
+  props: {
     _printing: {
       type: Number,
       default: 0
     }
   },
 
-  mounted() 
-  {
+  async beforeMount() {
+    if(this.specialities == null)
+    {
+      let items = await departament_api.getDepartments();
+      this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
+    }
+
+  },
+
+  mounted() {
     this.printing = this._printing;
   },
 
-  methods: 
-  {
-    add(item) 
-    {
-      this.items.unshift(item);
+  methods: {
+    add(item) {
+      this.$store.commit(mutations.ADD_SPECIALITIE,{context:this,"result":item});
     }
   }
 };

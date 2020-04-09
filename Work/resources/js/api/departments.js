@@ -42,7 +42,7 @@ export default {
     getDepartments(_this) {
         return axios.get('/api/getters/departments')
         .then(result => { return result.data.departments; })
-        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(exception => { console.log(exception); _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*Получение отделений для комбобокса
@@ -86,8 +86,8 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     saveDepartment(department, _this) {
-        return axios.post('/api/admin/department_management/save/', department)
-        .then(res => { _this.showMessage("Сохранено!"); return true; })
+        return axios.post('/api/save/departament', department)
+        .then(res => { _this.showMessage("Сохранено!"); return res.data.id; })
         .catch(exception => { _this.showError("Ошибка выполения"); return false; });
     },
 
@@ -99,7 +99,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deleteDepartment(id, _this) {
-        return axios.post('/api/admin/department_management/delete/' + id)
+        return axios.post('/api/delete/departament/' + id)
         .then(result => { _this.showMessage("Удалено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -112,27 +112,8 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editDepartment(department, _this) {
-        return axios.post('/api/admin/department_management/edit/' + department.id, { "department": department })
+        return axios.post('/api/edit/departament/',  department)
         .then(res => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
-
-
-
-
-
-    //*----------------------------------------
-    //!         Очистка таблицы
-    //*----------------------------------------
-    //*Полное удаление отделений
-    //! Комментарий ---------------------------
-    //? Реализуется сброс данных в таблице *departments* (Специальности) 
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    dropDepartments(_this) {
-        return axios.post('/api/admin/department_management/deleteAll')
-        .then(res => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
-    }
 }

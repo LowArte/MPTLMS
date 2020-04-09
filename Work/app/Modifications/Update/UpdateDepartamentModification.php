@@ -15,16 +15,13 @@ class UpdateDepartamentModification extends BaseModification
         return Model::class;
     }
 
-    public function updateDepartamentInDatabase($id,$data)
+    public function updateDepartamentInDatabase($data)
     {
-        $departament = $this->startCondition()->find($id);
-        try{
-            $departament->fill($data);
-            $departament->save();
-        }
-        catch(Exception $e){
-            return false;
-        }
-        return true;
+        $departament = $this->startCondition()->find($data['id']);
+        $departament->fill($data);
+        $result = $departament->save();
+        if($result)
+            return true;
+        return  false;
     }
 }

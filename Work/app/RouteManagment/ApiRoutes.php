@@ -20,7 +20,8 @@ class ApiRoutes
 
             Route::get('places','Api\PlaceController@getPlaces')->name('places');
 
-            Route::get('departments','Api\DepartamentController@getDepartments')->name('departments');
+            Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
+
             Route::get('departments_for_combobox','Api\DepartamentController@getDepartmentsForCombobox')->name('departments_for_combobox');
 
             Route::get('posts','Api\PostController@getPosts')->name('posts');
@@ -50,6 +51,11 @@ class ApiRoutes
          */
         Route::name('save.')->prefix('save')->group(function () {
             Route::post('replacement/{group_id}/{date}', 'Api\ReplacementController@save')->name('replacement');
+
+            Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
+
+            Route::post('departament','Api\DepartamentController@save')->name('departament');
+
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -59,12 +65,16 @@ class ApiRoutes
             Route::post('callschedule', 'Api\CallScheduleController@edit')->name('callschedule'); 
 
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
+
+            Route::post('departament','Api\DepartamentController@edit')->name('departament');
         });
         /**
          * Методы отвечаюшие за удаление общих данных
          */
         Route::name('delete.')->prefix('delete')->group(function () {
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
+
+            Route::post('departament/{departament_id}','Api\DepartamentController@delete')->name('departament');
         });
     }
 }

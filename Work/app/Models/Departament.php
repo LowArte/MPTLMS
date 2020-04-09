@@ -30,6 +30,10 @@ class Departament extends Model
         'dep_name_full','qualification','image','info','studysperiod'
     ];
 
+    protected $casts = [
+        'info' => 'array'
+    ];
+
     public function groups()
     {
         return $this->hasMany(Group::class);

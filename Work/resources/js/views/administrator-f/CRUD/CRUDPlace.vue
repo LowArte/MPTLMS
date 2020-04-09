@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Места проведения уч. з.'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Места проведения уч. з.'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -31,7 +31,13 @@ import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Plac
 import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Place_Edit";
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Place_Delite";
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
+  computed: {
+    ...mapGetters(["places"])
+  },
   post_name: {
     name: "CRUD мест проведения",
     url: "places_crud"

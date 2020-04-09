@@ -3,17 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Auth;
 use Illuminate\Http\Request;
 
-use Debugbar;
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
-        if (!Auth::attempt($credentials)) {
+        if (!auth()->attempt($credentials)) {
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
@@ -36,7 +34,7 @@ class LoginController extends Controller
         foreach ($user->tokens as $token) {
             $token->revoke();
         }
-        Auth::logout();
+        auth()->logout();
         return response()->json(["success" => true]);
     }
 

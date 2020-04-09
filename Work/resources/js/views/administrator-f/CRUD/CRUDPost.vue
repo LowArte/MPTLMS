@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_headers="headers" :_title="'Роли'")
+    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_headers="headers" :_title="'Роли'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
