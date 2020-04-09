@@ -83,65 +83,6 @@ v-content.pa-0
         v-flex
             v-card
                 v-system-bar(color="pimary")
-                    small Успеваемость
-                v-card-text Средний бал
-                    div.text-center.ma-3
-                        p.text-center.display-1.ma-0 {{rating}}
-                v-card-text Данный показатель говорит о Вашей успеваемости. Значение является усредненным из общего кол-ва оценок. Если показатель слишком мал, Вам стоит обратить внимание на свои оценки.
-                v-divider
-                v-card-actions
-                    v-spacer
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(icon light v-on="on" color="pimary")
-                                v-icon more_horiz
-                        span Подробнее
-        v-flex
-            v-card
-                v-system-bar(color="pimary")
-                    small Посещаемость
-                v-card-text Кол-во пропущенных часов
-                    div.text-center.ma-3
-                        p.text-center.display-1.ma-0 {{hours}}
-                v-card-text Данный показатель указывает на кол-во часов пропущенных за семестр. Если у Вас более 70% пропущенных занятий, то Вам следует обратиться к педагогу организатору вашего отделения.
-                v-divider
-                v-card-actions
-                    v-spacer
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(icon light v-on="on" color="pimary")
-                                v-icon more_horiz
-                        span Подробнее
-    v-layout.row.wrap
-        v-flex
-            v-card
-                v-system-bar(color="pimary")
-                    small Преподаватели
-                v-card-text Тут ещё нет преподавателей
-                v-divider
-                v-card-actions
-                    v-spacer
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(block text light v-on="on" color="pimary") Показать всех
-                        span Показать всех
-    v-layout.row.wrap
-        v-flex
-            v-card
-                v-system-bar(color="pimary")
-                    small Ваши одногруппники
-                v-card-text Тут ещё никого нет
-                v-divider
-                v-card-actions
-                    v-spacer
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(block text light v-on="on" color="pimary") Показать всех
-                        span Показать всех
-    v-layout.row.wrap
-        v-flex
-            v-card
-                v-system-bar(color="pimary")
                     small Услуги
                 v-card-text.body-1 Услуги по заказу справок и характеристик для организаций/военных комиссариатов
                 v-card-actions
@@ -150,23 +91,23 @@ v-content.pa-0
                             v-btn(block text light v-on="on" color="pimary") Получить
                                 v-spacer
                                 v-icon keyboard_arrow_right
-                        span Справки об обучение в МПТ, характеристик в военный комиссариат.
-                v-card-text.body-1 Услуги по оформлению дополнительных выплат к ситипендии в виде материальной помощи многодетным семьям или пособия по инвалидности. 
+                        span Справки об обучение в МПТ, характеристик в военный комиссариат
+                v-card-text.body-1 Услуги по оформлению дополнительных выплат к ситипендии в виде материальной помощи многодетным семьям или пособия по инвалидности
                 v-card-actions
                     v-tooltip(bottom)
                         template(v-slot:activator="{ on }")
                             v-btn(block text light v-on="on" color="pimary") Получить
                                 v-spacer
                                 v-icon keyboard_arrow_right
-                        span Заявление на получение материальной помощи или пособия по инвалидности.
-                v-card-text.body-1 Психологическая помощь студентам.
+                        span Заявление на получение материальной помощи или пособия по инвалидности
+                v-card-text.body-1 Психологическая помощь студентам
                 v-card-actions
                     v-tooltip(bottom)
                         template(v-slot:activator="{ on }")
                             v-btn(block text light v-on="on" color="pimary") Получить
                                 v-spacer
                                 v-icon keyboard_arrow_right
-                        span Записаться на прием к психологу.
+                        span Записаться на прием к психологу
 </template>
 
 <script>
