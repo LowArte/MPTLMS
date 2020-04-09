@@ -1,42 +1,49 @@
 <template lang="pug">
-    v-layout.column.wrap
-        c-comfirm-dialog(ref='qwestion')              
-        v-flex.ma-2.mb-0.pa-0.row
-            v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
-            v-combobox.ma-1(label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
-        v-flex.flex-grow-0.ma-2.mt-0.pa-0.row
-            v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
+v-content.ma-0.pa-2
+  v-layout.column.wrap
+    c-comfirm-dialog(ref='qwestion')              
+    v-flex
+      v-card.mx-auto(min-width="300")
+        v-system-bar(dark color="info")
+          span(style="color: white;") Фильры
+        v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
+        v-combobox.mx-3.my-2(dense label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
+        v-flex.flex-grow-0.mx-3.my-2.pa-0.row
+            v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="300px")
                 template(v-slot:activator="{ on }")
                     v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
-                    v-btn(text color="primary" @click="dateDialog.model = false") Отмены
-                    v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
-        v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllGroup" color="primary" @change="changeFilter" block inset label="Вывести замены для всех групп!")
-        v-switch.ma-0.pa-0.ml-2.mr-2(v-model="checkAllDate" color="primary" @change="changeFilter" block inset label="Вывести замены для всех дат!")
-        //- Отрисовка замен
-        v-layout.row.wrap(v-for="(groups_key, groups_index) in groups" :key="groups_index")
-            v-flex.ma-1(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
-                v-hover(v-slot:default='{ hover }')
-                    v-card.pa-2.pb-0.mx-auto(:elevation='hover ? 12 : 6'  min-width="300px" max-width="650px" style="display: flex; flex-direction: column;")
-                        v-card-title.subtitle-1(style="color: #FF3D00;") {{groups_key}} - {{date_key}}
-                        v-divider
-                        v-simple-table()
-                            thead
-                                tr
-                                    th.text-left № пары
-                                    th.text-left Что заменяют
-                                    th.text-left На что заменяют
-                                    th.text-left Дата замены
-                            tbody
-                                tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
-                                    td {{ replacement_key['swap']['caselesson'] }}
-                                    td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} ({{ replacement_key['swap']['oldteacher'] }})
-                                    td(v-else-if="replacement_key['swap']['oldlesson'] != null && replacement_key['swap']['oldlesson'] != ''") {{ replacement_key['swap']['oldlesson'] }}
-                                    td(v-else) Дополнительное занятие
-                                    td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
-                                    td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
-                                    td(v-else) Занятие отменено
-                                    td {{ replacement_key['created_at'] }}   
+                    v-btn(text dark color="accent" @click="dateDialog.model = false") Отмены
+                    v-spacer
+                    v-btn(text dark color="success" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
+        v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" @change="changeFilter" block label="Изменения для всех групп")
+        v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" @change="changeFilter" block label="Изменения на имеющиеся даты")
+  v-alert(border="left" dense type="warning")
+      span.subtitle-1(primary--text) Обратите внимание, что изменения в расписании выкладываются каждый день с 17:00 и до 19:00 вечера
+  v-layout.row.wrap(v-for="(groups_key, groups_index) in groups" :key="groups_index")
+      v-flex(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
+        v-card.mx-auto(min-width="300")
+          v-system-bar(dark color="accent")
+            span(style="color: white;") Группа: {{groups_key}} 
+            v-spacer
+            span(style="color: white;") Дата: {{date_key}}
+          v-simple-table
+              thead
+                  tr
+                    th.text-left №
+                    th.text-left Заменяемое
+                    th.text-left Заменено на
+                    th.text-left Дата замены
+              tbody
+                  tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
+                      td {{ replacement_key['swap']['caselesson'] }}
+                      td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} ({{ replacement_key['swap']['oldteacher'] }})
+                      td(v-else-if="replacement_key['swap']['oldlesson'] != null && replacement_key['swap']['oldlesson'] != ''") {{ replacement_key['swap']['oldlesson'] }}
+                      td(v-else) Дополнительное занятие
+                      td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
+                      td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
+                      td(v-else) Занятие отменено
+                      td {{ replacement_key['created_at'] }}   
 </template>
 
 <script>
@@ -58,8 +65,8 @@ export default {
   },
 
   data: () => ({
-    groups_info: {groups:null, selected_group:null}, //Группы
-    departaments_info: {departaments:null, selected_departament:null}, //Отделения
+    groups_info: { groups: null, selected_group: null }, //Группы
+    departaments_info: { departaments: null, selected_departament: null }, //Отделения
     parseReplacements: null, //Замены
     replacements: null, //Замены
     checkAllGroup: false, //Все группы
@@ -76,21 +83,23 @@ export default {
 
   methods: {
     //Получение отделений
-    async getDepartament()
-    {
-      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
-      if(this.departaments_info.departaments != null)
-      {
+    async getDepartament() {
+      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(
+        this
+      );
+      if (this.departaments_info.departaments != null) {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
         this.departament_change();
       }
-    }, 
+    },
 
     //Получение групп для отделения
     async departament_change() {
-      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
-      if(this.groups_info.groups != null)
-      {
+      this.groups_info.groups = await group_api.getGroupsByDepartamentId(
+        this.departaments_info.selected_departament.id,
+        this
+      );
+      if (this.groups_info.groups != null) {
         this.groups_info.selected_group = this.groups_info.groups[0];
         this.changeFilter();
       }
@@ -98,28 +107,32 @@ export default {
 
     //Получение замен с учётом фильтров
     async changeFilter() {
-      if (this.checkAllGroup && this.checkAllDate) 
+      if (this.checkAllGroup && this.checkAllDate)
         //Получить все замены для всех дат и групп
-        this.replacements = await replacements_api.getReplacements(this)
-      else 
-      if (this.checkAllGroup) 
+        this.replacements = await replacements_api.getReplacements(this);
+      else if (this.checkAllGroup)
         //Получить замены для всех групп
-        this.replacements = await replacements_api.getReplacementsByDate(this.dateDialog.date, this)
-      else 
-      if (this.checkAllDate) 
+        this.replacements = await replacements_api.getReplacementsByDate(
+          this.dateDialog.date,
+          this
+        );
+      else if (this.checkAllDate)
         //Получить все замены для всех дат
-        this.replacements = await replacements_api.getReplacementsByGroup(this.groups_info.selected_group.id, this);
-      else 
-      {
+        this.replacements = await replacements_api.getReplacementsByGroup(
+          this.groups_info.selected_group.id,
+          this
+        );
+      else {
         this.replacements = await replacements_api.getReplacementsByGroupByDate(
-        {
-          group_id: this.groups_info.selected_group.id,
-          date: this.dateDialog.date
-        }, this);
+          {
+            group_id: this.groups_info.selected_group.id,
+            date: this.dateDialog.date
+          },
+          this
+        );
       }
 
-      if (this.replacements != null)
-          this.parseReplacement();
+      if (this.replacements != null) this.parseReplacement();
     },
 
     //Перевод массив для вывода

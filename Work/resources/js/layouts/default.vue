@@ -13,7 +13,7 @@
       <c-logout-default v-if="isAuthenticated"></c-logout-default>
     </v-app-bar>
     <v-content style="background: white;">
-      <v-container fluid grid-list-md text-xs-center>
+      <v-container pa-0 fluid grid-list-md text-xs-center>
         <v-alert v-if="isProfilactic" class="my-2" text dense type="warning">
           <span
             class="primary--text subtitle-1"

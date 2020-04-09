@@ -1,9 +1,10 @@
 <template lang="pug">
-  v-overlay(:value="overlayLoadingShow")
-    v-layout(row)
-      v-progress-circular(indeterminate size="32")
-    v-layout(row)
-      span {{ overlayLoadingText }}
+  v-fade-transition
+    v-overlay(:value="overlayLoadingShow")
+      v-layout(row)
+        v-progress-circular.mx-auto(indeterminate size="32")
+      v-layout(row)
+        span.mx-auto {{ overlayLoadingText }}
 </template>
 
 <script>
@@ -12,11 +13,8 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters([
-      "overlayLoadingShow",
-      "overlayLoadingText",
-    ])
-  },
+    ...mapGetters(["overlayLoadingShow", "overlayLoadingText"])
+  }
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-expansion-panels(class="pa-2" v-model="panel" multiple)
+  v-expansion-panels(class="pa-0 mt-3" v-model="panel" multiple)
     v-expansion-panel(v-for="(component,i) in components" :key="i")
       v-expansion-panel-header {{ component.header }}
       v-expansion-panel-content
