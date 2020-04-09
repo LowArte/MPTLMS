@@ -85,8 +85,12 @@ export default {
   methods: {
     //Отправка сообщения-ответа от канцелярии, без фиксации того что справка выполнена
     async sendEmailAnswer(email) {
-      if(await cerificateApi.sendEmailAnswer({email: email, text: this.modelmessage, id: this.expanded[0].id}, this))
-      {
+      if (
+        await cerificateApi.sendEmailAnswer(
+          { email: email, text: this.modelmessage, id: this.expanded[0].id },
+          this
+        )
+      ) {
         this.items.splice(this.expanded[0]);
         this.modelmessage = "";
       }
@@ -94,8 +98,12 @@ export default {
 
     //Отправка сообщения о том, что справка готова
     async sendEmailDone(email) {
-      if(await cerificateApi.sendEmailDone({email: email,id: this.expanded[0].id}, this))
-      {
+      if (
+        await cerificateApi.sendEmailDone(
+          { email: email, id: this.expanded[0].id },
+          this
+        )
+      ) {
         this.expanded[0].done = true;
         this.Update();
         this.modelmessage = "";
@@ -103,13 +111,13 @@ export default {
     },
 
     //Отправка сообщения о том, что справка готова
-    async Update() 
-    {
+    async Update() {
       this.items = await cerificateApi.getCertificates(this);
-      if(this.items != null)
-      {
+      if (this.items != null) {
         for (var i = 0; i < this.items.length; i++)
-          this.items[i].certificates_data = JSON.parse(this.items[i].certificates_data);
+          this.items[i].certificates_data = JSON.parse(
+            this.items[i].certificates_data
+          );
       }
     }
   }

@@ -6,10 +6,7 @@
       <c-app-menu></c-app-menu>
     </v-navigation-drawer>
     <v-app-bar color="primary" dark app clipped-left clipped-right fixed>
-      <div
-        :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'"
-        class="ml-0 pl-3"
-      >
+      <div :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'" class="ml-0 pl-3">
         <v-btn icon @click="leftdrawer = !leftdrawer">
           <v-icon>menu</v-icon>
         </v-btn>
@@ -17,7 +14,7 @@
       <div v-if="user" class="d-flex align-center" style="margin-left: auto">
         <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
           <small class="white--text">{{user.name}}</small>
-          <small v-if="user.disabled == 1" class="red--text">{{Заблокирован}}</small>
+          <small v-if="user.disabled == 1" class="red--text"><kbd>{{Заблокирован}}</kbd></small>
           <v-avatar class="ml-2" size="32" color="white">
             <v-icon>account_circle</v-icon>
           </v-avatar>
@@ -25,14 +22,17 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="rightdrawer" fixed right clipped app>
-      <v-card outlined style="border: none;" flat>
+    <v-navigation-drawer v-model="rightdrawer" right clipped fixed app>
+      <v-card flat>
         <c-logout></c-logout>
+        <router-link class='nounderline' to="/password_reset">
+          <v-btn block text color="info"> Сменить пароль </v-btn>
+        </router-link>
       </v-card>
     </v-navigation-drawer>
 
     <v-content style="background: white;">
-      <v-container fluid grid-list-md text-xs-center>
+      <v-container pa-0 fluid grid-list-md text-xs-center>
         <transition>
           <keep-alive>
             <router-view></router-view>

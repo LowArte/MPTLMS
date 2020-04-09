@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-btn(@click="logout()" block text :loading="loading" :disabled="loading") ВЫХОД
+  v-btn(@click="logout()" block text :loading="loading" :disabled="loading" color="accent" ) ВЫХОД
 </template>
 
 <script>

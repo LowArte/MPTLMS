@@ -11,11 +11,11 @@ const opts = {
         themes: {
             light: {
                 primary: '#434343',
-                accent: '#FE532C',
-                error: '#CC2222',
+                accent: '#FF5722',
+                error: '#FF3D00',
                 info: '#4066FF',
-                success: '#7EB03D',
-                warning: '#FFCA28',
+                success: '#8BC34A',
+                warning: '#FBC02D',
             }
         }
     }

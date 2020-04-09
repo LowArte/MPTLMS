@@ -1,53 +1,51 @@
 <template lang="pug">
-  v-layout.row.wrap
-    v-col(cols="12")
-      v-card.mx-auto.pa-4(height="auto" width="max")
-          v-form(v-model="form")
-            v-text-field(:rules="notEmtyRules" v-model="school" label="Школа")
-            v-text-field(
-                  :rules="yearMptRules"
-                  v-model="yearmpt"
-                  v-mask="mask"
-                  label="Год поступления в учебное заведение")
-            v-select(
-                  :rules="notEmtyRules"
-                  v-model="postofgroup"
-                  :items="arrPostOfGroup"
-                  label="Обязанности в группе")
-            v-textarea(
-                  v-model="modelprogress"
-                  :auto-grow="true"
-                  :counter="255 ? 255 : false"
-                  :flat="true"
-                  :hint="'Не более 255 символов'"
-                  :label="'Успеваемость'"
-                  :persistent-hint="false"
-                  :placeholder="''"
-                  :row-height="24"
-                  :rows="1"
-                  :rules="progressRules")
-            v-textarea(
-                  v-model="modelorder"
-                  :auto-grow="true"
-                  :counter="255 ? 255 : false"
-                  :flat="true"
-                  :hint="'Не более 255 символов'"
-                  :label="'Куда нужна характеристика'"
-                  :row-height="24"
-                  :rows="3"
-                  :rules="orderRules")
-            v-switch.shrink.mr-2.mt-2(
-                  v-model="enabled"
-                  color="primary"
-                  value="primary"
-                  :rules="policyRules"
-                  label="Отправляя заявку на характеристику подтверждаю, что с условиями заказа справок ознакомлен")
-            v-btn.mt-2.justify-center.white--text(
-                  :disabled="!form"
-                  color="blue"
-                  block
-                  depressed
-                  @click="sendQuery") Заказать
+v-card.mx-auto.pa-4(height="auto" width="max")
+    v-form(v-model="form")
+      v-text-field(:rules="notEmtyRules" v-model="school" label="Школа")
+      v-text-field(
+            :rules="yearMptRules"
+            v-model="yearmpt"
+            v-mask="mask"
+            label="Год поступления в учебное заведение")
+      v-select(
+            :rules="notEmtyRules"
+            v-model="postofgroup"
+            :items="arrPostOfGroup"
+            label="Обязанности в группе")
+      v-textarea(
+            v-model="modelprogress"
+            :auto-grow="true"
+            :counter="255 ? 255 : false"
+            :flat="true"
+            :hint="'Не более 255 символов'"
+            :label="'Успеваемость'"
+            :persistent-hint="false"
+            :placeholder="''"
+            :row-height="24"
+            :rows="1"
+            :rules="progressRules")
+      v-textarea(
+            v-model="modelorder"
+            :auto-grow="true"
+            :counter="255 ? 255 : false"
+            :flat="true"
+            :hint="'Не более 255 символов'"
+            :label="'Куда нужна характеристика'"
+            :row-height="24"
+            :rows="3"
+            :rules="orderRules")
+      v-switch.shrink.mr-2.mt-2(
+            v-model="enabled"
+            color="primary"
+            value="primary"
+            :rules="policyRules"
+            label="Отправляя заявку на характеристику подтверждаю, что с условиями заказа справок ознакомлен")
+      v-btn.mt-2.justify-center.white--text(
+            :disabled="!form"
+            color="blue"
+            block
+            depressed
+            @click="sendQuery") Заказать
 </template>
 
 <script>
@@ -72,6 +70,7 @@ export default {
     dateendschool: "",
     yearmpt: "",
     postofgroup: "",
+    enabled: false,
     arrPostOfGroup: ["Староста", "Ответственный за успеваемость", "Ответственный за посещаемость", "Культ-орг", "Физ-орг", "Студент"],
     notEmtyRules: [v => v.length > 0 || "Поле не заполнено"],
     progressRules: [
@@ -88,7 +87,7 @@ export default {
       v => v.length > 0 || "Текст заявки не указан",
       v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
     ],
-    policyRules: [v => !!v || "Подтвердите!"],
+    policyRules: [v => !!v || "Ожидается согласие на обработку данных"],
     form: false
   }),
 
@@ -115,6 +114,7 @@ export default {
       this.postofgroup = "";
       this.modelprogress = "";
       this.modelorder = "";
+      this.enabled = false;
     }
   }
 };
