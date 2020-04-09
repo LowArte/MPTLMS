@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container(fluid grid-list-md text-xs-center)
+v-container(fluid grid-list-md text-xs-center id="dynamic-fade-demo")
     v-content.pa-0
         v-alert.my-2(border="left" dense type="warning")
             span.subtitle-1(primary--text) Данный раздел может содержать ошибки, так как находится в процесссе разработки. Если найдёте какие-либо ошибки, сообщите нам. Спасибо!
