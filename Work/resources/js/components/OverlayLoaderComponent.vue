@@ -1,6 +1,6 @@
 <template lang="pug">
   v-fade-transition
-    v-overlay(:value="overlayLoadingShow" style="filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=5);")
+    v-overlay(:value="overlayLoadingShow")
       v-layout(row)
         v-progress-circular.mx-auto(indeterminate size="32")
       v-layout(row)
