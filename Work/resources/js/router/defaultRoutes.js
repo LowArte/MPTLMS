@@ -13,5 +13,10 @@ export const defaultRoutes = [
         path: '/password_reset/',
         name: 'Reset',
         component: () => import( /* webpackChunkName: "views-auth-f-reset" */ '@/js/views/auth-f/Reset.vue'),
+    },
+    {
+        path: '/password_new/',
+        name: 'Reset_new',
+        component: () => import( /* webpackChunkName: "views-auth-f-reset" */ '@/js/views/auth-f/Reset_new.vue'),
     }
 ]

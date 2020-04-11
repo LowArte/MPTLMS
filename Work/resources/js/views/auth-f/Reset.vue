@@ -36,7 +36,7 @@ export default {
       this.loading = true;
       if (this.$refs.Reset.validate()) {
         this.showMessage("Восстановление пароля прошло успешно");
-      } else this.showError("Укажите корректно почту");
+      } else this.showError("Укажите корректно почту!");
       this.loading = false;
     }
   }
