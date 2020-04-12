@@ -6,12 +6,12 @@
       v-form(ref='form')
         v-card-text
           v-text-field(v-model="item.place_name" :rules="place_nameRules" label="Наименование места проведения")
-          v-text-field(v-model="item.place_country" :rules="place_countryRules" label="Страна")
-          v-text-field(v-model="item.place_index" :rules="place_indexRules" label="Почтовый индекс")
-          v-text-field(v-model="item.place_city" :rules="place_cityRules" label="Город")
-          v-text-field(v-model="item.place_street" :rules="place_streetRules" label="Улица")
-          v-text-field(v-model="item.place_building_number" :rules="place_building_numberRules" label="Номер здания")
-          v-text-field(v-model="item.place_piy" label="Корпус")          
+          v-text-field(v-model="item.info.place_country" :rules="place_countryRules" label="Страна")
+          v-text-field(v-model="item.info.place_index" :rules="place_indexRules" label="Почтовый индекс")
+          v-text-field(v-model="item.info.place_city" :rules="place_cityRules" label="Город")
+          v-text-field(v-model="item.info.place_street" :rules="place_streetRules" label="Улица")
+          v-text-field(v-model="item.info.place_building_number" :rules="place_building_numberRules" label="Номер здания")
+          v-text-field(v-model="item.info.place_piy" label="Корпус")          
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -29,14 +29,17 @@ export default {
   data() {
     return {
       dialog: false,
+      default_item: null,
       item: {
         place_name: null,
-        place_index: null,
-        place_country: null,
-        place_city: null,
-        place_street: null,
-        place_building_number: null,
-        place_piy: null
+        info:{
+          place_index: "",
+          place_country: "",
+          place_city: "",
+          place_street: "",
+          place_building_number: "",
+          place_piy: ""
+        }
       },
       resolve: null,
       place_nameRules: [
@@ -57,6 +60,11 @@ export default {
       place_piyRules: [v => !!v || "Поле не должно оставаться пустым"],
     };
   },
+
+  beforeMount(){
+    this.default_item = this.item;
+  },
+
   methods: {
     pop() {
       this.dialog = true;
@@ -69,14 +77,14 @@ export default {
       {
         this.dialog = false;
         this.resolve(this.item);
-        this.item = Object.assign({}, null);
+        this.item = Object.assign({}, this.default_item);
       } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, null);
+      this.item = Object.assign({}, this.default_item);
       this.resolve(false);
     }
   }

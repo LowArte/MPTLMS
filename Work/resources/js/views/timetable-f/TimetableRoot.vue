@@ -67,7 +67,6 @@
 </style>
 
 <script>
-import places_api from "@/js/api/places"; //Api мест проведений
 import callSchedule_api from "@/js/api/callSchedule"; //Api мест проведений
 import departament_api from "@/js/api/departments"; //Api отделения
 import group_api from "@/js/api/group"; //Api групп
@@ -82,7 +81,13 @@ Date.prototype.getWeek = function() {
   return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
 };
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
+  computed: {
+    ...mapGetters(["specialities_combo", "userposts", "groups_combo", "places_combo"]),
+  },
   mixins: [withSnackbar, withOverlayLoading],
   post_name: {
     name: "Учебное расписание",
@@ -101,7 +106,6 @@ export default {
       isToday: null, //Текущий день
       titleDialog: "Конструктор расписания",
       dialog: false,
-      places: null, 
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
     };
   },
@@ -112,14 +116,6 @@ export default {
     {
       this.showLoading("Получение расписания звонков");
       this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
-      this.closeLoading();
-    },
-
-    //Получение мест проведений
-    async getPlaces()
-    {
-      this.showLoading("Получение мест проведения");
-      this.places = await places_api.getPlaces(this);
       this.closeLoading();
     },
 
@@ -214,11 +210,10 @@ export default {
   beforeMount() {
     this.isToday = this.isChisl();
     this.getDepartament();
-    this.getPlaces();
   },
 
   mounted(){
-    //this.getCallScheduleForPanel();
+    this.getCallScheduleForPanel();
   }
 };
 </script>

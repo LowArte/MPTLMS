@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Учетные записи пользователей'")
+    c-crud-form(ref='crud' _flood="users" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -31,7 +31,13 @@ import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_User
 import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_User_Edit";
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_User_Delete";
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
+  computed: {
+    ...mapGetters(["users"])
+  },
   post_name: {
     name: "CRUD пользователей",
     url: "users_crud"
@@ -45,7 +51,6 @@ export default {
     "c-remove-dialog": removeDialog_C
   },
   data: () => ({
-    users: [],
     headers: [
       { text: "Почта", value: "email" },
       { text: "Роль", value: "post.name" },
@@ -58,9 +63,14 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
+    async init() {
+      if (this.users == null)
+        return this.update();
+    },
+
     async update() {
-      let data = await api.getUsers(this);
-      return data
+      let items = await api.getUsers(this);
+      this.$store.commit(mutations.SET_USERS_FULL, items)
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -68,9 +78,9 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.saveUser(result, this);
+          this.$store.dispatch(mutations.ADD_USER,{ context: this, result: result });
         } else {
-          this.showInfo("Действие отменено пользователем");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -80,22 +90,9 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editUser(result, this);
-          this.showMessage("Действие выполнено успешно");
+          this.$store.dispatch(mutations.EDIT_USER,{ context: this, result: result });
         } else {
-          this.showInfo("Действие отменено пользователем");
-        }
-      });
-    },
-    //?----------------------------------------------
-    //!           Удаление всех объектов
-    //?----------------------------------------------
-    clear() {
-      this.$refs.qwestion.pop().then(result => {
-        if (result) {
-          api.dropUsers(this);
-        } else {
-          this.showInfo("Действие отменено пользователем");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -105,9 +102,9 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deleteUser(result, this);
+          this.$store.dispatch(mutations.DELETE_USER,{ context: this, result: result });
         } else {
-          this.showInfo("Действие отменено пользователем");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     }

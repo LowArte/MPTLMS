@@ -53,7 +53,7 @@ export default {
     //!----------------------------------------
     getGroupsByDepartamentId(department_id, _this) {
         return axios.get('/api/getters/group_by_departament_id/' + department_id)
-        .then(result => {return result.data.groups_info.groups;})
+        .then(result => { return result.data.groups_info.groups;})
         .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 
@@ -68,7 +68,7 @@ export default {
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
     saveGroup(group, _this) {
-        return axios.post('/api/admin/group_management/save', {"group": group})
+        return axios.post('/api/save/group/', group)
         .then(res => {_this.showMessage("Выполнено!"); return true;})
         .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
@@ -81,7 +81,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editGroup(group, _this) {
-        return axios.post('/api/admin/group_management/edit/' + group.id, {"group": group})
+        return axios.post('/api/edit/group/', group)
         .then(res => {_this.showMessage("Выполнено!"); return true;})
         .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
@@ -94,20 +94,8 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deleteGroup(group_id, _this) {
-        return axios.post('/api/admin/group_management/delete/' + group_id)
+        return axios.post('/api/delete/group/' + group_id)
         .then(result => {_this.showMessage("Выполнено!"); return true;})
         .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
-
-    //*Логическое удаление всех записей
-    //! Комментарий ---------------------------
-    //? Реализуется стирание данных в таблице *GROUPS* (Группы) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    dropGroups(_this) {
-        return axios.post('/api/admin/group_management/deleteAll')
-        .then(res => {_this.showMessage("Выполнено!"); return true;})
-        .catch(exception => {_this.showError("Ошибка выполнения!"); return false});
-    }
 }

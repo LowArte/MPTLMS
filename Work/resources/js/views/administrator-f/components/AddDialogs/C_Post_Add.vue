@@ -48,7 +48,7 @@ export default {
         this.resolve(this.item);
         this.item = Object.assign({}, null);
       } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {

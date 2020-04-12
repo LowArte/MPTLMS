@@ -53,7 +53,7 @@ export default {
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
     savePlace(place, _this) {
-        return axios.post('/api/admin/place_management/save', { "place": place })
+        return axios.post('/api/save/place', place)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -66,7 +66,7 @@ export default {
     //! Реализовать back-end для api && Уточнить струткуру данных
     //!----------------------------------------
     editPlace(place, _this) {
-        return axios.post('/api/admin/place_management/edit/' + place.id, { "place": place })
+        return axios.post('/api/edit/place/', place)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -79,20 +79,8 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deletePlace(place_id, _this) {
-        return axios.post('/api/admin/place_management/delete/' + place_id)
+        return axios.post('/api/delete/place/' + place_id)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false;});
     },
-
-    //*Логическое удаление мест проведения
-    //! Комментарий ---------------------------
-    //? Реализуется стирание данных в таблице *PLACES* (Места проведения занятий) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    dropPlaces(_this) {
-        return axios.post('/api/admin/place_management/deleteAll')
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
-    }
 }

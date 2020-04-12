@@ -13,10 +13,26 @@ class PlacesSeeder extends Seeder
     {
         $data = array(
             [
-                'place_name' => "Нахимовский проспект"
+                'place_name' => "Нахимовский проспект",
+                'info' => json_encode([
+                    "place_index" => "",
+                    "place_country" => "",
+                    "place_city" => "",
+                    "place_street" => "",
+                    "place_building_number" => "",
+                    "place_piy" => "",
+                ])
             ],
             [
-                'place_name' => "Неженская улица"
+                'place_name' => "Неженская улица",
+                'info' => json_encode([
+                    "place_index" => "",
+                    "place_country" => "",
+                    "place_city" => "",
+                    "place_street" => "",
+                    "place_building_number" => "",
+                    "place_piy" => "",
+                ])
             ]
         );
         DB::table("places")->insert($data);

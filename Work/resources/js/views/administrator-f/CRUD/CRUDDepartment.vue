@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" _flood="specialities" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
+    c-crud-form(ref='crud' :_func_update="update" _flood="specialities" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
     c-add-dialog(ref='new')
     c-comfirm-dialog(ref='qwestion')
     c-edit-dialog(ref='revue')
@@ -35,17 +35,16 @@ import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
 
 export default {
+  computed: {
+    ...mapGetters(["specialities"]),
+  },
   post_name: {
     name: "CRUD отделений",
     url: "departaments_crud"
   },
-  computed: {
-    ...mapGetters(["specialities"]),
-  },
   mixins: [withSnackbar],
   data: () => ({
     headers: [
-      { text: "id", value: "id" },
       { text: "Наименование", value: "dep_name_full" },
       { text: "Квалификация", value: "qualification" },
       { text: "Действия", value: "action", sortable: false }
@@ -69,7 +68,7 @@ export default {
     },
 
     async update() {
-      let items = await api.getDepartments();
+      let items = await api.getDepartments(this);
       this.$store.commit(mutations.SET_SPECIALITIES_FULL,items)
     },
     //?----------------------------------------------
@@ -116,7 +115,7 @@ export default {
         if (result) {
           this.$store.dispatch(mutations.DELETE_SPECIALITIE,{ context: this, result: result });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     }

@@ -16,12 +16,6 @@
                           v-icon replay
                           span.ma-2 Обновить
                   span Обновить таблицу
-                v-tooltip(bottom v-if="_func_clear != null")
-                    template(v-slot:activator="{ on }")
-                        v-btn.ma-2.ml-1(text color="red" v-on="on" @click="clear")
-                            v-icon mdi-delete
-                            span.ma-2 Удалить все записи
-                    span Удалить все
                 v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
                         v-btn.ma-2.ml-1(text color="info" v-on="on" @click="upload")
@@ -61,9 +55,19 @@
 </template>
 
 <script>
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
+import withSnackbar from "@/js/components/mixins/withSnackbar";
+
 import { mapGetters } from "vuex";
 
 export default {
+  post_name: {
+    name: "CRUD паттер",
+    url: "pattern_crud"
+  },
+  mixins: [withSnackbar],
   data: () => ({
     title: "", //Заголовок страницы
     search: "", //Поиск
@@ -103,10 +107,6 @@ export default {
       type: Function,
       default: null
     },
-    _func_clear: {
-      type: Function,
-      default: null
-    },
     _func_edit: {
       type: Function,
       default: null
@@ -125,9 +125,9 @@ export default {
     }
   },
   computed:{
-    items(){
-      console.log(this.$store.getters[this._flood]);
-       return this.$store.getters[this._flood];
+    items()
+    {
+      return this.$store.getters[this._flood];
     }
   },
   mounted(){

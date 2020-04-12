@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     pop(item) {
-      this.item = Object.assign({}, item);
+      this.item = JSON.parse(JSON.stringify(item));
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
@@ -72,7 +72,7 @@ export default {
         this.dialog = false;
         this.resolve(this.item);
       } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {

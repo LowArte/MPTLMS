@@ -4,7 +4,11 @@ import snackbar from './modules/snackbar'
 import overlayLoading from './modules/overlayLoading'
 import auth from './modules/auth'
 import server from './modules/server'
-import specialitie from './modules/specialities'
+import specialities from './modules/specialities'
+import groups from './modules/groups'
+import places from './modules/places'
+import userPosts from './modules/userPost'
+import users from './modules/users'
 
 Vue.use(Vuex)
 
@@ -16,7 +20,11 @@ export default new Vuex.Store({
     overlayLoading,
     auth,
     server,
-    specialitie
+    specialities,
+    groups,
+    places,
+    userPosts,
+    users
   },
   strict: debug
 })

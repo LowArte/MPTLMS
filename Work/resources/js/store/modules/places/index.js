@@ -3,8 +3,8 @@ import mutations from './mutations'
 import actions from './actions'
 
 const state = {
-  specialities_full: null,
-  specialities_combobox: null,
+  places_full: null,
+  places_combobox: null,
 }
 
 export default {

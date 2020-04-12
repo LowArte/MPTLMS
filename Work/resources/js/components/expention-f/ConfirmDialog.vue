@@ -1,12 +1,12 @@
 <template lang="pug">
     v-dialog(v-model="dialog" max-width="290")
         v-card
-            v-card-title(color="warrning darken-1" class="headline") {{_title}}
-            v-card-text {{_text}}
-            v-card-actions
-                v-spacer
-                v-btn(color="accent darken-1" text @click="clickNot") Нет
-                v-btn(color="green darken-1" text @click="clickYes") Да
+          v-card-title(color="warrning darken-1" class="headline") {{_title}}
+          v-card-text {{_text}}
+          v-card-actions
+            v-spacer
+            v-btn(color="accent darken-1" text @click="clickNot") Нет
+            v-btn(color="green darken-1" text @click="clickYes") Да
 </template>
 
 <script>

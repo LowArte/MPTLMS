@@ -26,6 +26,7 @@ class ApiRoutes
 
             Route::get('posts','Api\PostController@getPosts')->name('posts');
             Route::get('posts_for_management','Api\PostController@getPostsForManagement')->name('posts_for_management');
+            Route::get('posts_for_combobox','Api\PostController@getPostsForCombobox')->name('posts_for_combobox');
 
             Route::get('retrainings','Api\RetrainingController@getRetraining')->name('retrainings');
 
@@ -40,6 +41,7 @@ class ApiRoutes
             Route::get('schedule_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleByGroupId')->name('schedule_by_group_id');
 
             Route::get('get_call_schedule', 'Api\CallscheduleController@getCallSchedule')->name('get_call_schedule');
+            Route::get('get_call_schedule_for_panel', 'Api\CallscheduleController@getCallScheduleForPanel')->name('get_call_schedule_for_panel');
             
             Route::get('replacements', 'Api\ReplacementController@replacements')->name('replacements');
             Route::get('replacements_by_group/{group_id}', 'Api\ReplacementController@replacementsByGroup')->name('replacements_by_group');
@@ -55,7 +57,6 @@ class ApiRoutes
             Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
 
             Route::post('departament','Api\DepartamentController@save')->name('departament');
-
         });
         /**
          * Методы отвечаюшие за изменения общих данных

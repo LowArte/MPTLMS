@@ -36,7 +36,7 @@ export default {
     //!----------------------------------------
     getUsers(_this) {
         return axios.get('/api/getters/users')
-        .then(result => {return result.data.users;})
+        .then(result => { return result.data.users;})
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
@@ -48,7 +48,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     getUser(user_id, _this) {
-        return axios.get('/api/admin/getters/users/' + user_id)
+        return axios.get('/api/getters/users/' + user_id)
         .then(result => {return true;})
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
@@ -66,7 +66,7 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     saveUser(user, _this) {
-        return axios.post('/api/admin/user_management/save', {"user": user})
+        return axios.post('/api/save/user/', user)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -79,7 +79,7 @@ export default {
     //! Отсутсвует
     //!----------------------------------------
     deleteUser(user_id, _this) {
-        return axios.post('/api/admin/user_management/delete/' + user_id)
+        return axios.post('/api/delete/user/' + user_id)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -92,19 +92,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     editUser(user, _this) {
-        return axios.post('/api/admin/user_management/edit/', {"user": user})
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
-    },
-
-    //*Логическое удаление пользователей
-    //! Комментарий ---------------------------
-    //? Реализуется стирание данных в таблице *USERS* (Пользователи) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    dropUsers(_this) {
-        return axios.post('/api/admin/user_management/deleteAll')
+        return axios.post('/api/edit/user/', user)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },

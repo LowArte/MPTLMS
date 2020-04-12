@@ -20,7 +20,7 @@
                 v-alert(text dense border="left" colored-border type="warning") В поле <strong>Отделение</strong> указывается отделение, к которому прикреплена данная группа <br>
                     strong Например: 
                             i П-3-16 - (09.02.03 Программирование в компьютерных системах)
-                v-autocomplete.my-3(:items="departaments" v-model="item.departaments_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
+                v-autocomplete.my-3(:items="specialities_combo" v-model="item.departaments_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
                 v-combobox.my-3(v-model="item.сurs" :items="curses" :rules="cursRules" label="Текущий курс" dense)
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
@@ -39,13 +39,18 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 //?----------------------------------------------
 import apiDepartment from "@/js/api/departments";
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
   mixins: [withSnackbar],
+  computed: {
+    ...mapGetters(["specialities_combo"]),
+  },
   data() {
     return {
       dialog: false,
       curses: [1, 2, 3, 4, 5],
-      departaments: [],
       item: {
         group_name: null,
         group_number: null,
@@ -53,6 +58,7 @@ export default {
         сurs: 1,
         departaments_id: 1
       },
+      default_item: null, 
       resolve: null,
       codeRules: [
         v => !!v || "Поле не должно оставаться пустым",
@@ -73,8 +79,14 @@ export default {
     };
   },
 
-  beforeMount() {
-    this.departaments = apiDepartment.getDepartmentsForCombobox();
+  async beforeMount() 
+  {
+    this.default_item = this.item;
+    if (this.specialities_combo == null)
+    {
+      let items = await apiDepartment.getDepartmentsForCombobox(this);
+      this.$store.commit(mutations.SET_SPECIALITIES_COMBO,items);
+    }
   },
 
   methods: {
@@ -88,14 +100,14 @@ export default {
       if (this.$refs.form.validate()) {
         this.dialog = false;
         this.resolve(this.item);
-        this.item = Object.assign({}, null);
+        this.item = Object.assign({}, this.default_item);
       } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, null);
+      this.item = Object.assign({}, this.default_item);
       this.resolve(false);
     }
   }

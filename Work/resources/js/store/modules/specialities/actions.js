@@ -1,5 +1,5 @@
 import * as types from '../../mutation-types'
-import api from "@/js/api/departments"; //api для отделений
+import api from "@/js/api/departments";
 
 export default{
     async [types.ADD_SPECIALITIE]({ commit, state }, data) {
@@ -9,8 +9,8 @@ export default{
             commit("add", data.result)
         }
     },
+    
     async [types.DELETE_SPECIALITIE]({ commit, state }, data) {
-        console.log("DELETE")
         let result = await api.deleteDepartment(data.result.id, data.context);
         if (result) {
             let newArr = state.specialities_full.filter(res => {
@@ -21,9 +21,8 @@ export default{
             });
             commit(types.SET_SPECIALITIES_FULL,newArr)
         }
-
-
     },
+
     async [types.EDIT_SPECIALITIE]({ commit, state }, data) {
         let result = await api.editDepartment(data.result, data.context);
         if (result) {

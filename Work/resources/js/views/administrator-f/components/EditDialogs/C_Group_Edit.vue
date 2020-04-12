@@ -20,7 +20,7 @@
                 v-alert(text dense border="left" colored-border type="warning") В поле <strong>Отделение</strong> указывается отделение, к которому прикреплена данная группа <br>
                     strong Например: 
                             i П-3-16 - (09.02.03 Программирование в компьютерных системах)
-                v-autocomplete.my-3(:items="departaments" v-model="item.departament_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
+                //- v-autocomplete.my-3(:items="specialities_combo" v-model="item.departament_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
                 v-combobox.my-3(v-model="item.сurs" :items="curses" :rules="cursRules" label="Текущий курс" dense)
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
@@ -39,8 +39,14 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 //?----------------------------------------------
 import apiDepartment from "@/js/api/departments";
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
   mixins: [withSnackbar],
+  computed: {
+    ...mapGetters(["specialities"]),
+  },
   data() {
     return {
       dialog: false,
@@ -73,13 +79,18 @@ export default {
     };
   },
 
-  beforeMount() {
-    this.departaments = apiDepartment.getDepartmentsForCombobox();
+  async beforeMount() 
+  {
+    if (this.specialities_combo == null)
+    {
+      let items = await apiDepartment.getDepartmentsForCombobox();
+      this.$store.commit(mutations.SET_SPECIALITIES_COMBO,items);
+    }
   },
 
   methods: {
     pop(item) {
-      this.item = Object.assign({}, item);
+      this.item = JSON.parse(JSON.stringify(item));
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
@@ -90,7 +101,7 @@ export default {
         this.dialog = false;
         this.resolve(this.item);
       } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {

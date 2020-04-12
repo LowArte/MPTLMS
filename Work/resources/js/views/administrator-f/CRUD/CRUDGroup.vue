@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
+    c-crud-form(ref='crud' _flood="groups" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -62,17 +62,14 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
-
     async init() {
       if (this.groups == null)
         return this.update();
-      else
-        return this.groups;
     },
 
     async update() {
-      let data = await api.getGroups(this);
-      return data;
+      let items = await api.getGroups(this);
+      this.$store.commit(mutations.SET_GROUPS_FULL, items)
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -80,7 +77,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.saveGroup(result, this);
+          this.$store.dispatch(mutations.ADD_GROUP,{ context: this, result: result });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -92,19 +89,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editGroup(result, this);
-        } else {
-          this.showInfo("Действие отменено пользователем!");
-        }
-      });
-    },
-    //?----------------------------------------------
-    //!           Удаление всех объектов
-    //?----------------------------------------------
-    clear() {
-      this.$refs.qwestion.pop().then(result => {
-        if (result) {
-          api.dropGroups(this);
+          this.$store.dispatch(mutations.EDIT_GROUP,{ context: this, result: result });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -116,9 +101,9 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deleteGroup(item.id, this);
+          this.$store.dispatch(mutations.DELETE_GROUP,{ context: this, result: result });
         } else {
-          this.showInfo("Действие отменено пользователем");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     }

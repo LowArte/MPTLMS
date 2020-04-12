@@ -5,17 +5,17 @@
                 h4.text-truncate Добавить запись
             v-form(ref='form')
               v-card-text
-                v-text-field.ma-2(v-model="item.image" label="Ссылка на картинку")
-                v-text-field.ma-2(v-model="item.dep_name_full" label="Название специальности")
-                v-text-field.ma-2(v-model="item.qualification" label="Квалификация")
-                v-textarea.ma-2(outlined v-model="item.info.text" label="Описание")
-                v-autocomplete.ma-2(v-model="item.studysperiod" :items="studysperiods" label="Период обучения")
+                v-text-field.ma-2(v-model="item.image" :rules="allRules" label="Ссылка на картинку")
+                v-text-field.ma-2(v-model="item.dep_name_full" :rules="allRules" label="Название специальности")
+                v-text-field.ma-2(v-model="item.qualification" :rules="allRules" label="Квалификация")
+                v-textarea.ma-2(outlined v-model="item.info.text" :rules="allRules" label="Описание")
+                v-autocomplete.ma-2(v-model="item.studysperiod" :rules="allRules" :items="studysperiods" label="Период обучения")
                 v-alert.mx-2(text dense type="warning")
                   span Перечислите все необходимые спецификации через запятую
-                v-textarea.ma-2(v-model="item.info.certifications" outlined multi-line label="Профессиональные сертификации")
-                v-textarea.ma-2(v-model="item.info.skills" outlined multi-line label="Наши выпускники умеют")
-                v-textarea.ma-2(v-model="item.info.learning" outlined multi-line label="На специальности изучаются")
-              v-card-actions              
+                v-textarea.ma-2(v-model="item.info.certifications" :rules="allRules" outlined multi-line label="Профессиональные сертификации")
+                v-textarea.ma-2(v-model="item.info.skills" :rules="allRules" outlined multi-line label="Наши выпускники умеют")
+                v-textarea.ma-2(v-model="item.info.learning" :rules="allRules" outlined multi-line label="На специальности изучаются")
+              v-card-actions
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
                   v-spacer
                   v-btn(color="info darken-1" text @click="clickSave") Сохранить
@@ -46,10 +46,12 @@ export default {
           certifications: [],
           skills: [],
           learning: [],
-          text: null
+          text: ""
         }
       },
+      defaultitem: null,
       resolve: null,
+      allRules: [v => !!v || "Поле не должно оставаться пустым"],
       dep_name_fullRules: [v => !!v || "Поле не должно оставаться пустым"],
       qualificationRules: [v => !!v || "Поле не должно оставаться пустым"],
       imageRules: [v => !!v || "Поле не должно оставаться пустым"],
@@ -58,6 +60,10 @@ export default {
     };
   },
   methods: {
+    beforeMount(){
+      this.defaultitem = item;
+    },
+
     pop() {
       this.dialog = true;
       return new Promise((resolve, reject) => {
@@ -68,16 +74,21 @@ export default {
     {
       if (this.$refs.form.validate()) 
       {
-        this.dialog = false;
+        this.item.info.certifications = this.item.info.certifications.split(",");
+        this.item.info.skills = this.item.info.skills.split(",");
+        this.item.info.learning = this.item.info.learning.split(",");
         this.resolve(this.item);
-        this.item = Object.assign({}, null);
-      } else {
-        this.showError("Необходимо заполнить ВСЕ имеющиеся поля");
+        this.dialog = false;
+        this.item = Object.assign({}, this.defaultitem);
+      } 
+      else 
+      {
+        this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, null);
+      this.item = Object.assign({}, this.defaultitem);
       this.resolve(false);
     }
   }

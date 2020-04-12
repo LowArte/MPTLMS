@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     pop(item) {
-      this.item = Object.assign({}, item);
+      this.item = JSON.parse(JSON.stringify(item));
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;

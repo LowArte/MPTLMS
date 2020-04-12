@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_func_add="add" :_func_clear="clear" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Места проведения уч. з.'")
+    c-crud-form(ref='crud' _flood="places" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Места проведения уч. з.'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -29,7 +29,7 @@ import CRUD_C from "@/js/views/administrator-f/CRUDpattern";
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Place_Add";
 import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Place_Edit";
-import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Place_Delite";
+import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Place_Delete";
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
@@ -61,9 +61,14 @@ export default {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
+    async init() {
+      if (this.places == null)
+        return this.update();
+    },
+
     async update() {
-      let data = await api.getPlaces(this);
-      return data
+      let items = await api.getPlaces(this);
+      this.$store.commit(mutations.SET_PLACES_FULL, items)
     },
     //?----------------------------------------------
     //!           Добавление объекта
@@ -71,9 +76,9 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          api.savePlace(result, this);
+          this.$store.dispatch(mutations.ADD_PLACE,{ context: this, result: result });
         } else {
-          this.showInfo("Действие отменено пользователем");
+          this.showInfo("Действие отменено пользователем!");
         }
       });
     },
@@ -83,19 +88,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          api.editPlace(result, this);
-        } else {
-          this.showInfo("Действие было отменено пользователем");
-        }
-      });
-    },
-    //?----------------------------------------------
-    //!           Удаление всех объектов
-    //?----------------------------------------------
-    clear() {
-      this.$refs.qwestion.pop().then(result => {
-        if (result) {
-          api.dropPlaces(this);
+          this.$store.dispatch(mutations.EDIT_PLACE,{ context: this, result: result });
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -107,9 +100,9 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          api.deletePlace(item.id, this);
+          this.$store.dispatch(mutations.DELETE_PLACE,{ context: this, result: result });
         } else {
-          this.showInfo("Действие было отменено пользователем");
+          this.showInfo("Действие было отменено пользователем!");
         }
       });
     }

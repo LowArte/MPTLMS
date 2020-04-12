@@ -47,8 +47,23 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвуют
     //!---------------------------------------
-    getPostsFull(_this) {
-        return axios.get('/api/getters/posts_full')
+    getPostsForManagement(_this) {
+        return axios.get('/api/getters/posts_for_management')
+        .then(result => { return result.data.posts;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+    },
+
+    //*----------------------------------------
+    //*Получение данных для выпадающего списка 
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *USERSPOST* (Роли)
+    //? Возвращается {} таблица данных JSON формата
+    //! Требование ----------------------------
+    //! Отсутсвуют
+    //!---------------------------------------
+    getPostsForCombobox(_this) {
+        //return axios.get('/api/getters/posts_for_combobox')
+        return axios.get('/api/getters/posts_for_management')
         .then(result => { return result.data.posts;})
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
@@ -61,7 +76,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     getPost(id, _this) {
-        return axios.get('/api/admin/getters/posts' + id)
+        return axios.get('/api/getters/posts/' + id)
         .then(res => {return res.data.post;})
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
@@ -72,8 +87,8 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    savePost(post, _this) {
-        return axios.get('/api/admin/getters/save', {"post": post})
+    saveUserPost(post, _this) {
+        return axios.get('/api/save/post/', post)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -85,8 +100,8 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    deletePost(post_id, _this) {
-        return axios.post('/api/admin/***/delete/' + post_id)
+    deleteUserPost(post_id, _this) {
+        return axios.post('/api/delete/post/' + post_id)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -98,21 +113,8 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    editPost(post, _this) {
-        return axios.post('/api/admin/***/edit/', {"user": post})
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
-    },
-
-    //*Логическое удаление роли
-    //! Комментарий ---------------------------
-    //? Реализуется стирание данных в таблице *USERSPOST* (Роли) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    dropPosts(_this)
-    {
-        return axios.post('/api/admin/***/deleteAll')
+    editUserPost(post, _this) {
+        return axios.post('/api/edit/post/', post)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },

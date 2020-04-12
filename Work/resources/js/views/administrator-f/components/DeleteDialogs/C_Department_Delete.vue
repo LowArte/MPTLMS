@@ -11,7 +11,7 @@
           v-text-field.ma-2(v-model="item.qualification" label="Квалификация" disabled)
           v-textarea.ma-2(outlined v-model="item.info.text" label="Описание" disabled)
           v-autocomplete.ma-2(v-model="item.studysperiod" :items="studysperiods" label="Период обучения" disabled)
-          v-alert.mx-2(text dense type="warning" disabled)
+          v-alert.mx-2(text dense type="warning")
             span Перечислите все необходимые спецификации через запятую
           v-textarea.ma-2(v-model="item.info.certifications" outlined multi-line label="Профессиональные сертификации" disabled)
           v-textarea.ma-2(v-model="item.info.skills" outlined multi-line label="Наши выпускники умеют" disabled)
@@ -48,7 +48,7 @@ export default {
           certifications: [],
           skills: [],
           learning: [],
-          text: null
+          text: ""
         }
       },
       resolve: null
