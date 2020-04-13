@@ -4,7 +4,7 @@
       v-layout(row)
         v-progress-circular.mx-auto(indeterminate size="32")
       v-layout(row)
-        span.mx-auto {{ overlayLoadingText }}
+        span.mx-auto {{ text }}
 </template>
 
 <script>
@@ -14,6 +14,17 @@ import * as mutations from "@/js/store/mutation-types";
 export default {
   computed: {
     ...mapGetters(["overlayLoadingShow", "overlayLoadingText"])
+  },
+  data() {
+    return {
+      text: null
+    }
+  },
+
+  watch: {
+    overlayLoadingText:function(val) {
+      this.text = this.overlayLoadingText.join(', ');
+    },
   }
 };
 </script>
