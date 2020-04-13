@@ -53,6 +53,20 @@ export default {
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
+    ResetPassword(data, _this)
+    {  
+        return axios.post('/password/reset', data)
+        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+    },
+
+    EmailForResetPassword(email, _this)
+    {
+        return axios.post('/password/email', {"email":email})
+        .then(result => { _this.showMessage("Отправлено!"); return true; })
+        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+    },
+
 
     //*----------------------------------------
     //!         Работа с данными

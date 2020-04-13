@@ -52,21 +52,30 @@ import replacements_api from "@/js/api/replacements"; //api замен
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 import departament_api from "@/js/api/departments"; //Api отделения
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог confirm
+import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //Конструктор замен
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
+
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
+  computed: {
+    ...mapGetters(["specialities_combo"]),
+  },
   post_name: {
     name: "Замены расписания",
-    url: "replacements"
+    url: "replacementsRoot"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
 
   components: {
-    "c-comfirm-dialog": ConfirmDialog_C
+    "c-comfirm-dialog": ConfirmDialog_C,
+    c_bildReplacement: BildReplacement
   },
 
   data: () => ({
-    groups_info: { groups: null, selected_group: null }, //Группы
-    departaments_info: { departaments: null, selected_departament: null }, //Отделения
+    groups_info: {groups:null, selected_group:null}, //Группы
+    departaments_info: {departaments:null, selected_departament:null}, //Отделения
     parseReplacements: null, //Замены
     replacements: null, //Замены
     checkAllGroup: false, //Все группы
@@ -83,23 +92,32 @@ export default {
 
   methods: {
     //Получение отделений
-    async getDepartament() {
-      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(
-        this
-      );
-      if (this.departaments_info.departaments != null) {
+    async getDepartament()
+    {
+      this.showLoading("Получение отделений");
+      if (this.specialities_combo == null)
+      {
+        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+      }
+      else
+        this.departaments_info.departaments = this.specialities_combo;
+
+      if(this.departaments_info.departaments != null)
+      {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
         this.departament_change();
       }
-    },
+      this.closeLoading("Получение отделений");
+    }, 
 
     //Получение групп для отделения
     async departament_change() {
-      this.groups_info.groups = await group_api.getGroupsByDepartamentId(
-        this.departaments_info.selected_departament.id,
-        this
-      );
-      if (this.groups_info.groups != null) {
+      this.showLoading("Получение групп");
+      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
+      this.closeLoading("Получение групп");
+      if(this.groups_info.groups != null)
+      {
         this.groups_info.selected_group = this.groups_info.groups[0];
         this.changeFilter();
       }
@@ -107,32 +125,30 @@ export default {
 
     //Получение замен с учётом фильтров
     async changeFilter() {
-      if (this.checkAllGroup && this.checkAllDate)
+      this.showLoading("Получение замен");
+      if (this.checkAllGroup && this.checkAllDate) 
         //Получить все замены для всех дат и групп
-        this.replacements = await replacements_api.getReplacements(this);
-      else if (this.checkAllGroup)
+        this.replacements = await replacements_api.getReplacements(this)
+      else 
+      if (this.checkAllGroup) 
         //Получить замены для всех групп
-        this.replacements = await replacements_api.getReplacementsByDate(
-          this.dateDialog.date,
-          this
-        );
-      else if (this.checkAllDate)
+        this.replacements = await replacements_api.getReplacementsByDate(this.dateDialog.date, this)
+      else 
+      if (this.checkAllDate) 
         //Получить все замены для всех дат
-        this.replacements = await replacements_api.getReplacementsByGroup(
-          this.groups_info.selected_group.id,
-          this
-        );
-      else {
+        this.replacements = await replacements_api.getReplacementsByGroup(this.groups_info.selected_group.id, this);
+      else 
+      {
         this.replacements = await replacements_api.getReplacementsByGroupByDate(
-          {
-            group_id: this.groups_info.selected_group.id,
-            date: this.dateDialog.date
-          },
-          this
-        );
+        {
+          group_id: this.groups_info.selected_group.id,
+          date: this.dateDialog.date
+        }, this);
       }
 
-      if (this.replacements != null) this.parseReplacement();
+      if (this.replacements != null)
+          this.parseReplacement();
+      this.closeLoading();
     },
 
     //Перевод массив для вывода

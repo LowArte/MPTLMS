@@ -59,13 +59,20 @@ import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 import departament_api from "@/js/api/departments"; //Api отделения
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог confirm
 import BildReplacement from "@/js/views/replacements-f/Bild_Replacements"; //Конструктор замен
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
+
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
+  computed: {
+    ...mapGetters(["specialities_combo"]),
+  },
   post_name: {
     name: "Замены расписания",
     url: "replacementsRoot"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
 
   components: {
     "c-comfirm-dialog": ConfirmDialog_C,
@@ -93,12 +100,21 @@ export default {
     //Получение отделений
     async getDepartament()
     {
-      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+      this.showLoading("Получение отделений");
+      if (this.specialities_combo == null)
+      {
+        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+      }
+      else
+        this.departaments_info.departaments = this.specialities_combo;
+
       if(this.departaments_info.departaments != null)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
         this.departament_change();
       }
+      this.closeLoading("Получение отделений");
     }, 
 
     //Удаление замены
@@ -119,7 +135,9 @@ export default {
 
     //Получение групп для отделения
     async departament_change() {
+      this.showLoading("Получение групп");
       this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
+      this.closeLoading("Получение групп");
       if(this.groups_info.groups != null)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
@@ -129,6 +147,7 @@ export default {
 
     //Получение замен с учётом фильтров
     async changeFilter() {
+      this.showLoading("Получение замен");
       if (this.checkAllGroup && this.checkAllDate) 
         //Получить все замены для всех дат и групп
         this.replacements = await replacements_api.getReplacements(this)
@@ -151,6 +170,7 @@ export default {
 
       if (this.replacements != null)
           this.parseReplacement();
+      this.closeLoading();
     },
 
     //Перевод массив для вывода

@@ -12,9 +12,7 @@ use App\RouteManagment\ApiRoutes;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:api')->name('api.')->group(function () 
 {   
     ApiRoutes::getApiRoutes();
-
 });

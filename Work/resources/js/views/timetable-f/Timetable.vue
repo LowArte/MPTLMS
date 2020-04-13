@@ -63,12 +63,13 @@ v-content.ma-0.pa-2
 </style>
 
 <script>
-import places_api from "@/js/api/places"; //Api мест проведений
 import callSchedule_api from "@/js/api/callSchedule"; //Api мест проведений
 import departament_api from "@/js/api/departments"; //Api отделения
 import group_api from "@/js/api/group"; //Api групп
 import schedule_api from "@/js/api/schedule"; //Api расписания
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
+import bildTimetable from "@/js/views/timetable-f/Bild_Timetable"; //Конструктор замен
 import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
 
 Date.prototype.getWeek = function() {
@@ -76,17 +77,24 @@ Date.prototype.getWeek = function() {
   return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
 };
 
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
-  mixins: [withSnackbar],
+  computed: {
+    ...mapGetters(["specialities_combo", "userposts", "groups_combo", "places_combo"]),
+  },
+  mixins: [withSnackbar, withOverlayLoading],
   post_name: {
     name: "Учебное расписание",
-    url: "timetable"
+    url: "timetableRoot"
   },
   components: {
+    c_bildTimetable: bildTimetable,
     c_panel_control: PanelControl_C,
   },
 
-data: () => {
+  data: () => {
     return {
       groups_info: {groups:null, selected_group:null}, //Группы
       departaments_info: {departaments:null, selected_departament:null}, //Отделения
@@ -94,7 +102,6 @@ data: () => {
       isToday: null, //Текущий день
       titleDialog: "Конструктор расписания",
       dialog: false,
-      places: null, 
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
     };
   },
@@ -103,19 +110,25 @@ data: () => {
     //Получение панели с расписанием 
     async getCallScheduleForPanel()
     {
+      this.showLoading("Получение расписания звонков");
       this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
-    },
-
-    //Получение мест проведений
-    async getPlaces()
-    {
-      this.places = await places_api.getPlaces(this);
+      this.closeLoading("Получение расписания звонков");
     },
 
     //Получение отделений
     async getDepartament()
     {
-      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+      this.showLoading("Получение отделений");
+      if (this.specialities_combo == null)
+      {
+        this.departaments_info.departaments = await apiDepartment.getDepartmentsForCombobox(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+      }
+      else
+        this.departaments_info.departaments = this.specialities_combo;
+
+      this.closeLoading("Получение отделений");
+
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -126,7 +139,9 @@ data: () => {
     //Получение группы при изменении отделения
     async departament_change() 
     {
+      this.showLoading("Получение групп");
       this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
+      this.closeLoading("Получение групп");
       if(this.groups_info.groups)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
@@ -143,8 +158,10 @@ data: () => {
     //Получение расписания при изменении выбранной группы
     async group_change() 
     {
+      this.showLoading("Получение расписания");
       this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
-      console.log(this.schedule);
+      this.closeLoading("Получение расписания");
+      this.closeLoading();
       if(this.schedule)
         this.parseSchedule();
     },
@@ -198,7 +215,6 @@ data: () => {
   beforeMount() {
     this.isToday = this.isChisl();
     this.getDepartament();
-    this.getPlaces();
   },
 
   mounted(){

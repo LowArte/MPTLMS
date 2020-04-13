@@ -86,7 +86,7 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities_combo", "userposts", "groups_combo", "places_combo"]),
+    ...mapGetters(["specialities_combo"]),
   },
   mixins: [withSnackbar, withOverlayLoading],
   post_name: {
@@ -123,8 +123,16 @@ export default {
     async getDepartament()
     {
       this.showLoading("Получение отделений");
-      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+      if (this.specialities_combo == null)
+      {
+        this.departaments_info.departaments = await apiDepartment.getDepartmentsForCombobox(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+      }
+      else
+        this.departaments_info.departaments = this.specialities_combo;
+
       this.closeLoading("Получение отделений");
+
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -137,11 +145,11 @@ export default {
     {
       this.showLoading("Получение групп");
       this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
-      this.closeLoading();
+      this.closeLoading("Получение групп");
       if(this.groups_info.groups)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
-        this.group_change("Получение групп");
+        this.group_change();
       }
     },
 
@@ -157,6 +165,7 @@ export default {
       this.showLoading("Получение расписания");
       this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
       this.closeLoading("Получение расписания");
+      this.closeLoading();
       if(this.schedule)
         this.parseSchedule();
     },

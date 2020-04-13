@@ -46,8 +46,8 @@
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-2.mt-2(v-model="replacement.caselesson" :rules="numberLessonRules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
                             v-switch(v-model="cancel" color="primary" inset label="Отменить занятие!")
-                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" :rules="[DiscipRules.required]" label="Дисциплины" :items="disciplines" item-text='discipline_name' item-value="id" small-chips chips multiple)
-                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" :rules="[TeacherRules.required]" label="Преподаватели" :items="teachers" item-text='fullFio' item-value="id" small-chips chips multiple)
+                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" :rules="[DiscipRules.required]" label="Дисциплины" :items="disciplines_combo" item-text='discipline_name' item-value="id" small-chips chips multiple)
+                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" :rules="[TeacherRules.required]" label="Преподаватели" :items="teachers_combo" item-text='fullFio' item-value="id" small-chips chips multiple)
                         v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
@@ -66,8 +66,15 @@ Date.prototype.getWeek = function() {
   return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
 };
 
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
+
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
+
 export default {
-  mixins: [withSnackbar],
+  computed: {
+    ...mapGetters(["specialities_combo", "teachers_combo", "disciplines_combo"]),
+  },
   post_name: {
     name: "Замены расписания",
     url: "bild_replacements"
@@ -121,22 +128,45 @@ export default {
     //Получение отделений
     async getDepartament()
     {
-      this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+      this.showLoading("Получение отделений");
+      if (this.specialities_combo == null)
+      {
+        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+      }
+      else
+        this.departaments_info.departaments = this.specialities_combo;
+
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
         this.departament_change();
       }
+      this.closeLoading("Получение отделений");
     }, 
 
     //Получение всех преподавателей
-    async getTeachers() {
-      this.teachers = await teacher_api.getTeachers(this);
+    async getTeachers() 
+    {
+      if(this.teachers_combo == null)
+      {
+        this.showLoading("Получение преподавателей");
+        let items = await teacher_api.getTeachers(this);
+        this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
+        this.closeLoading("Получение преподавателей");
+      }
     },
 
     //Получение всех дисциплин
-    async getDisciplines() {
-      this.disciplines = await discipline_api.getDisciplines(this);
+    async getDisciplines() 
+    {
+      if(this.disciplines_combo == null)
+      {
+        this.showLoading("Получение дисциплин");
+        let items = await discipline_api.getDisciplines(this);
+        this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
+        this.closeLoading("Получение дисциплин");
+      }
     },
 
     //Определение числителя
@@ -148,18 +178,22 @@ export default {
     },
 
     //Получение групп при изменении отдела
-    async departament_change() {
+    async departament_change() 
+    {
       this.groups_info.groups = await group_api.getGroupsByDepartamentId(
         this.departaments_info.selected_departament.id, this
       );
-      if (this.groups_info.groups) {
+      if (this.groups_info.groups) 
+      {
         this.groups_info.selected_group = this.groups_info.groups[0];
         this.caseDate();
       }
     },
 
     //При выборе даты получать расписание выбранного дня, если воскресенье то за день
-    async caseDate() {
+    async caseDate() 
+    {
+      this.showLoading("Получение расписания");
       this.date_week = new Date(this.dateDialog.date).getDay();
       if (this.date_week == 0) {
         this.dateDialog.date = new Date(
@@ -184,6 +218,7 @@ export default {
         if(this.schedule_bild)
             this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
       }
+      this.closeLoading();
     },
 
     //Сохранение замены

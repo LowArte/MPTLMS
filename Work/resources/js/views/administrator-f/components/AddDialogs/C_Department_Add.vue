@@ -87,7 +87,6 @@ export default {
     },
     clickCancel() {
       this.dialog = false;
-      console.log(this.defaultitem);
       this.item = Object.assign({}, this.defaultitem);
       this.resolve(false);
     }
