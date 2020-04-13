@@ -25,23 +25,23 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
   data() {
     return {
       dialog: false,
-      studysperiods:[
+      studysperiods: [
         "3 года 10 месяцев",
         "2 года 10 месяцев",
-        "1 год 10 месяцев",
+        "1 год 10 месяцев"
       ],
       item: {
         dep_name_full: null,
         image: null,
         qualification: null,
-        studysperiod:"3 года 10 месяцев",
+        studysperiod: "3 года 10 месяцев",
         info: {
           certifications: [],
           skills: [],
@@ -56,33 +56,32 @@ export default {
       qualificationRules: [v => !!v || "Поле не должно оставаться пустым"],
       imageRules: [v => !!v || "Поле не должно оставаться пустым"],
       infoRules: [v => !!v || "Поле не должно оставаться пустым"],
-      studysperiodRules: [v => !!v || "Поле не должно оставаться пустым"],
+      studysperiodRules: [v => !!v || "Поле не должно оставаться пустым"]
     };
   },
-  methods: {
-    beforeMount(){
-      this.defaultitem = item;
-    },
 
+  beforeMount() {
+    this.defaultitem = this.item;
+  },
+
+  methods: {
     pop() {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
-    clickSave() 
-    {
-      if (this.$refs.form.validate()) 
-      {
-        this.item.info.certifications = this.item.info.certifications.split(",");
+    clickSave() {
+      if (this.$refs.form.validate()) {
+        this.item.info.certifications = this.item.info.certifications.split(
+          ","
+        );
         this.item.info.skills = this.item.info.skills.split(",");
         this.item.info.learning = this.item.info.learning.split(",");
         this.resolve(this.item);
         this.dialog = false;
         this.item = Object.assign({}, this.defaultitem);
-      } 
-      else 
-      {
+      } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },

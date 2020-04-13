@@ -27,7 +27,7 @@ class ResetPasswordController extends Controller
      * @return string
      */
     public function redirectTo(){
-        return RouteServiceProvider::GetHOME();
+        return "/";
     }
 
 }

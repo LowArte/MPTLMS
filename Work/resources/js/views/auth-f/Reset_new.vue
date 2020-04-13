@@ -12,11 +12,12 @@ v-row.ma-2(align="center" justify="center")
           router-link(class='nounderline' to="/") 
             v-btn(color="accent" text) На главную
           v-spacer
-          v-btn(@click="login" color="blue darken-1" text :loading="loading" :disabled="loading" @click.native="reset()") Подтвердить
+          v-btn(color="blue darken-1" text :loading="loading" :disabled="loading" @click.native="reset()") Подтвердить
 </template>
 
 
 <script>
+import user_api from "@/js/api/users";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {
@@ -32,19 +33,24 @@ export default {
       ]
     };
   },
-
+  
+  
   methods: 
   {
     loadImg: function(path) {
       return require(`@img/${path}`);
     },
-    reset() 
+    async reset() 
     {
       this.loading = true;
       if (this.$refs.resetPasswordForm.validate()) 
       {
-        this.showMessage("Пароль изменён!");
-        this.$router.push("/");
+        if(await user_api.ResetPassword({
+          "password" : this.password,
+          "token" : this.$route.params.token,
+          "password_confirmation":this.passwordConfirmation,
+          "email" : this.$route.params.email}, this))
+          this.$router.push("/");
       }
       else
         this.showError("Заполните корректно поля!");

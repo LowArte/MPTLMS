@@ -3,6 +3,7 @@ require('./bootstrap');
 import store from './store'
 import vuetify from './vuetify'
 import router from './router/router'
+import ArrayHelpers from '@/js/plugins/ArrayHelpers'
 
 import user_api from '@/js/api/users'
 import * as mutations from '@/js/store/mutation-types'

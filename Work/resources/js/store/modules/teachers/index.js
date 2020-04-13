@@ -2,8 +2,7 @@ import getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  show: false,
-  text: []
+  teachers_combobox: null
 }
 
 export default {

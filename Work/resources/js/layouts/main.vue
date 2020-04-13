@@ -25,9 +25,7 @@
     <v-navigation-drawer v-model="rightdrawer" right clipped fixed app>
       <v-card flat>
         <c-logout></c-logout>
-        <router-link class='nounderline' to="/password_reset">
-          <v-btn block text color="info"> Сменить пароль </v-btn>
-        </router-link>
+        <c-reset-password></c-reset-password>
       </v-card>
     </v-navigation-drawer>
 
@@ -48,6 +46,7 @@ import snackbar from "@/js/components/SnackBarComponent";
 import overlayloader from "@/js/components/OverlayLoaderComponent";
 import C_AppMenu from "@/js/components/menu-f/AppMenu";
 import C_Logout from "@/js/components/buttons-f/logout";
+import C_resetPassword from "@/js/components/buttons-f/resetPassword";
 import { mapGetters } from "vuex";
 
 export default {
@@ -64,7 +63,8 @@ export default {
     snackbar,
     overlayloader,
     "c-app-menu": C_AppMenu,
-    "c-logout": C_Logout
+    "c-logout": C_Logout,
+    "c-reset-password" : C_resetPassword
   }
 };
 </script>

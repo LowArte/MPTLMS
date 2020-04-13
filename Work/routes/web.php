@@ -25,6 +25,12 @@ Route::post('/getToken', "Auth\LoginController@getToken")->name("token");
 
 Route::post('/logout', "Auth\LoginController@logout")->name("logout");
 
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+Route::get('password_new/{token}/{email}', 'AppController@index')->name('password.reset')->where("{token}",'*')->where("{email}",'*');
+
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
 Route::name('api.')->prefix("api")->group(function () 
 {
     Route::name('getters.')->prefix('getters')->group(function () {

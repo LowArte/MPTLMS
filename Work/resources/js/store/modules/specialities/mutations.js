@@ -7,7 +7,13 @@ export default {
     [types.SET_SPECIALITIES_COMBO](state, specialities) {
         state.specialities_combobox = specialities
     },
-    add(state,data){
-      state.specialities_full.unshift(data);
+    [types.DELETE_SPECIALITIE](state, id) {
+        state.specialities_full.deleteById(id);
     },
+    [types.EDIT_SPECIALITIE](state, specialitie) {
+        state.specialities_full.edit(specialitie);
+    },
+    [types.ADD_SPECIALITIE](state, specialitie) {
+        state.specialities_full.addToEnd(specialitie);
+    }
 }

@@ -36,7 +36,7 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["userPosts"])
+    ...mapGetters(["userposts"])
   },
   post_name: {
     name: "CRUD роли",

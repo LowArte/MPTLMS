@@ -12,9 +12,7 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (!auth()->attempt($credentials)) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+            return response()->json([], 422);
         }
         $user = auth()->user();
         $user->load("post");

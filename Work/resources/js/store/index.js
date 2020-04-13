@@ -9,6 +9,8 @@ import groups from './modules/groups'
 import places from './modules/places'
 import userPosts from './modules/userPost'
 import users from './modules/users'
+import teachers from './modules/teachers'
+import disciplines from './modules/disciplines'
 
 Vue.use(Vuex)
 
@@ -24,7 +26,9 @@ export default new Vuex.Store({
     groups,
     places,
     userPosts,
-    users
+    users,
+    teachers,
+    disciplines
   },
   strict: debug
 })
