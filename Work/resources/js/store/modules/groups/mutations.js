@@ -7,7 +7,13 @@ export default {
     [types.SET_GROUPS_COMBO](state, groups) {
         state.groups_combobox = groups
     },
-    add(state,data){
-      state.groups_full.unshift(data);
+    [types.DELETE_GROUP](state, id) {
+        state.groups_full.deleteById(id)
     },
+    [types.EDIT_GROUP](state, group) {
+        state.groups_full.edit(group);
+    },
+    [types.ADD_GROUP](state, group) {
+        state.groups_full.addToEnd(group);
+    }
 }

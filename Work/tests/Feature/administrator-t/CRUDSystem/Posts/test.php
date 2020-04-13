@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\administrator-t\CRUDSystem\Posts;
+namespace Tests\Feature\administrator_t\CRUDSystem\Posts;
 
 use Tests\TestCase;
 use Laravel\Passport\Passport;
