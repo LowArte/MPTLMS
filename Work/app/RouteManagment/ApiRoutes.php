@@ -35,6 +35,7 @@ class ApiRoutes
             Route::get('get_feedback_requests', 'Api\FeedbackController@getFeedbackRequests')->name('get_feedback_requests');
 
             Route::get('group_by_departament_id/{departament_id}', 'Api\GroupController@groupByDepartamentId')->name('group_by_departament_id');
+            Route::get('groups_for_combobox','Api\GroupController@groupForCombobox')->name('groups_for_combobox'); 
             Route::get('groups','Api\GroupController@getGroups')->name('groups'); 
 
             Route::get('schedule_bild_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleBildByGroupId')->name('schedule_bild_by_group_id');
@@ -57,6 +58,9 @@ class ApiRoutes
             Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
 
             Route::post('departament','Api\DepartamentController@save')->name('departament');
+
+            Route::post('place','Api\PlaceController@save')->name('place');
+
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -68,6 +72,9 @@ class ApiRoutes
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
 
             Route::post('departament','Api\DepartamentController@edit')->name('departament');
+
+            Route::post('place','Api\PlaceController@edit')->name('place');
+
         });
         /**
          * Методы отвечаюшие за удаление общих данных
@@ -76,6 +83,9 @@ class ApiRoutes
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
 
             Route::post('departament/{departament_id}','Api\DepartamentController@delete')->name('departament');
+
+            Route::post('place/{place_id}','Api\PlaceController@delete')->name('place');
+
         });
     }
 }

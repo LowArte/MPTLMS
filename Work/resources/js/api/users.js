@@ -81,7 +81,7 @@ export default {
     //!----------------------------------------
     saveUser(user, _this) {
         return axios.post('/api/save/user/', user)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .then(result => { _this.showMessage("Выполнено!"); return res.data.id; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 

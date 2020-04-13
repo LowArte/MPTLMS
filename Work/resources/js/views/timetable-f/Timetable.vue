@@ -121,7 +121,7 @@ export default {
       this.showLoading("Получение отделений");
       if (this.specialities_combo == null)
       {
-        this.departaments_info.departaments = await apiDepartment.getDepartmentsForCombobox(this);
+        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
         this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
       }
       else

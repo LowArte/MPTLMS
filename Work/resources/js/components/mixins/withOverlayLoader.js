@@ -2,7 +2,8 @@ import * as mutations from  "@/js/store/mutation-types"
 
 export default {
 
-    methods: {
+    methods: 
+    {
         showLoading(message)
         {
             if(!this.$store.getters.overlayLoadingShow)
@@ -14,7 +15,7 @@ export default {
         {
             if(item == null)
             {
-                this.$store.getters.overlayLoadingText = [];
+                this.$store.commit(mutations.SET_OVERLAYLOADING_TEXT, []);
                 this.$store.commit(mutations.SET_OVERLAYLOADING_SHOW, false);
             }    
             else

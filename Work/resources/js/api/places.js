@@ -54,7 +54,7 @@ export default {
     //!----------------------------------------
     savePlace(place, _this) {
         return axios.post('/api/save/place', place)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .then(result => { _this.showMessage("Выполнено!"); return result.data.id; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
@@ -79,6 +79,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deletePlace(place_id, _this) {
+        console.log(place_id);
         return axios.post('/api/delete/place/' + place_id)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false;});

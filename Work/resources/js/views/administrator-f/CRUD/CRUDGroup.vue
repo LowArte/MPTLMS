@@ -52,12 +52,12 @@ export default {
   },
   data: () => ({
     headers: [
-      { text: "Группа", value: "full_group_name" },
-      { text: "Курс", value: "сurs" },
+      { text: "№", value: "id" },
+      { text: "Группа", value: "group_name" },
+      { text: "Курс", value: "curs" },
       { text: "Действия", value: "action", sortable: false }
     ]
   }),
-
   methods: {
     //?----------------------------------------------
     //!           Обновление

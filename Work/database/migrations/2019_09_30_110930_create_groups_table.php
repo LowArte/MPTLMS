@@ -18,11 +18,11 @@ class CreateGroupsTable extends Migration
             function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('group_name');
-                $table->string('group_number');
-                $table->string('group_year');
-                $table->string('сurs');
+                $table->string('curs');
                 $table->unsignedBigInteger('departament_id');
+                $table->unsignedBigInteger('child_id')->nullable()->default(null);
                 $table->foreign('departament_id')->references('id')->on('departaments');
+                $table->foreign('child_id')->references('id')->on('groups');
                 $table->timestamps();
                 $table->softDeletes();
             }

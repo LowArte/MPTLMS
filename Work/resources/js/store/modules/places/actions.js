@@ -4,6 +4,7 @@ import api from "@/js/api/places";
 export default{
     async [types.ADD_PLACE]({ commit, state }, data) {
         let result = await api.savePlace(data.result, data.context);
+        console.log(result);
         if (result) {
             data.result.id = result;
             commit(types.ADD_PLACE,data.result)
@@ -11,7 +12,7 @@ export default{
     },
     
     async [types.DELETE_PLACE]({ commit, state }, data) {
-        let result = await api.deletePlace(data.result.id, data.context);
+        let result = await api.deletePlace(data.result, data.context);
         if (result) {
             commit(types.DELETE_PLACE,data.result)
         }

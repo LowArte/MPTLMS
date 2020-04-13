@@ -8,11 +8,11 @@ export default {
         state.places_combobox = places
     },
     [types.DELETE_PLACE](state, id) {
-        state.place_full.deleteById(id)
+        state.places_full.deleteById(id)
     },
     [types.EDIT_PLACE](state, place) {
-        console.log(typeof (state.place_full));
-        state.place_full.edit(place);
+        console.log(typeof (state.places_full));
+        state.places_full.edit(place);
     },
     [types.ADD_PLACE](state, place) {
         state.places_full.addToEnd(place);

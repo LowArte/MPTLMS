@@ -14,6 +14,15 @@ class Places extends Model
     {
         return $this->display_name;
     }
+
+    protected $fillable  = [
+        'place_name','info'
+    ];
+
+    protected $casts = [
+        'info' => 'array',
+    ];
+
     public $timestamps = true;
 
     protected $hidden = [

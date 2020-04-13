@@ -89,7 +89,7 @@ export default {
     //!----------------------------------------
     saveUserPost(post, _this) {
         return axios.get('/api/save/post/', post)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
+        .then(result => { _this.showMessage("Выполнено!"); return res.data.id; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 

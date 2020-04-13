@@ -7,12 +7,12 @@
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
           v-text-field(v-model="item.place_name" label="Наименование места проведения" disabled)
-          v-text-field(v-model="item.place_index" label="Индекс" disabled)
-          v-text-field(v-model="item.place_country" label="Страна" disabled)
-          v-text-field(v-model="item.place_city" label="Город" disabled)
-          v-text-field(v-model="item.place_street" label="Улица" disabled)
-          v-text-field(v-model="item.place_building_number" label="Номер здания" disabled)
-          v-text-field(v-model="item.place_piy" label="Корпус" disabled)
+          v-text-field(v-model="item.info.place_index" label="Индекс" disabled)
+          v-text-field(v-model="item.info.place_country" label="Страна" disabled)
+          v-text-field(v-model="item.info.place_city" label="Город" disabled)
+          v-text-field(v-model="item.info.place_street" label="Улица" disabled)
+          v-text-field(v-model="item.info.place_building_number" label="Номер здания" disabled)
+          v-text-field(v-model="item.info.place_piy" label="Корпус" disabled)
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -33,12 +33,14 @@ export default {
       item: {
         id: null,
         place_name: null,
-        place_index: null,
-        place_country: null,
-        place_city: null,
-        place_street: null,
-        place_building_number: null,
-        place_piy: null
+        info:{
+          place_index: "",
+          place_country: "",
+          place_city: "",
+          place_street: "",
+          place_building_number: "",
+          place_piy: ""
+        }
       },
       resolve: null
     };
@@ -57,7 +59,19 @@ export default {
     },
     clickCancel() {
       this.dialog = false;
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.place_name = null;
+      this.item.info.place_index = "";
+      this.item.place_country = "";
+      this.item.place_city = "";
+      this.item.place_street = "";
+      this.item.place_building_number = "";
+      this.item.place_piy = "";
     }
   }
 };

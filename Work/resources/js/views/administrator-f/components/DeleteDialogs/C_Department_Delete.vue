@@ -69,12 +69,26 @@ export default {
 
     clickSave() {
       this.dialog = false;
-      this.resolve(this.item);
+      this.clearForm();
+      this.resolve(this.item.id);
     },
 
     clickCancel() {
       this.dialog = false;
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      item.dep_name_full = null
+      item.image = null
+      item.qualification = null
+      item.studysperiod = "3 года 10 месяцев"
+      item.info.certifications = []
+      item.info.skills = []
+      item.info.learning = []
+      item.info.text = ""
     }
   }
 };
