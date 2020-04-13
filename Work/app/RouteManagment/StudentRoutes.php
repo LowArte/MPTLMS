@@ -44,7 +44,7 @@ class StudentRoutes
             Route::get('/drivingschool', 'WarningController@index')->name('drivingschool');
             Route::get('/certificate', 'Student\CertificateController@index')->name('certificate');
             Route::get('/petition', 'WarningController@index')->name('petition');
-            Route::get('/psych', 'WarningController@index')->name('psych');
+            Route::get('/psychologicalcounseling', 'PsychologicalCounseling@index')->name('psychologicalcounseling');
             Route::get('/photos', 'WarningController@index')->name('photos');
             Route::get('/competitions', 'WarningController@index')->name('competitions');
             Route::get('/sportlife', 'WarningController@index')->name('sportlife');
