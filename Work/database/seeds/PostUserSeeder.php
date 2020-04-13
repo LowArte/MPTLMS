@@ -304,9 +304,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
-                                        "url" => "psych"
+                                        "url" => "psychologicalcounseling"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
+                                    "path" => "js/views/psychological-counseling-f/Psychological_Counseling"
                                 ],
                             ]
                         ],

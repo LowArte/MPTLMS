@@ -1,5 +1,5 @@
 <template lang="pug">
-v-content.pa-0
+v-content.pa-0(v-if="user")
     v-alert.my-2(border="left" dense type="warning")
         span.subtitle-1(primary--text) Данный раздел может содержать ошибки, так как находится в процесссе разработки. Если найдёте какие-либо ошибки, сообщите нам. Спасибо!
     v-layout.row.wrap
@@ -86,32 +86,31 @@ v-content.pa-0
                     small Услуги
                 v-card-text.body-1 Услуги по заказу справок и характеристик для организаций/военных комиссариатов
                 v-card-actions
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(block text light v-on="on" color="pimary") Получить
-                                v-spacer
-                                v-icon keyboard_arrow_right
-                        span Справки об обучение в МПТ, характеристик в военный комиссариат
-                v-card-text.body-1 Услуги по оформлению дополнительных выплат к ситипендии в виде материальной помощи многодетным семьям или пособия по инвалидности
-                v-card-actions
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(block text light v-on="on" color="pimary") Получить
-                                v-spacer
-                                v-icon keyboard_arrow_right
-                        span Заявление на получение материальной помощи или пособия по инвалидности
+                    router-link(class='nounderline' :to="'/' + user.post.slug + '/certificate'")
+                        v-tooltip(bottom)
+                            template(v-slot:activator="{ on }")
+                                v-btn(block text light v-on="on" color="pimary") Получить
+                                    v-spacer
+                                    v-icon keyboard_arrow_right
+                            span Справки об обучение в МПТ, характеристик в военный комиссариат
                 v-card-text.body-1 Психологическая помощь студентам
                 v-card-actions
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(block text light v-on="on" color="pimary") Получить
-                                v-spacer
-                                v-icon keyboard_arrow_right
-                        span Записаться на прием к психологу
+                    router-link(class='nounderline' :to="'/' + user.post.slug + '/psychologicalcounseling'")
+                        v-tooltip(bottom)
+                            template(v-slot:activator="{ on }")
+                                v-btn(block text light v-on="on" color="pimary") Получить
+                                    v-spacer
+                                    v-icon keyboard_arrow_right
+                            span Записаться на прием к психологу
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
+  computed: {
+    ...mapGetters(["user"])
+  },
   data() {
     return {
       name: "Фамилия Имя Отчество",
