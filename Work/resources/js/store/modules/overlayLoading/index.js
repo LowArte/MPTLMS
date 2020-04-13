@@ -3,7 +3,7 @@ import mutations from './mutations'
 
 const state = {
   show: false,
-  text: 'Loading...'
+  text: []
 }
 
 export default {

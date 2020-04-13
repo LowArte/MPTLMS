@@ -116,7 +116,7 @@ export default {
     {
       this.showLoading("Получение расписания звонков");
       this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
-      this.closeLoading();
+      this.closeLoading("Получение расписания звонков");
     },
 
     //Получение отделений
@@ -124,7 +124,7 @@ export default {
     {
       this.showLoading("Получение отделений");
       this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
-      this.closeLoading();
+      this.closeLoading("Получение отделений");
       if(this.departaments_info.departaments)
       {
         this.departaments_info.selected_departament = this.departaments_info.departaments[0];
@@ -141,7 +141,7 @@ export default {
       if(this.groups_info.groups)
       {
         this.groups_info.selected_group = this.groups_info.groups[0];
-        this.group_change();
+        this.group_change("Получение групп");
       }
     },
 
@@ -156,7 +156,7 @@ export default {
     {
       this.showLoading("Получение расписания");
       this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
-      this.closeLoading();
+      this.closeLoading("Получение расписания");
       if(this.schedule)
         this.parseSchedule();
     },
