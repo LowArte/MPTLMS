@@ -11,8 +11,8 @@ class PlaceRepository extends BaseRepository
     }
 
     public function getPlaces(){
-        $columns=['place_name','id'];
-        $result = $this->startCondition()->select($columns)->toBase()->get();
+        $columns=['place_name','id','info'];
+        $result = $this->startCondition()->select($columns)->get();
         return $result;
     }
 

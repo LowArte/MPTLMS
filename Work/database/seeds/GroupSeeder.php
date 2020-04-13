@@ -11,475 +11,348 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
+
         $date = array(
             [
-                "group_name" => "Э",
+                "group_name" => "Э-1-16", // 1
                 "departament_id" => 1,
-                "group_number" => "1",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "Э",
+                "group_name" => "Э-1-17", // 2
                 "departament_id" => 1,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "Э",
+                "group_name" => "Э-1-18", //3
                 "departament_id" => 1,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "Э",
+                "group_name" => "Э-11-17", //4
                 "departament_id" => 1,
-                "group_number" => "2,11",
-                "group_year" => "16,17",
-                "сurs" => "3,4"
+                "curs" => "3"
             ],
             [
-                "group_name" => "Э",
+                "group_name" => "Э-11-18", //5
                 "departament_id" => 1,
-                "group_number" => "2,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "Э",
+                "group_name" => "Э-11-19", //6
                 "departament_id" => 1,
-                "group_number" => "2,11",
-                "group_year" => "18,19",
-                "сurs" => "2,1"
+                "curs" => "1"
             ],
             [
-                "group_name" => "КС",
+                "group_name" => "КС-1-16", //7
                 "departament_id" => 2,
-                "group_number" => "1",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "КС",
+                "group_name" => "КС-1-17", //8
                 "departament_id" => 2,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "КС",
+                "group_name" => "КС-2-16", //9
                 "departament_id" => 2,
-                "group_number" => "2",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "КС",
+                "group_name" => "КС-2-17", //10
                 "departament_id" => 2,
-                "group_number" => "2",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "КС",
+                "group_name" => "КС-11-17", //11
                 "departament_id" => 2,
-                "group_number" => "3,11",
-                "group_year" => "16,17",
-                "сurs" => "4,3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "КС",
+                "group_name" => "КС-11-18", //12
                 "departament_id" => 2,
-                "group_number" => "3,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-1-16", //13
                 "departament_id" => 3,
-                "group_number" => "1",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-1-17", //14
                 "departament_id" => 3,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-2-16", //15
                 "departament_id" => 3,
-                "group_number" => "2",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-2-17", //16
                 "departament_id" => 3,
-                "group_number" => "2",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-3-16", //17
                 "departament_id" => 3,
-                "group_number" => "3",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-11-18", //18
                 "departament_id" => 3,
-                "group_number" => "3,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П",
+                "group_name" => "П-11-17", //19
                 "departament_id" => 3,
-                "group_number" => "4,11",
-                "group_year" => "16,17",
-                "сurs" => "4,3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "ИС",
+                "group_name" => "ИС-1-16", //20
                 "departament_id" => 4,
-                "group_number" => "1",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "ИС",
+                "group_name" => "ИС-1-17", //21
                 "departament_id" => 4,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "ИС",
+                "group_name" => "ИС2-16", //22
                 "departament_id" => 4,
-                "group_number" => "2",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "ИС",
+                "group_name" => "ИС-2-17", //23
                 "departament_id" => 4,
-                "group_number" => "2",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "ИС",
+                "group_name" => "ИС-11-17", //24
                 "departament_id" => 4,
-                "group_number" => "3,11",
-                "group_year" => "16,17",
-                "сurs" => "4,3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "ИС",
+                "group_name" => "ИС-11-18", //25
                 "departament_id" => 4,
-                "group_number" => "3,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-1-16", //26
                 "departament_id" => 5,
-                "group_number" => "1",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-1-17", //27
                 "departament_id" => 5,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-2-16", //28
                 "departament_id" => 5,
-                "group_number" => "2",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-2-17", //29
                 "departament_id" => 5,
-                "group_number" => "2",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-3-16", //30
                 "departament_id" => 5,
-                "group_number" => "3",
-                "group_year" => "16",
-                "сurs" => "4"
+                "curs" => "4"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-11-18", //31
                 "departament_id" => 5,
-                "group_number" => "3",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "И",
+                "group_name" => "И-11-17", //32
                 "departament_id" => 5,
-                "group_number" => "4,11",
-                "group_year" => "16,17",
-                "сurs" => "4,3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "СА50",
+                "group_name" => "СА50-11-18", //33
                 "departament_id" => 6,
-                "group_number" => "1,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "СА50",
+                "group_name" => "СА50-1-18", //34
                 "departament_id" => 6,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "СА50",
+                "group_name" => "СА50-2-18", //35
                 "departament_id" => 6,
-                "group_number" => "2",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "СА50",
+                "group_name" => "СА50-11-19", //36
                 "departament_id" => 6,
-                "group_number" => "3,11",
-                "group_year" => "18,19",
-                "сurs" => "2,1"
+                "curs" => "1"
             ],
             [
-                "group_name" => "БД50",
+                "group_name" => "ВД50-11-18", //37
                 "departament_id" => 7,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "2"
             ],
             [
-                "group_name" => "БД50",
+                "group_name" => "БД50-1-18", //38
                 "departament_id" => 7,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "БД50",
+                "group_name" => "БД50-1-17", //39
                 "departament_id" => 7,
-                "group_number" => "1,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "3"
             ],
             [
-                "group_name" => "ВД50",
+                "group_name" => "ВД50-1-18", //40
                 "departament_id" => 7,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ВД50",
+                "group_name" => "ВД50-2-18", //41
                 "departament_id" => 7,
-                "group_number" => "2",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ВД50",
+                "group_name" => "ВД50-3-18", //42
                 "departament_id" => 7,
-                "group_number" => "3",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ВД50",
+                "group_name" => "ВД50-4-18", //43
                 "departament_id" => 7,
-                "group_number" => "4",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ВД50",
+                "group_name" => "ВД50-6-18", //44
                 "departament_id" => 7,
-                "group_number" => "6",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ИС50",
+                "group_name" => "ИС50-11-18", //45
                 "departament_id" => 7,
-                "group_number" => "1,11",
-                "group_year" => "17,19",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ИС50",
+                "group_name" => "ИС50-1-18", //46
                 "departament_id" => 7,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "ИС50",
+                "group_name" => "ИС50-11-19", //47
                 "departament_id" => 7,
-                "group_number" => "11",
-                "group_year" => "19",
-                "сurs" => "1"
+                "curs" => "1"
             ],
             [
-                "group_name" => "ИС50",
+                "group_name" => "ИС50-2-18", //48
                 "departament_id" => 7,
-                "group_number" => "2",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-1-18", //49
                 "departament_id" => 7,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-2-18", //50
                 "departament_id" => 7,
-                "group_number" => "2",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-3-18", //51
                 "departament_id" => 7,
-                "group_number" => "3",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-4-18", //52
                 "departament_id" => 7,
-                "group_number" => "4",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-5-18", //53
                 "departament_id" => 7,
-                "group_number" => "5",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-6-18", //54
                 "departament_id" => 7,
-                "group_number" => "6",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "П50",
+                "group_name" => "П50-7-18", //55
                 "departament_id" => 7,
-                "group_number" => "7",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "Т50",
+                "group_name" => "Т50-11-18", //56
                 "departament_id" => 7,
-                "group_number" => "1,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
+
             [
-                "group_name" => "Т50",
+                "group_name" => "Т50-1-18", //57
                 "departament_id" => 7,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "БИ",
+                "group_name" => "БИ-11-18", //58
                 "departament_id" => 8,
-                "group_number" => "1,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "БИ50",
+                "group_name" => "БИ50-1-17", //59
                 "departament_id" => 9,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "БИ50",
+                "group_name" => "БИ50-1-18", //60
                 "departament_id" => 9,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "БИ50",
+                "group_name" => "БИ50-11-19", //61
                 "departament_id" => 9,
-                "group_number" => "2,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "1"
             ],
             [
-                "group_name" => "БИ50",
+                "group_name" => "БИ50-11-18", //62
                 "departament_id" => 9,
-                "group_number" => "2,11",
-                "group_year" => "18,19",
-                "сurs" => "2,1"
+                "curs" => "2"
             ],
             [
-                "group_name" => "Ю",
+                "group_name" => "Ю-1-17", //63
                 "departament_id" => 10,
-                "group_number" => "1",
-                "group_year" => "17",
-                "сurs" => "3"
+                "curs" => "3"
             ],
             [
-                "group_name" => "Ю",
+                "group_name" => "Ю-1-18", //64
                 "departament_id" => 10,
-                "group_number" => "1",
-                "group_year" => "18",
-                "сurs" => "2"
+                "curs" => "2"
             ],
             [
-                "group_name" => "Ю",
+                "group_name" => "Ю-1-19", //65
                 "departament_id" => 10,
-                "group_number" => "1",
-                "group_year" => "19",
-                "сurs" => "1"
+                "curs" => "1"
             ],
             [
-                "group_name" => "Ю",
+                "group_name" => "Ю-11-19", //66
                 "departament_id" => 10,
-                "group_number" => "11",
-                "group_year" => "19",
-                "сurs" => "1"
+                "curs" => "1"
             ],
             [
-                "group_name" => "Ю",
+                "group_name" => "Ю-11-18", //67
                 "departament_id" => 10,
-                "group_number" => "2,11",
-                "group_year" => "17,18",
-                "сurs" => "3,2"
+                "curs" => "2"
+            ],
+            [
+                "group_name" => "Ю-2-17", //68
+                "departament_id" => 10,
+                "curs" => "3"
             ]
         );
         DB::table("groups")->insert($date);

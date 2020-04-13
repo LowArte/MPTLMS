@@ -36,14 +36,14 @@
                 v-card(:elevation="0")
                   v-dialog(v-if="item.post_id == 2" ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
                     template(v-slot:activator="{ on }")
-                        v-text-field(v-model="item.birthday" label="Дата рождения" :rules="birthdayRules" readonly v-on="on")
+                        v-text-field(v-model="studentItem.birthday" label="Дата рождения" :rules="birthdayRules" readonly v-on="on")
                     v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
                         v-btn(text color="primary" @click="dateDialog = false") Отмена
                         v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
-                  v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="item.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
-                  v-autocomplete(v-if="item.post_id == 2" v-model="item.departament_id" @change="depChange()" :items="specialities_combo" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
-                  v-autocomplete(v-if="item.post_id == 2 && groups_combo != null && item.departament_id != null" v-model="item.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups_combo" label='Группа')
-                  v-autocomplete(:items="financings" dense label='Вид финансирования')
+                  v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
+                  v-autocomplete(v-if="item.post_id == 2" v-model="studentItem.departament_id" @change="depChange()" :items="specialities_combo" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
+                  v-autocomplete(v-if="item.post_id == 2 && groups_combo != null && item.departament_id != null" v-model="studentItem.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups_combo" label='Группа')
+                  v-autocomplete(:items="studentItem.financings" dense label='Вид финансирования')
                   v-card-actions
                     v-btn(text @click="change(2)") Назад
                     v-spacer
@@ -79,7 +79,6 @@ export default {
       financings: ["Бюджет", "Платное"],
       gender: ["Мужской", "Женский", "Другое"],
       steps: 1,
-      default_item: null,
       item: {
         secName: null,
         name: null,
@@ -87,13 +86,17 @@ export default {
         email: null,
         password: null,
         post_id: null,
+        disabled: 0
+      },
+
+      studentItem:{
         gender: "Мужской",
         birthday: new Date().toISOString().substr(0, 10),
         departament_id: null,
         group_id: 1,
         type_of_financing: "Бюджет",
-        disabled: 0
       },
+
       adisabled: [
         { id: 0, name: "Разблокирован" },
         { id: 1, name: "Заблокирован" }
@@ -138,7 +141,9 @@ export default {
         this.$store.commit(mutations.SET_GROUPS_COMBO,items);
       }
     },
-    pop() {
+
+    pop() 
+    {
       this.dialog = true;
       if (this.specialities_combo != null)
       {
@@ -150,24 +155,33 @@ export default {
         this.resolve = resolve;
       });
     },
-    clickSave() {
-      if (this.$refs.form.validate()) {
+
+    clickSave() 
+    {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
-        this.resolve(this.item);
-        this.item = Object.assign({}, this.default_item);
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
       } else {
         this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
+
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, this.default_item);
+      this.clearForm();
       this.resolve(false);
     },
-    changePost() {
+
+    changePost() 
+    {
       this.post_name = this.userposts[this.item.post_id - 1];
     },
-    change(id) {
+
+    change(id) 
+    {
       switch (id) {
         case 1:
           this.steps = 1;
@@ -186,6 +200,23 @@ export default {
         default:
           break;
       }
+    },
+
+    clearForm()
+    {
+      this.item.secName = null;
+      this.item.name = null;
+      this.item.thirdName = null;
+      this.item.email = null;
+      this.item.password = null;
+      this.item.post_id = null;
+      this.item.disabled = 0;
+
+      this.item.studentItem.gender = "Мужской";
+      this.item.studentItem.birthday = new Date().toISOString().substr(0, 10);
+      this.item.studentItem.departament_id = null;
+      this.item.studentItem.group_id = 1;
+      this.item.studentItem.type_of_financing = "Бюджет";
     }
   }
 };

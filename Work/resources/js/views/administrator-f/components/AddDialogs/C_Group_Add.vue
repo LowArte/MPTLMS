@@ -5,23 +5,11 @@
                 h4.text-truncate Добавить запись
             v-form(ref='form')
               v-card-text
-                v-alert(text dense border="left" colored-border type="warning") В поле <strong>Код</strong> необходимо ввести краткое именование отделения. <br>
-                    strong Например: 
-                        i Программисты - П
-                v-text-field(v-model="item.group_name" :rules="codeRules" label="Код")
-                v-alert(text dense border="left" colored-border type="warning") В поле <strong>Номер группы</strong> указывается порядковый номер группы <br>
-                    strong Например: 
-                            i П-3
-                v-text-field(v-model="item.group_number" :rules="countRules" label="Номер группы")
-                v-alert(text dense border="left" colored-border type="warning") В поле <strong>Год поступления</strong> указываются последние два цифры года поступления <br>
-                    strong Например: 
-                            i П-3-16
-                v-text-field(v-model="item.group_year" :rules="yearRules" label="Год поступления")
-                v-alert(text dense border="left" colored-border type="warning") В поле <strong>Отделение</strong> указывается отделение, к которому прикреплена данная группа <br>
-                    strong Например: 
-                            i П-3-16 - (09.02.03 Программирование в компьютерных системах)
-                v-autocomplete.my-3(:items="specialities_combo" v-model="item.departaments_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
-                v-combobox.my-3(v-model="item.сurs" :items="curses" :rules="cursRules" label="Текущий курс" dense)
+                v-alert(text dense border="left" colored-border type="warning") <strong>В данной форме</strong> необходимо ввести наименование группы, курс, отделением к которому принадлежит группа и по нужде дополнительную группа. <br>
+                v-text-field(v-model="item.group_name" :rules="group_nameRules" label="Название группы")
+                v-combobox.my-3(v-model="item.curs" :items="curses" :rules="cursRules" label="Текущий курс" dense)
+                v-autocomplete.my-3(:items="specialities" v-model="item.departament_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="specRules" label="Отделение")
+                v-autocomplete.my-3(:items="groups" v-model="item.child_id" item-text="group_name" no-data-text="Нет данных" item-value="id" label="Дополнительная группа")      
               v-card-actions              
                   v-btn(color="accent darken-1" text @click="clickCancel") Отмена
                   v-spacer
@@ -38,6 +26,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 //!           Подключение api для получения отделений
 //?----------------------------------------------
 import apiDepartment from "@/js/api/departments";
+import group_api from "@/js/api/group"; //Api групп
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
@@ -45,35 +34,21 @@ import * as mutations from "@/js/store/mutation-types";
 export default {
   mixins: [withSnackbar],
   computed: {
-    ...mapGetters(["specialities_combo"]),
+    ...mapGetters(["specialities", "groups"]),
   },
   data() {
     return {
       dialog: false,
-      curses: [1, 2, 3, 4, 5],
+      curses: ['1', '2', '3', '4', '5'],
       item: {
         group_name: null,
-        group_number: null,
-        group_year: null,
-        сurs: 1,
-        departaments_id: 1
+        curs: '1',
+        departaments_id: null,
+        child_id: null
       },
-      default_item: null, 
       resolve: null,
-      codeRules: [
-        v => !!v || "Поле не должно оставаться пустым",
-        v =>
-          /^[A-Z && А-Я && 0-9]*$/.test(v) ||
-          "Только буквы в верхнем регистре или целочисленные значения (0-9)"
-      ],
-      countRules: [
-        v => !!v || "Поле не должно оставаться пустым",
-        v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
-      ],
-      yearRules: [
-        v => !!v || "Поле не должно оставаться пустым",
-        v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
-      ],
+      group_nameRules: [
+        v => !!v || "Поле не должно оставаться пустым"],
       specRules: [v => !!v || "Поле не должно оставаться пустым"],
       cursRules: [v => !!v || "Поле не должно оставаться пустым"]
     };
@@ -81,11 +56,10 @@ export default {
 
   async beforeMount() 
   {
-    this.default_item = this.item;
-    if (this.specialities_combo == null)
+    if(this.specialities == null)
     {
-      let items = await apiDepartment.getDepartmentsForCombobox(this);
-      this.$store.commit(mutations.SET_SPECIALITIES_COMBO,items);
+      let items = await apiDepartment.getDepartments(this);
+      this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
     }
   },
 
@@ -96,19 +70,35 @@ export default {
         this.resolve = resolve;
       });
     },
-    clickSave() {
-      if (this.$refs.form.validate()) {
+
+    clickSave() 
+    {
+      if (this.$refs.form.validate()) 
+      {
         this.dialog = false;
-        this.resolve(this.item);
-        this.item = Object.assign({}, this.default_item);
-      } else {
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
+      } 
+      else 
+      {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
-    clickCancel() {
+
+    clickCancel() 
+    {
       this.dialog = false;
-      this.item = Object.assign({}, this.default_item);
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.group_name = null;
+      this.item.curs = "1";
+      this.item.departaments_id = null;
+      this.item.child_id = null;
     }
   }
 };

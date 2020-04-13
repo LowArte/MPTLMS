@@ -50,12 +50,18 @@ export default {
     },
     clickDelete() {
         this.dialog = false;
+        this.clearForm();
         this.resolve(this.item.id);
     },
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, null);
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.name = null;
     }
   }
 };

@@ -24,8 +24,7 @@ export default {
     return {
       dialog: false,
       item: {
-        name: null,
-        slug: null
+        name: null
       },
       resolve: null,
       nameRules: [
@@ -34,27 +33,40 @@ export default {
       ],
     };
   },
-  methods: {
-    pop() {
+  methods: 
+  {
+    pop() 
+    {
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
+
     clickSave() {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        this.resolve(this.item);
-        this.item = Object.assign({}, null);
-      } else {
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
+      } 
+      else 
+      {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
-    clickCancel() {
+
+    clickCancel() 
+    {
       this.dialog = false;
-      this.item = Object.assign({}, null);
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.name = null;
     }
   }
 };

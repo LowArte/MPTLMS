@@ -61,10 +61,6 @@ export default {
     };
   },
 
-  beforeMount(){
-    this.default_item = this.item;
-  },
-
   methods: {
     pop() {
       this.dialog = true;
@@ -72,20 +68,36 @@ export default {
         this.resolve = resolve;
       });
     },
+
     clickSave() {
       if (this.$refs.form.validate())
       {
         this.dialog = false;
-        this.resolve(this.item);
-        this.item = Object.assign({}, this.default_item);
-      } else {
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
+      } 
+      else 
+      {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
+
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, this.default_item);
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.place_name = null;
+      this.item.info.place_index = "";
+      this.item.place_country = "";
+      this.item.place_city = "";
+      this.item.place_street = "";
+      this.item.place_building_number = "";
+      this.item.place_piy = "";
     }
   }
 };

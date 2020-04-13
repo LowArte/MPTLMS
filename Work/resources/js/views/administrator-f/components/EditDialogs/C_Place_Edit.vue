@@ -6,12 +6,12 @@
       v-form(ref='form')
         v-card-text
           v-text-field(v-model="item.place_name" :rules="place_nameRules" label="Наименование места проведения")
-          v-text-field(v-model="item.place_country" :rules="place_countryRules" label="Страна")
-          v-text-field(v-model="item.place_index" :rules="place_indexRules" label="Почтовый индекс")
-          v-text-field(v-model="item.place_city" :rules="place_cityRules" label="Город")
-          v-text-field(v-model="item.place_street" :rules="place_streetRules" label="Улица")
-          v-text-field(v-model="item.place_building_number" :rules="place_building_numberRules" label="Номер здания")
-          v-text-field(v-model="item.place_piy" label="Корпус")    
+          v-text-field(v-model="item.info.place_country" :rules="place_countryRules" label="Страна")
+          v-text-field(v-model="item.info.place_index" :rules="place_indexRules" label="Почтовый индекс")
+          v-text-field(v-model="item.info.place_city" :rules="place_cityRules" label="Город")
+          v-text-field(v-model="item.info.place_street" :rules="place_streetRules" label="Улица")
+          v-text-field(v-model="item.info.place_building_number" :rules="place_building_numberRules" label="Номер здания")
+          v-text-field(v-model="item.info.place_piy" label="Корпус")    
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -32,12 +32,14 @@ export default {
       item: {
         id: null,
         place_name: null,
-        place_index: null,
-        place_country: null,
-        place_city: null,
-        place_street: null,
-        place_building_number: null,
-        place_piy: null
+        info:{
+          place_index: "",
+          place_country: "",
+          place_city: "",
+          place_street: "",
+          place_building_number: "",
+          place_piy: ""
+        }
       },
       resolve: null,
             place_nameRules: [
@@ -70,14 +72,28 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        this.resolve(this.item);
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.place_name = null;
+      this.item.info.place_index = "";
+      this.item.place_country = "";
+      this.item.place_city = "";
+      this.item.place_street = "";
+      this.item.place_building_number = "";
+      this.item.place_piy = "";
     }
   }
 };

@@ -52,6 +52,7 @@ export default {
   },
   data: () => ({
     headers: [
+      { text: "№", value: "id" },
       { text: "Наименование", value: "place_name" },
       { text: "Действия", value: "action", sortable: false }
     ]

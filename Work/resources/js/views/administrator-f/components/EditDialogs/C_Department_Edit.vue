@@ -74,14 +74,29 @@ export default {
         this.item.info.certifications = this.item.info.certifications.split(",");
         this.item.info.skills = this.item.info.skills.split(",");
         this.item.info.learning = this.item.info.learning.split(",");
-        this.resolve(this.item);
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.dep_name_full = null
+      this.item.image = null
+      this.item.qualification = null
+      this.item.studysperiod = "3 года 10 месяцев"
+      this.item.info.certifications = []
+      this.item.info.skills = []
+      this.item.info.learning = []
+      this.item.info.text = ""
     }
   }
 };

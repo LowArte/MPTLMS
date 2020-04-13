@@ -44,6 +44,19 @@ export default {
         .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined});
     },
 
+    //*Получение всех групп для выпадающего списка
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *GROUPS* (Группы)
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //! Отсутсвует
+    //!----------------------------------------
+    getGroupsForCombobox(_this) {
+        return axios.get('/api/getters/groups_for_combobox')
+        .then(result => {return result.data.groups;})
+        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined});
+    },
+
     //*Получение групп по id отделению
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
@@ -69,7 +82,7 @@ export default {
     //!----------------------------------------
     saveGroup(group, _this) {
         return axios.post('/api/save/group/', group)
-        .then(res => {_this.showMessage("Выполнено!"); return true;})
+        .then(res => {_this.showMessage("Выполнено!"); return res.data.id;})
         .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
     },
 

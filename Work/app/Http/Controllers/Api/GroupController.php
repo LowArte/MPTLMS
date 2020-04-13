@@ -6,7 +6,7 @@ use App\Repositories\ModelRepository\DepartamentRepository;
 use App\Repositories\ModelRepository\GroupRepository;
 
 class GroupController extends BaseController
-{ 
+{
     /**
      * Get groups by departament id
      *
@@ -16,13 +16,26 @@ class GroupController extends BaseController
     {
         $groups = $groupRepository->getGroupsForComboBoxByDepartament($id);
         return response()->json(array(
-            "groups_info"=>array(
-                "groups"=>$groups,
-                "selected_group"=>$groups[0]
+            "groups_info" => array(
+                "groups" => $groups,
+                "selected_group" => $groups[0]
             ),
         ));
     }
-    
+
+    /**
+     * Get groups by departament id
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function groupForCombobox(GroupRepository $groupRepository)
+    {
+        $groups = $groupRepository->getGroupsForComboBox();
+        return response()->json(array(
+            "groups" => $groups
+        ));
+    }
+
     /**
      * get groups from database
      * @return JSON

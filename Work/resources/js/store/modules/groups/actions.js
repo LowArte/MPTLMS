@@ -11,9 +11,9 @@ export default{
     },
 
     async [types.DELETE_GROUP]({ commit, state }, data) {
-        let result = await api.deleteGroup(data.result.id, data.context);
+        let result = await api.deleteGroup(data.result, data.context);
         if (result) {
-            commit(types.DELETE_GROUP,data.result.id)
+            commit(types.DELETE_GROUP,data.result)
         }
     },
     

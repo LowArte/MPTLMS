@@ -11,9 +11,9 @@ export default{
     },
     
     async [types.DELETE_SPECIALITIE]({ commit, state }, data) {
-        let result = await api.deleteDepartment(data.result.id, data.context);
+        let result = await api.deleteDepartment(data.result, data.context);
         if (result) {
-            commit(types.DELETE_SPECIALITIE,data.result.id)
+            commit(types.DELETE_SPECIALITIE,data.result)
         }
     },
 

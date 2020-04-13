@@ -47,16 +47,22 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        this.resolve(this.item);
-        this.item = Object.assign({}, null);
+        let data = this.item;
+        this.clearForm();
+        this.resolve(data);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.item = Object.assign({}, null);
+      this.clearForm();
       this.resolve(false);
+    },
+
+    clearForm()
+    {
+      this.item.name = null;
     }
   }
 };

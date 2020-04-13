@@ -116,7 +116,17 @@ class PostUserSeeder extends Seeder
                                     ],
                                     "path" => "js/views/administrator-f/CRUD/CRUDPost"
                                 ],
-
+                            ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "Привилегии ролей",
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Конструктор привилегий ролей",
+                                        "url" => "bild_post_privilegies"
+                                    ],
+                                    "path" => "js/views/views/posts-f/Bild_RolesPrivilegies"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),

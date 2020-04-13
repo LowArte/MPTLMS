@@ -11,9 +11,9 @@ export default{
     },
     
     async [types.DELETE_USERPOST]({ commit, state }, data) {
-        let result = await api.deleteUserPost(data.result.id, data.context);
+        let result = await api.deleteUserPost(data.result, data.context);
         if (result) {
-            commit(types.DELETE_USERPOST,data.result.id)
+            commit(types.DELETE_USERPOST,data.result)
         }
     },
 
