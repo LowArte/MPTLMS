@@ -21,3 +21,7 @@ Array.prototype.edit = function (data) {
 Array.prototype.addToEnd = function (data) {
     this.unshift(data);
 }
+
+Array.prototype.clear = function (data) {
+    data = [];
+}

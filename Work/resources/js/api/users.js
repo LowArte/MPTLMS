@@ -36,8 +36,13 @@ export default {
     //!----------------------------------------
     getUsers(_this) {
         return axios.get('/api/getters/users')
-        .then(result => { return result.data.users;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+            .then(result => {
+                return result.data.users;
+            })
+            .catch(ex => {
+                _this.showError("Ошибка получения данных!");
+                return undefined;
+            });
     },
 
     //*Получение пользователей
@@ -49,22 +54,39 @@ export default {
     //!----------------------------------------
     getUser(user_id, _this) {
         return axios.get('/api/getters/users/' + user_id)
-        .then(result => {return true;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+            .then(result => {
+                return true;
+            })
+            .catch(ex => {
+                _this.showError("Ошибка получения данных!");
+                return undefined;
+            });
     },
 
-    ResetPassword(data, _this)
-    {  
+    ResetPassword(data, _this) {
         return axios.post('/password/reset', data)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+            .then(result => {
+                _this.showMessage("Выполнено!");
+                return true;
+            })
+            .catch(exception => {
+                _this.showError("Ошибка выполнения!");
+                return false;
+            });
     },
 
-    EmailForResetPassword(email, _this)
-    {
-        return axios.post('/password/email', {"email":email})
-        .then(result => { _this.showMessage("Отправлено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+    EmailForResetPassword(email, _this) {
+        return axios.post('/password/email', {
+                "email": email
+            })
+            .then(result => {
+                _this.showMessage("Отправлено!");
+                return true;
+            })
+            .catch(exception => {
+                _this.showError("Ошибка выполнения!");
+                return false;
+            });
     },
 
 
@@ -81,8 +103,14 @@ export default {
     //!----------------------------------------
     saveUser(user, _this) {
         return axios.post('/api/save/user/', user)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+            .then(result => {
+                _this.showMessage("Выполнено!");
+                return true;
+            })
+            .catch(exception => {
+                _this.showError("Ошибка выполнения!");
+                return false;
+            });
     },
 
     //*Удаление пользователя
@@ -94,8 +122,14 @@ export default {
     //!----------------------------------------
     deleteUser(user_id, _this) {
         return axios.post('/api/delete/user/' + user_id)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+            .then(result => {
+                _this.showMessage("Выполнено!");
+                return true;
+            })
+            .catch(exception => {
+                _this.showError("Ошибка выполнения!");
+                return false;
+            });
     },
 
     //*Редактирование пользователя
@@ -107,14 +141,20 @@ export default {
     //!----------------------------------------
     editUser(user, _this) {
         return axios.post('/api/edit/user/', user)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+            .then(result => {
+                _this.showMessage("Выполнено!");
+                return true;
+            })
+            .catch(exception => {
+                _this.showError("Ошибка выполнения!");
+                return false;
+            });
     },
 
     login(data) {
         return axios.post('/login', data).then(res => {
             const slug = res.data.user.post.slug;
-            const items = this.makeRoutes(res.data.user.post.privilegies,slug);
+            const items = this.makeRoutes(res.data.user.post.privilegies, slug);
             const user = res.data.user;
             const token = res.data.token;
             return {
@@ -130,16 +170,39 @@ export default {
     },
 
     init() {
-        return axios.post('/getToken')
+        return axios.post('/getToken').then(res => {
+            if (res.data.success) {
+                const slug = res.data.user.post.slug;
+                const items = this.makeRoutes(res.data.user.post.privilegies, slug);
+                const user = res.data.user;
+                const token = res.data.token;
+                return {
+                    items,
+                    slug,
+                    user,
+                    token
+                }
+            } else {
+                return undefined;
+            }
+        }).catch(ex => {
+            console.log(ex)
+            return undefined;
+        })
     },
 
     logout() {
         return axios.post('/logout')
-        .then(res => {return true;})
-        .catch(ex => {return false;});
+            .then(res => {
+                return true;
+            })
+            .catch(ex => {
+                return false;
+            });
     },
 
-    makeRoutes(privilegies,slug) {
+    makeRoutes(privilegies, slug) {
+        console.log(privilegies)
         let items = [];
         privilegies.forEach(element => {
             if (element.children) {
@@ -173,6 +236,8 @@ export default {
                 });
             }
         });
+        console.log(items)
+        
         return items;
     }
 }

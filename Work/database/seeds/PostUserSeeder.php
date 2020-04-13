@@ -554,14 +554,14 @@ class PostUserSeeder extends Seeder
                 "privilegies" => json_encode([
                     [
                         "id" => 1,
-                        "icon" => "home",
-                        "text" => "Главная",
+                        "icon" => "dashboard",
+                        "text" => "Панель управления",
                         "component" => [
                             "info" => [
-                                "name" => "Домашняя страница",
+                                "name" => "Панель управления",
                                 "url" => ""
                             ],
-                            "path" => "js/views/homes-f/DefaultHome"
+                            "path" => "js/views/homes-f/EditorHome"
                         ],
                         "default" => true
                     ],
@@ -575,8 +575,7 @@ class PostUserSeeder extends Seeder
                                 "url" => "news"
                             ],
                             "path" => "js/views/news-f/NewsFeed"
-                        ],
-                        "children" => [],
+                        ]
                     ],
                     [
                         "id" => uniqid(),
@@ -587,9 +586,8 @@ class PostUserSeeder extends Seeder
                                 "name" => "Создать новость",
                                 "url" => "news-constructor"
                             ],
-                            "path" => "js/views/other-f/Warning"
+                            "path" => "js/views/news-f/NewsConstructor"
                         ],
-                        "children" => [],
                         "default" => true
                     ],
                     [
@@ -601,9 +599,8 @@ class PostUserSeeder extends Seeder
                                 "name" => "Статистика",
                                 "url" => "news-statistics"
                             ],
-                            "path" => "js/views/other-f/Warning"
-                        ],
-                        "children" => [],
+                            "path" => "js/views/news-f/NewsStatistics"
+                        ]
                     ],
                     [
                         "id" => uniqid(),
