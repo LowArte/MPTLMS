@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Likes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Panoscape\History\HasHistories;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 
-class Departament extends Model
+class News extends Model
 {
     use SoftDeletes,HasHistories,CascadeSoftDeletes;
 
@@ -16,25 +17,26 @@ class Departament extends Model
         return $this->display_name;
     }
 
-    protected $cascadeDeletes = ['groups'];
+    protected $cascadeDeletes = ['likes'];
 
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at','deleted_at','updated_at'
+        'deleted_at','updated_at'
     ];
 
     protected $fillable  = [
-        'dep_name_full','qualification','image','info','studysperiod'
+        'title','text','images','links'
     ];
 
     protected $casts = [
-        'info' => 'array'
+        'images' => 'array',
+        'links'=>'array'
     ];
 
-    public function groups()
+    public function likes()
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Likes::class);
     }
 
     public function __construct($attributes = array())

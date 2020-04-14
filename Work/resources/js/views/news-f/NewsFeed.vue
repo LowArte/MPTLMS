@@ -3,14 +3,14 @@ div(name="top")
   c-comfirm-dialog(ref='qwestion')
   v-card.mx-auto.mb-3(max-width="600px" v-for="(post, i) in posts" :key="i")
       v-system-bar(color="primary" lights-out dark)
-          span Сегодня в 12:00
+          span {{post.time}}
           v-btn.mx-auto(x-small text @click="openPost(post.id)") Подробнее
           v-tooltip(v-if="user.post_id == 7 || user.post_id == 1" bottom)
               template(v-slot:activator="{ on }")
                   v-btn(icon x-small @click="deletePost(post.id)")
                       v-icon.pa-0.ma-0 close
               span Удалить запись
-      v-carousel(height="300" min-height="250px" :continuous="false" :cycle="false" :show-arrows="false" delimiter-icon="mdi-minus")
+      v-carousel(height="300" min-height="250px" :continuous="false" :cycle="false" :show-arrows="false" delimiter-icon="mdi-minus" v-if="post.media.length > 0")
           v-carousel-item(v-for="(mediain, i) in post.media" :key="i" :src="mediain")
       v-content.pt-0.pa-2
           v-card-title {{post.title}}
@@ -20,9 +20,6 @@ div(name="top")
           v-btn(text)
               v-icon mdi-heart
               span.mx-2 {{post.likes}}
-          v-btn(text)
-              v-icon comment
-              span.mx-2 {{post.comments}}
   v-speed-dial(v-if="posts.length > 2" absolute fixed v-model="fab" :bottom="true" :right="true")
     template(v-slot:activator)
       v-btn(v-model="fab" color="primary" dark fab href="#top")
@@ -55,45 +52,12 @@ export default {
       fab: false,
       posts: [
         {
-          id:
-            Math.random()
-              .toString(36)
-              .substring(2, 15) +
-            Math.random()
-              .toString(36)
-              .substring(2, 15),
-          media: [
-            "https://picsum.photos/500/250?image",
-            "https://picsum.photos/500/480?image",
-            "https://picsum.photos/500/480?image",
-            "https://picsum.photos/500/480?image"
-          ],
+          id: 1,
+          media: [],
           title: "Студент МПТ выиграл WSR",
-          text:
-            "Победителем WSR стал студент московского приборостроительного техникума",
-          likes: "0",
-          comments: "0"
+          text: "Победителем WSR стал студент московского приборостроительного техникума",
+          likes: "0"
         },
-        {
-          id:
-            Math.random()
-              .toString(36)
-              .substring(2, 15) +
-            Math.random()
-              .toString(36)
-              .substring(2, 15),
-          media: [
-            "https://picsum.photos/500/250?image",
-            "https://picsum.photos/500/480?image",
-            "https://picsum.photos/500/480?image",
-            "https://picsum.photos/500/480?image"
-          ],
-          title: "Студент МПТ проиграл WSR",
-          text:
-            "Проигравшим WSR стал студент московского приборостроительного техникума",
-          likes: "0",
-          comments: "0"
-        }
       ]
     };
   },

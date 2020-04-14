@@ -12,7 +12,7 @@ export const defaultRoutes = [
     {
         path: '/test/',
         name: 'Test',
-        component: () => import( /* webpackChunkName: "views-auth-f-login" */ '@/js/views/psychological-counseling-f/Psychological_Counseling.vue'),
+        component: () => import( /* webpackChunkName: "views-auth-f-login" */ '@/js/views/news-f/NewsOnePage.vue'),
     },
     {
         path: '/password_reset/',

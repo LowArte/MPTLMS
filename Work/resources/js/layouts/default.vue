@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background: white;">
     <snackbar></snackbar>
     <v-app-bar app elevate-on-scroll color="white">
       <v-toolbar-title>{{ name }}</v-toolbar-title>

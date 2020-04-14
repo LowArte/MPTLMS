@@ -20,6 +20,8 @@ class ApiRoutes
 
             Route::get('places','Api\PlaceController@getPlaces')->name('places');
 
+            Route::get('news','Api\NewsController@getNews')->name('news');
+
             Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
 
             Route::get('departments_for_combobox','Api\DepartamentController@getDepartmentsForCombobox')->name('departments_for_combobox');
@@ -62,7 +64,8 @@ class ApiRoutes
 
             Route::post('departament','Api\DepartamentController@save')->name('departament');
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
-            
+
+            Route::get('news','Api\NewsController@save')->name('news');              
 
             Route::post('place','Api\PlaceController@save')->name('place');
 
@@ -78,6 +81,9 @@ class ApiRoutes
 
             Route::post('departament','Api\DepartamentController@edit')->name('departament');
 
+            Route::get('news','Api\NewsController@edit')->name('news'); 
+            Route::get('setLike','Api\NewsController@addLike')->name('add_like');           
+
             Route::post('place','Api\PlaceController@edit')->name('place');
 
         });
@@ -88,6 +94,8 @@ class ApiRoutes
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
 
             Route::post('departament/{departament_id}','Api\DepartamentController@delete')->name('departament');
+
+            Route::get('news/{news_id}','Api\NewsController@delete')->name('news');         
 
             Route::post('place/{place_id}','Api\PlaceController@delete')->name('place');
 
