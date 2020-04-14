@@ -145,8 +145,6 @@ export default {
     },
     submit() {
       this.$refs.form.validate();
-
-      this.$refs.form.reset();
     },
     clear() {
       this.$refs.form.reset();
@@ -154,6 +152,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

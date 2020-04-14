@@ -4,14 +4,14 @@ div(name="top")
   v-card.mx-auto.mb-3(max-width="600px" v-for="(post, i) in posts" :key="i")
       v-system-bar(color="primary" lights-out dark)
           span Сегодня в 12:00
-          v-btn.mx-auto(x-small text) Подробнее
+          v-btn.mx-auto(x-small text @click="openPost(post.id)") Подробнее
           v-tooltip(v-if="user.post_id == 7 || user.post_id == 1" bottom)
               template(v-slot:activator="{ on }")
                   v-btn(icon x-small @click="deletePost(post.id)")
                       v-icon.pa-0.ma-0 close
               span Удалить запись
       v-carousel(height="300" min-height="250px" :continuous="false" :cycle="false" :show-arrows="false" delimiter-icon="mdi-minus")
-          v-carousel-post(v-for="(mediain, i) in post.media" :key="i" :src="mediain")
+          v-carousel-item(v-for="(mediain, i) in post.media" :key="i" :src="mediain")
       v-content.pt-0.pa-2
           v-card-title {{post.title}}
           v-card-text {{post.text}}
@@ -94,8 +94,7 @@ export default {
           likes: "0",
           comments: "0"
         }
-      ],
-      items: []
+      ]
     };
   },
   methods: {
@@ -108,14 +107,12 @@ export default {
     },
     loadPost() {
       this.loading = true;
-      /* if(this.items.length >= 10){
-        for (let index = this.items.length - this.posts.length; index < index - 10; index--) {
-          this.posts.push();
-        }
-      } else {
-        this.posts.push(this.items);
-      } */
-      console.log(this.items);
+      console.log(this.posts);
+      this.loading = false;
+    },
+    openPost(id) {
+      this.loading = true;
+      console.log(this.posts[1]);
       this.loading = false;
     }
   }
