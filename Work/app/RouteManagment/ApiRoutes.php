@@ -31,6 +31,9 @@ class ApiRoutes
             Route::get('retrainings','Api\RetrainingController@getRetraining')->name('retrainings');
 
             Route::get('get_certificates', 'Api\CertificateController@getCertificates')->name('getCertificates');
+
+            Route::get('get_disciplines', 'Api\DisciplineController@getDisciplines')->name('get_disciplines');
+            Route::get('get_teachers', 'Api\TeacherController@getTeachers')->name('get_teachers');
             
             Route::get('get_feedback_requests', 'Api\FeedbackController@getFeedbackRequests')->name('get_feedback_requests');
 
@@ -58,6 +61,8 @@ class ApiRoutes
             Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
 
             Route::post('departament','Api\DepartamentController@save')->name('departament');
+            Route::post('feedback','Api\FeedbackController@save')->name('feedback');
+            
 
             Route::post('place','Api\PlaceController@save')->name('place');
 

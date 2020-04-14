@@ -6,15 +6,25 @@ v-content.ma-0.pa-2
     v-flex
       v-card
         v-system-bar(dark color="info")
-          span(style="color: white;") Фильры
-        v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
-        v-combobox.mx-3.mt-2(dense label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups" v-model="groups_info.selected_group")
+          span(style="color: white;") Фильтры
+        v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
+        v-combobox.mx-3.mt-2(dense label="Группа" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
+    v-dialog(v-if="user.post_id == 1 || user.post_id == 4" v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+      template(v-slot:activator="{ on }")
+        v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
+      v-card
+        v-toolbar(dark color="primary")
+          v-btn(icon dark @click="dialog = false; group_change()")
+            v-icon mdi-close
+          v-toolbar-title {{titleDialog}}
+          v-spacer
+        c_bildTimetable.pa-2()
     v-chip.ma-1(v-if="isToday != 0" label color="info") Знаменатель
     v-chip.ma-1(v-if="isToday == 0" label color="accent") Числитель
     v-flex
       v-layout.row.wrap
         v-flex(v-for="(day_key,day_index) in days" :key="day_index" v-if="schedule != null")
-          v-card.mx-auto(min-width="300px" style="display: flex; flex-direction: column;")
+          v-card.mx-auto(min-width="300px" max-width="320px" style="display: flex; flex-direction: column;")
             v-system-bar
               span {{day_key}} 
             v-chip.ma-2(label) {{schedule[day_key].Place.place_name}} 
@@ -82,12 +92,25 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities_combo", "userposts", "groups_combo", "places_combo"]),
+    ...mapGetters(["specialities", "groups", "user"]),
+    combo_groups: function() 
+    {
+      if (!this.groups) return undefined;
+      let groups = this.groups.filter(res => {
+        if (res.departament_id == this.selected_departament.id) {
+          return true;
+        }
+        return false;
+      });
+      if (groups != null)
+        this.selected_group = groups[0];
+      return groups;
+    }
   },
   mixins: [withSnackbar, withOverlayLoading],
   post_name: {
     name: "Учебное расписание",
-    url: "timetableRoot"
+    url: "timetable"
   },
   components: {
     c_bildTimetable: bildTimetable,
@@ -96,8 +119,8 @@ export default {
 
   data: () => {
     return {
-      groups_info: {groups:null, selected_group:null}, //Группы
-      departaments_info: {departaments:null, selected_departament:null}, //Отделения
+      selected_departament: null,
+      selected_group:null,
       schedule: null, //Расписание
       isToday: null, //Текущий день
       titleDialog: "Конструктор расписания",
@@ -119,19 +142,16 @@ export default {
     async getDepartament()
     {
       this.showLoading("Получение отделений");
-      if (this.specialities_combo == null)
+      if (this.specialities == null)
       {
-        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
-        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+        let items = await departament_api.getDepartments(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
       }
-      else
-        this.departaments_info.departaments = this.specialities_combo;
-
       this.closeLoading("Получение отделений");
-
-      if(this.departaments_info.departaments)
+      
+      if(this.specialities)
       {
-        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.selected_departament = this.specialities[0];
         this.departament_change();
       }
     }, 
@@ -140,11 +160,37 @@ export default {
     async departament_change() 
     {
       this.showLoading("Получение групп");
-      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
-      this.closeLoading("Получение групп");
-      if(this.groups_info.groups)
+      if (this.groups == null)
       {
-        this.groups_info.selected_group = this.groups_info.groups[0];
+        let items = await group_api.getGroups(this);
+        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+      }
+      this.closeLoading("Получение групп");
+
+      if(this.groups)
+      {
+        /*if(this.user.post_id == 2) //Отображение отделения и группы студента
+        {
+          for(let i = 0; i < this.groups.length; i++)
+          {
+            if(this.groups[i].id == user.group_id)
+            {
+              this.selected_group = this.groups[i];
+              i = this.groups.length;
+            }
+          }
+
+          for(let i = 0; i < this.specialities.length; i++)
+          {
+            if (this.selected_group.departament_id == this.specialities[i].id) 
+            {
+              this.selected_departament = this.specialities[i];
+              i = this.specialities.length;
+            }
+          }
+        }
+        else*/
+          this.selected_group = this.combo_groups[0];
         this.group_change();
       }
     },
@@ -159,7 +205,7 @@ export default {
     async group_change() 
     {
       this.showLoading("Получение расписания");
-      this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
+      this.schedule = await schedule_api.getScheduleByGroupId(this.selected_group.id, this);
       this.closeLoading("Получение расписания");
       this.closeLoading();
       if(this.schedule)

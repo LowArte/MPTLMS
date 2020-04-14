@@ -53,7 +53,6 @@ export default {
   methods: {
     pop(item) {
       this.item = JSON.parse(JSON.stringify(item));
-      console.log(this.item);
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;

@@ -64,5 +64,4 @@ class DepartamentController extends BaseController
             return response()->json(500);
         }
     }
-    
 }

@@ -21,8 +21,10 @@ export default {
     }
   },
 
-  watch: {
-    overlayLoadingText:function(val) {
+  watch: 
+  {
+    overlayLoadingText:function(val) 
+    {
       this.text = this.overlayLoadingText.join(', ');
     },
   }

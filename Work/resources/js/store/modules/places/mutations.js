@@ -11,7 +11,6 @@ export default {
         state.places_full.deleteById(id)
     },
     [types.EDIT_PLACE](state, place) {
-        console.log(typeof (state.places_full));
         state.places_full.edit(place);
     },
     [types.ADD_PLACE](state, place) {

@@ -36,7 +36,6 @@ export default {
     "$route": {
       immediate: true,
       handler(route) {
-        console.log(route)
         const newLayout = route.meta.layout;
         if (!newLayout && !this.$route.name) {
           this.layoutName = this.loading;

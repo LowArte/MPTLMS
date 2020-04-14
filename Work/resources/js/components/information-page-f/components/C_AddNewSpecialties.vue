@@ -14,11 +14,11 @@
               v-btn(color="success" @click="add") Сохранить
             v-content.pa-0
               v-card.ma-2.pt-3
-                v-text-field.ma-2(v-model="item.image" label="Ссылка на картинку")
-                v-text-field.ma-2(v-model="item.dep_name_full" label="Название специальности")
-                v-text-field.ma-2(v-model="item.qualification" label="Квалификация")
-                v-textarea.ma-2(outlined v-model="item.info.text" label="Описание")
-                v-autocomplete.ma-2(v-model="item.studysperiod" :items="studysperiods" label="Период обучения")
+                v-text-field.ma-2(v-model="item.image" :rules="allRules" label="Ссылка на картинку")
+                v-text-field.ma-2(v-model="item.dep_name_full" :rules="allRules" label="Название специальности")
+                v-text-field.ma-2(v-model="item.qualification" :rules="allRules" label="Квалификация")
+                v-textarea.ma-2(outlined v-model="item.info.text" :rules="allRules" label="Описание")
+                v-autocomplete.ma-2(v-model="item.studysperiod" :items="studysperiods" :rules="allRules" label="Период обучения")
                 v-alert.mx-2(text dense type="warning")
                   span Перечислите все необходимые спецификации через запятую
                 v-textarea.ma-2(v-model="item.info.certifications" outlined multi-line label="Профессиональные сертификации")
@@ -47,7 +47,8 @@ export default {
           learning: [],
           text: null
         }
-      }
+      }, 
+      allRules: [v => !!v || "Поле не должно оставаться пустым"],
     };
   },
 

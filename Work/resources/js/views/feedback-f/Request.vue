@@ -23,7 +23,7 @@
               v-form.ma-2.pt-2(v-model='form')
                 v-textarea.mt-0.pt-0(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
                 v-btn.ma-1.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
-        .text-center.pt-2.mx-auto.pa-0
+        v-layout.row.text-center.pa-2.ma-2
             v-pagination(v-model='page' :length='pageCount')
 </template>
 
@@ -106,13 +106,13 @@ export default {
       });
     },
 
-    async sendQuery(email) {
+    async sendQuery(email) 
+    {
       if (await feedbackApi.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}, this))
       {
          this.items.splice(this.expanded[0]);
          this.modelmessage = "";
       }
-      
     },
 
     //Получение обращений пользователя

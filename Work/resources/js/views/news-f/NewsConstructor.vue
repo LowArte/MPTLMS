@@ -109,8 +109,6 @@ export default {
         value: [],
         identity: true
       });
-
-      console.log(this.files);
     },
     addLink() {
       this.links.push({

@@ -16,7 +16,6 @@ export default {
   },
   methods: {
     navigate(path) {
-      console.log(path);
       this.$router.push("/" + path, null, () => {});
     }
   }

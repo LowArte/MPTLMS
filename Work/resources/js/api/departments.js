@@ -42,7 +42,7 @@ export default {
     getDepartments(_this) {
         return axios.get('/api/getters/departments')
         .then(result => { return result.data.departments; })
-        .catch(exception => { console.log(exception); _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*Получение отделений для комбобокса

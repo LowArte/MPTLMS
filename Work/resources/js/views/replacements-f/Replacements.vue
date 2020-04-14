@@ -6,8 +6,8 @@ v-content.ma-0.pa-2
       v-card.mx-auto(min-width="300")
         v-system-bar(dark color="info")
           span(style="color: white;") Фильры
-        v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
-        v-combobox.mx-3.my-2(dense label="Группа" @change="changeFilter" item-text="group_name" :items="groups_info.groups"  v-model="groups_info.selected_group")
+        v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
+        v-combobox.mx-3.my-2(dense label="Группа" @change="changeFilter" item-text="group_name" :items="combo_groups"  v-model="selected_group")
         v-flex.flex-grow-0.mx-3.my-2.pa-0.row
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="300px")
                 template(v-slot:activator="{ on }")
@@ -16,11 +16,21 @@ v-content.ma-0.pa-2
                     v-btn(text dark color="accent" @click="dateDialog.model = false") Отмены
                     v-spacer
                     v-btn(text dark color="success" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
+            v-dialog(v-if="user.post_id == 1 || user.post_id == 4" v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
+                template(v-slot:activator="{ on }")
+                    v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
+                v-card
+                    v-toolbar(dark color="primary")
+                        v-btn(icon dark @click="dialog = false; changeFilter()")
+                            v-icon mdi-close
+                        v-toolbar-title {{titleDialog}}
+                        v-spacer
+                    c_bildReplacement.pa-2()
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" @change="changeFilter" block label="Изменения для всех групп")
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" @change="changeFilter" block label="Изменения на имеющиеся даты")
   v-alert(border="left" dense type="warning")
       span.subtitle-1(primary--text) Обратите внимание, что изменения в расписании выкладываются каждый день с 17:00 и до 19:00 вечера
-  v-layout.row.wrap(v-for="(groups_key, groups_index) in groups" :key="groups_index")
+  v-layout.row.wrap(v-for="(groups_key, groups_index) in arrgroups" :key="groups_index")
       v-flex(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
         v-card.mx-auto(min-width="300")
           v-system-bar(dark color="accent")
@@ -34,6 +44,7 @@ v-content.ma-0.pa-2
                     th.text-left Заменяемое
                     th.text-left Заменено на
                     th.text-left Дата замены
+                    th.text-left(v-if="user.post_id == 1 || user.post_id == 4") Действие
               tbody
                   tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                       td {{ replacement_key['swap']['caselesson'] }}
@@ -43,7 +54,9 @@ v-content.ma-0.pa-2
                       td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
                       td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
                       td(v-else) Занятие отменено
-                      td {{ replacement_key['created_at'] }}   
+                      td {{ replacement_key['created_at'] }}  
+                      td(v-if="user.post_id == 1 || user.post_id == 4")
+                        v-icon.small(@click="deleteItem(replacement_key['id'])") delete      
 </template>
 
 <script>
@@ -60,11 +73,24 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities_combo"]),
+    ...mapGetters(["specialities", "groups", "user"]),
+    combo_groups: function() 
+    {
+      if (!this.groups) return undefined;
+      let groups = this.groups.filter(res => {
+        if (res.departament_id == this.selected_departament.id) {
+          return true;
+        }
+        return false;
+      });
+      if (groups != null)
+        this.selected_group = groups[0];
+      return groups;
+    }
   },
   post_name: {
     name: "Замены расписания",
-    url: "replacementsRoot"
+    url: "replacements"
   },
   mixins: [withSnackbar, withOverlayLoading],
 
@@ -74,13 +100,13 @@ export default {
   },
 
   data: () => ({
-    groups_info: {groups:null, selected_group:null}, //Группы
-    departaments_info: {departaments:null, selected_departament:null}, //Отделения
+    selected_group:null, //Группы
+    selected_departament:null, //Отделения
     parseReplacements: null, //Замены
     replacements: null, //Замены
     checkAllGroup: false, //Все группы
     checkAllDate: false, //Все даты
-    groups: [],
+    arrgroups: [],
     date: [],
     titleDialog: "Конструктор замен",
     dialog: false,
@@ -95,30 +121,51 @@ export default {
     async getDepartament()
     {
       this.showLoading("Получение отделений");
-      if (this.specialities_combo == null)
+      if (this.specialities == null)
       {
-        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
-        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+        let items = await departament_api.getDepartments(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
       }
-      else
-        this.departaments_info.departaments = this.specialities_combo;
-
-      if(this.departaments_info.departaments != null)
+      this.closeLoading("Получение отделений");
+      
+      if(this.specialities)
       {
-        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.selected_departament = this.specialities[0];
         this.departament_change();
       }
       this.closeLoading("Получение отделений");
     }, 
 
+    //Удаление замены
+    deleteItem(id) 
+    {
+      this.$refs.qwestion.pop().then(confirmResult => {
+        if (confirmResult) 
+        {
+          if(replacements_api.deleteReplacement(id, this))
+            this.changeFilter();
+        } 
+        else 
+        {
+          this.showInfo("Действие было отменено");
+        }
+      });
+    },
+
     //Получение групп для отделения
-    async departament_change() {
+    async departament_change() 
+    {
       this.showLoading("Получение групп");
-      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id, this);
-      this.closeLoading("Получение групп");
-      if(this.groups_info.groups != null)
+      if (this.groups == null)
       {
-        this.groups_info.selected_group = this.groups_info.groups[0];
+        let items = await group_api.getGroups(this);
+        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+      }
+      this.closeLoading("Получение групп");
+
+      if(this.groups)
+      {
+        this.selected_group = this.combo_groups[0];
         this.changeFilter();
       }
     },
@@ -136,12 +183,12 @@ export default {
       else 
       if (this.checkAllDate) 
         //Получить все замены для всех дат
-        this.replacements = await replacements_api.getReplacementsByGroup(this.groups_info.selected_group.id, this);
+        this.replacements = await replacements_api.getReplacementsByGroup(this.selected_group.id, this);
       else 
       {
         this.replacements = await replacements_api.getReplacementsByGroupByDate(
         {
-          group_id: this.groups_info.selected_group.id,
+          group_id: this.selected_group.id,
           date: this.dateDialog.date
         }, this);
       }
@@ -152,8 +199,9 @@ export default {
     },
 
     //Перевод массив для вывода
-    parseReplacement() {
-      this.groups = [];
+    parseReplacement() 
+    {
+      this.arrgroups = [];
       this.date = [];
       this.parseReplacements = [];
       var j = -1; //Индекс группы
@@ -176,9 +224,9 @@ export default {
           this.replacements[i]["swap"]["oldteacher"] = this.replacements[i][
             "swap"
           ]["oldteacher"].join(" / ");
-        j = this.groups.indexOf(this.replacements[i]["group_name"]);
+        j = this.arrgroups.indexOf(this.replacements[i]["group_name"]);
         if (j == -1) {
-          this.groups.push(this.replacements[i]["group_name"]);
+          this.arrgroups.push(this.replacements[i]["group_name"]);
           this.date.push([this.replacements[i]["swap_date"]]);
           this.parseReplacements.push([[this.replacements[i]]]);
         } else {

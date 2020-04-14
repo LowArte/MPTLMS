@@ -66,7 +66,7 @@ export default {
           email: this.email,
           password: this.password
         });
-        console.log(info);
+        
         if (info) {
           this.$store.commit(mutations.SET_AUTH, info);
           window.axios.defaults.headers.common["Authorization"] =

@@ -196,7 +196,6 @@ export default {
     },
 
     makeRoutes(privilegies, slug) {
-        console.log(privilegies)
         let items = [];
         privilegies.forEach(element => {
             if (element.children) {
@@ -230,7 +229,6 @@ export default {
                 });
             }
         });
-        console.log(items)
         
         return items;
     }

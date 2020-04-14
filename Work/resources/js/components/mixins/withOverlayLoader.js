@@ -15,7 +15,7 @@ export default {
         {
             if(item == null)
             {
-                this.$store.commit(mutations.SET_OVERLAYLOADING_TEXT, []);
+                this.$store.commit(mutations.SET_OVERLAYLOADING_TEXT_FULL, []);
                 this.$store.commit(mutations.SET_OVERLAYLOADING_SHOW, false);
             }    
             else

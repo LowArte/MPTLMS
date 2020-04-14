@@ -27,7 +27,6 @@ export default {
 
   async beforeMount() {
     this.options = await api.getSiteOptions(this);
-    console.log(this.options);
     if (this.options != null)
       this.options.option_value = this.options.option_value == "true";
   },

@@ -60,9 +60,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Учебное расписание",
-                                        "url" => "timetableRoot"
+                                        "url" => "timetable"
                                     ],
-                                    "path" => "js/views/timetable-f/TimetableRoot"
+                                    "path" => "js/views/timetable-f/Timetable"
                                 ],
                             ],
                             [
@@ -71,9 +71,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Замены расписания",
-                                        "url" => "replacementsRoot"
+                                        "url" => "replacements"
                                     ],
-                                    "path" => "js/views/replacements-f/ReplacementsRoot"
+                                    "path" => "js/views/replacements-f/Replacements"
                                 ],
 
                             ],
@@ -437,9 +437,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Учебное расписание",
-                                        "url" => "timetableRoot"
+                                        "url" => "timetable"
                                     ],
-                                    "path" => "js/views/timetable-f/TimetableRoot"
+                                    "path" => "js/views/timetable-f/Timetable"
                                 ],
                             ],
                             [
@@ -448,9 +448,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Замены расписания",
-                                        "url" => "replacementsRoot"
+                                        "url" => "replacements"
                                     ],
-                                    "path" => "js/views/replacements-f/ReplacementsRoot"
+                                    "path" => "js/views/replacements-f/Replacements"
                                 ],
 
                             ],
@@ -502,7 +502,7 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "icon" => "library_books",
-                        "text" => "list_certificate",
+                        "text" => "Просмотр заказанных справок",
                         "component" => [
                             "info" => [
                                 "name" => "Просмотр заказанных справок",

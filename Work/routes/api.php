@@ -1,6 +1,7 @@
 <?php
 
 use App\RouteManagment\ApiRoutes;
+use App\RouteManagment\StudentRoutes;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,5 @@ use App\RouteManagment\ApiRoutes;
 Route::middleware('auth:api')->name('api.')->group(function () 
 {   
     ApiRoutes::getApiRoutes();
+    StudentRoutes::getApiRoutes();
 });

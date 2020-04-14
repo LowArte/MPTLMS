@@ -58,7 +58,7 @@ export default {
     //! Реализовать back-end для api 
     //!----------------------------------------
     save(data, _this) {
-        return axios.post('/api/student/feedback/save', {"text": data.text, "type": data.type})
+        return axios.post('/api/save/feedback/', {"text": data.text, "type": data.type})
         .then(res => {_this.showMessage("Выполнено!"); return true;})
         .catch(ex => {_this.showError("Не выполнено!"); return false;});
     },

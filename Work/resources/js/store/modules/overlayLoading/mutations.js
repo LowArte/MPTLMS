@@ -7,6 +7,9 @@ export default {
   [ types.SET_OVERLAYLOADING_TEXT ] (state, text) {
     state.text.push(text);
   },
+  [ types.SET_OVERLAYLOADING_TEXT_FULL ] (state, text) {
+    state.text = text;
+  },
   [ types.SET_OVERLAYLOADING_TEXT_DELETE ] (state, text) {
     let index = state.text.indexOf(text) + 1; 
     if (index >= 0)

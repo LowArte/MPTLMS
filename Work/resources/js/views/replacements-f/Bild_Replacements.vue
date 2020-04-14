@@ -1,8 +1,8 @@
 <template lang="pug">
     v-layout.column.wrap
         v-flex.ma-2.mb-0.pa-0.row
-            v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
-            v-combobox.ma-1(label="Группа" item-text="group_name" :items="groups_info.groups" @change="caseDate()" v-model="groups_info.selected_group")
+            v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
+            v-combobox.ma-1(label="Группа" item-text="group_name" :items="groups" @change="caseDate()" v-model="selected_group")
         v-flex.ma-2.mt-0.pa-0.row
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                 template(v-slot:activator="{ on }")
@@ -72,8 +72,22 @@ import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
 
 export default {
+  mixins: [withSnackbar, withOverlayLoading],
   computed: {
-    ...mapGetters(["specialities_combo", "teachers_combo", "disciplines_combo"]),
+    ...mapGetters(["specialities", "groups", "teachers_combo", "disciplines_combo"]),
+    combo_groups: function() 
+    {
+      if (!this.groups) return undefined;
+      let groups = this.groups.filter(res => {
+        if (res.departament_id == this.selected_departament.id) {
+          return true;
+        }
+        return false;
+      });
+      if (groups != null)
+        this.selected_group = groups[0];
+      return groups;
+    }
   },
   post_name: {
     name: "Замены расписания",
@@ -101,8 +115,8 @@ export default {
       oldlesson: [],
       oldteacher: []
     }, //Замена которая потом будет сохранена
-    groups_info: { groups: null, selected_group: null }, //Группы
-    departaments_info: { departaments: null, selected_departament: null }, //Отделения
+    selected_group: null, //Группы
+    selected_departament: null, //Отделения
     schedule: null, //Расписание выбранного дня
     schedule_bild: null, //Расписание выбранного дня
     week: [
@@ -129,17 +143,16 @@ export default {
     async getDepartament()
     {
       this.showLoading("Получение отделений");
-      if (this.specialities_combo == null)
+      if (this.specialities == null)
       {
-        this.departaments_info.departaments = await departament_api.getDepartmentsForCombobox(this);
-        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
+        let items = await departament_api.getDepartments(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
       }
-      else
-        this.departaments_info.departaments = this.specialities_combo;
-
-      if(this.departaments_info.departaments)
+      this.closeLoading("Получение отделений");
+      
+      if(this.specialities)
       {
-        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
+        this.selected_departament = this.specialities[0];
         this.departament_change();
       }
       this.closeLoading("Получение отделений");
@@ -180,12 +193,17 @@ export default {
     //Получение групп при изменении отдела
     async departament_change() 
     {
-      this.groups_info.groups = await group_api.getGroupsByDepartamentId(
-        this.departaments_info.selected_departament.id, this
-      );
-      if (this.groups_info.groups) 
+      this.showLoading("Получение групп");
+      if (this.groups == null)
       {
-        this.groups_info.selected_group = this.groups_info.groups[0];
+        let items = await group_api.getGroups(this);
+        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+      }
+      this.closeLoading("Получение групп");
+      
+      if(this.groups)
+      {
+        this.selected_group = this.combo_groups[0];
         this.caseDate();
       }
     },
@@ -207,14 +225,14 @@ export default {
       } 
       else 
       {
-        this.schedule = await schedule_api.getScheduleByGroupId(this.groups_info.selected_group.id, this);
+        this.schedule = await schedule_api.getScheduleByGroupId(this.selected_group.id, this);
         if(this.schedule)
         {
             this.schedule = this.schedule[this.week[this.date_week]];
             this.parseSchedule();
         }
 
-        this.schedule_bild = await schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id, this);
+        this.schedule_bild = await schedule_api.getScheduleBildByGroupId(this.selected_group.id, this);
         if(this.schedule_bild)
             this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
       }
@@ -231,7 +249,7 @@ export default {
           this.replacement.teacher = [];
         }
         await replacements_api.saveReplacements({
-          group_id: this.groups_info.selected_group.id,
+          group_id: this.selected_group.id,
           replacement: this.replacement,
           date: this.dateDialog.date
         }, this);

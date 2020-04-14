@@ -32,7 +32,7 @@ class ReplacementRepository extends BaseRepository
         ->join('schedules', 'schedule_swaps.schedule_id', '=', 'schedules.id')
         ->join('groups', 'schedules.group_id', '=', 'groups.id')
         ->orderBy('groups.id', 'asc')
-        ->selectRaw("schedule_swaps.id, schedule_swaps.swap_date, schedule_swaps.swap, schedule_swaps.created_at, CONCAT(group_name, '-', group_number, '-', group_year) as group_name")
+        ->selectRaw("schedule_swaps.id, schedule_swaps.swap_date, schedule_swaps.swap, schedule_swaps.created_at, group_name")
         ->orderBy('swap_date', 'desc')
         ->toBase()->get();
         foreach($result as $item)

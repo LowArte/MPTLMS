@@ -79,7 +79,6 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deletePlace(place_id, _this) {
-        console.log(place_id);
         return axios.post('/api/delete/place/' + place_id)
         .then(result => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false;});

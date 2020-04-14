@@ -56,7 +56,7 @@ export default {
     //! Уточнить структуру данных. 
     //!----------------------------------------
     save(data, _this) {
-        return axios.post('/api/student/certificate/save', {"data": data.data, "type": data.type})
+        return axios.post('/api/student/save/certificate/', {"data": data.data, "type": data.type})
         .then(res => {_this.showMessage("Выполнено!"); return true;})
         .catch(exp => {_this.showError("Ошибка выполнения!"); return false;});
     },

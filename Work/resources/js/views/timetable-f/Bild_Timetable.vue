@@ -1,8 +1,8 @@
 <template lang="pug">
     v-layout.column.wrap
-      v-flex.ma-2.row(v-if="departaments_info != null")
-        v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="departaments_info.departaments" v-model="departaments_info.selected_departament" )
-        v-combobox.ma-1(label="Группа" @change="group_change" item-text="group_name" :items="groups_info.groups" v-model="groups_info.selected_group")
+      v-flex.ma-2.row()
+        v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
+        v-combobox.ma-1(label="Группа" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
       v-divider.ma-0
       v-flex.ma-0.pa-0.row(v-if="schedule != null")
         v-form.ma-0.pa-0.grow(ref="BildTimetable")
@@ -44,7 +44,20 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities_combo", "teachers_combo", "disciplines_combo", "places_combo"]),
+    ...mapGetters(["specialities", "groups", "teachers_combo", "disciplines_combo", "places_combo"]),
+    combo_groups: function() 
+    {
+      if (!this.groups) return undefined;
+      let groups = this.groups.filter(res => {
+        if (res.departament_id == this.selected_departament.id) {
+          return true;
+        }
+        return false;
+      });
+      if (groups != null)
+        this.selected_group = groups[0];
+      return groups;
+    }
   },
   post_name: {
     name: "Конструктор учебного рассписения",
@@ -63,8 +76,8 @@ export default {
               return !!value.length || "Дисциплина не указана!";
           },
       },
-      groups_info: {groups:null, selected_group:null}, //Группы
-      departaments_info: {departaments:null, selected_departament:null}, //Отделения
+      selected_departament: null,
+      selected_group:null,
       schedule: null, //Расписание
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
     };
@@ -75,68 +88,71 @@ export default {
     //Получение всех преподавателей
     async getTeachers()
     {
+      this.showLoading("Получение преподавателей");
       if(this.teachers_combo == null)
       {
-        this.showLoading("Получение преподавателей");
         let items = await teacher_api.getTeachers(this);
         this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
-        this.closeLoading("Получение преподавателей");
       }
+      this.closeLoading("Получение преподавателей");
     },
 
     //Получение всех дисциплин
     async getDisciplines()
     {
+      this.showLoading("Получение дисциплин");
       if(this.disciplines_combo == null)
       {
-        this.showLoading("Получение дисциплин");
         let items = await discipline_api.getDisciplines(this);
         this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
-        this.closeLoading("Получение дисциплин");
       }
+      this.closeLoading("Получение дисциплин");
     },
 
     //Получение мест проведений
     async getPlaces()
     {
+      this.showLoading("Получение мест проведения");
       if(this.places_combo == null)
       {
-        this.showLoading("Получение мест проведения");
         let items = await places_api.getPlaces(this);
         this.$store.commit(mutations.SET_PLACES_COMBO, items)
-        this.closeLoading("Получение мест проведения");
       }
+      this.closeLoading("Получение мест проведения");
     },
 
     //Получение отделений
     async getDepartament()
     {
       this.showLoading("Получение отделений");
-      if (this.specialities_combo == null)
+      if (this.specialities == null)
       {
-        this.departaments_info.departaments = await apiDepartment.getDepartmentsForCombobox(this);
-        this.$store.commit(mutations.SET_SPECIALITIES_COMBO,this.departaments_info.departaments);
-      }
-      else
-        this.departaments_info.departaments = this.specialities_combo;
-
-      if(this.departaments_info.departaments)
-      {
-        this.departaments_info.selected_departament = this.departaments_info.departaments[0];
-        this.departament_change();
+        let items = await departament_api.getDepartments(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
       }
       this.closeLoading("Получение отделений");
+      
+      if(this.specialities)
+      {
+        this.selected_departament = this.specialities[0];
+        this.departament_change();
+      }
     }, 
 
     //Событие при изменении отделении
     async departament_change() 
     {
       this.showLoading("Получение групп");
-      this.groups_info.groups = await group_api.getGroupsByDepartamentId(this.departaments_info.selected_departament.id);
-      this.closeLoading("Получение групп");
-      if(this.groups_info.groups)
+      if (this.groups == null)
       {
-        this.groups_info.selected_group = this.groups_info.groups[0];
+        let items = await group_api.getGroups(this);
+        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+      }
+      this.closeLoading("Получение групп");
+      
+      if(this.groups)
+      {
+        this.selected_group = this.combo_groups[0];
         this.group_change();
       }
     },
@@ -145,7 +161,7 @@ export default {
     async group_change() 
     {
       this.showLoading("Получение расписания");
-      this.schedule = await schedule_api.getScheduleBildByGroupId(this.groups_info.selected_group.id, this);
+      this.schedule = await schedule_api.getScheduleBildByGroupId(this.selected_group.id, this);
       this.closeLoading("Получение расписания");
       this.closeLoading();
     },
@@ -157,7 +173,7 @@ export default {
       {
         if (schedule_api.editSchedule(
         {
-          group_id: this.groups_info.selected_group.id, 
+          group_id: this.selected_group.id, 
           schedule: this.schedule,
         }, this))
           this.group_change();

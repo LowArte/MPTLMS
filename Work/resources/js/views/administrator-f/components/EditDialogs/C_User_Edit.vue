@@ -114,7 +114,6 @@ export default {
         let items = await apigroup.getGroupsByDepartamentId(this.item.departament_id, this);
         this.$store.commit(mutations.SET_GROUPS_COMBO,items)
       }
-      console.log(this.groups_combo);
     },
 
     pop(item) {
