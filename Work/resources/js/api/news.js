@@ -38,35 +38,12 @@ export default {
     //!----------------------------------------
     getNews(_this) {
         return axios.get('/api/getters/news')
-        .then(result => {return true;})
+        .then(result => {return result.data.news;})
         .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
     },
 
-    //*Получение постов по фильтру тегов
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *NEWS* (Новости) в соответсвии с установленным фильтром
-    //? Возвращается таблица данных JSON формата
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    getNewsFiltered(filter, _this) {
-        return axios.get('/api/getters/news_filtered/' + filter)
-        .then(result => {return true;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
-    },
 
-    //*Получение постов по тексту
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *NEWS* (Новости) в соответсвии с посковым запросом
-    //? Возвращается таблица данных JSON формата
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    getNewsSearching(searching_text, _this) {
-        return axios.get('/api/getters/news_searching/' + searching_text)
-        .then(result => {return true;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
-    }, 
+    
     
     //*Получение поста по id
     //! Комментарий ---------------------------
@@ -94,7 +71,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     insertNews(data, _this) {
-        return axios.post('/api/editor/news/insert', data)
+        return axios.post('/api/save/news', data)
         .then(result => {_this.showMessage("Выполнено!"); return true;})
         .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
@@ -103,10 +80,10 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется редактирование данных в таблице *NEWS* (Новости)
     //! Требование ----------------------------
-    //! Реализовать back-end для api
+    //! Реализовать front
     //!----------------------------------------
     updateNews(data, _this) {
-        return axios.post('/api/editor/news/update', data)
+        return axios.post('/api/update/news', data)
         .then(result => {_this.showMessage("Выполнено!"); return true;})
         .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
@@ -118,32 +95,20 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     deleteNews(id, _this) {
-        return axios.post('/api/editor/news/delete/' + id)
+        return axios.post('/api/delete/news/' + id)
         .then(result => {_this.showMessage("Выполнено!"); return true;})
         .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
-    //*Логическое удаление записей
+    //*Оценка записи
     //! Комментарий ---------------------------
-    //? Реализуется стирание данных в таблице *NEWS* (Новости) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
+    //? Реализуется установка флага отметки новости
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    dropNews(_this) {
-        return axios.post('/api/editor/news/drop')
+    likeNews(id, _this) {
+        return axios.post('/api/update/set_like/' + id)
         .then(result => {_this.showMessage("Выполнено!"); return true;})
         .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },
-
-    //*Отправка жалобы на запись
-    //! Комментарий ---------------------------
-    //? Реализуется возможность подать жалобу на контент в случае наружение морально-этических норм или правил сообщества
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    complaintNews(complaint, _this) {
-        return axios.post('/api/editor/news/complaint', complaint)
-        .then(result => {_this.showMessage("Выполнено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
-    }
 }

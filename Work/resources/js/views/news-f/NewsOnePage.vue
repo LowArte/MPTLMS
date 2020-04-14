@@ -3,8 +3,8 @@ v-card.mx-auto.mb-3(max-width="600px")
     v-system-bar(color="primary" lights-out dark)
         router-link(class='nounderline' :to="'/' + user.post.slug + '/news'")
             v-btn(block x-small) Ко всем новостям
-    v-carousel(height="300" min-height="250px" :continuous="false" :cycle="false" :show-arrows="false" delimiter-icon="mdi-minus" v-if="post.media.length > 0")
-        v-carousel-item(v-for="(mediain, i) in post.media" :key="i" :src="mediain")
+    v-carousel(height="300" min-height="250px" :continuous="false" :cycle="false" :show-arrows="false" delimiter-icon="mdi-minus" v-if="post.images.length > 0")
+        v-carousel-item(v-for="(image, i) in post.images" :key="i" :src="image")
     v-system-bar(color="#F5F5F5")
         span Опубликовано: {{post.time}}
     v-content.pt-0.pa-2
@@ -17,12 +17,25 @@ v-card.mx-auto.mb-3(max-width="600px")
             a(:href="link") {{link}}
     v-divider
     v-card-actions
-        v-btn(text @click="clickLike()")
+        v-btn(text @click="clickLike(post.id)")
             v-icon mdi-heart
-            span.mx-2 {{post.likes}}
+            span.mx-2 {{post.likes.length}}
 </template>
 
 <script>
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
+import withSnackbar from "@/js/components/mixins/withSnackbar";
+
+//?----------------------------------------------
+//!           Подключение api
+//?----------------------------------------------
+import news_api from "@/js/api/news";
+
+//?----------------------------------------------
+//!           Подключение vuex
+//?----------------------------------------------
 import { mapGetters } from "vuex";
 
 export default {
@@ -31,27 +44,29 @@ export default {
   },
   data: () => {
     return {
+      mixins: [withSnackbar],
       clicklike: false,
       post: {
         id: 0,
-        time: new Date().toISOString().substr(0, 10),
-        media: [],
-        title: "Студент МПТ выиграл WSR",
-        text:
-          "Победителем WSR стал студент московского приборостроительного техникума",
+        time: null,
+        images: [],
+        title: "",
+        text: "",
         links: [],
-        likes: 20
+        likes: []
       }
     };
   },
 
   methods: {
-    clickLike() {
+    clickLike(id) {
       if (this.clicklike) {
         this.post.likes--;
+        news_api.likeNews(id, this);
         this.clicklike = false;
       } else {
         this.post.likes++;
+        news_api.likeNews(this.post.id, this);
         this.clicklike = true;
       }
     }

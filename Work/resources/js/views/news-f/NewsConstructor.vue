@@ -11,31 +11,30 @@ v-container.pa-4
                             v-btn(x-small text @click="clear") Очистить
                         span Очистить форму
                 v-form(ref="form")
-                    v-combobox.ma-4(v-model="teg" :items="items" label="Тематика" multiple outlined dense required)
-                    v-card-text.pt-0 Медиа данные (только фотографии)
-                    v-content.pa-3
-                        v-flex(v-for="(file, id) in files" :key="id")
-                            v-row
-                                v-col(lg="2")
-                                    v-file-input(v-model="file.value" label="Изображение" :rules="imageRules" show-size outlined dense prepend-icon="mdi-camera" accept="image/png, image/jpeg" @change="validateExt(file.value)")
+                    v-card-text.pb-0 Медиа данные (только фотографии)
+                    v-content.pa-3.pt-1
+                        v-flex(v-for="(file, id) in post.files" :key="id")
+                            v-row.pa-0
+                                v-col.pa-0(lg="2")
+                                    v-file-input(v-model="file.value" max-width="640" label="Изображение" :rules="imageRules" show-size outlined dense prepend-icon="mdi-camera" accept="image/png, image/jpeg" @change="validateExt(file.value)")
                                         template( v-slot:selection="{ text }")
                                             v-chip(small label color="primary") {{ text }}
-                                v-col(sm ="1")
+                                v-col.pa-0(sm ="1")
                                     v-card-actions
                                         v-btn(color="primary" dark @click="deleteFile(file.id)" icon x-small)
                                             v-icon.pa-0.ma-0 close
                         v-btn(outlined color="primary" block dark @click="addFile")
                             v-icon.pa-0.ma-0 add
-                    v-card-text Текстовое наполнение
-                    v-text-field.ma-4(v-model="title" :rules="titleRules" label="Заголовок" required)
-                    v-textarea.ma-4(v-model="text" :rules="textRules" auto-grow outlined filled label="Текст записи" required)
-                    v-card-text Ссылки на сторониие материалы
+                    v-card-text.py-0 Текстовое наполнение
+                    v-text-field.ma-4.py-0(v-model="post.title" :rules="titleRules" label="Заголовок" required)
+                    v-textarea.ma-4.py-0(v-model="post.text" :rules="textRules" auto-grow outlined filled label="Текст записи" required)
+                    v-card-text.py-0 Ссылки на сторониие материалы
                     v-content.pa-3
-                        v-flex(v-for="(link, id) in links" :key="id")
-                            v-row
-                                v-col(lg="2")
-                                    v-text-field(v-model="link.value" label="Ссылка на материал" :rules="linkRules" outlined dense prepend-icon="link")
-                                v-col(sm ="1")
+                        v-flex(v-for="(link, id) in post.links" :key="id")
+                            v-row.py-0
+                                v-col.py-0(lg="2")
+                                    v-text-field(v-model="link.value" max-width="640" label="Ссылка на материал" :rules="linkRules" outlined dense prepend-icon="link")
+                                v-col.py-0(sm ="1")
                                     v-card-actions
                                         v-btn(color="primary" dark @click="deleteLink(link.id)" icon x-small)
                                             v-icon.pa-0.ma-0 link_off
@@ -46,37 +45,49 @@ v-container.pa-4
 </template>
 
 <script>
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
+import withSnackbar from "@/js/components/mixins/withSnackbar";
+
+//?----------------------------------------------
+//!           Подключение api
+//?----------------------------------------------
+import news_api from "@/js/api/news";
+
 export default {
   data: () => ({
-    teg: [],
-    title: null,
-    text: null,
-    files: [
-      {
-        id:
-          Math.random()
-            .toString(36)
-            .substring(2, 15) +
-          Math.random()
-            .toString(36)
-            .substring(2, 15),
-        value: [],
-        identity: true
-      }
-    ],
-    links: [
-      {
-        id:
-          Math.random()
-            .toString(36)
-            .substring(2, 15) +
-          Math.random()
-            .toString(36)
-            .substring(2, 15),
-        value: [],
-        identity: true
-      }
-    ],
+    mixins: [withSnackbar],
+    post: {
+      title: null,
+      text: null,
+      files: [
+        {
+          id:
+            Math.random()
+              .toString(36)
+              .substring(2, 15) +
+            Math.random()
+              .toString(36)
+              .substring(2, 15),
+          value: [],
+          identity: true
+        }
+      ],
+      links: [
+        {
+          id:
+            Math.random()
+              .toString(36)
+              .substring(2, 15) +
+            Math.random()
+              .toString(36)
+              .substring(2, 15),
+          value: [],
+          identity: true
+        }
+      ]
+    },
     formHasErrors: false,
     errorMessages: "",
     titleRules: [value => !!value || "У записи должен быть заголовок"],
@@ -93,8 +104,7 @@ export default {
     linkRules: [
       value =>
         !value || "Поле не должно быть пустым, либо его необходимо удалить"
-    ],
-    items: ["Спорт", "Игры", "Новости", "Культурная жизнь", "IT"]
+    ]
   }),
   methods: {
     addFile() {
@@ -124,10 +134,10 @@ export default {
       });
     },
     deleteFile(id) {
-      this.files.deleteById(id);
+      this.post.files.deleteById(id);
     },
     deleteLink(id) {
-      this.links.deleteById(id);
+      this.post.links.deleteById(id);
     },
     validateExt(item) {
       if (item) {
@@ -144,7 +154,9 @@ export default {
       }
     },
     submit() {
-      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        news_api.insertNews(this.post, this);
+      }
     },
     clear() {
       this.$refs.form.reset();

@@ -20,6 +20,7 @@ class CreateLikesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('news_id')->references('id')->on('news');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
