@@ -19,16 +19,25 @@ class GroupController extends BaseController
     }
 
     /**
-     * Get groups by departament id
+     * Get groups 
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function groupForCombobox(GroupRepository $groupRepository)
     {
         $groups = $groupRepository->getGroupsForComboBox();
-        return response()->json(array(
-            "groups" => $groups
-        ));
+        return response()->json(compact("groups"));
+    }
+
+        /**
+     * Get groups recursive
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function groupForComboboxRecursive(GroupRepository $groupRepository)
+    {
+        $groups = $groupRepository->getGroupsForComboBoxWithRecursive();
+        return response()->json(compact("groups"));
     }
 
     /**
