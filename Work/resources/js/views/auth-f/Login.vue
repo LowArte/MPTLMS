@@ -38,6 +38,7 @@ import user_api from "@/js/api/users";
 import * as mutations from "@/js/store/mutation-types";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
+
 export default {
   mixins: [withSnackbar],
   data() {
@@ -66,17 +67,16 @@ export default {
           email: this.email,
           password: this.password
         });
-        
-        if (info) {
+        if (typeof(info)!="string") {
           this.$store.commit(mutations.SET_AUTH, info);
           window.axios.defaults.headers.common["Authorization"] =
             "Bearer " + info.token;
           this.$router.addRoutes(info.items);
           this.$router.push("/" + info.slug);
-        } else {
-          this.showError("Не верные данные");
-        }
-      } else this.showError("Поля заполнены не корректно");
+        } 
+        else 
+          this.showError(info);
+      } else this.showError("Поля заполнены не корректно!");
       this.loading = false;
     }
   }

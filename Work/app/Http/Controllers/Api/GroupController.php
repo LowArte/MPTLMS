@@ -15,12 +15,7 @@ class GroupController extends BaseController
     public function groupByDepartamentId($id, GroupRepository $groupRepository)
     {
         $groups = $groupRepository->getGroupsForComboBoxByDepartament($id);
-        return response()->json(array(
-            "groups_info" => array(
-                "groups" => $groups,
-                "selected_group" => $groups[0]
-            ),
-        ));
+        return response()->json(compact('groups'));
     }
 
     /**

@@ -147,19 +147,24 @@ export default {
 
     login(data) {
         return axios.post('/login', data).then(res => {
-            const slug = res.data.user.post.slug;
-            const items = this.makeRoutes(res.data.user.post.privilegies, slug);
-            const user = res.data.user;
-            const token = res.data.token;
-            return {
-                items,
-                slug,
-                user,
-                token
+            console.log(res);
+            if(!res.data.profilactic)
+            {
+                const slug = res.data.user.post.slug;
+                const items = this.makeRoutes(res.data.user.post.privilegies, slug);
+                const user = res.data.user;
+                const token = res.data.token;
+                return {
+                    items,
+                    slug,
+                    user,
+                    token
+                }
             }
+            return "Система находится в режиме профилактики!";
         }).catch(ex => {
             console.log(ex)
-            return undefined;
+            return "Не верные данные!";
         })
     },
 
@@ -176,9 +181,8 @@ export default {
                     user,
                     token
                 }
-            } else {
-                return undefined;
-            }
+            } 
+            return undefined;
         }).catch(ex => {
             console.log(ex)
             return undefined;

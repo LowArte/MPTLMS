@@ -23,7 +23,7 @@ class CheckProfilactic
         $user = auth()->user();
         if($options && $user['post_id']!=1)
         {
-            return redirect('/');
+            return response()->json(["success"=>false]);
         }
         return $next($request);
     }

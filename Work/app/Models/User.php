@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Student;
 use Laravel\Passport\HasApiTokens;
 use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,6 +45,11 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasOne(UsersPost::class,'id','post_id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class,'user_id','id');
     }
 
     public function getModelLabel()

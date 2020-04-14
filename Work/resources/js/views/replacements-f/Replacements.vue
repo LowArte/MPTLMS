@@ -108,6 +108,7 @@ export default {
     checkAllDate: false, //Все даты
     arrgroups: [],
     date: [],
+    start: true,
     titleDialog: "Конструктор замен",
     dialog: false,
     dateDialog: {
@@ -117,6 +118,13 @@ export default {
   }),
 
   methods: {
+    //Запрос для получения всех необходимых данных
+    async getAllData()
+    {
+      this.showLoading("Получение даннах");
+      this.closeLoading("Получение даннах");
+    },
+
     //Получение отделений
     async getDepartament()
     {
@@ -165,7 +173,30 @@ export default {
 
       if(this.groups)
       {
-        this.selected_group = this.combo_groups[0];
+        //Отображение отделения и группы студента
+        if(this.user.post_id == 2 && this.start) 
+        {
+          for(let i = 0; i < this.groups.length; i++)
+          {
+            if(this.groups[i].id == this.user.student.group_id)
+            {
+              this.selected_group = this.groups[i];
+              i = this.groups.length;
+            }
+          }
+
+          for(let i = 0; i < this.specialities.length; i++)
+          {
+            if (this.selected_group.departament_id == this.specialities[i].id) 
+            {
+              this.selected_departament = this.specialities[i];
+              i = this.specialities.length;
+            }
+          }
+          this.start = false;
+        }
+        else
+          this.selected_group = this.combo_groups[0];
         this.changeFilter();
       }
     },
@@ -242,6 +273,7 @@ export default {
 
   //Начальный метод
   beforeMount() {
+    this.getAllData();
     this.getDepartament();
   }
 };

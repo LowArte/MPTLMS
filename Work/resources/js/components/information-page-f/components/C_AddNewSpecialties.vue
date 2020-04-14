@@ -59,8 +59,10 @@ export default {
     }
   },
 
-  methods: {
-    add(item) {
+  methods:
+  {
+    add(item) 
+    {
       this.item.info.certifications = this.item.info.certifications.split(",");
       this.item.info.skills = this.item.info.skills.split(",");
       this.item.info.learning = this.item.info.learning.split(",");

@@ -121,6 +121,7 @@ export default {
     return {
       selected_departament: null,
       selected_group:null,
+      start: true,
       schedule: null, //Расписание
       isToday: null, //Текущий день
       titleDialog: "Конструктор расписания",
@@ -130,6 +131,13 @@ export default {
   },
 
   methods: {
+    //Запрос для получения всех необходимых данных
+    async getAllData()
+    {
+      this.showLoading("Получение даннах");
+      this.closeLoading("Получение даннах");
+    },
+
     //Получение панели с расписанием 
     async getCallScheduleForPanel()
     {
@@ -141,13 +149,13 @@ export default {
     //Получение отделений
     async getDepartament()
     {
-      this.showLoading("Получение отделений");
       if (this.specialities == null)
       {
+        this.showLoading("Получение отделений");
         let items = await departament_api.getDepartments(this);
         this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
+        this.closeLoading("Получение отделений");
       }
-      this.closeLoading("Получение отделений");
       
       if(this.specialities)
       {
@@ -159,21 +167,22 @@ export default {
     //Получение группы при изменении отделения
     async departament_change() 
     {
-      this.showLoading("Получение групп");
       if (this.groups == null)
       {
+        this.showLoading("Получение групп");
         let items = await group_api.getGroups(this);
         this.$store.commit(mutations.SET_GROUPS_FULL, items)
+        this.closeLoading("Получение групп");
       }
-      this.closeLoading("Получение групп");
 
       if(this.groups)
       {
-        /*if(this.user.post_id == 2) //Отображение отделения и группы студента
+        //Отображение отделения и группы студента
+        if(this.user.post_id == 2 && this.start) 
         {
           for(let i = 0; i < this.groups.length; i++)
           {
-            if(this.groups[i].id == user.group_id)
+            if(this.groups[i].id == this.user.student.group_id)
             {
               this.selected_group = this.groups[i];
               i = this.groups.length;
@@ -188,8 +197,9 @@ export default {
               i = this.specialities.length;
             }
           }
+          this.start = false;
         }
-        else*/
+        else
           this.selected_group = this.combo_groups[0];
         this.group_change();
       }
@@ -259,6 +269,7 @@ export default {
 
   //Преднастройка
   beforeMount() {
+    this.getAllData();
     this.isToday = this.isChisl();
     this.getDepartament();
   },

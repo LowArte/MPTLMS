@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ModelRepository\SiteOptionsRepository;
 use Illuminate\Http\Request;
 
 
@@ -14,11 +15,23 @@ class LoginController extends Controller
         if (!auth()->attempt($credentials)) {
             return response()->json([], 422);
         }
+
+        $siteOptionsRepository = app(SiteOptionsRepository::class);
+        $options = $siteOptionsRepository->getIsProfilactic();
         $user = auth()->user();
+
+        if($options && $user['post_id']!=1)
+        {
+            return response()->json(["profilactic"=>true], 200);
+        }
+
         $user->load("post");
+        $user->load("student");
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->save();
+
+
 
         return response()->json([
             'user' => $user,
@@ -38,11 +51,18 @@ class LoginController extends Controller
 
     public function getToken()
     {
+        $siteOptionsRepository = app(SiteOptionsRepository::class);
+        $options = $siteOptionsRepository->getIsProfilactic();
         $user = auth()->user();
+        if($options && $user['post_id']!=1)
+        {
+            return response()->json(["profilactic"=>true], 200);
+        }
         if (!$user) {
             return response()->json(["success" => false], 200);
         }
         $user->load("post");
+        $user->load("student");
         return response()->json(["success" => true, "user" => $user]);
     }
 }
