@@ -5,9 +5,9 @@ v-content.ma-0.pa-2
     v-flex
       v-card.mx-auto(min-width="300")
         v-system-bar(dark color="info")
-          span(style="color: white;") Фильры
+          span(style="color: white;") Фильтры
         v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
-        v-combobox.mx-3.my-2(dense label="Группа" @change="changeFilter" item-text="group_name" :items="combo_groups"  v-model="selected_group")
+        v-combobox.mx-3.my-2(dense label="Группа" @change="changeFilter" item-text="group_name" :items="combo_groups" v-model="selected_group")
         v-flex.flex-grow-0.mx-3.my-2.pa-0.row
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="300px")
                 template(v-slot:activator="{ on }")
@@ -73,11 +73,11 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities", "groups", "user"]),
+    ...mapGetters(["specialities", "groups_combo", "user"]),
     combo_groups: function() 
     {
-      if (!this.groups) return undefined;
-      let groups = this.groups.filter(res => {
+      if (!this.groups_combo) return undefined;
+      let groups = this.groups_combo.filter(res => {
         if (res.departament_id == this.selected_departament.id) {
           return true;
         }
@@ -141,7 +141,6 @@ export default {
         this.selected_departament = this.specialities[0];
         this.departament_change();
       }
-      this.closeLoading("Получение отделений");
     }, 
 
     //Удаление замены
@@ -164,24 +163,24 @@ export default {
     async departament_change() 
     {
       this.showLoading("Получение групп");
-      if (this.groups == null)
+      if (this.groups_combo == null)
       {
-        let items = await group_api.getGroups(this);
-        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+        let items = await group_api.getGroupsForComboboxRecursive(this);
+        this.$store.commit(mutations.SET_GROUPS_COMBO, items)
       }
       this.closeLoading("Получение групп");
 
-      if(this.groups)
+      if(this.groups_combo)
       {
         //Отображение отделения и группы студента
         if(this.user.post_id == 2 && this.start) 
         {
-          for(let i = 0; i < this.groups.length; i++)
+          for(let i = 0; i < this.groups_combo.length; i++)
           {
-            if(this.groups[i].id == this.user.student.group_id)
+            if(this.groups_combo[i].id == this.user.student.group_id)
             {
-              this.selected_group = this.groups[i];
-              i = this.groups.length;
+              this.selected_group = this.groups_combo[i];
+              i = this.groups_combo.length;
             }
           }
 

@@ -92,11 +92,11 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities", "groups", "user"]),
+    ...mapGetters(["specialities", "groups_combo", "user"]),
     combo_groups: function() 
     {
-      if (!this.groups) return undefined;
-      let groups = this.groups.filter(res => {
+      if (!this.groups_combo) return undefined;
+      let groups = this.groups_combo.filter(res => {
         if (res.departament_id == this.selected_departament.id) {
           return true;
         }
@@ -167,25 +167,25 @@ export default {
     //Получение группы при изменении отделения
     async departament_change() 
     {
-      if (this.groups == null)
+      if (this.groups_combo == null)
       {
         this.showLoading("Получение групп");
-        let items = await group_api.getGroups(this);
-        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+        let items = await group_api.getGroupsForComboboxRecursive(this);
+        this.$store.commit(mutations.SET_GROUPS_COMBO, items)
         this.closeLoading("Получение групп");
       }
 
-      if(this.groups)
+      if(this.groups_combo)
       {
         //Отображение отделения и группы студента
         if(this.user.post_id == 2 && this.start) 
         {
-          for(let i = 0; i < this.groups.length; i++)
+          for(let i = 0; i < this.groups_combo.length; i++)
           {
-            if(this.groups[i].id == this.user.student.group_id)
+            if(this.groups_combo[i].id == this.user.student.group_id)
             {
-              this.selected_group = this.groups[i];
-              i = this.groups.length;
+              this.selected_group = this.groups_combo[i];
+              i = this.groups_combo.length;
             }
           }
 

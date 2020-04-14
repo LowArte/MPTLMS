@@ -30,10 +30,30 @@ class GroupRepository extends BaseRepository
                     'group_name'=>$dat->getFullName()
                 ]);
             }
+        }
+        return $result;
+    }
+
+    public function getGroupsForComboBoxWithRecursive()
+    {
+        $columns = ['id','child_id','group_name','departament_id'];
+        $data = $this->startCondition()
+                        ->select($columns)
+                        ->with('child:id,group_name')
+                        ->get();
+
+        $result = collect();
+
+        foreach($data as $dat){
+            if($dat->haveParent()){
+                $result->push([
+                    'id'=>$dat->id,
+                    'group_name'=>$dat->getFullName(),
+                    'departament_id'=>$dat->departament_id,
+                ]);
+            }
 
         }
-        Debugbar::info($result);
-
         return $result;
     }
 

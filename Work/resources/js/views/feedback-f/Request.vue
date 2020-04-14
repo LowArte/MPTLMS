@@ -77,7 +77,7 @@ export default {
       itemsPerPage: 10,
       headers: [
         { text: "Тема", value: "type" },
-        { text: "E-mail", value: "user.email" },
+        { text: "E-mail", value: "email" },
         { text: "Отвечено", value: "answered" },
         { text: "Дата", value: "created_at" },
         { text: "", value: "data-table-expand" }
@@ -119,6 +119,7 @@ export default {
     async Update() 
     {
         this.items = await feedbackApi.getFeedbackRequests(this);
+        console.log(this.items);
     }
   }
 };
