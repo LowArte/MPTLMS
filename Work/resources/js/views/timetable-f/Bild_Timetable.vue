@@ -44,11 +44,11 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities", "groups", "teachers_combo", "disciplines_combo", "places_combo"]),
+    ...mapGetters(["specialities", "groups_combo", "teachers_combo", "disciplines_combo", "places_combo"]),
     combo_groups: function() 
     {
-      if (!this.groups) return undefined;
-      let groups = this.groups.filter(res => {
+      if (!this.groups_combo) return undefined;
+      let groups = this.groups_combo.filter(res => {
         if (res.departament_id == this.selected_departament.id) {
           return true;
         }
@@ -143,14 +143,14 @@ export default {
     async departament_change() 
     {
       this.showLoading("Получение групп");
-      if (this.groups == null)
+      if (this.groups_combo == null)
       {
-        let items = await group_api.getGroups(this);
-        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+        let items = await group_api.getGroupsForComboboxRecursive(this);
+        this.$store.commit(mutations.SET_GROUPS_COMBO, items)
       }
       this.closeLoading("Получение групп");
       
-      if(this.groups)
+      if(this.groups_combo)
       {
         this.selected_group = this.combo_groups[0];
         this.group_change();

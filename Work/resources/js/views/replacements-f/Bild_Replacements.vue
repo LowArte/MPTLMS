@@ -2,7 +2,7 @@
     v-layout.column.wrap
         v-flex.ma-2.mb-0.pa-0.row
             v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
-            v-combobox.ma-1(label="Группа" item-text="group_name" :items="groups" @change="caseDate()" v-model="selected_group")
+            v-combobox.ma-1(label="Группа" item-text="group_name" :items="combo_groups" @change="caseDate()" v-model="selected_group")
         v-flex.ma-2.mt-0.pa-0.row
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                 template(v-slot:activator="{ on }")
@@ -74,11 +74,11 @@ import * as mutations from "@/js/store/mutation-types";
 export default {
   mixins: [withSnackbar, withOverlayLoading],
   computed: {
-    ...mapGetters(["specialities", "groups", "teachers_combo", "disciplines_combo"]),
+    ...mapGetters(["specialities", "groups_combo", "teachers_combo", "disciplines_combo"]),
     combo_groups: function() 
     {
-      if (!this.groups) return undefined;
-      let groups = this.groups.filter(res => {
+      if (!this.groups_combo) return undefined;
+      let groups = this.groups_combo.filter(res => {
         if (res.departament_id == this.selected_departament.id) {
           return true;
         }
@@ -194,14 +194,14 @@ export default {
     async departament_change() 
     {
       this.showLoading("Получение групп");
-      if (this.groups == null)
+      if (this.groups_combo == null)
       {
-        let items = await group_api.getGroups(this);
-        this.$store.commit(mutations.SET_GROUPS_FULL, items)
+        let items = await group_api.getGroupsForComboboxRecursive(this);
+        this.$store.commit(mutations.SET_GROUPS_COMBO, items)
       }
       this.closeLoading("Получение групп");
       
-      if(this.groups)
+      if(this.groups_combo)
       {
         this.selected_group = this.combo_groups[0];
         this.caseDate();
