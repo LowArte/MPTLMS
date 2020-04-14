@@ -21,6 +21,10 @@ class Likes extends Model
         'value','user_id','news_id','links'
     ];
 
+    protected $casts = [
+        'value' => 'boolean'
+    ];
+
     protected $hidden = [
         'created_at', 'deleted_at', 'updated_at'
     ];

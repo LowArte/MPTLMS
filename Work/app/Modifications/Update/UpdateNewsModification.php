@@ -16,11 +16,20 @@ class UpdateNewsModification extends BaseModification
         return Model::class;
     }
 
-    public function updateLikeNewsInDatabase($data)
-    {
-        $news = $this->startCondition()->find($data['id']);   
-        $like = Likes::find     
-        $result = null;
+    public function updateLikeNewsInDatabase($id)
+    { 
+        $user = auth()->user();
+        $like = Likes::where(["user_id",$user->id],["news_id",$id])->first();     
+        if($like){
+            $like->value = !$like->value;
+        }
+        else{
+            $like = new Likes();
+            $like->user_id = $user->id;
+            $like->news_id = $id;
+            $like->value = true;
+        }
+        $result = $like->save();
         if($result)
             return true;
         return  false;

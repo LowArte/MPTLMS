@@ -7,7 +7,7 @@ use App\Modifications\BaseModification;
 use Illuminate\Support\Facades\Auth;
 use Hash;
 
-class CreatNewsModification extends BaseModification
+class CreateNewsModification extends BaseModification
 {
     protected function getModelClass(){
         return Model::class;

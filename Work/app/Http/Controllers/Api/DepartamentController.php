@@ -33,7 +33,6 @@ class DepartamentController extends BaseController
 
     public function save(Request $request,CreateDepartamentModification $createDepartamentModification){
         $data = $request->all();
-        Debugbar::info($data);
         $id = $createDepartamentModification->addDepartamentToDatabase($data);
         if($id){
             return response()->json(compact("id"),200);
@@ -45,7 +44,6 @@ class DepartamentController extends BaseController
     
     public function edit(Request $request,UpdateDepartamentModification $updateDepartamentModification){
         $data = $request->all();
-        Debugbar::info($data);
         $result = $updateDepartamentModification->updateDepartamentInDatabase($data);
         if($result){
             return response()->json(200);

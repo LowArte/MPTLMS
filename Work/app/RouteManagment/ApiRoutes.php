@@ -82,7 +82,7 @@ class ApiRoutes
             Route::post('departament','Api\DepartamentController@edit')->name('departament');
 
             Route::get('news','Api\NewsController@edit')->name('news'); 
-            Route::get('setLike','Api\NewsController@addLike')->name('add_like');           
+            Route::get('setLike/{post_id}','Api\NewsController@setLike')->name('add_like');           
 
             Route::post('place','Api\PlaceController@edit')->name('place');
 

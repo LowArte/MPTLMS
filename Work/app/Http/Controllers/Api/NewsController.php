@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Modifications\Create\CreateNewsModification;
+use App\Modifications\Delete\DeleteNewsModification;
+use App\Modifications\Update\UpdateNewsModification;
+use App\Repositories\ModelRepository\NewsRepository;
 
 class NewsController extends BaseController
 {
@@ -13,9 +17,10 @@ class NewsController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getNews(Request $request)
+    public function getNews(Request $request,NewsRepository $newsRepository)
     {
-        //
+        $news = $newsRepository->getNews();
+        return response()->json(compact('news'));
     }
 
     /**
@@ -24,9 +29,15 @@ class NewsController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function setLike(Request $request)
+    public function setLike($id,UpdateNewsModification $updateNewsModification)
     {
-        //
+        $result = $updateNewsModification->updateLikeNewsInDatabase($id);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
     }
 
     /**
@@ -35,9 +46,16 @@ class NewsController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request)
+    public function save(Request $request,CreateNewsModification $createNewsModification)
     {
-        //
+        $data = $request->all();
+        $id = $createNewsModification->addNewsToDatabase($data);
+        if($id){
+            return response()->json(compact("id"),200);
+        }
+        else{
+            return response()->json(500);
+        }
     }
 
 
@@ -48,9 +66,16 @@ class NewsController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request, UpdateNewsModification $updateNewsModification)
     {
-        //
+        $data = $request->all();
+        $result = $updateNewsModification->updateNewsInDatabase($data);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
     }
 
     /**
@@ -59,8 +84,14 @@ class NewsController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete($id,DeleteNewsModification $deleteNewsModification)
     {
-        //
+        $result = $deleteNewsModification->deleteNewsFromDatabase($id);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
     }
 }
