@@ -119,7 +119,6 @@ export default {
     async Update() 
     {
         this.items = await feedbackApi.getFeedbackRequests(this);
-        console.log(this.items);
     }
   }
 };
