@@ -64,11 +64,11 @@ export default {
     };
   },
   methods: {
-    init() {
+    async init() {
       this.files = this.importAll(
         require.context("@/js/views", true, /\.vue$/)
       );
-      this.posts = post_api.getPostsFull(this);
+      this.posts = await post_api.getPostsForCombobox(this);
       if (this.posts) {
         this.selectedPost = this.posts[0];
       }
@@ -157,11 +157,7 @@ export default {
         .setPostPrivilegies({
           id: this.selectedPost.id,
           privilegies: this.selectedPost.privilegies
-        }, this)
-        .then(res => {})
-        .catch(ex => {
-          console.log(ex);
-        });
+        }, this);
     },
     //! Сканирует систему на компоненты и возврашает их
     importAll(r) {

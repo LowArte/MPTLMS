@@ -1,0 +1,24 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFullModelClass as Model;
+use App\Modifications\BaseModification;
+
+
+class DummyClass extends BaseModification
+{
+    protected function getModelClass(){
+        return Model::class;
+    }
+
+    public function addDummyModelToDatabase($request)
+    {
+        $DummyVariableModel = new Model();
+        $DummyVariableModel->fill($request);
+        $result = $DummyVariableModel->save();
+        if($result)
+            return $DummyVariableModel->id;
+        return  false;
+    }
+}

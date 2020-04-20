@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\RepositoryMakeCommand::class,
+        \App\Console\Commands\ModificationMakeCommand::class,
+        \App\Console\Commands\GeneratorCommand::class,
+        \App\Console\Commands\ControllerMakeCommand::class,
     ];
 
     /**

@@ -88,6 +88,13 @@ class ApiRoutes
             Route::post('place','Api\PlaceController@edit')->name('place');
 
         });
+
+         /**
+         * Методы отвечаюшие за обобщенные функции
+         */
+        Route::name('functions.')->prefix('edit')->group(function () {
+            Route::get('set_like/{news_id}','Api\NewsController@setLike')->name('set_like');           
+        });
         /**
          * Методы отвечаюшие за удаление общих данных
          */

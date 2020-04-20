@@ -6,9 +6,6 @@ use App\Repositories\ModelRepository\CallScheduleRepository;
 
 class PanelExtentionRepository extends BaseRepository
 {
-    protected function getModelClass(){
-        return "";
-    }
     /** 
      * get panel array for driving school
      * @return Array

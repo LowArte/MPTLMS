@@ -125,7 +125,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Конструктор привилегий ролей",
                                         "url" => "bild_post_privilegies"
                                     ],
-                                    "path" => "js/views/views/posts-f/Bild_RolesPrivilegies"
+                                    "path" => "js/views/posts-f/Bild_RolesPrivilegies"
                                 ],
                             ],
                             [

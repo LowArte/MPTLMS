@@ -1,0 +1,12 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass extends BaseRepository
+{
+    public function getData()
+    {
+        $result = null;
+        return $result;
+    }
+}

@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFullModelClass as Model;
+
+class DummyClass extends BaseRepository
+{
+    protected function getModelClass(){
+        return Model::class;
+    }
+
+    public function getDummyModel()
+    {
+        $columns = [];
+        $result = $this->startCondition()->select($columns)->get();
+        return $result;
+    }
+}
