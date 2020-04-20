@@ -27,19 +27,13 @@
                 v-card-text.title {{item.dep_name_full}}
                 v-card-text {{item.info.text}}
                 v-card-text Квалификация: {{item.qualification}}
-                v-list(disabled)
-                  v-card-text.title Профессиональные сертификации
-                  v-list-item-group(color="primary")
-                    v-list-item(v-for="(item, i) in item.info.certifications" :key="i" dense)
+                v-list(v-for="(info,i) in Object.keys(item.info)" :key="i" v-if="info != 'text'" disabled)
+                  v-card-text.title {{info}}
+                  v-list-item-group(v-if="typeof(item.info[info]) == 'object'" color="primary")
+                    v-list-item(v-for="(item, j) in item.info[info]" :key="j" dense)
                       v-card-text.py-1(v-text="item")
-                  v-card-text.title Наши выпускники умеют
-                  v-list-item-group(color="primary")
-                    v-list-item(v-for="(item, i) in item.info.skills" :key="i" dense)
-                      v-card-text.py-1(v-text="item")
-                  v-card-text.title На специальности изучаются
-                  v-list-item-group(color="primary")
-                    v-list-item(v-for="(item, i) in item.info.learning" :key="i" dense)
-                      v-card-text.py-1(v-text="item")
+                  v-list-item(v-else dense)
+                    v-card-text.py-1 {{item.info[info]}}
 </template>
 
 

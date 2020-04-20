@@ -46,20 +46,16 @@ export default {
     form: false
   }),
 
-  methods: {
-    async sendQuery() {
-      if (
-        await cerificateApi.save(
-          {
-            data: { "Текст заявки": this.text },
-            type: "Справка"
-          },
-          this
-        )
-      )
+  methods: 
+  {
+    async sendQuery() 
+    {
+      if (await cerificateApi.save({data: {"Текст заявки": this.text}, type: "Справка"}, this))
         this.cleardata();
     },
-    cleardata() {
+
+    cleardata() 
+    {
       this.text = "";
       this.enabled = false;
     }

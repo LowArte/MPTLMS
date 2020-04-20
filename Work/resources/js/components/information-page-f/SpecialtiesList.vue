@@ -1,6 +1,6 @@
 <template lang="pug">
   v-layout.row.wrap
-    c-add-new-specialtie(v-if="printing == 1" :_add="add")
+    c-add-new-specialtie(v-if="printing == 1")
     c-specialtie(v-for="(item, index) in specialities" :key="index" :item="item")
 </template>
 
@@ -48,11 +48,5 @@ export default {
   mounted() {
     this.printing = this._printing;
   },
-
-  methods: {
-    add(item) {
-      this.$store.commit(mutations.ADD_SPECIALITIE,{context:this,"result":item});
-    }
-  }
 };
 </script>

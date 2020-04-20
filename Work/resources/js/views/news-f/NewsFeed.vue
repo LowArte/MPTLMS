@@ -24,7 +24,7 @@ div(name="top" v-if="posts.length > 0" )
     template(v-slot:activator)
       v-btn(v-model="fab" color="primary" dark fab href="#top")
         v-icon keyboard_arrow_up
-  v-btn.mx-auto(v-if="posts.length > 10" color="primary" block text :loading="loading" :disabled="loading") загрузить еще
+  v-btn.mx-auto(v-if="posts.length > 10" color="primary" block text :loading="loading" :disabled="loading") загрузить ещё
 </template>
 
 <script>
