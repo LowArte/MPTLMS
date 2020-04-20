@@ -66,12 +66,6 @@ export default {
     };
   },
 
-  async beforeMount() {
-    if (this.specialities == null) {
-      let items = await apiDepartment.getDepartments(this);
-      this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
-    }
-  },
   methods: {
     pop(item) {
       this.item = JSON.parse(JSON.stringify(item));

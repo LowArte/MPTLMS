@@ -217,7 +217,6 @@ export default {
       this.showLoading("Получение расписания");
       this.schedule = await schedule_api.getScheduleByGroupId(this.selected_group.id, this);
       this.closeLoading("Получение расписания");
-      this.closeLoading();
       if(this.schedule)
         this.parseSchedule();
     },

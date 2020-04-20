@@ -9,11 +9,12 @@
 
 <script>
 import api from "@/js/api/panel";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 import * as mutations from "@/js/store/mutation-types";
 
 export default {
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   post_name: {
     name: "Настройки сервера",
     url: "/server_settings"
@@ -25,10 +26,13 @@ export default {
     };
   },
 
-  async beforeMount() {
+  async beforeMount() 
+  {
+    this.showLoading("Получение настроек...");
     this.options = await api.getSiteOptions(this);
     if (this.options != null)
       this.options.option_value = this.options.option_value == "true";
+    this.closeLoading("Получение настроек...");
   },
 
   methods: {

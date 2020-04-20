@@ -236,7 +236,7 @@ export default {
         if(this.schedule_bild)
             this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
       }
-      this.closeLoading();
+      this.closeLoading("Получение расписания");
     },
 
     //Сохранение замены

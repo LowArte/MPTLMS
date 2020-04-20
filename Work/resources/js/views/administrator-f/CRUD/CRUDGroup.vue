@@ -12,6 +12,7 @@
 //!           Подключение api
 //?----------------------------------------------
 import api from "@/js/api/group";
+import apiDepartment from "@/js/api/departments";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -59,6 +60,14 @@ export default {
     ]
   }),
   methods: {
+    async beforeMount() 
+    {
+      if(this.specialities == null)
+      {
+        let items = await apiDepartment.getDepartments(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
+      }
+    },
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------

@@ -163,7 +163,6 @@ export default {
       this.showLoading("Получение расписания");
       this.schedule = await schedule_api.getScheduleBildByGroupId(this.selected_group.id, this);
       this.closeLoading("Получение расписания");
-      this.closeLoading();
     },
 
     //Отправка учебного расписания на сохранение

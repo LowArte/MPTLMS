@@ -41,7 +41,7 @@
                         v-btn(text color="primary" @click="dateDialog = false") Отмена
                         v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
                   v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
-                  v-autocomplete(v-if="item.post_id == 2" v-model="studentItem.departament_id" @change="depChange()" :items="specialities_combo" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
+                  v-autocomplete(v-if="item.post_id == 2" v-model="studentItem.departament_id" @change="depChange()" :items="specialities" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
                   v-autocomplete(v-if="item.post_id == 2 && groups_combo != null && item.departament_id != null" v-model="studentItem.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups_combo" label='Группа')
                   v-autocomplete(:items="studentItem.financings" dense label='Вид финансирования')
                   v-card-actions
@@ -69,7 +69,7 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities_combo", "userposts", "groups_combo"]),
+    ...mapGetters(["specialities", "userposts", "groups_combo"]),
   },
   mixins: [withSnackbar],
   data() {
@@ -114,22 +114,6 @@ export default {
       birthdayRules: [v => !!v || "Поле не должно оставаться пустым"],
       dateDialog: null
     };
-  },
-
-  async beforeMount() 
-  {
-    if (this.specialities_combo == null)
-    {
-      let items = await apidepartments.getDepartmentsForCombobox(this);
-      this.$store.commit(mutations.SET_SPECIALITIES_COMBO,items);
-      this.item.departament_id = items[0].id;
-    }
-
-    if (this.userposts == null)
-    {
-      let items = await apiposts.getPostsForCombobox(this);
-      this.$store.commit(mutations.SET_USERPOSTS_FULL,items)
-    }
   },
 
   methods: {

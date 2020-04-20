@@ -8,16 +8,16 @@ v-content.pa-0(v-if="user")
                 v-list-item(two-line)
                     v-list-item-avatar(color="grey darken-3")
                     v-list-item-content
-                        v-list-item-title.headline {{name}}
+                        v-list-item-title.headline {{user.secName + " " + user.name + " " + user.thirdName}}
                         v-list-item-subtitle Должность: {{post}}
                 v-divider
-                v-card-text.pb-2.font-weight-bold Дата рождения: 01.01.2000
-                v-card-text.py-2.font-weight-bold Гендерный признак: Мужчина/Женщина
-                v-card-text.py-2.font-weight-bold E-mail: now@mpt.ru
+                v-card-text.pb-2.font-weight-bold Дата рождения: {{user.student.birthday}}
+                v-card-text.py-2.font-weight-bold Гендерный признак: {{user.student.gender}}
+                v-card-text.py-2.font-weight-bold E-mail: {{user.email}}
                 v-card-text.py-2.font-weight-bold Специальность: 09.02.03 Программирование в компьютерных системах
-                v-card-text.py-2.font-weight-bold Группа: п-х-хх
+                v-card-text.py-2.font-weight-bold Группа: {{user.student.group_id}}
                 v-card-text.py-2.font-weight-bold Текущий курс
-                v-slider.mx-4(v-model="cours" :max="3" :tick-labels="labels"  disabled)
+                v-slider.mx-4(v-model="user.student.curs" :max="3" :tick-labels="labels"  disabled)
                 v-card-actions
                     v-tooltip(bottom)
                         template(v-slot:activator="{ on }")
@@ -33,7 +33,7 @@ v-content.pa-0(v-if="user")
                         v-divider
                         v-card-text.py-2 Специализация: Техник-программист
                         v-card-text.py-2 Форма обучения: Очная
-                        v-card-text.py-2 Вид финансирования: Бюджет/Платный
+                        v-card-text.py-2 Вид финансирования: {{user.student.type_of_financing}}
                         v-card-text.py-2 Срок обучения: 3г 10м
         v-flex
             v-card.mx-auto

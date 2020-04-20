@@ -25,7 +25,13 @@ export default {
   {
     overlayLoadingText:function(val) 
     {
-      this.text = this.overlayLoadingText.join(', ');
+      if(this.overlayLoadingText.length > 0 )
+        this.text = this.overlayLoadingText.join(', ');
+      else
+      {
+        this.text = '';
+        this.$store.commit(mutations.SET_OVERLAYLOADING_SHOW, false);
+      }  
     },
   }
 };

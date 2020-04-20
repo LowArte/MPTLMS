@@ -19,7 +19,7 @@
                     v-btn(text color="primary" @click="dateDialog = false") Отмена
                     v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
               v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="item.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
-              v-autocomplete(v-if="item.post_id == 2" v-model="item.departament_id" @change="depChange()" :items="specialities_combo" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
+              v-autocomplete(v-if="item.post_id == 2" v-model="item.departament_id" @change="depChange()" :items="specialities" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
               v-autocomplete(v-if="item.post_id == 2 && groups_combo != null && item.departament_id != null" v-model="item.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups_combo" label='Группа')
               v-autocomplete(v-if="item.post_id == 2" v-model="item.type_of_financing" no-data-text="Нет данных" :items="financings" dense label='Вид финансирования')
             v-card-actions
@@ -88,22 +88,6 @@ export default {
       birthdayRules: [v => !!v || "Поле не должно оставаться пустым"],
       dateDialog: null
     };
-  },
-
-  async beforeMount() 
-  {
-    if (this.specialities_combo == null)
-    {
-      let items = await apidepartments.getDepartmentsForCombobox(this);
-      this.$store.commit(mutations.SET_SPECIALITIES_COMBO,items);
-      this.item.departament_id = items[0].id;
-    }
-
-    if (this.userposts == null)
-    {
-      let items = await apiposts.getPostsForCombobox(this);
-      this.$store.commit(mutations.SET_USERPOSTS_FULL,items)
-    }
   },
 
   methods: {

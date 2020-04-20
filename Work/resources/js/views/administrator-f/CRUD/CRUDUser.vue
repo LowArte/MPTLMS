@@ -12,6 +12,9 @@
 //!           Подключение api
 //?----------------------------------------------
 import api from "@/js/api/users";
+import apiposts from "@/js/api/userPosts";
+import apidepartments from "@/js/api/departments";
+import apigroup from "@/js/api/group";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -36,7 +39,7 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["users"])
+    ...mapGetters(["users", "specialities"])
   },
   post_name: {
     name: "CRUD пользователей",
@@ -60,6 +63,22 @@ export default {
   }),
 
   methods: {
+    async beforeMount()
+    {
+      if (this.specialities == null)
+      {
+        let items = await apidepartments.getDepartments(this);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
+        this.item.departament_id = items[0].id;
+      }
+
+      if (this.userposts == null)
+      {
+        let items = await apiposts.getPostsForCombobox(this);
+        this.$store.commit(mutations.SET_USERPOSTS_FULL,items)
+      }
+    },
+
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------

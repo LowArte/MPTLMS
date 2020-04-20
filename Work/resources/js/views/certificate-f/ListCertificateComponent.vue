@@ -34,9 +34,21 @@
           v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
           v-card-text.my-1.ma-0.pa-0.text(v-for="(info,i) in Object.keys(expanded[0].certificates_data)" :key="i") {{info}} : {{expanded[0].certificates_data[info]}}
           v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].text != null") Текст: {{expanded[0].text}}
-            v-form.ma-2.pt-2(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
-            v-btn.ma-1.white--text(:disabled='!form' color='blue' depressed @click='sendEmailAnswer(expanded[0].email)') Ответить
-            v-btn.ma-1.white--text(color='blue' depressed @click='sendEmailDone(expanded[0].email)') Выполнено
+          v-form.mt-3(ref="sendNotDone")
+            v-dialog(v-model="dialog" persistent max-width="500px")
+              template(v-slot:activator="{ on }")
+                v-card-actions              
+                  v-spacer
+                  v-btn.ma-1.white--text(color='accent' depressed v-on="on") Отказать
+                  v-btn.ma-1.white--text(color='blue' depressed @click='sendEmailDone(expanded[0].email)') Выполнить
+              v-card
+                v-card-title.headline.grey.lighten-2.primary-title Введите причину отказа
+                v-textarea.ma-2.pt-5(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
+                v-divider
+                v-card-actions
+                  v-btn(color="primary" text @click="dialog = false; modelmessage = ''") Отмена
+                  v-spacer
+                  v-btn(color="primary" text @click="sendEmailNotDone()") Отправить отказ     
     v-layout.row.text-center.pa-2.ma-2
       v-pagination(v-model="page" :length="pageCount")
 </template>
@@ -56,6 +68,7 @@ export default {
       search: "", //Поиск
       expanded: [],
       singleExpand: true,
+      dialog: false,
       page: 1, //Страница
       pageCount: 0, //Количество страниц
       itemsPerPage: 10, //Количество строк
@@ -72,7 +85,6 @@ export default {
         v =>
           v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
       ],
-      form: false,
       items: []
     };
   },
@@ -83,17 +95,20 @@ export default {
   },
 
   methods: {
-    //Отправка сообщения-ответа от канцелярии, без фиксации того что справка выполнена
-    async sendEmailAnswer(email) {
-      if (
-        await cerificateApi.sendEmailAnswer(
-          { email: email, text: this.modelmessage, id: this.expanded[0].id },
-          this
-        )
-      ) {
-        this.items.splice(this.expanded[0]);
-        this.modelmessage = "";
+    //Отправка отказа канцелярии с ответом почему справка не выполнена
+    async sendEmailNotDone(email) 
+    {
+      if(this.$refs.sendNotDone.validate())
+      {
+        if (await cerificateApi.sendEmailNotDone({ email: email, text: this.modelmessage, id: this.expanded[0].id }, this)) 
+        {
+          this.items.splice(this.expanded[0]);
+          this.dialog = false;
+          this.modelmessage = "";
+        }
       }
+      else
+        this.showError("Заполните корректно ответ!");
     },
 
     //Отправка сообщения о том, что справка готова
