@@ -278,17 +278,6 @@ class PostUserSeeder extends Seeder
                                     ],
                                     "path" => "js/views/other-f/Warning"
                                 ],
-                            ],
-                            [
-                                "id" => uniqid(),
-                                "text" => "Преподаватели",
-                                "component" => [
-                                    "info" => [
-                                        "name" => "Преподаватели",
-                                        "url" => "teachers"
-                                    ],
-                                    "path" => "js/views/other-f/Warning"
-                                ],
                             ]
                         ],
                     ],

@@ -92,7 +92,7 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities", "groups_combo", "user"]),
+    ...mapGetters(["specialities", "groups_combo", "user", "timetable_full"]),
     combo_groups: function() 
     {
       if (!this.groups_combo) return undefined;
@@ -105,7 +105,7 @@ export default {
       if (groups != null)
         this.selected_group = groups[0];
       return groups;
-    }
+    },
   },
   mixins: [withSnackbar, withOverlayLoading],
   post_name: {
@@ -136,6 +136,29 @@ export default {
     {
       this.showLoading("Получение даннах");
       this.closeLoading("Получение даннах");
+    },
+
+    async schedules()
+    {
+      if(this.selected_group == null) return undefined;
+      let schedule = this.timetable_full.filter(res => {
+        if(res.group_id == this.selected_group.id)
+          return true;
+        else
+          return false;
+      });
+
+      if(schedule.length == 0)
+      {
+        this.showLoading("Получение расписания");
+        schedule = await schedule_api.getScheduleByGroupId(this.selected_group.id, this);
+        //schedule['group_id'] = this.selected_group.id;
+        this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
+        this.closeLoading("Получение расписания");
+      }
+      else
+        schedule = schedule[0];
+      return schedule;
     },
 
     //Получение панели с расписанием 
@@ -214,9 +237,7 @@ export default {
     //Получение расписания при изменении выбранной группы
     async group_change() 
     {
-      this.showLoading("Получение расписания");
-      this.schedule = await schedule_api.getScheduleByGroupId(this.selected_group.id, this);
-      this.closeLoading("Получение расписания");
+      this.schedule = await this.schedules();
       if(this.schedule)
         this.parseSchedule();
     },

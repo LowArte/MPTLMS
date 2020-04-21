@@ -25,3 +25,20 @@ Array.prototype.addToEnd = function (data) {
 Array.prototype.clear = function (data) {
     data = [];
 }
+
+Array.prototype.includesById = function(id){
+    for(let data of this){
+        if(data.id == id)
+            return true;
+    }
+    return false;
+}
+
+Array.prototype.findById = function(id){
+    for (let i = 0; i < this.length; i++) {
+        if (this[i].id == id) {
+            return this[i];
+        }
+    }
+    return undefined;
+}

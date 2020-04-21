@@ -11,6 +11,7 @@ import userPosts from './modules/userPost'
 import users from './modules/users'
 import teachers from './modules/teachers'
 import disciplines from './modules/disciplines'
+import timetable from './modules/timetable'
 
 Vue.use(Vuex)
 
@@ -28,7 +29,8 @@ export default new Vuex.Store({
     userPosts,
     users,
     teachers,
-    disciplines
+    disciplines,
+    timetable
   },
   strict: debug
 })
