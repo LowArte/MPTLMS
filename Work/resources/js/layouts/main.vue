@@ -29,8 +29,8 @@
       </v-card>
     </v-navigation-drawer>
 
-    <v-content style="background: white;">
-      <v-container pa-0 fluid grid-list-md text-xs-center>
+    <v-content>
+      <v-container pa-4 fluid grid-list-md text-xs-center>
         <transition>
           <keep-alive>
             <router-view></router-view>

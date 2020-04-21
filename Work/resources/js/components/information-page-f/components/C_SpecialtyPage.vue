@@ -8,7 +8,7 @@
             v-progress-circular(indeterminate color="grey lighten-5")
       v-card-text.grow
         v-card-text.my-2.pa-0.subtitle-1.black--text(style='color: #FF3D00' max-height="70") {{item.dep_name_full}}
-        v-card-text.pa-0() {{item.info.text.slice(0,255) + "..."}}
+        v-card-text.pa-0() {{item.info.text.length > 255 ? (item.info.text.slice(0,255).substr(-1) == '.' ? item.info.text.slice(0,254) + "..." : item.info.text.slice(0,255) + "...") : item.info.text}}
       v-card-actions.ma-2.mt-0.pa-0.text--center
         v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
           template(v-slot:activator="{ on }")

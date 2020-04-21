@@ -1,6 +1,6 @@
 <template lang="pug">
 v-content.ma-0.pa-2
-  v-layout.column.wrap
+  v-layout.column.wrap(v-if="loaded" )
     v-flex
       c_panel_control(ref="panel")
     v-flex
@@ -119,6 +119,7 @@ export default {
 
   data: () => {
     return {
+      loaded: false,
       selected_departament: null,
       selected_group:null,
       start: true,
