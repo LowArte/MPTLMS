@@ -64,7 +64,9 @@ class ApiRoutes
             Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
 
             Route::post('departament','Api\DepartamentController@save')->name('departament');
+            Route::post('group','Api\GroupController@save')->name('group');
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
+            Route::post('certificate','Api\CertificateController@save')->name('certificate');
 
             Route::get('news','Api\NewsController@save')->name('news');              
 
@@ -81,6 +83,7 @@ class ApiRoutes
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
 
             Route::post('departament','Api\DepartamentController@edit')->name('departament');
+            Route::post('group','Api\GroupController@edit')->name('group');
 
             Route::get('news','Api\NewsController@edit')->name('news'); 
             Route::get('set_like/{news_id}','Api\NewsController@setLike')->name('set_like');           
@@ -102,6 +105,7 @@ class ApiRoutes
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
 
             Route::post('departament/{departament_id}','Api\DepartamentController@delete')->name('departament');
+            Route::post('group/{group_id}','Api\GroupController@delete')->name('group');
 
             Route::get('news/{news_id}','Api\NewsController@delete')->name('news');         
 

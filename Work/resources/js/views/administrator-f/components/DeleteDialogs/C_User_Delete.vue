@@ -1,20 +1,20 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="550px")
+  v-dialog(v-model="dialog" persistent scrollable max-width="550px")
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
       v-form
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
-          v-text-field(v-model="item.post_id" dense label="Роль пользователя" disabled)
-          v-text-field(v-model="item.thirdName" label="Фамилия" disabled)
-          v-text-field(v-model="item.name" label="Имя" disabled)
-          v-text-field(v-model="item.secName" label="Отчество" disabled)
-          v-text-field(v-model="item.email" label="Почта" disabled)
-          v-text-field(v-model="item.gender" dense label="Гендерная принадлежность" disabled)
-          v-text-field(v-if="item.post_id == 2" v-model="item.dep_name" label="Специальность" disabled)
-          v-text-field(v-if="item.post_id == 2" v-model="item.group_id" label='Группа' disabled)
-          v-text-field(v-if="item.post_id == 2" v-model="item.type_of_financing" dense label='Вид финансирования' disabled)
+          v-text-field(v-model="item.post_id" dense label="Роль пользователя" readonly)
+          v-text-field(v-model="item.thirdName" label="Фамилия" readonly)
+          v-text-field(v-model="item.name" label="Имя" readonly)
+          v-text-field(v-model="item.secName" label="Отчество" readonly)
+          v-text-field(v-model="item.email" label="Почта" readonly)
+          v-text-field(v-model="item.gender" dense label="Гендерная принадлежность" readonly)
+          v-text-field(v-if="item.post_id == 2" v-model="item.dep_name" label="Специальность" readonly)
+          v-text-field(v-if="item.post_id == 2" v-model="item.group_id" label='Группа' readonly)
+          v-text-field(v-if="item.post_id == 2" v-model="item.type_of_financing" dense label='Вид финансирования' readonly)
         v-card-actions
           v-btn(color="red" text @click="clickCancel") Отмена
           v-spacer
@@ -60,7 +60,6 @@ export default {
     },
     clickDelete() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(this.item.id);
     },
     clickCancel() {

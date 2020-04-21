@@ -1,25 +1,26 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="500px")
+  v-dialog(v-model="dialog" persistent max-width="500px" scrollable)
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
-      v-form
-        v-card-text
-          v-alert(dense type="info") Данное действие необратимо
-          v-text-field.ma-2(v-model="item.image" label="Ссылка на картинку" disabled)
-          v-text-field.ma-2(v-model="item.dep_name_full" label="Название специальности" disabled)
-          v-text-field.ma-2(v-model="item.qualification" label="Квалификация" disabled)
-          v-textarea.ma-2(outlined v-model="item.info.text" label="Описание" disabled)
-          v-autocomplete.ma-2(v-model="item.studysperiod" :items="studysperiods" label="Период обучения" disabled)
-          v-alert.mx-2(text dense type="warning")
-            span Перечислите все необходимые спецификации через запятую
-          v-textarea.ma-2(v-model="item.info.certifications" outlined multi-line label="Профессиональные сертификации" disabled)
-          v-textarea.ma-2(v-model="item.info.skills" outlined multi-line label="Наши выпускники умеют" disabled)
-          v-textarea.ma-2(v-model="item.info.learning" outlined multi-line label="На специальности изучаются" disabled)
-        v-card-actions              
-          v-btn(color="accent darken-1" text @click="clickCancel") Отмена
-          v-spacer
-          v-btn(color="info darken-1" text @click="clickSave") Удалить
+      v-card-text
+        v-alert(dense type="info") Данное действие необратимо
+        v-text-field.ma-2(v-model="item.image" label="Ссылка на картинку" readonly)
+        v-text-field.ma-2(v-model="item.dep_name_full" label="Название специальности" readonly)
+        v-text-field.ma-2(v-model="item.qualification" label="Квалификация" readonly)
+        v-textarea.ma-2(outlined v-model="item.info.text" label="Описание" readonly)
+        v-text-field.ma-2(v-model="item.studysperiod" :items="studysperiods" label="Период обучения" readonly)
+        v-alert.mx-2(text dense type="warning")
+          span Перечислите все необходимые спецификации через запятую
+        v-list(v-for="(info,i) in Object.keys(item.info)" :key="i" v-if="info != 'text'" readonly)
+          v-card-text.title {{info}}
+          v-list-item-group(v-if="typeof(item.info[info]) == 'object'" color="primary")
+            v-list-item(v-for="(item, j) in item.info[info]" :key="j" dense)
+              v-card-text.py-1(v-text="item")
+      v-card-actions              
+        v-btn(color="accent darken-1" text @click="clickCancel") Отмена
+        v-spacer
+        v-btn(color="info darken-1" text @click="clickSave") Удалить
 </template>
 
 <script>
@@ -45,9 +46,6 @@ export default {
         qualification: null,
         studysperiod:"3 года 10 месяцев",
         info: {
-          certifications: [],
-          skills: [],
-          learning: [],
           text: ""
         }
       },
@@ -59,9 +57,6 @@ export default {
     pop(item) {
       this.item = JSON.parse(JSON.stringify(item));
       this.dialog = true;
-      this.item.info.certifications = this.item.info.certifications.join(",");
-      this.item.info.skills = this.item.info.skills.join(",");
-      this.item.info.learning = this.item.info.learning.join(",");
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
@@ -81,14 +76,12 @@ export default {
 
     clearForm()
     {
-      item.dep_name_full = null
-      item.image = null
-      item.qualification = null
-      item.studysperiod = "3 года 10 месяцев"
-      item.info.certifications = []
-      item.info.skills = []
-      item.info.learning = []
-      item.info.text = ""
+      this.item.dep_name_full = null
+      this.item.image = null
+      this.item.qualification = null
+      this.item.studysperiod = "3 года 10 месяцев"
+      this.item.info = []
+      this.item.info['text'] = ""
     }
   }
 };

@@ -1,5 +1,5 @@
 <template lang='pug'>
-    v-treeview(v-if="user" activatable dense :items="user.post.privilegies" open-on-click)              
+    v-treeview(v-if="user" activatable dense :items="three" open-on-click)              
       template(v-slot:prepend="{ item }") 
         v-icon(v-if="item.icon") {{item.icon}}
       template(v-slot:label="{item}" )
@@ -14,6 +14,17 @@ export default {
   computed: {
     ...mapGetters(["user"])
   },
+
+  data(){
+    return{
+      three: null
+    }
+  },
+
+  beforeMount(){
+    this.three = this.user.post.privilegies.filter(res => {return res.menu;});
+  },
+
   methods: {
     navigate(path) {
       this.$router.push("/" + path, null, () => {});

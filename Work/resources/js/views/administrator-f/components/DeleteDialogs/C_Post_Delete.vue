@@ -1,12 +1,12 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="550px")
+  v-dialog(v-model="dialog" persistent scrollable max-width="550px")
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
       v-form
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
-          v-text-field(v-model="item.name" label="Наименование" disabled)
+          v-text-field(v-model="item.name" label="Наименование" readonly)
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
@@ -50,7 +50,6 @@ export default {
     },
     clickDelete() {
         this.dialog = false;
-        this.clearForm();
         this.resolve(this.item.id);
     },
     clickCancel() {

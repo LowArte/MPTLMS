@@ -60,7 +60,7 @@ export default {
     }
   },
   post_name: {
-    name: "Конструктор учебного рассписения",
+    name: "Конструктор учебного расписания",
     url: "bild_timetable"
   },
   mixins: [withSnackbar, withOverlayLoading],

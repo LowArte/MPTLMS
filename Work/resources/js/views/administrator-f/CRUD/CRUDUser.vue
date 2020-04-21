@@ -98,6 +98,7 @@ export default {
       this.$refs.new.pop().then(result => {
         if (result) {
           this.$store.dispatch(mutations.ADD_USER,{ context: this, result: result });
+          this.$refs.new.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -110,6 +111,7 @@ export default {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(mutations.EDIT_USER,{ context: this, result: result });
+          this.$refs.revue.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
@@ -122,6 +124,7 @@ export default {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(mutations.DELETE_USER,{ context: this, result: result });
+          this.$refs.rem.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }

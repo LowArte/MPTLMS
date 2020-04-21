@@ -24,7 +24,7 @@
           <v-card max-width="620px" class="mx-auto" :elevation="0" color="secondary">
             <v-card-title
               class="white--text subtitle-1 black--text text-truncate"
-            >Центр допольнительного образования</v-card-title>
+            >Центр дополнительного образования</v-card-title>
             <v-card-text
               class="white--text"
             >Московский приборостроительный техникум предоставляет услуги дополнительного образования, с которыми можно ознакомиться на сайте.</v-card-text>

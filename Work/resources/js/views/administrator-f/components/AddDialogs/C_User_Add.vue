@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-dialog(v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" persistent max-width="550px")
+    v-dialog(v-model="dialog" fullscreen scrollable hide-overlay transition="dialog-bottom-transition" persistent max-width="550px")
         v-card.ma-0.pa-0
           v-toolbar(color="white")
             v-btn(icon dark @click="clickCancel")
@@ -145,8 +145,7 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        let data = this.item;
-        this.clearForm();
+        let data = Object.assign({}, this.item);
         this.resolve(data);
       } else {
         this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля!");

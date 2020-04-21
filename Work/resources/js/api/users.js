@@ -202,8 +202,10 @@ export default {
     makeRoutes(privilegies, slug) {
         let items = [];
         privilegies.forEach(element => {
-            if (element.children) {
-                element.children.forEach(child => {
+            if (element.children) 
+            {
+                element.children.forEach(child => 
+                {
                     if (child.component != null)
                         items.push({
                             path: "/" + slug + "/" + child.component.info.url,
@@ -218,7 +220,9 @@ export default {
                                 )
                         });
                 });
-            } else {
+            } 
+            else 
+            {
                 items.push({
                     path: "/" + slug + "/" + element.component.info.url,
                     name: element.component.info.name,

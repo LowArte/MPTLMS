@@ -6,8 +6,8 @@
         v-card-text.pa-0.subtitle-1
           span Один аккаунт. Много возможностей.
         v-form(ref="Login")
-          v-text-field(v-model="email" :rules="emailRules"  label="Email" required)
-          v-text-field(v-model="password" :rules="passwordRules" label="Пароль" type="password" required)
+          v-text-field(v-model="email" :rules="emailRules"  label="Email" required v-on:keyup.enter="login") 
+          v-text-field(v-model="password" :rules="passwordRules" label="Пароль" type="password" required v-on:keyup.enter="login")
           v-card-actions
             router-link(class='nounderline' to="/") 
               v-btn(color="accent" text) ОТМЕНА

@@ -28,7 +28,7 @@
                         v-icon.pa-0.ma-0 close     
                     v-row.pa-0(v-for="(itemInfo, j) in item.info[info]" :key="j")
                       v-col.pa-0(lg="2")
-                          v-text-field.ma-2(v-model="item.info[info][j]" :rules="allRules" outlined multi-line label="Введите текст")
+                          v-text-field.ma-2(v-model="item.info[info][j]" :rules="allRules" outlined multi-line label="Введите текст" v-on:keyup.enter="addElementInfo(info)")
                       v-col.pa-0(sm ="1")
                           v-card-actions
                               v-btn(color="primary" dark @click="deleteElementInfo(info)" icon x-small)
@@ -43,12 +43,12 @@
                           v-btn.ma-1.white--text(depressed color="accent" v-on="on") Добавить новый подраздел
                       v-card
                         v-card-title.headline.grey.lighten-2.primary-title Подзаголовок
-                        v-text-field.ma-2(v-model="title" :rules="titleRules" outlined multi-line label="Название подзаголовка")
+                        v-text-field.ma-2(v-model="title" :rules="titleRules" v-on:keyup.enter="addInfo()" outlined multi-line label="Название подзаголовка")
                         v-divider
                         v-card-actions
                           v-btn(color="primary" text @click="dialogAdd = false; title = ''") Отмена
                           v-spacer
-                          v-btn(color="primary" text @click="dialogAdd = false; addInfo()") Добавить                                      
+                          v-btn(color="primary" text @click="addInfo()") Добавить                                      
 </template>
 
 <script>
@@ -123,6 +123,7 @@ export default {
         {
           this.item.info[this.title] = [""];
           this.title = "";
+          this.dialogAdd = false;
         }
       }
       else

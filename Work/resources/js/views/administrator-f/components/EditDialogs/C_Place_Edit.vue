@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="550px")
+  v-dialog(v-model="dialog" scrollable persistent max-width="550px")
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Добавить запись
@@ -42,7 +42,7 @@ export default {
         }
       },
       resolve: null,
-            place_nameRules: [
+      place_nameRules: [
         v => !!v || "Поле не должно оставаться пустым",
         v => /^[А-Я && а-я]*$/.test(v) || "Только буквы"
       ],
@@ -72,8 +72,7 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        let data = this.item;
-        this.clearForm();
+        let data = Object.assign({}, this.item);
         this.resolve(data);
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
@@ -88,12 +87,6 @@ export default {
     clearForm()
     {
       this.item.place_name = null;
-      this.item.info.place_index = "";
-      this.item.place_country = "";
-      this.item.place_city = "";
-      this.item.place_street = "";
-      this.item.place_building_number = "";
-      this.item.place_piy = "";
     }
   }
 };

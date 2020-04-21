@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="550px")
+  v-dialog(v-model="dialog" persistent scrollable max-width="550px")
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Добавить запись
@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       dialog: false,
-      default_item: null,
       item: {
         place_name: null,
         info:{
@@ -72,10 +71,9 @@ export default {
     clickSave() {
       if (this.$refs.form.validate())
       {
-        this.dialog = false;
-        let data = this.item;
-        this.clearForm();
+        let data = Object.assign({}, this.item);
         this.resolve(data);
+        this.dialog = false;
       } 
       else 
       {
@@ -92,12 +90,14 @@ export default {
     clearForm()
     {
       this.item.place_name = null;
-      this.item.info.place_index = "";
-      this.item.place_country = "";
-      this.item.place_city = "";
-      this.item.place_street = "";
-      this.item.place_building_number = "";
-      this.item.place_piy = "";
+      this.item.info = {
+        place_index: null,
+        place_country: null,  
+        place_city: null,
+        place_street: null,
+        place_building_number: null,
+        place_piy: null
+      }
     }
   }
 };

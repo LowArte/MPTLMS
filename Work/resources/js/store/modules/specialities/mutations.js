@@ -12,7 +12,6 @@ export default {
     },
     [types.EDIT_SPECIALITIE](state, specialitie) {
         state.specialities_full.edit(specialitie);
-        state.specialities_combobox.edit(specialitie)
     },
     [types.ADD_SPECIALITIE](state, specialitie) {
         state.specialities_full.addToEnd(specialitie);

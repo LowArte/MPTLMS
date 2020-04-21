@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-dialog(v-model="dialog" persistent max-width="550px")
+    v-dialog(v-model="dialog" persistent scrollable max-width="550px")
         v-card.ma-0.pa-0
             v-card-title.headline 
                 h4.text-truncate Добавить запись
@@ -79,8 +79,7 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        let data = this.item;
-        this.clearForm();
+        let data = Object.assign({}, this.item);
         this.resolve(data);
       } 
       else 

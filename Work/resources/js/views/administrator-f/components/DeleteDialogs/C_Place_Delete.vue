@@ -1,18 +1,18 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="550px")
+  v-dialog(v-model="dialog" persistent scrollable max-width="550px")
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
       v-form
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
-          v-text-field(v-model="item.place_name" label="Наименование места проведения" disabled)
-          v-text-field(v-model="item.info.place_index" label="Индекс" disabled)
-          v-text-field(v-model="item.info.place_country" label="Страна" disabled)
-          v-text-field(v-model="item.info.place_city" label="Город" disabled)
-          v-text-field(v-model="item.info.place_street" label="Улица" disabled)
-          v-text-field(v-model="item.info.place_building_number" label="Номер здания" disabled)
-          v-text-field(v-model="item.info.place_piy" label="Корпус" disabled)
+          v-text-field(v-model="item.place_name" label="Наименование места проведения" readonly)
+          v-text-field(v-model="item.info.place_index" label="Индекс" readonly)
+          v-text-field(v-model="item.info.place_country" label="Страна" readonly)
+          v-text-field(v-model="item.info.place_city" label="Город" readonly)
+          v-text-field(v-model="item.info.place_street" label="Улица" readonly)
+          v-text-field(v-model="item.info.place_building_number" label="Номер здания" readonly)
+          v-text-field(v-model="item.info.place_piy" label="Корпус" readonly)
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer

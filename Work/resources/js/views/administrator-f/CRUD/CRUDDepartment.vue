@@ -78,6 +78,7 @@ export default {
       this.$refs.new.pop().then(result => {
         if (result) {
           this.$store.dispatch(mutations.ADD_SPECIALITIE,{ context: this, result: result });
+          this.$refs.new.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -90,18 +91,7 @@ export default {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(mutations.EDIT_SPECIALITIE,{ context: this, result: result });
-        } else {
-          this.showInfo("Действие было отменено пользователем!");
-        }
-      });
-    },
-    //?----------------------------------------------
-    //!           Удаление всех объектов
-    //?----------------------------------------------
-    clear() {
-      this.$refs.qwestion.pop().then(result => {
-        if (result) {
-          api.dropDepartments(this);
+          this.$refs.revue.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
@@ -114,6 +104,7 @@ export default {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(mutations.DELETE_SPECIALITIE,{ context: this, result: result });
+          this.$refs.rem.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }

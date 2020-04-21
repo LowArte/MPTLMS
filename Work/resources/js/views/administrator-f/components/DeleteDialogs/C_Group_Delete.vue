@@ -1,15 +1,15 @@
 <template lang="pug">
-  v-dialog(v-model="dialog" persistent max-width="550px")
+  v-dialog(v-model="dialog" persistent scrollable max-width="550px")
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
       v-form
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
-          v-text-field(v-model="item.group_name" label="Название группы" disabled)
-          v-text-field(v-model="item.curs" label="Текущий курс" dense disabled)
-          v-autocomplete.my-3(:items="specialities" v-model="item.departament_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" disabled label="Отделение")
-          v-autocomplete.my-3(:items="groups" v-model="item.child_id" item-text="group_name" no-data-text="Нет данных" item-value="id" disabled label="Дополнительная группа")
+          v-text-field(v-model="item.group_name" label="Название группы" readonly)
+          v-text-field(v-model="item.curs" label="Текущий курс" dense readonly)
+          v-autocomplete.my-3(:items="specialities" v-model="item.departament_id" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" readonly label="Отделение")
+          v-autocomplete.my-3(:items="groups" v-model="item.child_id" item-text="group_name" no-data-text="Нет данных" item-value="id" readonly label="Дополнительная группа")
         v-card-actions              
           v-btn(color="accent darken-1" text @click="clickCancel") Отмена
           v-spacer
