@@ -1,6 +1,6 @@
 <template lang="pug">
   v-layout.row.wrap.pa-3
-    v-card.mx-auto.pa-3(height='auto' width='100%')
+    v-card.mx-auto.pa-3(height='auto' width='100%' v-if="loaded" )
       v-card-text.my-2.ma-0.pa-0.title Панель управления
       v-divider
       v-switch.mx-2(v-if="options != null" v-model='options.option_value' label='Режим профилактики' color='accent')
@@ -22,17 +22,20 @@ export default {
 
   data: () => {
     return {
-      options: null
+      options: null,
+      loaded: true
     };
   },
 
   async beforeMount() 
   {
     this.showLoading("Получение настроек...");
+    this.loaded = false;
     this.options = await api.getSiteOptions(this);
     if (this.options != null)
       this.options.option_value = this.options.option_value == "true";
     this.closeLoading("Получение настроек...");
+    this.loaded = true;
   },
 
   methods: {

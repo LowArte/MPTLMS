@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-layout.column.wrap
+    v-layout.column.wrap(v-if="loaded")
       v-flex.ma-2.row()
         v-combobox.ma-1(label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
         v-combobox.ma-1(label="Группа" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
@@ -66,6 +66,7 @@ export default {
   mixins: [withSnackbar, withOverlayLoading],
   data: () => {
     return {
+      loaded: false,
       TeacherRules: {
           required: value => {
               return !!value.length || "Преподаватель не указан!";
