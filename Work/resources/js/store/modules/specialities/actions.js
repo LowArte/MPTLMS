@@ -1,26 +1,34 @@
 import * as types from '../../mutation-types'
-import api from "@/js/api/departments";
+import * as actions from '../../action-types'
+import api_department from "@/js/api/departments";
 
 export default{
-    async [types.ADD_SPECIALITIE]({ commit, state }, data) {
+
+    async [actions.CREATE_SPECIALITIE]({ commit, state }, data) {
+        let items = await api_department.getDepartments();
+        if(items)
+            commit(types.SET_SPECIALITIES_FULL, items)
+    },
+
+    async [actions.ADD_SPECIALITIE]({ commit, state }, data) {
         let result = await api.saveDepartment(data.result, data.context);
         if (result) {
             data.result.id = result;
-            commit(types.ADD_SPECIALITIE, data.result)
+            commit(actions.ADD_SPECIALITIE, data.result)
         }
     },
     
-    async [types.DELETE_SPECIALITIE]({ commit, state }, data) {
+    async [actions.DELETE_SPECIALITIE]({ commit, state }, data) {
         let result = await api.deleteDepartment(data.result, data.context);
         if (result) {
-            commit(types.DELETE_SPECIALITIE,data.result)
+            commit(actions.DELETE_SPECIALITIE,data.result)
         }
     },
 
-    async [types.EDIT_SPECIALITIE]({ commit, state }, data) {
+    async [actions.EDIT_SPECIALITIE]({ commit, state }, data) {
         let result = await api.editDepartment(data.result, data.context);
         if (result) {
-            commit(types.EDIT_SPECIALITIE,data.result)
+            commit(actions.EDIT_SPECIALITIE,data.result)
         }
     },
 }

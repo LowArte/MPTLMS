@@ -78,6 +78,7 @@ import api_departments from "@/js/api/departments"; //Расписания зв�
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
+import * as actions from "@/js/store/action-types";
 //?----------------------------------------------
 //!           Вспомогательные функции
 //?----------------------------------------------

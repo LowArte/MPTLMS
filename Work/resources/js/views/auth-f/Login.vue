@@ -13,37 +13,30 @@
               v-btn(color="accent" text) ОТМЕНА
             v-spacer
             v-btn(@click="login" color="blue darken-1" text :loading="loading" :disabled="loading") ВОЙТИ
-        v-bottom-sheet.pa-3(v-model="sheet" scrollable max-height="300px")
-          template(v-slot:activator="{ on }")
-            v-btn(text block x-small color="primary font-weight-light" v-on="on") Проблемы со входом?
-          v-card.mx-auto(:elevation="0")
-            v-card-title.pa-3.font-weight-black Проблемы со входом
-            v-card-text
-              v-card-text.subtitle-1.pa-0.pb-2.font-weight-medium Для обучающегося
-              v-card-text.pa-0 Внимание! Для первого входа в личный кабинет необходимо получит пароль в Центре по работе со студентами. В качесте логина используйте Вашу корпоративную почту. После авторизации Вы можете поменять пароль в личном кабинете.
-              v-card-text.pa-0 Если выданный центром пароль не подходит - обратитесь к задеющему отделением или своему куратору.
-              v-card-text.subtitle-1.pa-0.py-2.font-weight-medium Нет пароля?
-              v-card-text.pa-0 Обратитесь к задеющему отделением или своему куратору - Вам выдадут временный пароль для входа в личный кабинет. При себе необходимо иметь студенческий билет.
-              v-card-text.subtitle-1.pa-0.py-2.font-weight-medium Забыли пароль?
-              router-link(class='nounderline' to="/password_reset")
-                a.ma-0.pa-0.pb-2(color="font-weight-light" style="color: #FE532C; text-decoration: none;") Восстановление пароля на сайте
-              v-card-text.pa-0 Либо вы можете обратиться к задеющему отделением или своему куратору или к админестратору сайта (преподавателям)
-            v-card-actions
-              v-btn(class="mt-6 text-center" text color="red" @click="sheet = !sheet") Закрыть
+        c-reset-password-sheet
 </template>
 
 
 <script>
 import user_api from "@/js/api/users";
 import * as mutations from "@/js/store/mutation-types";
-import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+
+//?----------------------------------------------
+//!           Подключение системы уведомлений
+//?----------------------------------------------
+import withSnackbar from "@/js/components/mixins/withSnackbar";
+import loadImage from "@/js/plugins/loadImage";
+
+//?----------------------------------------------
+//!           Компоненты
+//?----------------------------------------------
+import ResetPasswordSheet_C from "@/js/components/auth-f/ResetPasswordSheet";
 
 
 export default {
-  mixins: [withSnackbar],
+  mixins: [withSnackbar,loadImage],
   data() {
     return {
-      sheet: false,
       loading: false,
       email: "",
       password: "",
@@ -56,10 +49,10 @@ export default {
       passwordRules: [v => !!v || "Поле должно быть заполнено корректно"]
     };
   },
+  components: {
+    "c-reset-password-sheet": ResetPasswordSheet_C
+  },
   methods: {
-    loadImg: function(path) {
-      return require(`@img/${path}`);
-    },
     async login() {
       this.loading = true;
       if (this.$refs.Login.validate()) {

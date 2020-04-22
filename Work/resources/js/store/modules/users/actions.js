@@ -1,26 +1,27 @@
 import * as types from '../../mutation-types'
 import api from "@/js/api/users";
+import * as actions from '../../action-types'
 
 export default{
-    async [types.ADD_USER]({ commit, state }, data) {
+    async [actions.ADD_USER]({ commit, state }, data) {
         let result = await api.saveUser(data.result, data.context);
         if (result) {
             data.result.id = result;
-            commit(types.ADD_USER,data.result)
+            commit(actions.ADD_USER,data.result)
         }
     },
     
-    async [types.DELETE_USER]({ commit, state }, data) {
+    async [actions.DELETE_USER]({ commit, state }, data) {
         let result = await api.deleteUser(data.result, data.context);
         if (result) {
-            commit(types.DELETE_USER,data.result)
+            commit(actions.DELETE_USER,data.result)
         }
     },
 
-    async [types.EDIT_USER]({ commit, state }, data) {
+    async [actions.EDIT_USER]({ commit, state }, data) {
         let result = await api.editUser(data.result, data.context);
         if (result) {
-            commit(types.EDIT_USER,data.result)
+            commit(actions.EDIT_USER,data.result)
         }
     },
 }

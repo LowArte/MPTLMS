@@ -1,32 +1,21 @@
-<template>
-  <v-app style="background: white;">
-    <snackbar></snackbar>
-    <v-app-bar app elevate-on-scroll color="white">
-      <v-toolbar-title>{{ name }}</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <router-link v-if="currentRoute.name !='Login' && !isAuthenticated" class="nounderline" to="/login">
-        <v-btn color="accent" text small>ВОЙТИ</v-btn>
-      </router-link>
-      <router-link v-if="isAuthenticated" class="nounderline" :to="`/${user.post.slug}`">
-        <v-btn color="primary mr-5" text small>В КАБИНЕТ</v-btn>
-      </router-link>
-      <c-logout-default v-if="isAuthenticated"></c-logout-default>
-    </v-app-bar>
-    <v-content style="background: white;">
-      <v-container pa-0 fluid grid-list-md text-xs-center>
-        <v-alert v-if="isProfilactic" class="my-2" text dense type="warning">
-          <span
-            class="primary--text subtitle-1"
-          >Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.</span>
-        </v-alert>
-        <transition>
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
-        </transition>
-      </v-container>
-    </v-content>
-  </v-app>
+<template lang="pug">
+  v-app(style='background: white;')
+    snackbar
+    v-app-bar(app elevate-on-scroll color='white')
+      v-toolbar-title {{ name }}
+      v-spacer
+      router-link.nounderline(v-if="currentRoute.name !='Login' && !isAuthenticated" to='/login')
+        v-btn(color='accent' text small) ВОЙТИ
+      router-link.nounderline(v-if='isAuthenticated' :to='`/${user.post.slug}`')
+        v-btn(color='primary mr-5' text small) В КАБИНЕТ
+      c-logout-default(v-if='isAuthenticated')
+    v-content(style='background: white;')
+      v-container(pa-0 fluid grid-list-md text-xs-center='')
+        v-alert.my-2(v-if='isProfilactic' text dense type='warning')
+          span.primary--text.subtitle-1 Ведутся профилактические работы - функциональные возможности системы ограничены. Повторите попытку позднее.
+        transition
+          keep-alive
+            router-view
 </template>
 
 <script>

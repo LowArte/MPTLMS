@@ -1,26 +1,26 @@
-import * as types from '../../mutation-types'
+import * as actions from '../../action-types'
 import api from "@/js/api/places";
 
 export default{
-    async [types.ADD_PLACE]({ commit, state }, data) {
+    async [actions.ADD_PLACE]({ commit, state }, data) {
         let result = await api.savePlace(data.result, data.context);
         if (result) {
             data.result.id = result;
-            commit(types.ADD_PLACE,data.result)
+            commit(actions.ADD_PLACE,data.result)
         }
     },
     
-    async [types.DELETE_PLACE]({ commit, state }, data) {
+    async [actions.DELETE_PLACE]({ commit, state }, data) {
         let result = await api.deletePlace(data.result, data.context);
         if (result) {
-            commit(types.DELETE_PLACE,data.result)
+            commit(actions.DELETE_PLACE,data.result)
         }
     },
 
-    async [types.EDIT_PLACE]({ commit, state }, data) {
+    async [actions.EDIT_PLACE]({ commit, state }, data) {
         let result = await api.editPlace(data.result, data.context);
         if (result) {
-            commit(types.EDIT_PLACE,data.result)
+            commit(actions.EDIT_PLACE,data.result)
         }
     },
 }

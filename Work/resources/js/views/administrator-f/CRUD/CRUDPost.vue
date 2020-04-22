@@ -33,6 +33,7 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
+import * as actions from "@/js/store/action-types";
 
 export default {
   computed: {
@@ -76,7 +77,7 @@ export default {
     add() {
       this.$refs.new.pop().then(result => {
         if (result) {
-          this.$store.dispatch(mutations.ADD_USERPOST,{ context: this, result: result });
+          this.$store.dispatch(actions.ADD_USERPOST,{ context: this, result: result });
           this.$refs.new.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
@@ -89,7 +90,7 @@ export default {
     edit(item) {
       this.$refs.revue.pop(item).then(result => {
         if (result) {
-          this.$store.dispatch(mutations.EDIT_USERPOST,{ context: this, result: result });
+          this.$store.dispatch(actions.EDIT_USERPOST,{ context: this, result: result });
           this.$refs.revue.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
@@ -102,7 +103,7 @@ export default {
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          this.$store.dispatch(mutations.DELETE_USERPOST,{ context: this, result: result });
+          this.$store.dispatch(actions.DELETE_USERPOST,{ context: this, result: result });
           this.$refs.rem.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");

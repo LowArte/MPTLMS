@@ -1,18 +1,18 @@
 <template lang="pug">
-v-row.ma-2(align="center" justify="center")
-    v-col.pa-0(justify="center" align="center")
-      v-card.pa-0.mx-auto(:elevation="0" max-width="320")
-        v-img.mx-auto(:src="loadImg('main-logo.png')" max-width="128px" height="auto")
-        v-row.ma-2(align="center" justify="center")
-          v-card-title.headline() Новый пароль
-        v-form(ref="resetPasswordForm")
-          v-text-field(v-model="password" :rules="passwordRules" min="6" type="password" label="Пароль" required)
-          v-text-field(v-model="passwordConfirmation" :rules="passwordRules" type="password" min="6" label="Подтвердите пароль" required)
-        v-card-actions
-          router-link(class='nounderline' to="/") 
-            v-btn(color="accent" text) На главную
-          v-spacer
-          v-btn(color="blue darken-1" text :loading="loading" :disabled="loading" @click.native="reset()") Подтвердить
+  v-row.ma-2(align="center" justify="center")
+      v-col.pa-0(justify="center" align="center")
+        v-card.pa-0.mx-auto(:elevation="0" max-width="320")
+          v-img.mx-auto(:src="loadImg('main-logo.png')" max-width="128px" height="auto")
+          v-row.ma-2(align="center" justify="center")
+            v-card-title.headline() Новый пароль
+          v-form(ref="resetPasswordForm")
+            v-text-field(v-model="password" :rules="passwordRules" min="6" type="password" label="Пароль" required)
+            v-text-field(v-model="passwordConfirmation" :rules="passwordRules" type="password" min="6" label="Подтвердите пароль" required)
+          v-card-actions
+            router-link(class='nounderline' to="/") 
+              v-btn(color="accent" text) На главную
+            v-spacer
+            v-btn(color="blue darken-1" text :loading="loading" :disabled="loading" @click.native="reset()") Подтвердить
 </template>
 
 
