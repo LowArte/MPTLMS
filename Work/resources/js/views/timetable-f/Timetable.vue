@@ -1,8 +1,8 @@
 <template lang="pug">
 v-content.ma-0.pa-2
-  v-layout.column.wrap(v-if="loaded" )
-    //- v-flex
-    //-   //- c_panel_control(ref="panel")
+  v-layout.column.wrap()
+    v-flex
+      c_panel_control(ref="panel")
     v-flex
       v-card
         v-system-bar(dark color="info")
@@ -12,9 +12,9 @@ v-content.ma-0.pa-2
     v-flex
        router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'/' + user.post.slug + '/bild_timetable'") 
         v-btn.ma-3(color="accent" text block dark) Конструктор расписания
-    v-chip.ma-1(v-if="isToday != 0" label color="info") Знаменатель
-    v-chip.ma-1(v-if="isToday == 0" label color="accent") Числитель
-    v-flex
+    v-chip.ma-1(v-if="isChisl != 0" label color="info") Знаменатель
+    v-chip.ma-1(v-if="isChisl == 0" label color="accent") Числитель
+    //--v-flex
       v-layout.row.wrap
         v-flex(v-for="(day_key,day_index) in days" :key="day_index" v-if="schedule != null")
           v-card.mx-auto(min-width="300px" max-width="320px" style="display: flex; flex-direction: column;")
@@ -56,7 +56,7 @@ v-content.ma-0.pa-2
                               v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl }} 
                               v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
                             v-expansion-panel-content.px-0.mx-0(v-else)
-                              v-card-text.pa-0.wrap.text-black Отсутствует
+                              v-card-text.pa-0.wrap.text-black Отсутствует --//
 </template>
 
 <style scoped>
@@ -66,200 +66,148 @@ v-content.ma-0.pa-2
 </style>
 
 <script>
-import callSchedule_api from "@/js/api/callSchedule"; //Api мест проведений
-import departament_api from "@/js/api/departments"; //Api отделения
-import group_api from "@/js/api/group"; //Api групп
-import schedule_api from "@/js/api/schedule"; //Api расписания
-import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
-import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
+//?----------------------------------------------
+//!           Подключение дополнительных библиотек
+//?----------------------------------------------
+import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
 import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
 
-Date.prototype.getWeek = function() {
-  const onejan = new Date(this.getFullYear(), 0, 1);
-  return Math.ceil(((this - onejan) / 86400000 + 1) / 7);
-};
+import api_call_schedule from "@/js/api/callSchedule"; //Расписания звонков
+import api_departments from "@/js/api/departments"; //Расписания звонков
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
+//?----------------------------------------------
+//!           Вспомогательные функции
+//?----------------------------------------------
+
 
 export default {
-  computed: {
-    ...mapGetters(["specialities", "groups_combo", "user", "timetable_full"]),
-    combo_groups: function() {
-      if (!this.groups_combo) return undefined;
-      this.selected_group = this.groups_combo[0];
-      return this.groups_combo;
-    }
-  },
+//?----------------------------------------------
+//!           Преднастройка
+//?----------------------------------------------
+  //*Подключение вспомогательный компонентов
   mixins: [withSnackbar, withOverlayLoading],
-  post_name: {
-    name: "Учебное расписание",
-    url: "timetable"
-  },
   components: {
     c_panel_control: PanelControl_C,
   },
-
-  data: () => {
-    return {
-      loaded: true,
-      selected_departament: null,
-      selected_group: null,
-      start: true,
-      schedule: null, //Расписание
-      isToday: null, //Текущий день
-      titleDialog: "Конструктор расписания",
-      dialog: false,
-      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"] //Дни недели
-    };
+  //*Вычисляемые свойства
+  computed: {
+    ...mapGetters(["specialities", "groups_combo", "user", "timetable_full"]),
+    
+    combo_groups: function() {
+      if (!this.groups_combo) return undefined;
+        this.selected_group = this.groups_combo[0];
+      return this.groups_combo;
+    },
+    //*Получение четности недели
+    isChisl: function() {
+      var year = new Date().getFullYear();
+      var month = new Date().getMonth();
+      var today = new Date(year, month, 0).getTime();
+      var now = new Date().getTime();
+      var week = Math.round((now - today) / (1000 * 60 * 60 * 24 * 7));
+      return week % 2;
+    }
   },
 
+  data() {
+    return {
+      selected_departament: null,
+      selected_group: null,
+    }
+  },
+
+  beforeMount()
+  {
+    this.getDepartments();
+  },
+
+  mounted()
+  {
+    this.getCallScheduleForPanel();
+  },
+
+//?----------------------------------------------
+//!           Методы страницы
+//?----------------------------------------------
   methods: {
-    //Запрос для получения всех необходимых данных
-    async getAllData() {
-      this.showLoading("Получение даннах");
-      this.closeLoading("Получение даннах");
-    },
-
-    async schedules() {
-      if (this.selected_group == null) return undefined;
-      let schedule = this.timetable_full.filter(res => {
-        if (res.group_id == this.selected_group.id) return true;
-        else return false;
-      });
-
-      if (schedule.length == 0) {
-        this.showLoading("Получение расписания");
-        schedule = await schedule_api.getScheduleByGroupId(
-          this.selected_group.id,
-          this
-        );
-        schedule["group_id"] = this.selected_group.id;
-        this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
-        this.closeLoading("Получение расписания");
-      } else schedule = schedule[0];
-      return schedule;
-    },
-
-    //Получение панели с расписанием
+    //*Получение панели с расписанием
     async getCallScheduleForPanel() {
       this.showLoading("Получение расписания звонков");
-      // this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
+      this.$refs.panel.loadData(await api_call_schedule.getCallScheduleForPanel(this));
+
+      if(this.call_schedule == null)
+      {
+        let timeTable = await api_call_schedule.getCallSchedule(this);
+        await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
+      }
       this.closeLoading("Получение расписания звонков");
     },
-
-    //Получение отделений
-    async getDepartament() {
+    //*Получение отделений для выпадающего списка
+    async getDepartments()
+    {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
-        let items = await departament_api.getDepartments(this);
+        let items = await api_departments.getDepartments(this);
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
         this.closeLoading("Получение отделений");
       }
 
-      if (this.specialities) {
+      if (this.specialities) 
+      {
         this.selected_departament = this.specialities[0];
         this.departament_change();
       }
     },
-
+//?----------------------------------------------
+//!           Методы компонентов
+//?----------------------------------------------
     //Получение группы при изменении отделения
     async departament_change() {
-      // this.showLoading("Получение групп");
-      this.$store.dispatch(mutations.ADD_CACHE_GROUP_DATA, {
+      this.showLoading("Получение групп");
+      await this.$store.dispatch(mutations.ADD_CACHE_GROUP_DATA, {
         context: this,
         result: this.selected_departament.id
       });
-      // this.closeLoading("Получение групп");
+      this.closeLoading("Получение групп");
 
-      // if (this.combo_groups) {
-      //   //Отображение отделения и группы студента
-      //   if (this.user.post_id == 2 && this.start) {
-      //     for (let i = 0; i < this.combo_groups.length; i++) {
-      //       if (this.combo_groups[i].id == this.user.student.group_id) {
-      //         this.selected_group = this.combo_groups[i];
-      //         i = this.combo_groups.length;
-      //       }
-      //     }
+      if (this.combo_groups) 
+      {
+        //*Отображение отделения и группы студента
+        if (this.user.post_id == 2 && this.start) 
+        {
+          for (let i = 0; i < this.combo_groups.length; i++) 
+          {
+            if (this.combo_groups[i].id == this.user.student.group_id) 
+            {
+              this.selected_group = this.combo_groups[i];
+              i = this.combo_groups.length;
+            }
+          }
 
-      //     for (let i = 0; i < this.specialities.length; i++) {
-      //       if (this.selected_group.departament_id == this.specialities[i].id) {
-      //         this.selected_departament = this.specialities[i];
-      //         i = this.specialities.length;
-      //       }
-      //     }
-      //     this.start = false;
-      //   } else this.selected_group = this.combo_groups[0];
-      //   this.group_change();
-      // }
+          for (let i = 0; i < this.specialities.length; i++) 
+          {
+            if (this.selected_group.departament_id == this.specialities[i].id) 
+            {
+              this.selected_departament = this.specialities[i];
+              i = this.specialities.length;
+            }
+          }
+          this.start = false;
+        } 
+        else 
+          this.selected_group = this.combo_groups[0];
+        this.group_change();
+      }
     },
 
-    //Определение числителя
-    isChisl() {
-      var today = new Date(new Date().getTime() + 8 * (24 * 60 * 60 * 1000));
-      return today.getWeek() % 2;
-    },
-
-    //Получение расписания при изменении выбранной группы
+    //*Получение расписания при изменении выбранной группы
     async group_change() {
-      this.schedule = await this.schedules();
-      if (this.schedule) this.parseSchedule();
+      /*this.schedule = await this.schedules();
+      if (this.schedule) this.parseSchedule();*/
     },
-
-    //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
-    parseSchedule() {
-      var tag = 0;
-      // for (var i = 0; i < this.days.length; i++) {
-      //   for (var j = 1; j <= 7; j++) {
-      //     if (Array.isArray(this.schedule[this.days[i]][j]["LessonChisl"]))
-      //       this.schedule[this.days[i]][j]["LessonChisl"] = this.schedule[
-      //         this.days[i]
-      //       ][j]["LessonChisl"].join(" / ");
-      //     if (Array.isArray(this.schedule[this.days[i]][j]["LessonZnam"]))
-      //       this.schedule[this.days[i]][j]["LessonZnam"] = this.schedule[
-      //         this.days[i]
-      //       ][j]["LessonZnam"].join(" / ");
-      //     if (Array.isArray(this.schedule[this.days[i]][j]["TeacherChisl"]))
-      //       this.schedule[this.days[i]][j]["TeacherChisl"] = this.schedule[
-      //         this.days[i]
-      //       ][j]["TeacherChisl"].join(" / ");
-      //     if (Array.isArray(this.schedule[this.days[i]][j]["TeacherZnam"]))
-      //       this.schedule[this.days[i]][j]["TeacherZnam"] = this.schedule[
-      //         this.days[i]
-      //       ][j]["TeacherZnam"].join(" / ");
-
-      //     if (
-      //       (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
-      //         this.schedule[this.days[i]][j]["LessonZnam"] == null) ||
-      //       (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
-      //         this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
-      //       (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
-      //         this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
-      //       (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
-      //         this.schedule[this.days[i]][j]["LessonZnam"] == null)
-      //     )
-      //       tag++;
-
-      //     if (tag >= 7) {
-      //       this.schedule[this.days[i]][1]["LessonChisl"] = "Домашнее обучение";
-      //       this.schedule[this.days[i]][1]["time"] = "Весь день";
-      //       this.schedule[this.days[i]]["Place"] = [];
-      //     }
-      //   }
-      //   tag = 0;
-      // }
-    }
-  },
-
-  //Преднастройка
-  beforeMount() {
-    this.getAllData();
-    this.isToday = this.isChisl();
-    this.getDepartament();
-  },
-
-  mounted() {
-    this.getCallScheduleForPanel();
   }
-};
+}
 </script>

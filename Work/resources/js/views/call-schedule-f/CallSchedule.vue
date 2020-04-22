@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import callSchedule_api from "@/js/api/callSchedule"; //api для расписания звонков
+import api_call_schedule from "@/js/api/callSchedule"; //api для расписания звонков
+
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
 
@@ -20,16 +21,20 @@ export default {
     name: "Расписание звонков",
     url: "callschedule"
   },
-  directives: 
+
+  beforeMount()
   {
-    mask
+    this.init();
   },
-  async beforeMount()
-  {
-    if(this.call_schedule == null)
+  
+  methods:{
+    async init()
     {
-      let timeTable = await callSchedule_api.getCallSchedule(this);
-      await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
+      if(this.call_schedule == null)
+      {
+        let timeTable = await api_call_schedule.getCallSchedule(this);
+        await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
+      }
     }
   }
 };

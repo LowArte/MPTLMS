@@ -26,13 +26,10 @@ class PanelExtentionRepository extends BaseRepository
     */
     public function getPanelForCallSchedule()
     {
-        $callScheduleRepository = app(CallScheduleRepository::class);
-        $calls = $callScheduleRepository->getCallSchedule();
         return array(
             array(
                 "header"  => "Расписание звонков",
-                "content" => "call-schedule-f/CallSchedule",
-                "props"   => array('_time_table'=>$calls)
+                "content" => "call-schedule-f/CallSchedule"
             )
         );
     }

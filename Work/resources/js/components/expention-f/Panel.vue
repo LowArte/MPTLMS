@@ -3,7 +3,7 @@
     v-expansion-panel(v-for="(component,i) in components" :key="i")
       v-expansion-panel-header {{ component.header }}
       v-expansion-panel-content
-        component(:is='component.component' v-bind="component.props")
+        component(:is='component.component')
 </template>
 
 <script>
