@@ -79,7 +79,7 @@ export default {
     //!----------------------------------------
     getGroupsByDepartamentId(department_id, _this) {
         return axios.get('/api/getters/group_by_departament_id/' + department_id)
-        .then(result => { return result.data.groups_info.groups;})
+        .then(result => { return result.data.groups;})
         .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 

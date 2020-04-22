@@ -23,4 +23,15 @@ export default{
             commit(types.EDIT_GROUP,data.result)
         }
     },
+
+    async [types.ADD_CACHE_GROUP_DATA]({ commit, state },data){
+        if(!state.groups_combobox_cache.contains(data.result))
+        {
+            let result = await api.getGroupsByDepartamentId(data.result, data.context);
+            commit(types.ADD_CACHE_GROUP_DATA,{id:data.result,result:result});
+        }
+        else{
+            commit(types.GET_CACHE_GROUP_DATA,data.result);
+        }
+    }
 }

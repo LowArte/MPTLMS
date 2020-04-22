@@ -15,5 +15,11 @@ export default {
     },
     [types.ADD_GROUP](state, group) {
         state.groups_full.addToEnd(group);
+    },
+    [types.ADD_CACHE_GROUP_DATA](state, data) {
+        state.groups_combobox_cache.add(data);
+    },
+    [types.GET_CACHE_GROUP_DATA](state, id) {
+        state.groups_combobox_cache.addId(id);
     }
 }

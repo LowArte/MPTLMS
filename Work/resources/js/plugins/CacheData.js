@@ -1,24 +1,28 @@
-export default class CacheData{
+export class CacheData {
 
-    contructor(update){
-        this.update = update;
+    constructor() {
         this.data = new Array();
+        this.id = 0;
     }
 
-    async get(id)
-    {
-        if(this.data.includesById(id)){
-            return this.data.findById(id).data;
-        }
-        else{
-            let data = await this.update();
-            this.data.push({id:id,data:data})
-            return data;
-        }
+    contains(id){
+        return this.data[id] != undefined
     }
 
-    delete(callback){
-        callback(arguments[0]);
+    add(data){
+        this.id = data.id;
+        this.data[data.id] = data.result;
     }
+
+    addId(id){
+        this.id = id;
+    }
+
+    getLast(){
+        return this.data[this.id];
+    }
+
+    // delete(callback) {
+    //     callback(arguments[0]);
+    // }
 }
-
