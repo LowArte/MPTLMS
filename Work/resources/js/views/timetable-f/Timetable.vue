@@ -1,8 +1,8 @@
 <template lang="pug">
 v-content.ma-0.pa-2
   v-layout.column.wrap(v-if="loaded" )
-    v-flex
-      c_panel_control(ref="panel")
+    //- v-flex
+    //-   //- c_panel_control(ref="panel")
     v-flex
       v-card
         v-system-bar(dark color="info")
@@ -85,19 +85,11 @@ import * as mutations from "@/js/store/mutation-types";
 export default {
   computed: {
     ...mapGetters(["specialities", "groups_combo", "user", "timetable_full"]),
-    combo_groups: function() 
-    {
+    combo_groups: function() {
       if (!this.groups_combo) return undefined;
-      let groups = this.groups_combo.filter(res => {
-        if (res.departament_id == this.selected_departament.id) {
-          return true;
-        }
-        return false;
-      });
-      if (groups != null)
-        this.selected_group = groups[0];
-      return groups;
-    },
+      this.selected_group = this.groups_combo[0];
+      return this.groups_combo;
+    }
   },
   mixins: [withSnackbar, withOverlayLoading],
   post_name: {
@@ -110,9 +102,9 @@ export default {
 
   data: () => {
     return {
-      loaded: false,
+      loaded: true,
       selected_departament: null,
-      selected_group:null,
+      selected_group: null,
       start: true,
       schedule: null, //Расписание
       isToday: null, //Текущий день
@@ -124,100 +116,82 @@ export default {
 
   methods: {
     //Запрос для получения всех необходимых данных
-    async getAllData()
-    {
+    async getAllData() {
       this.showLoading("Получение даннах");
       this.closeLoading("Получение даннах");
     },
 
-    async schedules()
-    {
-      if(this.selected_group == null) return undefined;
+    async schedules() {
+      if (this.selected_group == null) return undefined;
       let schedule = this.timetable_full.filter(res => {
-        if(res.group_id == this.selected_group.id)
-          return true;
-        else
-          return false;
+        if (res.group_id == this.selected_group.id) return true;
+        else return false;
       });
 
-      if(schedule.length == 0)
-      {
+      if (schedule.length == 0) {
         this.showLoading("Получение расписания");
-        schedule = await schedule_api.getScheduleByGroupId(this.selected_group.id, this);
-        //schedule['group_id'] = this.selected_group.id;
+        schedule = await schedule_api.getScheduleByGroupId(
+          this.selected_group.id,
+          this
+        );
+        schedule["group_id"] = this.selected_group.id;
         this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
         this.closeLoading("Получение расписания");
-      }
-      else
-        schedule = schedule[0];
+      } else schedule = schedule[0];
       return schedule;
     },
 
-    //Получение панели с расписанием 
-    async getCallScheduleForPanel()
-    {
+    //Получение панели с расписанием
+    async getCallScheduleForPanel() {
       this.showLoading("Получение расписания звонков");
-      this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
+      // this.$refs.panel.loadData(await callSchedule_api.getCallScheduleForPanel(this));
       this.closeLoading("Получение расписания звонков");
     },
 
     //Получение отделений
-    async getDepartament()
-    {
-      if (this.specialities == null)
-      {
+    async getDepartament() {
+      if (!this.specialities) {
         this.showLoading("Получение отделений");
         let items = await departament_api.getDepartments(this);
-        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
+        this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
         this.closeLoading("Получение отделений");
       }
-      
-      if(this.specialities)
-      {
+
+      if (this.specialities) {
         this.selected_departament = this.specialities[0];
         this.departament_change();
       }
-    }, 
+    },
 
     //Получение группы при изменении отделения
-    async departament_change() 
-    {
-      if (this.groups_combo == null)
-      {
-        this.showLoading("Получение групп");
-        let items = await group_api.getGroupsForComboboxRecursive(this);
-        this.$store.commit(mutations.SET_GROUPS_COMBO, items)
-        this.closeLoading("Получение групп");
-      }
+    async departament_change() {
+      // this.showLoading("Получение групп");
+      this.$store.dispatch(mutations.ADD_CACHE_GROUP_DATA, {
+        context: this,
+        result: this.selected_departament.id
+      });
+      // this.closeLoading("Получение групп");
 
-      if(this.groups_combo)
-      {
-        //Отображение отделения и группы студента
-        if(this.user.post_id == 2 && this.start) 
-        {
-          for(let i = 0; i < this.groups_combo.length; i++)
-          {
-            if(this.groups_combo[i].id == this.user.student.group_id)
-            {
-              this.selected_group = this.groups_combo[i];
-              i = this.groups_combo.length;
-            }
-          }
+      // if (this.combo_groups) {
+      //   //Отображение отделения и группы студента
+      //   if (this.user.post_id == 2 && this.start) {
+      //     for (let i = 0; i < this.combo_groups.length; i++) {
+      //       if (this.combo_groups[i].id == this.user.student.group_id) {
+      //         this.selected_group = this.combo_groups[i];
+      //         i = this.combo_groups.length;
+      //       }
+      //     }
 
-          for(let i = 0; i < this.specialities.length; i++)
-          {
-            if (this.selected_group.departament_id == this.specialities[i].id) 
-            {
-              this.selected_departament = this.specialities[i];
-              i = this.specialities.length;
-            }
-          }
-          this.start = false;
-        }
-        else
-          this.selected_group = this.combo_groups[0];
-        this.group_change();
-      }
+      //     for (let i = 0; i < this.specialities.length; i++) {
+      //       if (this.selected_group.departament_id == this.specialities[i].id) {
+      //         this.selected_departament = this.specialities[i];
+      //         i = this.specialities.length;
+      //       }
+      //     }
+      //     this.start = false;
+      //   } else this.selected_group = this.combo_groups[0];
+      //   this.group_change();
+      // }
     },
 
     //Определение числителя
@@ -227,55 +201,53 @@ export default {
     },
 
     //Получение расписания при изменении выбранной группы
-    async group_change() 
-    {
+    async group_change() {
       this.schedule = await this.schedules();
-      if(this.schedule)
-        this.parseSchedule();
+      if (this.schedule) this.parseSchedule();
     },
 
     //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
     parseSchedule() {
       var tag = 0;
-      for (var i = 0; i < this.days.length; i++) {
-        for (var j = 1; j <= 7; j++) {
-          if (Array.isArray(this.schedule[this.days[i]][j]["LessonChisl"]))
-            this.schedule[this.days[i]][j]["LessonChisl"] = this.schedule[
-              this.days[i]
-            ][j]["LessonChisl"].join(" / ");
-          if (Array.isArray(this.schedule[this.days[i]][j]["LessonZnam"]))
-            this.schedule[this.days[i]][j]["LessonZnam"] = this.schedule[
-              this.days[i]
-            ][j]["LessonZnam"].join(" / ");
-          if (Array.isArray(this.schedule[this.days[i]][j]["TeacherChisl"]))
-            this.schedule[this.days[i]][j]["TeacherChisl"] = this.schedule[
-              this.days[i]
-            ][j]["TeacherChisl"].join(" / ");
-          if (Array.isArray(this.schedule[this.days[i]][j]["TeacherZnam"]))
-            this.schedule[this.days[i]][j]["TeacherZnam"] = this.schedule[
-              this.days[i]
-            ][j]["TeacherZnam"].join(" / ");
+      // for (var i = 0; i < this.days.length; i++) {
+      //   for (var j = 1; j <= 7; j++) {
+      //     if (Array.isArray(this.schedule[this.days[i]][j]["LessonChisl"]))
+      //       this.schedule[this.days[i]][j]["LessonChisl"] = this.schedule[
+      //         this.days[i]
+      //       ][j]["LessonChisl"].join(" / ");
+      //     if (Array.isArray(this.schedule[this.days[i]][j]["LessonZnam"]))
+      //       this.schedule[this.days[i]][j]["LessonZnam"] = this.schedule[
+      //         this.days[i]
+      //       ][j]["LessonZnam"].join(" / ");
+      //     if (Array.isArray(this.schedule[this.days[i]][j]["TeacherChisl"]))
+      //       this.schedule[this.days[i]][j]["TeacherChisl"] = this.schedule[
+      //         this.days[i]
+      //       ][j]["TeacherChisl"].join(" / ");
+      //     if (Array.isArray(this.schedule[this.days[i]][j]["TeacherZnam"]))
+      //       this.schedule[this.days[i]][j]["TeacherZnam"] = this.schedule[
+      //         this.days[i]
+      //       ][j]["TeacherZnam"].join(" / ");
 
-          if (
-            (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
-              this.schedule[this.days[i]][j]["LessonZnam"] == null) ||
-            (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
-              this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
-            (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
-              this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
-            (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
-              this.schedule[this.days[i]][j]["LessonZnam"] == null)
-          )
-            tag++;
+      //     if (
+      //       (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
+      //         this.schedule[this.days[i]][j]["LessonZnam"] == null) ||
+      //       (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
+      //         this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
+      //       (this.schedule[this.days[i]][j]["LessonChisl"] == null &&
+      //         this.schedule[this.days[i]][j]["LessonZnam"] == "") ||
+      //       (this.schedule[this.days[i]][j]["LessonChisl"] == "" &&
+      //         this.schedule[this.days[i]][j]["LessonZnam"] == null)
+      //     )
+      //       tag++;
 
-          if (tag >= 7) {
-            this.schedule[this.days[i]][1]["LessonChisl"] = "Домашнее обучение";
-            this.schedule[this.days[i]][1]["time"] = "Весь день";
-            this.schedule[this.days[i]]["Place"] = [];
-          }
-        }
-        tag = 0;
-      }
+      //     if (tag >= 7) {
+      //       this.schedule[this.days[i]][1]["LessonChisl"] = "Домашнее обучение";
+      //       this.schedule[this.days[i]][1]["time"] = "Весь день";
+      //       this.schedule[this.days[i]]["Place"] = [];
+      //     }
+      //   }
+      //   tag = 0;
+      // }
     }
   },
 
@@ -286,7 +258,7 @@ export default {
     this.getDepartament();
   },
 
-  mounted(){
+  mounted() {
     this.getCallScheduleForPanel();
   }
 };
