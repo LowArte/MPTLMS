@@ -8,24 +8,8 @@ v-content.ma-0.pa-2
           span(style="color: white;") Фильтры
         v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
         v-combobox.mx-3.my-2(dense label="Группа" @change="changeFilter" item-text="group_name" :items="combo_groups" v-model="selected_group")
-        v-flex.flex-grow-0.mx-3.my-2.pa-0.row
-            v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="300px")
-                template(v-slot:activator="{ on }")
-                    v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
-                v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
-                    v-btn(text dark color="accent" @click="dateDialog.model = false") Отмены
-                    v-spacer
-                    v-btn(text dark color="success" @click="$refs.dateDialog.save(dateDialog.date); changeFilter();") Принять
-            v-dialog(v-if="user.post_id == 1 || user.post_id == 4" v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
-                template(v-slot:activator="{ on }")
-                    v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
-                v-card
-                    v-toolbar(dark color="primary")
-                        v-btn(icon dark @click="dialog = false; changeFilter()")
-                            v-icon mdi-close
-                        v-toolbar-title {{titleDialog}}
-                        v-spacer
-                    c_bildReplacement.pa-2()
+        router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'/' + user.post.slug + '/bild_replacements'") 
+          v-btn.ma-3(color="accent" text block dark) Конструктор замен
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" @change="changeFilter" block label="Изменения для всех групп")
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" @change="changeFilter" block label="Изменения на имеющиеся даты")
   v-alert(border="left" dense type="warning")

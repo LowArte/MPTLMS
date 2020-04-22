@@ -9,7 +9,10 @@
                     v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
                 v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
+                    span
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
+        router-link(class='nounderline' to="replacements") 
+          v-btn.ma-3(color="accent" text block dark) Замены
         v-layout.row.wrap(v-if="date_week != 0")
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
@@ -90,7 +93,7 @@ export default {
     }
   },
   post_name: {
-    name: "Замены расписания",
+    name: "Конструктор замен расписания",
     url: "bild_replacements"
   },
   data: () => ({
@@ -155,7 +158,6 @@ export default {
         this.selected_departament = this.specialities[0];
         this.departament_change();
       }
-      this.closeLoading("Получение отделений");
     }, 
 
     //Получение всех преподавателей

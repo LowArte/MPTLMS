@@ -46,6 +46,19 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Конструктор замен расписания",
+                        "component" => [
+                            "info" => [
+                                "name" => "Конструктор замен расписания",
+                                "url" => "bild_replacements"
+                            ],
+                            "path" => "js/views/replacements-f/Bild_Replacements"
+                        ],
+                        "default" => true,
+                        "menu" => false
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "settings_brightness",
                         "text" => "Панель управления",
                         "default" => true,

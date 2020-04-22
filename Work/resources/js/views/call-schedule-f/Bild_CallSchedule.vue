@@ -19,13 +19,20 @@ import { mask } from "vue-the-mask"; //Маска
 import callSchedule_api from "@/js/api/callSchedule"; //api для расписания звонков
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 import places_api from "@/js/api/places"; //Api мест проведений
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
+  computed:{
+    ...mapGetters(["call_schedule", "places"]),
+  },
+  
   post_name: {
     name: "Конструктор звонков",
     url: "bild_call_schedule"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
 
   directives:
   {
@@ -41,14 +48,13 @@ export default {
         "Не соответствует формату времени"
     ], //Правила для прохождения валидации
     mplace: null, //Выбранное место проведения
-    places: null, //Выбранное место проведения
     timeTable: null, //Расписание звонков
   }),
 
   //Преднастройка
   beforeMount(){
-    this.getPlaces(this);
-    this.getCallSchedule(this);
+    this.getPlaces();
+    this.getCallSchedule();
   },
 
   methods: 
@@ -56,14 +62,29 @@ export default {
     //Получение мест проведений
     async getPlaces()
     {
-      this.places = await places_api.getPlaces(this);
-      if (this.places != null)
+      this.showLoading("Получение мест проведения");
+      if(this.places == null)
+      {
+        let items = await places_api.getPlaces(this);
+        this.$store.commit(mutations.SET_PLACES_FULL, items)
+      }
+
+      if (this.places)
         this.mplace = this.places[0].id;
+      this.closeLoading("Получение мест проведения");
     },
 
     async getCallSchedule()
     {
-      this.timeTable = await callSchedule_api.getCallSchedule(this);
+      this.showLoading("Получение расписания");
+      if(this.call_schedule == null)
+      {
+        this.timeTable = await callSchedule_api.getCallSchedule(this);
+        await this.$store.commit(mutations.SET_CALL_SCHEDULE, JSON.parse(JSON.stringify(this.timeTable)));
+      }
+      else
+        this.timeTable = JSON.parse(JSON.stringify(this.call_schedule));
+      this.closeLoading("Получение расписания");
     },
 
     async sendQuery() 
@@ -71,8 +92,10 @@ export default {
       //Проверка на валидацию полей, после чего происходит отправка на сохранение
       if (this.$refs.BildCallSchedule.validate()) 
       {
-        await callSchedule_api.edit(this.timeTable, this)
+        this.$store.dispatch(mutations.EDIT_CALL_SCHEDULE,{ context: this, result: JSON.parse(JSON.stringify(this.timeTable)) });
       }
+      else
+        this.showError("Заполните корректно поля!");
     }
   }
 };

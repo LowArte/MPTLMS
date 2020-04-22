@@ -12,6 +12,7 @@ import users from './modules/users'
 import teachers from './modules/teachers'
 import disciplines from './modules/disciplines'
 import timetable from './modules/timetable'
+import callschedule from './modules/callSchedule'
 
 Vue.use(Vuex)
 
@@ -30,7 +31,8 @@ export default new Vuex.Store({
     users,
     teachers,
     disciplines,
-    timetable
+    timetable,
+    callschedule
   },
   strict: debug
 })

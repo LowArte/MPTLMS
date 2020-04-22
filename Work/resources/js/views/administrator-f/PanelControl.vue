@@ -44,6 +44,7 @@ export default {
         id: this.options.id,
         value: this.options.option_value
       }, this);
+
       if(result){
         this.$store.commit(mutations.SET_PROFILACTIC,this.options.option_value)
       }

@@ -9,16 +9,9 @@ v-content.ma-0.pa-2
           span(style="color: white;") Фильтры
         v-combobox.mx-3.mt-6(dense label="Специальность" @change="departament_change" item-text="dep_name_full" :items="specialities" v-model="selected_departament" )
         v-combobox.mx-3.mt-2(dense label="Группа" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
-    v-dialog(v-if="user.post_id == 1 || user.post_id == 4" v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition")
-      template(v-slot:activator="{ on }")
-        v-btn.ma-3(color="accent" text block dark v-on="on") {{titleDialog}}
-      v-card
-        v-toolbar(dark color="primary")
-          v-btn(icon dark @click="dialog = false; group_change()")
-            v-icon mdi-close
-          v-toolbar-title {{titleDialog}}
-          v-spacer
-        c_bildTimetable.pa-2()
+    v-flex
+       router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'/' + user.post.slug + '/bild_timetable'") 
+        v-btn.ma-3(color="accent" text block dark) Конструктор расписания
     v-chip.ma-1(v-if="isToday != 0" label color="info") Знаменатель
     v-chip.ma-1(v-if="isToday == 0" label color="accent") Числитель
     v-flex
@@ -79,7 +72,6 @@ import group_api from "@/js/api/group"; //Api групп
 import schedule_api from "@/js/api/schedule"; //Api расписания
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
-import bildTimetable from "@/js/views/timetable-f/Bild_Timetable"; //Конструктор замен
 import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
 
 Date.prototype.getWeek = function() {
@@ -113,7 +105,6 @@ export default {
     url: "timetable"
   },
   components: {
-    c_bildTimetable: bildTimetable,
     c_panel_control: PanelControl_C,
   },
 
