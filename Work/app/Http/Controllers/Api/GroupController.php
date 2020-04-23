@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Repositories\ModelRepository\DepartamentRepository;
+use App\Repositories\ModelRepository\DepartmentRepository;
 use App\Repositories\ModelRepository\GroupRepository;
 
 class GroupController extends BaseController
 {
     /**
-     * Get groups by departament id
+     * Get groups by department id
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function groupByDepartamentId($id, GroupRepository $groupRepository)
+    public function groupByDepartmentId($id, GroupRepository $groupRepository)
     {
-        $groups = $groupRepository->getGroupsForComboBoxByDepartament($id);
+        $groups = $groupRepository->getGroupsForComboBoxByDepartment($id);
         return response()->json(compact('groups'));
     }
 
@@ -44,10 +44,10 @@ class GroupController extends BaseController
      * get groups from database
      * @return JSON
      */
-    public function getGroups(GroupRepository $groupRepository, DepartamentRepository $departamentRepository)
+    public function getGroups(GroupRepository $groupRepository, DepartmentRepository $departmentRepository)
     {
         $groups = $groupRepository->getGroups();
-        $departments = $departamentRepository->getDepartamentsForComboBox();
+        $departments = $departmentRepository->getDepartmentsForComboBox();
         return response()->json(compact('groups', 'departments'));
     }
 }

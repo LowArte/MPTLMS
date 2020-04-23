@@ -1,5 +1,5 @@
-<template>
-  <component :is="currentLayout" />
+<template lang="pug">
+  component(:is="currentLayout")
 </template>
 
 

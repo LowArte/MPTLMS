@@ -16,6 +16,7 @@ const opts = {
                 info: '#4066FF',
                 success: '#8BC34A',
                 warning: '#FBC02D',
+                boring: "#fafafa"
             }
         }
     }

@@ -24,11 +24,12 @@ class ApiRoutes
 
             Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
 
-            Route::get('departments_for_combobox','Api\DepartamentController@getDepartmentsForCombobox')->name('departments_for_combobox');
+            Route::get('departments_for_combobox','Api\DepartmentController@getDepartmentsForCombobox')->name('departments_for_combobox');
 
             Route::get('posts','Api\PostController@getPosts')->name('posts');
             Route::get('posts_for_management','Api\PostController@getPostsForManagement')->name('posts_for_management');
             Route::get('posts_for_combobox','Api\PostController@getPostsForCombobox')->name('posts_for_combobox');
+            Route::get('posts_full','Api\PostController@getPostsFull')->name('posts_full');
 
             Route::get('retrainings','Api\RetrainingController@getRetraining')->name('retrainings');
 
@@ -39,7 +40,7 @@ class ApiRoutes
             
             Route::get('get_feedback_requests', 'Api\FeedbackController@getFeedbackRequests')->name('get_feedback_requests');
 
-            Route::get('group_by_departament_id/{departament_id}', 'Api\GroupController@groupByDepartamentId')->name('group_by_departament_id');
+            Route::get('group_by_department_id/{department_id}', 'Api\GroupController@groupByDepartmentId')->name('group_by_department_id');
             Route::get('groups_for_combobox','Api\GroupController@groupForCombobox')->name('groups_for_combobox'); 
             Route::get('groups_for_combobox_recursive','Api\GroupController@groupForComboboxRecursive')->name('groups_for_combobox_recursive'); 
             Route::get('groups','Api\GroupController@getGroups')->name('groups'); 
@@ -63,7 +64,7 @@ class ApiRoutes
 
             Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
 
-            Route::post('departament','Api\DepartamentController@save')->name('departament');
+            Route::post('department','Api\DepartmentController@save')->name('department');
             Route::post('group','Api\GroupController@save')->name('group');
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
             Route::post('certificate','Api\CertificateController@save')->name('certificate');
@@ -82,7 +83,7 @@ class ApiRoutes
 
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
 
-            Route::post('departament','Api\DepartamentController@edit')->name('departament');
+            Route::post('department','Api\DepartmentController@edit')->name('department');
             Route::post('group','Api\GroupController@edit')->name('group');
 
             Route::get('news','Api\NewsController@edit')->name('news'); 
@@ -104,7 +105,7 @@ class ApiRoutes
         Route::name('delete.')->prefix('delete')->group(function () {
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
 
-            Route::post('departament/{departament_id}','Api\DepartamentController@delete')->name('departament');
+            Route::post('department/{department_id}','Api\DepartmentController@delete')->name('department');
             Route::post('group/{group_id}','Api\GroupController@delete')->name('group');
 
             Route::get('news/{news_id}','Api\NewsController@delete')->name('news');         

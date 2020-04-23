@@ -9,15 +9,15 @@
                 v-text-field.ma-2(v-model="item.dep_name_full" :rules="allRules" label="Название специальности")
                 v-text-field.ma-2(v-model="item.qualification" :rules="allRules" label="Квалификация")
                 v-textarea.ma-2(outlined v-model="item.info.text" :rules="allRules" label="Описание")
-                v-autocomplete.ma-2(v-model="item.studysperiod" :rules="allRules" :items="studysperiods" label="Период обучения")
+                v-autocomplete.ma-2(v-model="item.studysperiod" no-data-text="Нет данных" :rules="allRules" :items="studysperiods" label="Период обучения")
                 v-alert.mx-2(text dense type="warning")
-                  span Перечислите все необходимые спецификации через запятую
+                  span Перечислите все необходимые спецификации
               v-card.pa-3.pt-1.mt-1(v-for="(info,i) in Object.keys(item.info)" :key="i" v-if="info != 'text'")
                   v-card-text.title {{info}}
                     v-btn(icon x-small @click="deleteInfo(info)")
                       v-icon.pa-0.ma-0 close     
                   v-row.pa-0(v-for="(itemInfo, j) in item.info[info]" :key="j")
-                    v-col.pa-0(lg="2")
+                    v-col.pa-0
                         v-text-field.ma-2(v-model="item.info[info][j]" :rules="allRules" outlined multi-line label="Введите текст" v-on:keyup.enter="addElementInfo(info)")
                     v-col.pa-0(sm ="1")
                         v-card-actions
@@ -92,16 +92,16 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        var data = Object.assign({}, this.item);
-        this.resolve(data);
+        this.resolve(JSON.parse(JSON.stringify(this.item)));
+        this.item.info = {text: null};
       } else {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
+      this.item.info = {text: null};
     },
 
     clearForm()
@@ -121,13 +121,13 @@ export default {
         let keys = Object.keys(this.item.info); 
         if(keys.indexOf(this.title) > -1)
         { 
-          this.title = "";
+          this.$refs.add.reset();
           this.showError("Имя уже зарезервировано!");
         }
         else
         {
           this.item.info[this.title] = [""];
-          this.title = "";
+          this.$refs.add.reset();
           this.dialogAdd = false;
         }
       }

@@ -17,7 +17,7 @@
 
 
 <script>
-import user_api from "@/js/api/users";
+import user_api from "@/js/api/user";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {

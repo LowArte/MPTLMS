@@ -52,7 +52,7 @@ export default {
       place_countryRules: [v => !!v || "Поле не должно оставаться пустым"],
       place_cityRules: [v => !!v || "Поле не должно оставаться пустым"],
       place_streetRules: [v => !!v || "Поле не должно оставаться пустым"],
-      place_building_numberRules: [
+      place_building_numberRules: [  
         v => !!v || "Поле не должно оставаться пустым", 
         v => /^[0-9]*$/.test(v) || "Только целочисленные значения (0-9)"
       ],
@@ -71,9 +71,8 @@ export default {
     clickSave() {
       if (this.$refs.form.validate())
       {
-        let data = Object.assign({}, this.item);
-        this.resolve(data);
         this.dialog = false;
+        this.resolve(JSON.parse(JSON.stringify(this.item)));
       } 
       else 
       {
@@ -83,22 +82,8 @@ export default {
 
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
     },
-
-    clearForm()
-    {
-      this.item.place_name = null;
-      this.item.info = {
-        place_index: null,
-        place_country: null,  
-        place_city: null,
-        place_street: null,
-        place_building_number: null,
-        place_piy: null
-      }
-    }
   }
 };
 </script>

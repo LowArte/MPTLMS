@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import api_user from "@/js/api/users";
+import api_user from "@/js/api/user";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
 
 export default {

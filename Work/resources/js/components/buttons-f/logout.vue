@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import user_api from "@/js/api/users";
+import api_user from "@/js/api/user";
 import { resetRouter } from "@/js/router/router";
 import * as mutations from "@/js/store/mutation-types";
 
@@ -17,7 +17,7 @@ export default {
   methods: {
     async logout() {
       this.loading = true;
-      if (await user_api.logout()) {
+      if (await api_user.logout()) {
         resetRouter();
         this.$store.commit(mutations.SET_NOTAUTH);
         this.$router.push("/");

@@ -43,7 +43,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import news_api from "@/js/api/news";
+import api_new from "@/js/api/new";
 
 export default {
   computed: {
@@ -65,7 +65,7 @@ export default {
     };
   },
   async mounted() {
-    this.posts = await news_api.getNews(this);
+    this.posts = await api_new.getNews(this);
     console.log(this.posts.length);
   },
   methods: {
@@ -73,7 +73,7 @@ export default {
       this.$refs.qwestion.pop().then(result => {
         if (result) {
           this.posts.deleteById(id);
-          news_api.deleteNews(id, this);
+          api_new.deleteNews(id, this);
         }
       });
     },
@@ -88,7 +88,7 @@ export default {
       this.loading = false;
     },
     clickLike(id) {
-      news_api.likeNews(id, this);
+      api_new.likeNews(id, this);
       //найти пользователя в масиве и отметить лайк, оновить счётчик
     }
   }

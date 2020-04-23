@@ -11,15 +11,16 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "@/js/api/users";
-import apiposts from "@/js/api/userPosts";
-import apidepartments from "@/js/api/departments";
-import apigroup from "@/js/api/group";
+import api_user from "@/js/api/user";
+import api_user_post from "@/js/api/userPost";
+import api_department from "@/js/api/department";
+import api_group from "@/js/api/group";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
@@ -36,16 +37,17 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
+import * as actions from "@/js/store/action-types";
 
 export default {
   computed: {
-    ...mapGetters(["users", "specialities"])
+    ...mapGetters(["users", "specialities", "groups"])
   },
   post_name: {
     name: "CRUD пользователей",
     url: "users_crud"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   components: {
     "c-crud-form": CRUD_C,
     "c-comfirm-dialog": confirmDialog_C,
@@ -61,24 +63,21 @@ export default {
       { text: "Действия", value: "action", sortable: false }
     ]
   }),
+  async beforeMount()
+  {
+    this.showLoading("Загрузка аддонов");
+    if (this.specialities == null)
+      await this.$store.commit(mutations.SET_SPECIALITIES_FULL,await api_department.getDepartments(this));
+
+    if (this.userposts == null)
+      await this.$store.commit(mutations.SET_USERPOSTS_FULL,await api_user_post.getPostsForCombobox(this))
+
+    if (this.groups == null)
+      await this.$store.commit(mutations.SET_GROUPS_FULL, await api_group.getGroups(this));
+    this.closeLoading("Загрузка аддонов");
+  },
 
   methods: {
-    async beforeMount()
-    {
-      if (this.specialities == null)
-      {
-        let items = await apidepartments.getDepartments(this);
-        this.$store.commit(mutations.SET_SPECIALITIES_FULL,items);
-        this.item.departament_id = items[0].id;
-      }
-
-      if (this.userposts == null)
-      {
-        let items = await apiposts.getPostsForCombobox(this);
-        this.$store.commit(mutations.SET_USERPOSTS_FULL,items)
-      }
-    },
-
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
@@ -88,43 +87,43 @@ export default {
     },
 
     async update() {
-      let items = await api.getUsers(this);
-      this.$store.commit(mutations.SET_USERS_FULL, items)
+      this.showLoading("Обновление данных");
+      await this.$store.commit(mutations.SET_USERS_FULL, await api_user.getUsers(this));
+      this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
-    add() {
-      this.$refs.new.pop().then(result => {
+    async add() {
+      await this.$refs.new.pop().then(result => {
         if (result) {
-          this.$store.dispatch(mutations.ADD_USER,{ context: this, result: result });
-          this.$refs.new.clearForm();
+          this.$store.dispatch(actions.ADD_USER,{ context: this, result: result });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта
     //?----------------------------------------------
-    edit(item) {
-      this.$refs.revue.pop(item).then(result => {
+    async edit(item) {
+      await this.$refs.revue.pop(item).then(result => {
         if (result) {
-          this.$store.dispatch(mutations.EDIT_USER,{ context: this, result: result });
-          this.$refs.revue.clearForm();
+          this.$store.dispatch(actions.EDIT_USER,{ context: this, result: result });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.revue.$refs.form.reset();
     },
     //?----------------------------------------------
-    //!           Удаление всех объектa
+    //!           Удаление объекта
     //?----------------------------------------------
     remove(item) {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
-          this.$store.dispatch(mutations.DELETE_USER,{ context: this, result: result });
-          this.$refs.rem.clearForm();
+          this.$store.dispatch(actions.DELETE_USER,{ context: this, result: result });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }

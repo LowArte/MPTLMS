@@ -19,7 +19,7 @@ class DatabaseSeeder  extends Seeder
             SiteOptionsSeeder::class,
             PlacesSeeder::class,
             CallSchedulesSeeder::class,
-            DepartamentSeeder::class,
+            DepartmentSeeder::class,
             GroupSeeder::class,
             GroupSeeder2::class,
             ScheduleSeeder::class,

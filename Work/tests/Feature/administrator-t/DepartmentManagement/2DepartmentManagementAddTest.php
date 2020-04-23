@@ -7,7 +7,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class DepartamentManagementAddTest extends TestCase
+class DepartmentManagementAddTest extends TestCase
 {
     use DatabaseTransactions;
     /**

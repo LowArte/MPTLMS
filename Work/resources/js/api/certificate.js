@@ -35,7 +35,6 @@ export default {
     //? Реализуется получение данных из таблицы *CERTIFICATES* (Справки)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвуют
     //!----------------------------------------
     getCertificates(_this) {
         return axios.get('/api/getters/get_certificates')
@@ -53,7 +52,6 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется сохранения данных в таблице *CERTIFICATES* (Справки)
     //! Требование ----------------------------
-    //! Уточнить структуру данных. 
     //!----------------------------------------
     save(data, _this) {
         return axios.post('/api/save/certificate/', {"data": data.data, "type": data.type})
@@ -69,7 +67,7 @@ export default {
     //! Реализовать back-end для api 
     //!----------------------------------------
     sendEmailDone(answer, _this) {
-        return axios.post('/api/chancellery/certificate/sendEmailDone/' + answer.id + '/' + answer.email)
+        return axios.post('/api/certificate/sendEmailDone/', answer)
         .then(result =>{_this.showMessage("Отправлено!"); return true;})
         .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
     },
@@ -82,7 +80,7 @@ export default {
     //! Реализовать back-end для api 
     //!----------------------------------------
     sendEmailAnswer(answer, _this) {
-        return axios.post('/api/chancellery/certificate/sendEmailAnswer/' + answer.id + '/' + answer.email, {"answer": answer.text})
+        return axios.post('/api/certificate/sendEmailAnswer/', answer)
         .then(result => {_this.showMessage("Отправлено!"); return true;})
         .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
     }

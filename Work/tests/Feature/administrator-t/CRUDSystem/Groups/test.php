@@ -28,7 +28,7 @@ class test extends TestCase
         $group['group_number'] = 1;
         $group['group_year'] = 16;
         $group['сurs'] = 4;
-        $group['departaments_id'] = 1;
+        $group['departments_id'] = 1;
 
         $response = $this->call('POST', '/api/admin/group_management/save', $group);
         $response->assertStatus(200);
@@ -52,7 +52,7 @@ class test extends TestCase
         $group->group_number = 1;
         $group->group_year = 16;
         $group->сurs = 4;
-        $group->departaments_id = 1;
+        $group->departments_id = 1;
 
         $response = $this->call('POST', '/api/admin/group_management/edit', json_decode(json_encode($group),true));        
         $response->assertStatus(200); //Проверка на ответ

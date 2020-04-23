@@ -27,7 +27,7 @@ class GroupManagementEditTest extends TestCase
         $group['study_period'] = "3 года 10 месяцев";
         $group['arr_type_of_study'] = "Очная";
         $group['сurs'] = 2;
-        $group['departaments_id'] = 2;
+        $group['departments_id'] = 2;
 
         $response = $this->call('POST', '/api/admin/group_management/edit/'.$group['id'], array(
             'group' =>  $group,

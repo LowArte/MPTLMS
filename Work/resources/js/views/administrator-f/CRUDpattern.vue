@@ -1,55 +1,56 @@
 <template lang="pug">
+  v-content.ma-0.pa-2
     v-layout.row.wrap
-      v-card.mx-auto.pa-3(height='auto' width='100%')
-        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="items" :items="items"  :search="search" sort-by-text="Сортировать" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
+      v-card.mx-auto(height='auto' width='100%')
+        v-system-bar(color="info" dark)
+          span Управление: {{title}}
+        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="items" :items="items"  :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
-                v-card-title.my-2.ma-0.py-2.text-truncate Менеджмент {{title}}
-                v-tooltip(bottom v-if="_func_add != null")
-                    template(v-slot:activator="{ on }")
-                        v-btn.ma-2.ml-1(text v-on="on" @click="add")
-                            v-icon add
-                            span.ma-2 Добавить запись
-                    span Новая запись
-                v-tooltip(bottom)
+              v-tooltip(bottom v-if="_func_add != null")
+                template(v-slot:activator="{ on }")
+                  v-btn.ma-2.ml-1(text v-on="on" @click="add")
+                    v-icon add
+                    span.ma-2 Добавить запись
+                span Новая запись
+              v-tooltip(bottom)
+                template(v-slot:activator="{ on }")
+                  v-btn.ma-2.ml-1(text v-on="on" @click="update")
+                    v-icon replay
+                    span.ma-2 Обновить
+                span Обновить таблицу
+              v-tooltip(bottom)
+                template(v-slot:activator="{ on }")
+                  v-btn.ma-2.ml-1(text color="info" v-on="on" @click="upload")
+                    v-icon mdi-upload
+                    span.ma-2 Загрузить документ
+                span Загрузить файл с данными
+              v-tooltip(bottom)
                   template(v-slot:activator="{ on }")
-                      v-btn.ma-2.ml-1(text v-on="on" @click="update")
-                          v-icon replay
-                          span.ma-2 Обновить
-                  span Обновить таблицу
-                v-tooltip(bottom)
-                    template(v-slot:activator="{ on }")
-                        v-btn.ma-2.ml-1(text color="info" v-on="on" @click="upload")
-                            v-icon mdi-upload
-                            span.ma-2 Загрузить документ
-                    span Загрузить файл с данными
-                v-tooltip(bottom)
-                    template(v-slot:activator="{ on }")
-                        v-btn.ma-2.ml-1(text color="success" v-on="on" @click="download")
-                            v-icon mdi-download
-                            span.ma-2 Выгрузить документ
-                    span Скачать файл с данными
-                v-text-field.ma-0.pa-0.mt-4.single-line.hide-details(v-model="search" label="Поиск")
-            //-Обозначение блокировки пользователя
+                    v-btn.ma-2.ml-1(text color="success" v-on="on" @click="download")
+                      v-icon mdi-download
+                      span.ma-2 Выгрузить документ
+                  span Скачать файл с данными
+              v-text-field.ma-0.pa-3.single-line.hide-details(v-model="search" label="Поиск" dense outlined prepend-inner-icon="search" clearable)
             template(v-slot:item.disabled="{ item }") 
               v-tooltip(bottom v-if="item['disabled'] == 1")
-                  template(v-slot:activator="{ on }")
-                    v-btn.ma-2.ml-1(text v-on="on")
-                      v-icon done
-                  span Заблокирован
+                template(v-slot:activator="{ on }")
+                  v-btn.ma-2.ml-1(text v-on="on")
+                    v-icon done
+                span Заблокирован
               v-tooltip(bottom v-if="item['disabled'] == 0")
-                  template(v-slot:activator="{ on }")
-                    v-btn.ma-2.ml-1(text v-on="on")
-                      v-icon close
-                  span Не заблокирован                  
+                template(v-slot:activator="{ on }")
+                  v-btn.ma-2.ml-1(text v-on="on")
+                    v-icon close
+                span Не заблокирован                  
             template(v-slot:item.action="{ item }")
-                v-tooltip(bottom v-if="_func_edit != null")
-                    template(v-slot:activator="{ on }")
-                        v-icon.small(v-on="on" @click="edit(item)") edit
-                    span Редактировать
-                v-tooltip(bottom v-if="_func_remove != null")
-                    template(v-slot:activator="{ on }")
-                        v-icon.small(v-on="on" @click="remove(item)") mdi-delete
-                    span Удалить
+              v-tooltip(bottom v-if="_func_edit != null")
+                template(v-slot:activator="{ on }")
+                    v-icon.small(v-on="on" @click="edit(item)") edit
+                span Редактировать
+              v-tooltip(bottom v-if="_func_remove != null")
+                template(v-slot:activator="{ on }")
+                    v-icon.small(v-on="on" @click="remove(item)") mdi-delete
+                span Удалить
         v-layout.row.text-center.pa-2.ma-2
             v-pagination(v-model="page" :length="pageCount")
 </template>

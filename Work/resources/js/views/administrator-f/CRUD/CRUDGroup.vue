@@ -11,13 +11,14 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "@/js/api/group";
-import apiDepartment from "@/js/api/departments";
+import api_group from "@/js/api/group";
+import api_department from "@/js/api/department";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
@@ -44,7 +45,7 @@ export default {
     name: "CRUD групп",
     url: "groups_crud"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   components: {
     "c-crud-form": CRUD_C,
     "c-comfirm-dialog": confirmDialog_C,
@@ -61,11 +62,9 @@ export default {
     ]
   }),
   methods: {
-    async beforeMount() 
-    {
-      if(this.specialities == null)
-      {
-        let items = await apiDepartment.getDepartments(this);
+    async beforeMount() {
+      if (this.specialities == null) {
+        let items = await api_department.getDepartments(this);
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
       }
     },
@@ -73,48 +72,57 @@ export default {
     //!           Обновление
     //?----------------------------------------------
     async init() {
-      if (this.groups == null)
-        return this.update();
+      if (this.groups == null) return this.update();
     },
 
     async update() {
-      let items = await api.getGroups(this);
-      this.$store.commit(mutations.SET_GROUPS_FULL, items)
+      this.showLoading("Обновление данных");
+      await this.$store.commit(mutations.SET_GROUPS_FULL, await api_group.getGroups(this));
+      this.closeLoading("Обновление данных");
     },
+
     //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
-    add() {
-      this.$refs.new.pop().then(result => {
+    async add() {
+      await this.$refs.new.pop().then(result => {
         if (result) {
-          this.$store.dispatch(actions.ADD_GROUP,{ context: this, result: result });
-          this.$refs.new.clearForm();
+          this.$store.dispatch(actions.ADD_GROUP, {
+            context: this,
+            result: result
+          });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта
     //?----------------------------------------------
-    edit(item) {
-      this.$refs.revue.pop(item).then(result => {
+    async edit(item) {
+      await this.$refs.revue.pop(item).then(result => {
         if (result) {
-          this.$store.dispatch(actions.EDIT_GROUP,{ context: this, result: result });
-          this.$refs.revue.clearForm();
+          this.$store.dispatch(actions.EDIT_GROUP, {
+            context: this,
+            result: result
+          });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.revue.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Удаление всех объектa
     //?----------------------------------------------
-    remove(item) {
-      this.$refs.rem.pop(item).then(result => {
+    async remove(item) {
+      await this.$refs.rem.pop(item).then(result => {
         if (result) {
-          this.$store.dispatch(actions.DELETE_GROUP,{ context: this, result: result });
-          this.$refs.rem.clearForm();
+          this.$store.dispatch(actions.DELETE_GROUP, {
+            context: this,
+            result: result
+          });
         } else {
           this.showInfo("Действие отменено пользователем!");
         }

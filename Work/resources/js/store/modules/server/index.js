@@ -2,7 +2,7 @@ import getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  isProfilactic:false,
+  profilactic:null,
   name:null,
 }
 

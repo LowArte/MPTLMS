@@ -37,7 +37,6 @@ export default {
     //? Реализуется получение данных из таблицы *FEEDBACK* (Обраная связь)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвуют
     //!----------------------------------------
     getFeedbackRequests(_this) {
         return axios.get('/api/getters/get_feedback_requests')
@@ -55,7 +54,6 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется сохранения данных в таблице *FEEDBACK* (Обраная связь)
     //! Требование ----------------------------
-    //! Реализовать back-end для api 
     //!----------------------------------------
     save(data, _this) {
         return axios.post('/api/save/feedback/', {"text": data.text, "type": data.type})
@@ -72,7 +70,7 @@ export default {
     //!----------------------------------------
     sendEmail(data, _this)
     {
-        return axios.post('/api/admin/request_users/send_email/' + data.id, {
+        return axios.post('/api/send_email/request_users/' + data.id, {
             "text": data.text,
             "to": data.mail,
         })

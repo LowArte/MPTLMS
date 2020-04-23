@@ -4,7 +4,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 
-class DepartamentManagementTest extends TestCase
+class DepartmentManagementTest extends TestCase
 {
     /**
      * A basic test example.

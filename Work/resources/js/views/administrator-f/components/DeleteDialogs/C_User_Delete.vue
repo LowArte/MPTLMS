@@ -64,26 +64,8 @@ export default {
     },
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
     },
-
-    clearForm()
-    {
-      this.item.secName = null;
-      this.item.name = null;
-      this.item.thirdName = null;
-      this.item.email = null;
-      this.item.password = null;
-      this.item.post_id = null;
-      this.item.disabled = 0;
-
-      this.item.studentItem.gender = "Мужской";
-      this.item.studentItem.birthday = new Date().toISOString().substr(0, 10);
-      this.item.studentItem.departament_id = null;
-      this.item.studentItem.group_id = 1;
-      this.item.studentItem.type_of_financing = "Бюджет";
-    }
   }
 };
 </script>

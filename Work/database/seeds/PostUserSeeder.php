@@ -173,7 +173,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "CRUD отделений",
-                                        "url" => "departaments_crud"
+                                        "url" => "departments_crud"
                                     ],
                                     "path" => "js/views/administrator-f/CRUD/CRUDDepartment"
                                 ],

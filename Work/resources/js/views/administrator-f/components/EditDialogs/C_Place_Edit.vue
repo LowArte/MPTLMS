@@ -72,22 +72,17 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        let data = Object.assign({}, this.item);
-        this.resolve(data);
-      } else {
+        this.resolve(JSON.parse(JSON.stringify(this.item)));
+      } 
+      else 
+      {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
     },
-
-    clearForm()
-    {
-      this.item.place_name = null;
-    }
   }
 };
 </script>

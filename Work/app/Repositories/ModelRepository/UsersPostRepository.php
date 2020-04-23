@@ -11,7 +11,7 @@ class UsersPostRepository extends BaseRepository
     }
 
     public function getPostsFull()
-    {   $columns = ['name','id','privilegies'];
+    {   $columns = ['name','id', 'privilegies'];
         $result = $this->startCondition()->select($columns)->get();
         return $result;
     }

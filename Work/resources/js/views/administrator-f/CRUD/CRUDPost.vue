@@ -11,12 +11,13 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "@/js/api/userPosts";
+import api_user_post from "@/js/api/userPost";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
@@ -43,7 +44,7 @@ export default {
     name: "CRUD роли",
     url: "posts_crud"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   components: {
     "c-crud-form": CRUD_C,
     "c-comfirm-dialog": confirmDialog_C,
@@ -68,43 +69,43 @@ export default {
     },
 
     async update() {
-      let items = await api.getPostsForManagement(this);
-      this.$store.commit(mutations.SET_USERPOSTS_FULL, items)
+      this.showLoading("Обновление данных");
+      await this.$store.commit(mutations.SET_USERPOSTS_FULL, await api_user_post.getPostsForManagement(this));
+      this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
-    add() {
-      this.$refs.new.pop().then(result => {
+    async add() {
+      await this.$refs.new.pop().then(result => {
         if (result) {
           this.$store.dispatch(actions.ADD_USERPOST,{ context: this, result: result });
-          this.$refs.new.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта
     //?----------------------------------------------
-    edit(item) {
-      this.$refs.revue.pop(item).then(result => {
+    async edit(item) {
+      await this.$refs.revue.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(actions.EDIT_USERPOST,{ context: this, result: result });
-          this.$refs.revue.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.revue.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Удаление объектa
     //?----------------------------------------------
-    remove(item) {
-      this.$refs.rem.pop(item).then(result => {
+    async remove(item) {
+      await this.$refs.rem.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(actions.DELETE_USERPOST,{ context: this, result: result });
-          this.$refs.rem.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }

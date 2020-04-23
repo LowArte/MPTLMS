@@ -12,13 +12,13 @@ class GroupRepository extends BaseRepository
         return Model::class;
     }
 
-    public function getGroupsForComboBoxByDepartament($dep_id)
+    public function getGroupsForComboBoxByDepartment($dep_id)
     {
         $columns = ['id','child_id','group_name'];
         $data = $this->startCondition()
                         ->select($columns)
                         ->with('child:id,group_name')
-                        ->where([['departament_id',$dep_id]])
+                        ->where([['department_id',$dep_id]])
                         ->get();
 
         $result = collect();
@@ -36,7 +36,7 @@ class GroupRepository extends BaseRepository
 
     public function getGroupsForComboBoxWithRecursive()
     {
-        $columns = ['id','child_id','group_name','departament_id'];
+        $columns = ['id','child_id','group_name','department_id'];
         $data = $this->startCondition()
                         ->select($columns)
                         ->with('child:id,group_name')
@@ -49,7 +49,7 @@ class GroupRepository extends BaseRepository
                 $result->push([
                     'id'=>$dat->id,
                     'group_name'=>$dat->getFullName(),
-                    'departament_id'=>$dat->departament_id,
+                    'department_id'=>$dat->department_id,
                 ]);
             }
 
@@ -59,7 +59,7 @@ class GroupRepository extends BaseRepository
 
     public function getGroupsForComboBox()
     {
-        $columns = ['id','group_name','departament_id'];
+        $columns = ['id','group_name','department_id'];
         $result = $this->startCondition()
                         ->select($columns)
                         ->toBase()
@@ -69,7 +69,7 @@ class GroupRepository extends BaseRepository
 
     public function getGroups()
     {
-        $columns = ['id','group_name','curs','child_id','departament_id'];
+        $columns = ['id','group_name','curs','child_id','department_id'];
         $result = $this->startCondition()
                         ->select($columns)
                         ->toBase()

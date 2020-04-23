@@ -2,16 +2,16 @@
 
 namespace App\Modifications\Delete;
 
-use App\Models\Departament as Model;
+use App\Models\Department as Model;
 use App\Modifications\BaseModification;
 
-class DeleteDepartamentModification extends BaseModification
+class DeleteDepartmentModification extends BaseModification
 {
     protected function getModelClass(){
         return Model::class;
     }
 
-    public function deleteDepartamentFromDatabase($id){
+    public function deleteDepartmentFromDatabase($id){
         $result = $this->startCondition()->find($id)->delete();
         return $result;
     }

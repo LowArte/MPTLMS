@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DepartamentSeeder extends Seeder
+class DepartmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -299,6 +299,6 @@ class DepartamentSeeder extends Seeder
                 "studysperiod" => "3 года 10 месяцев"
             ],
         );
-        DB::table("departaments")->insert($date);
+        DB::table("departments")->insert($date);
     }
 }

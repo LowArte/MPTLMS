@@ -1,10 +1,10 @@
 <template lang='pug'>  
-    v-card
+    v-card(v-if="selectedPost")
       v-system-bar
         v-card-text Настройка меню пользователя
       v-layout.column.wrap
         v-flex.ma-2.mb-0
-          v-autocomplete.ma-1(label="Роль" @change="postChange" return-object item-text='name' :items="posts" v-model="selectedPost")
+          v-autocomplete.ma-1(label="Роль" @change="postChange" no-data-text="Нет данных" return-object item-text='name' :items="posts" v-model="selectedPost")
         v-flex.ma-2.mb-0.row.pa-4
           v-flex.md6.xs12
             v-treeview(:active.sync="active" v-if="selectedPost" item-text="text" :items="selectedPost.privilegies" open-all return-object activatable transition :multiple-active='false')              
@@ -21,12 +21,13 @@
                 v-text-field(v-model='selected.text' label="Наименование")
                 v-flex(v-if='selected.children' row)
                   v-icon.mr-1 {{selected.icon}}
-                  v-autocomplete(v-model='selected.icon' :items="icons" label="Иконка")
+                  v-autocomplete(v-model='selected.icon' no-data-text="Нет данных" :items="icons" label="Иконка")
                     template(v-slot:item="{ item }")
                         v-icon {{item}}
                         v-spacer
                         span {{item}}
-                v-autocomplete(v-if='(!selected.children || selected.children.length==0) && !selected.default' return-object item-text='info.name' :items="files" v-model='selected.component' label="Компонент")
+                v-autocomplete(v-if='(!selected.children || selected.children.length==0) && !selected.default' return-object item-text='info.name' no-data-text="Нет данных" :items="files" v-model='selected.component' label="Компонент")
+                v-switch.mx-2(v-model="selected.menu" label='Показывать в меню' color='accent')
                 v-btn(v-if="!selected.default" @click="deleteItem(selected)") УДАЛИТЬ
         v-flex.ma-2.mb-0
           v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") СОХРАНИТЬ               
@@ -34,12 +35,13 @@
 
 <script>
 import { getIcons } from "@/js/materialDesignIcons";
-import post_api from "@/js/api/userPosts";
+import api_user_post from "@/js/api/userPost";
 import * as mutations from "@/js/store/mutation-types";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
 
 export default {
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   post_name: {
     name: "Конструктор привилегий ролей",
     url: "bild_post_privilegies"
@@ -63,24 +65,25 @@ export default {
       selectedPost: null // Выбранный элемень роли
     };
   },
-  methods: {
-    async init() {
-      this.files = this.importAll(
-        require.context("@/js/views", true, /\.vue$/)
-      );
-      this.posts = await post_api.getPostsForCombobox(this);
-      if (this.posts) {
+  methods: 
+  {
+    async init() 
+    {
+      this.showLoading("Загрузка данных");
+      this.files = this.importAll(require.context("@/js/views", true, /\.vue$/));
+      this.posts = await api_user_post.getPostsFull(this);
+      if (this.posts) 
         this.selectedPost = this.posts[0];
-      }
+      this.closeLoading("Загрузка данных");
     },
     postChange() {
       this.active = [];
     },
     //! Добавляет внутрь массива privilegies{item}.children дополнительный элемент
     addInside(item) {
-      if (!item.component) {
+      if (!item.component) 
         delete item.component;
-      }
+
       item.children.push({
         id:
           Math.random()
@@ -105,33 +108,37 @@ export default {
             .substring(2, 15),
         icon: "fiber_new",
         text: "Новый элемент",
+        menu: true,
         component: "",
         children: []
       };
-      if (this.selectedPost.id != 1) {
-        this.selectedPost.privilegies.splice(
-          this.selectedPost.privilegies.length - 1,
-          0,
-          element
-        );
-      } else {
+
+      if (this.selectedPost.id != 1) 
+        this.selectedPost.privilegies.splice(this.selectedPost.privilegies.length - 1, 0, element);
+      else 
         this.selectedPost.privilegies.push(element);
-      }
     },
+
     //! Удаляет элемент из массива children или privilegies
-    deleteItem(item) {
+    deleteItem(item) 
+    {
       this.active = [];
-      if (item.children) {
+      if (item.children) 
+      {
         this.selectedPost.privilegies = this.selectedPost.privilegies.filter(
           x => x.id !== item.id
         );
-      } else {
+      } 
+      else 
+      {
         this.selectedPost.privilegies = this.selectedPost.privilegies.map(
           varitem => {
             let deleted = [];
             if (varitem.children)
               deleted = varitem.children.filter(x => x.id !== item.id);
-            if (deleted.length == 0) {
+            
+            if (deleted.length == 0) 
+            {
               return {
                 id: varitem.id,
                 icon: varitem.icon,
@@ -139,7 +146,9 @@ export default {
                 children: [],
                 component: null
               };
-            } else {
+            } 
+            else 
+            {
               return {
                 id: varitem.id,
                 icon: varitem.icon,
@@ -151,16 +160,16 @@ export default {
         );
       }
     },
+
     //! Отправляет запрос на сохранение изменений
-    sendQuery() {
-      post_api
-        .setPostPrivilegies({
-          id: this.selectedPost.id,
-          privilegies: this.selectedPost.privilegies
-        }, this);
+    sendQuery() 
+    {
+      api_user_post.setPostPrivilegies({id: this.selectedPost.id, privilegies: this.selectedPost.privilegies}, this);
     },
+
     //! Сканирует систему на компоненты и возврашает их
-    importAll(r) {
+    importAll(r) 
+    {
       let items = [];
       r.keys().forEach(key => {
         let com = r(key);

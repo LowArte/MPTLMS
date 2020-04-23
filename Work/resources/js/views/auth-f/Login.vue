@@ -18,7 +18,7 @@
 
 
 <script>
-import user_api from "@/js/api/users";
+import api_user from "@/js/api/user";
 import * as mutations from "@/js/store/mutation-types";
 
 //?----------------------------------------------
@@ -56,7 +56,7 @@ export default {
     async login() {
       this.loading = true;
       if (this.$refs.Login.validate()) {
-        let info = await user_api.login({
+        let info = await api_user.login({
           email: this.email,
           password: this.password
         });

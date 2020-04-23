@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 use Laravel\Passport\Passport;
 use App\Models\User;
-use App\Models\Departament;
+use App\Models\Department;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class DepartamentManagementEditTest extends TestCase
+class DepartmentManagementEditTest extends TestCase
 {
     use DatabaseTransactions;
     /**
@@ -22,7 +22,7 @@ class DepartamentManagementEditTest extends TestCase
             ['create-servers']
         );
 
-        $department['id'] = Departament::orderBy('id', 'desc')->first()->id;
+        $department['id'] = Department::orderBy('id', 'desc')->first()->id;
         $department['dep_name'] = "10.02.05";
         $department['specialization'] = "Специализация";
         $department['dep_name_full'] = "10.02.05 Обеспечение информационной безопасности в автоматизированных системах";

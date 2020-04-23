@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\Departament;
+use App\Models\Department;
 use Laravel\Passport\Passport;
 use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class DepartamentManagementDeleteTest extends TestCase
+class DepartmentManagementDeleteTest extends TestCase
 {
     use DatabaseTransactions;
     /**
@@ -23,7 +23,7 @@ class DepartamentManagementDeleteTest extends TestCase
             ['create-servers']
         );
 
-        $id = Departament::orderBy('id', 'desc')->first()->id;
+        $id = Department::orderBy('id', 'desc')->first()->id;
         $response = $this->post('/api/admin/department_management/delete/'.$id);
         $response->assertStatus(200);
     }

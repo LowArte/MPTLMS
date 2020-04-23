@@ -17,7 +17,7 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
@@ -49,18 +49,12 @@ export default {
       });
     },
     clickDelete() {
-        this.dialog = false;
-        this.resolve(this.item.id);
+      this.dialog = false;
+      this.resolve(this.item.id);
     },
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
-    },
-
-    clearForm()
-    {
-      this.item.name = null;
     }
   }
 };

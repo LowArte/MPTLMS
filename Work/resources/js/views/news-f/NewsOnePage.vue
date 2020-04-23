@@ -31,7 +31,7 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import news_api from "@/js/api/news";
+import api_new from "@/js/api/new";
 
 //?----------------------------------------------
 //!           Подключение vuex
@@ -62,11 +62,11 @@ export default {
     clickLike(id) {
       if (this.clicklike) {
         this.post.likes--;
-        news_api.likeNews(id, this);
+        api_new.likeNews(id, this);
         this.clicklike = false;
       } else {
         this.post.likes++;
-        news_api.likeNews(this.post.id, this);
+        api_new.likeNews(this.post.id, this);
         this.clicklike = true;
       }
     }

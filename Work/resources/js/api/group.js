@@ -23,7 +23,7 @@ export default {
      * group_name - string - not null
      * group_name - string - not null
      * curs - string - not null
-     * departaments_id - int - not null - FK
+     * departments_id - int - not null - FK
      */
     //*----------------------------------------
 
@@ -36,7 +36,6 @@ export default {
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
     getGroups(_this) {
         return axios.get('/api/getters/groups')
@@ -49,7 +48,6 @@ export default {
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
     getGroupsForCombobox(_this) {
         return axios.get('/api/getters/groups_for_combobox')
@@ -62,7 +60,6 @@ export default {
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
     getGroupsForComboboxRecursive(_this) {
         return axios.get('/api/getters/groups_for_combobox_recursive')
@@ -75,10 +72,9 @@ export default {
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается таблица данных JSON формата по id соответствующей группы
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
-    getGroupsByDepartamentId(department_id, _this) {
-        return axios.get('/api/getters/group_by_departament_id/' + department_id)
+    getGroupsByDepartmentId(department_id, _this) {
+        return axios.get('/api/getters/group_by_department_id/' + department_id)
         .then(result => { return result.data.groups;})
         .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
@@ -91,7 +87,7 @@ export default {
     //? Реализуется сохранение данных в таблице *GROUPS* (Группы)
     //? Передается объект
     //! Требование ----------------------------
-    //! Реализовать back-end для api && Уточнить струткуру данных
+    //! Реализовать back-end для api
     //!----------------------------------------
     saveGroup(group, _this) {
         return axios.post('/api/save/group/', group)

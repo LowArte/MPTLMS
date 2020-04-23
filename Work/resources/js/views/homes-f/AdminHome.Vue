@@ -1,8 +1,8 @@
 <template lang="pug">
-v-container(pa-0)
+v-content.ma-0.pa-0
   v-layout.row.wrap
     v-flex(xs12)
-      v-card(:elevation='0')
+      v-card(:elevation='0' color='boring')
         v-card-title.info--text.font-weight-light
           h2.font-weight-light Специальности
         v-divider.ma-2

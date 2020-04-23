@@ -1,7 +1,7 @@
 <template lang="pug">
     v-dialog(v-model="dialog" fullscreen scrollable hide-overlay transition="dialog-bottom-transition" persistent max-width="550px")
         v-card.ma-0.pa-0
-          v-toolbar(color="white")
+          v-toolbar(color="white" max-height="60px" )
             v-btn(icon dark @click="clickCancel")
               v-icon(color="primary") mdi-close
             v-spacer
@@ -16,7 +16,7 @@
                 small Текущая роль: {{ post_name.name }}
               v-stepper-content(step="1")
                 v-card(:elevation="0")
-                  v-autocomplete.mt-3(v-model="item.post_id" item-value="id" item-text="name" :items="userposts" dense label="Роль нового пользователя" @change="changePost")
+                  v-autocomplete.mt-3(v-model="item.post_id" item-value="id" item-text="name" no-data-text="Нет данных" :items="userposts" dense label="Роль нового пользователя" @change="changePost")
                   v-card-actions
                     v-spacer
                     v-btn(v-if="post_name.id != null" color="accent" text @click="change(2)") Далее
@@ -40,10 +40,9 @@
                     v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
                         v-btn(text color="primary" @click="dateDialog = false") Отмена
                         v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
-                  v-autocomplete.mt-3(v-if="item.post_id == 2" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
-                  v-autocomplete(v-if="item.post_id == 2" v-model="studentItem.departament_id" @change="depChange()" :items="specialities" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" label="Отделение")
-                  v-autocomplete(v-if="item.post_id == 2 && groups_combo != null && item.departament_id != null" v-model="studentItem.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups_combo" label='Группа')
-                  v-autocomplete(:items="studentItem.financings" dense label='Вид финансирования')
+                  v-autocomplete.mt-3(v-if="item.post_id == 2" no-data-text="Нет данных" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
+                  v-autocomplete(v-if="item.post_id == 2 && groups != null" v-model="studentItem.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups" label='Группа')
+                  v-autocomplete(:v-model="studentItem.financings" :items="financings" no-data-text="Нет данных" dense label='Вид финансирования')
                   v-card-actions
                     v-btn(text @click="change(2)") Назад
                     v-spacer
@@ -55,9 +54,9 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import apiposts from "@/js/api/userPosts";
-import apigroup from "@/js/api/group";
-import apidepartments from "@/js/api/departments";
+import api_post from "@/js/api/userPost";
+import api_group from "@/js/api/group";
+import api_department from "@/js/api/department";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -69,7 +68,7 @@ import * as mutations from "@/js/store/mutation-types";
 
 export default {
   computed: {
-    ...mapGetters(["specialities", "userposts", "groups_combo"]),
+    ...mapGetters(["specialities", "userposts", "groups"]),
   },
   mixins: [withSnackbar],
   data() {
@@ -92,7 +91,7 @@ export default {
       studentItem:{
         gender: "Мужской",
         birthday: new Date().toISOString().substr(0, 10),
-        departament_id: null,
+        department_id: null,
         group_id: 1,
         type_of_financing: "Бюджет",
       },
@@ -117,24 +116,9 @@ export default {
   },
 
   methods: {
-    async depChange() 
-    {
-      if(this.item.departament_id != null)
-      {
-        let items = await apigroup.getGroupsByDepartamentId(this.item.departament_id, this);
-        this.$store.commit(mutations.SET_GROUPS_COMBO,items);
-      }
-    },
-
     pop() 
     {
-      this.dialog = true;
-      if (this.specialities_combo != null)
-      {
-        this.item.departament_id = this.specialities_combo[0].id;
-        depChange();
-      }
-      
+      this.dialog = true;      
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
@@ -145,16 +129,18 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        let data = Object.assign({}, this.item);
-        this.resolve(data);
-      } else {
-        this.showInfo("Необходимо заполнить ВСЕ имеющиеся поля!");
+        if(this.post_id == 2)
+          this.item['student'] = this.studentItem;
+        this.resolve(JSON.parse(JSON.stringify(this.item)));
+      } 
+      else 
+      {
+        this.showErroe("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
 
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
     },
 
@@ -183,23 +169,6 @@ export default {
         default:
           break;
       }
-    },
-
-    clearForm()
-    {
-      this.item.secName = null;
-      this.item.name = null;
-      this.item.thirdName = null;
-      this.item.email = null;
-      this.item.password = null;
-      this.item.post_id = null;
-      this.item.disabled = 0;
-
-      this.item.studentItem.gender = "Мужской";
-      this.item.studentItem.birthday = new Date().toISOString().substr(0, 10);
-      this.item.studentItem.departament_id = null;
-      this.item.studentItem.group_id = 1;
-      this.item.studentItem.type_of_financing = "Бюджет";
     }
   }
 };

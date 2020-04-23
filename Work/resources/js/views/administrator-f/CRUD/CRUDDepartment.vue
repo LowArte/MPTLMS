@@ -11,12 +11,13 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "@/js/api/departments"; //api для отделений
+import api_department from "@/js/api/department"; //api для отделений
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
@@ -41,9 +42,9 @@ export default {
   },
   post_name: {
     name: "CRUD отделений",
-    url: "departaments_crud"
+    url: "departments_crud"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   data: () => ({
     headers: [
       { text: "Наименование", value: "dep_name_full" },
@@ -69,34 +70,35 @@ export default {
     },
 
     async update() {
-      let items = await api.getDepartments(this);
-      this.$store.commit(mutations.SET_SPECIALITIES_FULL,items)
+      this.showLoading("Обновление данных");
+      await this.$store.commit(mutations.SET_SPECIALITIES_FULL, await api_department.getDepartments(this));
+      this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
-    add() {
-      this.$refs.new.pop().then(result => {
+    async add() {
+      await this.$refs.new.pop().then(result => {
         if (result) {
           this.$store.dispatch(actions.ADD_SPECIALITIE,{ context: this, result: result });
-          this.$refs.new.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
       });
+      this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта
     //?----------------------------------------------
-    edit(item) {
-      this.$refs.revue.pop(item).then(result => {
+    async edit(item) {
+      await this.$refs.revue.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(actions.EDIT_SPECIALITIE,{ context: this, result: result });
-          this.$refs.revue.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
       });
+      this.$refs.revue.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Удаление объектa
@@ -105,7 +107,6 @@ export default {
       this.$refs.rem.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(actions.DELETE_SPECIALITIE,{ context: this, result: result });
-          this.$refs.rem.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }

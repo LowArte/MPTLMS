@@ -1,31 +1,33 @@
 <template lang="pug">
-  v-layout.row.wrap(align='center' justify='center')
+v-content.ma-0.pa-1
+  v-layout.row.wrap
     c-comfirm-dialog(ref="qwestion")
-    v-card.mx-auto(outline height='auto' width='max')
-      v-system-bar
-        span Обращение пользователей
-      v-content.pa-0
-        v-data-table.pa-0(:headers='headers' :items='items' :single-expand='true' no-results-text='Нет результатов' no-data-text='Нет результатов' :expanded.sync='expanded' item-key='id' show-expand :page.sync='page' hide-default-footer @page-count='pageCount = $event' :search='search' :items-per-page='itemsPerPage')
-          template(v-slot:top)
-            v-text-field.ma-0.pa-2(v-model='search' outlined dense label='Поиск' single-line hide-details)
-            v-tooltip(bottom)
-              template(v-slot:activator="{ on }")
-                  v-btn.ma-2.ml-1(text v-on="on" @click="Update()")
-                      v-icon replay
-                      span.ma-2 Обновить
-              span Обновить таблицу
-          template(v-slot:item.answered="{ item }")
-            v-card-text.ma-0.pa-0(v-if="item['answered']") Да
-            v-card-text.ma-0.pa-0(v-else) Нет
-          template(v-slot:expanded-item='{ headers }')
-            td.pa-2(:colspan='headers.length' v-if='expanded.length > 0')
-              v-form.ma-2(v-model='form')
-                v-card-text.pa-1.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
-                v-card-text.pa-1.text Текст: {{expanded[0].text}}
-                v-textarea.pa-1(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
-                v-btn.ma-1.white--text(:disabled='!form' color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
-      v-layout.row.text-center.pa-2.ma-2
-        v-pagination(v-model='page' :length='pageCount')
+    v-flex
+      v-card
+        v-system-bar
+          span Обращение пользователей
+        v-content.pa-0
+          v-data-table.pa-0(:headers='headers' :items='items' :single-expand='true' no-results-text='Нет результатов' no-data-text='Нет результатов' :expanded.sync='expanded' item-key='id' show-expand :page.sync='page' hide-default-footer @page-count='pageCount = $event' :search='search' :items-per-page='itemsPerPage')
+            template(v-slot:top)
+              v-text-field.ma-0.pa-2(v-model='search' outlined dense label='Поиск' single-line hide-details)
+              v-tooltip(bottom)
+                template(v-slot:activator="{ on }")
+                    v-btn.ma-2.ml-1(text v-on="on" @click="Update()")
+                        v-icon replay
+                        span.ma-2 Обновить
+                span Обновить таблицу
+            template(v-slot:item.answered="{ item }")
+              v-card-text.ma-0.pa-0(v-if="item['answered']") Да
+              v-card-text.ma-0.pa-0(v-else) Нет
+            template(v-slot:expanded-item='{ headers }')
+              td.pa-2(:colspan='headers.length' v-if='expanded.length > 0')
+                v-form.ma-2(ref='form')
+                  v-card-text.pa-1.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
+                  v-card-text.pa-1.text Текст: {{expanded[0].text}}
+                  v-textarea.pa-1(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
+                  v-btn.ma-1.white--text(color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
+        v-layout.row.text-center.pa-2.ma-2
+          v-pagination(v-model='page' :length='pageCount')
 </template>
 
 <script>
@@ -38,11 +40,12 @@ import { mask } from "vue-the-mask"; //Маска
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import feedbackApi from "@/js/api/feedback";
+import api_feedback from "@/js/api/feedback";
 
 //?----------------------------------------------
 //!           Подключение диалогов
@@ -54,7 +57,7 @@ export default {
     name: "Просмотр обращений пользователей",
     url: "requests"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
 
   directives: {
     mask
@@ -64,11 +67,9 @@ export default {
     return {
       modelmessage: "",
       messageRules: [
-        v => v.length > 0 || "Текст сообщения не указан",
-        v =>
-          v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
+        v => !!v || "Текст сообщения не указан",
+        v => !!v && v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
       ],
-      form: false,
       search: "",
       mask: "####",
       expanded: [],
@@ -109,17 +110,24 @@ export default {
 
     async sendQuery(email) 
     {
-      if (await feedbackApi.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}, this))
+      if(this.$refs.form.validate())
       {
-         this.items.splice(this.expanded[0]);
-         this.modelmessage = "";
+        if(await api_feedback.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}, this))
+        {
+          this.items.splice(this.expanded[0]);
+          this.$refs.form.reset();
+        }
       }
+      else
+        this.showError("Заполните корректно поля!");   
     },
 
     //Получение обращений пользователя
     async Update() 
     {
-        this.items = await feedbackApi.getFeedbackRequests(this);
+      this.showLoading("Обновление данных");
+      this.items = await api_feedback.getFeedbackRequests(this);
+      this.closeLoading("Обновление данных");
     }
   }
 };

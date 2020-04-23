@@ -2,10 +2,10 @@ import * as types from '../../mutation-types'
 
 export default {
   [ types.SET_SERVER ] (state, data) {
-    state.isProfilactic = data.isProfilactic
+    state.profilactic = data.profilactic
     state.name = data.name
   },
   [ types.SET_PROFILACTIC ] (state, data) {
-    state.isProfilactic = data
+    state.profilactic.option_value = data
   },
 }

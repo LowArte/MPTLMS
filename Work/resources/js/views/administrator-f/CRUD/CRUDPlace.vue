@@ -11,12 +11,13 @@
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-import api from "@/js/api/places";
+import api_place from "@/js/api/place";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 //?----------------------------------------------
 //!           Подключение шаблона CRUD
@@ -43,7 +44,7 @@ export default {
     name: "CRUD мест проведения",
     url: "places_crud"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   components: {
     "c-crud-form": CRUD_C,
     "c-comfirm-dialog": confirmDialog_C,
@@ -53,7 +54,6 @@ export default {
   },
   data: () => ({
     headers: [
-      { text: "№", value: "id" },
       { text: "Наименование", value: "place_name" },
       { text: "Действия", value: "action", sortable: false }
     ]
@@ -69,43 +69,43 @@ export default {
     },
 
     async update() {
-      let items = await api.getPlaces(this);
-      this.$store.commit(mutations.SET_PLACES_FULL, items)
+      this.showLoading("Обновление данных");
+      await this.$store.commit(mutations.SET_PLACES_FULL, await api_place.getPlaces(this));
+      this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------
     //!           Добавление объекта
     //?----------------------------------------------
-    add() {
-      this.$refs.new.pop().then(result => {
+    async add() {
+      await this.$refs.new.pop().then(result => {
         if (result) {
           this.$store.dispatch(actions.ADD_PLACE,{ context: this, result: result });
-          this.$refs.new.clearForm();
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
+      this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта
     //?----------------------------------------------
-    edit(item) {
-      this.$refs.revue.pop(item).then(result => {
+    async edit(item) {
+      await this.$refs.revue.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(actions.EDIT_PLACE,{ context: this, result: result });
-          this.$refs.revue.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }
       });
+      this.$refs.revue.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Удаление объектa
     //?----------------------------------------------
-    remove(item) {
-      this.$refs.rem.pop(item).then(result => {
+    async remove(item) {
+      await this.$refs.rem.pop(item).then(result => {
         if (result) {
           this.$store.dispatch(actions.DELETE_PLACE,{ context: this, result: result });
-          this.$refs.rem.clearForm();
         } else {
           this.showInfo("Действие было отменено пользователем!");
         }

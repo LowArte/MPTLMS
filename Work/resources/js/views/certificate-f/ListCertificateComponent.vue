@@ -31,9 +31,9 @@
         v-icon.small(v-else) close
       template(v-slot:expanded-item="{ headers }")
         td(:colspan="headers.length" v-if="expanded.length > 0")
-          v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
-          v-card-text.my-1.ma-0.pa-0.text(v-for="(info,i) in Object.keys(expanded[0].certificates_data)" :key="i") {{info}} : {{expanded[0].certificates_data[info]}}
-          v-card-text.my-1.ma-0.pa-0.text(v-if="expanded[0].text != null") Текст: {{expanded[0].text}}
+          v-card-text.my-1.ma-0.pa-0(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
+          v-card-text.my-1.ma-0.pa-0(v-for="(info,i) in Object.keys(expanded[0].certificates_data)" :key="i") {{info}} : {{expanded[0].certificates_data[info]}}
+          v-card-text.my-1.ma-0.pa-0(v-if="expanded[0].text != null") Текст: {{expanded[0].text}}
           v-form.mt-3(ref="sendNotDone")
             v-dialog(v-model="dialog" persistent max-width="500px")
               template(v-slot:activator="{ on }")
@@ -54,15 +54,16 @@
 </template>
 
 <script>
-import cerificateApi from "@/js/api/certificate";
+import api_cerificate from "@/js/api/certificate";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Loading
 
 export default {
   post_name: {
     name: "Заказанные справки",
     url: "list_certificate"
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, withOverlayLoading],
   data() {
     return {
       search: "", //Поиск
@@ -81,9 +82,8 @@ export default {
       ], //Заголовок
       modelmessage: "",
       messageRules: [
-        v => v.length > 0 || "Текст сообщения не указан",
-        v =>
-          v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
+        v => !!v || "Текст сообщения не указан",
+        v => !!v && v.length <= 255 || "Текст сообщения должен быть не более 255 символов"
       ],
       items: []
     };
@@ -100,11 +100,11 @@ export default {
     {
       if(this.$refs.sendNotDone.validate())
       {
-        if (await cerificateApi.sendEmailNotDone({ email: email, text: this.modelmessage, id: this.expanded[0].id }, this)) 
+        if (await api_cerificate.sendEmailNotDone({ email: email, text: this.modelmessage, id: this.expanded[0].id }, this)) 
         {
           this.items.splice(this.expanded[0]);
           this.dialog = false;
-          this.modelmessage = "";
+          this.$refs.sendNotDone.reset();
         }
       }
       else
@@ -112,28 +112,32 @@ export default {
     },
 
     //Отправка сообщения о том, что справка готова
-    async sendEmailDone(email) {
+    async sendEmailDone(email) 
+    {
       if (
-        await cerificateApi.sendEmailDone(
+        await api_cerificate.sendEmailDone(
           { email: email, id: this.expanded[0].id },
           this
         )
       ) {
         this.expanded[0].done = true;
         this.Update();
-        this.modelmessage = "";
       }
     },
 
     //Отправка сообщения о том, что справка готова
-    async Update() {
-      this.items = await cerificateApi.getCertificates(this);
-      if (this.items != null) {
+    async Update() 
+    {
+      this.showLoading("Обновление данных");
+      this.items = await api_cerificate.getCertificates(this);
+      if (this.items != null) 
+      {
         for (var i = 0; i < this.items.length; i++)
           this.items[i].certificates_data = JSON.parse(
             this.items[i].certificates_data
           );
       }
+      this.closeLoading("Обновление данных");
     }
   }
 };

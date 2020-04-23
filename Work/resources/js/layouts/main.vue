@@ -1,44 +1,31 @@
-<template>
-  <div>
-    <snackbar></snackbar>
-    <overlayloader></overlayloader>
-    <v-navigation-drawer width="300" v-model="leftdrawer" fixed clipped app>
-      <c-app-menu></c-app-menu>
-    </v-navigation-drawer>
-    <v-app-bar color="primary" dark app clipped-left clipped-right fixed>
-      <div :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'" class="ml-0 pl-3">
-        <v-btn icon @click="leftdrawer = !leftdrawer">
-          <v-icon>menu</v-icon>
-        </v-btn>
-      </div>
-      <div v-if="user" class="d-flex align-center" style="margin-left: auto">
-        <v-btn text @click.stop="rightdrawer = !rightdrawer" class="ml-5" light>
-          <small class="white--text">{{user.name}}</small>
-          <small v-if="user.disabled == 1" class="red--text"><kbd>{{Заблокирован}}</kbd></small>
-          <v-avatar class="ml-2" size="32" color="white">
-            <v-icon>account_circle</v-icon>
-          </v-avatar>
-        </v-btn>
-      </div>
-    </v-app-bar>
-
-    <v-navigation-drawer v-model="rightdrawer" right clipped fixed app>
-      <v-card flat>
-        <c-logout></c-logout>
-        <c-reset-password></c-reset-password>
-      </v-card>
-    </v-navigation-drawer>
-
-    <v-content>
-      <v-container pa-4 fluid grid-list-md text-xs-center>
-        <transition>
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
-        </transition>
-      </v-container>
-    </v-content>
-  </div>
+<template lang="pug">
+div
+  snackbar
+  overlayloader
+  v-navigation-drawer(width='300' v-model='leftdrawer' fixed clipped app='')
+    c-app-menu
+  v-app-bar(color='primary' dark app clipped-left clipped-right fixed='')
+    div.ml-0.pl-3(:style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 250px' : 'min-width: 72px'")
+      v-btn(icon @click='leftdrawer = !leftdrawer')
+        v-icon menu
+    div.d-flex.align-center(v-if='user' style='margin-left: auto')
+      v-btn.ml-5(text @click.stop='rightdrawer = !rightdrawer' light='')
+        small.white--text {{user.name}}
+        small.red--text(v-if='user.disabled == 1')
+          kbd {{Заблокирован}}
+        v-avatar.ml-2(size='32' color='white')
+          v-icon account_circle
+  v-navigation-drawer(v-model='rightdrawer' right clipped fixed app='')
+    template(v-slot:prepend='')
+      div.pa-2
+        c-reset-password
+      div.pa-2
+        c-logout
+  v-content
+    v-container(pa-0 fluid grid-list-md text-xs-center='')
+      transition(name='page' mode='out-in')
+        keep-alive
+          router-view
 </template>
 
 <script>

@@ -13,7 +13,7 @@ class AppController extends Controller
      */
     public function index(SiteOptionsRepository $siteOptionsRepository)
     {    
-        $Profilactic = $siteOptionsRepository->getIsProfilactic();
+        $Profilactic = $siteOptionsRepository->getProfilacticInfo();
         return view('layouts.app',["Profilactic"=>$Profilactic]);
     }
 }

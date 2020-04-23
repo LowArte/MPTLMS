@@ -28,7 +28,7 @@ export default {
      *      privilegies : объект формата JSON в котором описаны доступные пользователю привелегии
     */
     //! Требование ----------------------------
-    //! Отсутсвуют
+    //! Не работает
     //!---------------------------------------
     setPostPrivilegies(data, _this) {
         return axios.post('/api/edit/post', data)
@@ -45,10 +45,24 @@ export default {
     //? Реализуется получение данных из таблицы *USERSPOST* (Роли)
     //? Возвращается {} таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвуют
     //!---------------------------------------
     getPostsForManagement(_this) {
         return axios.get('/api/getters/posts_for_management')
+        .then(result => { return result.data.posts;})
+        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+    },
+
+    //*----------------------------------------
+    //!         Получение данных
+    //*----------------------------------------
+    //*Получение полной информации для всех ролей 
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *USERSPOST* (Роли)
+    //? Возвращается {} таблица данных JSON формата
+    //! Требование ----------------------------
+    //!---------------------------------------
+    getPostsFull(_this) {
+        return axios.get('/api/getters/posts_full')
         .then(result => { return result.data.posts;})
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
@@ -59,25 +73,11 @@ export default {
     //? Реализуется получение данных из таблицы *USERSPOST* (Роли)
     //? Возвращается {} таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвуют
     //!---------------------------------------
     getPostsForCombobox(_this) {
         //return axios.get('/api/getters/posts_for_combobox')
         return axios.get('/api/getters/posts_for_management')
         .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
-    },
-    
-    //*Получение роли
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *USERSPOST* (Роли)
-    //? Возвращается экзмемпляр данных по id
-    //! Требование ----------------------------
-    //! Реализовать back-end для api
-    //!----------------------------------------
-    getPost(id, _this) {
-        return axios.get('/api/getters/posts/' + id)
-        .then(res => {return res.data.post;})
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
     

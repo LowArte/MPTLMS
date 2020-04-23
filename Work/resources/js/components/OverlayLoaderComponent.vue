@@ -4,7 +4,7 @@
       v-layout(row)
         v-progress-circular.mx-auto(indeterminate size="32")
       v-layout(row)
-        span.mx-auto {{ text }}
+        p.text-center.px-6.py-2 {{ text }}
 </template>
 
 <script>

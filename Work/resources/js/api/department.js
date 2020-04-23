@@ -37,7 +37,6 @@ export default {
     //? Реализуется получение данных из таблицы *departments* (Специальности)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Отсутсвуют
     //!----------------------------------------
     getDepartments(_this) {
         return axios.get('/api/getters/departments')
@@ -50,27 +49,12 @@ export default {
     //? Реализуется получение данных из таблицы *departments* (Специальности)
     //? Возвращается список специальностей для выпадающих списков
     //! Требование ----------------------------
-    //! Отсутсвуют
     //!----------------------------------------
     getDepartmentsForCombobox(_this) {
         return axios.get('/api/getters/departments_for_combobox')
-        .then(res => { return res.data.departaments; })
+        .then(res => { return res.data.departments; })
         .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined; });
     },
-
-    //*Получение отделеня
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *departments* (Специальности)
-    //? Возвращается ОДИН экземпляр по переданному id
-    //! Требование ----------------------------
-    //! Нужно получать department по ID
-    //!----------------------------------------
-    getDepartment(id, _this) {
-        return axios.get('/api/admin/getters/department/' + id)
-        .then(result => { return result.data; })
-        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined; });
-    },
-
 
 
 
@@ -83,10 +67,9 @@ export default {
     //? Реализуется сохранение данных в таблицу *departments* (Специальности)
     //? Передаётся ОДИН экземпляр записи
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
     saveDepartment(department, _this) {
-        return axios.post('/api/save/departament', department)
+        return axios.post('/api/save/department', department)
         .then(res => { _this.showMessage("Сохранено!"); return res.data.id; })
         .catch(exception => { _this.showError("Ошибка выполения"); return false; });
     },
@@ -96,10 +79,9 @@ export default {
     //? Реализуется удаление данных из таблицы *departments* (Специальности)
     //? Передаётся id в функцию
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
     deleteDepartment(id, _this) {
-        return axios.post('/api/delete/departament/' + id)
+        return axios.post('/api/delete/department/' + id)
         .then(result => { _this.showMessage("Удалено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
@@ -109,10 +91,9 @@ export default {
     //? Реализуется редактирование данных в таблице *departments* (Специальности)
     //? Передаётся ОДИН экземпляр записи 
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
     editDepartment(department, _this) {
-        return axios.post('/api/edit/departament/',  department)
+        return axios.post('/api/edit/department/',  department)
         .then(res => { _this.showMessage("Выполнено!"); return true; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },

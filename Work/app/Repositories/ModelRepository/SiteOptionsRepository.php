@@ -28,4 +28,10 @@ class SiteOptionsRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->where("id",1)->toBase()->first()->option_value;
         return $result == "true";
     }
+
+    public function getProfilacticInfo(){
+        $columns = ['id','option_value'];
+        $result = $this->startCondition()->select($columns)->where("id",1)->toBase()->first();
+        return $result;
+    }
 }

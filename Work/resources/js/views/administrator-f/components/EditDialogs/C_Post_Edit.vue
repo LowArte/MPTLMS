@@ -16,7 +16,7 @@
 //?----------------------------------------------
 //!           Подключение системы уведомлений
 //?----------------------------------------------
-import withSnackbar from "@/js/components/mixins/withSnackbar"
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
   mixins: [withSnackbar],
@@ -32,36 +32,32 @@ export default {
       nameRules: [
         v => !!v || "Поле не должно оставаться пустым",
         v => /^[А-Я && а-я]*$/.test(v) || "Только кирилические символы"
-      ],
+      ]
     };
   },
   methods: {
     pop(item) {
-      this.item = Object.assign({}, item);
+      this.item = JSON.parse(JSON.stringify(item));
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
-    clickSave() {
+    clickSave() 
+    {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        let data = Object.assign({}, this.item);
-        this.resolve(data);
-      } else {
+        this.resolve(JSON.parse(JSON.stringify(this.item)));
+      } 
+      else 
+      {
         this.showError("Необходимо заполнить ВСЕ имеющиеся поля!");
       }
     },
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
-    },
-
-    clearForm()
-    {
-      this.item.name = null;
     }
   }
 };

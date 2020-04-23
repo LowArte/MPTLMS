@@ -3,7 +3,7 @@
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
-      v-form
+      v-form(ref="form")
         v-card-text
           v-alert(dense type="info") Данное действие необратимо
           v-text-field(v-model="item.place_name" label="Наименование места проведения" readonly)
@@ -59,20 +59,8 @@ export default {
     },
     clickCancel() {
       this.dialog = false;
-      this.clearForm();
       this.resolve(false);
     },
-
-    clearForm()
-    {
-      this.item.place_name = null;
-      this.item.info.place_index = "";
-      this.item.place_country = "";
-      this.item.place_city = "";
-      this.item.place_street = "";
-      this.item.place_building_number = "";
-      this.item.place_piy = "";
-    }
   }
 };
 </script>

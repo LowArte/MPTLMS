@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import user_api from "@/js/api/users";
+import api_user from "@/js/api/user";
 import { resetRouter } from "@/js/router/router";
 import * as mutations from "@/js/store/mutation-types";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Alert
@@ -24,7 +24,7 @@ export default {
     async reset() 
     {
       this.loading = true;
-      if (await user_api.EmailForResetPassword(this.user.email, this)) 
+      if (await api_user.EmailForResetPassword(this.user.email, this)) 
       {
         this.showMessage("Отправлено на почту!");
       }

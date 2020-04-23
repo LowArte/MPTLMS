@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Panoscape\History\HasHistories;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 
-class Departament extends Model
+class Department extends Model
 {
     use SoftDeletes,HasHistories,CascadeSoftDeletes;
 

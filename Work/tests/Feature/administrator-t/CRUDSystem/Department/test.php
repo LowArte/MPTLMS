@@ -5,7 +5,7 @@ namespace Tests\Feature\administrator_t\CRUDSystem\Department;
 use Tests\TestCase;
 use Laravel\Passport\Passport;
 use App\Models\User;
-use App\Repositories\ModelRepository\DepartamentRepository;
+use App\Repositories\ModelRepository\DepartmentRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class test extends TestCase
@@ -46,9 +46,9 @@ class test extends TestCase
             User::Find(1),
             ['create-servers']
         );
-        $rep = new DepartamentRepository();
+        $rep = new DepartmentRepository();
 
-        $department = $rep->getDepartamentsByID(1);
+        $department = $rep->getDepartmentsByID(1);
         $department->dep_name_full = "09.02.03 Программиовоние в комьютерных системах";
         $department->qualification = "Программист-техник";
         $department->image = "http://image";
@@ -72,8 +72,8 @@ class test extends TestCase
             User::Find(1),
             ['create-servers']
         );
-        $rep = new DepartamentRepository();
-        $department = $rep->getDepartamentsByID(2);
+        $rep = new DepartmentRepository();
+        $department = $rep->getDepartmentsByID(2);
         $response = $this->call('POST', '/api/admin/department_management/delete/'.$department->id);        
         $response->assertStatus(200); //Проверка на ответ
     }

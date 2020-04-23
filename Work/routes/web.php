@@ -34,6 +34,6 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::name('api.')->prefix("api")->group(function () 
 {
     Route::name('getters.')->prefix('getters')->group(function () {
-        Route::get('departments','Api\DepartamentController@getDepartments')->name('departments');
+        Route::get('departments','Api\DepartmentController@getDepartments')->name('departments');
     });
 });

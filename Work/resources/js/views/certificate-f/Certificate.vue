@@ -1,6 +1,6 @@
 <template lang="pug">
 v-card.mx-auto.pa-4.mt-2(height="auto" width="max")
-    v-form(v-model="form")
+    v-form(ref="form")
       v-textarea(
             v-model="text"
             :auto-grow="true"
@@ -18,7 +18,6 @@ v-card.mx-auto.pa-4.mt-2(height="auto" width="max")
             :rules="policyRules"
             label="Отправляя заявку на справку подтверждаю, что с условиями заказа справок ознакомлен")
       v-btn.mt-2.justify-center.white--text(
-            :disabled="!form"
             color="blue"
             block
             depressed
@@ -26,7 +25,7 @@ v-card.mx-auto.pa-4.mt-2(height="auto" width="max")
 </template>
 
 <script>
-import cerificateApi from "@/js/api/certificate";
+import api_cerificate from "@/js/api/certificate";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
@@ -36,11 +35,11 @@ export default {
   },
   mixins: [withSnackbar],
   data: () => ({
-    text: "",
+    text: null,
     enabled: false,
     orderRules: [
-      v => v.length > 0 || "Текст заявки не указан",
-      v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
+      v => !!v ||  "Текст заявки не указан",
+      v => !!v && v.length <= 255 || "Текст заявки должен быть не более 255 символов"
     ],
     policyRules: [v => !!v || "Ожидается согласие на обработку данных"],
     form: false
@@ -50,15 +49,14 @@ export default {
   {
     async sendQuery() 
     {
-      if (await cerificateApi.save({data: {"Текст заявки": this.text}, type: "Справка"}, this))
-        this.cleardata();
+      if(this.$refs.form.validate())
+      {
+        if (await api_cerificate.save({data: {"Текст заявки": this.text}, type: "Справка"}, this))
+          this.$refs.form.reset();
+      }
+      else 
+        this.showError("Укажите корректные данные!");
     },
-
-    cleardata() 
-    {
-      this.text = "";
-      this.enabled = false;
-    }
   }
 };
 </script>

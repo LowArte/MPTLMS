@@ -17,7 +17,7 @@ class Student extends Model
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at', 'departaments_id'
+        'created_at', 'deleted_at', 'updated_at', 'departments_id'
     ];
 
     public function __construct($attributes = array())

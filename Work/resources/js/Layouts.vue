@@ -1,5 +1,5 @@
 <template lang="pug">
-    vue-extend-layout
+  vue-extend-layout
 </template>
 
 <script>
@@ -14,12 +14,12 @@ export default {
       default: "Личный кабинет"
     },
     _is_profilactic:{
-      type:Boolean,
+      type:Object,
       default:false
     }
   },
   mounted(){
-    this.$store.commit(mutations.SET_SERVER,{isProfilactic:this._is_profilactic,name:this._name})
+    this.$store.commit(mutations.SET_SERVER,{profilactic:this._is_profilactic,name:this._name})
   },
 };
 </script>

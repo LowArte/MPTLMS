@@ -2,23 +2,23 @@
 
 namespace App\Repositories\ModelRepository;
 
-use App\Models\Departament as Model;
+use App\Models\Department as Model;
 
-class DepartamentRepository extends BaseRepository
+class DepartmentRepository extends BaseRepository
 {
     protected function getModelClass()
     {
         return Model::class;
     }
 
-    public function getDepartamentsForComboBox()
+    public function getDepartmentsForComboBox()
     {
         $columns = ['id', 'dep_name_full'];
         $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
 
-    public function getDepartamentsByID($id)
+    public function getDepartmentsByID($id)
     {
         $columns = ['id', 'qualification', 'dep_name_full','image','info','studysperiod'];
         $result = $this->startCondition()->select($columns)->where('id',$id)->toBase()->first();
@@ -26,7 +26,7 @@ class DepartamentRepository extends BaseRepository
     }
 
 
-    public function getDepartaments()
+    public function getDepartments()
     {
         $columns = ['id',  'qualification', 'dep_name_full',  'image', 'info', 'studysperiod'];
         $result = $this->startCondition()->select($columns)->get();

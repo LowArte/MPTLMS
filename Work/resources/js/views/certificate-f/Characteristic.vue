@@ -1,6 +1,6 @@
 <template lang="pug">
 v-card.mx-auto.pa-4(height="auto" width="max")
-    v-form(v-model="form")
+    v-form(ref="form")
       v-text-field(:rules="notEmtyRules" v-model="school" label="Школа")
       v-text-field(
             :rules="yearMptRules"
@@ -41,7 +41,6 @@ v-card.mx-auto.pa-4(height="auto" width="max")
             :rules="policyRules"
             label="Отправляя заявку на характеристику подтверждаю, что с условиями заказа справок ознакомлен")
       v-btn.mt-2.justify-center.white--text(
-            :disabled="!form"
             color="blue"
             block
             depressed
@@ -50,7 +49,7 @@ v-card.mx-auto.pa-4(height="auto" width="max")
 
 <script>
 import { mask } from "vue-the-mask";
-import cerificateApi from "@/js/api/certificate";
+import api_cerificate from "@/js/api/certificate";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
 
 export default {
@@ -64,58 +63,51 @@ export default {
   mixins: [withSnackbar],
   data: vm => ({
     mask: "####",
-    modelprogress: "",
-    modelorder: "",
-    school: "",
-    dateendschool: "",
-    yearmpt: "",
-    postofgroup: "",
+    modelprogress: null,
+    modelorder: null,
+    school: null,
+    dateendschool: null,
+    yearmpt: null,
+    postofgroup: null,
     enabled: false,
     arrPostOfGroup: ["Староста", "Ответственный за успеваемость", "Ответственный за посещаемость", "Культ-орг", "Физ-орг", "Студент"],
-    notEmtyRules: [v => v.length > 0 || "Поле не заполнено"],
+    notEmtyRules: [v => !!v || "Поле не заполнено"],
     progressRules: [
-      v => v.length > 0 || "Успеваемость не указана",
-      v =>
-        v.length <= 255 ||
-        "Текст успеваемости должен быть не более 255 символов"
+      v => !!v || "Успеваемость не указана",
+      v => !!v && v.length <= 255 || "Текст успеваемости должен быть не более 255 символов"
     ],
     yearMptRules: [
       v =>(v <= new Date().getFullYear() && v >= new Date().getFullYear() - 4) || "Ошибка даты",
-      v => v.length > 0 || "Поле не заполнено"
+      v => !!v || "Поле не заполнено"
     ],
     orderRules: [
-      v => v.length > 0 || "Текст заявки не указан",
-      v => v.length <= 255 || "Текст заявки должен быть не более 255 символов"
+      v => !!v || "Текст заявки не указан",
+      v => !!v && v.length <= 255 || "Текст заявки должен быть не более 255 символов"
     ],
-    policyRules: [v => !!v || "Ожидается согласие на обработку данных"],
-    form: false
+    policyRules: [v => !!v || "Ожидается согласие на обработку данных"]
   }),
 
   methods: 
   {
     async sendQuery() 
     {
-      if (await cerificateApi.save({
-          data: {
-            "Год поступления": this.yearmpt,
-            "Школа": this.school,
-            "Обязанности в группе": this.postofgroup,
-            "Успеваемость": this.modelprogress,
-            "Куда нужна характеристика": this.modelorder
-          },
-          type: "Характеристика"
-        }, this))
-          this.cleardata();
+      if(this.$refs.form.validate())
+      {
+        if (await api_cerificate.save({
+            data: {
+              "Год поступления": this.yearmpt,
+              "Школа": this.school,
+              "Обязанности в группе": this.postofgroup,
+              "Успеваемость": this.modelprogress,
+              "Куда нужна характеристика": this.modelorder
+            },
+            type: "Характеристика"
+          }, this))
+            this.$refs.form.reset();
+      }
+      else 
+        this.showError("Укажите корректные данные!");
     },
-
-    cleardata() {
-      this.yearmpt = new Date().getFullYear().toString();
-      this.school = "";
-      this.postofgroup = "";
-      this.modelprogress = "";
-      this.modelorder = "";
-      this.enabled = false;
-    }
   }
 };
 </script>

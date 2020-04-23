@@ -19,7 +19,7 @@ class Group extends Model
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at', 'departament_id'
+        'created_at', 'deleted_at', 'updated_at', 'department_id'
     ];
 
     protected $cascadeDeletes = ['students'=>'group_id'];
@@ -44,9 +44,9 @@ class Group extends Model
         return  $data == null;
     }
 
-    public function departament()
+    public function department()
     {
-        return $this->hasOne(Departament::class);
+        return $this->hasOne(Department::class);
     }
 
     public function __construct($attributes = array())

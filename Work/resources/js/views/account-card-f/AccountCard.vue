@@ -17,14 +17,9 @@ v-content.pa-0(v-if="user")
                 v-card-text.py-2.font-weight-bold Специальность: 09.02.03 Программирование в компьютерных системах
                 v-card-text.py-2.font-weight-bold Группа: {{user.student.group_id}}
                 v-card-text.py-2.font-weight-bold Текущий курс
-                v-slider.mx-4(v-model="user.student.curs" :max="3" :tick-labels="labels"  disabled)
+                v-slider.mx-4(v-model="curs" :max="3" :tick-labels="labels"  disabled)
                 v-card-actions
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(text light v-on="on" color="accent")
-                                v-icon warning
-                                span.ma-2 Сообщить об ошибке
-                        span Сообщить об ошибке
+                    span.ma-2 Дополнительная информация
                     v-spacer
                     v-btn(icon @click="show = !show")
                         v-icon {{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
@@ -35,6 +30,15 @@ v-content.pa-0(v-if="user")
                         v-card-text.py-2 Форма обучения: Очная
                         v-card-text.py-2 Вид финансирования: {{user.student.type_of_financing}}
                         v-card-text.py-2 Срок обучения: 3г 10м
+                        v-card-actions
+                            v-tooltip(bottom)
+                                template(v-slot:activator="{ on }")
+                                    router-link(class='nounderline' :to="'feedback'") 
+                                        v-btn(text light v-on="on" color="accent")
+                                            v-icon warning
+                                            span.ma-2 Сообщить об ошибке
+                                span Сообщить об ошибке
+
         v-flex
             v-card.mx-auto
                 v-system-bar(color="pimary")
@@ -59,26 +63,6 @@ v-content.pa-0(v-if="user")
                             v-btn(icon light v-on="on" color="pimary")
                                 v-icon more_horiz
                         span Подробнее
-    v-layout.row.wrap
-        v-flex
-            v-card.mx-auto
-                v-system-bar(color="pimary")
-                    small Направления
-                v-card-text Нет открытых направлений
-                v-divider
-                v-card-actions
-                    v-spacer
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn.my-2(icon light v-on="on" color="success")
-                                v-icon mdi-download
-                        span Скачать доступный направления
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(text light v-on="on" color="pimary")
-                                v-icon mdi-printer
-                                span.ma-2 Печать
-                        span Напечатать доступный направления
     v-layout.row.wrap
         v-flex
             v-card
@@ -113,14 +97,17 @@ export default {
   },
   data() {
     return {
-      name: "Фамилия Имя Отчество",
-      post: "Наименование должности",
-      cours: 2,
-      labels: ["1", "2", "3", "4"],
-      show: false,
-      rating: 4.3,
-      hours: 28
+        post: "Студент",
+        curs: 2,
+        labels: ["1", "2", "3", "4"],
+        show: false,
+        rating: 4.3,
+        hours: 28
     };
+  },
+
+  beforeMount(){
+      this.curs = this.user.student.curs; 
   }
 };
 </script>

@@ -5,7 +5,7 @@ import vuetify from './vuetify'
 import router from './router/router'
 import ArrayHelpers from '@/js/plugins/ArrayHelpers'
 
-import user_api from '@/js/api/users'
+import api_user from '@/js/api/user'
 import * as mutations from '@/js/store/mutation-types'
 
 import C_Layouts from '@/js/Layouts'
@@ -15,7 +15,7 @@ window.Vue = require('vue');
 
 
 async function init() {
-    let result = await user_api.init()
+    let result = await api_user.init()
     if (result) {
         router.addRoutes(result.items);
         store.commit(mutations.SET_AUTH, result);

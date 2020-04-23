@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Departament;
+use App\Models\Department;
 use Laravel\Passport\Passport;
 use App\Models\User;
 use Tests\TestCase;
@@ -23,7 +23,7 @@ class RetrainingManagementDeleteTest extends TestCase
             ['create-servers']
         );
 
-        $id = Departament::orderBy('id', 'desc')->first()->id;
+        $id = Department::orderBy('id', 'desc')->first()->id;
         $response = $this->post('/api/admin/retraining_management/delete/'.$id);
         $response->assertStatus(200);
     }
