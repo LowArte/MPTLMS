@@ -25,7 +25,7 @@ class ScheduleSeeder extends Seeder
         $lessons = array($les,$les0,$les1,$les2,$les3,$les4,$les5,$les6);
         $days = array('Понедельник','Вторник','Среда','Четверг','Пятница','Суббота');
         */
-        $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => []);
+        $les = array('TeacherChisl' => [1], 'LessonChisl' => [1, 2], 'chisl' => false, 'TeacherZnam' => [1], 'LessonZnam' => [2,3]);
         $lessons = array($les);
         $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота');
 

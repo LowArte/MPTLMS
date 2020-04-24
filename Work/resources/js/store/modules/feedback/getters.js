@@ -1,5 +1,4 @@
 export default {
-    GET_FEEDBACK(state) {
-      return state.feedback
-    }
+  feedback:state=>state.feedback,
+  request:state=>state.request
 }

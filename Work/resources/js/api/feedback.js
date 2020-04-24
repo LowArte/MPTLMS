@@ -70,10 +70,7 @@ export default {
     //!----------------------------------------
     sendEmail(data, _this)
     {
-        return axios.post('/api/functions/send_feedback_email_answer/' + data.id, {
-            "text": data.text,
-            "to": data.mail,
-        })
+        return axios.post('/api/send_feedback_email_answer/', data)
         .then(result => {_this.showMessage("Выполнено!"); return true;})
         .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
     },

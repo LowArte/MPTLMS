@@ -6,5 +6,8 @@ export default {
     async [actions.FILL_UP_FEEDBACK] ({commit, state}) {
         let feedback = await api_feedback.getFeedbackRequests(this);
         commit(types.SET_FEEDBACK, feedback);
+    },
+    async [actions.RESPOND] ({commit, state}, data) {
+        await api_feedback.sendEmail(data, this);
     }
 }

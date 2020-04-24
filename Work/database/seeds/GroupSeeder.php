@@ -11,7 +11,6 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-
         $date = array(
             [
                 "group_name" => "Э-1-16", // 1

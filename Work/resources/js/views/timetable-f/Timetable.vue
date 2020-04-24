@@ -100,7 +100,8 @@ export default {
   //*Вычисляемые свойства
   post_name: {
     name: "Учебного расписание",
-    url: "timetable"
+    url: "timetable", 
+    //dop_comp: ["", ]
   },
 
   computed: {

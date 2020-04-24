@@ -31,7 +31,7 @@ export default {
     ...mapGetters(["specialities", "groups"]),
     combo_groups: function() {
       if (!this.groups) return undefined;
-      return this.groups.filter(res => {
+      let data = this.groups.filter(res => {
         if (res.id == this.item.id) {
           return false;
         }
@@ -40,6 +40,8 @@ export default {
         }
         return false;
       });
+      data.addToEnd({id: null, group_name: "Пусто"});
+      return data;
     }
   },
   data() {

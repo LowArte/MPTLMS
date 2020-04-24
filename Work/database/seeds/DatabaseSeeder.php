@@ -24,7 +24,9 @@ class DatabaseSeeder  extends Seeder
             GroupSeeder2::class,
             ScheduleSeeder::class,
             SwapScheduleSeeder::class,
-            DesciplineSeeder::class
+            DesciplineSeeder::class,
+            FeedbackSeeder::class,
+            CertificateSeeder::class,
         ]);
         
         $this->call([

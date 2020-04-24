@@ -19,7 +19,7 @@ class DesciplineSeeder extends Seeder
                 "discipline_name"=>"Физическая культура",
             ],
             [
-                "discipline_name"=>"Основа экономики",
+                "discipline_name"=>"Основы экономики",
             ],
             [
                 "discipline_name"=>"Правовое обеспечение профессиональной деятельности",
