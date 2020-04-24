@@ -46,6 +46,19 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Конструктор расписания экзаменов",
+                        "component" => [
+                            "info" => [
+                                "name" => "Конструктор расписания экзаменов",
+                                "url" => "bild_timetable_exam"
+                            ],
+                            "path" => "js/views/timetable-exam-f/Bild_Timetable_Exam"
+                        ],
+                        "default" => true,
+                        "menu" => false
+                    ],
+                    [
+                        "id" => uniqid(),
                         "text" => "Конструктор замен расписания",
                         "component" => [
                             "info" => [
@@ -109,6 +122,18 @@ class PostUserSeeder extends Seeder
                                     "path" => "js/views/replacements-f/Replacements"
                                 ],
 
+                            ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "Расписание экзаменов",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Расписание экзаменов",
+                                        "url" => "timetable_exam"
+                                    ],
+                                    "path" => "js/views/timetable-exam-f/Timetable_Exam"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),
@@ -301,9 +326,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
-                                        "url" => "exams"
+                                        "url" => "timetable_exam"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
+                                    "path" => "js/views/timetable-exam-f/Timetable_Exam"
                                 ],
                             ],
                             [
@@ -428,6 +453,18 @@ class PostUserSeeder extends Seeder
                                     "path" => "js/views/replacements-f/Replacements"
                                 ],
                             ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "Расписание экзаменов",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Расписание экзаменов",
+                                        "url" => "timetable_exam"
+                                    ],
+                                    "path" => "js/views/timetable-exam-f/Timetable_Exam"
+                                ],
+                            ],
                         ],
                     ],
                     [
@@ -479,6 +516,45 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Конструктор учебного расписания",
+                        "component" => [
+                            "info" => [
+                                "name" => "Конструктор учебного расписания",
+                                "url" => "bild_timetable"
+                            ],
+                            "path" => "js/views/timetable-f/Bild_Timetable"
+                        ],
+                        "default" => true,
+                        "menu" => false
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "text" => "Конструктор расписания экзаменов",
+                        "component" => [
+                            "info" => [
+                                "name" => "Конструктор расписания экзаменов",
+                                "url" => "bild_timetable_exam"
+                            ],
+                            "path" => "js/views/timetable-exam-f/Bild_Timetable_Exam"
+                        ],
+                        "default" => true,
+                        "menu" => false
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "text" => "Конструктор замен расписания",
+                        "component" => [
+                            "info" => [
+                                "name" => "Конструктор замен расписания",
+                                "url" => "bild_replacements"
+                            ],
+                            "path" => "js/views/replacements-f/Bild_Replacements"
+                        ],
+                        "default" => true,
+                        "menu" => false
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "assignment",
                         "text" => "Расписания",
                         "menu" => true,
@@ -507,6 +583,18 @@ class PostUserSeeder extends Seeder
                                     "path" => "js/views/replacements-f/Replacements"
                                 ],
 
+                            ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "Расписание экзаменов",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Расписание экзаменов",
+                                        "url" => "timetable-exam_exam"
+                                    ],
+                                    "path" => "js/views/timetable-f/Timetable_Exam"
+                                ],
                             ],
                             [
                                 "id" => uniqid(),

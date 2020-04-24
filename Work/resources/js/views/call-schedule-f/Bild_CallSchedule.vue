@@ -4,7 +4,7 @@ v-content.ma-0.pa-2
     v-card.mx-auto(width='100%' height='auto')
       v-system-bar
         span Расписание звонков
-      v-form.pa-2(ref="BildCallSchedule" v-model="valid" v-if="timeTable != null && timeTable[mplace-1] != null && timeTable[mplace-1].schedule != null")
+      v-form.pa-2(ref="BildCallSchedule" v-if="timeTable != null && timeTable[mplace-1] != null && timeTable[mplace-1].schedule != null")
         v-select.pa-0.mb-0.mt-2(v-model="mplace" label="Место проведения" outlined :items="places" item-value='id' item-text='place_name')
         v-card.pa-2.py-0(width='100%' v-for="(value) in Object.keys(timeTable[mplace-1].schedule)" :key="value" :elevation='0' flat) {{value}} пара
           v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
@@ -42,7 +42,6 @@ export default {
   },
   
   data: () => ({
-    valid: false, //Валидация формы
     mask: "##:##-##:##", //Маска расписания звонка
     inputRules: [
       v =>

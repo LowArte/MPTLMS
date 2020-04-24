@@ -34,7 +34,8 @@ export default {
   },
 
   methods: {
-    async sendQuery() {
+    async sendQuery() 
+    {
       this.loading = true;
       if (this.$refs.Reset.validate()) 
         await api_user.EmailForResetPassword(this.email, this);

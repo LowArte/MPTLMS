@@ -7,8 +7,9 @@
             span(style="color: white;") Фильтры
           v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
           v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
-          router-link(class='nounderline' :to="'timetable'") 
-            v-btn.ma-3(color="accent" text block dark) Расписание      
+          v-content.pa-1
+            router-link(class='nounderline' :to="'timetable'") 
+              v-btn(color="accent" text block dark) Расписание      
       v-divider.ma-0
       v-flex.ma-0.pa-0.row(v-if="schedule != null")
         v-form.ma-0.pa-0.grow(ref="BildTimetable")
@@ -44,7 +45,7 @@ import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //З�
 import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
 
 import api_call_schedule from "@/js/api/callSchedule"; //Расписания звонков
-import api_department from "@/js/api/department"; //Расписания звонков
+import api_department from "@/js/api/department"; //Отделения
 import api_schedule from "@/js/api/schedule"; //Api расписания
 import api_place from "@/js/api/place"; //Api мест проведений
 import api_teacher from "@/js/api/teacher"; //Api преподавателей

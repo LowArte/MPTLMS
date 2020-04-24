@@ -8,8 +8,9 @@ v-content.ma-0.pa-2
           span(style="color: white;") Фильтры
         v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
         v-combobox.mx-3.my-2(dense label="Группа" no-data-text="Нет данных" @change="changeFilter" item-text="group_name" :items="combo_groups" v-model="selected_group")
-        router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_replacements'") 
-          v-btn.ma-3(color="accent" text block dark) Конструктор замен
+        v-content.pa-1
+          router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_replacements'") 
+            v-btn(color="accent" text block dark) Конструктор замен
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" @change="changeFilter" block label="Изменения для всех групп")
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" @change="changeFilter" block label="Изменения на имеющиеся даты")
   v-alert(border="left" dense type="warning")

@@ -51,6 +51,10 @@
                 template(v-slot:activator="{ on }")
                     v-icon.small(v-on="on" @click="remove(item)") mdi-delete
                 span Удалить
+              v-tooltip(bottom v-if="_func_reset_password != null")
+                template(v-slot:activator="{ on }")
+                    v-icon.small(v-on="on" @click="reset_password(item)") mail_outline
+                span Отправить письмо на смену пароля
         v-layout.row.text-center.pa-2.ma-2
             v-pagination(v-model="page" :length="pageCount")
 </template>
@@ -116,6 +120,10 @@ export default {
       type: Function,
       default: null
     },
+    _func_reset_password: {
+      type: Function,
+      default: null
+    },
     _func_upload: {
       type: Function,
       default: null
@@ -155,6 +163,10 @@ export default {
 
     remove(item) {
       this._func_remove(item);
+    },
+
+    reset_password(item) {
+      this._func_reset_password(item);
     },
 
     async init() {
