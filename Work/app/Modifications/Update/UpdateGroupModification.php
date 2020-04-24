@@ -2,19 +2,17 @@
 
 namespace App\Modifications\Update;
 
-use App\Models\User as Model;
+use App\Models\Group as Model;
 use App\Modifications\BaseModification;
 
-use Debugbar;
 
-class UpdateUserModification extends BaseModification
+class UpdateGroupModification extends BaseModification
 {
-    protected function getModelClass()
-    {
+    protected function getModelClass(){
         return Model::class;
     }
 
-    public function updateUserInDatabase($data)
+    public function updateGroupInDatabase($data)
     {
         $group = $this->startCondition()->find($data['id']);
         $group->fill($data);

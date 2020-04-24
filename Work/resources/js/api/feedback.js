@@ -70,7 +70,7 @@ export default {
     //!----------------------------------------
     sendEmail(data, _this)
     {
-        return axios.post('/api/send_email/request_users/' + data.id, {
+        return axios.post('/api/functions/send_feedback_email_answer/' + data.id, {
             "text": data.text,
             "to": data.mail,
         })

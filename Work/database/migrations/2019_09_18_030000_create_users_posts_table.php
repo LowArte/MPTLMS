@@ -16,7 +16,7 @@ class CreateUsersPostsTable extends Migration
         Schema::create('users_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->mediumText('name');
-            $table->mediumText('slug');
+            $table->string('slug')->unique();
             $table->json('privilegies');
             $table->timestamps();
             $table->softDeletes();

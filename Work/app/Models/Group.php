@@ -22,7 +22,11 @@ class Group extends Model
         'created_at', 'deleted_at', 'updated_at', 'department_id'
     ];
 
-    protected $cascadeDeletes = ['students'=>'group_id'];
+    protected $fillable  = [
+        'group_name','curs','department_id','child_id'
+    ];
+
+    protected $cascadeNullDeletes = ['students'=>'group_id'];
 
     public function getFullName($name = ''){
         if($this->child_id == null){
@@ -46,7 +50,7 @@ class Group extends Model
 
     public function department()
     {
-        return $this->hasOne(Department::class);
+        return $this->hasOne(Department::class,'id','department_id');
     }
 
     public function __construct($attributes = array())

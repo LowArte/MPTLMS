@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Repositories\ModelRepository\FeedbackRepository;
 use App\Modifications\Create\CreateFeedbackModification;
+use App\Modifications\Other\OtherFeedbackModification;
+use Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +28,14 @@ class FeedbackController extends BaseController
     {
         $data = $request->all();
         $result = $createFeedbackModification->addFeedbackToDatabase($data, Auth::user()->id);
+        if($result)
+            return response()->json(["success"=>true]);
+        return response()->json(["success"=>true]);
+    }
+
+    public function sendEmail($id,Request $request,OtherFeedbackModification $otherFeedbackModification){
+        $data = $request->all();
+        $result = $otherFeedbackModification->sendEmail($data);
         if($result)
             return response()->json(["success"=>true]);
         return response()->json(["success"=>true]);

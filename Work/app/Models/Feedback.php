@@ -17,8 +17,12 @@ class Feedback extends Model
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at'
+        'deleted_at', 'updated_at'
     ];
+
+    function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
     
     public function __construct($attributes = array())
     {

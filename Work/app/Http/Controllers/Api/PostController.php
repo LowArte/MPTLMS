@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Modifications\Create\CreatePostModification;
+use App\Modifications\DeletePostModification;
 use App\Modifications\Update\UpdatePostModification;
 use App\Repositories\ModelRepository\UsersPostRepository;
 use Illuminate\Http\Request;
@@ -28,7 +30,6 @@ class PostController extends BaseController
     public function getPostsFull(UsersPostRepository $usersPostRepository)
     {
         $posts = $usersPostRepository->getPostsFull();
-        Debugbar::info($posts);
         return response()->json(compact('posts'));
     }
 
@@ -42,6 +43,15 @@ class PostController extends BaseController
         return response()->json(compact('posts'));
     }
 
+    public function save(Request $request, CreatePostModification $createPostModification){
+        $data = $request->all();
+        $result = $createPostModification->addPostToDatabase($data);
+        if($result){
+            return response()->json(["success"=>true]);
+        }
+        return response()->json([],400);
+    }
+
     public function edit(Request $request, UpdatePostModification $updatePostModification){
         $data = $request->all();
         $result = $updatePostModification->updatePostInDatabase($data);
@@ -49,5 +59,15 @@ class PostController extends BaseController
             return response()->json(["success"=>true]);
         }
         return response()->json([],400);
+    }
+
+    public function delete($id, DeletePostModification $deletePostModification){
+        $result = $deletePostModification->deletePostFromDatabase($id);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
     }
 }

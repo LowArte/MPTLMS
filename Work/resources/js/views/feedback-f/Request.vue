@@ -25,7 +25,7 @@ v-content.ma-0.pa-1
                   v-card-text.pa-1.text(v-if="expanded[0].fio != null") ФИО: {{expanded[0].fio}}
                   v-card-text.pa-1.text Текст: {{expanded[0].text}}
                   v-textarea.pa-1(v-model='modelmessage' :auto-grow='true' :clearable='false' :counter='255 ? 255 : false' :filled='false' :flat='true' :hint="'Не более 255 символов'" :label="'Сообщение'" :loading='false' :no-resize='false' :outlined='false' :persistent-hint='false' :placeholder="''" :rounded='false' :row-height='24' :rows='3' :shaped='false' :single-line='false' :solo='false' :rules='messageRules')
-                  v-btn.ma-1.white--text(color='blue' depressed @click='sendQuery(expanded[0].email)') Ответить
+                  v-btn.ma-1.white--text(color='blue' depressed @click='sendQuery(expanded[0].user.email)') Ответить
         v-layout.row.text-center.pa-2.ma-2
           v-pagination(v-model='page' :length='pageCount')
 </template>
@@ -79,7 +79,7 @@ export default {
       itemsPerPage: 10,
       headers: [
         { text: "Тема", value: "type" },
-        { text: "E-mail", value: "email" },
+        { text: "E-mail", value: "user.email" },
         { text: "Отвечено", value: "answered" },
         { text: "Дата", value: "created_at" },
         { text: "", value: "data-table-expand" }
@@ -114,7 +114,7 @@ export default {
       {
         if(await api_feedback.sendEmail({mail: email,text: this.modelmessage,id: this.expanded[0].id}, this))
         {
-          this.items.splice(this.expanded[0]);
+         // this.items.splice(this.expanded[0]); //!Зачем это действие мне не понят по идеии должно устанавливать отвечено
           this.$refs.form.reset();
         }
       }
@@ -126,7 +126,7 @@ export default {
     async Update() 
     {
       this.showLoading("Обновление данных");
-      this.items = await api_feedback.getFeedbackRequests(this);
+      this.items = await api_feedback.getFeedbackRequests(this); //! Переписать на сторону action vuex
       this.closeLoading("Обновление данных");
     }
   }

@@ -67,7 +67,7 @@ export default {
     //! Реализовать back-end для api 
     //!----------------------------------------
     sendEmailDone(answer, _this) {
-        return axios.post('/api/certificate/sendEmailDone/', answer)
+        return axios.post('/api/functions/send_email_certificate_answer/', answer)
         .then(result =>{_this.showMessage("Отправлено!"); return true;})
         .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
     },

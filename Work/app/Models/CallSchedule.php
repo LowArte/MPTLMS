@@ -21,6 +21,10 @@ class CallSchedule extends Model
         'created_at', 'deleted_at', 'updated_at'
     ];
 
+    protected $fillable  = [
+        'call_schedule','place_id'
+    ];
+
     public function place()
     {
         return $this->hasOne(Places::class,'id','place_id');

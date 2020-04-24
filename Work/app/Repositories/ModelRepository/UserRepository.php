@@ -3,6 +3,7 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\User as Model;
+use Debugbar;
 
 class UserRepository extends BaseRepository
 {
@@ -13,6 +14,12 @@ class UserRepository extends BaseRepository
     public function getUsers()
     {   $columns = ['id','name','secName','thirdName','email','post_id','disabled'];
         $result = $this->startCondition()->select($columns)->with('post:id,name')->get();
+        return $result;
+    }
+
+    public function getUserByEmail($email)
+    {   $columns = ['id','email'];
+        $result = $this->startCondition()->select($columns)->where("email",$email)->first();
         return $result;
     }
 

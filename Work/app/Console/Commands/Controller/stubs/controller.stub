@@ -12,7 +12,7 @@ use Debugbar;
 class DummyClass extends BaseController
 { 
     /**
-     * get departments from database
+     * get DummyClass from database
      * @return JSON
      */
     public function getDummyModelName(DummyModelNameRepository $DummyModelVariableNameRepository)

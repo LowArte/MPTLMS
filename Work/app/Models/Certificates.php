@@ -21,6 +21,14 @@ class Certificates extends Model
         'deleted_at','updated_at'
     ];
 
+    protected $casts = [
+        'certificates_data' => 'array'
+    ];
+
+    function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);

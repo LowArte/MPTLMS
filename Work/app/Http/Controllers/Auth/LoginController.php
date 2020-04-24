@@ -27,6 +27,11 @@ class LoginController extends Controller
 
         $user->load("post");
         $user->load("student");
+        if($user->student)
+        {
+            $user->student->load("group:id,group_name,curs,department_id");
+            $user->student->group->load("department:id,dep_name_full,studysperiod,qualification");
+        }
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->save();
@@ -63,6 +68,11 @@ class LoginController extends Controller
         }
         $user->load("post");
         $user->load("student");
+        if($user->student)
+        {
+            $user->student->load("group:id,group_name,curs,department_id");
+            $user->student->group->load("department");
+        }
         return response()->json(["success" => true, "user" => $user]);
     }
 }

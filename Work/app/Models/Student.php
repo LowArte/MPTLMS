@@ -20,6 +20,10 @@ class Student extends Model
         'created_at', 'deleted_at', 'updated_at', 'departments_id'
     ];
 
+    function group(){
+        return $this->hasOne(Group::class,'id','group_id');
+    }
+
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);

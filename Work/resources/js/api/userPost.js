@@ -88,7 +88,7 @@ export default {
     //! Реализовать back-end для api
     //!----------------------------------------
     saveUserPost(post, _this) {
-        return axios.get('/api/save/post/', post)
+        return axios.post('/api/save/post/', post)
         .then(result => { _this.showMessage("Выполнено!"); return res.data.id; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },

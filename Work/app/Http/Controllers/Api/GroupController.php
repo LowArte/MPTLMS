@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Modifications\Create\CreateGroupModification;
+use App\Modifications\Delete\DeleteGroupModification;
+use App\Modifications\Update\UpdateGroupModification;
 use App\Repositories\ModelRepository\DepartmentRepository;
 use App\Repositories\ModelRepository\GroupRepository;
+
+use Illuminate\Http\Request;
+
 
 class GroupController extends BaseController
 {
@@ -49,5 +55,33 @@ class GroupController extends BaseController
         $groups = $groupRepository->getGroups();
         $departments = $departmentRepository->getDepartmentsForComboBox();
         return response()->json(compact('groups', 'departments'));
+    }
+
+    public function save(Request $request, CreateGroupModification $createGroupModification){
+        $data = $request->all();
+        $result = $createGroupModification->addGroupToDatabase($data);
+        if($result){
+            return response()->json(["success"=>true]);
+        }
+        return response()->json([],400);
+    }
+
+    public function edit(Request $request, UpdateGroupModification $updateGroupModification){
+        $data = $request->all();
+        $result = $updateGroupModification->updateGroupInDatabase($data);
+        if($result){
+            return response()->json(["success"=>true]);
+        }
+        return response()->json([],400);
+    }
+
+    public function delete($id, DeleteGroupModification $deleteGroupModification){
+        $result = $deleteGroupModification->deleteGroupFromDatabase($id);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
     }
 }

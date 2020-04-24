@@ -7,18 +7,19 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class BaseNotification extends Notification
+class FeedbackAnswer extends Notification
 {
     use Queueable;
-    public $text;
+
+    public $data;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($_text)
+    public function __construct($data)
     {
-        $this->text = $_text;
+        $this->data=$data;
     }
 
     /**
@@ -29,10 +30,8 @@ class BaseNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail'];
     }
-
-
 
     /**
      * Get the mail representation of the notification.
@@ -43,9 +42,12 @@ class BaseNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->markdown('vendor.notifications.answerforrequest')
+            ->from('p_a.n.pikalov@mpt.ru', "Ответ на ваше обращение")
+            ->subject('Ответ на обращение от ' . config('app.name'))
+            ->line("На ваще обращение ответил: ".$this->data['by'])
+            ->line("C текстом ")
+            ->line($this->data['text']);
     }
 
     /**
@@ -57,7 +59,7 @@ class BaseNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            "text"=>$this->text
+            //
         ];
     }
 }
