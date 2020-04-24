@@ -91,7 +91,7 @@ trait CascadeNullDeletes
      */
     protected function getCascadingDeletes()
     {
-        return isset($this->cascadeDeletes) ? (array) $this->cascadeDeletes : [];
+        return isset($this->cascadeNullDeletes) ? (array) $this->cascadeNullDeletes : [];
     }
 
 

@@ -3,7 +3,6 @@ v-content.ma-0.pa-1
   v-layout.row.wrap
     v-flex(v-for="items  in GET_FEEDBACK" :key="items.id")
       p 
-        
 </template>
 
 <script>
@@ -45,7 +44,8 @@ export default {
 
   computed: mapGetters(["GET_FEEDBACK"]),
 
-  async mounted() {
+  async mounted() 
+  {
     this.showLoading("Получение данных");
     await this.$store.dispatch(actions.FILL_UP_FEEDBACK);
     console.log(await this.GET_FEEDBACK);

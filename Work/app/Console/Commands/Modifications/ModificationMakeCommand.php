@@ -84,6 +84,7 @@ class ModificationMakeCommand extends GeneratorCommand
             'DummyVariableModel' => Str::lower($this->option($modelName)),
         ];
     }
+
     /**
      * Get the stub file for the generator.
      *
@@ -103,7 +104,7 @@ class ModificationMakeCommand extends GeneratorCommand
             $stub = '/stubs/modification.update.stub';
         }
 
-        $stub = $stub ??  '/stubs/modification.create.stub';
+        $stub = $stub ??  '/stubs/modification.other.stub';
 
         return __DIR__ . $stub;
     }
@@ -138,7 +139,7 @@ class ModificationMakeCommand extends GeneratorCommand
             $path = '\Modifications\Delete';
         }
 
-        $path = $path ??  '\Modifications';
+        $path = $path ??   $path = '\Modifications\Other';
 
         return $path;
     }
@@ -173,9 +174,9 @@ class ModificationMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['create', 'c', InputOption::VALUE_OPTIONAL, 'Generate a modification only create'],
-            ['delete', 'd', InputOption::VALUE_OPTIONAL, 'Generate a modification only delete'],
-            ['update', 'u', InputOption::VALUE_OPTIONAL, 'Generate a modification only update'],
+            ['create', 'c', InputOption::VALUE_REQUIRED, 'Generate a modification only create'],
+            ['delete', 'd', InputOption::VALUE_REQUIRED, 'Generate a modification only delete'],
+            ['update', 'u', InputOption::VALUE_REQUIRED, 'Generate a modification only update'],
         ];
     }
 }

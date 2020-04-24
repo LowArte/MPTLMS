@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Student;
+use App\Notifications\FeedbackAnswer;
 use Laravel\Passport\HasApiTokens;
 use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -68,4 +69,17 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPassword($token));
     }
+
+            /**
+     * Sending password reset Notification
+     * 
+     * @param string $token Required
+     * 
+     * @return void
+     */
+    public function sendAnswerForFeedback($data)
+    {
+        $this->notify(new FeedbackAnswer($data));
+    }
+
 }

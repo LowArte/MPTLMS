@@ -75,7 +75,7 @@ export default {
       itemsPerPage: 10, //Количество строк
       headers: [
         { text: "Тематика", value: "type" },
-        { text: "Почта", value: "email" },
+        { text: "Почта", value: "user.email" },
         { text: "Дата обращения", value: "created_at" },
         { text: "Выполнено", value: "done" },
         { text: "", value: "data-table-expand" }
@@ -100,7 +100,7 @@ export default {
     {
       if(this.$refs.sendNotDone.validate())
       {
-        if (await api_cerificate.sendEmailNotDone({ email: email, text: this.modelmessage, id: this.expanded[0].id }, this)) 
+        if (await api_cerificate.sendEmailNotDone({ email: email, text: this.modelmessage, id: this.expanded[0].id }, this)) //! Такого даже нет
         {
           this.items.splice(this.expanded[0]);
           this.dialog = false;
@@ -129,14 +129,14 @@ export default {
     async Update() 
     {
       this.showLoading("Обновление данных");
-      this.items = await api_cerificate.getCertificates(this);
-      if (this.items != null) 
-      {
-        for (var i = 0; i < this.items.length; i++)
-          this.items[i].certificates_data = JSON.parse(
-            this.items[i].certificates_data
-          );
-      }
+      this.items = await api_cerificate.getCertificates(this); //! перевести в action vuex
+      // if (this.items != null) 
+      // {
+      //   for (var i = 0; i < this.items.length; i++)
+      //     this.items[i].certificates_data = JSON.parse(  //! бесполезный код
+      //       this.items[i].certificates_data
+      //     );
+      // }
       this.closeLoading("Обновление данных");
     }
   }

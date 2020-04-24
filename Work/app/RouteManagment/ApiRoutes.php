@@ -65,11 +65,18 @@ class ApiRoutes
             Route::post('options', 'Api\SiteOptionsController@setOptions')->name('options');
 
             Route::post('department','Api\DepartmentController@save')->name('department');
+
+            Route::post('post','Api\PostController@save')->name('post');
+
             Route::post('group','Api\GroupController@save')->name('group');
+
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
+
             Route::post('certificate','Api\CertificateController@save')->name('certificate');
 
-            Route::get('news','Api\NewsController@save')->name('news');              
+            Route::post('news','Api\NewsController@save')->name('news');  
+            
+            Route::post('user','Api\UserController@save')->name('user');      
 
             Route::post('place','Api\PlaceController@save')->name('place');
 
@@ -84,10 +91,14 @@ class ApiRoutes
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
 
             Route::post('department','Api\DepartmentController@edit')->name('department');
+
             Route::post('group','Api\GroupController@edit')->name('group');
 
-            Route::get('news','Api\NewsController@edit')->name('news'); 
-            Route::get('set_like/{news_id}','Api\NewsController@setLike')->name('set_like');           
+            Route::post('post','Api\PostController@edit')->name('post');
+
+            Route::post('news','Api\NewsController@edit')->name('news');  
+
+            Route::post('user','Api\UserController@edit')->name('user');      
 
             Route::post('place','Api\PlaceController@edit')->name('place');
 
@@ -96,8 +107,10 @@ class ApiRoutes
          /**
          * Методы отвечаюшие за обобщенные функции
          */
-        Route::name('functions.')->prefix('edit')->group(function () {
-            Route::get('set_like/{news_id}','Api\NewsController@setLike')->name('set_like');           
+        Route::name('functions.')->prefix('functions')->group(function () {
+            Route::post('set_like/{news_id}','Api\NewsController@setLike')->name('set_like'); 
+
+            Route::post('send_feedback_email_answer/{feedback_id}','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');           
         });
         /**
          * Методы отвечаюшие за удаление общих данных
@@ -106,12 +119,16 @@ class ApiRoutes
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
 
             Route::post('department/{department_id}','Api\DepartmentController@delete')->name('department');
+
+            Route::post('post/{post_id}','Api\PostController@delete')->name('post');
+
             Route::post('group/{group_id}','Api\GroupController@delete')->name('group');
 
-            Route::get('news/{news_id}','Api\NewsController@delete')->name('news');         
+            Route::post('news/{news_id}','Api\NewsController@delete')->name('news');         
 
             Route::post('place/{place_id}','Api\PlaceController@delete')->name('place');
 
+            Route::post('user','Api\UserController@delete')->name('user');      
         });
     }
 }

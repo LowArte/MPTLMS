@@ -1,9 +1,26 @@
 @component('mail::message')
-Ответ на обращение от:  {{config('app.name')}}<br>
-Ваше обращение рассмотренно. Не отвечайте на это письмо, так как система отвечает автоматически на ваши обращения.<br>
-{{$message}}
-<br>
-Спасибо за ваще обращение
-ваш,<br>
+{{-- Greeting --}}
+@if (! empty($greeting))
+# {{ $greeting }}
+@else
+@if ($level === 'error')
+# @lang('Ой!')
+@else
+# @lang('Здравствуйте!')
+@endif
+@endif
+
+{{-- Intro Lines --}}
+@foreach ($introLines as $line)
+{{ $line }}
+@endforeach
+
+{{-- Salutation --}}
+@if (! empty($salutation))
+{{ $salutation }}
+@else
+@lang('Ваш'),<br>
 {{ config('app.name') }}
+@endif
+
 @endcomponent

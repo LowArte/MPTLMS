@@ -13,7 +13,7 @@ class FeedbackRepository extends BaseRepository
     public function getFeedback()
     {
         $columns = ['id', 'user_id', 'type', 'text', 'answered', 'created_at'];
-        $result = $this->startCondition()->select($columns)->orderBy('id', 'desc')->toBase()->get();
+        $result = $this->startCondition()->select($columns)->with('user:id,email')->orderBy('id', 'desc')->get();
         return $result;
     }
 }

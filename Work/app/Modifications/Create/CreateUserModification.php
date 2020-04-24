@@ -16,11 +16,11 @@ class CreateUserModification extends BaseModification
 
     public function addUserToDatabase($data){
 
-        $user = $this->startCondition()->select(['email'])->where([['id',"<>",$data['id']],['email',$data['email']]])->toBase()->first();
+        $user = $this->startCondition()->select(['id'])->where('email',$data['email'])->toBase()->first();
         if($user != null){
             return false;
         }
-
+        
         $user = new Model();
         $user->fill($data);
         $user->save();
