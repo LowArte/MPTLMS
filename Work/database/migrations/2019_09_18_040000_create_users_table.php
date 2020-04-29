@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('disabled');
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('users_posts');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
