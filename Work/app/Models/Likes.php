@@ -8,8 +8,6 @@ use Panoscape\History\HasHistories;
 
 class Likes extends Model
 {
-    use SoftDeletes;
-
     public function getModelLabel()
     {
         return $this->display_name;
@@ -18,11 +16,7 @@ class Likes extends Model
     public $timestamps = true;
 
     protected $fillable  = [
-        'value','user_id','news_id','links'
-    ];
-
-    protected $casts = [
-        'value' => 'boolean'
+        'user_id','news_id','links'
     ];
 
     protected $hidden = [

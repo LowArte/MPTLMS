@@ -1,4 +1,4 @@
-import * as actions from '../../action-types'
+import * as actions from '../../action-types';
 import api_group from "@/js/api/group";
 
 export default{
@@ -28,10 +28,10 @@ export default{
         if(!state.groups_combobox_cache.contains(data.result))
         {
             let result = await api_group.getGroupsByDepartmentId(data.result, data.context);
-            commit(actions.ADD_CACHE_GROUP_DATA,{id:data.result,result:result});
+            await commit(actions.ADD_CACHE_GROUP_DATA,{id:data.result,result:result});
         }
         else{
-            commit(actions.ADD_ID_CACHE_GROUP_DATA,data.result);
+            await commit(actions.ADD_ID_CACHE_GROUP_DATA,data.result);
         }
     }
 }

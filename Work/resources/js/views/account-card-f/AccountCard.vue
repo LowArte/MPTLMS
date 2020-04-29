@@ -9,13 +9,13 @@ v-content.pa-0(v-if="user")
                     v-list-item-avatar(color="grey darken-3")
                     v-list-item-content
                         v-list-item-title.headline {{user.secName + " " + user.name + " " + user.thirdName}}
-                        v-list-item-subtitle Должность: {{post}}
+                        v-list-item-subtitle Должность: {{user.post.name}}
                 v-divider
                 v-card-text.pb-2.font-weight-bold Дата рождения: {{user.student.birthday}}
                 v-card-text.py-2.font-weight-bold Гендерный признак: {{user.student.gender}}
                 v-card-text.py-2.font-weight-bold E-mail: {{user.email}}
                 v-card-text.py-2.font-weight-bold Специальность: 09.02.03 Программирование в компьютерных системах
-                v-card-text.py-2.font-weight-bold Группа: {{user.student.group_id}}
+                v-card-text.py-2.font-weight-bold Группа: {{user.student.group.group_name}}
                 v-card-text.py-2.font-weight-bold Текущий курс
                 v-slider.mx-4(v-model="curs" :max="3" :tick-labels="labels"  disabled)
                 v-card-actions
@@ -26,10 +26,10 @@ v-content.pa-0(v-if="user")
                 v-expand-transition
                     div(v-show="show")
                         v-divider
-                        v-card-text.py-2 Специализация: Техник-программист
+                        v-card-text.py-2 Специализация: {{user.student.group.department.qualification}}
                         v-card-text.py-2 Форма обучения: Очная
                         v-card-text.py-2 Вид финансирования: {{user.student.type_of_financing}}
-                        v-card-text.py-2 Срок обучения: 3г 10м
+                        v-card-text.py-2 Срок обучения: {{user.student.group.department.studysperiod}}
                         v-card-actions
                             v-tooltip(bottom)
                                 template(v-slot:activator="{ on }")

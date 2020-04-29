@@ -4,7 +4,6 @@ namespace App\Modifications\Create;
 
 use App\Models\ScheduleSwap as Model;
 use App\Modifications\BaseModification;
-use Hash;
 
 class CreateReplacementModification extends BaseModification
 {

@@ -12,8 +12,16 @@ class CertificateRepository extends BaseRepository
 
     public function getCertificates()
     {
-        $columns = ['id','user_id','type', 'certificates_data', 'done', 'created_at'];
-        $result = $this->startCondition()->select($columns)->with("user:id,email")->orderBy('id', 'desc')->get();
+        $columns = ['certificates.id','user_id','type', 'certificates_data', 'done', 'certificates.created_at'];
+        $result = $this->startCondition()
+        ->join('users', 'user_id', '=', 'users.id')
+        ->select($columns)
+        ->selectRaw("CONCAT(users.name,users.secName,users.thirdName) as fullFio, users.email")
+        ->orderBy('id', 'desc')
+        ->toBase()
+        ->get();   
+        foreach ($result as $value)
+            $value->certificates_data = json_decode($value->certificates_data);
         return $result;
     }
 }

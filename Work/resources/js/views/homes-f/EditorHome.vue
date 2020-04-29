@@ -19,9 +19,6 @@ v-content.ma-0.pa-2
                         v-flex
                             router-link(class='nounderline' :to="'/' + user.post.slug + '/news-constructor'")
                                 v-btn(color="primary" block dark) Создать новую запись
-                        v-flex
-                            router-link(class='nounderline' :to="'/' + user.post.slug + '/news-statistics'")
-                                v-btn(color="primary" block dark) Статистика
 </template>
 
 <script>

@@ -5,7 +5,7 @@ namespace App\Modifications\Create;
 use App\Models\News as Model;
 use App\Modifications\BaseModification;
 use Illuminate\Support\Facades\Auth;
-use Hash;
+use Debugbar;
 
 class CreateNewsModification extends BaseModification
 {
@@ -15,6 +15,7 @@ class CreateNewsModification extends BaseModification
 
     public function addNewsToDatabase($request)
     {
+        Debugbar::info($request);
         $news = new Model();
         $news->fill($request);
         $result = $news->save();

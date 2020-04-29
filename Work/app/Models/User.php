@@ -4,17 +4,21 @@ namespace App\Models;
 
 use App\Models\Student;
 use App\Notifications\FeedbackAnswer;
+use App\Notifications\CertificateAnswerAccess;
+use App\Notifications\CertificateAnswerCancel;
+use App\Notifications\NewUser;
 use Laravel\Passport\HasApiTokens;
 use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Panoscape\History\HasOperations;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Panoscape\History\HasHistories;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasApiTokens,HasOperations,HasHistories;
+    use Notifiable,HasApiTokens,HasOperations,HasHistories, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email','secName','thirdName','disabled','post_id'
+        'name', 'email','secName','disabled','post_id'
     ];
 
     /**
@@ -70,8 +74,8 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
-            /**
-     * Sending password reset Notification
+     /**
+     * Отправка ответа
      * 
      * @param string $token Required
      * 
@@ -82,4 +86,39 @@ class User extends Authenticatable
         $this->notify(new FeedbackAnswer($data));
     }
 
+    /**
+     * Отправка ответа
+     * 
+     * @param string $token Required
+     * 
+     * @return void
+     */
+    public function sendAnswerForCertificateAccess($data)
+    {
+        $this->notify(new CertificateAnswerAccess($data));
+    }
+
+    /**
+     * Отправка ответа
+     * 
+     * @param string $token Required
+     * 
+     * @return void
+     */
+    public function sendAnswerForCertificateCancel($data)
+    {
+        $this->notify(new CertificateAnswerCancel($data));
+    }
+
+    /**
+     * Отправка ответа
+     * 
+     * @param string $token Required
+     * 
+     * @return void
+     */
+    public function sendEmailNewUser($data)
+    {
+        $this->notify(new NewUser($data));
+    }
 }

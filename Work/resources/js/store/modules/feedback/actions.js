@@ -8,6 +8,9 @@ export default {
         commit(types.SET_FEEDBACK, feedback);
     },
     async [actions.RESPOND] ({commit, state}, data) {
-        await api_feedback.sendEmail(data, this);
+        await api_feedback.sendEmail(data)
+    },
+    async [actions.EDIT_ANSWERED] ({commit, state}, id) {
+        commit(types.EDIT_ANSWERED, id);
     }
 }

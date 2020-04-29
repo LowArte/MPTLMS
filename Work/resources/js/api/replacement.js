@@ -43,44 +43,6 @@ export default {
         .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
     },
 
-    //*Получение замен для определённой даты и группы
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
-    //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
-    //! Требование ----------------------------
-    //!----------------------------------------
-    getReplacementsByGroupByDate(data, _this) {
-        return axios.get('/api/getters/replacements_by_group_by_date/' + data.group_id + '/' + data.date)
-        .then(res => {return res.data.replacements;})
-        .catch(ex => {_this.showError("Ошибка выполнения данных!"); return undefined;});
-    },
-
-    //*Получение замен для определённой группы
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
-    //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
-    //! Требование ----------------------------
-    //!----------------------------------------
-    getReplacementsByGroup(group_id, _this) {
-        return axios.get('/api/getters/replacements_by_group/' + group_id)
-        .then(res => {return res.data.replacements;})
-        .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
-    },
-
-    //*Получение замен для определённой даты
-    //! Комментарий ---------------------------
-    //? Реализуется получение данных из таблицы *SCHEDULE_SWAPS* (Замены)
-    //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
-    //! Требование ----------------------------
-    //!----------------------------------------
-    getReplacementsByDate(date, _this) {
-        return axios.get('/api/getters/replacements_by_date/' + date)
-        .then(res => {return res.data.replacements;})
-        .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
-    },
-
-
-
 
     //*----------------------------------------
     //!         Работа с данными

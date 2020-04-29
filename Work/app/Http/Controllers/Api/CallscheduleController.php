@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CallscheduleController extends BaseController
 { 
     /**
-     * Edit call schedule
+     * Редактирование расписания звонков
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -28,7 +28,7 @@ class CallscheduleController extends BaseController
     }
 
     /**
-     * get call schedule for component
+     * Получение компонента для вывода расписания
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -39,7 +39,7 @@ class CallscheduleController extends BaseController
     }
 
     /**
-     * get call schedule
+     * Получение расписания
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

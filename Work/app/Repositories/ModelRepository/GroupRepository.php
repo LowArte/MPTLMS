@@ -28,6 +28,7 @@ class GroupRepository extends BaseRepository
                 $result->push([
                     'id'=>$dat->id,
                     'group_name'=>$dat->getFullName(),
+                    'child_id'=>$dat->child_id,
                 ]);
             }
         }

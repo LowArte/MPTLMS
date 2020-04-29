@@ -13,7 +13,7 @@ export default{
     async [actions.DELETE_USER]({ commit, state }, data) {
         let result = await api_user.deleteUser(data.result, data.context);
         if (result) {
-            commit(actions.DELETE_USER,data.result)
+            commit(actions.DELETE_USER,data.result[0])
         }
     },
 

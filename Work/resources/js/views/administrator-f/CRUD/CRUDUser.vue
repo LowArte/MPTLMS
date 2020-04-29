@@ -134,9 +134,11 @@ export default {
     //?----------------------------------------------
     async reset_password(item) 
     {
+      this.showLoading("Отправка письма");
       if(item.email != null)
         if(await api_user.EmailForResetPassword(item.email, this))
           this.showMessage("Письмо отправлено!");
+      this.closeLoading("Отправка письма");
     }
   }
 };

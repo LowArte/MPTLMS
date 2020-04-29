@@ -2,24 +2,16 @@
 div(name="top" v-if="posts.length > 0" )
   c-comfirm-dialog(ref='qwestion')
   v-card.mx-auto.mb-3(max-width="600px" v-for="(post, i) in posts" :key="i")
-      v-system-bar(color="primary" lights-out dark)
-          span {{post.time}}
-          v-btn.mx-auto(x-small text @click="openPost(post.id)") Подробнее
-          v-tooltip(v-if="user.post_id == 7 || user.post_id == 1" bottom)
-              template(v-slot:activator="{ on }")
-                  v-btn(icon x-small @click="deletePost(post.id)")
-                      v-icon.pa-0.ma-0 close
-              span Удалить запись
-      v-carousel(height="300" min-height="250px" :continuous="false" :cycle="false" :show-arrows="false" delimiter-icon="mdi-minus" v-if="post.images.length > 0")
-          v-carousel-item(v-for="(mediain, i) in post.media" :key="i" :src="mediain")
-      v-content.pt-0.pa-2
-          v-card-title {{post.title}}
-          v-card-text {{post.text}}
-      v-divider
-      v-card-actions
-          v-btn(text @click="clickLike(post.id)")
-              v-icon mdi-heart
-              span.mx-2 {{post.likes.length}}
+    v-system-bar(color="primary" lights-out dark v-if="user != null && user.post_id != null")
+      //--span {{post.time}}
+      //--v-btn.mx-auto(x-small text @click="openPost(post.id)") Подробнее
+      v-spacer
+      v-tooltip(v-if="user.post_id == 7 || user.post_id == 1" bottom)
+          template(v-slot:activator="{ on }")
+              v-btn(icon x-small @click="deletePost(post.id)")
+                  v-icon.pa-0.ma-0 close
+          span Удалить запись
+    c-card-new(:_post = "post")
   v-speed-dial(v-if="posts.length > 2" absolute fixed v-model="fab" :bottom="true" :right="true")
     template(v-slot:activator)
       v-btn(v-model="fab" color="primary" dark fab href="#top")
@@ -34,6 +26,7 @@ import { mapGetters } from "vuex";
 //!           Подключение диалога
 //?----------------------------------------------
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
+import cardNew_C from "@/js/components/news-f/CardNew";
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -50,7 +43,8 @@ export default {
     ...mapGetters(["user"])
   },
   components: {
-    "c-comfirm-dialog": confirmDialog_C
+    "c-comfirm-dialog": confirmDialog_C,
+    "c-card-new" : cardNew_C
   },
   post_name: {
     name: "Лента новостей",
@@ -64,32 +58,24 @@ export default {
       posts: []
     };
   },
-  async mounted() {
-    this.posts = await api_new.getNews(this);
-    console.log(this.posts.length);
+  async beforeMount() {
+    this.posts = await api_new.getNews(this.user.id);
   },
   methods: {
-    deletePost(id) {
-      this.$refs.qwestion.pop().then(result => {
-        if (result) {
-          this.posts.deleteById(id);
-          api_new.deleteNews(id, this);
+    async deletePost(id) {
+        if(await this.$refs.qwestion.pop().then(result => { return true;}))
+        {
+          if(await api_new.deleteNews(id, this))
+            this.posts = await api_new.getNews(this.user.id);
         }
-      });
     },
     loadPost() {
       this.loading = true;
-      console.log(this.posts);
       this.loading = false;
     },
     openPost(id) {
       this.loading = true;
-      console.log(this.posts[1]);
       this.loading = false;
-    },
-    clickLike(id) {
-      api_new.likeNews(id, this);
-      //найти пользователя в масиве и отметить лайк, оновить счётчик
     }
   }
 };

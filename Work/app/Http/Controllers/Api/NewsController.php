@@ -6,42 +6,51 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modifications\Create\CreateNewsModification;
 use App\Modifications\Delete\DeleteNewsModification;
+use App\Modifications\Create\CreateLikesModification;
+use App\Modifications\Delete\DeleteLikesModification;
 use App\Modifications\Update\UpdateNewsModification;
 use App\Repositories\ModelRepository\NewsRepository;
+use App\Repositories\ModelRepository\LikesRepository;
+use Debugbar;
 
 class NewsController extends BaseController
 {
     /**
-     * Get news 
+     * Получение новостей
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getNews(Request $request,NewsRepository $newsRepository)
+    public function getNews($user_id,NewsRepository $newsRepository)
     {
-        $news = $newsRepository->getNews();
+        $news = $newsRepository->getNews($user_id);
         return response()->json(compact('news'));
     }
 
     /**
-     * Add like
+     * Добавление лайка
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function setLike($id,UpdateNewsModification $updateNewsModification)
+    public function setLike(Request $request,CreateLikesModification $createLikesModification, DeleteLikesModification $deleteLikesModification, LikesRepository $likesRepository)
     {
-        $result = $updateNewsModification->updateLikeNewsInDatabase($id);
-        if($result){
-            return response()->json(200);
-        }
-        else{
+        $data = $request->all();
+        Debugbar::info($likesRepository->getLikesForUser($data['new_id'], $data['user_id']));
+        if($likesRepository->getLikesForUser($data['new_id'], $data['user_id']) == null)
+            $result = $createLikesModification->addLikeToDatabase($data['new_id'], $data['user_id']);
+        else
+            $result = $deleteLikesModification->deleteLikesFromDatabase($data['user_id'], $data['new_id']);
+
+        $count = $likesRepository->getLikesCount($data['new_id']);
+        if($result)
+            return response()->json(compact('count'), 200);
+        else
             return response()->json(500);
-        }
     }
 
     /**
-     * Save a newly created resource in storage.
+     * Сохранение новости
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -58,10 +67,8 @@ class NewsController extends BaseController
         }
     }
 
-
-
     /**
-     * Update the specified resource in storage.
+     * Редактирование новости
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -79,7 +86,7 @@ class NewsController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Удаление новости
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

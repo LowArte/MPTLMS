@@ -7,10 +7,10 @@
         v-card-text
           v-form.ma-3.mb-0(ref='form')
             v-autocomplete.mt-3(v-model="item.post_id" item-value="id" item-text="name" :items="userposts" dense label="Роль пользователя")
-            v-text-field(v-model="item.thirdName" :rules="famRules" label="Фамилия")
+            v-text-field(v-model="item.secName" :rules="famRules" label="Фамилия")
             v-text-field(v-model="item.name" :rules="nameRules" label="Имя")
-            v-text-field(v-model="item.secName" label="Отчество")
-            v-text-field(v-model="item.email" :rules="emailRules" label="Почта")
+            v-text-field(v-model="item.thirdName" label="Отчество")
+            v-text-field(v-model="item.email" :rules="emailRules" label="Почта" readonly)
             v-autocomplete(:items="adisabled" no-data-text="Нет данных" item-value='id' item-text='name' value=item v-model="item.disabled" label='Блокировка')
             v-dialog(v-if="item.post_id == 2" ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
               template(v-slot:activator="{ on }")
@@ -105,6 +105,8 @@ export default {
     pop(item) 
     {
       this.item = JSON.parse(JSON.stringify(item));
+      if(this.item.student)
+        this.studentItem = this.item.student;
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
@@ -114,7 +116,7 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        if(this.post_id == 2)
+        if(this.item.post_id == 2)
           this.item['student'] = this.studentItem;
         this.resolve(JSON.parse(JSON.stringify(this.item)));
       } 

@@ -10,55 +10,20 @@ use Illuminate\Http\Request;
 
 class ReplacementController extends BaseController
 { 
-/**
-     * Get replacements by group and data
+    /**
+     * Получение замен
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function replacementsByGroupByDate($id, $date, ReplacementRepository $replacementRepository, ScheduleRepository $scheduleRepository)
+    public function getReplacements(ReplacementRepository $replacementRepository, DeleteReplacementModification $deleteReplacementModification)
     {
-        $replacements = $replacementRepository->getReplacements([
-            ["swap_date", '=', $date],
-            ["schedule_id", '=', $scheduleRepository->getScheduleIdByGroup($id)],
-        ]);
+        $result = $deleteReplacementModification->deleteReplacementOldFromDatabase();
+        $replacements = $replacementRepository->getReplacements();
         return response()->json(compact('replacements'));
     }
 
     /**
-     * Get replacements by group
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function replacementsByGroup($id, ReplacementRepository $replacementRepository, ScheduleRepository $scheduleRepository)
-    {
-        $replacements = $replacementRepository->getReplacements([["schedule_id", '=', $scheduleRepository->getScheduleIdByGroup($id)]]);
-        return response()->json(compact('replacements'));
-    }
-
-    /**
-     * Get replacements by data
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function replacementsByDate($date, ReplacementRepository $replacementRepository)
-    {
-        $replacements = $replacementRepository->getReplacements([["swap_date", '=', $date]]);
-        return response()->json(compact('replacements'));
-    }
-
-    /**
-     * Get replacements
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function replacements(ReplacementRepository $replacementRepository)
-    {
-        $replacements = $replacementRepository->getReplacements([]);
-        return response()->json(compact('replacements'));
-    }
-
-        /**
-     * save replacement from database
+     * Сохранение замены
      * @param id schedule id
      * @return JSON
      */
@@ -73,7 +38,7 @@ class ReplacementController extends BaseController
     }
    
     /**
-     * delete replacement from database
+     * Удаление замены
      * @param id schedule id
      * @return JSON
      */

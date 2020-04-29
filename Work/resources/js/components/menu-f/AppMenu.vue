@@ -22,7 +22,12 @@ export default {
   },
 
   beforeMount(){
-    this.three = this.user.post.privilegies.filter(res => {return res.menu;});
+    this.three = JSON.parse(JSON.stringify(this.user.post.privilegies));
+    this.three = this.three.filter(res => {return res.menu;});
+    if(this.user.disabled == 1)
+      for(let i = 0; i < this.three.length; i++)
+        if(!this.three[i].default)
+          this.three[i].disabled = true;
   },
 
   methods: {

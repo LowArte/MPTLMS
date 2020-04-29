@@ -5,7 +5,6 @@ namespace App\Modifications\Create;
 use App\Models\Department as Model;
 use App\Modifications\BaseModification;
 use Exception;
-use Hash;
 
 class CreateDepartmentModification extends BaseModification
 {

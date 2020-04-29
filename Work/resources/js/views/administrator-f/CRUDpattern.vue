@@ -53,7 +53,7 @@
                 span Удалить
               v-tooltip(bottom v-if="_func_reset_password != null")
                 template(v-slot:activator="{ on }")
-                    v-icon.small(v-on="on" @click="reset_password(item)") mail_outline
+                  v-icon.small(v-on="on" @click="reset_password(item)") mail_outline
                 span Отправить письмо на смену пароля
         v-layout.row.text-center.pa-2.ma-2
             v-pagination(v-model="page" :length="pageCount")
@@ -79,7 +79,7 @@ export default {
     page: 1, //Текущая страница
     itemsPerPage: 30, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
-    headers: [] //Структура таблицы и с полями которые требуется выводить
+    headers: [], //Структура таблицы и с полями которые требуется выводить
   }),
   props: {
     //?----------------------------------------------

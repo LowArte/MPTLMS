@@ -9,13 +9,14 @@ div
       v-btn(icon @click='leftdrawer = !leftdrawer')
         v-icon menu
     div.d-flex.align-center(v-if='user' style='margin-left: auto')
-      v-btn.ml-5(text @click.stop='rightdrawer = !rightdrawer' light='')
+      notifications
+      v-btn.ml-1(text @click.stop='rightdrawer = !rightdrawer' light='')
         small.white--text {{user.name}}
         small.red--text(v-if='user.disabled == 1')
-          kbd {{Заблокирован}}
+          kbd Заблокирован
         v-avatar.ml-2(size='32' color='white')
           v-icon account_circle
-  v-navigation-drawer(v-model='rightdrawer' right clipped fixed app='')
+  v-navigation-drawer(v-model='rightdrawer' temporary right clipped fixed app='')
     template(v-slot:prepend='')
       div.pa-2
         c-reset-password
@@ -29,6 +30,7 @@ div
 </template>
 
 <script>
+import notifications from "@/js/components/notifications-menu-f/NotificationsBar"
 import snackbar from "@/js/components/SnackBarComponent";
 import overlayloader from "@/js/components/OverlayLoaderComponent";
 import C_AppMenu from "@/js/components/menu-f/AppMenu";
@@ -49,6 +51,7 @@ export default {
   components: {
     snackbar,
     overlayloader,
+    notifications,
     "c-app-menu": C_AppMenu,
     "c-logout": C_Logout,
     "c-reset-password" : C_resetPassword

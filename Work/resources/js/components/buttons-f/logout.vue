@@ -20,7 +20,8 @@ export default {
       if (await api_user.logout()) {
         resetRouter();
         this.$store.commit(mutations.SET_NOTAUTH);
-        this.$router.push("/");
+        await this.$router.push("/");
+        location.reload();
       }
       this.loading = false;
     }

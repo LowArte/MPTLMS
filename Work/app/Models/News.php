@@ -10,7 +10,7 @@ use Iatstuti\Database\Support\CascadeSoftDeletes;
 
 class News extends Model
 {
-    use SoftDeletes,HasHistories,CascadeSoftDeletes;
+    use HasHistories;
 
     public function getModelLabel()
     {
@@ -33,11 +33,6 @@ class News extends Model
         'images' => 'array',
         'links'=>'array'
     ];
-
-    public function likes()
-    {
-        return $this->hasMany(Likes::class);
-    }
 
     public function __construct($attributes = array())
     {

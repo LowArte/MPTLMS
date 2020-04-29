@@ -12,8 +12,14 @@ class FeedbackRepository extends BaseRepository
 
     public function getFeedback()
     {
-        $columns = ['id', 'user_id', 'type', 'text', 'answered', 'created_at'];
-        $result = $this->startCondition()->select($columns)->with('user:id,email')->orderBy('id', 'desc')->get();
+        $columns = ['feedback.id', 'user_id', 'type', 'text', 'answered', 'feedback.created_at'];
+        $result = $this->startCondition()
+        ->join('users', 'user_id', '=', 'users.id')
+        ->select($columns)
+        ->selectRaw("CONCAT(users.name,users.secName,users.thirdName) as fullFio, users.email")
+        ->orderBy('id', 'desc')
+        ->toBase()
+        ->get();   
         return $result;
     }
 }

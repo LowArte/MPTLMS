@@ -10,10 +10,10 @@ class ReplacementRepository extends BaseRepository
         return Model::class;
     }
     /** 
-     * get all replacements
+     * Получение всех замен
      * @return Illuminate\Database\Eloquent\Collection
     */
-    public function getReplacements($where, $teachers=null, $disciplines=null)
+    public function getReplacements($teachers=null, $disciplines=null)
     {
         if($teachers == null)
         {
@@ -28,11 +28,10 @@ class ReplacementRepository extends BaseRepository
         }
 
         $result = $this->startCondition()
-        ->where($where)
         ->join('schedules', 'schedule_swaps.schedule_id', '=', 'schedules.id')
         ->join('groups', 'schedules.group_id', '=', 'groups.id')
         ->orderBy('groups.id', 'asc')
-        ->selectRaw("schedule_swaps.id, schedule_swaps.swap_date, schedule_swaps.swap, schedule_swaps.created_at, group_name")
+        ->selectRaw("schedule_swaps.id, schedule_swaps.swap_date, schedule_swaps.swap, group_name, schedules.group_id")
         ->orderBy('swap_date', 'desc')
         ->toBase()->get();
         foreach($result as $item)

@@ -7,8 +7,16 @@ v-content.ma-0.pa-2
         v-system-bar(dark color="info")
           span(style="color: white;") Фильтры
         v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-        v-combobox.mx-3.my-2(dense label="Группа" no-data-text="Нет данных" @change="changeFilter" item-text="group_name" :items="combo_groups" v-model="selected_group")
-        v-content.pa-1
+        v-combobox.mx-3.my-2(dense label="Группа" no-data-text="Нет данных" @change="changeFilter()" item-text="group_name" :items="combo_groups" v-model="selected_group")
+        v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
+          template(v-slot:activator="{ on }")
+            v-content.pa-2
+              v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
+          v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
+              v-btn(text color="primary" @click="dateDialog.model = false") Отмены
+              v-spacer
+              v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter()") Принять
+        v-content.pa-1(v-if="user != null && user.post_id != null")
           router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_replacements'") 
             v-btn(color="accent" text block dark) Конструктор замен
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" @change="changeFilter" block label="Изменения для всех групп")
@@ -22,24 +30,22 @@ v-content.ma-0.pa-2
             span(style="color: white;") Группа: {{groups_key}} 
             v-spacer
             span(style="color: white;") Дата: {{date_key}}
-          v-simple-table
-              thead
+          v-simple-table(v-if="user != null && user.post_id != null")
+              thead(v-if="user != null && user.post_id != null")
                   tr
                     th.text-left №
                     th.text-left Заменяемое
                     th.text-left Заменено на
-                    th.text-left Дата замены
                     th.text-left(v-if="user.post_id == 1 || user.post_id == 4") Действие
-              tbody
+              tbody(v-if="user != null && user.post_id != null")
                   tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                       td {{ replacement_key['swap']['caselesson'] }}
-                      td(v-if="replacement_key['swap']['oldteacher'] != null && replacement_key['swap']['oldteacher'] != ''") {{ replacement_key['swap']['oldlesson'] }} ({{ replacement_key['swap']['oldteacher'] }})
-                      td(v-else-if="replacement_key['swap']['oldlesson'] != null && replacement_key['swap']['oldlesson'] != ''") {{ replacement_key['swap']['oldlesson'] }}
+                      td(v-if="replacement_key['swap']['oldteacher'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }} ({{ replacement_key['swap']['oldteacher'].join(" / ") }})
+                      td(v-else-if="replacement_key['swap']['oldlesson'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }}
                       td(v-else) Дополнительное занятие
-                      td(v-if="replacement_key['swap']['teacher'] != null && replacement_key['swap']['teacher'] != ''") {{ replacement_key['swap']['lesson'] }} ({{ replacement_key['swap']['teacher'] }})
-                      td(v-else-if="replacement_key['swap']['lesson'] != null && replacement_key['swap']['lesson'] != ''") {{ replacement_key['swap']['lesson'] }}
+                      td(v-if="replacement_key['swap']['teacher'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }} ({{ replacement_key['swap']['teacher'].join(" / ") }})
+                      td(v-else-if="replacement_key['swap']['lesson'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }}
                       td(v-else) Занятие отменено
-                      td {{ replacement_key['created_at'] }}  
                       td(v-if="user.post_id == 1 || user.post_id == 4")
                         v-icon.small(@click="deleteItem(replacement_key['id'])") delete      
 </template>
@@ -84,6 +90,24 @@ export default {
       return this.groups_combo;
     },
 
+    filterReplacements: function(){
+        if (!this.replacements) return undefined;
+        let replacements = this.replacements.filter(res => {
+            if(!this.selected_group)
+                return false;
+            if(this.checkAllDate && this.checkAllGroup)
+                return true;
+            if(this.checkAllDate && res.group_id == this.selected_group.id)
+                return true;
+            if(res.swap_date == this.dateDialog.date && this.checkAllGroup)
+                return true;
+            if(res.swap_date == this.dateDialog.date && res.group_id == this.selected_group.id)
+                return true;
+            return false;
+        });
+        return replacements;
+    },
+
     //*Получение четности недели
     isChisl: function() {
       var year = new Date().getFullYear();
@@ -104,6 +128,7 @@ export default {
       parseReplacements: null, //Замены
       replacements: null, //Замены
       arrgroups: [],
+      start: true,
       date: [],
       dateDialog: {
         model: false,
@@ -112,9 +137,14 @@ export default {
     }
   },
 
-  beforeMount()
+  async beforeMount()
   {
     this.getDepartments();
+    this.showLoading("Получение замен");
+    this.replacements = await api_replacement.getReplacements(this)
+    for (var i = 0; i < this.replacements.length; i++) 
+        this.replacements[i]["swap"] = JSON.parse(this.replacements[i]["swap"]);
+    this.closeLoading("Получение замен");
   }, 
 
  methods: {
@@ -133,7 +163,10 @@ export default {
 
       if (this.specialities) 
       {
-        this.selected_department = this.specialities[0];
+        if(this.start && this.user.post_id == 2)
+          this.selected_department = this.user.student.group.department;
+        else
+          this.selected_department = this.specialities[0];
         this.department_change();
       }
     },
@@ -146,33 +179,30 @@ export default {
       this.parseReplacements = [];
       var j = -1; //Индекс группы
       var l = -1; //Индекс даты
-      for (var i = 0; i < this.replacements.length; i++) 
-      {
-        this.replacements[i]["swap"] = JSON.parse(this.replacements[i]["swap"]);
-        this.replacements[i]["swap"]["lesson"] = this.replacements[i]["swap"]["lesson"].join(" / ");
-        this.replacements[i]["swap"]["oldlesson"] = this.replacements[i]["swap"]["oldlesson"].join(" / ");
-        this.replacements[i]["swap"]["teacher"] = this.replacements[i]["swap"]["teacher"].join(" / ");
-        this.replacements[i]["swap"]["oldteacher"] = this.replacements[i]["swap"]["oldteacher"].join(" / ");
-        
-        j = this.arrgroups.indexOf(this.replacements[i]["group_name"]);
+      let fReplacements = this.filterReplacements;
+      if(fReplacements)
+      for (var i = 0; i < fReplacements.length; i++) 
+      {       
+        j = this.arrgroups.indexOf(fReplacements[i]["group_name"]);
         if (j == -1) 
         {
-          this.arrgroups.push(this.replacements[i]["group_name"]);
-          this.date.push([this.replacements[i]["swap_date"]]);
-          this.parseReplacements.push([[this.replacements[i]]]);
+          this.arrgroups.push(fReplacements[i]["group_name"]);
+          this.date.push([fReplacements[i]["swap_date"]]);
+          this.parseReplacements.push([[fReplacements[i]]]);
         } 
         else 
         {
-          l = this.date[j].indexOf(this.replacements[i]["swap_date"]);
+          l = this.date[j].indexOf(fReplacements[i]["swap_date"]);
           if (l == -1) 
           {
-            this.date[j].push(this.replacements[i]["swap_date"]);
-            this.parseReplacements[j].push([this.replacements[i]]);
+            this.date[j].push(fReplacements[i]["swap_date"]);
+            this.parseReplacements[j].push([fReplacements[i]]);
           } 
           else 
-          this.parseReplacements[j][l].push(this.replacements[i]);
+          this.parseReplacements[j][l].push(fReplacements[i]);
         }
       }
+      this.$forceUpdate();
     },
 //?----------------------------------------------
 //!           Методы компонентов
@@ -190,7 +220,19 @@ export default {
 
       if (this.combo_groups) 
       {
-        this.selected_group = this.combo_groups[0];
+        if(this.start && this.user.post_id == 2)
+        {
+          for (let index = 0; index < this.combo_groups.length; index++) 
+          {
+            if(this.combo_groups[index].id == this.user.student.group.id || this.combo_groups[index].child_id == this.user.student.group.id)
+            {
+              this.selected_group = this.combo_groups[index];
+              index = this.combo_groups.length;
+            }
+          }
+        }
+        else
+          this.selected_group = this.combo_groups[0];
         this.group_change();
       }
     },
@@ -218,32 +260,9 @@ export default {
     },
 
     //Получение замен с учётом фильтров
-    async changeFilter() 
+    changeFilter() 
     {
-      this.showLoading("Получение замен");
-      if (this.checkAllGroup && this.checkAllDate) 
-        //Получить все замены для всех дат и групп
-        this.replacements = await api_replacement.getReplacements(this)
-      else 
-      if (this.checkAllGroup) 
-        //Получить замены для всех групп
-        this.replacements = await api_replacement.getReplacementsByDate(this.dateDialog.date, this)
-      else 
-      if (this.checkAllDate) 
-        //Получить все замены для всех дат
-        this.replacements = await api_replacement.getReplacementsByGroup(this.selected_group.id, this);
-      else 
-      {
-        this.replacements = await api_replacement.getReplacementsByGroupByDate(
-        {
-          group_id: this.selected_group.id,
-          date: this.dateDialog.date
-        }, this);
-      }
-
-      if (this.replacements != null)
-          this.parseReplacement();
-      this.closeLoading("Получение замен");
+      this.parseReplacement();
     },
  }
 };

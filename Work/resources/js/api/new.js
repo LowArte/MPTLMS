@@ -36,10 +36,10 @@ export default {
     //! Требование ----------------------------
     //! Пересмотреть back-end для api
     //!----------------------------------------
-    getNews(_this) {
-        return axios.get('/api/getters/news')
+    getNews(user_id) {
+        return axios.get('/api/getters/news/' + user_id)
         .then(result => {return result.data.news;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
+        .catch(ex => {return false;});
     },
 
 
@@ -72,8 +72,8 @@ export default {
     //!----------------------------------------
     insertNews(data, _this) {
         return axios.post('/api/save/news', data)
-        .then(result => {_this.showMessage("Выполнено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(result => {return true;})
+        .catch(ex => {return false;});
     },
 
     //*Редактирование записи
@@ -104,11 +104,10 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется установка флага отметки новости
     //! Требование ----------------------------
-    //! Пересмотреть
     //!----------------------------------------
-    likeNews(id, _this) {
-        return axios.post('/api/update/set_like/' + id)
-        .then(result => {_this.showMessage("Выполнено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
+    likeNews(data) {
+        return axios.post('/api/functions/set_like', data)
+        .then(result => {return result.data.count;})
+        .catch(ex => {return null;});
     },
 }

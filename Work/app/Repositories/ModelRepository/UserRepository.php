@@ -3,6 +3,7 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\User as Model;
+use Illuminate\Support\Facades\DB;
 use Debugbar;
 
 class UserRepository extends BaseRepository
@@ -12,8 +13,12 @@ class UserRepository extends BaseRepository
     }
 
     public function getUsers()
-    {   $columns = ['id','name','secName','thirdName','email','post_id','disabled'];
+    {   $columns = ['id', 'name','secName','thirdName','email','post_id','disabled'];
         $result = $this->startCondition()->select($columns)->with('post:id,name')->get();
+        foreach ($result as $value)
+            if($value->post_id == 2)
+                $value->student = DB::table('students')->where('user_id', '=', $value->id)->first();
+                
         return $result;
     }
 

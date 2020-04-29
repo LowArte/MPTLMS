@@ -39,7 +39,7 @@ export default {
     getCertificates(_this) {
         return axios.get('/api/getters/get_certificates')
         .then(res => {return res.data.certificates;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(ex => {return undefined;});
     },
 
 
@@ -53,10 +53,10 @@ export default {
     //? Реализуется сохранения данных в таблице *CERTIFICATES* (Справки)
     //! Требование ----------------------------
     //!----------------------------------------
-    save(data, _this) {
+    save(data) {
         return axios.post('/api/save/certificate/', {"data": data.data, "type": data.type})
-        .then(res => {_this.showMessage("Выполнено!"); return true;})
-        .catch(exp => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(res => {return true;})
+        .catch(exp => {return false;});
     },
 
     //*Уведомление и фикусация о выполнении
@@ -66,10 +66,10 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmailDone(answer, _this) {
-        return axios.post('/api/functions/send_email_certificate_answer/', answer)
-        .then(result =>{_this.showMessage("Отправлено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
+    sendEmailAccess(answer) {
+        return axios.post('/api/functions/send_email_certificate_access/', answer)
+        .then(result =>{return true;})
+        .catch(ex => {return false;});
     },
 
     //*Ответ канцелярии заказчику, в случае если справку нельзя сделать, при том, что справка не будет зафиксирована о выполнении
@@ -79,9 +79,9 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmailAnswer(answer, _this) {
-        return axios.post('/api/certificate/sendEmailAnswer/', answer)
-        .then(result => {_this.showMessage("Отправлено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка отправления!"); return false;});
+    sendEmailCancel(answer) {
+        return axios.post('/api/functions/send_email_certificate_cancel/', answer)
+        .then(result => {return true;})
+        .catch(ex => {return false;});
     }
 }

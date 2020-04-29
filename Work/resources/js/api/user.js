@@ -110,7 +110,7 @@ export default {
     //!----------------------------------------
     saveUser(user, _this) {
         return axios.post('/api/save/user/', user)
-        .then(result => { _this.showMessage("Выполнено!"); return res.data.id; })
+        .then(res => { _this.showMessage("Выполнено!"); return res.data.id; })
         .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
@@ -121,8 +121,8 @@ export default {
     //! Требование ----------------------------
     //! Отсутсвует
     //!----------------------------------------
-    deleteUser(user_id, _this) {
-        return axios.post('/api/delete/user/' + user_id)
+    deleteUser(user, _this) {
+        return axios.post('/api/delete/user/' + user[0] + '/' + user[1])
             .then(result => {
                 _this.showMessage("Выполнено!");
                 return true;
@@ -159,11 +159,10 @@ export default {
     //!----------------------------------------
     login(data) {
         return axios.post('/login', data).then(res => {
-            console.log(res);
             if(!res.data.profilactic)
             {
                 const slug = res.data.user.post.slug;
-                const items = this.makeRoutes(res.data.user.post.privilegies, slug);
+                const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
                 const user = res.data.user;
                 const token = res.data.token;
                 return {
@@ -189,7 +188,7 @@ export default {
         return axios.post('/getToken').then(res => {
             if (res.data.success) {
                 const slug = res.data.user.post.slug;
-                const items = this.makeRoutes(res.data.user.post.privilegies, slug);
+                const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
                 const user = res.data.user;
                 const token = res.data.token;
                 return {
@@ -216,42 +215,46 @@ export default {
             });
     },
 
-    makeRoutes(privilegies, slug) {
+    makeRoutes(privilegies, slug, disabled) {
         let items = [];
         privilegies.forEach(element => {
-            if (element.children) 
+            if((disabled == 1 && element.default == true) || disabled == 0)
             {
-                element.children.forEach(child => 
+                if (element.children) 
                 {
-                    if (child.component != null)
-                        items.push({
-                            path: "/" + slug + "/" + child.component.info.url,
-                            name: child.component.info.name,
-                            meta: {
-                                layout: "main"
-                            },
-                            component: () =>
-                                import(
-                                    /* webpackChunkName: "[request]" */
-                                    `@/${child.component.path}.vue`
-                                )
-                        });
-                });
-            } 
-            else 
-            {
-                items.push({
-                    path: "/" + slug + "/" + element.component.info.url,
-                    name: element.component.info.name,
-                    meta: {
-                        layout: "main"
-                    },
-                    component: () =>
-                        import(
-                            /* webpackChunkName: "[request]" */
-                            `@/${element.component.path}.vue`
-                        )
-                });
+                    element.children.forEach(child => 
+                    {
+                        
+                        if (child.component != null)
+                            items.push({
+                                path: "/" + slug + "/" + child.component.info.url,
+                                name: child.component.info.name,
+                                meta: {
+                                    layout: "main"
+                                },
+                                component: () =>
+                                    import(
+                                        /* webpackChunkName: "[request]" */
+                                        `@/${child.component.path}.vue`
+                                    )
+                            });
+                    });
+                } 
+                else 
+                {
+                    items.push({
+                        path: "/" + slug + "/" + element.component.info.url,
+                        name: element.component.info.name,
+                        meta: {
+                            layout: "main"
+                        },
+                        component: () =>
+                            import(
+                                /* webpackChunkName: "[request]" */
+                                `@/${element.component.path}.vue`
+                            )
+                    });
+                }
             }
         });
         

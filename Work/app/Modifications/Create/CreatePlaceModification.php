@@ -4,7 +4,6 @@ namespace App\Modifications\Create;
 
 use App\Models\Places as Model;
 use App\Modifications\BaseModification;
-use Hash;
 
 class CreatePlaceModification extends BaseModification
 {

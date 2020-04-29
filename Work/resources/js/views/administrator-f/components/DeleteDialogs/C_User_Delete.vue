@@ -3,22 +3,21 @@
     v-card.ma-0.pa-0
       v-card-title.headline 
         h4.text-truncate Удалить запись
-      v-form
-        v-card-text
+      v-card-text
+        v-form
           v-alert(dense type="info") Данное действие необратимо
           v-text-field(v-model="item.post_id" dense label="Роль пользователя" readonly)
-          v-text-field(v-model="item.thirdName" label="Фамилия" readonly)
+          v-text-field(v-model="item.secName" label="Фамилия" readonly)
           v-text-field(v-model="item.name" label="Имя" readonly)
-          v-text-field(v-model="item.secName" label="Отчество" readonly)
+          v-text-field(v-model="item.thirdName" label="Отчество" readonly)
           v-text-field(v-model="item.email" label="Почта" readonly)
-          v-text-field(v-model="item.gender" dense label="Гендерная принадлежность" readonly)
-          v-text-field(v-if="item.post_id == 2" v-model="item.dep_name" label="Специальность" readonly)
-          v-text-field(v-if="item.post_id == 2" v-model="item.group_id" label='Группа' readonly)
-          v-text-field(v-if="item.post_id == 2" v-model="item.type_of_financing" dense label='Вид финансирования' readonly)
-        v-card-actions
-          v-btn(color="red" text @click="clickCancel") Отмена
-          v-spacer
-          v-btn(color="info" text @click="clickDelete") Удалить
+          v-text-field(v-if="item.post_id == 2" v-model="item.student.gender" dense label="Гендерная принадлежность" readonly)
+          v-autocomplete(v-if="item.post_id == 2 && groups != null" v-model="item.student.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups" label='Группа' readonly)
+          v-text-field(v-if="item.post_id == 2" v-model="item.student.type_of_financing" dense label='Вид финансирования' readonly)
+      v-card-actions
+        v-btn(color="red" text @click="clickCancel") Отмена
+        v-spacer
+        v-btn(color="info" text @click="clickDelete") Удалить
 </template>
 
 <script>
@@ -26,8 +25,13 @@
 //!           Подключение системы уведомлений
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar"
+import { mapGetters } from "vuex";
+import * as mutations from "@/js/store/mutation-types";
 
 export default {
+  computed: {
+    ...mapGetters(["groups"]),
+  },
   mixins: [withSnackbar],
   data() {
     return {
@@ -60,7 +64,7 @@ export default {
     },
     clickDelete() {
       this.dialog = false;
-      this.resolve(this.item.id);
+      this.resolve([this.item.id, this.item.post_id]);
     },
     clickCancel() {
       this.dialog = false;

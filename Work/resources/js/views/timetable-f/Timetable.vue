@@ -25,44 +25,44 @@ v-content.ma-0.pa-2
             v-content.pa-2.ma-0 
               v-container.grid-list-xs.pa-0(v-for="(lesson,lesson_index) in schedule[day_key]" :key="'l'+lesson_index")
                   v-container.pa-0.ma-0(v-if="lesson.chisl == false && lesson_index != 'Place'") <!--Прорисовка обычной пары-->
-                    v-container.pa-0.ma-0(v-if="lesson.LessonChisl != null && lesson.LessonChisl != ''")
+                    v-container.pa-0.ma-0(v-if="lesson.LessonChisl.length > 0")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                       v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
-                      v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
-                      v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                      v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl.join(" / ")}} 
+                      v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                   v-container.pa-0.ma-0(v-else-if="lesson_index != 'Place'") <!--Прорисовка числителя/знаменателя-->
-                    v-container.pa-0.ma-0(v-if="isChisl == 0 && (lesson.LessonChisl !='' || lesson.LessonZnam !='')")
+                    v-container.pa-0.ma-0(v-if="isChisl == 0 && (lesson.LessonChisl.length > 0 || lesson.LessonZnam.length > 0)")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
-                      div(v-if="lesson.LessonChisl")
+                      div(v-if="lesson.LessonChisl.length > 0")
                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
-                        v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl}} 
-                        v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                        v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl.join(" / ")}} 
+                        v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                       div(v-else)
                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                         v-card-text.pa-0.wrap.text-black Занятия по числителю отсутствует
                       v-expansion-panels.pa-0(style="z-index: initial;")                    
                         v-expansion-panel.pa-0
                             v-expansion-panel-header.px-1.py-0 {{ isChisl == 0 ? "Знаменатель" :"Числитель" }}                 
-                            v-expansion-panel-content.px-0.mx-0(v-if="lesson.LessonZnam != ''")
-                              v-card-text.pa-0.wrap.text-black {{ lesson.LessonZnam }} 
-                              v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
+                            v-expansion-panel-content.px-0.mx-0(v-if="lesson.LessonZnam.length > 0")
+                              v-card-text.pa-0.wrap.text-black {{ lesson.LessonZnam.join(" / ") }} 
+                              v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam.join(" / ") }}
                             v-expansion-panel-content.px-0.mx-0(v-else)
                               v-card-text.pa-0.wrap.text-black Отсутствует
-                    v-container.pa-0.ma-0(v-else-if="lesson.LessonChisl !='' || lesson.LessonZnam !=''")
+                    v-container.pa-0.ma-0(v-else-if="lesson.LessonChisl.length > 0 || lesson.LessonZnam.length > 0")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
-                      div(v-if="lesson.LessonZnam")
+                      div(v-if="lesson.LessonZnam.length > 0")
                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
-                        v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam}} 
-                        v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
+                        v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam.join(" / ")}} 
+                        v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam.join(" / ") }}
                       div(v-else)
                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                         v-card-text.pa-0.wrap.text-black Занятия по знаменателю отсутствует
                       v-expansion-panels.pa-0(style="z-index: initial;")                    
                         v-expansion-panel.pa-0
                             v-expansion-panel-header.px-1.py-0 {{ isChisl == 0 ? "Знаменатель" :"Числитель" }}                 
-                            v-expansion-panel-content.px-0.mx-0(v-if="lesson.LessonChisl != ''")
-                              v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl }} 
-                              v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
+                            v-expansion-panel-content.px-0.mx-0(v-if="lesson.LessonChisl.length > 0")
+                              v-card-text.pa-0.wrap.text-black {{ lesson.LessonChisl.join(" / ") }} 
+                              v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                             v-expansion-panel-content.px-0.mx-0(v-else)
                               v-card-text.pa-0.wrap.text-black Отсутствует
 </template>
@@ -128,7 +128,8 @@ export default {
       selected_department: null,
       selected_group: null,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
-      schedule: null
+      schedule: null,
+      start: true
     }
   },
 
@@ -170,7 +171,10 @@ export default {
 
       if (this.specialities) 
       {
-        this.selected_department = this.specialities[0];
+        if(this.start && this.user.post_id == 2)
+          this.selected_department = this.user.student.group.department;
+        else
+          this.selected_department = this.specialities[0];
         this.department_change();
       }
     },
@@ -182,12 +186,7 @@ export default {
       {
         for (var j = 1; j <= 7; j++) 
         {
-          this.schedule[this.days[i]][j]["LessonChisl"] = this.schedule[this.days[i]][j]["LessonChisl"].join(" / ");
-          this.schedule[this.days[i]][j]["LessonZnam"] = this.schedule[this.days[i]][j]["LessonZnam"].join(" / ");
-          this.schedule[this.days[i]][j]["TeacherChisl"] = this.schedule[this.days[i]][j]["TeacherChisl"].join(" / ");
-          this.schedule[this.days[i]][j]["TeacherZnam"] = this.schedule[this.days[i]][j]["TeacherZnam"].join(" / ");
-
-          if (this.schedule[this.days[i]][j]["LessonChisl"] == "" && this.schedule[this.days[i]][j]["LessonZnam"] == "")
+          if (this.schedule[this.days[i]][j]["LessonChisl"].length == 0 && this.schedule[this.days[i]][j]["LessonZnam"].length == 0)
             tag++;
 
           if (tag >= 7) 
@@ -234,7 +233,21 @@ export default {
       this.closeLoading("Получение групп");
 
       if (this.combo_groups) 
-      {      
+      {
+        if(this.start && this.user.post_id == 2)
+        {
+          for (let index = 0; index < this.combo_groups.length; index++) 
+          {
+            if(this.combo_groups[index].id == this.user.student.group.id || this.combo_groups[index].child_id == this.user.student.group.id)
+            {
+              this.selected_group = this.combo_groups[index];
+              index = this.combo_groups.length;
+            }
+          }
+        }
+        /*else
+          this.selected_group = this.combo_groups[0];*/
+        this.start = false;
         if(this.selected_group)
           this.group_change();
       }

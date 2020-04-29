@@ -43,23 +43,10 @@ class FeedbackAnswer extends Notification
     {
         return (new MailMessage)
             ->markdown('vendor.notifications.answerforrequest')
-            ->from('p_a.n.pikalov@mpt.ru', "Ответ на ваше обращение")
+            ->from('p_a.i.borisov@mpt.ru', "Ответ на ваше обращение")
             ->subject('Ответ на обращение от ' . config('app.name'))
             ->line("На ваще обращение ответил: ".$this->data['by'])
             ->line("C текстом ")
             ->line($this->data['text']);
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

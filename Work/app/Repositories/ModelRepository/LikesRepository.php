@@ -10,10 +10,15 @@ class LikesRepository extends BaseRepository
         return Model::class;
     }
 
-    public function getLikes()
+    public function getLikesCount($new_id)
     {
-        $columns = [];
-        $result = $this->startCondition()->select($columns)->get();
+        $result = $this->startCondition()->where("news_id", $new_id)->count();
+        return $result;
+    }
+
+    public function getLikesForUser($new_id, $user_id)
+    {
+        $result = $this->startCondition()->where([["news_id", $new_id],["user_id", $user_id]])->first();
         return $result;
     }
 }

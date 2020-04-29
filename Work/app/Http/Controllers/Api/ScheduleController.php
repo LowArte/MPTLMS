@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ScheduleController extends BaseController
 { 
     /**
-     * Get schedule
+     * Получение расписания
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

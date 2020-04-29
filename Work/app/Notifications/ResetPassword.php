@@ -52,17 +52,4 @@ class ResetPassword extends ResetPasswordNotification
             ->action('Восстановить', url(config('app.url') . route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
             ->line('Если Вы не отправляли запрос на восстановление пароля, проигнорируйте это сообщение.');
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

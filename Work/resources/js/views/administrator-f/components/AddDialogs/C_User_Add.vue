@@ -23,9 +23,9 @@
               v-stepper-step(:complete="steps > 2" step="2" @click="change(2)") Биографические данные
               v-stepper-content(step="2")
                 v-card(:elevation="0")
-                  v-text-field(v-model="item.thirdName" :rules="famRules" label="Фамилия")
+                  v-text-field(v-model="item.secName" :rules="famRules" label="Фамилия")
                   v-text-field(v-model="item.name" :rules="nameRules" label="Имя")
-                  v-text-field(v-model="item.secName" label="Отчество")
+                  v-text-field(v-model="item.thirdName" label="Отчество")
                   v-text-field(v-model="item.email" :rules="emailRules" label="Почта")
                   v-card-actions
                     v-btn(text @click="change(1)") Назад
@@ -37,7 +37,7 @@
                   v-dialog(v-if="item.post_id == 2" ref="dateDialog" v-model="dateDialog" :return-value.sync="item.birthday" persistent width="290px")
                     template(v-slot:activator="{ on }")
                         v-text-field(v-model="studentItem.birthday" label="Дата рождения" :rules="birthdayRules" readonly v-on="on")
-                    v-date-picker(v-model="item.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
+                    v-date-picker(v-model="studentItem.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
                         v-btn(text color="primary" @click="dateDialog = false") Отмена
                         v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
                   v-autocomplete.mt-3(v-if="item.post_id == 2" no-data-text="Нет данных" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
@@ -129,7 +129,7 @@ export default {
       if (this.$refs.form.validate()) 
       {
         this.dialog = false;
-        if(this.post_id == 2)
+        if(this.item.post_id == 2)
           this.item['student'] = this.studentItem;
         this.resolve(JSON.parse(JSON.stringify(this.item)));
       } 

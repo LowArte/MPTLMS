@@ -14,6 +14,8 @@ import disciplines from './modules/disciplines'
 import timetable from './modules/timetable'
 import callschedule from './modules/callSchedule'
 import feedback from './modules/feedback'
+import сertificate from './modules/сertificate'
+import notifications from './modules/notifications'
 
 Vue.use(Vuex)
 
@@ -34,7 +36,9 @@ export default new Vuex.Store({
     disciplines,
     timetable,
     callschedule,
-    feedback
+    feedback,
+    сertificate,
+    notifications
   },
   strict: debug
 })

@@ -7,7 +7,7 @@
             v-card-title.headline() Новый пароль
           v-form(ref="resetPasswordForm")
             v-text-field(v-model="password" :rules="passwordRules" min="6" type="password" label="Пароль" required)
-            v-text-field(v-model="passwordConfirmation" :rules="passwordRules" type="password" min="6" label="Подтвердите пароль" required)
+            v-text-field(v-model="passwordConfirmation" :rules="passwordRules" type="password" min="8" label="Подтвердите пароль" required)
           v-card-actions
             router-link(class='nounderline' to="/") 
               v-btn(color="accent" text) На главную
@@ -29,7 +29,7 @@ export default {
       passwordConfirmation: "",
       passwordRules: [
         v => !!v || "Пароль не соответствует требования",
-        v => v.length >= 6 || "Пароль должен быть как минимум 6 символов"
+        v => v.length >= 8 || "Пароль должен быть как минимум 8 символов"
       ]
     };
   },

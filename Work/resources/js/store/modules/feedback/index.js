@@ -3,8 +3,7 @@ import mutations from './mutations'
 import actions from './actions'
 
 const state = {
-  feedback: [],
-  request: []
+  feedback: []
 }
 
 export default {

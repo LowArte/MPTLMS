@@ -9,18 +9,18 @@ use Route;
  */
 class ApiRoutes
 {
-    //!! Поменять контроллеры
     public static function getApiRoutes()
     {
         /**
-         * Методы отвечаюшие за получение общих данных
+         * Методы отвечаюшие за получение данных
          */
-        Route::name('getters.')->prefix('getters')->group(function () {
+        Route::name('getters.')->prefix('getters')->group(function () 
+        {
             Route::get('users', 'Api\UserController@getUsers')->name('users'); 
 
             Route::get('places','Api\PlaceController@getPlaces')->name('places');
 
-            Route::get('news','Api\NewsController@getNews')->name('news');
+            Route::get('news/{user_id}','Api\NewsController@getNews')->name('news');
 
             Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
 
@@ -30,8 +30,6 @@ class ApiRoutes
             Route::get('posts_for_management','Api\PostController@getPostsForManagement')->name('posts_for_management');
             Route::get('posts_for_combobox','Api\PostController@getPostsForCombobox')->name('posts_for_combobox');
             Route::get('posts_full','Api\PostController@getPostsFull')->name('posts_full');
-
-            Route::get('retrainings','Api\RetrainingController@getRetraining')->name('retrainings');
 
             Route::get('get_certificates', 'Api\CertificateController@getCertificates')->name('getCertificates');
 
@@ -48,13 +46,14 @@ class ApiRoutes
             Route::get('schedule_bild_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleBildByGroupId')->name('schedule_bild_by_group_id');
             Route::get('schedule_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleByGroupId')->name('schedule_by_group_id');
 
+            Route::get('schedule_exams', 'Api\ScheduleExamsController@getScheduleExams')->name('schedule_exams');
+
             Route::get('get_call_schedule', 'Api\CallscheduleController@getCallSchedule')->name('get_call_schedule');
             Route::get('get_call_schedule_for_panel', 'Api\CallscheduleController@getCallScheduleForPanel')->name('get_call_schedule_for_panel');
             
-            Route::get('replacements', 'Api\ReplacementController@replacements')->name('replacements');
-            Route::get('replacements_by_group/{group_id}', 'Api\ReplacementController@replacementsByGroup')->name('replacements_by_group');
-            Route::get('replacements_by_date/{date}', 'Api\ReplacementController@replacementsByDate')->name('replacements_by_date');
-            Route::get('replacements_by_group_by_date/{group_id}/{date}', 'Api\ReplacementController@replacementsByGroupByDate')->name('replacements_by_group_by_date');
+            Route::get('replacements', 'Api\ReplacementController@getReplacements')->name('replacements');
+
+            Route::get('notificications/{user_id}', 'Api\NotificationsController@getNotificationsForUser')->name('notificications');
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -70,6 +69,8 @@ class ApiRoutes
 
             Route::post('group','Api\GroupController@save')->name('group');
 
+            Route::post('schedule_exam','Api\ScheduleExamsController@save')->name('schedule_exam');
+            
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
 
             Route::post('certificate','Api\CertificateController@save')->name('certificate');
@@ -80,6 +81,11 @@ class ApiRoutes
 
             Route::post('place','Api\PlaceController@save')->name('place');
 
+            Route::post('notificications_for_user','Api\NotificationsController@saveForUser')->name('notificications_for_user');
+            Route::post('notificications_for_user_group','Api\NotificationsController@saveForUserGroup')->name('notificications_for_user_group');
+            Route::post('notificications_for_user_department','Api\NotificationsController@saveForUserDepartment')->name('notificications_for_user_department');
+            Route::post('notificications_for_user_post','Api\NotificationsController@saveForUserPost')->name('notificications_for_user_post');
+            Route::post('notificications_for_user_all','Api\NotificationsController@saveForUserAll')->name('notificications_for_user_all');
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -88,7 +94,9 @@ class ApiRoutes
         Route::name('edit.')->prefix('edit')->group(function () {
             Route::post('callschedule', 'Api\CallScheduleController@edit')->name('callschedule'); 
 
-            Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');    
+            Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');   
+            
+            Route::post('schedule_exam','Api\ScheduleExamsController@edit')->name('schedule_exam');
 
             Route::post('department','Api\DepartmentController@edit')->name('department');
 
@@ -102,21 +110,28 @@ class ApiRoutes
 
             Route::post('place','Api\PlaceController@edit')->name('place');
 
+            Route::post('notificications','Api\NotificationsController@edit')->name('notificications');
         });
 
          /**
          * Методы отвечаюшие за обобщенные функции
          */
         Route::name('functions.')->prefix('functions')->group(function () {
-            Route::post('set_like/{news_id}','Api\NewsController@setLike')->name('set_like'); 
+            Route::post('set_like','Api\NewsController@setLike')->name('set_like'); 
 
-            Route::post('send_feedback_email_answer/{feedback_id}','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');           
+            Route::post('send_feedback_email_answer','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');
+            
+            Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
+            Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access');           
+            
         });
         /**
          * Методы отвечаюшие за удаление общих данных
          */
         Route::name('delete.')->prefix('delete')->group(function () {
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
+
+            Route::post('schedule_exam/{id}','Api\ScheduleExamsController@delete')->name('schedule_exam');
 
             Route::post('department/{department_id}','Api\DepartmentController@delete')->name('department');
 
@@ -128,7 +143,7 @@ class ApiRoutes
 
             Route::post('place/{place_id}','Api\PlaceController@delete')->name('place');
 
-            Route::post('user','Api\UserController@delete')->name('user');      
+            Route::post('user/{user_id}/{post_id}','Api\UserController@delete')->name('user');      
         });
     }
 }
