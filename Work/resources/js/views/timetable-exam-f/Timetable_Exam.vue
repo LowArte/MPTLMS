@@ -20,7 +20,7 @@
                     v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" block label="Экзамены для всех групп")
                     v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" block label="Экзамены на все даты")
                     v-content.pa-1(v-if="user != null && user.post_id != null")
-                        v-btn(color="accent" text block dark @click="addExam()") Добавить экзамен    
+                        v-btn(v-if="user.post_id == 1 || user.post_id == 4" color="accent" text block dark @click="addExam()") Добавить экзамен    
             v-flex
                 v-layout.row.wrap(filterSchedule)
                     v-flex(v-for="(exam,exam_index) in filterSchedule" :key="exam_index")

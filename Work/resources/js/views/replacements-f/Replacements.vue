@@ -139,12 +139,13 @@ export default {
 
   async beforeMount()
   {
-    this.getDepartments();
     this.showLoading("Получение замен");
     this.replacements = await api_replacement.getReplacements(this)
     for (var i = 0; i < this.replacements.length; i++) 
         this.replacements[i]["swap"] = JSON.parse(this.replacements[i]["swap"]);
     this.closeLoading("Получение замен");
+    this.getDepartments();
+    
   }, 
 
  methods: {
