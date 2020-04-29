@@ -1,15 +1,7 @@
-
 <template lang="pug">
 v-flex.my-2
   v-card.mx-auto(max-width='420px' min-width='310px' style='display: flex; flex-direction: column;' height='100%')
-    v-img(v-if="error == false" :src='item.image' @error="onError()" max-height='200px')
-      template(v-slot:placeholder)
-        v-row(class="fill-height ma-0" align="center" justify="center")
-          v-progress-circular(indeterminate color="grey lighten-5")
-    v-img(v-else :src="loadImg('reu.png')" max-height='200px')
-      template(v-slot:placeholder)
-        v-row(class="fill-height ma-0" align="center" justify="center")
-          v-progress-circular(indeterminate color="grey lighten-5")            
+    c-load-image(:_image="item.image")
     v-card-text.grow
       v-card-text.my-2.pa-0.subtitle-1.black--text(style='color: #FF3D00' max-height="70") {{item.dep_name_full}}
       v-card-text.pa-0 {{item.info.text.length > 255 ? (item.info.text.slice(0,255).substr(-1) == '.' ? item.info.text.slice(0,254) + "..." : item.info.text.slice(0,255) + "...") : item.info.text}}
@@ -23,10 +15,7 @@ v-flex.my-2
               v-icon(color="primary") mdi-close
             v-toolbar-title(text--primary) Подробная информация
           v-content.pa-0
-            v-img(v-bind:src="item.image" max-height='256px')
-              template(v-slot:placeholder)
-                v-row(class="fill-height ma-0" align="center" justify="center")
-                  v-progress-circular(indeterminate color="grey lighten-5")
+            c-load-image(:_image="item.image")
             v-card.ma-2
               v-card-text.title {{item.dep_name_full}}
               v-card-text {{item.info.text}}
@@ -40,36 +29,37 @@ v-flex.my-2
 
 
 <script>
+import ImageLoad_C from "@/js/components/information-page-f/components/C_ImageLoad";
+
 export default {
   data() {
     return {
-      dialog: false, 
-      error: false,
+      dialog: false,
+      error: false
     };
   },
-  props: 
-  {
+  props: {
     item: {
       type: Object,
       default: null
     }
   },
-
-  methods:{
-    onError()
-    {
-      this.error = true;
-    },
-
-    loadImg: function(path){
-      return require(`@img/${path}`);
+  computed: {
+    image: function() {
+      var vm = this;
+      return function(value) {
+        return this.error ? value : this.loadImg("reu.png");
+      };
     }
+  },
+  components: {
+    "c-load-image": ImageLoad_C
   }
 };
 </script>
 
-<style scoped>
-.rounded-card {
+<style  lang="scss">
+.rounded-card{
   border-radius: 50px;
 }
-</style>
+</style>>

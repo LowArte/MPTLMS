@@ -76,7 +76,7 @@ export default {
     getGroupsByDepartmentId(department_id, _this) {
         return axios.get('/api/getters/group_by_department_id/' + department_id)
         .then(result => { return result.data.groups;})
-        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {_this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*----------------------------------------
@@ -91,8 +91,8 @@ export default {
     //!----------------------------------------
     saveGroup(group, _this) {
         return axios.post('/api/save/group/', group)
-        .then(res => {_this.showMessage("Выполнено!"); return res.data.id;})
-        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(result => {_this.showMessage("Выполнено!");return result.data.id;})
+        .catch(() => {_this.showError("Ошибка выполнения!"); return false;});
     },
 
     //*Редактирование группы

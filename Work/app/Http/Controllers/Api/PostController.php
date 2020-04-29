@@ -45,9 +45,9 @@ class PostController extends BaseController
 
     public function save(Request $request, CreatePostModification $createPostModification){
         $data = $request->all();
-        $result = $createPostModification->addPostToDatabase($data);
-        if($result){
-            return response()->json(["success"=>true]);
+        $id = $createPostModification->addPostToDatabase($data);
+        if($id){
+            return response()->json(compact("id"),200);
         }
         return response()->json([],400);
     }

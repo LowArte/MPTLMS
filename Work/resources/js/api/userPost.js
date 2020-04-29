@@ -32,8 +32,8 @@ export default {
     //!---------------------------------------
     setPostPrivilegies(data, _this) {
         return axios.post('/api/edit/post', data)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => { _this.showMessage("Выполнено!"); return true; })
+        .catch(() => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
 
@@ -49,7 +49,7 @@ export default {
     getPostsForManagement(_this) {
         return axios.get('/api/getters/posts_for_management')
         .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*----------------------------------------
@@ -64,7 +64,7 @@ export default {
     getPostsFull(_this) {
         return axios.get('/api/getters/posts_full')
         .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
 
     //*----------------------------------------
@@ -78,7 +78,7 @@ export default {
         //return axios.get('/api/getters/posts_for_combobox')
         return axios.get('/api/getters/posts_for_management')
         .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => { _this.showError("Ошибка получения данных!"); return undefined;});
     },
     
     //*Сохранение роли
@@ -89,8 +89,8 @@ export default {
     //!----------------------------------------
     saveUserPost(post, _this) {
         return axios.post('/api/save/post/', post)
-        .then(result => { _this.showMessage("Выполнено!"); return res.data.id; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(result => { _this.showMessage("Выполнено!"); return result.data.id; })
+        .catch(() => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Удаление роли
@@ -102,8 +102,8 @@ export default {
     //!----------------------------------------
     deleteUserPost(post_id, _this) {
         return axios.post('/api/delete/post/' + post_id)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => { _this.showMessage("Выполнено!"); return true; })
+        .catch(() => { _this.showError("Ошибка выполнения!"); return false; });
     },
 
     //*Редактирование роли
@@ -115,8 +115,8 @@ export default {
     //!----------------------------------------
     editUserPost(post, _this) {
         return axios.post('/api/edit/post/', post)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => { _this.showMessage("Выполнено!"); return true; })
+        .catch(() => { _this.showError("Ошибка выполнения!"); return false; });
     },
 }
 

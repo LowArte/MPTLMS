@@ -7,7 +7,7 @@ use App\Modifications\Delete\DeleteGroupModification;
 use App\Modifications\Update\UpdateGroupModification;
 use App\Repositories\ModelRepository\DepartmentRepository;
 use App\Repositories\ModelRepository\GroupRepository;
-
+use Debugbar;
 use Illuminate\Http\Request;
 
 
@@ -59,9 +59,9 @@ class GroupController extends BaseController
 
     public function save(Request $request, CreateGroupModification $createGroupModification){
         $data = $request->all();
-        $result = $createGroupModification->addGroupToDatabase($data);
-        if($result){
-            return response()->json(["success"=>true]);
+        $id = $createGroupModification->addGroupToDatabase($data);
+        if($id){
+            return response()->json(compact("id"),200);
         }
         return response()->json([],400);
     }

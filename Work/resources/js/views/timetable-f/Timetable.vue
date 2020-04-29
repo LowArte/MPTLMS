@@ -101,7 +101,7 @@ export default {
   post_name: {
     name: "Учебного расписание",
     url: "timetable", 
-    //dop_comp: ["", ]
+    com: ["js/views/timetable-f/Bild_Timetable"]
   },
 
   computed: {
@@ -207,9 +207,9 @@ export default {
       let schedule = this.timetable_full.filter(res => {
         if (res.group_id == this.selected_group.id) return true;
         else return false;
-      });
+      })[0];
 
-      if (schedule.length == 0) 
+      if (!schedule) 
       {
         this.showLoading("Получение расписания");
         schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id, this);
@@ -217,8 +217,6 @@ export default {
         this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
         this.closeLoading("Получение расписания");
       } 
-      else 
-        schedule = schedule[0];
       return schedule;
     },
 //?----------------------------------------------
@@ -236,8 +234,7 @@ export default {
       this.closeLoading("Получение групп");
 
       if (this.combo_groups) 
-      {
-        this.selected_group = this.combo_groups[0];
+      {      
         if(this.selected_group)
           this.group_change();
       }
