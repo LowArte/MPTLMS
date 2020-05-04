@@ -77,4 +77,16 @@ class GroupRepository extends BaseRepository
                         ->get();
         return $result;
     }
+
+    public function getGroupsWithoutChild()
+    {
+        $columns = ['id','group_name','department_id'];
+        $result = $this->startCondition()
+                        ->select($columns)
+                        ->where("child_id",null)
+                        ->get();
+        return $result;
+    }
+
+
 }

@@ -2,17 +2,17 @@
 
 namespace App\Repositories\ModelRepository;
 
-use App\Models\Discipline as Model;
+use App\Models\ScheduleSwap as Model;
 
-class DisciplineRepository extends BaseRepository
+class ScheduleSwapRepository extends BaseRepository
 {
     protected function getModelClass(){
         return Model::class;
     }
 
-    public function getDisciplines()
+    public function getScheduleSwap()
     {
-        $columns=['discipline_name','id'];
+        $columns = [];
         $result = $this->startCondition()->select($columns)->get();
         return $result;
     }

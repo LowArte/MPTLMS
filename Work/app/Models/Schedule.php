@@ -23,6 +23,11 @@ class Schedule extends Model
     protected $fillable  = [
         'schedule','group_id'
     ];
+
+    public function group()
+    {
+        return $this->hasOne(Group::class,"id","group_id");
+    }
     
     public function __construct($attributes = array())
     {

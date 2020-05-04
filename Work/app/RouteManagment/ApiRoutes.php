@@ -77,10 +77,12 @@ class ApiRoutes
 
             Route::post('news','Api\NewsController@save')->name('news');  
             
+            Route::post('swap_schedule','Api\ParserController@save')->name(' swap_schedule');  
+
             Route::post('user','Api\UserController@save')->name('user');      
 
             Route::post('place','Api\PlaceController@save')->name('place');
-
+           
             Route::post('notificications_for_user','Api\NotificationsController@saveForUser')->name('notificications_for_user');
             Route::post('notificications_for_user_group','Api\NotificationsController@saveForUserGroup')->name('notificications_for_user_group');
             Route::post('notificications_for_user_department','Api\NotificationsController@saveForUserDepartment')->name('notificications_for_user_department');
@@ -120,6 +122,8 @@ class ApiRoutes
             Route::post('set_like','Api\NewsController@setLike')->name('set_like'); 
 
             Route::post('send_feedback_email_answer','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');
+
+            Route::post('swap_schedule_parse','Api\ParserController@swap_schedule_parse')->name('swap_schedule_parse');
             
             Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
             Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access');           

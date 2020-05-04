@@ -70,6 +70,13 @@ class ScheduleRepository extends BaseRepository
         return $result;
     }
 
+    public function getSchedulesWithGroup()
+    {
+        $columns = ['id','group_id'];
+        $result = $this->startCondition()->with("group:id,group_name")->select($columns)->get(); 
+        return $result;
+    }
+
     public function getScheduleByGroupId($group_id){
         $columns = ['id'];
         $result = $this->startCondition()->select($columns)->where('group_id',$group_id)->first(); 
@@ -79,7 +86,7 @@ class ScheduleRepository extends BaseRepository
     public function getScheduleIdByGroup($group_id)
     {
         $columns = ['id'];
-        $result = $this->startCondition()->select($columns)->where('group_id', $group_id)->toBase()->first()->id;
+        $result = $this->startCondition()->select($columns)->where('group_id', $group_id)->first()->id;
         return $result;
     }
 }

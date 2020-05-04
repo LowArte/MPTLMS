@@ -9,6 +9,7 @@ use App\Notifications\CertificateAnswerCancel;
 use App\Notifications\NewUser;
 use Laravel\Passport\HasApiTokens;
 use App\Notifications\ResetPassword;
+use Debugbar;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Panoscape\History\HasOperations;
@@ -28,6 +29,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email','secName','disabled','post_id'
     ];
+
+    protected $appends = ['full_name'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -50,6 +53,12 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasOne(UsersPost::class,'id','post_id');
+    }
+
+    public function getFullNameAttribute(){
+        $thirdName = $this->thirdName ? ".".mb_substr($this->thirdName, 0, 1, "UTF-8").". " : ". ";
+        return mb_substr($this->name, 0, 1, "UTF-8").$thirdName.$this->secName;
+
     }
 
     public function student()
