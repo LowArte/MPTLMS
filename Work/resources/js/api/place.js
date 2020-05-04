@@ -22,10 +22,6 @@ export default {
      * place_name - string - not null
      */
     //*----------------------------------------
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -35,12 +31,12 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getPlaces(_this) {
+    getPlaces() 
+    {
         return axios.get('/api/getters/places')
-        .then(result => { return result.data.places; })
-        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .then(res => {return res.data.places;})
+        .catch(() => {return undefined;});
     },
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -50,33 +46,34 @@ export default {
     //? Передается объект
     //! Требование ----------------------------
     //!----------------------------------------
-    savePlace(place, _this) {
+    savePlace(place) 
+    {
         return axios.post('/api/save/place', place)
-        .then(result => { _this.showMessage("Выполнено!"); return result.data.id; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
     },
-
     //*Редактирование мест проведения
     //! Комментарий ---------------------------
     //? Реализуется изменение данных в таблице *PLACES* (Места проведения занятий)
     //? Передается объект и заменет оригинал по id
     //! Требование ----------------------------
     //!----------------------------------------
-    editPlace(place, _this) {
+    editPlace(place) 
+    {
         return axios.post('/api/edit/place/', place)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Логическое удаление места проведения
     //! Комментарий ---------------------------
     //? Реализуется стирание данных в таблице *PLACES* (Места проведения занятий) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
     //? Передается id места проведения
     //! Требование ----------------------------
     //!----------------------------------------
-    deletePlace(place_id, _this) {
+    deletePlace(place_id) 
+    {
         return axios.post('/api/delete/place/' + place_id)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 }

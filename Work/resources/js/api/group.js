@@ -24,8 +24,6 @@ export default {
      * departments_id - int - not null - FK
      */
     //*----------------------------------------
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -35,48 +33,48 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getGroups(_this) {
+    getGroups() 
+    {
         return axios.get('/api/getters/groups')
-        .then(result => {return result.data.groups;})
-        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined});
+        .then(res => {return res.data.groups;})
+        .catch(() => {return undefined});
     },
-
     //*Получение всех групп для выпадающего списка
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getGroupsForCombobox(_this) {
+    getGroupsForCombobox() 
+    {
         return axios.get('/api/getters/groups_for_combobox')
-        .then(result => {return result.data.groups;})
-        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined});
+        .then(res => {return res.data.groups;})
+        .catch(() => {return undefined});
     },
-
     //*Получение всех групп для выпадающего списка с учётом вспомогательных групп
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getGroupsForComboboxRecursive(_this) {
+    getGroupsForComboboxRecursive() 
+    {
         return axios.get('/api/getters/groups_for_combobox_recursive')
-        .then(result => {return result.data.groups;})
-        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined});
+        .then(res => {return res.data.groups;})
+        .catch(() => {return undefined});
     },
-
     //*Получение групп по id отделению
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
     //? Возвращается таблица данных JSON формата по id соответствующей группы
     //! Требование ----------------------------
     //!----------------------------------------
-    getGroupsByDepartmentId(department_id, _this) {
+    getGroupsByDepartmentId(department_id) 
+    {
         return axios.get('/api/getters/group_by_department_id/' + department_id)
-        .then(result => { return result.data.groups;})
-        .catch(exception => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .then(res => {return res.data.groups;})
+        .catch(() => {return undefined;});
     },
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -85,37 +83,35 @@ export default {
     //? Реализуется сохранение данных в таблице *GROUPS* (Группы)
     //? Передается объект
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    saveGroup(group, _this) {
+    saveGroup(group) 
+    {
         return axios.post('/api/save/group/', group)
-        .then(res => {_this.showMessage("Выполнено!"); return res.data.id;})
-        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
     },
-
     //*Редактирование группы
     //! Комментарий ---------------------------
     //? Реализуется изменение данных в таблице *GROUPS* (Группы)
     //? Передается объект и заменет оригинал по id
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    editGroup(group, _this) {
+    editGroup(group) 
+    {
         return axios.post('/api/edit/group/', group)
-        .then(res => {_this.showMessage("Выполнено!"); return true;})
-        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Логическое удаление группы
     //! Комментарий ---------------------------
     //? Реализуется стирание данных в таблице *GROUPS* (Группы)
     //? Передается id группы
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    deleteGroup(group_id, _this) {
+    deleteGroup(group_id) 
+    {
         return axios.post('/api/delete/group/' + group_id)
-        .then(result => {_this.showMessage("Выполнено!"); return true;})
-        .catch(exception => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 }

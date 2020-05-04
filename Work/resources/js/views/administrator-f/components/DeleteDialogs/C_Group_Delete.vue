@@ -44,7 +44,7 @@ export default {
   {
     if(this.specialities == null)
     {
-      let items = await api_department.getDepartments(this);
+      let items = await api_department.getDepartments();
       this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
     }
   },

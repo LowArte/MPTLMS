@@ -102,8 +102,11 @@ export default {
               "Куда нужна характеристика": this.modelorder
             },
             type: "Характеристика"
-          }, this))
+          }))
+          {
+            this.showMessage("Заказано. Ожидайте выполнения");
             this.$refs.form.reset();
+          }
       }
       else 
         this.showError("Укажите корректные данные!");

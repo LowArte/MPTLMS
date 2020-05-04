@@ -3,7 +3,8 @@ import mutations from './mutations'
 import actions from './actions'
 
 const state = {
-  timetable_full: []
+  timetable_full: [],
+  tieacher_timetable: []
 }
 
 export default {

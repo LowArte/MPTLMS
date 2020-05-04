@@ -123,7 +123,7 @@ export default {
       this.showLoading("Получение преподавателей");
       if(this.teachers_combo == null)
       {
-        let items = await api_teacher.getTeachers(this);
+        let items = await api_teacher.getTeachers();
         this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
       }
       this.closeLoading("Получение преподавателей");
@@ -135,7 +135,7 @@ export default {
       this.showLoading("Получение дисциплин");
       if(this.disciplines_combo == null)
       {
-        let items = await api_discipline.getDisciplines(this);
+        let items = await api_discipline.getDisciplines();
         this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
       }
       this.closeLoading("Получение дисциплин");
@@ -147,7 +147,7 @@ export default {
       this.showLoading("Получение мест проведения");
       if(this.places_combo == null)
       {
-        let items = await api_place.getPlaces(this);
+        let items = await api_place.getPlaces();
         this.$store.commit(mutations.SET_PLACES_COMBO, items)
       }
       this.closeLoading("Получение мест проведения");
@@ -158,7 +158,7 @@ export default {
     {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
-        let items = await api_department.getDepartments(this);
+        let items = await api_department.getDepartments();
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
         this.closeLoading("Получение отделений");
       }
@@ -175,7 +175,8 @@ export default {
     {
       if (this.$refs.BildTimetable.validate())
       {
-        await api_schedule.editSchedule({group_id: this.selected_group.id, schedule: this.schedule}, this);
+        if(await api_schedule.editSchedule({group_id: this.selected_group.id, schedule: this.schedule}))
+          this.showMessage("Выполнено!");
       }
       else
         this.showError('Поля заполнены не корректно!');
@@ -206,7 +207,7 @@ export default {
     async group_change() 
     {
       this.showLoading("Получение расписания");
-      this.schedule = await api_schedule.getScheduleBildByGroupId(this.selected_group.id, this);
+      this.schedule = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
       this.closeLoading("Получение расписания");
     },
   }

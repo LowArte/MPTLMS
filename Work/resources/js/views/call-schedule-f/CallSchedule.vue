@@ -33,7 +33,7 @@ export default {
     {
       if(this.call_schedule == null)
       {
-        let timeTable = await api_call_schedule.getCallSchedule(this);
+        let timeTable = await api_call_schedule.getCallSchedule();
         await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
       }
     }

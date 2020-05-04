@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Modifications\Update\UpdateScheduleModification;
 use App\Repositories\ModelRepository\ScheduleRepository;
 use Illuminate\Http\Request;
+use Debugbar;
 
 class ScheduleController extends BaseController
 { 
@@ -18,8 +19,18 @@ class ScheduleController extends BaseController
         $schedule = $scheduleRepository->getScheduleByGroup($id);
         return response()->json(compact('schedule'));
     }
-     /**
-     * Get schedule
+    /**
+     * Получение чистого расписания с id элементами и для вывода
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getScheduleBildShowByGroupId($id, ScheduleRepository $scheduleRepository)
+    {
+        $schedule = $scheduleRepository->getScheduleBildShowByGroup($id);
+        return response()->json(compact('schedule'));
+    }
+    /**
+     * Получение чистого и общего расписания
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -28,10 +39,35 @@ class ScheduleController extends BaseController
         $schedule = $scheduleRepository->getScheduleBildByGroup($id);
         return response()->json(compact('schedule'));
     }
-
     /**
-     * edit schedule from database
-     * @param id schedule id
+     * Получение чистого и общего расписания на день по id препода
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getScheduleBildShowDayByTeacherId($teacher_id, $day, ScheduleRepository $scheduleRepository)
+    {
+        $schedule = $scheduleRepository->getScheduleBildShowDayByTeacherId($teacher_id, $day);
+        return response()->json(compact('schedule'));
+    }    
+
+    public function getTeachersForScheduleDay($chisl, $day, ScheduleRepository $scheduleRepository)
+    {
+        $teachers = $scheduleRepository->getTeachersForScheduleDay($chisl, $day);
+        return response()->json(compact('teachers'));
+    }
+    /**
+     * Получение расписания преподавателя
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getScheduleTeacher($teacher_id, ScheduleRepository $scheduleRepository)
+    {
+        $schedule = $scheduleRepository->getScheduleTeacher($teacher_id);
+        return response()->json(compact('schedule'));
+    }
+    /**
+     * Редактирование расписания
+     * @param id id расписания
      * @return JSON
      */
     public function edit($id, Request $request, ScheduleRepository $scheduleRepository, UpdateScheduleModification $updateScheduleModification)
@@ -44,6 +80,20 @@ class ScheduleController extends BaseController
         {
             return response()->json(["success"=>true]);
         }
+        return response()->json(["error"=>"Расписание не сохранено"],400);
+    }
+    /**
+     * Редактирование аудиторного фонда
+     * @param id id расписания
+     * @return JSON
+     */
+    public function editClassroom(Request $request, UpdateScheduleModification $updateScheduleModification)
+    {
+        $data = $request->all();
+        $result = $updateScheduleModification->updateScheduleClassroomInDatabase($data);
+
+        if($result)
+            return response()->json(["success"=>true]);
         return response()->json(["error"=>"Расписание не сохранено"],400);
     }
 }

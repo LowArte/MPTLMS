@@ -70,7 +70,7 @@ export default {
 
     async update() {
       this.showLoading("Обновление данных");
-      await this.$store.commit(mutations.SET_USERPOSTS_FULL, await api_user_post.getPostsForManagement(this));
+      await this.$store.commit(mutations.SET_USERPOSTS_FULL, await api_user_post.getPostsForManagement());
       this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------

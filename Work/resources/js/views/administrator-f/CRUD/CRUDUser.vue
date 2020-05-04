@@ -67,13 +67,13 @@ export default {
   {
     this.showLoading("Загрузка аддонов");
     if (this.specialities == null)
-      await this.$store.commit(mutations.SET_SPECIALITIES_FULL,await api_department.getDepartments(this));
+      await this.$store.commit(mutations.SET_SPECIALITIES_FULL,await api_department.getDepartments());
 
     if (this.userposts == null)
-      await this.$store.commit(mutations.SET_USERPOSTS_FULL,await api_user_post.getPostsForCombobox(this))
+      await this.$store.commit(mutations.SET_USERPOSTS_FULL,await api_user_post.getPostsForCombobox())
 
     if (this.groups == null)
-      await this.$store.commit(mutations.SET_GROUPS_FULL, await api_group.getGroups(this));
+      await this.$store.commit(mutations.SET_GROUPS_FULL, await api_group.getGroups());
     this.closeLoading("Загрузка аддонов");
   },
 
@@ -88,7 +88,7 @@ export default {
 
     async update() {
       this.showLoading("Обновление данных");
-      await this.$store.commit(mutations.SET_USERS_FULL, await api_user.getUsers(this));
+      await this.$store.commit(mutations.SET_USERS_FULL, await api_user.getUsers());
       this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------
@@ -136,7 +136,7 @@ export default {
     {
       this.showLoading("Отправка письма");
       if(item.email != null)
-        if(await api_user.EmailForResetPassword(item.email, this))
+        if(await api_user.EmailForResetPassword(item.email))
           this.showMessage("Письмо отправлено!");
       this.closeLoading("Отправка письма");
     }

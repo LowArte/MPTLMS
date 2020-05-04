@@ -36,20 +36,25 @@ export default {
     ...mapGetters(["user", "notifications", "unread_notifications_count"])
   },
 
-  async beforeMount() {
+  async beforeMount() 
+  {
     await this.getNotifications();
     this.items = JSON.parse(JSON.stringify(this.notifications));
   },
 
   methods: {
-    async accept(item) {
-      if (!item.done) {
+    async accept(item) 
+    {
+      if (!item.done) 
+      {
         item.done = true;
         await this.editNotifications(this.items);
         this.items = JSON.parse(JSON.stringify(this.notifications));
       }
     },
-    async acceptAll() {
+
+    async acceptAll() 
+    {
       if (this.unread_notifications_count > 0) {
         await this.editAllNotifications(this.items);
         this.items = JSON.parse(JSON.stringify(this.notifications));

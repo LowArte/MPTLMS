@@ -23,10 +23,6 @@ export default {
      * place_id - int - not null - FK
      */
     //*----------------------------------------
-
-
-
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -35,31 +31,32 @@ export default {
     //? Реализуется редактирование данных в таблицe *CALLSHEDULE* (Расписание звонков)
     //! Требование ----------------------------
     //!----------------------------------------
-    edit(callSchedule, _this) {
+    edit(callSchedule) 
+    {
         return axios.post('/api/edit/callschedule', {'callSchedule': callSchedule})
-        .then(res => {_this.showMessage("Выполнено!"); return res.data.timeTable;})
-        .catch(ex => {_this.showError("Произошла ошибка выолнения!"); return undefined;});
+        .then(res => {return res.data.timeTable;})
+        .catch(() => {return undefined;});
     },
-
     //*Получение расписания звонков
     //! Комментарий ---------------------------
     //? Реализуется редактирование данных в таблицe *CALLSHEDULE* (Расписание звонков)
     //! Требование ----------------------------
     //!----------------------------------------
-    getCallSchedule(_this) {
+    getCallSchedule() 
+    {
         return axios.get('/api/getters/get_call_schedule')
-        .then(res => { return res.data.timeTable;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .then(res => {return res.data.timeTable;})
+        .catch(() => {return undefined;});
     },
-
     //*Получение расписания звонков для панели
     //! Комментарий ---------------------------
     //? Реализуется получения данных в таблицe *CALLSHEDULE* (Расписание звонков)
     //! Требование ----------------------------
     //!----------------------------------------
-    getCallScheduleForPanel(_this) {
+    getCallScheduleForPanel() 
+    {
         return axios.get('/api/getters/get_call_schedule_for_panel')
         .then(res => {return res.data.panel_array;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     }
 }

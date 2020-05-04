@@ -59,14 +59,18 @@ export default {
   },
 
   methods: {
-    clickLike(id) {
-      if (this.clicklike) {
+    clickLike(id) 
+    {
+      if (this.clicklike) 
+      {
         this.post.likes--;
-        api_new.likeNews(id, this);
+        api_new.likeNews(id);
         this.clicklike = false;
-      } else {
+      } 
+      else 
+      {
         this.post.likes++;
-        api_new.likeNews(this.post.id, this);
+        api_new.likeNews(this.post.id);
         this.clicklike = true;
       }
     }

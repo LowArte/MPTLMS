@@ -70,7 +70,7 @@ export default {
 
     async update() {
       this.showLoading("Обновление данных");
-      await this.$store.commit(mutations.SET_PLACES_FULL, await api_place.getPlaces(this));
+      await this.$store.commit(mutations.SET_PLACES_FULL, await api_place.getPlaces());
       this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------

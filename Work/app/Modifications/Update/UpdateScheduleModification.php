@@ -25,4 +25,20 @@ class UpdateScheduleModification extends BaseModification
         $schedule->save();
         return true;
     }
+
+    public function updateScheduleClassroomInDatabase($data)
+    {
+        $scheduleData = $data['schedule'];
+        $day = $data['day'];
+
+        foreach($scheduleData as $value)
+        {
+            $result = Model::where('id', $value['schedule_id'])->first();
+            $result->schedule = json_decode($result->schedule);
+            $result->schedule->$day = $value['bild'];
+            $result->schedule = json_encode($result->schedule);
+            $result->save();
+        }
+        return true;
+    }
 }

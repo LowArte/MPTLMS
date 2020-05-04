@@ -9,6 +9,11 @@
 <script>
 
 export default {
+  post_name: {
+    name: "warning",
+    url: "warning"
+  },
+
   methods: {
     loadImg: function(path){
       return require(`@img/${path}`);

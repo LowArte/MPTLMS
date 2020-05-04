@@ -49,13 +49,13 @@ export default {
   },
 
   async beforeMount() {
-    
     await this.getNotifications();
     this.items = JSON.parse(JSON.stringify(this.notifications));
   },
 
   methods: {
-    async accept(item) {
+    async accept(item) 
+    {
       item.done = true;
       await this.editNotifications(this.items);
       this.items = JSON.parse(JSON.stringify(this.notifications));

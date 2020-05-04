@@ -70,16 +70,17 @@ export default {
 
   methods: {
     async sendEmailDone() {
-      this.$refs.qwestion.pop().then(result => {
-        if (result) {
+      this.$refs.qwestion.pop().then(result => 
+      {
+        if (result) 
+        {
           this.data.id = this._item.id;
           this.data.to = this._item.email;
           this.data.by = this.user.email;
-          if (this.$store.dispatch(actions.RESPOND_СERTIFICATE, this.data)) {
+          if (this.$store.dispatch(actions.RESPOND_СERTIFICATE, this.data)) 
             this.showInfo("Документ одобрен");
-          } else {
+          else 
             this.showInfo("Что-то пошло не так. Обратитесь в службу поддержки. Спасибо.");
-          }
         }
       });
     }

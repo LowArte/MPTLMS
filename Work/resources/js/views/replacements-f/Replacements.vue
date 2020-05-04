@@ -19,6 +19,7 @@ v-content.ma-0.pa-2
         v-content.pa-1(v-if="user != null && user.post_id != null")
           router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_replacements'") 
             v-btn(color="accent" text block dark) Конструктор замен
+        v-switch.shrink.mx-3.my-2(v-if="user.post_id == 3" dense v-model="isTeacher" color="primary" @change="changeFilter" block label="Мои замены")
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" @change="changeFilter" block label="Изменения для всех групп")
         v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" @change="changeFilter" block label="Изменения на имеющиеся даты")
   v-alert(border="left" dense type="warning")
@@ -95,6 +96,28 @@ export default {
         let replacements = this.replacements.filter(res => {
             if(!this.selected_group)
                 return false;
+            var checkTeacher = false;
+            if(this.isTeacher)
+            {
+              res['swap']['oldteacher'].forEach(element => {
+                if(element == this.user.teacher.id)
+                  checkTeacher = true;
+              });
+              res['swap']['teacher'].forEach(element => {
+                if(element == this.user.teacher.id)
+                  checkTeacher = true;
+              });
+
+              if(this.checkAllDate && this.checkAllGroup && checkTeacher)
+                return true;
+              if(this.checkAllDate && res.group_id == this.selected_group.id  && checkTeacher)
+                  return true;
+              if(res.swap_date == this.dateDialog.date && this.checkAllGroup  && checkTeacher)
+                  return true;
+              if(res.swap_date == this.dateDialog.date && res.group_id == this.selected_group.id  && checkTeacher)
+                  return true;
+            }
+
             if(this.checkAllDate && this.checkAllGroup)
                 return true;
             if(this.checkAllDate && res.group_id == this.selected_group.id)
@@ -130,6 +153,7 @@ export default {
       arrgroups: [],
       start: true,
       date: [],
+      isTeacher: false,
       dateDialog: {
         model: false,
         date: new Date().toISOString().substr(0, 10)
@@ -139,8 +163,10 @@ export default {
 
   async beforeMount()
   {
+    if(this.user.post_id == 3)
+      this.isTeacher = true;
     this.showLoading("Получение замен");
-    this.replacements = await api_replacement.getReplacements(this)
+    this.replacements = await api_replacement.getReplacements()
     for (var i = 0; i < this.replacements.length; i++) 
         this.replacements[i]["swap"] = JSON.parse(this.replacements[i]["swap"]);
     this.closeLoading("Получение замен");
@@ -157,7 +183,7 @@ export default {
     {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
-        let items = await api_department.getDepartments(this);
+        let items = await api_department.getDepartments();
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
         this.closeLoading("Получение отделений");
       }
@@ -245,19 +271,18 @@ export default {
     },
 
     //Удаление замены
-    deleteItem(id) 
+    async deleteItem(id) 
     {
-      this.$refs.qwestion.pop().then(confirmResult => {
-        if (confirmResult) 
+      if(await this.$refs.qwestion.pop().then(res => { return res;}))
+      {
+        if(api_replacement.deleteReplacement(id))
         {
-          if(api_replacement.deleteReplacement(id, this))
-            this.changeFilter();
-        } 
-        else 
-        {
-          this.showInfo("Действие было отменено");
+          this.showMessage("Замена удалена!");
+          this.changeFilter();
         }
-      });
+      }
+      else 
+          this.showInfo("Действие было отменено");
     },
 
     //Получение замен с учётом фильтров

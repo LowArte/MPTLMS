@@ -12,7 +12,7 @@ export const defaultRoutes = [
     {
         path: '/test/',
         name: 'Test',
-        component: () => import( /* webpackChunkName: "components-parser-f-parser" */ '@/js/components/parser-f/Parser.vue'),
+        component: () => import( /* webpackChunkName: "views-auth-f-login" */ '@/js/views/news-f/NewsOnePage.vue'),
     },
     {
         path: '/password_reset/',

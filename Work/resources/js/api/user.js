@@ -22,8 +22,6 @@ export default {
      * 
      */
     //*----------------------------------------
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -33,72 +31,46 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getUsers(_this) {
+    getUsers() 
+    {
         return axios.get('/api/getters/users')
-            .then(result => {
-                return result.data.users;
-            })
-            .catch(ex => {
-                _this.showError("Ошибка получения данных!");
-                return undefined;
-            });
+        .then(res => {return res.data.users;})
+        .catch(() => {return undefined;});
     },
-
     //*Получение пользователя
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *USERS* (Пользователи)
     //? Возвращается экзмемпляр данных по id
     //! Требование ----------------------------
-    //! Пересмотреть (укажи меня)
     //!----------------------------------------
-    getUser(user_id, _this) {
+    getUser(user_id) 
+    {
         return axios.get('/api/getters/users/' + user_id)
-            .then(result => {
-                return true;
-            })
-            .catch(ex => {
-                _this.showError("Ошибка получения данных!");
-                return undefined;
-            });
+        .then(() => {return true;})
+        .catch(() => {return undefined;});
     },
-
     //*Установка нового пароля
     //! Комментарий ---------------------------
     //? Реализуется создание нового пароля для пользователя *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    ResetPassword(data, _this) {
+    ResetPassword(data) 
+    {
         return axios.post('/password/reset', data)
-            .then(result => {
-                _this.showMessage("Выполнено!");
-                return true;
-            })
-            .catch(exception => {
-                _this.showError("Ошибка выполнения!");
-                return false;
-            });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Отправка письма для получения ссылки для указания нового пароля
     //! Комментарий ---------------------------
     //? Реализуется отправка письма для получения ссылки для создание нового пароля для пользователя *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    EmailForResetPassword(email, _this) {
-        return axios.post('/password/email', {
-                "email": email
-            })
-            .then(result => {
-                _this.showMessage("Отправлено!");
-                return true;
-            })
-            .catch(exception => {
-                _this.showError("Ошибка выполнения!");
-                return false;
-            });
+    EmailForResetPassword(email) 
+    {
+        return axios.post('/password/email', {"email": email})
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -106,59 +78,45 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется сохранение данных в таблицу *USERS* (Пользователи)
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
-    saveUser(user, _this) {
+    saveUser(user) 
+    {
         return axios.post('/api/save/user/', user)
-        .then(res => { _this.showMessage("Выполнено!"); return res.data.id; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
     },
-
     //*Удаление пользователя
     //! Комментарий ---------------------------
     //? Реализуется удаление данных из таблицы *USERS* (Пользователи)
     //? Передаётся id в функцию
     //! Требование ----------------------------
-    //! Отсутсвует
     //!----------------------------------------
-    deleteUser(user, _this) {
+    deleteUser(user) 
+    {
         return axios.post('/api/delete/user/' + user[0] + '/' + user[1])
-            .then(result => {
-                _this.showMessage("Выполнено!");
-                return true;
-            })
-            .catch(exception => {
-                _this.showError("Ошибка выполнения!");
-                return false;
-            });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Редактирование пользователя
     //! Комментарий ---------------------------
     //? Реализуется редактирование данных в таблице *USERS* (Пользователи)
     //? Передаётся ОДИН экземпляр записи 
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    editUser(user, _this) {
+    editUser(user) {
         return axios.post('/api/edit/user/', user)
-            .then(result => {
-                _this.showMessage("Выполнено!");
-                return true;
-            })
-            .catch(exception => {
-                _this.showError("Ошибка выполнения!");
-                return false;
-            });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Вход в систему
     //! Комментарий ---------------------------
     //? Вход в систему *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    login(data) {
-        return axios.post('/login', data).then(res => {
+    login(data) 
+    {
+        return axios.post('/login', data)
+        .then(res => {
             if(!res.data.profilactic)
             {
                 const slug = res.data.user.post.slug;
@@ -173,10 +131,8 @@ export default {
                 }
             }
             return "Система находится в режиме профилактики!";
-        }).catch(ex => {
-            console.log(ex)
-            return "Не верные данные!";
         })
+        .catch(() => {return "Не верные данные!";})
     },
 
     //*Иницилизация пользователя
@@ -184,9 +140,12 @@ export default {
     //? Получения токена 
     //! Требование ----------------------------
     //!----------------------------------------
-    init() {
-        return axios.post('/getToken').then(res => {
-            if (res.data.success) {
+    init() 
+    {
+        return axios.post('/getToken')
+        .then(res => {
+            if (res.data.success) 
+            {
                 const slug = res.data.user.post.slug;
                 const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
                 const user = res.data.user;
@@ -199,23 +158,25 @@ export default {
                 }
             } 
             return undefined;
-        }).catch(ex => {
-            console.log(ex)
-            return undefined;
-        })
+        }).catch(() => {return undefined;})
     },
-
+    //*Выход из системы
+    //! Комментарий ---------------------------
+    //? Выход из системы
+    //! Требование ----------------------------
+    //!----------------------------------------
     logout() {
         return axios.post('/logout')
-            .then(res => {
-                return true;
-            })
-            .catch(ex => {
-                return false;
-            });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
-    makeRoutes(privilegies, slug, disabled) {
+    //*Формирование доступных маршрутов
+    //! Комментарий ---------------------------
+    //? Формирование доступных маршрутов
+    //! Требование ----------------------------
+    //!----------------------------------------
+    makeRoutes(privilegies, slug, disabled) 
+    {
         let items = [];
         privilegies.forEach(element => {
             if((disabled == 1 && element.default == true) || disabled == 0)
@@ -257,7 +218,6 @@ export default {
                 }
             }
         });
-        
         return items;
     }
 }

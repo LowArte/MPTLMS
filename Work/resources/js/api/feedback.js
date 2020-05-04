@@ -25,10 +25,6 @@ export default {
      * answered - int - not null
      */
     //*----------------------------------------
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -38,40 +34,36 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getFeedbackRequests(_this) {
+    getFeedbackRequests() 
+    {
         return axios.get('/api/getters/get_feedback_requests')
         .then(res => {return res.data.feedback;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
-
-
-
-
     //*----------------------------------------
     //!         Работа с данными*
-    //*---------Имеется модификация------------
+    //*----------------------------------------
     //*Заказ нового документа
     //! Комментарий ---------------------------
     //? Реализуется сохранения данных в таблице *FEEDBACK* (Обраная связь)
     //! Требование ----------------------------
     //!----------------------------------------
-    save(data, _this) {
+    save(data) 
+    {
         return axios.post('/api/save/feedback/', {"text": data.text, "type": data.type})
-        .then(res => {_this.showMessage("Выполнено!"); return true;})
-        .catch(ex => {_this.showError("Не выполнено!"); return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Оправка сообщений на почту
     //*------------Модификация-----------------
     //! Комментарий ---------------------------
     //? Реализуется отправка сообщения на почту пользователя в качестве ответа на обращение
     //! Требование ----------------------------
-    //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmail(data, _this)
+    sendEmail(data)
     {
         return axios.post('/api/functions/send_feedback_email_answer/', data)
-        .then(result => {return true;})
-        .catch(ex => {return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 }

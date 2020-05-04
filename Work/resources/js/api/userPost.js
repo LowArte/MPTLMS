@@ -13,8 +13,6 @@ export default {
      * privilegie - json - not null
      */
     //*----------------------------------------
-    
-
     //*----------------------------------------
     //!         Установка данных
     //*----------------------------------------
@@ -28,15 +26,13 @@ export default {
      *      privilegies : объект формата JSON в котором описаны доступные пользователю привелегии
     */
     //! Требование ----------------------------
-    //! Не работает
     //!---------------------------------------
-    setPostPrivilegies(data, _this) {
+    setPostPrivilegies(data) 
+    {
         return axios.post('/api/edit/post', data)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -46,12 +42,12 @@ export default {
     //? Возвращается {} таблица данных JSON формата
     //! Требование ----------------------------
     //!---------------------------------------
-    getPostsForManagement(_this) {
+    getPostsForManagement() 
+    {
         return axios.get('/api/getters/posts_for_management')
-        .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .then(res => {return res.data.posts;})
+        .catch(() => {return undefined;});
     },
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -61,66 +57,60 @@ export default {
     //? Возвращается {} таблица данных JSON формата
     //! Требование ----------------------------
     //!---------------------------------------
-    getPostsFull(_this) {
+    getPostsFull() 
+    {
         return axios.get('/api/getters/posts_full')
-        .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .then(res => {return res.data.posts;})
+        .catch(() => {return undefined;});
     },
-
     //*----------------------------------------
     //*Получение данных для выпадающего списка 
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *USERSPOST* (Роли)
     //? Возвращается {} таблица данных JSON формата
     //! Требование ----------------------------
+    //!Дублированная api. Требуется разобраться, как получить такие данные
     //!---------------------------------------
-    getPostsForCombobox(_this) {
+    getPostsForCombobox() 
+    {
         //return axios.get('/api/getters/posts_for_combobox')
         return axios.get('/api/getters/posts_for_management')
-        .then(result => { return result.data.posts;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .then(res => { return res.data.posts;})
+        .catch(() => {return undefined;});
     },
-    
     //*Сохранение роли
     //! Комментарий ---------------------------
     //? Реализуется запись данных в таблицу *USERSPOST* (Роли)
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    saveUserPost(post, _this) {
+    saveUserPost(post) 
+    {
         return axios.post('/api/save/post/', post)
-        .then(result => { _this.showMessage("Выполнено!"); return res.data.id; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
     },
-
     //*Удаление роли
     //! Комментарий ---------------------------
     //? Реализуется удаление данных из таблицы *USERSPOST* (Роли)
     //? Передаётся id в функцию
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    deleteUserPost(post_id, _this) {
+    deleteUserPost(post_id) 
+    {
         return axios.post('/api/delete/post/' + post_id)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Редактирование роли
     //! Комментарий ---------------------------
     //? Реализуется редактирование данных в таблице *USERSPOST* (Роли)
     //? Передаётся ОДИН экземпляр записи 
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    editUserPost(post, _this) {
+    editUserPost(post) 
+    {
         return axios.post('/api/edit/post/', post)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 }
-
-    //?----------------------------------------
-    //?         Документация
-    //?----------------------------------------
-    //*

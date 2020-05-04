@@ -22,7 +22,8 @@ export default {
     url: "/server_settings"
   },
   computed: {
-    profilactic: {
+    profilactic: 
+    {
       get() {
         return this.$store.getters.profilactic.option_value == "true";
       },
@@ -35,13 +36,14 @@ export default {
   methods: 
   {
     async send() {
-      let result = await api_panel.setOptionValue(
-        {
+      if(await api_panel.setOptionValue({
           id: this.$store.getters.profilactic.id,
           value: this.$store.getters.profilactic.option_value
-        },
-        this
-      );
+      }))
+        this.showMessage("Принято!");
+      else
+        this.showError("Ошибка выполнения!");
+
     }
   }
 };

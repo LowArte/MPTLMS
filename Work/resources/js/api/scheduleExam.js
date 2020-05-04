@@ -25,7 +25,6 @@ export default {
      * place_id - int - not null - FK
      */
     //*----------------------------------------
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -35,12 +34,12 @@ export default {
     //? Возвращается расписание экзаменов все
     //! Требование ----------------------------
     //!----------------------------------------
-    getScheduleExam(_this) {
+    getScheduleExam() 
+    {
         return axios.get('/api/getters/schedule_exams')
         .then(res => {return res.data.schedule;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -49,31 +48,32 @@ export default {
     //? Реализуется сохранение  данных в таблице *SCHEDULES_EXAM* (Расписание экзаменов)
     //! Требование ----------------------------
     //!----------------------------------------
-    saveScheduleExam(data, _this) {
+    saveScheduleExam(data) 
+    {
         return axios.post('/api/save/schedule_exam/', data)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Сохранение расписания экзаменов
     //! Комментарий ---------------------------
     //? Реализуется сохранение  данных в таблице *SCHEDULES_EXAM* (Расписание экзаменов)
     //! Требование ----------------------------
     //!----------------------------------------
-    deleteScheduleExam(id, _this) {
+    deleteScheduleExam(id) 
+    {
         return axios.post('/api/delete/schedule_exam/' + id)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Сохранение расписания экзаменов
     //! Комментарий ---------------------------
     //? Реализуется сохранение  данных в таблице *SCHEDULES_EXAM* (Расписание экзаменов)
     //! Требование ----------------------------
     //!----------------------------------------
-    editScheduleExam(data, _this) {
+    editScheduleExam(data) 
+    {
         return axios.post('/api/edit/schedule_exam/', data)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     }
 }

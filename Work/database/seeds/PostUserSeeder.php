@@ -123,6 +123,18 @@ class PostUserSeeder extends Seeder
                             ],
                             [
                                 "id" => uniqid(),
+                                "text" => "Аудиторный фонд",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Аудиторный фонд",
+                                        "url" => "bild_classroom_fund"
+                                    ],
+                                    "path" => "js/views/сlassroom-fund-f/Bild_Classroom_Fund"
+                                ],
+                            ],
+                            [
+                                "id" => uniqid(),
                                 "text" => "Расписание звонков",
                                 "menu" => true,
                                 "component" => [
@@ -352,7 +364,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Успеваемость",
                                         "url" => "progress"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
+                                    "path" => "js/views/journal-f/Journal"
                                 ],
                             ],
                             [
@@ -364,7 +376,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Домашнее задание",
                                         "url" => "homework"
                                     ],
-                                    "path" => "js/views/other-f/Warning"
+                                    "path" => "js/views/homework-f/HomeWork"
                                 ],
                             ]
                         ],
@@ -468,6 +480,18 @@ class PostUserSeeder extends Seeder
                             ],
                             [
                                 "id" => uniqid(),
+                                "text" => "Расписание преподавателя",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Расписание",
+                                        "url" => "timetable_teacher"
+                                    ],
+                                    "path" => "js/views/timetable-f/Timetable_Teacher"
+                                ],
+                            ],
+                            [
+                                "id" => uniqid(),
                                 "text" => "Изменения в расписании",
                                 "menu" => true,
                                 "component" => [
@@ -497,13 +521,32 @@ class PostUserSeeder extends Seeder
                         "icon" => "class",
                         "text" => "Учебные журналы",
                         "menu" => true,
-                        "component" => [
-                            "info" => [
-                                "name" => "Учебные журналы",
-                                "url" => "journals"
+                        "children" => [
+                            [
+                                "id" => uniqid(),
+                                "text" => "Журналы групп",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Успеваемость",
+                                        "url" => "progress"
+                                    ],
+                                    "path" => "js/views/journal-f/JournalTeacher"
+                                ],
                             ],
-                            "path" => "js/views/other-f/Warning"
-                        ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "Домашнее задание",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Домашнее задание",
+                                        "url" => "homework_teacher"
+                                    ],
+                                    "path" => "js/views/homework-f/HomeWorkTeacher"
+                                ],
+                            ]
+                        ]
                     ],
                     [
                         "id" => uniqid(),
@@ -623,6 +666,18 @@ class PostUserSeeder extends Seeder
                             ],
                             [
                                 "id" => uniqid(),
+                                "text" => "Аудиторный фонд",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Аудиторный фонд",
+                                        "url" => "bild-classroom-foundation"
+                                    ],
+                                    "path" => "js/views/сlassroom-foundation-f/Bild_Classroom_Foundation"
+                                ],
+                            ],
+                            [
+                                "id" => uniqid(),
                                 "text" => "Расписание звонков",
                                 "menu" => true,
                                 "component" => [
@@ -634,6 +689,38 @@ class PostUserSeeder extends Seeder
                                 ],
                             ]
                         ],
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "icon" => "class",
+                        "text" => "Учебные журналы",
+                        "menu" => true,
+                        "children" => [
+                            [
+                                "id" => uniqid(),
+                                "text" => "Журналы групп",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Успеваемость",
+                                        "url" => "progress"
+                                    ],
+                                    "path" => "js/views/journal-f/JournalTeacher"
+                                ],
+                            ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "Домашнее задание",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Домашнее задание",
+                                        "url" => "homework_teacher"
+                                    ],
+                                    "path" => "js/views/homework-f/HomeWorkTeacher"
+                                ],
+                            ]
+                        ]
                     ],
                     [
                         "id" => uniqid(),
@@ -771,7 +858,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "Панель управления",
-                                "url" => ""
+                                "url" => "editor_panel"
                             ],
                             "path" => "js/views/homes-f/EditorHome"
                         ],

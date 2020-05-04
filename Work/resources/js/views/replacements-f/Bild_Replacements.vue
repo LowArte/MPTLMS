@@ -165,7 +165,7 @@ export default {
       this.showLoading("Получение преподавателей");
       if(this.teachers_combo == null)
       {
-        let items = await api_teacher.getTeachers(this);
+        let items = await api_teacher.getTeachers();
         this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
       }
       this.closeLoading("Получение преподавателей");
@@ -177,7 +177,7 @@ export default {
       this.showLoading("Получение дисциплин");
       if(this.disciplines_combo == null)
       {
-        let items = await api_discipline.getDisciplines(this);
+        let items = await api_discipline.getDisciplines();
         this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
       }
       this.closeLoading("Получение дисциплин");
@@ -188,7 +188,7 @@ export default {
     {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
-        let items = await api_department.getDepartments(this);
+        let items = await api_department.getDepartments();
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
         this.closeLoading("Получение отделений");
       }
@@ -264,7 +264,7 @@ export default {
 
       if (schedule.length == 0) 
       {
-        schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id, this);
+        schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id);
         schedule["group_id"] = this.selected_group.id;
         this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
       } 
@@ -304,12 +304,9 @@ export default {
     {
       this.showLoading("Получение расписания");
       this.date_week = new Date(this.dateDialog.date).getDay();
-      if (this.date_week == 0) {
-        this.dateDialog.date = new Date(
-          new Date(this.dateDialog.date).getTime() - 24 * 60 * 60 * 1000
-        )
-          .toISOString()
-          .substr(0, 10);
+      if (this.date_week == 0) 
+      {
+        this.dateDialog.date = new Date(new Date(this.dateDialog.date).getTime() - 24 * 60 * 60 * 1000).toISOString().substr(0, 10);
         this.$refs.dateDialog.save(this.dateDialog.date);
         this.showInfo("Данные отсутствуют!");
         this.caseDate();
@@ -323,7 +320,7 @@ export default {
             this.parseSchedule();
         }
 
-        this.schedule_bild = await api_schedule.getScheduleBildByGroupId(this.selected_group.id, this);
+        this.schedule_bild = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
         if(this.schedule_bild)
             this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
       }
@@ -367,10 +364,13 @@ export default {
           this.replacement.lesson = [];
           this.replacement.teacher = [];
         }
-        await api_replacement.saveReplacements({group_id: this.selected_group.id, replacement: this.replacement, date: this.dateDialog.date}, this);
-        this.$refs.BildReplacement.reset();
+        if(await api_replacement.saveReplacements({group_id: this.selected_group.id, replacement: this.replacement, date: this.dateDialog.date}))
+        {
+          this.showMessage("Выполнено!");
+          this.$refs.BildReplacement.reset();
+        }
       } 
-        else this.showError("Форма заполнена не верно!");
+      else this.showError("Форма заполнена не верно!");
     },
  }
 };

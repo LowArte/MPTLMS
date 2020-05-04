@@ -27,18 +27,18 @@ v-content.ma-0.pa-2
                   v-container.pa-0.ma-0(v-if="lesson.chisl == false && lesson_index != 'Place'") <!--Прорисовка обычной пары-->
                     v-container.pa-0.ma-0(v-if="lesson.LessonChisl.length > 0")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
-                      v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                      v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                       v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl.join(" / ")}} 
                       v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                   v-container.pa-0.ma-0(v-else-if="lesson_index != 'Place'") <!--Прорисовка числителя/знаменателя-->
                     v-container.pa-0.ma-0(v-if="isChisl == 0 && (lesson.LessonChisl.length > 0 || lesson.LessonZnam.length > 0)")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                       div(v-if="lesson.LessonChisl.length > 0")
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl.join(" / ")}} 
                         v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                       div(v-else)
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black Занятия по числителю отсутствует
                       v-expansion-panels.pa-0(style="z-index: initial;")                    
                         v-expansion-panel.pa-0
@@ -51,11 +51,11 @@ v-content.ma-0.pa-2
                     v-container.pa-0.ma-0(v-else-if="lesson.LessonChisl.length > 0 || lesson.LessonZnam.length > 0")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                       div(v-if="lesson.LessonZnam.length > 0")
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam.join(" / ")}} 
                         v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam.join(" / ") }}
                       div(v-else)
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
+                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black Занятия по знаменателю отсутствует
                       v-expansion-panels.pa-0(style="z-index: initial;")                    
                         v-expansion-panel.pa-0
@@ -99,7 +99,7 @@ export default {
   },
   //*Вычисляемые свойства
   post_name: {
-    name: "Учебного расписание",
+    name: "Учебное расписание",
     url: "timetable", 
     com: ["js/views/timetable-f/Bild_Timetable"]
   },
@@ -107,7 +107,8 @@ export default {
   computed: {
     ...mapGetters(["specialities", "groups_combo", "user", "timetable_full"]),
     
-    combo_groups: function() {
+    combo_groups: function() 
+    {
       if (!this.groups_combo) return undefined;
       this.selected_group = this.groups_combo[0];
       return this.groups_combo;
@@ -150,11 +151,11 @@ export default {
     //*Получение панели с расписанием
     async getCallScheduleForPanel() {
       this.showLoading("Получение расписания звонков");
-      this.$refs.panel.loadData(await api_call_schedule.getCallScheduleForPanel(this));
+      this.$refs.panel.loadData(await api_call_schedule.getCallScheduleForPanel());
 
       if(this.call_schedule == null)
       {
-        var timeTable = await api_call_schedule.getCallSchedule(this);
+        var timeTable = await api_call_schedule.getCallSchedule();
         await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
       }
       this.closeLoading("Получение расписания звонков");
@@ -164,7 +165,7 @@ export default {
     {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
-        let items = await api_department.getDepartments(this);
+        let items = await api_department.getDepartments();
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
         this.closeLoading("Получение отделений");
       }
@@ -211,7 +212,7 @@ export default {
       if (!schedule) 
       {
         this.showLoading("Получение расписания");
-        schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id, this);
+        schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id);
         schedule["group_id"] = this.selected_group.id;
         this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
         this.closeLoading("Получение расписания");
@@ -245,8 +246,6 @@ export default {
             }
           }
         }
-        /*else
-          this.selected_group = this.combo_groups[0];*/
         this.start = false;
         if(this.selected_group)
           this.group_change();

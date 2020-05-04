@@ -23,9 +23,6 @@ export default {
      * group_id - int - not null - FK
      */
     //*----------------------------------------
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -35,24 +32,62 @@ export default {
     //? Возвращается расписание по id группы
     //! Требование ----------------------------
     //!----------------------------------------
-    getScheduleByGroupId(group_id, _this) {
+    getScheduleByGroupId(group_id) 
+    {
         return axios.get('/api/getters/schedule_by_group_id/' + group_id)
         .then(res => {return res.data.schedule;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
-
+    //*Получение учебного расписания для преподавателя
+    //! Комментарий ---------------------------
+    //? Возвращается расписание по id преподавателя
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getScheduleTeacher(teacher_id) 
+    {
+        return axios.get('/api/getters/schedule_teacher/' + teacher_id)
+        .then(res => {return res.data.schedule;})
+        .catch(() => {return undefined;});
+    },
     //*Получение учебного расписания для редактирования для группы
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *SCHEDULES* (Расписание)
     //? Возвращается расписание по id группы ДЛЯ РЕДАКТИРОВАНИЯ
     //! Требование ----------------------------
     //!----------------------------------------
-    getScheduleBildByGroupId(group_id, _this) {
+    getScheduleBildByGroupId(group_id) 
+    {
         return axios.get('/api/getters/schedule_bild_by_group_id/' + group_id)
         .then(res => {return res.data.schedule;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
 
+    //*Получение учебного расписания по дню и преподавателю для редактирования и вывода 
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *SCHEDULES* (Расписание)
+    //? Возвращается расписание по id группы ДЛЯ РЕДАКТИРОВАНИЯ и ВЫВОДА для аудиторного фонда
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getScheduleBildShowDayByTeacherId(data)
+    {
+        console.log(data.day);
+        return axios.get('/api/getters/schedule_bild_show_day_by_teacher_id/' + data.teacher_id + '/' + data.day)
+        .then(res => {return res.data.schedule;})
+        .catch(() => {return undefined;});
+    },
+
+    //*Получение учебного расписания по дню и преподавателю для редактирования и вывода 
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *SCHEDULES* (Расписание)
+    //? Возвращается расписание по id группы ДЛЯ РЕДАКТИРОВАНИЯ и ВЫВОДА для аудиторного фонда
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getTeachersForScheduleDay(data)
+    {
+        return axios.get('/api/getters/schedule_day_teachers/' + data.chisl + '/' + data.day)
+        .then(res => {return res.data.teachers;})
+        .catch(() => {return undefined;});
+    },
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -61,9 +96,21 @@ export default {
     //? Реализуется сохранения измененных данных в таблице *SCHEDULES* (Расписание)
     //! Требование ----------------------------
     //!----------------------------------------
-    editSchedule(data, _this) {
+    editSchedule(data) 
+    {
         return axios.post('/api/edit/schedule/' + data.group_id, {"schedule": data.schedule})
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
+    //*Редактирование аудиторного фонда
+    //! Комментарий ---------------------------
+    //? Реализуется сохранения измененных данных в таблице *SCHEDULES* (Расписание)
+    //! Требование ----------------------------
+    //!----------------------------------------
+    editScheduleClassroom(data)
+    {
+        return axios.post('/api/edit/schedule_classroom/', data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
     }
 }

@@ -26,6 +26,8 @@ class SwapScheduleSeeder extends Seeder
                         "caselesson" => "1",
                         "lesson" => [2],
                         "teacher" => [1],
+                        "oldlesson" => [1],
+                        "oldteacher" => [1]
                     )),
                     "created_at" => "2020-02-22 00:00:00"
                 ]         

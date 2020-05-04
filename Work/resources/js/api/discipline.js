@@ -19,14 +19,9 @@ export default {
     //*----------------------------------------
     /**
      * id - BIGINT
-     * 
+     * discip_name - text
      */
     //*----------------------------------------
-
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -36,9 +31,10 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getDisciplines(_this) {
+    getDisciplines() 
+    {
         return axios.get('/api/getters/get_disciplines')
         .then(res => {return res.data.disciplines;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
 }

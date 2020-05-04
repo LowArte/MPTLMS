@@ -150,7 +150,7 @@ export default {
         {
             if (!this.specialities) {
                 this.showLoading("Получение отделений");
-                let items = await api_department.getDepartments(this);
+                let items = await api_department.getDepartments();
                 this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
                 this.closeLoading("Получение отделений");
             }
@@ -168,7 +168,7 @@ export default {
             this.showLoading("Получение преподавателей");
             if(this.teachers_combo == null)
             {
-                let items = await api_teacher.getTeachers(this);
+                let items = await api_teacher.getTeachers();
                 this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
             }
             this.closeLoading("Получение преподавателей");
@@ -180,7 +180,7 @@ export default {
             this.showLoading("Получение мест проведения");
             if(this.places == null)
             {
-                let items = await api_place.getPlaces(this);
+                let items = await api_place.getPlaces();
                 this.$store.commit(mutations.SET_PLACES_FULL, items)
             }
             this.closeLoading("Получение мест проведения");

@@ -20,7 +20,7 @@ class StudentsSeeder extends Seeder
                 $data,
                 array(
                     'user_id' => $users[$i]['id'],
-                    'group_id' => 1,
+                    'group_id' => rand(1,4),
                     'type_of_financing' => "Бюджет",
                     'gender' => "Мужской",
                     'birthday' => $faker->dateTime($max = 'now', $timezone = null),

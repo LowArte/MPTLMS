@@ -23,10 +23,6 @@ export default {
      * place_id - int - not null - FK
      */
     //*----------------------------------------
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -36,15 +32,12 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getCertificates(_this) {
+    getCertificates() 
+    {
         return axios.get('/api/getters/get_certificates')
         .then(res => {return res.data.certificates;})
-        .catch(ex => {return undefined;});
+        .catch(() => {return undefined;});
     },
-
-
-
-
     //*----------------------------------------
     //!         Работа с данными*
     //*---------Имеется модификация------------
@@ -53,10 +46,11 @@ export default {
     //? Реализуется сохранения данных в таблице *CERTIFICATES* (Справки)
     //! Требование ----------------------------
     //!----------------------------------------
-    save(data) {
+    save(data) 
+    {
         return axios.post('/api/save/certificate/', {"data": data.data, "type": data.type})
-        .then(res => {return true;})
-        .catch(exp => {return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 
     //*Уведомление и фикусация о выполнении
@@ -64,12 +58,12 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется уведомление пользователя о готовности заказанного документа и занесение указателя в БД о готовности
     //! Требование ----------------------------
-    //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmailAccess(answer) {
+    sendEmailAccess(answer) 
+    {
         return axios.post('/api/functions/send_email_certificate_access/', answer)
-        .then(result =>{return true;})
-        .catch(ex => {return false;});
+        .then(() =>{return true;})
+        .catch(() => {return false;});
     },
 
     //*Ответ канцелярии заказчику, в случае если справку нельзя сделать, при том, что справка не будет зафиксирована о выполнении
@@ -77,11 +71,11 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется уведомление пользователя об отказе изготавить документ и занесение указателя в БД об отказе
     //! Требование ----------------------------
-    //! Реализовать back-end для api 
     //!----------------------------------------
-    sendEmailCancel(answer) {
+    sendEmailCancel(answer) 
+    {
         return axios.post('/api/functions/send_email_certificate_cancel/', answer)
-        .then(result => {return true;})
-        .catch(ex => {return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     }
 }

@@ -51,8 +51,11 @@ export default {
     {
       if(this.$refs.form.validate())
       {
-        if(await api_feedback.save({ type: this.thematic, text: this.modelmessage }, this))
+        if(await api_feedback.save({ type: this.thematic, text: this.modelmessage }))
+        {
+          this.showMessage("Отправлено!");
           this.$refs.form.reset();
+        }
       }
       else
         this.showError("Заполните корректно поля!");   

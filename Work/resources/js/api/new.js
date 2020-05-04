@@ -22,10 +22,6 @@ export default {
      * 
      */
     //*----------------------------------------
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -34,17 +30,13 @@ export default {
     //? Реализуется получение данных из таблицы *NEWS* (Новости)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
-    //! Пересмотреть back-end для api
     //!----------------------------------------
-    getNews(user_id) {
+    getNews(user_id) 
+    {
         return axios.get('/api/getters/news/' + user_id)
-        .then(result => {return result.data.news;})
-        .catch(ex => {return false;});
+        .then(res => {return res.data.news;})
+        .catch(() => {return false;});
     },
-
-
-    
-    
     //*Получение поста по id
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *NEWS* (Новости) в соответсвии с id
@@ -52,15 +44,12 @@ export default {
     //! Требование ----------------------------
     //! Реализовать back-end для api
     //!----------------------------------------
-    getNewsById(id, _this) {
+    getNewsById(id) 
+    {
         return axios.get('/api/getters/news_by_id/' + id)
-        .then(result => {return true;})
-        .catch(ex => {_this.showError("Ошибка получения данных!"); return false;});
+        .then(res => {return true;})
+        .catch(() => {return false;});
     },
-
-
-
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -68,46 +57,44 @@ export default {
     //! Комментарий ---------------------------
     //? Реализуется добавление данных в таблицу *NEWS* (Новости)
     //! Требование ----------------------------
-    //! Проверсти тесты
     //!----------------------------------------
-    insertNews(data, _this) {
+    insertNews(data) {
         return axios.post('/api/save/news', data)
-        .then(result => {return true;})
-        .catch(ex => {return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Редактирование записи
     //! Комментарий ---------------------------
     //? Реализуется редактирование данных в таблице *NEWS* (Новости)
     //! Требование ----------------------------
     //! Реализовать front и back-end для api
     //!----------------------------------------
-    updateNews(data, _this) {
+    updateNews(data) 
+    {
         return axios.post('/api/update/news', data)
-        .then(result => {_this.showMessage("Выполнено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Логическое удаление записи
     //! Комментарий ---------------------------
     //? Реализуется стирание данных в таблице *NEWS* (Новости) С ВОЗМОЖНОСТЬЮ ВОССТАНОВЛЕНИЯ
     //! Требование ----------------------------
-    //! Реализовать back-end для api
     //!----------------------------------------
-    deleteNews(id, _this) {
+    deleteNews(id) 
+    {
         return axios.post('/api/delete/news/' + id)
-        .then(result => {_this.showMessage("Выполнено!"); return true;})
-        .catch(ex => {_this.showError("Ошибка выполнения!"); return false;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Оценка записи
     //! Комментарий ---------------------------
     //? Реализуется установка флага отметки новости
     //! Требование ----------------------------
     //!----------------------------------------
-    likeNews(data) {
+    likeNews(data) 
+    {
         return axios.post('/api/functions/set_like', data)
-        .then(result => {return result.data.count;})
-        .catch(ex => {return null;});
+        .then(res => {return res.data.count;})
+        .catch(() => {return null;});
     },
 }

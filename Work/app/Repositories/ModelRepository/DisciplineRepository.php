@@ -13,7 +13,7 @@ class DisciplineRepository extends BaseRepository
     public function getDisciplines()
     {
         $columns=['discipline_name','id'];
-        $result = $this->startCondition()->select($columns)->get();
+        $result = $this->startCondition()->select($columns)->toBase()->get();
         return $result;
     }
 }

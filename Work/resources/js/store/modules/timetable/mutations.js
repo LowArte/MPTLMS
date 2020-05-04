@@ -8,4 +8,7 @@ export default {
     [actions.EDIT_TIMETABLE](state, timetable) {
         state.timetable_full.edit(timetable);
     },
+    [types.UPDATE_TIACHER_TIMETABLE](state, data) {
+        state.tieacher_timetable = data
+    }
 }

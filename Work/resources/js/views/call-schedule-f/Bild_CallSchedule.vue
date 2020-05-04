@@ -66,7 +66,7 @@ export default {
       this.showLoading("Получение мест проведения");
       if(this.places == null)
       {
-        let items = await api_place.getPlaces(this);
+        let items = await api_place.getPlaces();
         this.$store.commit(mutations.SET_PLACES_FULL, items)
       }
 
@@ -80,7 +80,7 @@ export default {
       this.showLoading("Получение расписания");
       if(this.call_schedule == null)
       {
-        this.timeTable = await api_call_schedule.getCallSchedule(this);
+        this.timeTable = await api_call_schedule.getCallSchedule();
         await this.$store.commit(mutations.SET_CALL_SCHEDULE, JSON.parse(JSON.stringify(this.timeTable)));
       }
       else
@@ -93,7 +93,7 @@ export default {
       //Проверка на валидацию полей, после чего происходит отправка на сохранение
       if (this.$refs.BildCallSchedule.validate()) 
       {
-        this.$store.dispatch(actions.EDIT_CALL_SCHEDULE,{ context: this, result: JSON.parse(JSON.stringify(this.timeTable)) });
+        this.$store.dispatch(actions.EDIT_CALL_SCHEDULE,{ context: this, result: JSON.parse(JSON.stringify(this.timeTable))});
       }
       else
         this.showError("Заполните корректно поля!");

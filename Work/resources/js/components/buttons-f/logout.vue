@@ -17,11 +17,11 @@ export default {
   methods: {
     async logout() {
       this.loading = true;
-      if (await api_user.logout()) {
+      if (await api_user.logout()) 
+      {
         resetRouter();
         this.$store.commit(mutations.SET_NOTAUTH);
-        await this.$router.push("/");
-        location.reload();
+        location.href = '/';
       }
       this.loading = false;
     }

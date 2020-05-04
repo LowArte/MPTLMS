@@ -58,15 +58,20 @@ export default {
       posts: []
     };
   },
-  async beforeMount() {
+  async beforeMount() 
+  {
     this.posts = await api_new.getNews(this.user.id);
   },
   methods: {
-    async deletePost(id) {
-        if(await this.$refs.qwestion.pop().then(result => { return true;}))
+    async deletePost(id) 
+    {
+        if(await this.$refs.qwestion.pop().then(res => { return res;}))
         {
-          if(await api_new.deleteNews(id, this))
+          if(await api_new.deleteNews(id))
+          {
+            this.showMessage("Пост удалён!");
             this.posts = await api_new.getNews(this.user.id);
+          }
         }
     },
     loadPost() {

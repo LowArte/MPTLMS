@@ -23,8 +23,6 @@ export default {
      * user_id - int - not null - FK
      */
     //*----------------------------------------
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -34,12 +32,12 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getNotifications(id) {
+    getNotifications(id) 
+    {
         return axios.get('/api/getters/notificications/' + id)
-        .then(result => {return result.data.notifications;})
-        .catch(exception => {return undefined});
+        .then(res => {return res.data.notifications;})
+        .catch(() => {return undefined});
     },
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -48,64 +46,65 @@ export default {
     //? Добавление данных таблицы *NOTIFICATIONS* (Центр уведомлений)
     //! Требование ----------------------------
     //!----------------------------------------
-    addNotificationsForUser(data) {
+    addNotificationsForUser(data) 
+    {
         return axios.post('/api/save/notificications_for_user/', data)
-        .then(result => {return true;})
-        .catch(exception => {return false});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Добавление уведомления для всех пользователей определенной группы
     //! Комментарий ---------------------------
     //? Добавление данных таблицы *NOTIFICATIONS* (Центр уведомлений)
     //! Требование ----------------------------
     //!----------------------------------------
-    addNotificationsForUserGroup(data) {
+    addNotificationsForUserGroup(data) 
+    {
         return axios.post('/api/save/notificications_for_user_group/', data)
-        .then(result => {return true;})
-        .catch(exception => {return false});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Добавление уведомления для всех пользователей определенного отделения
     //! Комментарий ---------------------------
     //? Добавление данных таблицы *NOTIFICATIONS* (Центр уведомлений)
     //! Требование ----------------------------
     //!----------------------------------------
-    addNotificationsForUserDepartment(data) {
+    addNotificationsForUserDepartment(data) 
+    {
         return axios.post('/api/save/notificications_for_user_department/', data)
-        .then(result => {return true;})
-        .catch(exception => {return false});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Добавление уведомления для всех пользователей определенной роли
     //! Комментарий ---------------------------
     //? Добавление данных таблицы *NOTIFICATIONS* (Центр уведомлений)
     //! Требование ----------------------------
     //!----------------------------------------
-    addNotificationsForUserPost(data) {
+    addNotificationsForUserPost(data) 
+    {
         return axios.post('/api/save/notificications_for_user_post/', data)
-        .then(result => {return true;})
-        .catch(exception => {return false});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Добавление уведомления для всех пользователей
     //! Комментарий ---------------------------
     //? Добавление данных таблицы *NOTIFICATIONS* (Центр уведомлений)
     //! Требование ----------------------------
     //!----------------------------------------
-    addNotificationsForUserAll(data) {
+    addNotificationsForUserAll(data) 
+    {
         return axios.post('/api/save/notificications_for_user_all/', data)
-        .then(result => {return true;})
-        .catch(exception => {return false});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Редактирование уведомлений для пользователя по его id
     //! Комментарий ---------------------------
     //? Реализуется редактирование данных таблицы *NOTIFICATIONS* (Центр уведомлений)
     //! Требование ----------------------------
     //!----------------------------------------
-    editNotifications(data) {
+    editNotifications(data) 
+    {
         return axios.post('/api/edit/notificications/', data)
-        .then(result => {return true;})
-        .catch(exception => {return false});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 }

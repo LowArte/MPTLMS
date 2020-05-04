@@ -24,10 +24,6 @@ export default {
      * schedule_id - int - not null - FK
      */
     //*----------------------------------------
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -37,13 +33,12 @@ export default {
     //? Возвращается полная таблица данных JSON форматаd
     //! Требование ----------------------------
     //!----------------------------------------
-    getReplacements(_this) {
+    getReplacements() 
+    {
         return axios.get('/api/getters/replacements')
         .then(res => {return res.data.replacements;})
-        .catch(ex => { _this.showError("Ошибка выполнения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
-
-
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
@@ -53,20 +48,21 @@ export default {
     //? Передается объект
     //! Требование ----------------------------
     //!----------------------------------------
-    saveReplacements(data, _this) {
+    saveReplacements(data) 
+    {
         return axios.post('/api/save/replacement/' + data.group_id + '/' + data.date, {"replacement": data.replacement})
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true; })
+        .catch(() => {return false; });
     },
-
     //*Логическое удаление замены
     //? Реализуется стирание данных в таблице *SCHEDULE_SWAPS* (Замены)
     //? Передается id замены
     //! Требование ----------------------------
     //!----------------------------------------
-    deleteReplacement(replacement_id, _this) {
+    deleteReplacement(replacement_id) 
+    {
         return axios.post('/api/delete/replacement/' + replacement_id)
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
 }

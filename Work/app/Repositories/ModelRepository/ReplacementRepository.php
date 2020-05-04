@@ -3,6 +3,7 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\ScheduleSwap as Model;
+use Debugbar;
 
 class ReplacementRepository extends BaseRepository
 {
@@ -13,19 +14,13 @@ class ReplacementRepository extends BaseRepository
      * Получение всех замен
      * @return Illuminate\Database\Eloquent\Collection
     */
-    public function getReplacements($teachers=null, $disciplines=null)
+    public function getReplacements()
     {
-        if($teachers == null)
-        {
-            $teachersRepository = app(TeacherRepository::class);
-            $teachers = $teachersRepository->getTeachersWithFio();
-        }
+        $teachersRepository = app(TeacherRepository::class);
+        $teachers = $teachersRepository->getTeachersWithFio();
 
-        if($disciplines == null)
-        {
-            $disciplineRepository = app(DisciplineRepository::class);
-            $disciplines = $disciplineRepository->getDisciplines();
-        }
+        $disciplineRepository = app(DisciplineRepository::class);
+        $disciplines = $disciplineRepository->getDisciplines();
 
         $result = $this->startCondition()
         ->join('schedules', 'schedule_swaps.schedule_id', '=', 'schedules.id')

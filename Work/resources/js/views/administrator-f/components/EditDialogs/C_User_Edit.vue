@@ -97,7 +97,7 @@ export default {
     {
       if(this.item.department_id != null)
       {
-        let items = await api_group.getGroupsByDepartmentId(this.item.department_id, this);
+        let items = await api_group.getGroupsByDepartmentId(this.item.department_id);
         this.$store.commit(mutations.SET_GROUPS_COMBO,items)
       }
     },

@@ -45,7 +45,10 @@ class ApiRoutes
 
             Route::get('schedule_bild_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleBildByGroupId')->name('schedule_bild_by_group_id');
             Route::get('schedule_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleByGroupId')->name('schedule_by_group_id');
-
+            Route::get('schedule_teacher/{teacher_id}', 'Api\ScheduleController@getScheduleTeacher')->name('schedule_teacher');
+            Route::get('schedule_bild_show_day_by_teacher_id/{teacher_id}/{day}', 'Api\ScheduleController@getScheduleBildShowDayByTeacherId')->name('schedule_bild_show_day_by_teacher_id');
+            Route::get('schedule_day_teachers/{chsil}/{day}', 'Api\ScheduleController@getTeachersForScheduleDay')->name('schedule_day_teachers');
+            
             Route::get('schedule_exams', 'Api\ScheduleExamsController@getScheduleExams')->name('schedule_exams');
 
             Route::get('get_call_schedule', 'Api\CallscheduleController@getCallSchedule')->name('get_call_schedule');
@@ -77,12 +80,10 @@ class ApiRoutes
 
             Route::post('news','Api\NewsController@save')->name('news');  
             
-            Route::post('swap_schedule','Api\ParserController@save')->name(' swap_schedule');  
-
             Route::post('user','Api\UserController@save')->name('user');      
 
             Route::post('place','Api\PlaceController@save')->name('place');
-           
+
             Route::post('notificications_for_user','Api\NotificationsController@saveForUser')->name('notificications_for_user');
             Route::post('notificications_for_user_group','Api\NotificationsController@saveForUserGroup')->name('notificications_for_user_group');
             Route::post('notificications_for_user_department','Api\NotificationsController@saveForUserDepartment')->name('notificications_for_user_department');
@@ -97,6 +98,7 @@ class ApiRoutes
             Route::post('callschedule', 'Api\CallScheduleController@edit')->name('callschedule'); 
 
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');   
+            Route::post('schedule_classroom/', 'Api\ScheduleController@editClassroom')->name('schedule_classroom');   
             
             Route::post('schedule_exam','Api\ScheduleExamsController@edit')->name('schedule_exam');
 
@@ -122,8 +124,6 @@ class ApiRoutes
             Route::post('set_like','Api\NewsController@setLike')->name('set_like'); 
 
             Route::post('send_feedback_email_answer','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');
-
-            Route::post('swap_schedule_parse','Api\ParserController@swap_schedule_parse')->name('swap_schedule_parse');
             
             Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
             Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access');           

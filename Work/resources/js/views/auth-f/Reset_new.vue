@@ -49,7 +49,7 @@ export default {
           "password" : this.password,
           "token" : this.$route.params.token,
           "password_confirmation":this.passwordConfirmation,
-          "email" : this.$route.params.email}, this))
+          "email" : this.$route.params.email}))
           this.$router.push("/");
       }
       else

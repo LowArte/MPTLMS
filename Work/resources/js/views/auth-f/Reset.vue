@@ -38,7 +38,10 @@ export default {
     {
       this.loading = true;
       if (this.$refs.Reset.validate()) 
-        await api_user.EmailForResetPassword(this.email, this);
+      {
+        if(await api_user.EmailForResetPassword(this.email))
+          this.showMessage("Отправлено!");
+      }
       else 
         this.showError("Укажите корректно почту!");
       this.loading = false;

@@ -22,11 +22,6 @@ export default {
      * 
      */
     //*----------------------------------------
-
-
-
-
-
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
@@ -36,9 +31,10 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getTeachers(_this) {
+    getTeachers() 
+    {
         return axios.get('/api/getters/get_teachers')
         .then(res => {return res.data.teachers;})
-        .catch(ex => { _this.showError("Ошибка получения данных!"); return undefined;});
+        .catch(() => {return undefined;});
     },
 }

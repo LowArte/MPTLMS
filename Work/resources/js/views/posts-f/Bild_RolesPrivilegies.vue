@@ -71,7 +71,7 @@ export default {
     {
       this.showLoading("Загрузка данных");
       this.files = this.importAll(require.context("@/js/views", true, /\.vue$/));
-      this.posts = await api_user_post.getPostsFull(this);
+      this.posts = await api_user_post.getPostsFull();
       if (this.posts) 
         this.selectedPost = this.posts[0];
       this.closeLoading("Загрузка данных");
@@ -162,9 +162,12 @@ export default {
     },
 
     //! Отправляет запрос на сохранение изменений
-    sendQuery() 
+    async sendQuery() 
     {
-      api_user_post.setPostPrivilegies({id: this.selectedPost.id, privilegies: this.selectedPost.privilegies}, this);
+      if(await api_user_post.setPostPrivilegies({id: this.selectedPost.id, privilegies: this.selectedPost.privilegies}))
+        this.showMessage("Выполнено!");
+      else
+        this.closeMessage("Произошла ошибка!");
     },
 
     //! Сканирует систему на компоненты и возврашает их

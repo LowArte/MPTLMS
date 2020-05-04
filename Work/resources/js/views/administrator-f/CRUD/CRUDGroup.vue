@@ -64,7 +64,7 @@ export default {
   methods: {
     async beforeMount() {
       if (this.specialities == null) {
-        let items = await api_department.getDepartments(this);
+        let items = await api_department.getDepartments();
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
       }
     },
@@ -77,7 +77,7 @@ export default {
 
     async update() {
       this.showLoading("Обновление данных");
-      await this.$store.commit(mutations.SET_GROUPS_FULL, await api_group.getGroups(this));
+      await this.$store.commit(mutations.SET_GROUPS_FULL, await api_group.getGroups());
       this.closeLoading("Обновление данных");
     },
 

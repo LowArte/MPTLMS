@@ -22,24 +22,22 @@ export default {
     //? Реализуется установка настроек для сайта. Передается строковое значение.
     //! Требование ----------------------------
     //!----------------------------------------
-    setOptionValue(data, _this) {
-        return axios.post('/api/save/options', {
-            'id': data.id,
-            'value': String(data.value)
-        })
-        .then(result => { _this.showMessage("Выполнено!"); return true; })
-        .catch(exception => { _this.showError("Ошибка выполнения!"); return false; });
+    setOptionValue(data) 
+    {
+        return axios.post('/api/save/options', {'id': data.id, 'value': String(data.value)})
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
     //*Получение опция для панели администратора
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *site_options* (Замены)
     //? Возвращается таблица данных JSON формата в соотвествии с предаваемыми параметрами
     //! Требование ----------------------------
     //!----------------------------------------
-    getSiteOptions(_this) {
+    getSiteOptions() 
+    {
         return axios.get('/api/getters/options')
-        .then(result => { return result.data.siteOptions; })
-        .catch(exception => { _this.showError("Ошибка получения данных!"); return undefined; });
+        .then(res => {return res.data.siteOptions;})
+        .catch(() => {return undefined;});
     },
 }

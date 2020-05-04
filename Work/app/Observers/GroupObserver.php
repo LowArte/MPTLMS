@@ -19,7 +19,7 @@ class GroupObserver
     {
         $createScheduleModification = app(CreateScheduleModification::class);
         $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота');
-        $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => []);
+        $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => [], 'classroom' =>'');
         $lessons = array($les);
         $rasp = array();
         foreach ($days as $key => $value) {
@@ -45,7 +45,7 @@ class GroupObserver
             } else {
                 $createScheduleModification = app(CreateScheduleModification::class);
                 $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота');
-                $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => []);
+                $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => [], 'classroom' =>'');
                 $lessons = array($les);
                 $rasp = array();
                 foreach ($days as $key => $value) {
@@ -79,7 +79,7 @@ class GroupObserver
     {
         $createScheduleModification = app(CreateScheduleModification::class);
         $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота');
-        $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => []);
+        $les = array('TeacherChisl' => [], 'LessonChisl' => [], 'chisl' => false, 'TeacherZnam' => [], 'LessonZnam' => [], 'classroom' =>'');
         $lessons = array($les);
         $rasp = array();
         foreach ($days as $key => $value) {

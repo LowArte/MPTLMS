@@ -43,26 +43,31 @@ v-content.pa-0(v-if="user")
             v-card.mx-auto
                 v-system-bar(color="pimary")
                     small Уведомления
-                v-card-text Тут будут уведомления
+                v-list.pb-0(items v-if="unread_notifications_count > 0 && items.info")
+                  v-list-item(v-if="!item.done && index <= 5" v-for="(item, index) in items.info.slice().reverse()" :key="index" :item="item")
+                        v-list-item-avatar
+                            v-icon {{item.icon}}
+                        v-list-item-content
+                            v-list-item-title {{item.title}}
+                            v-list-item-subtitle {{item.subtitle}}
+                        v-list-item-action
+                          v-btn(icon small :color="!item.done ? 'accent' : 'primary'" dark @click="accept(item)")
+                            v-icon(:color="item.done ? 'grey' : 'accent'") {{!item.done ? 'done' : 'done_all'}}
+                v-card-text(v-else) Уведомлений нет
                 v-divider
                 v-card-actions
                     v-tooltip(bottom)
                         template(v-slot:activator="{ on }")
-                            v-btn.my-2(icon light v-on="on" color="success")
+                            v-btn.my-2(icon light v-on="on" @click="acceptAll" color="success")
                                 v-icon mdi-check-all
                         span Отметить все прочитанными
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(text light v-on="on" color="accent")
-                                v-icon mdi-notification-clear-all
-                                span.ma-2 Очистить
-                        span Очистить уведомления
                     v-spacer
-                    v-tooltip(bottom)
-                        template(v-slot:activator="{ on }")
-                            v-btn(icon light v-on="on" color="pimary")
-                                v-icon more_horiz
-                        span Подробнее
+                    router-link(class='nounderline' :to="'/' + user.post.slug + '/notifications'")
+                        v-tooltip(bottom)
+                            template(v-slot:activator="{ on }")
+                                v-btn(icon light v-on="on" color="pimary")
+                                    v-icon more_horiz
+                            span Подробнее
     v-layout.row.wrap
         v-flex
             v-card
@@ -89,25 +94,52 @@ v-content.pa-0(v-if="user")
 </template>
 
 <script>
+import Notifications from "@/js/plugins/NotificationsHelpers";
+
 import {mapGetters} from 'vuex'
 
 export default {
-  computed: {
-    ...mapGetters(["user"])
-  },
-  data() {
-    return {
-        post: "Студент",
-        curs: 2,
-        labels: ["1", "2", "3", "4"],
-        show: false,
-        rating: 4.3,
-        hours: 28
-    };
-  },
+    mixins: [Notifications],
+    computed: {
+        ...mapGetters(["user", "notifications", "unread_notifications_count"])
+    },
+    data() {
+        return {
+            curs: null,
+            labels: ["1", "2", "3", "4"],
+            show: false,
+            rating: 4.3,
+            menu: false,
+            items: []
+        };
+    },
 
-  beforeMount(){
-      this.curs = this.user.student.curs; 
-  }
+    async beforeMount()
+    {   
+        this.curs = this.user.student.curs; 
+        await this.getNotifications();
+        this.items = JSON.parse(JSON.stringify(this.notifications));
+    },
+
+    methods: 
+    {
+        async accept(item) 
+        {
+            item.done = true;
+            await this.editNotifications(this.items);
+            this.items = JSON.parse(JSON.stringify(this.notifications));
+            if (this.unread_notifications_count == 0)
+                this.menu = false;
+        },
+
+        async acceptAll() 
+        {
+            if (this.unread_notifications_count > 0) 
+            {
+                await this.editAllNotifications(this.items);
+                this.items = JSON.parse(JSON.stringify(this.notifications));
+            }
+        }
+    }
 };
 </script>

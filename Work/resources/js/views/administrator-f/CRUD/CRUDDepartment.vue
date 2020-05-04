@@ -71,7 +71,7 @@ export default {
 
     async update() {
       this.showLoading("Обновление данных");
-      await this.$store.commit(mutations.SET_SPECIALITIES_FULL, await api_department.getDepartments(this));
+      await this.$store.commit(mutations.SET_SPECIALITIES_FULL, await api_department.getDepartments());
       this.closeLoading("Обновление данных");
     },
     //?----------------------------------------------

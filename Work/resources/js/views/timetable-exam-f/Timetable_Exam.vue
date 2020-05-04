@@ -138,7 +138,7 @@ export default {
         {
             if (!this.specialities) {
                 this.showLoading("Получение отделений");
-                let items = await api_department.getDepartments(this);
+                let items = await api_department.getDepartments();
                 this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
                 this.closeLoading("Получение отделений");
             }
@@ -155,7 +155,7 @@ export default {
 
         async refresh()
         {
-            this.schedule = await api_schedule_exam.getScheduleExam(this);
+            this.schedule = await api_schedule_exam.getScheduleExam();
         },
 //?----------------------------------------------
 //!           Методы компонентов
@@ -194,40 +194,44 @@ export default {
 
         async addExam()
         {  
-            await this.$refs.bild.pop(null).then(result => {
-                if (result)
+            if(await this.$refs.bild.pop(null).then(res => {return res;}))
+            {
+                if(await api_schedule_exam.saveScheduleExam(result))
                 {
-                    if(api_schedule_exam.saveScheduleExam(result, this))
-                        this.refresh();
+                    this.showMessage("Сохранено!");
+                    this.refresh();
                 }
-                else 
-                    this.showInfo("Действие было отменено пользователем!");
-            });
+            }
+            else 
+                this.showInfo("Действие было отменено пользователем!");
         },
 
         async editExam(item)
         {
-            await this.$refs.bild.pop(item).then(result => {
-                if (result)
+            if(await this.$refs.bild.pop(item).then(result => {return true;}))
+            {
+                if(await api_schedule_exam.editScheduleExam(result))
                 {
-                    //await this.$store.dispatch(actions.ADD_SPECIALITIE,{ context: this, result: result });
-                    if(api_schedule_exam.editScheduleExam(result, this))
-                        this.refresh();
+                    this.showMessage("Выполнено!");
+                    this.refresh();
                 }
-                else 
-                    this.showInfo("Действие было отменено пользователем!");
-            });
+            }
+            else 
+                this.showInfo("Действие было отменено пользователем!");
         },
 
         async deleteExam(id)
         {
-            this.$refs.qwestion.pop().then(confirmResult => {
-                if (confirmResult) 
-                    if(api_schedule_exam.deleteScheduleExam(id, this))
-                        this.refresh();
-                else 
-                    this.showInfo("Действие было отменено");
-            });
+            if(await this.$refs.qwestion.pop().then(res => { return res;}))
+            {
+                if(await api_schedule_exam.deleteScheduleExam(id))
+                {
+                    this.showMessage("Выполнено!");
+                    this.refresh();
+                }
+            }
+            else 
+                this.showInfo("Действие было отменено");
         },
 
         //*Получение расписания при изменении выбранной группы

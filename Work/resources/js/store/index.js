@@ -16,6 +16,7 @@ import callschedule from './modules/callSchedule'
 import feedback from './modules/feedback'
 import сertificate from './modules/сertificate'
 import notifications from './modules/notifications'
+import foundation from './modules/foundation'
 
 Vue.use(Vuex)
 
@@ -38,7 +39,8 @@ export default new Vuex.Store({
     callschedule,
     feedback,
     сertificate,
-    notifications
+    notifications,
+    foundation
   },
   strict: debug
 })

@@ -164,10 +164,13 @@ export default {
       }
     },
 
-    submit() 
+    async submit() 
     {
       if (this.$refs.form.validate())
-        api_new.insertNews(this.post);
+      {
+        if(await api_new.insertNews(this.post))
+          this.showMessage("Выполнено!");
+      }
       else
         this.showError("Заполните корректно поля!");
     },

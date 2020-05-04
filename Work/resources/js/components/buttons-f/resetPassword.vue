@@ -24,7 +24,7 @@ export default {
     async reset() 
     {
       this.loading = true;
-      if (await api_user.EmailForResetPassword(this.user.email, this)) 
+      if (await api_user.EmailForResetPassword(this.user.email)) 
       {
         this.showMessage("Отправлено на почту!");
       }

@@ -15,8 +15,10 @@ div
 <script>
 import api_new from "@/js/api/new";
 import { mapGetters } from "vuex";
+import withSnackbar from "@/js/components/mixins/withSnackbar";
 
 export default {
+    mixins: [withSnackbar],
     computed: {
         ...mapGetters(["user"])
     },
@@ -43,12 +45,14 @@ export default {
         async clickLike(id) 
         {
             this.loading = true;
-            var result = await api_new.likeNews({new_id: id, user_id: this.user.id},  this);
+            var result = await api_new.likeNews({new_id: id, user_id: this.user.id});
             if(result != null)
             {
                 this.post.likes = result;
                 this.post.isLike = !this.post.isLike;
             }
+            else
+                this.showError("Произошла ошибка!");
             this.loading = false;
         }
     }
