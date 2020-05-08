@@ -11,87 +11,117 @@ v-content.ma-0.pa-2
           v-btn(block text color="primary" dark @click="getFull") {{allTabel ? "Расписание на сегодня" : "Расписание на неделю"}}
     v-chip.ma-1(label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
     v-flex(v-if="!allTabel")
-      v-card
+      v-card(v-if="tieacher_timetable")
         v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
           span {{days[(new Date()).getDay()]}} | Сегодня
-        div.ma-0.pa-0(v-if="!item.chisl && !isChisl" v-for="(item, index) in tieacher_timetable" :key="index")
-          v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-          v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-          v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-        div.ma-0.pa-0(v-if="!item.chisl && isChisl"  v-for="(item, index) in tieacher_timetable" :key="index")
-          v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-          v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-          v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-        div.ma-0.pa-0(v-if="!isChisl"  v-for="(item, index) in tieacher_timetable" :key="index") 
-          v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5")
-            div.overline.mb-0 Числитель | {{item.PlaceChisl.join(" / ")}}
+        div.ma-0.pa-0(v-for="(item, index1) in tieacher_timetable" v-if="item.GroupChisl")
+          v-card-title.ma-0.pa-0.pl-1 Занятие №{{index1}}
+          div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length > 0")
+            v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
             v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-            v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
-          v-expansion-panels.px-2(flat)
-            v-expansion-panel
-              v-expansion-panel-header.px-1
-                div.overline.mb-0 Знаменатель
-              v-expansion-panel-content
-                v-card.pa-1.ma-1.mb-3(outlined color="boring")
-                  div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
-                  v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
-                  v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-        div.ma-0.pa-0(v-if="isChisl" v-for="(item, index) in tieacher_timetable" :key="index") 
-          v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5")
-            div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
-            v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}
-            v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-          v-expansion-panels.px-2(flat)
-            v-expansion-panel
-              v-expansion-panel-header.px-1
-                div.overline.mb-0 Числитель
-              v-expansion-panel-content
-                v-card.pa-1.ma-1.mb-3(outlined color="boring")
-                  div.overline.mb-0 {{item.PlaceChisl.join(" / ")}}
-                  v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.GroupChisl.join(" / ")}}
-                  v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
+            v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
+          div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length == 0")
+            v-card-text.pl-1.py-1 Отсутствует
+          div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length > 0")
+            v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
+            v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
+            v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
+          div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length == 0")
+            v-card-text.pl-1.py-1 Отсутствует
+          //-Числитель/Знаменатель
+          div.ma-0.pa-0(v-if="!isChisl && item.chisl")
+            v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-if="item.GroupChisl.length > 0")
+              div.overline.mb-0 Числитель | {{item.PlaceChisl.join(" / ")}}
+              v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
+              v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
+            v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
+              div.overline.mb-0 Числитель | Отсутствует
+            v-expansion-panels.px-2(flat)
+              v-expansion-panel
+                v-expansion-panel-header.px-1
+                  div.overline.mb-0 Знаменатель
+                v-expansion-panel-content
+                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupZnam.length > 0")
+                    div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
+                    v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
+                    v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
+                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
+                    v-card-text.pb-1.pl-1 Отсутствует
+          div.ma-0.pa-0(v-if="isChisl  && item.chisl") 
+            v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5" v-if="item.GroupZnam.length > 0")
+              div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
+              v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}
+              v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
+            v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
+              div.overline.mb-0 Знаменатель | Отсутствует
+            v-expansion-panels.px-2(flat)
+              v-expansion-panel
+                v-expansion-panel-header.px-1
+                  div.overline.mb-0 Числитель
+                v-expansion-panel-content
+                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupChisl.length > 0")
+                    div.overline.mb-0 {{item.PlaceChisl.join(" / ")}}
+                    v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.GroupChisl.join(" / ")}}
+                    v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
+                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
+                    v-card-text.pb-1.pl-1 Отсутствует
     v-flex(v-if="allTabel")
-      v-layout.row.wrap
-        v-flex(v-for="(itemt, index) in tieacher_timetable" :key="index")
+      v-layout.row.wrap(v-if="tieacher_timetable")
+        v-flex(v-for="(itemt, day_i) in tieacher_timetable" :key="day_i")
           v-card.mx-auto(min-width="300px" max-width="320px" style="display: flex; flex-direction: column;")
             v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
-              span {{index}}
-            div.ma-0.pa-0(v-if="!item.chisl && !isChisl"  v-for="(item, index) in itemt" :key="index")
-              v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-              v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-              v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-            div.ma-0.pa-0(v-if="!item.chisl && isChisl"  v-for="(item, index) in itemt" :key="index")
-              v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-              v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-              v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-            div.ma-0.pa-0(v-if="!isChisl && item.chisl"  v-for="(item, index) in itemt" :key="index") 
-              v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5")
-                div.overline.mb-0 Числитель | {{item.PlaceChisl.join(" / ")}}
+              span {{day_i}}
+            div.ma-0.pa-0(v-for="(item, index1) in itemt" v-if="item.GroupChisl")
+              v-card-title.ma-0.pa-0.pl-1 Занятие №{{index1}}
+              div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length > 0")
+                v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
                 v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-                v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
-              v-expansion-panels.px-2(flat)
-                v-expansion-panel
-                  v-expansion-panel-header.px-1
-                    div.overline.mb-0 Знаменатель
-                  v-expansion-panel-content
-                    v-card.pa-1.ma-1.mb-3(outlined color="boring")
-                      div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
-                      v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
-                      v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-            div.ma-0.pa-0(v-if="isChisl && item.chisl"  v-for="(item, index) in itemt" :key="index") 
-              v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5")
-                div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
-                v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}
-                v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-              v-expansion-panels.px-2(flat)
-                v-expansion-panel
-                  v-expansion-panel-header.px-1
-                    div.overline.mb-0 Числитель
-                  v-expansion-panel-content
-                    v-card.pa-1.ma-1.mb-3(outlined color="boring")
-                      div.overline.mb-0 {{item.PlaceChisl.join(" / ")}}
-                      v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.GroupChisl.join(" / ")}}
-                      v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}    
+                v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
+              div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length == 0")
+                v-card-text.pl-1.py-1 Отсутствует
+              div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length > 0")
+                v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
+                v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
+                v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
+              div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length == 0")
+                v-card-text.pl-1.py-1 Отсутствует
+              //-Числитель/Знаменатель
+              div.ma-0.pa-0(v-if="!isChisl && item.chisl")
+                v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-if="item.GroupChisl.length > 0")
+                  div.overline.mb-0 Числитель | {{item.PlaceChisl.join(" / ")}}
+                  v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
+                  v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
+                v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
+                  div.overline.mb-0 Числитель | Отсутствует
+                v-expansion-panels.px-2(flat)
+                  v-expansion-panel
+                    v-expansion-panel-header.px-1
+                      div.overline.mb-0 Знаменатель
+                    v-expansion-panel-content
+                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupZnam.length > 0")
+                        div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
+                        v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
+                        v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
+                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
+                        v-card-text.pb-1.pl-1 Отсутствует
+              div.ma-0.pa-0(v-if="isChisl  && item.chisl") 
+                v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5" v-if="item.GroupZnam.length > 0")
+                  div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
+                  v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}
+                  v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
+                v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
+                  div.overline.mb-0 Знаменатель | Отсутствует
+                v-expansion-panels.px-2(flat)
+                  v-expansion-panel
+                    v-expansion-panel-header.px-1
+                      div.overline.mb-0 Числитель
+                    v-expansion-panel-content
+                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupChisl.length > 0")
+                        div.overline.mb-0 {{item.PlaceChisl.join(" / ")}}
+                        v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.GroupChisl.join(" / ")}}
+                        v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
+                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
+                        v-card-text.pb-1.pl-1 Отсутствует    
 </template>
 
 <style>
@@ -186,12 +216,14 @@ export default {
     async getFull() {
       this.showLoading("Получение данных");
       if(!this.allTabel) {
-        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE_FULL, this.user.teacher.id);
         this.allTabel = true;
+        await this.$forceUpdate();
+        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE_FULL, this.user.teacher.id);
       }
       else {
-        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.teacher.id, date: this.days[new Date().getDay()]});
         this.allTabel = false;
+        await this.$forceUpdate();
+        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.teacher.id, date: this.days[new Date().getDay()]});
       }
       if(!this.tieacher_timetable) this.showError("Данные не получены!");
       this.closeLoading("Получение данных");

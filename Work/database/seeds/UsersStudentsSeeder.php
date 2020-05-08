@@ -30,6 +30,17 @@ class UsersStudentsSeeder extends Seeder
             }
         }
 
+        array_push($data,[
+            'name'=>'Артём',
+            'secName'=>"Борисов",
+            'thirdName'=>1,
+            'email'=>"p_a.i.borisov@mpt.ru",
+            'password' =>Hash::make("secret"),
+            'disabled' =>false,
+            'post_id' => 2
+        ]);
+
+
         DB::table("users")->insert($data);
     }
 }
