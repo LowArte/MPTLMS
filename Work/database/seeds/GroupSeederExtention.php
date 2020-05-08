@@ -92,7 +92,7 @@ class GroupSeederExtention extends Seeder
                 "curs" => "2"
             ],  
             [
-                "group_name" => "БД50-1-17",
+                "group_name" => "ВД50-1-17",
                 "department_id" => 7,
                 "child_id" => 37,
                 "curs" => "3"

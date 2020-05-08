@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Panoscape\History\HasHistories;
 
-class Student extends Model
+class Association extends Model
 {
     use SoftDeletes,HasHistories;
 
@@ -17,13 +17,13 @@ class Student extends Model
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at', 'departments_id'
+        'created_at', 'deleted_at', 'updated_at'
     ];
 
-    function group(){
-        return $this->hasOne(Group::class,'id','group_id');
-    }
-
+    protected $fillable  = [
+        'teacher_id', 'group_id', 'discip_id'
+    ];
+    
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);

@@ -70,7 +70,6 @@ export default {
     //!----------------------------------------
     getScheduleBildShowDayByTeacherId(data)
     {
-        console.log(data.day);
         return axios.get('/api/getters/schedule_bild_show_day_by_teacher_id/' + data.teacher_id + '/' + data.day)
         .then(res => {return res.data.schedule;})
         .catch(() => {return undefined;});

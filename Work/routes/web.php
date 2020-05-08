@@ -13,7 +13,7 @@
 
 
 //Default page
-Route::get('/', "AppController@index");
+Route::get('/', "AppController@index")->name('main');
 
 Route::get('/{any}/{any2}', "AppController@index")->where("{any}",'*')->where("{any2}",'*');
 
@@ -37,3 +37,7 @@ Route::name('api.')->prefix("api")->group(function ()
         Route::get('departments','Api\DepartmentController@getDepartments')->name('departments');
     });
 });
+
+Route::get('/{vue_capture?}', function () {
+    return redirect('/404');
+})->where('vue_capture', '[\/\w\.-]*');

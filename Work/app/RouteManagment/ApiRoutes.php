@@ -42,6 +42,7 @@ class ApiRoutes
             Route::get('groups_for_combobox','Api\GroupController@groupForCombobox')->name('groups_for_combobox'); 
             Route::get('groups_for_combobox_recursive','Api\GroupController@groupForComboboxRecursive')->name('groups_for_combobox_recursive'); 
             Route::get('groups','Api\GroupController@getGroups')->name('groups'); 
+            Route::get('groups_and_association','Api\GroupController@getGroupsAndAssociation')->name('groups_and_association'); 
 
             Route::get('schedule_bild_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleBildByGroupId')->name('schedule_bild_by_group_id');
             Route::get('schedule_by_group_id/{group_id}', 'Api\ScheduleController@getScheduleByGroupId')->name('schedule_by_group_id');
@@ -57,6 +58,12 @@ class ApiRoutes
             Route::get('replacements', 'Api\ReplacementController@getReplacements')->name('replacements');
 
             Route::get('notificications/{user_id}', 'Api\NotificationsController@getNotificationsForUser')->name('notificications');
+            
+            Route::get('journals', 'Api\JournalController@getJournals')->name('journals');
+            Route::get('journals_id/{journal_id}', 'Api\JournalController@getJournal')->name('journals_id');
+            
+            Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForStudentByGroup_Id')->name('association_for_teacher');
+            Route::get('association_for_student/{group_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_student');
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -89,6 +96,10 @@ class ApiRoutes
             Route::post('notificications_for_user_department','Api\NotificationsController@saveForUserDepartment')->name('notificications_for_user_department');
             Route::post('notificications_for_user_post','Api\NotificationsController@saveForUserPost')->name('notificications_for_user_post');
             Route::post('notificications_for_user_all','Api\NotificationsController@saveForUserAll')->name('notificications_for_user_all');
+
+            Route::post('journals', 'Api\JournalController@save')->name('journals');
+
+            Route::post('association', 'Api\AssociationController@save')->name('association');
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -115,6 +126,9 @@ class ApiRoutes
             Route::post('place','Api\PlaceController@edit')->name('place');
 
             Route::post('notificications','Api\NotificationsController@edit')->name('notificications');
+
+            Route::post('journal_close/{journal_id}/{isClose}','Api\JournalController@editClose')->name('journal_close');
+            Route::post('journal','Api\JournalController@edit')->name('journal');
         });
 
          /**
@@ -124,7 +138,7 @@ class ApiRoutes
             Route::post('set_like','Api\NewsController@setLike')->name('set_like'); 
 
             Route::post('send_feedback_email_answer','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');
-
+            
             Route::get('download_place_export','Api\ExportController@downloadPlaceExport')->name('download_place_export');
             Route::post('import_place','Api\ImportController@insertPlaceImport')->name('import_place');
 
@@ -138,8 +152,9 @@ class ApiRoutes
             Route::post('import_user','Api\ImportController@insertUserImport')->name('import_user');
             
             Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
-            Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access');           
+            Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access'); 
             
+            Route::post('load_excel_titles','Api\JournalController@parseExcel')->name('load_excel_titles');            
         });
         /**
          * Методы отвечаюшие за удаление общих данных

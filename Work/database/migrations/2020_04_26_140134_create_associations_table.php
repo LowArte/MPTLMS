@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomeWorksTable extends Migration
+class CreateAssociationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateHomeWorksTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_works', function (Blueprint $table) {
+        Schema::create('associations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('journal_id');
-            $table->foreign('journal_id')->references('id')->on('journals');
             $table->unsignedBigInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
-            $table->json('info');
-            $table->json('homework');
+            $table->unsignedBigInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('groups');
+            $table->unsignedBigInteger('discip_id');
+            $table->foreign('discip_id')->references('id')->on('disciplines');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +33,6 @@ class CreateHomeWorksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_works');
+        Schema::dropIfExists('associations');
     }
 }

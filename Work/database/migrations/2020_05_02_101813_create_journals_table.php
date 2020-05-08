@@ -15,12 +15,13 @@ class CreateJournalsTable extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->string('year');
-            $table->json('association');
+            $table->unsignedBigInteger('association_id');
+            $table->foreign('association_id')->references('id')->on('associations');
+            $table->boolean("isClose");
+            $table->json('titles');
             $table->json('journal');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

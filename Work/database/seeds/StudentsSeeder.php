@@ -20,12 +20,10 @@ class StudentsSeeder extends Seeder
                 $data,
                 array(
                     'user_id' => $users[$i]['id'],
-                    'group_id' => rand(1,4),
+                    'group_id' => $users[$i]['thirdName'],
                     'type_of_financing' => "Бюджет",
                     'gender' => "Мужской",
                     'birthday' => $faker->dateTime($max = 'now', $timezone = null),
-                    'created_at' => $faker->dateTime($max = 'now', $timezone = null),
-                    'updated_at' => $faker->dateTime($max = 'now', $timezone = null)
                 )
             );
         }

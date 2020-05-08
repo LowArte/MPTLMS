@@ -11,10 +11,18 @@ class DatabaseSeeder  extends Seeder
      */
     public function run()
     {
+        //Формирование отделений и групп
+        $this->call([
+            DepartmentSeeder::class,
+            GroupSeeder::class,
+            GroupSeederExtention::class,
+        ]);
         //Формирование пользователей системы
         $this->call([
             PostUserSeeder::class,
             UsersSeeder::class,
+            UsersStudentsSeeder::class,
+            UsersTeacherSeeder::class,
             NotificationsSeeder::class,
         ]);
         //Формирование вспомогательных данных
@@ -27,12 +35,7 @@ class DatabaseSeeder  extends Seeder
             PlacesSeeder::class,
             CallSchedulesSeeder::class,
         ]);
-        //Формирование отделений и групп
-        $this->call([
-            DepartmentSeeder::class,
-            GroupSeeder::class,
-            GroupSeederExtention::class,
-        ]);
+        
         //Формирование данный для особых пользователей
         $this->call([
             TeachersSeeder::class,
@@ -47,6 +50,12 @@ class DatabaseSeeder  extends Seeder
         $this->call([           
             FeedbackSeeder::class,
             CertificateSeeder::class,
+        ]);
+
+        //Формирование журналов
+        $this->call([
+            AssociationsSeeder::class,
+            JournalsSeeder::class,
         ]);
     }
 }

@@ -12,7 +12,6 @@ export default{
     async [actions.SET_TEACHER_TIMETABLE]({ commit, state }, data) {
         let result = await api_schedule.getScheduleTeacher(data.id);
         if (result) {
-            console.log(result[data.date])
             commit(types.UPDATE_TIACHER_TIMETABLE, result[data.date])
         }
     },

@@ -39,6 +39,18 @@ export default {
         .then(res => {return res.data.groups;})
         .catch(() => {return undefined});
     },
+    //*Получение групп и ассоциаций
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *GROUPS* (Группы) и *ASSOCIATION*
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getGroupsAndAssociation() 
+    {
+        return axios.get('/api/getters/groups_and_association')
+        .then(res => {return res.data.groups;})
+        .catch(() => {return undefined});
+    },
     //*Получение всех групп для выпадающего списка
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *GROUPS* (Группы)
@@ -114,7 +126,9 @@ export default {
         .then(() => {return true;})
         .catch(() => {return false;});
     },
-
+    //*----------------------------------------
+    //!         Работа с файлами
+    //*----------------------------------------
     exportGroup() {
         return axios({
                 url: '/api/functions/download_group_export',

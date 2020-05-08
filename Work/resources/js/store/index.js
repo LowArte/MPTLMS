@@ -17,6 +17,7 @@ import feedback from './modules/feedback'
 import сertificate from './modules/сertificate'
 import notifications from './modules/notifications'
 import foundation from './modules/foundation'
+import journals from './modules/journals'
 
 Vue.use(Vuex)
 
@@ -40,7 +41,8 @@ export default new Vuex.Store({
     feedback,
     сertificate,
     notifications,
-    foundation
+    foundation,
+    journals
   },
   strict: debug
 })

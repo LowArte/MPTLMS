@@ -31,14 +31,11 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getPlaces() {
+    getPlaces() 
+    {
         return axios.get('/api/getters/places')
-            .then(res => {
-                return res.data.places;
-            })
-            .catch(() => {
-                return undefined;
-            });
+        .then(res => {return res.data.places;})
+        .catch(() => {return undefined;});
     },
     //*----------------------------------------
     //!         Работа с данными
@@ -49,14 +46,11 @@ export default {
     //? Передается объект
     //! Требование ----------------------------
     //!----------------------------------------
-    savePlace(place) {
+    savePlace(place) 
+    {
         return axios.post('/api/save/place', place)
-            .then(res => {
-                return res.data.id;
-            })
-            .catch(() => {
-                return false;
-            });
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
     },
     //*Редактирование мест проведения
     //! Комментарий ---------------------------
@@ -64,14 +58,11 @@ export default {
     //? Передается объект и заменет оригинал по id
     //! Требование ----------------------------
     //!----------------------------------------
-    editPlace(place) {
+    editPlace(place) 
+    {
         return axios.post('/api/edit/place/', place)
-            .then(() => {
-                return true;
-            })
-            .catch(() => {
-                return false;
-            });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
     //*Логическое удаление места проведения
     //! Комментарий ---------------------------
@@ -79,16 +70,15 @@ export default {
     //? Передается id места проведения
     //! Требование ----------------------------
     //!----------------------------------------
-    deletePlace(place_id) {
+    deletePlace(place_id) 
+    {
         return axios.post('/api/delete/place/' + place_id)
-            .then(() => {
-                return true;
-            })
-            .catch(() => {
-                return false;
-            });
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
-
+    //*----------------------------------------
+    //!         Работа с файлами
+    //*----------------------------------------
     exportPlace() {
         return axios({
                 url: '/api/functions/download_place_export',

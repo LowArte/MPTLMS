@@ -21,7 +21,7 @@ class Journal extends Model
     ];
 
     protected $fillable  = [
-        
+        'association_id', 'isClose', 'titles', 'journal'
     ];
     
     public function __construct($attributes = array())

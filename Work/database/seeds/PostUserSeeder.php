@@ -597,6 +597,32 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Журналы по дисциплинам",
+                        "component" => [
+                            "info" => [
+                                "name" => "Журналы по дисциплинам",
+                                "url" => "JournalOfSubjects"
+                            ],
+                            "path" => "js/views/journal-f/JournalOfSubjects"
+                        ],
+                        "default" => true,
+                        "menu" => false,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "text" => "Журнал по дисциплине",
+                        "component" => [
+                            "info" => [
+                                "name" => "Журнал по дисциплине",
+                                "url" => "Journal/"
+                            ],
+                            "path" => "js/views/journal-f/Journal"
+                        ],
+                        "default" => true,
+                        "menu" => false,
+                    ],
+                    [
+                        "id" => uniqid(),
                         "text" => "Конструктор учебного расписания",
                         "component" => [
                             "info" => [
@@ -693,19 +719,19 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "icon" => "class",
-                        "text" => "Учебные журналы",
+                        "text" => "Успеваемость",
                         "menu" => true,
                         "children" => [
                             [
                                 "id" => uniqid(),
-                                "text" => "Журналы групп",
+                                "text" => "Учебные журналы",
                                 "menu" => true,
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
-                                        "url" => "progress"
+                                        "url" => "Journals"
                                     ],
-                                    "path" => "js/views/journal-f/JournalTeacher"
+                                    "path" => "js/views/journal-f/JournalUnit"
                                 ],
                             ],
                             [

@@ -17,7 +17,7 @@ class CreateGroupsTable extends Migration
             'groups',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('group_name');
+                $table->string('group_name')->unique();
                 $table->string('curs');
                 $table->unsignedBigInteger('department_id');
                 $table->unsignedBigInteger('child_id')->nullable()->default(null);

@@ -3,6 +3,7 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\Group as Model;
+use App\Models\Association as AssociationModel;
 
 use Debugbar;
 
@@ -10,6 +11,38 @@ class GroupRepository extends BaseRepository
 {
     protected function getModelClass(){
         return Model::class;
+    }
+
+    //Получение групп и ассоциаций для них
+    public function getGroupsAndAssociation()
+    {
+        $columns = ['groups.id as group_id', 'group_name', 'department_id', 'dep_name_full'];
+        $result = $this->startCondition()
+                        ->join('departments', 'department_id', '=', 'departments.id')
+                        ->select($columns)
+                        ->with('child:id,group_name')
+                        ->get();
+        $columns = ['associations.id', 'teacher_id', 'group_id', 'discip_id', 'journals.isClose', 'journals.id as journal_id'];
+
+        $teachersRepository = app(TeacherRepository::class);
+        $teachers = $teachersRepository->getTeachersWithFio();
+        $disciplineRepository = app(DisciplineRepository::class);
+        $disciplines = $disciplineRepository->getDisciplines();
+
+        foreach($result as $value)
+        {
+            $value->association = AssociationModel::where('group_id', $value->group_id)
+                                                    ->select($columns)
+                                                    ->leftJoin('journals', 'associations.id', '=', 'journals.association_id')
+                                                    ->get();
+            foreach($value->association as $assoctiation)
+            {
+                $assoctiation->teacher = $teachers->where("id",$assoctiation->teacher_id)->first()->fullFio;
+                $assoctiation->discip = $disciplines->where("id",$assoctiation->discip_id)->first()->discipline_name;
+            }
+        }
+
+        return $result;
     }
 
     public function getGroupsForComboBoxByDepartment($dep_id)
@@ -77,16 +110,4 @@ class GroupRepository extends BaseRepository
                         ->get();
         return $result;
     }
-
-    public function getGroupsWithoutChild()
-    {
-        $columns = ['id','group_name','department_id'];
-        $result = $this->startCondition()
-                        ->select($columns)
-                        ->where("child_id",null)
-                        ->get();
-        return $result;
-    }
-
-
 }

@@ -6,9 +6,13 @@ use App\Models\Group;
 use App\Models\Places;
 use App\Models\User;
 use App\Models\UsersPost;
+use App\Models\Association;
+use App\Models\Journal;
 use App\Observers\GroupObserver;
 use App\Observers\PlacesObserver;
 use App\Observers\UserObserver;
+use App\Observers\AssociationObserver;
+use App\Observers\JournalObserver;
 use App\Observers\UsersPostObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -36,5 +40,7 @@ class AppServiceProvider extends ServiceProvider
         UsersPost::observe(UsersPostObserver::class);
         Places::observe(PlacesObserver::class);
         Group::observe(GroupObserver::class);
+        Association::observe(AssociationObserver::class);
+        Journal::observe(JournalObserver::class);
     }
 }

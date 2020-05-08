@@ -154,7 +154,6 @@ export default {
   {
     this.showLoading("Получение данных");
     await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.teacher.id, date: this.days[new Date().getDay()]});
-    console.log(this.tieacher_timetable)
     if(!this.tieacher_timetable) this.showError("Данные не получены!");
     this.closeLoading("Получение данных");
   },

@@ -25,6 +25,15 @@ class GroupController extends BaseController
     }
 
     /**
+     * Получние групп и ассоциаций
+     */
+    public function getGroupsAndAssociation(GroupRepository $groupRepository)
+    {
+        $groups = $groupRepository->getGroupsAndAssociation();
+        return response()->json(compact('groups'));
+    }
+
+    /**
      * Get groups 
      *
      * @return \Illuminate\Contracts\Support\Renderable

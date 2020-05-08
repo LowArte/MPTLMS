@@ -2,9 +2,21 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Group;
+use App\Models\Teacher;
+use App\Models\Discipline;
 
 class ScheduleSeeder extends Seeder
 {
+    public function getLesson($teachers, $disciplines)
+    {
+        $arr = array('TeacherChisl' => [$teachers[rand(0, count($teachers)-1)]->id], 
+        'LessonChisl' => [$disciplines[rand(0, count($disciplines)-1)]->id], 
+        'chisl' => rand(0,1), 
+        'TeacherZnam' => [$teachers[rand(0, count($teachers)-1)]->id], 
+        'LessonZnam' => [$disciplines[rand(0, count($disciplines)-1)]->id], 
+        'classroom' =>'');
+        return $arr;
+    }
     /**
      * Формирования дополнительных данных по расписанию
      *
@@ -12,8 +24,10 @@ class ScheduleSeeder extends Seeder
      */
     public function run()
     {
-        $les = array('TeacherChisl' => [1], 'LessonChisl' => [1], 'chisl' => true, 'TeacherZnam' => [1], 'LessonZnam' => [2], 'classroom' =>'');
-        $lessons = array($les);
+        $teachers = Teacher::get();
+        $disciplines = Discipline::get();
+        //$les = array('TeacherChisl' => [1], 'LessonChisl' => [1], 'chisl' => true, 'TeacherZnam' => [1], 'LessonZnam' => [2], 'classroom' =>'');
+        //$lessons = array($les);
         $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота');
 
         foreach (Group::get() as $group) 
@@ -21,7 +35,14 @@ class ScheduleSeeder extends Seeder
             if ($group->haveParent()) {
                 $rasp = array();
                 foreach ($days as $key => $value) {
-                    $lesons = array('Place' => rand(1, 2), '1' => $lessons[rand(0, count($lessons) - 1)], '2' => $lessons[rand(0, count($lessons) - 1)], '3' => $lessons[rand(0, count($lessons) - 1)], '4' => $lessons[rand(0, count($lessons) - 1)], '5' => $lessons[rand(0, count($lessons) - 1)], '6' => $lessons[rand(0, count($lessons) - 1)], '7' => $lessons[rand(0, count($lessons) - 1)]); //Формат дня
+                    $lesons = array('Place' => rand(1, 2), 
+                    '1' => $this->getLesson($teachers, $disciplines), 
+                    '2' => $this->getLesson($teachers, $disciplines), 
+                    '3' => $this->getLesson($teachers, $disciplines), 
+                    '4' => $this->getLesson($teachers, $disciplines), 
+                    '5' => $this->getLesson($teachers, $disciplines), 
+                    '6' => $this->getLesson($teachers, $disciplines), 
+                    '7' => $this->getLesson($teachers, $disciplines)); //Формат дня
                     $rasp[$value] = $lesons;
                 }
                 // Формат недели

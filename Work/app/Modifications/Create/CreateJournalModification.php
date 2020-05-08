@@ -4,6 +4,7 @@ namespace App\Modifications\Create;
 
 use App\Models\Journal as Model;
 use App\Modifications\BaseModification;
+use Debugbar;
 
 
 class CreateJournalModification extends BaseModification
@@ -17,6 +18,7 @@ class CreateJournalModification extends BaseModification
         $journal = new Model();
         $journal->fill($request);
         $result = $journal->save();
+        
         if($result)
             return $journal->id;
         return  false;

@@ -4,11 +4,13 @@ namespace App\Modifications\Update;
 
 use App\Models\Journal as Model;
 use App\Modifications\BaseModification;
+use Debugbar;
 
 
 class UpdateJournalModification extends BaseModification
 {
-    protected function getModelClass(){
+    protected function getModelClass()
+    {
         return Model::class;
     }
 
@@ -20,5 +22,16 @@ class UpdateJournalModification extends BaseModification
         if($result)
             return true;
         return  false;
+    }
+
+    public function updateJournalCloseInDatabase($id, $close)
+    {
+        $journal = $this->startCondition()->find($id);
+        if($close == 'true')
+            $journal->isClose = 1;
+        else
+            $journal->isClose = 0;
+        $journal->save();
+        return true;
     }
 }
