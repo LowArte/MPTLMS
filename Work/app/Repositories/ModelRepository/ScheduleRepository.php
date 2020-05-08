@@ -181,7 +181,6 @@ class ScheduleRepository extends BaseRepository
                         ->join('groups', 'schedules.group_id', '=', 'groups.id')
                         ->select($columns)
                         ->toBase()
-                        ->limit(1)
                         ->get(); 
         //Каркас для формирования расписания преподавателя
         $days = array('Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота');
@@ -248,7 +247,8 @@ class ScheduleRepository extends BaseRepository
                                 break;
                             }
                         }
-                        array_push($schedule_teacher[$day][$keyLesson]['Classroom'], $lesson->classroom);
+                        if($checkTeacher)
+                            array_push($schedule_teacher[$day][$keyLesson]['Classroom'], $lesson->classroom);
                     }
                 }
             }

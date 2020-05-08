@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Imports\DepartmentImport;
+use App\Imports\ExcerptImport;
 use App\Imports\GroupImport;
 use App\Imports\PlacesImport;
 use App\Imports\UserImport;
@@ -15,7 +16,12 @@ class ImportController extends BaseController
 { 
     public function insertPlaceImport(){
         $data = request()->file("file");
-        Excel::import(new PlacesImport, $data);
+        //Excel::import(new PlacesImport, $data);
+
+        $imp = new ExcerptImport();
+
+        $imp->getExcert($data);
+
         return response()->json();
     }
 

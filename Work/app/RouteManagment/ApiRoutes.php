@@ -157,7 +157,7 @@ class ApiRoutes
             Route::post('load_excel_titles','Api\JournalController@parseExcel')->name('load_excel_titles');            
         });
         /**
-         * Методы отвечаюшие за удаление общих данных
+         * Методы отвечающие за удаление общих данных
          */
         Route::name('delete.')->prefix('delete')->group(function () {
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');

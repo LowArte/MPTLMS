@@ -14,7 +14,7 @@ v-content.ma-0.pa-2
       v-card
         v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
           span {{days[(new Date()).getDay()]}} | Сегодня
-        div.ma-0.pa-0(v-if="!item.chisl && !isChisl"  v-for="(item, index) in tieacher_timetable" :key="index")
+        div.ma-0.pa-0(v-if="!item.chisl && !isChisl" v-for="(item, index) in tieacher_timetable" :key="index")
           v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
           v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
           v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
@@ -36,7 +36,7 @@ v-content.ma-0.pa-2
                   div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
                   v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
                   v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-        div.ma-0.pa-0(v-if="isChisl"  v-for="(item, index) in tieacher_timetable" :key="index") 
+        div.ma-0.pa-0(v-if="isChisl" v-for="(item, index) in tieacher_timetable" :key="index") 
           v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5")
             div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
             v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}

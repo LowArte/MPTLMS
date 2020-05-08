@@ -41,7 +41,6 @@ class UserController extends BaseController
     
     public function edit(Request $request,UpdateUserModification $updateUserModification){
         $data = $request->all();
-        Debugbar::info($data);
         $result = $updateUserModification->updateUserInDatabase($data);
         if($result){
             return response()->json(200);

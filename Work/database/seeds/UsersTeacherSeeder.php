@@ -6,7 +6,7 @@ class UsersTeacherSeeder extends Seeder
 {
     public function translit($str) {
         $rus = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я');
-        $lat = array('A', 'B', 'V', 'G', 'D', 'E', 'E', 'Gh', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya');
+        $lat = array('a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya');
         return str_replace($rus, $lat, $str);
       }
     /**
@@ -375,7 +375,7 @@ class UsersTeacherSeeder extends Seeder
                 "name" => "Александр",
                 "secName" => "Соколов",
                 "thirdName" => "Леонидович",
-                "email" => " a.l.sokolov@mpt.ru"
+                "email" => "a.l.sokolov@mpt.ru"
             ],
             [
                 "name" => "Иван",
@@ -387,7 +387,7 @@ class UsersTeacherSeeder extends Seeder
                 "name" => "Лариса",
                 "secName" => "Соколова",
                 "thirdName" => "Алексеевна",
-                "email" => " l.a.sokolova@mpt.ru"
+                "email" => "l.a.sokolova@mpt.ru"
             ],
             [
                 "name" => "Ольга",
@@ -417,19 +417,19 @@ class UsersTeacherSeeder extends Seeder
                 "name" => "Михаил",
                 "secName" => "Прищеп",
                 "thirdName" => "Сергеевич",
-                "email" => " m.s.prischep@mpt.ru"
+                "email" => "m.s.prischep@mpt.ru"
             ],
             [
                 "name" => "Павел",
                 "secName" => "Агафонов",
                 "thirdName" => "Витальевич",
-                "email" => " p.v.agafonov@mpt.ru"
+                "email" => "p.v.agafonov@mpt.ru"
             ],
             [
                 "name" => "Егор",
                 "secName" => "Лытнев",
                 "thirdName" => "Павлович",
-                "email" => " e.p.lytnev@mpt.ru"
+                "email" => "e.p.lytnev@mpt.ru"
             ],
             [
                 "name" => "Иван",
