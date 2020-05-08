@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.38 on 2020-05-07 09:30:20.
+ * Generated for Laravel 5.8.38 on 2020-05-08 18:51:11.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -3422,6 +3422,20 @@ namespace Illuminate\Support\Facades {
     class Config {
         
         /**
+         * Write a given configuration value to file.
+         *
+         * @param string $key
+         * @param mixed $value
+         * @return void 
+         * @static 
+         */ 
+        public static function write($key, $value)
+        {
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
+                        $instance->write($key, $value);
+        }
+        
+        /**
          * Determine if the given configuration value exists.
          *
          * @param string $key
@@ -3430,7 +3444,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function has($key)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         return $instance->has($key);
         }
         
@@ -3444,7 +3459,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function get($key, $default = null)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         return $instance->get($key, $default);
         }
         
@@ -3457,7 +3473,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function getMany($keys)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         return $instance->getMany($keys);
         }
         
@@ -3471,7 +3488,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function set($key, $value = null)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         $instance->set($key, $value);
         }
         
@@ -3485,7 +3503,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function prepend($key, $value)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         $instance->prepend($key, $value);
         }
         
@@ -3499,7 +3518,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function push($key, $value)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         $instance->push($key, $value);
         }
         
@@ -3511,7 +3531,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function all()
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         return $instance->all();
         }
         
@@ -3524,7 +3545,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function offsetExists($key)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         return $instance->offsetExists($key);
         }
         
@@ -3537,7 +3559,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function offsetGet($key)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         return $instance->offsetGet($key);
         }
         
@@ -3551,7 +3574,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function offsetSet($key, $value)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         $instance->offsetSet($key, $value);
         }
         
@@ -3564,7 +3588,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function offsetUnset($key)
         {
-                        /** @var \Illuminate\Config\Repository $instance */
+            //Method inherited from \Illuminate\Config\Repository            
+                        /** @var \App\Helpers\FileWrite\Repository $instance */
                         $instance->offsetUnset($key);
         }
          

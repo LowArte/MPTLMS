@@ -2,9 +2,12 @@
 
 namespace App\Observers;
 
+use App\Helpers\FileWrite\FileWriter;
+use App\Helpers\FileWrite\Rewrite;
 use App\Models\DepartmentBuffer;
 use Config;
 use Debugbar;
+use ErrorException;
 use Schema;
 use Storage;
 
@@ -18,25 +21,9 @@ class DepartmentBufferObserver
      */
     public function creating(DepartmentBuffer $departmentBuffer)
     {
-        $departmentBuffer->db_name = "db_for_".date("Y");
-        Storage::disk('db')->put($departmentBuffer->db_name.".sqlite",'');
-        $path = storage_path('databases\\'.$departmentBuffer->db_name.".sqlite");
-        Debugbar::info($path);
-
-        config(['database.connections.test' => 'America/Chicago']);
-        # Динамически создаём конфигурацию подключения
-        Config::set('database.connections.test' ,array(
-            'driver' => 'sqlite',
-            'database' =>  $path,
-        ));
-
-
-
-        # Используя созданное подключение создаём таблицы       
-        Schema::connection("test")->create('mytable', function ($table) {
-            $table->increments('id');
-            $table->string('name');
-        });
+        $departmentBuffer->db_name = "db_for_" . date("Y");
+        Storage::disk('db')->put($departmentBuffer->db_name . ".sqlite", '');
+        $path = storage_path('databases\\' . $departmentBuffer->db_name . ".sqlite");
     }
 
     /**

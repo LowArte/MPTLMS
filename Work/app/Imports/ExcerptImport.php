@@ -23,21 +23,29 @@ class ExcerptImport
             $reader = IOFactory::createReader($type);
             $spreadsheet = $reader->load($this->file_name);
             $arr = [];
+            $time_stamp = [];
             for ($i = 0; $i < $spreadsheet->getSheetCount(); $i++) {
                 $spreadsheet->setActiveSheetIndex($i);
                 $iterator = 7;
                 $arr[$i] = [];
-                while ($spreadsheet->getActiveSheet()->getCell("A".$iterator)->getValue() != "ИТОГО" && $spreadsheet->getActiveSheet()->getCell("B".$iterator)->getValue() != "ИТОГО") {
-                    if($spreadsheet->getActiveSheet()->getCell("B".$iterator)->getValue()  != "")
-                        array_push($arr[$i], $spreadsheet->getActiveSheet()->getCell("B".$iterator)->getValue());
+                for ($col = 1; $col <= 20; ++$col) {
+                    if ($spreadsheet->getActiveSheet()->getCellByColumnAndRow($col, 6)->getValue() == "час в сем") {
+                        array_push($time_stamp, $col);
+                    }
+                }
+                while ($spreadsheet->getActiveSheet()->getCell("A" . $iterator)->getValue() != "ИТОГО" && $spreadsheet->getActiveSheet()->getCell("B" . $iterator)->getValue() != "ИТОГО") {
+                    if ($spreadsheet->getActiveSheet()->getCell("B" . $iterator)->getValue()  != "")
+                        $test = $spreadsheet->getActiveSheet()->getCellByColumnAndRow($time_stamp[0], $iterator)->getCalculatedValue() + $spreadsheet->getActiveSheet()->getCellByColumnAndRow($time_stamp[0] + 1, $iterator)->getCalculatedValue() + $spreadsheet->getActiveSheet()->getCellByColumnAndRow($time_stamp[1], $iterator)->getCalculatedValue() + $spreadsheet->getActiveSheet()->getCellByColumnAndRow($time_stamp[1] + 1, $iterator)->getCalculatedValue();
+                        array_push($arr[$i], ['subject' => $spreadsheet->getActiveSheet()->getCell("B" . $iterator)->getValue(), 'time' => $test]);
                     $iterator++;
                 }
+                $time_stamp = array();
             }
-            Debugbar::info($arr);
         } catch (\Throwable $th) {
             Debugbar::info($th);
         }
         $this->clearGarbage();
+        return $arr;
     }
 
     /**

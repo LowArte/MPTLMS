@@ -5,13 +5,14 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-05-07 09:30:22.
+    * Generated on 2020-05-08 18:51:12.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -134,6 +135,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -162,7 +164,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -178,6 +179,7 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -300,6 +302,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -328,7 +331,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -344,6 +346,7 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -466,6 +469,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -494,7 +498,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -510,6 +513,7 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -632,6 +636,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -660,7 +665,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -676,6 +680,7 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -798,6 +803,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -826,7 +832,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -842,6 +847,7 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -964,6 +970,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -992,7 +999,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -1008,6 +1014,7 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -1130,6 +1137,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -1158,7 +1166,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
@@ -1174,6 +1181,7 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
+        'App\Helpers\FileWrite\Repository' => \App\Helpers\FileWrite\Repository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -1296,6 +1304,7 @@ namespace PHPSTORM_META {
         'command.view.cache' => \Illuminate\Foundation\Console\ViewCacheCommand::class,
         'command.view.clear' => \Illuminate\Foundation\Console\ViewClearCommand::class,
         'composer' => \Illuminate\Support\Composer::class,
+        'config' => \App\Helpers\FileWrite\Repository::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
         'db.connection' => \Illuminate\Database\MySqlConnection::class,
@@ -1324,7 +1333,6 @@ namespace PHPSTORM_META {
         'queue.worker' => \Illuminate\Queue\Worker::class,
         'redirect' => \Illuminate\Routing\Redirector::class,
         'redis' => \Illuminate\Redis\RedisManager::class,
-        'redis.connection' => \Illuminate\Redis\Connections\PhpRedisConnection::class,
         'router' => \Illuminate\Routing\Router::class,
         'session' => \Illuminate\Session\SessionManager::class,
         'session.store' => \Illuminate\Session\Store::class,
