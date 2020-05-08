@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" _flood="specialities" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
+    c-crud-form(ref='crud' :_func_upload="upload" :_func_download="download" :_func_update="update" _flood="specialities" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Отделения'")
     c-add-dialog(ref='new')
     c-comfirm-dialog(ref='qwestion')
     c-edit-dialog(ref='revue')
@@ -33,6 +33,8 @@ import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
 import { mapGetters } from "vuex";
+import FileDownload from "js-file-download";
+
 import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 
@@ -68,7 +70,14 @@ export default {
       if (this.specialities == null) 
         await this.update();
     },
-
+    async download() {
+      let response = await api_department.exportDepartaments();
+      FileDownload(response.data, "departaments.xlsx");
+    },
+    async upload(result) {
+      await api_department.importDepartaments(result);
+      this.update();
+    },
     async update() {
       this.showLoading("Обновление данных");
       await this.$store.commit(mutations.SET_SPECIALITIES_FULL, await api_department.getDepartments());

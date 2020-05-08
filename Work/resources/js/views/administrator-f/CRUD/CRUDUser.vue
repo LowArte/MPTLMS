@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' _flood="users" :_func_reset_password="reset_password" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Учетные записи пользователей'")
+    c-crud-form(ref='crud' _flood="users" :_func_upload="upload" :_func_download="download" :_func_reset_password="reset_password" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Учетные записи пользователей'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -36,6 +36,8 @@ import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Us
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_User_Delete";
 
 import { mapGetters } from "vuex";
+import FileDownload from "js-file-download";
+
 import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 
@@ -90,6 +92,14 @@ export default {
       this.showLoading("Обновление данных");
       await this.$store.commit(mutations.SET_USERS_FULL, await api_user.getUsers());
       this.closeLoading("Обновление данных");
+    },
+    async download() {
+      let response = await api_user.exportUser();
+      FileDownload(response.data, "users.xlsx");
+    },
+    async upload(result) {
+      await api_user.importUser(result);
+      this.update();
     },
     //?----------------------------------------------
     //!           Добавление объекта

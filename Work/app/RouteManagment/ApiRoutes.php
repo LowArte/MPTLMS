@@ -124,6 +124,18 @@ class ApiRoutes
             Route::post('set_like','Api\NewsController@setLike')->name('set_like'); 
 
             Route::post('send_feedback_email_answer','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');
+
+            Route::get('download_place_export','Api\ExportController@downloadPlaceExport')->name('download_place_export');
+            Route::post('import_place','Api\ImportController@insertPlaceImport')->name('import_place');
+
+            Route::get('download_departament_export','Api\ExportController@downloadDepartamentExport')->name('download_place_export');
+            Route::post('import_departament','Api\ImportController@insertDepartamentImport')->name('import_departament');
+
+            Route::get('download_group_export','Api\ExportController@downloadGroupExport')->name('download_group_export');
+            Route::post('import_group','Api\ImportController@insertGroupImport')->name('import_group');
+
+            Route::get('download_user_export','Api\ExportController@downloadUserExport')->name('download_user_export');
+            Route::post('import_user','Api\ImportController@insertUserImport')->name('import_user');
             
             Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
             Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access');           

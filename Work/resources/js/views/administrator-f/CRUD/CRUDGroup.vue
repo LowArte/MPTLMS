@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' _flood="groups" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
+    c-crud-form(ref='crud' _flood="groups" :_func_upload="upload" :_func_download="download" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Группы'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -34,6 +34,8 @@ import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Gr
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Group_Delete";
 
 import { mapGetters } from "vuex";
+import FileDownload from "js-file-download";
+
 import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 
@@ -67,6 +69,14 @@ export default {
         let items = await api_department.getDepartments();
         this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
       }
+    },
+    async download() {
+      let response = await api_group.exportGroup();
+      FileDownload(response.data, "groups.xlsx");
+    },
+    async upload(result) {
+      await api_group.importGroup(result);
+      this.update();
     },
     //?----------------------------------------------
     //!           Обновление

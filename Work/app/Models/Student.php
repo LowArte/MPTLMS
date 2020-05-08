@@ -17,7 +17,11 @@ class Student extends Model
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at', 'departments_id'
+        'created_at', 'deleted_at', 'updated_at', 
+    ];
+
+    protected $fillable  = [
+        'birthday', 'gender', 'type_of_financing', 'group_id','user_id'
     ];
 
     function group(){

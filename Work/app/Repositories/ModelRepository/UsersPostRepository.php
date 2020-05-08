@@ -18,7 +18,7 @@ class UsersPostRepository extends BaseRepository
 
     public function getPosts()
     {   $columns = ['name','id'];
-        $result = $this->startCondition()->select($columns)->toBase()->get();
+        $result = $this->startCondition()->select($columns)->get();
         return $result;
     }
 

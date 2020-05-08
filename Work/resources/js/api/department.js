@@ -93,4 +93,32 @@ export default {
         .then(() => {return true;})
         .catch(() => {return false;});
     },
+
+    exportDepartaments() {
+        return axios({
+                url: '/api/functions/download_departament_export',
+                method: 'GET',
+                responseType: 'blob',
+            })
+            .then((res) => {
+                return res;
+            })
+            .catch((er) => {
+                return er;
+            });
+    },
+
+    importDepartaments(file) {
+        return axios.post('/api/functions/import_departament', file, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
+    }
 }

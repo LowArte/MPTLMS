@@ -61,6 +61,5 @@ class ParserController extends BaseController
         $data = $request->all();
         $result = $createScheduleSwapModification->addParsedScheduleSwapToDatabase($data);
         return response()->json(compact('result'));
-
     }
 }

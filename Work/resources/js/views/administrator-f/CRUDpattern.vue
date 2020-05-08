@@ -1,10 +1,11 @@
 <template lang="pug">
   v-content.ma-0.pa-2
+    c-upload-file-dialog(ref="upload_dialog")
     v-layout.row.wrap
       v-card.mx-auto(height='auto' width='100%')
         v-system-bar(color="info" dark)
-          span Управление: {{title}}
-        v-data-table.elevation-0.pa-0.ma-0(:headers="headers" v-if="items" :items="items"  :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
+          span Управление: {{_title}}
+        v-data-table.elevation-0.pa-0.ma-0(:headers="_headers" v-if="items" :items="items"  :search="search" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer @page-count="pageCount = $event" :items-per-page="itemsPerPage")
             template(v-slot:top)
               v-tooltip(bottom v-if="_func_add != null")
                 template(v-slot:activator="{ on }")
@@ -18,13 +19,13 @@
                     v-icon replay
                     span.ma-2 Обновить
                 span Обновить таблицу
-              v-tooltip(bottom)
+              v-tooltip(bottom  v-if="_func_upload != null")
                 template(v-slot:activator="{ on }")
                   v-btn.ma-2.ml-1(text color="info" v-on="on" @click="upload")
                     v-icon mdi-upload
                     span.ma-2 Загрузить документ
                 span Загрузить файл с данными
-              v-tooltip(bottom)
+              v-tooltip(bottom v-if="_func_download != null")
                   template(v-slot:activator="{ on }")
                     v-btn.ma-2.ml-1(text color="success" v-on="on" @click="download")
                       v-icon mdi-download
@@ -65,6 +66,8 @@
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
 
+import UploadFileDialog_C from "@/js/components/expention-f/UploadFileDialog";
+
 import { mapGetters } from "vuex";
 
 export default {
@@ -74,20 +77,18 @@ export default {
   },
   mixins: [withSnackbar],
   data: () => ({
-    title: "", //Заголовок страницы
     search: "", //Поиск
     page: 1, //Текущая страница
     itemsPerPage: 30, //Количество отображаемых строк
     pageCount: 0, //Количество страниц
-    headers: [], //Структура таблицы и с полями которые требуется выводить
   }),
   props: {
     //?----------------------------------------------
     //!           Данные
     //?----------------------------------------------
-    _flood:{
-      type:String,
-      default:null
+    _flood: {
+      type: String,
+      default: null
     },
     _headers: {
       type: Array,
@@ -133,15 +134,13 @@ export default {
       default: null
     }
   },
-  computed:{
-    items()
-    {
+  components: {
+    "c-upload-file-dialog": UploadFileDialog_C
+  },
+  computed: {
+    items() {
       return this.$store.getters[this._flood];
     }
-  },
-  mounted(){
-    this.headers = this._headers;
-    this.title = this._title;
   },
 
   async beforeMount() {
@@ -173,16 +172,22 @@ export default {
       await this._func_init();
     },
 
-    async update(){
+    async update() {
       await this._func_update();
     },
 
-    upload() {
-      this.showInfo("Данная функция будет не доступна до релизной версии!");
+    async upload() {
+      await this.$refs.upload_dialog.pop().then(result => {
+        if (result) {
+          this._func_upload(result);
+        } else {
+          this.showInfo("Действие отменено пользователем!");
+        }
+      });
     },
 
     download() {
-      this.showInfo("Данная функция будет не доступна до релизной версии!");
+      this._func_download();
     }
   }
 };

@@ -219,5 +219,31 @@ export default {
             }
         });
         return items;
+    },
+    exportUser() {
+        return axios({
+                url: '/api/functions/download_user_export',
+                method: 'GET',
+                responseType: 'blob',
+            })
+            .then((res) => {
+                return res;
+            })
+            .catch((er) => {
+                return er;
+            });
+    },
+    importUser(file) {
+        return axios.post('/api/functions/import_user', file, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
     }
 }

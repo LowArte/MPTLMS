@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Panoscape\History\HasHistories;
 
 use Debugbar;
+
 class Group extends Model
 {
-    use SoftDeletes,HasHistories, CascadeNullDeletes;
+    use SoftDeletes, HasHistories, CascadeNullDeletes;
 
     public function getModelLabel()
     {
@@ -23,34 +24,38 @@ class Group extends Model
     ];
 
     protected $fillable  = [
-        'group_name','curs','department_id','child_id'
+        'group_name', 'curs', 'department_id', 'child_id'
     ];
 
-    protected $cascadeNullDeletes = ['students'=>'group_id'];
+    protected $cascadeNullDeletes = ['students' => 'group_id'];
 
-    public function getFullName($name = ''){
-        if($this->child_id == null){
-            return $name.$this->group_name;
+    public function getFullName($name = '')
+    {
+        if ($this->child_id == null) {
+            return $name . $this->group_name;
         }
-        return $this->child->getFullName($this->group_name.',');
+        return $this->child->getFullName($this->group_name . ',');
     }
 
-    public function students(){
+    public function students()
+    {
         return $this->hasMany(Student::class);
     }
 
-    public function child(){
-        return $this->hasOne(Group::class,"id","child_id");
+    public function child()
+    {
+        return $this->hasOne(Group::class, "id", "child_id");
     }
 
-    public function haveParent(){
-        $data = Group::where("child_id",$this->id)->first();
+    public function haveParent()
+    {
+        $data = Group::where("child_id", $this->id)->first();
         return  $data == null;
     }
 
     public function department()
     {
-        return $this->hasOne(Department::class,'id','department_id');
+        return $this->hasOne(Department::class, 'id', 'department_id');
     }
 
     public function __construct($attributes = array())

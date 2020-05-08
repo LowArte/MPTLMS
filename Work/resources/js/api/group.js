@@ -114,4 +114,31 @@ export default {
         .then(() => {return true;})
         .catch(() => {return false;});
     },
+
+    exportGroup() {
+        return axios({
+                url: '/api/functions/download_group_export',
+                method: 'GET',
+                responseType: 'blob',
+            })
+            .then((res) => {
+                return res;
+            })
+            .catch((er) => {
+                return er;
+            });
+    },
+    importGroup(file) {
+        return axios.post('/api/functions/import_group', file, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
+    }
 }
