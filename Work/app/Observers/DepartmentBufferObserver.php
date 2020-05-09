@@ -17,12 +17,10 @@ class DepartmentBufferObserver
      */
     public function creating(DepartmentBuffer $departmentBuffer)
     {
-
         $departmentBuffer->db_name = "db_for_" . date("Y");
-        // Storage::disk('db')->put($departmentBuffer->db_name . ".sqlite", '');
         $db = new SQLiteDBFunctions($departmentBuffer->db_name);
         $db->createTable();
-        
+        $db->testData();
     }
 
     /**

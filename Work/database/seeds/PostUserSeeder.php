@@ -168,6 +168,18 @@ class PostUserSeeder extends Seeder
                         "children" => [
                             [
                                 "id" => uniqid(),
+                                "text" => "Менеджер дисциплин",
+                                "menu" => true,
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Менеджер дисциплин",
+                                        "url" => "discipline_managment"
+                                    ],
+                                    "path" => "js/views/administrator-f/DisciplineManagment"
+                                ],
+                            ],
+                            [
+                                "id" => uniqid(),
                                 "text" => "Пользователи",
                                 "menu" => true,
                                 "component" => [
