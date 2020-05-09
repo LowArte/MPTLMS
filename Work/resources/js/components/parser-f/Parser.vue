@@ -81,12 +81,10 @@ export default {
   methods: {
    async parse(){
       this.swaps = await api_parser.parse();
-      console.log(this.swaps);
       this.dialog = true;
     },
     async save(){
-      this.swaps_result = await api_parser.save(this.swaps);    
-      console.log(this.swaps_result)
+      this.swaps_result = await api_parser.save(this.swaps);  
     }
   } 
 };

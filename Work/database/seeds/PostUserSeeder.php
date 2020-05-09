@@ -374,9 +374,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
-                                        "url" => "progress"
+                                        "url" => "journal"
                                     ],
-                                    "path" => "js/views/journal-f/Journal"
+                                    "path" => "js/views/journal-f/JournalStudent"
                                 ],
                             ],
                             [
@@ -541,7 +541,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
-                                        "url" => "progress"
+                                        "url" => "journal"
                                     ],
                                     "path" => "js/views/journal-f/JournalTeacher"
                                 ],
@@ -603,32 +603,6 @@ class PostUserSeeder extends Seeder
                                 "url" => "notifications"
                             ],
                             "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Журналы по дисциплинам",
-                        "component" => [
-                            "info" => [
-                                "name" => "Журналы по дисциплинам",
-                                "url" => "journal/subjects"
-                            ],
-                            "path" => "js/views/journal-f/JournalOfSubjects"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Журнал по дисциплине",
-                        "component" => [
-                            "info" => [
-                                "name" => "Журнал по дисциплине",
-                                "url" => "journal/subject"
-                            ],
-                            "path" => "js/views/journal-f/Journal"
                         ],
                         "default" => true,
                         "menu" => false,
@@ -741,7 +715,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
-                                        "url" => "journals"
+                                        "url" => "journal"
                                     ],
                                     "path" => "js/views/journal-f/JournalUnit"
                                 ],

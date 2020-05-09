@@ -50,7 +50,6 @@ export default {
     async uploadFile() {
       if (this.$refs.form.validate()) {
         this.loading = !this.loading;
-        console.log(this.fileOreder);
         let data = new FormData();
         data.append('file',this.fileOreder);
         if (await api_journal.getExcelTitles(data)) {

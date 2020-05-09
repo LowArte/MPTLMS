@@ -148,10 +148,6 @@ export default {
         schedule: this.schedule,
         day: this.day
       });
-      /*console.log(await api_schedule.getScheduleBildShowDayByTeacherId({
-        teacher_id: this.teacher_id,
-        day: this.day
-      }));*/
       this.loading = false;
     },
 

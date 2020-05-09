@@ -1,6 +1,13 @@
 <template lang="pug">
   v-content.ma-0.pa-0
-    v-layout.column.wrap
+    v-layout.column.wrap(v-if="JournalOfSubject")
+      v-card.mx-auto(height='auto' width='100%')
+        v-system-bar(color="info" dark)
+            span Список журналов
+        div.ma-0.pa-1
+            v-btn(block @click="JournalOfSubject = false;") К списку 
+        //--c-crud-discipline()
+    v-layout.column.wrap(v-if="!JournalOfSubject")
       v-data-iterator.px-2(:items="groups_umo" :search="search" :items-per-page.sync="itemsPerPage" :page="page" hide-default-footer no-results-text="Не найдены данные, удовлетворяющие Вашему запросу. Попробуйте изменить запрос" no-data-text="")
         template(v-slot:header)
           v-flex
@@ -37,8 +44,8 @@
                     v-list-item-subtitle Журналов: {{item.association.length}}
                 v-card-actions.pt-0
                   v-spacer
-                  router-link(class='nounderline' :to="'/' + user.post.slug + '/journal/subjects'")
-                    v-btn(block x-small text dark color="accent" @click="setGroupInformationToVuex(item)") перейти к журналам
+                  div
+                    v-btn(block x-small text dark color="accent" @click="setGroupInformationToVuex(item); JournalOfSubject = true;") перейти к журналам
                   v-spacer  
 </template>
 
@@ -73,7 +80,8 @@ export default {
       search: null,
       itemsPerPage: 16,
       itemsPerPageArray: [4, 8, 16, 32, 100],
-      page: 1
+      page: 1,
+      JournalOfSubject: false
     };
   },
 
@@ -81,7 +89,6 @@ export default {
   {
     this.showLoading("Получение данных");
     await this.$store.dispatch(actions.SET_GROUPS_FOR_UMO);
-    console.log(this.groups_umo)
     this.closeLoading("Получение данных");
   },
 

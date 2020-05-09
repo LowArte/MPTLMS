@@ -3,6 +3,8 @@
     c-crud-form(ref='crud' :_floodArray="this.flood" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Дисциплины'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
+    c-edit-dialog(ref='revue')
+    c-remove-dialog(ref='rem')
 </template>
 
 <script>
@@ -27,8 +29,8 @@ import CRUD_C from "@/js/views/administrator-f/CRUDpattern";
 //?----------------------------------------------
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Discipline_Add";
-/*import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Group_Edit";
-import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Group_Delete";*/
+import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Group_Edit";
+import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Group_Delete";
 
 import { mapGetters } from "vuex";
 import FileDownload from "js-file-download";
@@ -37,9 +39,6 @@ import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 
 export default {
-  computed: {
-    ...mapGetters(["groups"])
-  },
   post_name: {
     name: "CRUD дисциплин",
     url: "disciplines_crud"
@@ -49,6 +48,8 @@ export default {
     "c-crud-form": CRUD_C,
     "c-comfirm-dialog": confirmDialog_C,
     "c-add-dialog": addDialog_C,
+    "c-edit-dialog": editDialog_C,
+    "c-remove-dialog": removeDialog_C
   },
 
   props:{
@@ -69,11 +70,16 @@ export default {
     ],
     flood: [],
   }),
-  methods: {
-    async beforeMount() {
-      this.init();
-    },
+  async beforeMount()
+  {
+    if (this.specialities == null) 
+    {
+      let items = await api_department.getDepartments();
+      this.$store.commit(mutations.SET_SPECIALITIES_FULL, items);
+    }
+  },
 
+  methods: {
     //?----------------------------------------------
     //!           Обновление
     //?----------------------------------------------
@@ -84,7 +90,6 @@ export default {
     async update() {
       this.showLoading("Обновление данных");
       this.flood = await api_discipline.getDisciplinesDBContent(this._db_name);
-      console.log(this.flood);
       this.closeLoading("Обновление данных");
     },
 
@@ -92,23 +97,36 @@ export default {
     //!           Добавление объекта
     //?----------------------------------------------
     async add() {
-      await this.$refs.new.pop().then(res => {
-        if (res) {}
-        else
-          this.showInfo("Действие было отменено пользователем!");
-      });
+      var res = await this.$refs.new.pop().then(res => { return res; });
+      if (res)
+        await api_discipline.saveDiscipline(res);
+      else
+        this.showInfo("Действие было отменено пользователем!");
       this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта
     //?----------------------------------------------
-    async edit(item) {
+    async edit(item) 
+    {
+      var res = await this.$refs.revue.pop().then(res => { return res; });
+      if (res)
+        await api_discipline.editDiscipline(res);
+      else
+        this.showInfo("Действие было отменено пользователем!");
+      this.$refs.revue.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Удаление всех объектa
     //?----------------------------------------------
-    async remove(item) {
-
+    async remove(item) 
+    {
+      var res = await this.$refs.rem.pop().then(res => { return res; });
+      if (res)
+        await api_discipline.deleteDiscipline(res);
+      else
+        this.showInfo("Действие было отменено пользователем!");
+      this.$refs.rem.$refs.form.reset();
     }
   }
 };

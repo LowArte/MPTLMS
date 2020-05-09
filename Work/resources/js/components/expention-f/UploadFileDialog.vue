@@ -35,7 +35,6 @@ export default {
 
       if(typeof(this.file) == "object")
       {
-        console.log(this.file)
         for(let i =0;i<this.file.length;i++)
           formData.append("file"+i, this.file[i]);
       }

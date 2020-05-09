@@ -63,6 +63,30 @@ export default {
         .catch(() => {return undefined;});
     },
     //*----------------------------------------
+    //!         Работа с данными
+    //*----------------------------------------
+    saveDiscipline()
+    {
+        return axios.post('/api/save/discipline_buffer_data/', + data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
+
+    deleteDiscipline(id)
+    {
+        return axios.post('/api/delete/discipline_buffer_data/' + id)
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
+
+    editDiscipline(data)
+    {
+        return axios.post('/api/edit/discipline_buffer_data/', + data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
+
+    //*----------------------------------------
     //!         Загрузка файлов
     //*----------------------------------------
     importDiscipline(file) 
