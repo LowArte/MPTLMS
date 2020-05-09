@@ -27,7 +27,7 @@ export default {
   async beforeMount() {
     if(this.specialities == null)
     {
-      this.$store.dispatch(actions.CREATE_SPECIALITIE);
+      await this.$store.dispatch(actions.CREATE_SPECIALITIE);
     }
   },
 };

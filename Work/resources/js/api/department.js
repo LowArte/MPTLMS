@@ -39,7 +39,7 @@ export default {
     getDepartments() 
     {
         return axios.get('/api/getters/departments')
-        .then(res => {return res.data.departments;})
+        .then(res => {console.log(res.data); return res.data.departments;})
         .catch(() => {return undefined;});
     },
     //*Получение отделений для комбобокса

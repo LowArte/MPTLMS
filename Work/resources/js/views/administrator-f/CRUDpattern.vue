@@ -139,7 +139,10 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.getters[this._flood];
+      if(this._flood == null)
+        return [];
+      else
+        return this.$store.getters[this._flood];
     }
   },
 

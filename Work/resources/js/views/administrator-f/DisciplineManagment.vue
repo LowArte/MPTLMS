@@ -4,15 +4,16 @@
             v-card.mx-auto(height='auto' width='100%')
                 v-system-bar(color="info" dark)
                     span CRUD дисциплин
-                v-btn.ma-2.ml-1(v-on="on" block @click="NoShow")
-                c-crud-discipline(:_db_id = "db_id", :_main="this")
+                div.ma-0.pa-1
+                    v-btn(block @click="showCRUD = false;") К списку баз данных
+                c-crud-discipline(:_db_id = "db_id")
         div(v-else)
             c-upload-file-dialog(ref="upload_dialog")
             v-layout.row.wrap
             v-card.mx-auto(height='auto' width='100%')
                 v-system-bar(color="info" dark)
                     span Менеджмент дисциплин
-                v-data-table.elevation-0.pa-0.ma-0(:headers="headers" :items="items" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" hide-default-footer :items-per-page="itemsPerPage")
+                v-data-table.elevation-0.pa-0.ma-0(:headers="headers" :items="items" item-key="id" no-results-text='Данные отсутствуют' no-data-text='Данные отсутствуют' :page.sync="page" @page-count="pageCount = $event" hide-default-footer :items-per-page="itemsPerPage")
                     template(v-slot:top)
                         v-tooltip(bottom)
                             template(v-slot:activator="{ on }")
@@ -27,9 +28,9 @@
                                     span.ma-2 Загрузить документ
                             span Загрузить файл с данными
                     template(v-slot:item.action="{ item }")
-                        v-tooltip(bottom v-if="_func_edit != null")
+                        v-tooltip(bottom)
                             template(v-slot:activator="{ on }")
-                                v-icon.small(v-on="on" @click="edit(item)") edit
+                                v-icon.small(v-on="on" @click="db_id = item.id; showCRUD=true;") edit
                             span Просмотреть
                 v-layout.row.text-center.pa-2.ma-2
                     v-pagination(v-model="page" :length="pageCount")
@@ -67,7 +68,7 @@ export default {
                 { text: "Год", value: "year" },
                 { text: "Действия", value: "action", sortable: false }
             ],
-            items: [],
+            items: [{id: 1, db_name: 'Название базы', year: '2020'}],
             page: 1, //Текущая страница
             itemsPerPage: 30, //Количество отображаемых строк
             pageCount: 0, //Количество страниц
