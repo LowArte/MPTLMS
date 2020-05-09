@@ -6,7 +6,7 @@
                     span CRUD дисциплин
                 div.ma-0.pa-1
                     v-btn(block @click="showCRUD = false;") К списку баз данных
-                c-crud-discipline(:_db_id = "db_id")
+                c-crud-discipline(:_db_name = "db_name")
         div(v-else)
             c-upload-file-dialog(ref="upload_dialog")
             v-layout.row.wrap
@@ -30,7 +30,7 @@
                     template(v-slot:item.action="{ item }")
                         v-tooltip(bottom)
                             template(v-slot:activator="{ on }")
-                                v-icon.small(v-on="on" @click="db_id = item.id; showCRUD=true;") edit
+                                v-icon.small(v-on="on" @click="show(item)") edit
                             span Просмотреть
                 v-layout.row.text-center.pa-2.ma-2
                     v-pagination(v-model="page" :length="pageCount")
@@ -65,7 +65,7 @@ export default {
         return{
             headers: [
                 { text: "Наименование", value: "db_name" },
-                { text: "Год", value: "year" },
+                { text: "Год", value: "created_at" },
                 { text: "Действия", value: "action", sortable: false }
             ],
             items: [{id: 1, db_name: 'Название базы', year: '2020'}],
@@ -73,7 +73,7 @@ export default {
             itemsPerPage: 30, //Количество отображаемых строк
             pageCount: 0, //Количество страниц
             showCRUD: false,
-            db_id: 0,
+            db_name: "",
         }
     }, 
     async beforeMount(){
@@ -81,9 +81,15 @@ export default {
     },
 
     methods:{
+        show(item){
+            this.db_name = item.db_name;
+            this.showCRUD = true;
+        },
         async Update()
         {
-            
+            this.showLoading("Обновление данных");
+            this.items = await api_discipline.getDisciplinesDB();
+            this.closeLoading("Обновление данных");
         },
 
         async LoadFile()
@@ -92,7 +98,8 @@ export default {
             
             if (res)
             {
-                //await api_group.importGroup(res);
+                if(await api_discipline.importDiscipline(res))
+                    this.showMessage("Файл загружен!");
                 this.Update();
             }
             else

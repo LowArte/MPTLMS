@@ -9,13 +9,14 @@ use App\Models\UsersPost;
 use App\Models\Association;
 use App\Models\Journal;
 use App\Models\DepartmentBuffer;
+use App\Models\DisciplineBuffer;
 use App\Observers\GroupObserver;
 use App\Observers\PlacesObserver;
 use App\Observers\UserObserver;
 use App\Observers\AssociationObserver;
 use App\Observers\JournalObserver;
 use App\Observers\UsersPostObserver;
-use App\Observers\DepartmentBufferObserver;
+use App\Observers\DisciplineBufferObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -44,6 +45,6 @@ class AppServiceProvider extends ServiceProvider
         Group::observe(GroupObserver::class);
         Association::observe(AssociationObserver::class);
         Journal::observe(JournalObserver::class);
-        DepartmentBuffer::observe(DepartmentBufferObserver::class);
+        DisciplineBuffer::observe(DisciplineBufferObserver::class);
     }
 }

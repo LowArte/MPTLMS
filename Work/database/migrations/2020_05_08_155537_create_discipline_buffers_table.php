@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentBuffersTable extends Migration
+class CreateDisciplineBuffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDepartmentBuffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('department_buffers', function (Blueprint $table) {
+        Schema::create('discipline_buffers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("db_name");
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateDepartmentBuffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('department_buffers');
+        Schema::dropIfExists('discipline_buffers');
     }
 }

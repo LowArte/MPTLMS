@@ -90,6 +90,10 @@ export default {
       type: String,
       default: null
     },
+    _floodArray: {
+      type: Array,
+      default: null
+    },
     _headers: {
       type: Array,
       default: null
@@ -139,6 +143,8 @@ export default {
   },
   computed: {
     items() {
+      if(this._floodArray != null)
+        return this._floodArray;
       if(this._flood == null)
         return [];
       else

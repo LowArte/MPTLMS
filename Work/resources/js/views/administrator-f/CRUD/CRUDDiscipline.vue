@@ -1,14 +1,15 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Дисциплины'")
+    c-crud-form(ref='crud' :_floodArray="this.flood" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Дисциплины'")
     c-comfirm-dialog(ref="qwestion")
+    c-add-dialog(ref='new')
 </template>
 
 <script>
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
-
+import api_discipline from '@/js/api/discipline';
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -25,8 +26,8 @@ import CRUD_C from "@/js/views/administrator-f/CRUDpattern";
 //!           Подключение диалогов CRUD
 //?----------------------------------------------
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
-/*import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Group_Add";
-import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Group_Edit";
+import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Discipline_Add";
+/*import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Group_Edit";
 import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Group_Delete";*/
 
 import { mapGetters } from "vuex";
@@ -47,25 +48,30 @@ export default {
   components: {
     "c-crud-form": CRUD_C,
     "c-comfirm-dialog": confirmDialog_C,
+    "c-add-dialog": addDialog_C,
   },
 
   props:{
-      _db_id:{
-          type: Number,
-          default: 0
+      _db_name:{
+          type: String,
+          default: null
       }
   },
 
   data: () => ({
     headers: [
       { text: "№", value: "id" },
+      { text: "Отделение", value: "dep_name_full" },
       { text: "Дисциплина", value: "discip_name" },
+      { text: "I семестр", value: "discip_hours_first" },
+      { text: "II семестр", value: "discip_hours_second" },
       { text: "Действия", value: "action", sortable: false }
-    ]
+    ],
+    flood: [],
   }),
   methods: {
     async beforeMount() {
-
+      this.init();
     },
 
     //?----------------------------------------------
@@ -77,7 +83,8 @@ export default {
 
     async update() {
       this.showLoading("Обновление данных");
-
+      this.flood = await api_discipline.getDisciplinesDBContent(this._db_name);
+      console.log(this.flood);
       this.closeLoading("Обновление данных");
     },
 
@@ -85,7 +92,12 @@ export default {
     //!           Добавление объекта
     //?----------------------------------------------
     async add() {
-
+      await this.$refs.new.pop().then(res => {
+        if (res) {}
+        else
+          this.showInfo("Действие было отменено пользователем!");
+      });
+      this.$refs.new.$refs.form.reset();
     },
     //?----------------------------------------------
     //!           Изменение объекта

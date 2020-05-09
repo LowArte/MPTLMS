@@ -37,4 +37,47 @@ export default {
         .then(res => {return res.data.disciplines;})
         .catch(() => {return undefined;});
     },
+    //*Получение бд
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *Discipline* (Пользователи)
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getDisciplinesDB() 
+    {
+        return axios.get('/api/getters/discipline_buffer')
+        .then(res => {return res.data.disciplineBuffer;})
+        .catch(() => {return undefined;});
+    },
+
+    //*Получение дисциплин из бд
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *Discipline* (Пользователи)
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getDisciplinesDBContent(db_name) 
+    {
+        return axios.get('/api/getters/discipline_buffer_data/' + db_name)
+        .then(res => {return res.data.disciplineBuffer;})
+        .catch(() => {return undefined;});
+    },
+    //*----------------------------------------
+    //!         Загрузка файлов
+    //*----------------------------------------
+    importDiscipline(file) 
+    {
+        return axios.post('/api/functions/import_discipline', file, 
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(() => {
+            return true;
+        })
+        .catch(() => {
+            return false;
+        });
+    }
 }

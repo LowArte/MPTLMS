@@ -22,6 +22,9 @@ class ApiRoutes
 
             Route::get('news/{user_id}','Api\NewsController@getNews')->name('news');
 
+            Route::get('discipline_buffer','Api\DisciplineBufferController@getDisciplineBuffer')->name('discipline_buffer');
+            Route::get('discipline_buffer_data/{dbname}','Api\DisciplineBufferController@getDisciplineBufferData')->name('discipline_buffer');
+
             Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
 
             Route::get('departments_for_combobox','Api\DepartmentController@getDepartmentsForCombobox')->name('departments_for_combobox');

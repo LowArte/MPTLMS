@@ -14,7 +14,7 @@ class DepartmentRepository extends BaseRepository
     public function getDepartmentsForComboBox()
     {
         $columns = ['id', 'dep_name_full'];
-        $result = $this->startCondition()->select($columns)->toBase()->get();
+        $result = $this->startCondition()->select($columns)->get();
         return $result;
     }
 
