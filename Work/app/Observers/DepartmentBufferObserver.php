@@ -2,15 +2,9 @@
 
 namespace App\Observers;
 
-use App\Helpers\FileWrite\FileWriter;
-use App\Helpers\FileWrite\Rewrite;
-use App\Helpers\SQLite\SQLiteDb;
 use App\Helpers\SQLite\SQLiteDBFunctions;
 use App\Models\DepartmentBuffer;
-use Config;
-use Debugbar;
-use ErrorException;
-use Schema;
+
 use Storage;
 
 class DepartmentBufferObserver
@@ -23,8 +17,9 @@ class DepartmentBufferObserver
      */
     public function creating(DepartmentBuffer $departmentBuffer)
     {
+
         $departmentBuffer->db_name = "db_for_" . date("Y");
-        Storage::disk('db')->put($departmentBuffer->db_name . ".sqlite", '');
+        // Storage::disk('db')->put($departmentBuffer->db_name . ".sqlite", '');
         $db = new SQLiteDBFunctions($departmentBuffer->db_name);
         $db->createTable();
         
