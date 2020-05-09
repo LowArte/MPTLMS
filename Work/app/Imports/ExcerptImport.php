@@ -17,11 +17,9 @@ class ExcerptImport
         $departmanetRepository = app(DepartmentRepository::class);
         $departmens = $departmanetRepository->getDepartmentsForComboBox();
         $groupsRepository = app(GroupRepository::class);
-        $groupsR = $groupsRepository->getGroupsForComboBoxWithRecursive();
+        $groupsR = collect($groupsRepository->getGroupsForComboBoxWithRecursive());
         $array_groups_subgects = [];
-
         foreach ($files as $file) {
-
             $temp_file->newTemporaryFile($file);
             $reader = IOFactory::createReader(IOFactory::identify($temp_file->getFileName()));
             $spreadsheet = $reader->load($temp_file->getFileName());
