@@ -12,15 +12,14 @@
             v-chip.ma-1(min-width="300px" label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
         v-layout.row.wrap
             v-flex(v-if="teachers_combo")
-                v-card(min-width="300px")
+                v-card.mb-1(min-width="300px")
                     v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
                         span Преподаватели
                     v-alert.ma-2(type="warning" border="left" dense colored-border elevation="2") В данном списке представлены преподаватели, у которых имеются пары на {{days[(new Date()).getDay() + 1].toLowerCase()}}
-                    v-list( nav flat dense )
-                        v-list-item-group
-                            v-list-item(v-for="(item, index) in teachers_combo" :key="index" inactive @click="listChange(item.id)")
-                                v-list-item-content
-                                    v-list-item-title {{item.fullFio}} 
+                    v-list(nav flat dense v-if="teachers_day")
+                      v-list-item(v-for="(item, index) in teachers_day" :key="index" inactive @click="listChange(item.id)")
+                          v-list-item-content
+                              v-list-item-title {{item.fio}} 
             v-flex(v-if="schedule")
                 v-card(min-width="300px")
                     v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
@@ -99,8 +98,10 @@ export default {
         "Среда",
         "Четверг",
         "Пятница",
-        "Суббота"
+        "Суббота",
+        "Понедельник",
       ],
+      teachers_day: null,
       schedule: null,
       classroom: null
     };
@@ -108,12 +109,6 @@ export default {
 
   async beforeMount() {
     await this.getTeachers();
-    console.log(
-      await api_schedule.getTeachersForScheduleDay({
-        chisl: this.isChisl,
-        day: this.day
-      })
-    );
   },
 
   methods: {
@@ -124,6 +119,10 @@ export default {
       this.showLoading("Получение расписания");
       this.schedule = await api_schedule.getScheduleBildShowDayByTeacherId({
         teacher_id: this.teacher_id,
+        day: this.day
+      });
+      this.teachers_day = await api_schedule.getTeachersForScheduleDay({
+        chisl: this.isChisl,
         day: this.day
       });
       this.closeLoading("Получение расписания");
@@ -145,15 +144,14 @@ export default {
     async sendQuery() 
     {
       this.loading = true;
-      console.log(this.schedule);
       await api_schedule.editScheduleClassroom({
         schedule: this.schedule,
         day: this.day
       });
-      console.log(await api_schedule.getScheduleBildShowDayByTeacherId({
+      /*console.log(await api_schedule.getScheduleBildShowDayByTeacherId({
         teacher_id: this.teacher_id,
         day: this.day
-      }));
+      }));*/
       this.loading = false;
     },
 

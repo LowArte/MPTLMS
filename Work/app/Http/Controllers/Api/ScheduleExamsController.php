@@ -32,9 +32,9 @@ class ScheduleExamsController extends BaseController
     public function save(Request $request, CreateScheduleExamModification $createScheduleExamModification)
     {
         $data = $request->all();
-        $result = $createScheduleExamModification->addScheduleExamToDatabase($data);
-        if($result)
-            return response()->json(["success"=>true]);
+        $id = $createScheduleExamModification->addScheduleExamToDatabase($data);
+        if($id)
+            return response()->json(compact("id"),200);
         return response()->json(["error"=>"Расписание не сохранено"],400);
     } 
 

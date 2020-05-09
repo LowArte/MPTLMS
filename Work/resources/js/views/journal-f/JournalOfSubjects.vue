@@ -75,7 +75,9 @@ export default {
       this.loading = !this.loading
     },
 
-    async getJournalForGroupOfSubject(id) {}
+    async getJournalForGroupOfSubject(id) {
+      
+    }
   }
 };
 </script>

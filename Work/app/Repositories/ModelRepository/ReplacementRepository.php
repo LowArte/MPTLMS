@@ -37,10 +37,11 @@ class ReplacementRepository extends BaseRepository
                     $foundDiscipline = $disciplines->where("id",$item->swap->lesson[$i])->first()->discipline_name;
                     $item->swap->lesson[$i] =  $foundDiscipline;
                 }
+                $item->swap->teacher_name = $item->swap->oldteacher;
 
                 for($i=0;$i<count((array)$item->swap->teacher);$i++){
                     $foundTeacher = $teachers->where("id",$item->swap->teacher[$i])->first()->fullFio;                   
-                    $item->swap->teacher[$i] =  $foundTeacher;
+                    $item->swap->teacher_name[$i] =  $foundTeacher;
                 }  
             }
 
@@ -49,10 +50,11 @@ class ReplacementRepository extends BaseRepository
                     $foundDiscipline = $disciplines->where("id",$item->swap->oldlesson[$i])->first()->discipline_name;
                     $item->swap->oldlesson[$i] =  $foundDiscipline;
                 }
+                $item->swap->oldteacher_name = $item->swap->oldteacher;
 
                 for($i=0;$i<count((array)$item->swap->oldteacher);$i++){
                     $foundTeacher = $teachers->where("id",$item->swap->oldteacher[$i])->first()->fullFio;                   
-                    $item->swap->oldteacher[$i] =  $foundTeacher;
+                    $item->swap->oldteacher_name[$i] =  $foundTeacher;
                 }  
             }
             $item->swap = json_encode($item->swap);

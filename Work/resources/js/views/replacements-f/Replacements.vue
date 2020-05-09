@@ -41,10 +41,10 @@ v-content.ma-0.pa-2
               tbody(v-if="user != null && user.post_id != null")
                   tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
                       td {{ replacement_key['swap']['caselesson'] }}
-                      td(v-if="replacement_key['swap']['oldteacher'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }} ({{ replacement_key['swap']['oldteacher'].join(" / ") }})
+                      td(v-if="replacement_key['swap']['oldteacher'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }} ({{ replacement_key['swap']['oldteacher_name'].join(" / ") }})
                       td(v-else-if="replacement_key['swap']['oldlesson'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }}
                       td(v-else) Дополнительное занятие
-                      td(v-if="replacement_key['swap']['teacher'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }} ({{ replacement_key['swap']['teacher'].join(" / ") }})
+                      td(v-if="replacement_key['swap']['teacher'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }} ({{ replacement_key['swap']['teacher_name'].join(" / ") }})
                       td(v-else-if="replacement_key['swap']['lesson'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }}
                       td(v-else) Занятие отменено
                       td(v-if="user.post_id == 1 || user.post_id == 4")
@@ -117,15 +117,17 @@ export default {
               if(res.swap_date == this.dateDialog.date && res.group_id == this.selected_group.id  && checkTeacher)
                   return true;
             }
-
-            if(this.checkAllDate && this.checkAllGroup)
-                return true;
-            if(this.checkAllDate && res.group_id == this.selected_group.id)
-                return true;
-            if(res.swap_date == this.dateDialog.date && this.checkAllGroup)
-                return true;
-            if(res.swap_date == this.dateDialog.date && res.group_id == this.selected_group.id)
-                return true;
+            else
+            {
+              if(this.checkAllDate && this.checkAllGroup)
+                  return true;
+              if(this.checkAllDate && res.group_id == this.selected_group.id)
+                  return true;
+              if(res.swap_date == this.dateDialog.date && this.checkAllGroup)
+                  return true;
+              if(res.swap_date == this.dateDialog.date && res.group_id == this.selected_group.id)
+                  return true;
+            }
             return false;
         });
         return replacements;

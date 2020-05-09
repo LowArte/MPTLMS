@@ -193,10 +193,10 @@ export default {
         },
 
         async addExam()
-        {  
-            if(await this.$refs.bild.pop(null).then(res => {return res;}))
+        {  var res = await this.$refs.bild.pop(null).then(res => {return res;});
+            if(res)
             {
-                if(await api_schedule_exam.saveScheduleExam(result))
+                if(await api_schedule_exam.saveScheduleExam(res))
                 {
                     this.showMessage("Сохранено!");
                     this.refresh();
@@ -208,9 +208,10 @@ export default {
 
         async editExam(item)
         {
-            if(await this.$refs.bild.pop(item).then(result => {return true;}))
+            var res = await this.$refs.bild.pop(item).then(res => {return res;});
+            if(res)
             {
-                if(await api_schedule_exam.editScheduleExam(result))
+                if(await api_schedule_exam.editScheduleExam(res))
                 {
                     this.showMessage("Выполнено!");
                     this.refresh();

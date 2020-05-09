@@ -15,6 +15,7 @@ class UpdateScheduleExamModification extends BaseModification
 
     public function updateScheduleExamInDatabase($data)
     {
+        Debugbar::info($data);
         $schedule = $this->startCondition()->select('id')->where('id',$data['id'])->toBase()->first();
         if($schedule == null){
             return false;

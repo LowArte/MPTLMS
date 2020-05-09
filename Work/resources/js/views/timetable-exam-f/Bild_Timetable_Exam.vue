@@ -88,6 +88,7 @@ export default {
             mask: "##:##-##:##", //Маска расписания экзамена
             resolve: null,
             exam:{
+                id: null,
                 date:null,
                 info:{
                     time: null,
@@ -223,6 +224,7 @@ export default {
             this.dialog = false;
             this.$refs.form.reset();
             this.exam.info = {
+                id: null,
                 time: null,
                 exam: null,
                 teacher: [],

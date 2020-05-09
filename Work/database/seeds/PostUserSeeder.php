@@ -130,7 +130,7 @@ class PostUserSeeder extends Seeder
                                         "name" => "Аудиторный фонд",
                                         "url" => "bild_classroom_fund"
                                     ],
-                                    "path" => "js/views/сlassroom-fund-f/Bild_Classroom_Fund"
+                                    "path" => "js/views/сlassroom-foundation-f/Bild_Classroom_Foundation"
                                 ],
                             ],
                             [
@@ -509,7 +509,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
-                                        "url" => "timetable-exam_exam"
+                                        "url" => "timetable-exam"
                                     ],
                                     "path" => "js/views/timetable-exam-f/Timetable_Exam"
                                 ],
@@ -685,7 +685,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
-                                        "url" => "timetable-exam_exam"
+                                        "url" => "timetable-exam"
                                     ],
                                     "path" => "js/views/timetable-exam-f/Timetable_Exam"
                                 ],

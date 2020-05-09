@@ -19,7 +19,7 @@ class CreateScheduleExamModification extends BaseModification
         $schedule->fill($request);
         $schedule = $schedule->save();
         if($schedule)
-            return true;
+            return $schedule->id;
         return  false;
     }
 }
