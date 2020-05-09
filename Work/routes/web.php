@@ -15,6 +15,8 @@
 //Default page
 Route::get('/', "AppController@index")->name('main');
 
+Route::get('/{any}/{any2}/{any3}', "AppController@index")->where("{any}",'*')->where("{any2}",'*')->where("{any3}",'*');
+
 Route::get('/{any}/{any2}', "AppController@index")->where("{any}",'*')->where("{any2}",'*');
 
 Route::get('/{any}', "AppController@index")->where("{any}",'*');

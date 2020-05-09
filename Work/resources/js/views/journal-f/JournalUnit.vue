@@ -37,7 +37,7 @@
                     v-list-item-subtitle Журналов: {{item.association.length}}
                 v-card-actions.pt-0
                   v-spacer
-                  router-link(class='nounderline' :to="'/' + user.post.slug + '/JournalOfSubjects'")
+                  router-link(class='nounderline' :to="'/' + user.post.slug + '/journal/subjects'")
                     v-btn(block x-small text dark color="accent" @click="setGroupInformationToVuex(item)") перейти к журналам
                   v-spacer  
 </template>

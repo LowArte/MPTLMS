@@ -21,7 +21,7 @@
                             br
                             small {{item.teacher}}
                         v-col(class="shrink")
-                            router-link(class='nounderline' :to="'/' + user.post.slug + '/Journal/'")
+                            router-link(class='nounderline' :to="'/' + user.post.slug + '/journal/subject'")
                                 v-btn(small text dark color="success" @click="getJournalForGroupOfSubject(item.journal_id)") открыть
 </template>
 
@@ -37,6 +37,8 @@ import CreateJournalDialog_С from "@/js/components/journal-f/CreateJournalDialo
 import { mapGetters } from "vuex";
 import * as actions from "@/js/store/action-types";
 
+import api_journal from "@/js/api/journal";
+
 export default {
   components: {
     "c-create-journal-dialog": CreateJournalDialog_С
@@ -44,7 +46,7 @@ export default {
 
   async beforeMount() {
     if (!this.groups_subjects)
-      location.href = "/" + this.user.post.slug + "/Journals";
+      location.href = "/" + this.user.post.slug + "/journals";
   },
 
   computed: {
@@ -76,7 +78,7 @@ export default {
     },
 
     async getJournalForGroupOfSubject(id) {
-      
+      await this.$store.dispatch(actions.SET_GROUP_JOURNAL, id);
     }
   }
 };

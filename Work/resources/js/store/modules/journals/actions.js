@@ -21,4 +21,7 @@ export default {
         await api_journal.editJournalClose(item.id, !item.isClose);
         commit(types.CLOSE_JOURNAL, item);
     },
+    async [actions.SET_GROUP_JOURNAL] ({commit, state}, id) {
+        commit(types.SET_GROUP_JOURNAL, id);
+    }
 }

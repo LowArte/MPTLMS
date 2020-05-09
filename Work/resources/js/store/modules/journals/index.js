@@ -6,6 +6,7 @@ const state = {
     groups_umo: [], //id, отделение, наименование группы
     groups_subjects: null, //id, дисциплины
     group_journal: [], //id, журналы, статус журнала
+    id_journal: null
 }
 
 export default {

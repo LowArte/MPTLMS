@@ -9,16 +9,19 @@ export default {
     },
     [types.CLOSE_JOURNAL](state, item) {
         state.groups_subjects.association.forEach(element => {
-            if(element.id == item.id) {
+            if (element.id == item.id) {
                 element.isClose = !item.isClose
             }
         });
     },
-    [types.UPDATE_JOURNAL] (state, group_id) {
+    [types.UPDATE_JOURNAL](state, group_id) {
         state.groups_umo.forEach(element => {
-            if(element.group_id == group_id) {
+            if (element.group_id == group_id) {
                 state.groups_subjects = element
             }
         });
+    },
+    [types.SET_GROUP_JOURNAL](state, id) {
+        state.id_journal = id
     }
 }

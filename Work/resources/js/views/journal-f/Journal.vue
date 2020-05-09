@@ -119,6 +119,11 @@ import LoadFitleDialog from "@/js/components/load-file-f/LoadFileDialog";
 //?----------------------------------------------
 import api_journal from "@/js/api/journal";
 
+//?----------------------------------------------
+//!           Vuex
+//?----------------------------------------------
+import { mapGetters } from "vuex";
+
 export default {
   //?----------------------------------------------
   //!           Преднастройка
@@ -151,10 +156,17 @@ export default {
     };
   },
 
-  async beforeMount() {
-    this.journal = await api_journal.getJournalById(2); //Id журнала
+  computed: {
+    ...mapGetters(["user", "id_journal"])
+  },
 
-    if (this.selected_semester != null) this.headers = this.getHeaders();
+  async beforeMount() {
+    if (!this.id_journal) {
+      location.href = "/" + this.user.post.slug + "/journals";
+    } else {
+      this.journal = await api_journal.getJournalById(this.id_journal); //Id журнала
+      if (this.selected_semester != null) this.headers = this.getHeaders();
+    }
   },
   //?----------------------------------------------
   //!           Методы страницы

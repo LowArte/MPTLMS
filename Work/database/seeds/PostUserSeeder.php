@@ -601,7 +601,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "Журналы по дисциплинам",
-                                "url" => "JournalOfSubjects"
+                                "url" => "journal/subjects"
                             ],
                             "path" => "js/views/journal-f/JournalOfSubjects"
                         ],
@@ -614,7 +614,7 @@ class PostUserSeeder extends Seeder
                         "component" => [
                             "info" => [
                                 "name" => "Журнал по дисциплине",
-                                "url" => "Journal/"
+                                "url" => "journal/subject"
                             ],
                             "path" => "js/views/journal-f/Journal"
                         ],
@@ -729,7 +729,7 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
-                                        "url" => "Journals"
+                                        "url" => "journals"
                                     ],
                                     "path" => "js/views/journal-f/JournalUnit"
                                 ],
