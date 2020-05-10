@@ -632,6 +632,20 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                         "menu" => false
+                        
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "text" => "Менеджер дисциплин",
+                        "menu" => true,
+                        "icon" => "sd_storage",
+                        "component" => [
+                            "info" => [
+                                "name" => "Менеджер дисциплин",
+                                "url" => "discipline_managment"
+                            ],
+                            "path" => "js/views/administrator-f/DisciplineManagment"
+                        ],
                     ],
                     [
                         "id" => uniqid(),

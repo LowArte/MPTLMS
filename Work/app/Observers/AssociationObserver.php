@@ -16,16 +16,7 @@ class AssociationObserver
      */
     public function created(Association $association)
     {
-        Debugbar::info($association->id);
-        $createAssociationModification = app(CreateJournalModification::class);
-        $createAssociationModification->addJournalToDatabase(
-            [
-                'association_id' => $association->id, 
-                'isClose' => false, 
-                'titles' => json_encode([]),
-                'journal' => json_encode([])
-            ],
-        );
+
     }
 
     /**

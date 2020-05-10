@@ -48,6 +48,8 @@ class User extends Authenticatable
         'deleted_at' => 'datetime',
     ];
 
+    protected $appends = ['full_name','full_name_inverted'];
+
     public function post()
     {
         return $this->hasOne(UsersPost::class,'id','post_id');
@@ -66,6 +68,16 @@ class User extends Authenticatable
     public function getModelLabel()
     {
         return $this->display_name;
+    }
+
+    public function getFullNameAttribute(){
+        $thirdName = $this->thirdName ? ".".mb_substr($this->thirdName, 0, 1, "UTF-8").". " : ". ";
+        return mb_substr($this->name, 0, 1, "UTF-8").$thirdName.$this->secName;
+    }
+
+    public function getFullNameInvertedAttribute(){
+        $thirdName = $this->thirdName ? ".".mb_substr($this->thirdName, 0, 1, "UTF-8")."." : ".";
+        return $this->secName." ".mb_substr($this->name, 0, 1, "UTF-8").$thirdName;
     }
     
         /**

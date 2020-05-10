@@ -12,16 +12,16 @@
             v-chip.ma-1(min-width="300px" label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
         v-layout.row.wrap
             v-flex(v-if="teachers_combo")
-                v-card.mb-1(min-width="300px")
+                v-card.mx-auto(min-width="300px" max-width="620px")
                     v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
                         span Преподаватели
                     v-alert.ma-2(type="warning" border="left" dense colored-border elevation="2") В данном списке представлены преподаватели, у которых имеются пары на {{days[(new Date()).getDay() + 1].toLowerCase()}}
                     v-list(nav flat dense v-if="teachers_day")
-                      v-list-item(v-for="(item, index) in teachers_day" :key="index" inactive @click="listChange(item.id)")
+                      v-list-item(v-for="(item, index) in teachers_day" :key="index" @click="listChange(item.id)")
                           v-list-item-content
                               v-list-item-title {{item.fio}} 
             v-flex(v-if="schedule")
-                v-card(min-width="300px")
+                v-card.mx-auto(min-width="300px" max-width="620px")
                     v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
                         span {{days[(new Date()).getDay() + 1]}}
                         v-spacer
@@ -50,9 +50,9 @@
                                             v-card.pa-0.ma-0.mb-3(flat v-if="index != 'Place'") 
                                                 v-card-title.pl-1.py-1 {{item.time}} • {{item.classroom ? item.classroom : "НУ"}}
                                                 v-card-text.pl-1.pb-1 {{item.LessonChisl.join(" / ")}}
-                                                v-text-field.mt-3(solo clearable dense label="Номер аудитории" v-model="item.classroom")
+                                                v-text-field.mt-3(solo clearable dense label="Номер аудитории" v-model="schedule[i].bild[index].classroom" @change="item.classroom = schedule[i].bild[index].classroom")
                     v-card-actions
-                        v-btn(block text color="success" @click="sendQuery" :loading="loading" :disabled="loading") сохранить          
+                        v-btn(block text color="success" @click="sendQuery()" :loading="loading") сохранить          
 </template>
 
 <script>
@@ -144,10 +144,14 @@ export default {
     async sendQuery() 
     {
       this.loading = true;
-      await api_schedule.editScheduleClassroom({
+      if(await api_schedule.editScheduleClassroom({
         schedule: this.schedule,
         day: this.day
-      });
+      }))
+        this.showMessage("Выполнено!");
+      else
+        this.showError("Ошибка выполнения!");
+
       this.loading = false;
     },
 

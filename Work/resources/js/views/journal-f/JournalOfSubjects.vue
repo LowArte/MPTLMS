@@ -2,7 +2,7 @@
     v-content.ma-0.pa-0
         v-layout.column.wrap(v-if="groups_subjects")
             v-flex.pa-3
-                v-card.mx-auto(raised dark max-width="920px" min-width="300px")
+                v-card.mx-auto(raised max-width="920px" min-width="300px")
                     v-card-title {{groups_subjects.group_name}}
                     v-card-text В данном разделе вы можете создавать новые журналы для группы, а так же закрывать или открывать доступ к журналам для преподавателей.
                     v-card-actions

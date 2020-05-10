@@ -28,9 +28,10 @@ class ScheduleRepository extends BaseRepository
 
         if($disciplines == null)
         {
-            $disciplineRepository = app(DisciplineRepository::class);
-            $disciplines = $disciplineRepository->getDisciplines();
+            $disciplineRepository = app(DisciplineBufferRepository::class);
+            $disciplines = $disciplineRepository->getDisciplineBufferRepositoryDataLast();
         }
+
         $schedule = json_decode($this->startCondition()->select($columns)->where('group_id',$group_id)->toBase()->first()->schedule);
         foreach ((array)$schedule as $days => $row) {
             $current = $call->where('place.id',$schedule->{$days}->Place)->first();
@@ -40,8 +41,12 @@ class ScheduleRepository extends BaseRepository
 
                 if(count($schedule->{$days}->{$lessons}->LessonChisl)!=0){
                     for($i=0;$i<count($schedule->{$days}->{$lessons}->LessonChisl);$i++){
-                        $foundDiscipline = $disciplines->where("id",$schedule->{$days}->{$lessons}->LessonChisl[$i])->first()->discipline_name;
-                        $schedule->{$days}->{$lessons}->LessonChisl[$i] =  $foundDiscipline;
+
+                        $foundDiscipline = $disciplines->where("id",$schedule->{$days}->{$lessons}->LessonChisl[$i])->first();
+                        if($foundDiscipline)
+                        {
+                            $schedule->{$days}->{$lessons}->LessonChisl[$i] =  $foundDiscipline['discip_name'];
+                        }
                     }
 
                     for($i=0;$i<count($schedule->{$days}->{$lessons}->TeacherChisl);$i++){
@@ -51,8 +56,11 @@ class ScheduleRepository extends BaseRepository
                 }
                 if(count($schedule->{$days}->{$lessons}->LessonZnam)!=0){
                     for($i=0;$i<count($schedule->{$days}->{$lessons}->LessonZnam);$i++){
-                        $foundDiscipline = $disciplines->where("id",$schedule->{$days}->{$lessons}->LessonZnam[$i])->first()->discipline_name;
-                        $schedule->{$days}->{$lessons}->LessonZnam[$i] =  $foundDiscipline;
+                        $foundDiscipline = $disciplines->where("id",$schedule->{$days}->{$lessons}->LessonZnam[$i])->first();
+                        if($foundDiscipline)
+                        {
+                            $schedule->{$days}->{$lessons}->LessonZnam[$i] =  $foundDiscipline['discip_name'];
+                        }
                     }
 
                     for($i=0;$i<count($schedule->{$days}->{$lessons}->TeacherZnam);$i++){
@@ -191,8 +199,8 @@ class ScheduleRepository extends BaseRepository
             $schedule_teacher[$value] = $lesons;
         }
         //Замена id на название дисциплины
-        $disciplineRepository = app(DisciplineRepository::class);
-        $disciplines = $disciplineRepository->getDisciplines();
+        $disciplineRepository = app(DisciplineBufferRepository::class);
+        $disciplines = $disciplineRepository->getDisciplineBufferRepositoryDataLast();
 
         //Получение расписания звонков
         $callScheduleRepository = app(CallScheduleRepository::class);
@@ -221,7 +229,7 @@ class ScheduleRepository extends BaseRepository
                             {
                                 $checkTeacher = true;
                                 array_push($schedule_teacher[$day][$keyLesson]['GroupChisl'], $schedule->group_name);
-                                $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()->discipline_name;
+                                $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()['discip_name'];
                                 array_push($schedule_teacher[$day][$keyLesson]['LessonChisl'], $foundDiscipline);
                                 array_push($schedule_teacher[$day][$keyLesson]['PlaceChisl'], $current['place']->place_name);
                                 array_push($schedule_teacher[$day][$keyLesson]['TimeChisl'], $current['schedule']->$keyLesson);
@@ -239,7 +247,7 @@ class ScheduleRepository extends BaseRepository
                                     $checkTeacher = true;
                                     $schedule_teacher[$day][$keyLesson]['chisl'] = true;
                                     array_push($schedule_teacher[$day][$keyLesson]['GroupZnam'], $schedule->group_name);
-                                    $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()->discipline_name;
+                                    $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()['discip_name'];
                                     array_push($schedule_teacher[$day][$keyLesson]['LessonZnam'], $foundDiscipline);
                                     array_push($schedule_teacher[$day][$keyLesson]['PlaceZnam'], $current['place']->place_name);
                                     array_push($schedule_teacher[$day][$keyLesson]['TimeZnam'], $current['schedule']->$keyLesson);

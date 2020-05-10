@@ -12,6 +12,7 @@
 //!           Подключение api
 //?----------------------------------------------
 import api_discipline from '@/js/api/discipline';
+import api_department from '@/js/api/department';
 
 //?----------------------------------------------
 //!           Подключение системы уведомлений
@@ -29,8 +30,8 @@ import CRUD_C from "@/js/views/administrator-f/CRUDpattern";
 //?----------------------------------------------
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 import addDialog_C from "@/js/views/administrator-f/components/AddDialogs/C_Discipline_Add";
-import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Group_Edit";
-import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Group_Delete";
+import editDialog_C from "@/js/views/administrator-f/components/EditDialogs/C_Discipline_Edit";
+import removeDialog_C from "@/js/views/administrator-f/components/DeleteDialogs/C_Discipline_Delete";
 
 import { mapGetters } from "vuex";
 import FileDownload from "js-file-download";
@@ -62,8 +63,9 @@ export default {
   data: () => ({
     headers: [
       { text: "№", value: "id" },
-      { text: "Отделение", value: "dep_name_full" },
       { text: "Дисциплина", value: "discip_name" },
+      { text: "Отделение", value: "dep_name_full" },
+      { text: "Курс", value: "curs" },
       { text: "I семестр", value: "discip_hours_first" },
       { text: "II семестр", value: "discip_hours_second" },
       { text: "Действия", value: "action", sortable: false }
@@ -87,10 +89,17 @@ export default {
       return this.update();
     },
 
-    async update() {
+    async update() 
+    {
       this.showLoading("Обновление данных");
-      this.flood = await api_discipline.getDisciplinesDBContent(this._db_name);
+      await this.getData();
       this.closeLoading("Обновление данных");
+    },
+
+    async getData()
+    {
+      let flood = await api_discipline.getDisciplinesDBContent(this._db_name);
+      this.flood = flood;
     },
 
     //?----------------------------------------------
@@ -99,7 +108,15 @@ export default {
     async add() {
       var res = await this.$refs.new.pop().then(res => { return res; });
       if (res)
-        await api_discipline.saveDiscipline(res);
+      {
+        if(await api_discipline.saveDiscipline(this._db_name, res))
+        {
+          this.showMessage("Выполнено!");
+          this.getData();
+        }
+        else
+          this.showError("Ошибка выполнения!");
+      }
       else
         this.showInfo("Действие было отменено пользователем!");
       this.$refs.new.$refs.form.reset();
@@ -109,9 +126,17 @@ export default {
     //?----------------------------------------------
     async edit(item) 
     {
-      var res = await this.$refs.revue.pop().then(res => { return res; });
+      var res = await this.$refs.revue.pop(item).then(res => { return res; });
       if (res)
-        await api_discipline.editDiscipline(res);
+      {
+        if(await api_discipline.editDiscipline(this._db_name, res))
+        {
+          this.showMessage("Выполнено!");
+          this.getData();
+        }
+        else
+          this.showError("Ошибка выполнения!");
+      }
       else
         this.showInfo("Действие было отменено пользователем!");
       this.$refs.revue.$refs.form.reset();
@@ -121,9 +146,17 @@ export default {
     //?----------------------------------------------
     async remove(item) 
     {
-      var res = await this.$refs.rem.pop().then(res => { return res; });
+      var res = await this.$refs.rem.pop(item).then(res => { return res; });
       if (res)
-        await api_discipline.deleteDiscipline(res);
+      {
+        if(await api_discipline.deleteDiscipline(this._db_name, res))
+        {
+          this.showMessage("Выполнено!");
+          this.getData();
+        }
+        else
+          this.showError("Ошибка выполнения!");
+      }
       else
         this.showInfo("Действие было отменено пользователем!");
       this.$refs.rem.$refs.form.reset();

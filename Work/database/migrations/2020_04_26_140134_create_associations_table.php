@@ -15,12 +15,10 @@ class CreateAssociationsTable extends Migration
     {
         Schema::create('associations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('teacher_id');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
-            $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->unsignedBigInteger('discip_id');
-            $table->foreign('discip_id')->references('id')->on('disciplines');
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->unsignedBigInteger('journal_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('journal_id')->references('id')->on('journals');
             $table->timestamps();
             $table->softDeletes();
         });

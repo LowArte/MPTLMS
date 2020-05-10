@@ -52,10 +52,10 @@ class DatabaseSeeder  extends Seeder
             CertificateSeeder::class,
         ]);
 
-        //Формирование журналов
-        $this->call([
-            AssociationsSeeder::class,
-            JournalsSeeder::class,
-        ]);
+        // //Формирование журналов
+        // $this->call([
+        //     AssociationsSeeder::class,
+        //     JournalsSeeder::class,
+        // ]);
     }
 }

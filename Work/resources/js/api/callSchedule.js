@@ -34,8 +34,8 @@ export default {
     edit(callSchedule) 
     {
         return axios.post('/api/edit/callschedule', {'callSchedule': callSchedule})
-        .then(res => {return res.data.timeTable;})
-        .catch(() => {return undefined;});
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
     //*Получение расписания звонков
     //! Комментарий ---------------------------

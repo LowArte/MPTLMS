@@ -23,7 +23,7 @@ class ApiRoutes
             Route::get('news/{user_id}','Api\NewsController@getNews')->name('news');
 
             Route::get('discipline_buffer','Api\DisciplineBufferController@getDisciplineBuffer')->name('discipline_buffer');
-            Route::get('discipline_buffer_data/{dbname}','Api\DisciplineBufferController@getDisciplineBufferData')->name('discipline_buffer');
+            Route::get('discipline_buffer_data/{dbName}','Api\DisciplineBufferController@getDisciplineBufferData')->name('discipline_buffer');
 
             Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
 
@@ -37,7 +37,7 @@ class ApiRoutes
 
             Route::get('get_certificates', 'Api\CertificateController@getCertificates')->name('getCertificates');
 
-            Route::get('get_disciplines', 'Api\DisciplineController@getDisciplines')->name('get_disciplines');
+            Route::get('get_disciplines', 'Api\DisciplineBufferController@getDisciplines')->name('get_disciplines');
             Route::get('get_teachers', 'Api\TeacherController@getTeachers')->name('get_teachers');
             
             Route::get('get_feedback_requests', 'Api\FeedbackController@getFeedbackRequests')->name('get_feedback_requests');
@@ -83,6 +83,8 @@ class ApiRoutes
 
             Route::post('group','Api\GroupController@save')->name('group');
 
+            Route::post('discipline_buffer_data/{dbName}','Api\DisciplineBufferController@save')->name('discipline_buffer_data');
+
             Route::post('schedule_exam','Api\ScheduleExamsController@save')->name('schedule_exam');
             
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
@@ -121,6 +123,8 @@ class ApiRoutes
 
             Route::post('group','Api\GroupController@edit')->name('group');
 
+            Route::post('discipline_buffer_data/{dbName}','Api\DisciplineBufferController@edit')->name('discipline_buffer_data');
+
             Route::post('post','Api\PostController@edit')->name('post');
 
             Route::post('news','Api\NewsController@edit')->name('news');  
@@ -158,7 +162,9 @@ class ApiRoutes
             Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
             Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access'); 
             
-            Route::post('load_excel_titles','Api\JournalController@parseExcel')->name('load_excel_titles');            
+            Route::post('load_excel_titles','Api\JournalController@parseExcel')->name('load_excel_titles');
+
+            Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');            
         });
         /**
          * Методы отвечающие за удаление общих данных
@@ -173,6 +179,8 @@ class ApiRoutes
             Route::post('post/{post_id}','Api\PostController@delete')->name('post');
 
             Route::post('group/{group_id}','Api\GroupController@delete')->name('group');
+
+            Route::post('discipline_buffer_data/{dbName}/{id}','Api\DisciplineBufferController@delete')->name('discipline_buffer_data');
 
             Route::post('news/{news_id}','Api\NewsController@delete')->name('news');         
 

@@ -21,11 +21,11 @@
                 v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
                   v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
                   v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Числитель
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="disciplines_combo" item-value='id' item-text='discipline_name' small-chips chips multiple)
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="disciplines_combo" item-value='id' item-text='discip_name' small-chips chips multiple)
                   v-autocomplete(v-if="schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="teachers_combo" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
                   v-switch(v-model="schedule[day_key][lesson_key].chisl" color="primary" inset label="Числитель/Знаменатель")
                   v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Знаменатель
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discipline_name' small-chips chips multiple)
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' small-chips chips multiple)
                   v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели" :rules="[TeacherRules.required]" no-data-text="Нет данных" :items="teachers_combo" item-value='id' item-text='fullFio' small-chips chips multiple)
           v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
@@ -72,6 +72,7 @@ export default {
     combo_groups: function() {
       if (!this.groups_combo) return undefined;
       this.selected_group = this.groups_combo[0];
+      console.log(this.groups_combo)
       return this.groups_combo;
     },
     //*Получение четности недели
@@ -109,7 +110,6 @@ export default {
   {
     this.getDepartments();
     this.getPlaces();
-    this.getDisciplines();
     this.getTeachers();
   },
 
@@ -133,11 +133,8 @@ export default {
     async getDisciplines()
     {
       this.showLoading("Получение дисциплин");
-      if(this.disciplines_combo == null)
-      {
-        let items = await api_discipline.getDisciplines();
-        this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
-      }
+      let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
+      this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
       this.closeLoading("Получение дисциплин");
     },
 
@@ -209,6 +206,7 @@ export default {
       this.showLoading("Получение расписания");
       this.schedule = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
       this.closeLoading("Получение расписания");
+      this.getDisciplines();
     },
   }
 };

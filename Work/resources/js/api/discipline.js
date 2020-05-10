@@ -31,9 +31,10 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getDisciplines() 
+    getDisciplines(data) 
     {
-        return axios.get('/api/getters/get_disciplines')
+        console.log(data);
+        return axios.get('/api/getters/get_disciplines/', { params: {...data}})
         .then(res => {return res.data.disciplines;})
         .catch(() => {return undefined;});
     },
@@ -65,23 +66,23 @@ export default {
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------
-    saveDiscipline()
+    saveDiscipline(db_name, data)
     {
-        return axios.post('/api/save/discipline_buffer_data/', + data)
+        return axios.post('/api/save/discipline_buffer_data/' + db_name, data)
         .then(() => {return true;})
         .catch(() => {return false;});
     },
 
-    deleteDiscipline(id)
+    deleteDiscipline(db_name, id)
     {
-        return axios.post('/api/delete/discipline_buffer_data/' + id)
-        .then(() => {return true;})
+        return axios.post('/api/delete/discipline_buffer_data/' + db_name + '/' + id)
+        .then(() => {return true;}) 
         .catch(() => {return false;});
     },
 
-    editDiscipline(data)
+    editDiscipline(db_name, data)
     {
-        return axios.post('/api/edit/discipline_buffer_data/', + data)
+        return axios.post('/api/edit/discipline_buffer_data/' + db_name, data)
         .then(() => {return true;})
         .catch(() => {return false;});
     },
@@ -89,9 +90,9 @@ export default {
     //*----------------------------------------
     //!         Загрузка файлов
     //*----------------------------------------
-    importDiscipline(file) 
+    loadDiscipline(file) 
     {
-        return axios.post('/api/functions/import_discipline', file, 
+        return axios.post('/api/functions/load_discipline', file, 
         {
             headers: {
                 'Content-Type': 'multipart/form-data'

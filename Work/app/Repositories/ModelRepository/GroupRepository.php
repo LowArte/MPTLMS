@@ -22,7 +22,7 @@ class GroupRepository extends BaseRepository
                         ->select($columns)
                         ->with('child:id,group_name')
                         ->get();
-        $columns = ['associations.id', 'teacher_id', 'group_id', 'discip_id', 'journals.isClose', 'journals.id as journal_id'];
+        /*$columns = ['associations.id', 'teacher_id', 'group_id', 'discip_id', 'journals.isClose', 'journals.id as journal_id'];
 
         $teachersRepository = app(TeacherRepository::class);
         $teachers = $teachersRepository->getTeachersWithFio();
@@ -40,14 +40,14 @@ class GroupRepository extends BaseRepository
                 $assoctiation->teacher = $teachers->where("id",$assoctiation->teacher_id)->first()->fullFio;
                 $assoctiation->discip = $disciplines->where("id",$assoctiation->discip_id)->first()->discipline_name;
             }
-        }
+        }*/
 
         return $result;
     }
 
     public function getGroupsForComboBoxByDepartment($dep_id)
     {
-        $columns = ['id','child_id','group_name'];
+        $columns = ['id','child_id','group_name','curs'];
         $data = $this->startCondition()
                         ->select($columns)
                         ->with('child:id,group_name')
@@ -62,6 +62,7 @@ class GroupRepository extends BaseRepository
                     'id'=>$dat->id,
                     'group_name'=>$dat->getFullName(),
                     'child_id'=>$dat->child_id,
+                    'curs'=>$dat->curs
                 ]);
             }
         }
@@ -93,7 +94,7 @@ class GroupRepository extends BaseRepository
 
     public function getGroupsForComboBox()
     {
-        $columns = ['id','group_name','department_id'];
+        $columns = ['id','group_name','department_id','curs'];
         $result = $this->startCondition()
                         ->select($columns)
                         ->toBase()

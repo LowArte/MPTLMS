@@ -43,5 +43,3 @@ Route::name('api.')->prefix("api")->group(function ()
 Route::get('/{vue_capture?}', function () {
     return redirect('/404');
 })->where('vue_capture', '[\/\w\.-]*');
-
-Route::post('/xerest', 'Api\DisciplineBufferController@create')->name('xerest');

@@ -7,6 +7,7 @@
         v-card-text
           v-autocomplete.my-3(:items="specialities" v-model="item.department" item-text="dep_name_full" no-data-text="Нет данных" item-value="id" :rules="notNullRules" label="Отделение")
           v-text-field(v-model="item.discip_name" :rules="notNullRules" label="Название дисциплины")
+          v-combobox.my-3(v-model="item.curs" :items="curses" no-data-text="Нет данных" :rules="notNullRules" label="Курс" dense)
           v-text-field(v-model="item.discip_hours_first" :rules="numberRules" label="Количество часов за I семестр")
           v-text-field(v-model="item.discip_hours_second" :rules="numberRules" label="Количество часов за II семестр")
         v-card-actions              
@@ -31,9 +32,11 @@ export default {
   data() {
     return {
       dialog: false,
+      curses: ['1', '2', '3', '4', '5'],
       item: {
         department: null,
         discip_name: null,
+        curs: null,
         discip_hours_first: null,
         discip_hours_second: null,
       },
@@ -49,6 +52,8 @@ export default {
 
   methods: {
     pop() {
+      if(this.specialities)
+        this.item.department = this.specialities[0].id;
       this.dialog = true;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;

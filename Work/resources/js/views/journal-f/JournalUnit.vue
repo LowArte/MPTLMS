@@ -1,17 +1,15 @@
 <template lang="pug">
   v-content.ma-0.pa-0
     v-layout.column.wrap(v-if="JournalOfSubject")
-      v-card.mx-auto(height='auto' width='100%')
-        v-system-bar(color="info" dark)
-            span Список журналов
-        div.ma-0.pa-1
-            v-btn(block @click="JournalOfSubject = false;") К списку 
-        //--c-crud-discipline()
+      v-card(:elevation="0" )
+        v-card-actions
+          v-btn(small text @click="JournalOfSubject = !JournalOfSubject") назад 
+      c-journal-of-subjects
     v-layout.column.wrap(v-if="!JournalOfSubject")
       v-data-iterator.px-2(:items="groups_umo" :search="search" :items-per-page.sync="itemsPerPage" :page="page" hide-default-footer no-results-text="Не найдены данные, удовлетворяющие Вашему запросу. Попробуйте изменить запрос" no-data-text="")
         template(v-slot:header)
           v-flex
-            v-card.mx-auto(raised dark min-width="300px" )
+            v-card.mx-auto(raised min-width="300px" )
               v-card-actions
                 v-col.py-1
                   v-row
@@ -20,7 +18,7 @@
                     span(class="grey--text") Кол-во 
                     v-menu(offset-y)
                       template(v-slot:activator="{ on }")
-                        v-btn(text dark class="ml-1" v-on="on") {{ itemsPerPage }}
+                        v-btn(text class="ml-1" v-on="on") {{ itemsPerPage }}
                           v-icon mdi-chevron-down
                       v-list
                         v-list-item(v-for="(number, index) in itemsPerPageArray" :key="index"  @click="updateItemsPerPage(number)")
@@ -34,18 +32,17 @@
         template(v-slot:default="props")
           v-layout.row.wrap
             v-flex.pa-3(v-for="item in props.items" :key="item.name")
-              v-card.mx-auto(raised dark max-width="320px")
+              v-card.mx-auto(raised max-width="320px")
                 v-system-bar(dark color="primary")
                   span Учебные журналы по группе
                 v-list-item(three-line)
                   v-list-item-content
                     v-list-item-title(class="headline mb-1") {{item.group_name}}
                     v-list-item-subtitle {{item.dep_name_full}}
-                    v-list-item-subtitle Журналов: {{item.association.length}}
                 v-card-actions.pt-0
                   v-spacer
                   div
-                    v-btn(block x-small text dark color="accent" @click="setGroupInformationToVuex(item); JournalOfSubject = true;") перейти к журналам
+                    v-btn(block x-small text color="accent" @click="setGroupInformationToVuex(item); JournalOfSubject = true;") перейти к журналам
                   v-spacer  
 </template>
 
@@ -54,6 +51,7 @@
 //!           Подключение дополнительных библиотек
 //?----------------------------------------------
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
+import JournalOfSubjects_С from "@/js/views/journal-f/JournalOfSubjects";
 
 //?----------------------------------------------
 //!           Vuex
@@ -67,6 +65,10 @@ export default {
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withOverlayLoading],
+
+  components:{
+    "c-journal-of-subjects": JournalOfSubjects_С
+  },
 
   computed: {
     ...mapGetters(["user", "groups_umo"]),

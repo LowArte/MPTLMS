@@ -45,6 +45,5 @@ class AppServiceProvider extends ServiceProvider
         Group::observe(GroupObserver::class);
         Association::observe(AssociationObserver::class);
         Journal::observe(JournalObserver::class);
-        DisciplineBuffer::observe(DisciplineBufferObserver::class);
     }
 }

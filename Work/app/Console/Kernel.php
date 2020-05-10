@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ModificationMakeCommand::class,
         \App\Console\Commands\GeneratorCommand::class,
         \App\Console\Commands\ControllerMakeCommand::class,
+        \App\Console\Commands\RefreshCommand::class,
     ];
 
     /**

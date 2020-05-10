@@ -16,9 +16,7 @@ class ImportController extends BaseController
 { 
     public function insertPlaceImport(){
         $data = request()->file();
-        //Excel::import(new PlacesImport, $data);
-        $imp = new ExcerptImport();
-        $imp->getExcert($data);
+        Excel::import(new PlacesImport, $data);
         return response()->json();
     }
 

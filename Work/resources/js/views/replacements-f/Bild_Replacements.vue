@@ -31,7 +31,7 @@
                                 v-card-text.pa-0.wrap.text-black(v-else) Дополнительное занятие 
                                 v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl }}
                             v-container.pa-0.ma-0(v-else) <!--Прорисовка числителя/знаменателя-->
-                                v-container.pa-0.ma-0(v-if="isToday == 0")
+                                v-container.pa-0.ma-0(v-if="isChisl == 0")
                                     v-btn.ma-0.pa-0(text @click="caseLesson(lesson_index)") 
                                         v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} 
                                     v-card-text.pa-0.wrap.text-black(v-if="lesson.LessonChisl != ''") {{lesson.LessonChisl}} 
@@ -151,7 +151,6 @@ export default {
   beforeMount()
   {
     this.getDepartments();
-    this.getDisciplines();
     this.getTeachers();
   }, 
 
@@ -177,7 +176,7 @@ export default {
       this.showLoading("Получение дисциплин");
       if(this.disciplines_combo == null)
       {
-        let items = await api_discipline.getDisciplines();
+        let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
         this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
       }
       this.closeLoading("Получение дисциплин");
@@ -296,6 +295,7 @@ export default {
     //*Получение расписания при изменении выбранной группы
     async group_change() 
     {
+      this.getDisciplines();
       this.caseDate();
     },
 

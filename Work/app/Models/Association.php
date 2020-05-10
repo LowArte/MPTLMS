@@ -21,7 +21,7 @@ class Association extends Model
     ];
 
     protected $fillable  = [
-        'teacher_id', 'group_id', 'discip_id'
+        'teacher_id', 'journal_id', 'discip_id'
     ];
     
     public function __construct($attributes = array())

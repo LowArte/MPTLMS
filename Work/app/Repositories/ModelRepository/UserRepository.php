@@ -33,4 +33,11 @@ class UserRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->where('id', $id)->first();
         return $result;
     }
+
+    public function getTeachersFIO()
+    {
+        $columns = ['id', 'name', 'secName', 'thirdName'];
+        $result = $this->startCondition()->select($columns)->where('post_id', 3)->get();
+        return $result;
+    }
 }

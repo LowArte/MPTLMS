@@ -19,9 +19,9 @@ class ReplacementRepository extends BaseRepository
         $teachersRepository = app(TeacherRepository::class);
         $teachers = $teachersRepository->getTeachersWithFio();
 
-        $disciplineRepository = app(DisciplineRepository::class);
-        $disciplines = $disciplineRepository->getDisciplines();
-
+        $disciplineRepository = app(DisciplineBufferRepository::class);
+        $disciplines = $disciplineRepository->getDisciplineBufferRepositoryDataLast();
+        
         $result = $this->startCondition()
         ->join('schedules', 'schedule_swaps.schedule_id', '=', 'schedules.id')
         ->join('groups', 'schedules.group_id', '=', 'groups.id')
@@ -34,8 +34,9 @@ class ReplacementRepository extends BaseRepository
             $item->swap = json_decode($item->swap);
             if(count((array)$item->swap->lesson)!=0){
                 for($i=0;$i<count((array)$item->swap->lesson);$i++){
-                    $foundDiscipline = $disciplines->where("id",$item->swap->lesson[$i])->first()->discipline_name;
-                    $item->swap->lesson[$i] =  $foundDiscipline;
+                    $foundDiscipline = $disciplines->where("id", $item->swap->lesson[$i])->first();
+                    if($foundDiscipline)
+                        $item->swap->lesson[$i] =  $foundDiscipline['discip_name'];
                 }
                 $item->swap->teacher_name = $item->swap->oldteacher;
 
@@ -47,8 +48,9 @@ class ReplacementRepository extends BaseRepository
 
             if(count((array)$item->swap->oldlesson)!=0){
                 for($i=0;$i<count((array)$item->swap->oldlesson);$i++){
-                    $foundDiscipline = $disciplines->where("id",$item->swap->oldlesson[$i])->first()->discipline_name;
-                    $item->swap->oldlesson[$i] =  $foundDiscipline;
+                    $foundDiscipline = $disciplines->where("id", $item->swap->oldlesson[$i])->first();
+                    if($foundDiscipline)
+                        $item->swap->oldlesson[$i] =  $foundDiscipline['discip_name'];
                 }
                 $item->swap->oldteacher_name = $item->swap->oldteacher;
 

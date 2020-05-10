@@ -27,4 +27,20 @@ class DisciplineBufferRepository extends BaseRepository
         $result = $db->getData();
         return $result;
     }
+
+    public function getDisciplineBufferRepositoryDataLast()
+    {
+        $discip = $this->startCondition()->get()->last();
+        $db = new SQLiteDBFunctions($discip->db_name);
+        $result = $db->getData();
+        return $result;
+    }
+
+    public function getDisciplineBufferRepositoryDataLastFiltered($filter)
+    {
+        $discip = $this->startCondition()->get()->last();
+        $db = new SQLiteDBFunctions($discip->db_name);
+        $result = $db->getDataFiltered($filter);
+        return $result;
+    }
 }

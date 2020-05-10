@@ -113,6 +113,7 @@ export default {
       this.selected_group = this.groups_combo[0];
       return this.groups_combo;
     },
+
     //*Получение четности недели
     isChisl: function() {
       var year = new Date().getFullYear();
@@ -160,6 +161,7 @@ export default {
       }
       this.closeLoading("Получение расписания звонков");
     },
+
     //*Получение отделений для выпадающего списка
     async getDepartments()
     {
@@ -180,7 +182,7 @@ export default {
       }
     },
 
-    //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
+    //*Парсировка данных для вывода, перевод массивов с данными в строки для вывода
     parseSchedule() {
       var tag = 0;
       for (var i = 0; i < this.days.length; i++) 
