@@ -15,6 +15,10 @@
 //Default page
 Route::get('/', "AppController@index")->name('main');
 
+Route::get('/{any}/{any2}/{any3}/{any4}/{any5}', "AppController@index")->where("{any}",'*')->where("{any2}",'*')->where("{any3}",'*')->where("{any4}",'*')->where("{any5}",'*');
+
+Route::get('/{any}/{any2}/{any3}/{any4}', "AppController@index")->where("{any}",'*')->where("{any2}",'*')->where("{any3}",'*')->where("{any4}",'*');
+
 Route::get('/{any}/{any2}/{any3}', "AppController@index")->where("{any}",'*')->where("{any2}",'*')->where("{any3}",'*');
 
 Route::get('/{any}/{any2}', "AppController@index")->where("{any}",'*')->where("{any2}",'*');

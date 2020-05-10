@@ -24,16 +24,16 @@ export default {
     //*----------------------------------------
     //!         Получение данных
     //*----------------------------------------
-    //*Получение учебного журнала
+    //*Получение учебных журналов
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *JOURNALS* (Журналы)
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getJournalById(id) 
+    getJournalsByGroupId(id) 
     {
-        return axios.get('/api/getters/journals_id/' + id)
-        .then(res => {return res.data.journal;})
+        return axios.get('/api/getters/journals_by_group_id/' + id)
+        .then(res => {return res.data.journals;})
         .catch(() => {return undefined});
     },
 
@@ -75,19 +75,5 @@ export default {
         .then(() => {return true;})
         .catch(() => {return false;});
     },
-    //*----------------------------------------
-    //!         Функции
-    //*----------------------------------------
-    //*Получение данных из excel файла
-    //! Комментарий ---------------------------
-    //! Требование ----------------------------
-    //!----------------------------------------
-    async getExcelTitles(form)
-    {
-        return await axios.post('/api/functions/load_excel_titles', form)
-        .then(() => {return true})
-        .catch(() => {return false});
-    }
-    
 }
     

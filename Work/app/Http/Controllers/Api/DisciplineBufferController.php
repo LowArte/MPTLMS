@@ -30,11 +30,16 @@ class DisciplineBufferController extends BaseController
             foreach ($data as $key2 => $dis) {
                 foreach ($dis['groups'] as $groupKey=>$group) {
                     $journal = new Journal();
+                    $semesters = [];
+                    if($dis["discip_hours_first"] != 0)
+                        $semesters['1'] = [];
+                    if($dis["discip_hours_second"] != 0)
+                        $semesters['2'] = [];
                     $fill = [
                         "isClose" => ($dis["discip_hours_first"] != 0 ? 0 : 2) + ($dis["discip_hours_second"] != 0 ? 0 : 1),
                         'discip_id'=>$dis['id'],
                         'group_id'=>$groupKey,
-                        'journal' => json_encode([])
+                        'journal' => json_encode($semesters)
                     ];
                     $journal->fill($fill);
                     $journal->save();
@@ -51,6 +56,7 @@ class DisciplineBufferController extends BaseController
                 }
             }
         }
+        $disciplineBuffer->save();
         return response()->json();
     }
 

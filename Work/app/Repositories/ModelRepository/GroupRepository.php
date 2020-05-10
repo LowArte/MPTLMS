@@ -16,7 +16,7 @@ class GroupRepository extends BaseRepository
     //Получение групп и ассоциаций для них
     public function getGroupsAndAssociation()
     {
-        $columns = ['groups.id as group_id', 'group_name', 'department_id', 'dep_name_full'];
+        $columns = ['groups.id as group_id', 'group_name', 'department_id', 'dep_name_full', 'curs'];
         $result = $this->startCondition()
                         ->join('departments', 'department_id', '=', 'departments.id')
                         ->select($columns)

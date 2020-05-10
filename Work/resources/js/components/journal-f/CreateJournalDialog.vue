@@ -1,14 +1,15 @@
 <template lang="pug">
     v-dialog(v-model="dialog" persistent max-width="600px" v-if="item" )
-        v-card(dark)
+        v-card
             v-system-bar(dark color="primary")
                 span Новый журнал
             v-progress-linear(:active="loading" :indeterminate="loading" absolute bottom color="success")
             v-card-title {{item.group_name}}
             v-card-text
                 v-form(ref="form")
-                    v-autocomplete(dack v-model="journal.teacher_id" label="Преподаватель" :rules="[TeacherRules.required]" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio')
-                    v-autocomplete(dack v-model="journal.discip_id"  label="Дисциплина" :rules="[DiscipRules.required]" outlined dense :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discipline_name')
+                    v-autocomplete(v-model="journal.teachers" label="Преподаватели" :items="teachers_combo" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
+                    v-autocomplete(dack v-model="journal.discip_id"  label="Дисциплина" :rules="DiscipRules" outlined dense :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discipline_name')
+                    v-autocomplete(dack v-model="journal.isClose"  label="Семестры" :rules="SemesterRules" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name')
             v-card-actions
                 v-btn(small text dark color="red" @click="dialog = !dialog") отмена
                 v-spacer
@@ -51,27 +52,27 @@ export default {
       dialog: false,
       item: null,
       loading: false,
+      semesters: [{id: 0, name: "Два семестра"}, {id: 1, name: "Только первый семестр"}, {id: 2, name: "Только второй семестр"}],
       journal: {
         //Объект для создания журнала (Отправить в бэк на сохранение)
-        teacher_id: null,
+        isClose: null,
         group_id: null,
-        discip_id: null
+        discip_id: null,
+        teachers: []
       },
       TeacherRules: {
         required: value => {
           return !!value || "Преподаватель не указан";
         }
       },
-      DiscipRules: {
-        required: value => {
-          return !!value || "Дисциплина не указана";
-        }
-      }
+      DiscipRules: [v => !!v ||  "Дисциплина не указана"],
+      SemesterRules: [v => !!v ||  "Семестры не указаны"]
     };
   },
 
   methods: {
     async pop(item) {
+      console.log(item);
       this.dialog = true;
       this.loading = !this.loading;
       this.item = item;
@@ -83,7 +84,7 @@ export default {
       );
       this.$store.commit(
         mutations.SET_DISCIPLINES_COMBO,
-        await api_discipline.getDisciplines()
+        await api_discipline.getDisciplines({"curs":item.curs, "department_id": item.department_id})
       );
       this.closeLoading("Получение данных");
       this.loading = !this.loading;

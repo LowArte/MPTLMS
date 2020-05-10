@@ -31,11 +31,14 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getUsers() 
-    {
+    getUsers() {
         return axios.get('/api/getters/users')
-        .then(res => {return res.data.users;})
-        .catch(() => {return undefined;});
+            .then(res => {
+                return res.data.users;
+            })
+            .catch(() => {
+                return undefined;
+            });
     },
     //*Получение пользователя
     //! Комментарий ---------------------------
@@ -43,33 +46,44 @@ export default {
     //? Возвращается экзмемпляр данных по id
     //! Требование ----------------------------
     //!----------------------------------------
-    getUser(user_id) 
-    {
+    getUser(user_id) {
         return axios.get('/api/getters/users/' + user_id)
-        .then(() => {return true;})
-        .catch(() => {return undefined;});
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return undefined;
+            });
     },
     //*Установка нового пароля
     //! Комментарий ---------------------------
     //? Реализуется создание нового пароля для пользователя *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    ResetPassword(data) 
-    {
+    ResetPassword(data) {
         return axios.post('/password/reset', data)
-        .then(() => {return true;})
-        .catch(() => {return false;});
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
     },
     //*Отправка письма для получения ссылки для указания нового пароля
     //! Комментарий ---------------------------
     //? Реализуется отправка письма для получения ссылки для создание нового пароля для пользователя *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    EmailForResetPassword(email) 
-    {
-        return axios.post('/password/email', {"email": email})
-        .then(() => {return true;})
-        .catch(() => {return false;});
+    EmailForResetPassword(email) {
+        return axios.post('/password/email', {
+                "email": email
+            })
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
     },
     //*----------------------------------------
     //!         Работа с данными
@@ -79,11 +93,14 @@ export default {
     //? Реализуется сохранение данных в таблицу *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    saveUser(user) 
-    {
+    saveUser(user) {
         return axios.post('/api/save/user/', user)
-        .then(res => {return res.data.id;})
-        .catch(() => {return false;});
+            .then(res => {
+                return res.data.id;
+            })
+            .catch(() => {
+                return false;
+            });
     },
     //*Удаление пользователя
     //! Комментарий ---------------------------
@@ -91,11 +108,14 @@ export default {
     //? Передаётся id в функцию
     //! Требование ----------------------------
     //!----------------------------------------
-    deleteUser(user) 
-    {
+    deleteUser(user) {
         return axios.post('/api/delete/user/' + user[0] + '/' + user[1])
-        .then(() => {return true;})
-        .catch(() => {return false;});
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
     },
     //*Редактирование пользователя
     //! Комментарий ---------------------------
@@ -105,34 +125,38 @@ export default {
     //!----------------------------------------
     editUser(user) {
         return axios.post('/api/edit/user/', user)
-        .then(() => {return true;})
-        .catch(() => {return false;});
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
     },
     //*Вход в систему
     //! Комментарий ---------------------------
     //? Вход в систему *USERS* (Пользователи)
     //! Требование ----------------------------
     //!----------------------------------------
-    login(data) 
-    {
+    login(data) {
         return axios.post('/login', data)
-        .then(res => {
-            if(!res.data.profilactic)
-            {
-                const slug = res.data.user.post.slug;
-                const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
-                const user = res.data.user;
-                const token = res.data.token;
-                return {
-                    items,
-                    slug,
-                    user,
-                    token
+            .then(res => {
+                if (!res.data.profilactic) {
+                    const slug = res.data.user.post.slug;
+                    const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
+                    const user = res.data.user;
+                    const token = res.data.token;
+                    return {
+                        items,
+                        slug,
+                        user,
+                        token
+                    }
                 }
-            }
-            return "Система находится в режиме профилактики!";
-        })
-        .catch(() => {return "Не верные данные!";})
+                return "Система находится в режиме профилактики!";
+            })
+            .catch(() => {
+                return "Не верные данные!";
+            })
     },
 
     //*Иницилизация пользователя
@@ -140,25 +164,25 @@ export default {
     //? Получения токена 
     //! Требование ----------------------------
     //!----------------------------------------
-    init() 
-    {
+    init() {
         return axios.post('/getToken')
-        .then(res => {
-            if (res.data.success) 
-            {
-                const slug = res.data.user.post.slug;
-                const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
-                const user = res.data.user;
-                const token = res.data.token;
-                return {
-                    items,
-                    slug,
-                    user,
-                    token
+            .then(res => {
+                if (res.data.success) {
+                    const slug = res.data.user.post.slug;
+                    const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
+                    const user = res.data.user;
+                    const token = res.data.token;
+                    return {
+                        items,
+                        slug,
+                        user,
+                        token
+                    }
                 }
-            } 
-            return undefined;
-        }).catch(() => {return undefined;})
+                return undefined;
+            }).catch(() => {
+                return undefined;
+            })
     },
     //*Выход из системы
     //! Комментарий ---------------------------
@@ -167,26 +191,41 @@ export default {
     //!----------------------------------------
     logout() {
         return axios.post('/logout')
-        .then(() => {return true;})
-        .catch(() => {return false;});
+            .then(() => {
+                return true;
+            })
+            .catch(() => {
+                return false;
+            });
     },
     //*Формирование доступных маршрутов
     //! Комментарий ---------------------------
     //? Формирование доступных маршрутов
     //! Требование ----------------------------
     //!----------------------------------------
-    makeRoutes(privilegies, slug, disabled) 
-    {
+    makeRoutes(privilegies, slug, disabled) {
         let items = [];
         privilegies.forEach(element => {
-            if((disabled == 1 && element.default == true) || disabled == 0)
+            if ((disabled == 1 && element.default == true) || disabled == 0) //Блокировка пользователя
             {
-                if (element.children) 
-                {
-                    element.children.forEach(child => 
-                    {
-                        
-                        if (child.component != null)
+                if (element.children) {
+                    element.children.forEach(child => {
+                        if (child.component != null) {
+                            if (child.component.dop_com) {
+                                child.component.dop_com.forEach(dop_com => {
+                                    items.push({
+                                        path: "/" + slug + "/" + dop_com.url,
+                                        meta: {
+                                            layout: "main"
+                                        },
+                                        component: () =>
+                                            import(
+                                                /* webpackChunkName: "[request]" */
+                                                `@/${dop_com.path}.vue`
+                                            )
+                                    });
+                                });
+                            }
                             items.push({
                                 path: "/" + slug + "/" + child.component.info.url,
                                 name: child.component.info.name,
@@ -199,10 +238,24 @@ export default {
                                         `@/${child.component.path}.vue`
                                     )
                             });
+                        }
                     });
-                } 
-                else 
-                {
+                } else {
+                    if (element.component.dop_com) {
+                        element.component.dop_com.forEach(dop_com => {
+                            items.push({
+                                path: "/" + slug + "/" + dop_com.url,
+                                meta: {
+                                    layout: "main"
+                                },
+                                component: () =>
+                                    import(
+                                        /* webpackChunkName: "[request]" */
+                                        `@/${dop_com.path}.vue`
+                                    )
+                            });
+                        });
+                    }
                     items.push({
                         path: "/" + slug + "/" + element.component.info.url,
                         name: element.component.info.name,

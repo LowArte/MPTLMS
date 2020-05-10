@@ -13,19 +13,16 @@ use Debugbar;
 class JournalController extends BaseController
 { 
     /**
-     * Получение журнала по ассоциации id
+     * Получение журнала по id группы
      * @return JSON
      */
-    public function getJournal($id, JournalRepository $journalRepository)
+    public function getJournalsByGroupId($id, JournalRepository $journalRepository)
     {
-        $journal = $journalRepository->getJournalById($id);
-        return response()->json(compact('journal'));
-    }
-
-    public function parseExcel(Request $request)
-    {
-
-    }
+        Debugbar::info($id);
+        $journals = $journalRepository->getJournalByGroupId($id);
+        Debugbar::info($journals);
+        return response()->json(compact('journals'));
+    }    
 
     public function save(Request $request,CreateJournalModification $createJournalModification){
         $data = $request->all();

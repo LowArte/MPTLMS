@@ -22,7 +22,6 @@ class DisciplineBufferRepository extends BaseRepository
 
     public function getDisciplineBufferRepositoryData($dbName)
     {
-        Debugbar::info($dbName);
         $db = new SQLiteDBFunctions($dbName);
         $result = $db->getData();
         return $result;

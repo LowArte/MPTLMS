@@ -28,40 +28,14 @@ class PostUserSeeder extends Seeder
                             "path" => "js/views/homes-f/AdminHome"
                         ],
                         "default" => true,
-                        "menu" => true,
 
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Конструктор учебного расписания",
-                        "component" => [
-                            "info" => [
-                                "name" => "Конструктор учебного расписания",
-                                "url" => "bild_timetable"
-                            ],
-                            "path" => "js/views/timetable-f/Bild_Timetable"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Конструктор замен расписания",
-                        "component" => [
-                            "info" => [
-                                "name" => "Конструктор замен расписания",
-                                "url" => "bild_replacements"
-                            ],
-                            "path" => "js/views/replacements-f/Bild_Replacements"
-                        ],
-                        "default" => true,
                     ],
                     [
                         "id" => uniqid(),
                         "icon" => "settings_brightness",
                         "text" => "Панель управления",
                         "default" => true,
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
@@ -74,7 +48,7 @@ class PostUserSeeder extends Seeder
                                     "path" => "js/views/administrator-f/PanelControl"
                                 ],
                                 "default" => true,
-                                "menu" => true,
+
                             ]
                         ]
                     ],
@@ -82,16 +56,22 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "assignment",
                         "text" => "Расписания",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное расписание",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Учебное расписание",
-                                        "url" => "timetable"
+                                        "url" => "timetable",
+                                    ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "bild_timetable",
+                                            "path" => "js/views/timetable-f/Bild_Timetable"
+                                        ]
                                     ],
                                     "path" => "js/views/timetable-f/Timetable"
                                 ],
@@ -99,11 +79,17 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Замены расписания",
-                                        "url" => "replacements"
+                                        "url" => "replacements",
+                                    ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "bild_replacements",
+                                            "path" => "js/views/replacements-f/Bild_Replacements"
+                                        ]
                                     ],
                                     "path" => "js/views/replacements-f/Replacements"
                                 ],
@@ -112,7 +98,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание экзаменов",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
@@ -124,7 +110,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Аудиторный фонд",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Аудиторный фонд",
@@ -136,7 +122,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание звонков",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание звонков",
@@ -149,31 +135,22 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
-                        "text" => "Уведомления",
-                        "component" => [
-                            "info" => [
-                                "name" => "Уведомления",
-                                "url" => "notifications"
-                            ],
-                            "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
                         "icon" => "sd_storage",
                         "text" => "База данных",
-                        "menu" => true,
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Менеджер дисциплин",
-                                "menu" => true,
                                 "component" => [
                                     "info" => [
                                         "name" => "Менеджер дисциплин",
-                                        "url" => "discipline_managment"
+                                        "url" => "discipline_managment",
+                                    ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "disciplines_crud/:dbName",
+                                            "path" => "js/views/administrator-f/CRUD/CRUDDiscipline"
+                                        ]
                                     ],
                                     "path" => "js/views/administrator-f/DisciplineManagment"
                                 ],
@@ -181,7 +158,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Пользователи",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "CRUD пользователей",
@@ -193,7 +170,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Роли",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "CRUD роли",
@@ -205,7 +182,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Привилегии ролей",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Конструктор привилегий ролей",
@@ -217,7 +194,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Отделения",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "CRUD отделений",
@@ -229,7 +206,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Группы",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "CRUD групп",
@@ -241,7 +218,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Места проведения",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "CRUD мест проведения",
@@ -257,7 +234,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обращение пользователей",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Просмотр обращений пользователей",
@@ -276,7 +253,7 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -286,24 +263,12 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                     ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Уведомления",
-                        "component" => [
-                            "info" => [
-                                "name" => "Уведомления",
-                                "url" => "notifications"
-                            ],
-                            "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
+
                     [
                         "id" => uniqid(),
                         "icon" => "portrait",
                         "text" => "Мой профиль",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Мой профиль",
@@ -316,7 +281,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "whatshot",
                         "text" => "Новости",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Лента новостей",
@@ -329,16 +294,16 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "school",
                         "text" => "Учебные процесс",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание занятий",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание занятий",
-                                        "url" => "timetable"
+                                        "url" => "timetable",
                                     ],
                                     "path" => "js/views/timetable-f/Timetable"
                                 ],
@@ -346,7 +311,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Изменения в расписании",
@@ -358,7 +323,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание экзаменов",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
@@ -370,7 +335,6 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Успеваемость",
-                                "menu" => true,
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
@@ -382,7 +346,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Домашнее задание",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Домашнее задание",
@@ -397,12 +361,12 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "beenhere",
                         "text" => "Услуги",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Заказ документов",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Заказ справок",
@@ -414,7 +378,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Психолог",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "warning",
@@ -429,7 +393,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Обратная связь",
@@ -449,7 +413,7 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -459,33 +423,21 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                     ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Уведомления",
-                        "component" => [
-                            "info" => [
-                                "name" => "Уведомления",
-                                "url" => "notifications"
-                            ],
-                            "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
+
                     [
                         "id" => uniqid(),
                         "icon" => "school",
                         "text" => "Учебные процесс",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание занятий",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание занятий",
-                                        "url" => "timetable"
+                                        "url" => "timetable",
                                     ],
                                     "path" => "js/views/timetable-f/Timetable"
                                 ],
@@ -493,7 +445,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание преподавателя",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание",
@@ -505,7 +457,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Изменения в расписании",
@@ -517,7 +469,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание экзаменов",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
@@ -532,12 +484,12 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "class",
                         "text" => "Учебные журналы",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Журналы групп",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
@@ -549,7 +501,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Домашнее задание",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Домашнее задание",
@@ -564,7 +516,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Обратная связь",
@@ -584,7 +536,7 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -596,53 +548,18 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
-                        "text" => "Уведомления",
-                        "component" => [
-                            "info" => [
-                                "name" => "Уведомления",
-                                "url" => "notifications"
-                            ],
-                            "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Конструктор учебного расписания",
-                        "component" => [
-                            "info" => [
-                                "name" => "Конструктор учебного расписания",
-                                "url" => "bild_timetable"
-                            ],
-                            "path" => "js/views/timetable-f/Bild_Timetable"
-                        ],
-                        "default" => true,
-                        "menu" => false
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "text" => "Конструктор замен расписания",
-                        "component" => [
-                            "info" => [
-                                "name" => "Конструктор замен расписания",
-                                "url" => "bild_replacements"
-                            ],
-                            "path" => "js/views/replacements-f/Bild_Replacements"
-                        ],
-                        "default" => true,
-                        "menu" => false
-                        
-                    ],
-                    [
-                        "id" => uniqid(),
                         "text" => "Менеджер дисциплин",
-                        "menu" => true,
                         "icon" => "sd_storage",
                         "component" => [
                             "info" => [
                                 "name" => "Менеджер дисциплин",
-                                "url" => "discipline_managment"
+                                "url" => "discipline_managment",
+                            ],
+                            "dop_com" => [
+                                [
+                                    "url" => "disciplines_crud/:dbName",
+                                    "path" => "js/views/administrator-f/CRUD/CRUDDiscipline"
+                                ]
                             ],
                             "path" => "js/views/administrator-f/DisciplineManagment"
                         ],
@@ -651,16 +568,23 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "assignment",
                         "text" => "Расписания",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное расписание",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Учебное расписание",
-                                        "url" => "timetable"
+                                        "url" => "timetable",
+
+                                    ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "bild_timetable",
+                                            "path" => "js/views/timetable-f/Bild_Timetable"
+                                        ]
                                     ],
                                     "path" => "js/views/timetable-f/Timetable"
                                 ],
@@ -668,11 +592,18 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Замены расписания",
-                                        "url" => "replacements"
+                                        "url" => "replacements",
+
+                                    ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "bild_replacements",
+                                            "path" => "js/views/replacements-f/Bild_Replacements"
+                                        ]
                                     ],
                                     "path" => "js/views/replacements-f/Replacements"
                                 ],
@@ -681,7 +612,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание экзаменов",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание экзаменов",
@@ -693,7 +624,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Аудиторный фонд",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Аудиторный фонд",
@@ -705,7 +636,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание звонков",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание звонков",
@@ -720,16 +651,21 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "class",
                         "text" => "Успеваемость",
-                        "menu" => true,
+
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебные журналы",
-                                "menu" => true,
                                 "component" => [
                                     "info" => [
-                                        "name" => "Успеваемость",
-                                        "url" => "journal"
+                                        "name" => "Журнал учебной части",
+                                        "url" => "journal_unit"
+                                    ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "journal/:group_id",
+                                            "path" => "js/views/journal-f/JournalOfSubjects"
+                                        ]
                                     ],
                                     "path" => "js/views/journal-f/JournalUnit"
                                 ],
@@ -737,7 +673,7 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Домашнее задание",
-                                "menu" => true,
+
                                 "component" => [
                                     "info" => [
                                         "name" => "Домашнее задание",
@@ -752,7 +688,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Обратная связь",
@@ -772,7 +708,7 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -784,22 +720,9 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
-                        "text" => "Уведомления",
-                        "component" => [
-                            "info" => [
-                                "name" => "Уведомления",
-                                "url" => "notifications"
-                            ],
-                            "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
                         "icon" => "library_books",
                         "text" => "Заказанные справки",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Заказанные справки",
@@ -812,7 +735,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Обратная связь",
@@ -832,7 +755,7 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -846,7 +769,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Обратная связь",
@@ -866,7 +789,7 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -880,7 +803,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "dashboard",
                         "text" => "Панель управления",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Панель управления",
@@ -892,22 +815,9 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
-                        "text" => "Уведомления",
-                        "component" => [
-                            "info" => [
-                                "name" => "Уведомления",
-                                "url" => "notifications"
-                            ],
-                            "path" => "js/views/notifications-f/NotificationsPage"
-                        ],
-                        "default" => true,
-                        "menu" => false,
-                    ],
-                    [
-                        "id" => uniqid(),
                         "icon" => "whatshot",
                         "text" => "Новости",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Лента новостей",
@@ -920,7 +830,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "create",
                         "text" => "Создать новость",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Создать новость",
@@ -934,7 +844,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "bar_chart",
                         "text" => "Статистика",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Статистика",
@@ -947,7 +857,7 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "feedback",
                         "text" => "Обратная связь",
-                        "menu" => true,
+
                         "component" => [
                             "info" => [
                                 "name" => "Обратная связь",

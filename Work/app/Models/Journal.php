@@ -20,6 +20,10 @@ class Journal extends Model
         'deleted_at', 'updated_at'
     ];
 
+    protected $casts = [
+        'journal' => 'array'
+    ];
+
     protected $fillable  = [
          'isClose', 'journal','group_id','discip_id'
     ];

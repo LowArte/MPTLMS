@@ -87,12 +87,6 @@ export default {
     "c-comfirm-dialog": ConfirmDialog_C
   },
 
-  //*Вычисляемые свойства
-  post_name: {
-    name: "Конструктор замен расписания",
-    url: "bild_replacements"
-  },
-
   computed: {
     ...mapGetters(["specialities", "groups_combo", "teachers_combo", "disciplines_combo", "timetable_full"]),
     

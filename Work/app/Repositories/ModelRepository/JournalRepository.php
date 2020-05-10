@@ -4,6 +4,7 @@ namespace App\Repositories\ModelRepository;
 
 use App\Models\Journal as Model;
 use App\Models\Student as StudentModel;
+use Debugbar;
 
 class JournalRepository extends BaseRepository
 {
@@ -12,22 +13,32 @@ class JournalRepository extends BaseRepository
         return Model::class;
     }
 
-    public function getJournalById($id)
+    public function getJournalByGroupId($id)
     {
-        $columns = ['journals.id', 'association_id', 'titles', 'journal', 'isClose', 'group_id'];
+        $columns = ['id','journal', 'discip_id', 'group_id', 'isClose'];
         $result = $this->startCondition()
-                        ->join('associations', 'association_id', '=', 'associations.id')
-                        ->where('journals.id', $id)
                         ->select($columns)
-                        ->first();
+                        ->where('group_id', $id)
+                        ->select($columns)
+                        ->get();
 
-        $students = StudentModel::leftJoin('users', 'user_id', '=', 'users.id')
-        ->where('students.group_id', $result->group_id)
-        ->selectRaw("students.id as student_id, CONCAT(users.secName, ' ', users.name, ' ',  users.thirdName) as fullFio")
-        ->get();
-        $result['students'] = $students;
-        $result['titles'] = json_decode($result['titles']);
-        $result['journal'] = json_decode($result['journal']);
+        $disiplineBufferRepository = app(DisciplineBufferRepository::class);
+        $teacherRepository = app(UserRepository::class);
+        $assosiationRepositroy = app(AssociationRepository::class);
+
+        $teachers = $teacherRepository->getTeachersFIO();
+        $assosiations = $assosiationRepositroy->getAssociation();
+        $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
+        foreach($result as $res){
+            $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
+            $assosiation = $assosiations->where("journal_id",$res['id'])->all();
+            $teach = [];
+
+            foreach($assosiation as $ass){
+                array_push($teach,$teachers->where("id",$ass['teacher_id'])->first()->full_name);
+            }   
+            $res['teachers'] = $teach;
+        }
         return $result;
     }
 }

@@ -12,9 +12,10 @@ class AssociationRepository extends BaseRepository
 
     public function getAssociation()
     {
-        $columns = ['id', 'group_id', 'teacher_id', 'discip_id'];
+        $columns = ['id', 'journal_id', 'teacher_id'];
         $result = $this->startCondition()
-        ->select($columns)->get();
+                        ->select($columns)
+                        ->get();
         return $result;
     }
 

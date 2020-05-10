@@ -101,7 +101,12 @@ export default {
   post_name: {
     name: "Учебное расписание",
     url: "timetable", 
-    com: ["js/views/timetable-f/Bild_Timetable"]
+    dop_com: [
+      {
+        url:"bild_timetable",
+        path:"js/views/timetable-f/Bild_Timetable"
+      }   
+    ]
   },
 
   computed: {

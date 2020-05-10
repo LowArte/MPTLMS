@@ -42,7 +42,6 @@ class SQLiteDBFunctions
             $res['dep_name_full'] =  $curRes->dep_name_full;
             $data->push($res);
         }
-        Debugbar::info($data);
         return $data;
     }
 
@@ -64,7 +63,6 @@ class SQLiteDBFunctions
             $res['dep_name_full'] =  $curRes->dep_name_full;
             $data->push($res);
         }
-        Debugbar::info($data);
         return $data;
     }
 

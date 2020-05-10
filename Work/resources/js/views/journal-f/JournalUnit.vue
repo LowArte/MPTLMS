@@ -1,12 +1,7 @@
 <template lang="pug">
   v-content.ma-0.pa-0
-    v-layout.column.wrap(v-if="JournalOfSubject")
-      v-card(:elevation="0" )
-        v-card-actions
-          v-btn(small text @click="JournalOfSubject = !JournalOfSubject") назад 
-      c-journal-of-subjects
-    v-layout.column.wrap(v-if="!JournalOfSubject")
-      v-data-iterator.px-2(:items="groups_umo" :search="search" :items-per-page.sync="itemsPerPage" :page="page" hide-default-footer no-results-text="Не найдены данные, удовлетворяющие Вашему запросу. Попробуйте изменить запрос" no-data-text="")
+    v-layout.column.wrap
+      v-data-iterator.px-2(v-if="groups_journal" :items="groups_journal" :search="search" :items-per-page.sync="itemsPerPage" :page="page" hide-default-footer no-results-text="Не найдены данные, удовлетворяющие Вашему запросу. Попробуйте изменить запрос" no-data-text="")
         template(v-slot:header)
           v-flex
             v-card.mx-auto(raised min-width="300px" )
@@ -33,25 +28,24 @@
           v-layout.row.wrap
             v-flex.pa-3(v-for="item in props.items" :key="item.name")
               v-card.mx-auto(raised max-width="320px")
-                v-system-bar(dark color="primary")
+                v-system-bar(color="white")
                   span Учебные журналы по группе
                 v-list-item(three-line)
                   v-list-item-content
                     v-list-item-title(class="headline mb-1") {{item.group_name}}
                     v-list-item-subtitle {{item.dep_name_full}}
+                    v-list-item-subtitle Курс: {{item.curs}}
                 v-card-actions.pt-0
-                  v-spacer
-                  div
-                    v-btn(block x-small text color="accent" @click="setGroupInformationToVuex(item); JournalOfSubject = true;") перейти к журналам
-                  v-spacer  
+                    v-btn(block x-small text color="success" @click="goingOpenJournalsGroups(item)") перейти к журналам
+      v-alert.mx-auto(v-else border="left" elevation="3" type="error"  max-width="920px" min-width="300px")
+        span Данные журналов не могут быть загружены. Возможно отсутствуют запрашиваемые данные.
 </template>
 
 <script>
 //?----------------------------------------------
 //!           Подключение дополнительных библиотек
 //?----------------------------------------------
-import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
-import JournalOfSubjects_С from "@/js/views/journal-f/JournalOfSubjects";
+import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 
 //?----------------------------------------------
 //!           Vuex
@@ -65,15 +59,20 @@ export default {
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withOverlayLoading],
-
-  components:{
-    "c-journal-of-subjects": JournalOfSubjects_С
+  post_name: {
+    name: "Журнал учебной части",
+    url: "journal_unit",
+    dop_com: [
+      {
+        url: "journal/:group_id",
+        path: "js/views/journal-f/JournalOfSubjects"
+      }
+    ]
   },
-
   computed: {
-    ...mapGetters(["user", "groups_umo"]),
+    ...mapGetters(["user", "groups_journal"]),
     numberOfPages() {
-      return Math.ceil(this.groups_umo.length / this.itemsPerPage);
+      return Math.ceil(this.groups_journal.length / this.itemsPerPage);
     }
   },
 
@@ -82,15 +81,13 @@ export default {
       search: null,
       itemsPerPage: 16,
       itemsPerPageArray: [4, 8, 16, 32, 100],
-      page: 1,
-      JournalOfSubject: false
+      page: 1
     };
   },
 
-  async beforeMount()
-  {
+  async beforeMount() {
     this.showLoading("Получение данных");
-    await this.$store.dispatch(actions.SET_GROUPS_FOR_UMO);
+    await this.$store.dispatch(actions.SET_JOURNALS_GROUPS);
     this.closeLoading("Получение данных");
   },
 
@@ -98,8 +95,8 @@ export default {
   //!           Методы страницы
   //?----------------------------------------------
   methods: {
-    async setGroupInformationToVuex(item) {
-      await this.$store.dispatch(actions.SET_GROUPS_SUBJECTS, item);
+    async goingOpenJournalsGroups(item) {
+      this.$router.push("journal/" + item.group_id);
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;

@@ -19,7 +19,7 @@ class Group extends Model
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'deleted_at', 'updated_at', 'department_id'
+        'created_at', 'deleted_at', 'updated_at'
     ];
 
     protected $fillable  = [

@@ -1,6 +1,8 @@
 <template lang="pug">
   div
-    c-crud-form(ref='crud' :_floodArray="this.flood" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Дисциплины'")
+    div
+      v-btn(small text @click="back") назад 
+    c-crud-form(ref='crud' :_funcK_back="back" :_floodArray="this.flood" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Дисциплины'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')
     c-edit-dialog(ref='revue')
@@ -40,6 +42,9 @@ import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 
 export default {
+  computed: {
+    ...mapGetters(["user"])
+  },
   post_name: {
     name: "CRUD дисциплин",
     url: "disciplines_crud"
@@ -53,14 +58,8 @@ export default {
     "c-remove-dialog": removeDialog_C
   },
 
-  props:{
-      _db_name:{
-          type: String,
-          default: null
-      }
-  },
-
   data: () => ({
+    db_name: null,
     headers: [
       { text: "№", value: "id" },
       { text: "Дисциплина", value: "discip_name" },
@@ -74,6 +73,7 @@ export default {
   }),
   async beforeMount()
   {
+    this.db_name = this.$route.params.dbName;
     if (this.specialities == null) 
     {
       let items = await api_department.getDepartments();
@@ -98,7 +98,7 @@ export default {
 
     async getData()
     {
-      let flood = await api_discipline.getDisciplinesDBContent(this._db_name);
+      let flood = await api_discipline.getDisciplinesDBContent(this.db_name);
       this.flood = flood;
     },
 
@@ -109,7 +109,7 @@ export default {
       var res = await this.$refs.new.pop().then(res => { return res; });
       if (res)
       {
-        if(await api_discipline.saveDiscipline(this._db_name, res))
+        if(await api_discipline.saveDiscipline(this.db_name, res))
         {
           this.showMessage("Выполнено!");
           this.getData();
@@ -129,7 +129,7 @@ export default {
       var res = await this.$refs.revue.pop(item).then(res => { return res; });
       if (res)
       {
-        if(await api_discipline.editDiscipline(this._db_name, res))
+        if(await api_discipline.editDiscipline(this.db_name, res))
         {
           this.showMessage("Выполнено!");
           this.getData();
@@ -149,7 +149,7 @@ export default {
       var res = await this.$refs.rem.pop(item).then(res => { return res; });
       if (res)
       {
-        if(await api_discipline.deleteDiscipline(this._db_name, res))
+        if(await api_discipline.deleteDiscipline(this.db_name, res))
         {
           this.showMessage("Выполнено!");
           this.getData();
@@ -160,6 +160,11 @@ export default {
       else
         this.showInfo("Действие было отменено пользователем!");
       this.$refs.rem.$refs.form.reset();
+    },
+
+    back()
+    {
+      this.$router.push('/' + this.user.post.slug + '/discipline_managment');
     }
   }
 };

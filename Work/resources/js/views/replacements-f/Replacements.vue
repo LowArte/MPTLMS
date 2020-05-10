@@ -79,7 +79,13 @@ export default {
   //*Вычисляемые свойства
   post_name: {
     name: "Замены расписания",
-    url: "replacements"
+    url: "replacements",
+    dop_com: [
+      {
+        url:"bild_replacements",
+        path:"js/views/replacements-f/Bild_Replacements"
+      }   
+    ]
   },
 
   computed: {

@@ -23,8 +23,8 @@ export default {
 
   beforeMount(){
     this.three = JSON.parse(JSON.stringify(this.user.post.privilegies));
-    this.three = this.three.filter(res => {return res.menu;});
-    if(this.user.disabled == 1)
+
+    if(this.user.disabled == 1) //Блокировка кнопок
       for(let i = 0; i < this.three.length; i++)
         if(!this.three[i].default)
           this.three[i].disabled = true;

@@ -64,7 +64,7 @@ class ApiRoutes
             Route::get('notificications/{user_id}', 'Api\NotificationsController@getNotificationsForUser')->name('notificications');
             
             Route::get('journals', 'Api\JournalController@getJournals')->name('journals');
-            Route::get('journals_id/{journal_id}', 'Api\JournalController@getJournal')->name('journals_id');
+            Route::get('journals_by_group_id/{group_id}', 'Api\JournalController@getJournalsByGroupId')->name('journals_by_group_id');
             
             Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForStudentByGroup_Id')->name('association_for_teacher');
             Route::get('association_for_student/{group_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_student');

@@ -60,12 +60,6 @@ export default {
 //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withSnackbar, withOverlayLoading],
-
-  //*Вычисляемые свойства
-  post_name: {
-    name: "Конструктор учебного расписания",
-    url: "bild_timetable"
-  },
   
   computed: {
     ...mapGetters(["specialities", "groups_combo", "teachers_combo", "disciplines_combo", "places_combo"]),

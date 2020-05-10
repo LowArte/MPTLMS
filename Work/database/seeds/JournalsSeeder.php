@@ -19,7 +19,6 @@ class JournalsSeeder extends Seeder
            array_push($data,[
             'association_id' => $association['id'],
             'isClose' => false,
-            'titles' => json_encode([]),
             'journal' => json_encode([])     
            ]);
         }
