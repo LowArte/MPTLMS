@@ -30,7 +30,7 @@
                         v-btn(x-small icon color="success" v-on="on")
                           v-icon mdi-chevron-down
                       v-list(dense)
-                        v-list-item(@click="")
+                        v-list-item(@click="closeJournal(item)")
                           v-list-item-icon
                             v-icon(small) mdi-lock
                           v-list-item-content
@@ -63,6 +63,11 @@ import EditJournalDialog_С from "@/js/components/journal-f/EditJournalDialog";
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
 //?----------------------------------------------
+//!           API
+//?----------------------------------------------
+import api_journal from "@/js/api/journal";
+
+//?----------------------------------------------
 //!           Vuex
 //?----------------------------------------------
 import { mapGetters } from "vuex";
@@ -92,6 +97,7 @@ export default {
       context: this,
       result: this.$route.params.group_id
     });
+    console.log(this.groups_subgects);
     this.closeLoading("Получение данных");
   },
   computed: {
@@ -113,29 +119,55 @@ export default {
 
   methods: {
     async closeJournal(item) {
-      //закрыть журнал
+      await this.$refs.qwestion.pop().then(result => {
+        if (result) {
+          this.$store.dispatch(actions.CLOSE_JOURNAL, {
+            id: item.id,
+            result: this.$route.params.group_id
+          });
+          this.showInfo("Журналы заблокированы");
+        } else {
+          this.showInfo("Действие было отменено пользователем");
+        }
+      });
     },
 
-    async createJournal() 
-    {
-      let res = await this.$refs.create.pop(this.getCursAndDepId).then(res => { return res; });
-      if (res) 
-        //this.$store.dispatch(actions.EDIT_SPECIALITIE, {data: result, result: this.$route.params.group_id});
-        if(await api_journal.saveJournal(res))
-          this.showMessage("Выполнено!");
-      else
-        this.showInfo("Действие было отменено пользователем!");
+    async createJournal() {
+      await this.$refs.create.pop(this.getCursAndDepId).then(result => {
+        if (result) {
+          this.$store.dispatch(actions.CREATE_JOURNAL, {
+            data: result,
+            result: this.$route.params.group_id
+          });
+          this.showInfo("Журналы заблокированы");
+        } else {
+          this.showInfo("Действие было отменено пользователем");
+        }
+      });
       this.$refs.create.$refs.form.reset();
     },
 
     async editJournal(item) {
-      await this.$refs.edit.pop(item).then(() => {});
+      await this.$refs.edit.pop(item).then(result => {
+        if (result) {
+          this.$store.dispatch(actions.EDIT_JOURNAL_ACCESS, {
+            data: result,
+            result: this.$route.params.group_id
+          });
+          this.showInfo("Журналы заблокированы");
+        } else {
+          this.showInfo("Действие было отменено пользователем");
+        }
+      });
       this.$refs.edit.$refs.form.reset();
     },
-    //editJournal
     async cloaseAllJournal() {
       await this.$refs.qwestion.pop().then(result => {
         if (result) {
+          this.$store.dispatch(
+            actions.CLOSE_ALL_JOURNAL,
+            this.getCursAndDepId.group_id
+          );
           this.showInfo("Журналы заблокированы");
         } else {
           this.showInfo("Действие было отменено пользователем");

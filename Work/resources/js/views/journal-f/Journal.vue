@@ -102,7 +102,7 @@ export default {
         console.log(journal_id);
         this.journal = null;
         await this.$forceUpdate();
-        let journal = await api_journal.getJournalById(this.journal_id);
+        let journal = await api_journal.getJournalById(journal_id);
         console.log(journal);
         if(journal)
         {

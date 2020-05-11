@@ -5,7 +5,8 @@ import {CacheData} from '@/js/plugins/CacheData'
 
 const state = {
     groups_journal: [],
-    groups_subgects_list: new CacheData()
+    groups_subgects_list: new CacheData(),
+    teacher_journals: []
 }
 
 export default {

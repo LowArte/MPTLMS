@@ -15,7 +15,7 @@
                       template(v-slot:selection="data")
                         v-chip.ma-1(small dense label color="blue-grey lighten-4") 
                           span {{ !data.item ? 'Нет данных для выбора' : data.item.discip_name }}
-                    v-autocomplete(:disabled="loading" v-model="journal.isClose"  label="Семестры" :rules="[SemesterRules.required]" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name' clearable)
+                    v-autocomplete(:disabled="loading" v-model="journal.isClose"  label="Семестры" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name' clearable)
                       template(v-slot:selection="data")
                         v-chip.ma-1(small dense label color="blue-grey lighten-4") 
                           span {{ !data.item ? 'Нет данных для выбора' : data.item.name }}
@@ -80,11 +80,7 @@ export default {
         }
       },
       DiscipRules: [v => !!v || "Дисциплина не указана"],
-      SemesterRules: {
-        required: value => {
-          return !!value || "Семестр не указан";
-        }
-      }
+      SemesterRules: [v => !!v || "Семестр не указан"]
     };
   },
 
@@ -120,12 +116,12 @@ export default {
       
       if (this.$refs.form.validate()) {
         
-        if (!this.fingJournal()) 
-        {
+        /* if (!this.fingJournal()) 
+        { */
           this.dialog = false;
           this.alert = false;
           this.resolve(this.journal);
-        } else this.alert = this.fingJournal()
+        /* } else this.alert = this.fingJournal() */
       } else this.showError("Валидация не пройдена");
     },
 

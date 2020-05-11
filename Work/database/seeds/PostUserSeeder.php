@@ -274,7 +274,6 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                     ],
-
                     [
                         "id" => uniqid(),
                         "icon" => "portrait",
@@ -305,7 +304,6 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "school",
                         "text" => "Учебные процесс",
-
                         "children" => [
                             [
                                 "id" => uniqid(),
@@ -414,7 +412,7 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                     ]
-                ]),
+                ])
             ],
             [
                 "name" => "Преподаватель",
@@ -424,7 +422,6 @@ class PostUserSeeder extends Seeder
                         "id" => 1,
                         "icon" => "home",
                         "text" => "Главная",
-
                         "component" => [
                             "info" => [
                                 "name" => "Домашняя страница",
@@ -434,17 +431,14 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                     ],
-
                     [
                         "id" => uniqid(),
                         "icon" => "school",
                         "text" => "Учебные процесс",
-
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание занятий",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание занятий",
@@ -456,7 +450,6 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Расписание преподавателя",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Расписание",
@@ -495,32 +488,35 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "class",
                         "text" => "Учебные журналы",
-
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Журналы групп",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Успеваемость",
-                                        "url" => "journal"
+                                        "url" => "journal",
+                                        "dop_com" => [
+                                            [
+                                                "url" => "group_journal/:journal_id",
+                                                "path" => "js/views/journal-f/Journal"
+                                            ]
+                                        ],
                                     ],
-                                    "path" => "js/views/journal-f/JournalTeacher"
                                 ],
+                                "path" => "js/views/journal-f/JournalTeacher"
                             ],
-                            [
-                                "id" => uniqid(),
-                                "text" => "Домашнее задание",
-
-                                "component" => [
-                                    "info" => [
-                                        "name" => "Домашнее задание",
-                                        "url" => "homework_teacher"
-                                    ],
-                                    "path" => "js/views/homework-f/HomeWorkTeacher"
+                        ],
+                        [
+                            "id" => uniqid(),
+                            "text" => "Домашнее задание",
+                            "component" => [
+                                "info" => [
+                                    "name" => "Домашнее задание",
+                                    "url" => "homework_teacher"
                                 ],
-                            ]
+                                "path" => "js/views/homework-f/HomeWorkTeacher"
+                            ],
                         ]
                     ],
                     [
@@ -537,7 +533,7 @@ class PostUserSeeder extends Seeder
                         ],
                         "default" => true,
                     ]
-                ]),
+                ])
             ],
             [
                 "name" => "Учебная часть",
@@ -660,44 +656,24 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
-                        "icon" => "class",
-                        "text" => "Успеваемость",
-
-                        "children" => [
-                            [
-                                "id" => uniqid(),
-                                "text" => "Учебные журналы",
-                                "component" => [
-                                    "info" => [
-                                        "name" => "Журнал учебной части",
-                                        "url" => "journal_unit"
-                                    ],
-                                    "dop_com" => [
-                                        [
-                                            "url" => "journal/:group_id",
-                                            "path" => "js/views/journal-f/JournalOfSubjects"
-                                        ],
-                                        [
-                                            "url" => "group_journal/:journal_id",
-                                            "path" => "js/views/journal-f/Journal"
-                                        ]
-                                    ],
-                                    "path" => "js/views/journal-f/JournalUnit"
-                                ],
+                        "text" => "Учебные журналы",
+                        "component" => [
+                            "info" => [
+                                "name" => "Журнал учебной части",
+                                "url" => "journal_unit"
                             ],
-                            [
-                                "id" => uniqid(),
-                                "text" => "Домашнее задание",
-
-                                "component" => [
-                                    "info" => [
-                                        "name" => "Домашнее задание",
-                                        "url" => "homework_teacher"
-                                    ],
-                                    "path" => "js/views/homework-f/HomeWorkTeacher"
+                            "dop_com" => [
+                                [
+                                    "url" => "journal/:group_id",
+                                    "path" => "js/views/journal-f/JournalOfSubjects"
                                 ],
-                            ]
-                        ]
+                                [
+                                    "url" => "group_journal/:journal_id",
+                                    "path" => "js/views/journal-f/Journal"
+                                ]
+                            ],
+                            "path" => "js/views/journal-f/JournalUnit"
+                        ],
                     ],
                     [
                         "id" => uniqid(),

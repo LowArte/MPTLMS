@@ -6,7 +6,7 @@
         v-progress-linear(:active="loading" :indeterminate="loading" absolute top  color="success") 
         v-card-text
             v-form(ref="form")
-                v-autocomplete(:disabled="loading" v-model="item.teachers" label="Преподаватели" :rules="[TeacherRules.required]" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
+                v-autocomplete(:disabled="loading" v-model="item.teachers_id" label="Преподаватели" :rules="[TeacherRules.required]" outlined dense :items="teachers_combo" @selected no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
                   template(v-slot:selection="data")
                     v-chip.ma-1(small dense label color="blue-grey lighten-4") 
                       span {{ !data.item.fullFio ? 'Нет данных для выбора' : data.item.fullFio }}
@@ -14,7 +14,7 @@
                   template(v-slot:selection="data")
                     v-chip.ma-1(small dense label color="blue-grey lighten-4") 
                       span {{ !data.item ? 'Нет данных для выбора' : data.item.discip_name }}
-                v-autocomplete(:disabled="loading" v-model="item.isClose"  label="Семестры" :rules="SemesterRules" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name' clearable)
+                v-autocomplete(:disabled="loading" v-model="item.isClose"  label="Семестры" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name' clearable)
                   template(v-slot:selection="data")
                     v-chip.ma-1(small dense label color="blue-grey lighten-4") 
                       span {{ !data.item ? 'Нет данных для выбора' : data.item.name }}
@@ -42,7 +42,6 @@ import * as actions from "@/js/store/action-types";
 //!           api
 //?----------------------------------------------
 import api_teacher from "@/js/api/teacher"; //Api преподавателей
-import api_discipline from "@/js/api/discipline"; //Api дисциплин
 
 export default {
   //?----------------------------------------------
@@ -59,7 +58,7 @@ export default {
     return {
       item: null,
       dialog: false,
-      loading: false,
+      loading: true,
       journal: {
         id: null,
         //Объект для создания журнала (Отправить в бэк на сохранение)
@@ -76,22 +75,25 @@ export default {
           return !!value || "Преподаватель не указан";
         }
       },
-      SemesterRules: [v => !!v || "Дисциплина не указана"]
+      SemesterRules: [v => null || "Семестр не указан"]
     };
   },
 
   methods: {
     async pop(item) {
-      console.log(item)
+      console.log(item);
+      this.loading = true;
       this.dialog = !this.dialog;
       this.showLoading("Получение данных");
       this.$store.commit(
         mutations.SET_TEACHERS_COMBO,
         await api_teacher.getTeachers()
       );
+      console.log(this.teachers_combo)
       this.item = JSON.parse(JSON.stringify(item));
+      console.log(this.item);
       this.closeLoading("Получение данных");
-      item.isClose != null ? this.loading = false : this.loading = true;
+      this.loading = !this.loading;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
@@ -104,7 +106,8 @@ export default {
       } else this.showError("Валидация не пройдена");
     },
     async cancelJournal() {
-        this.dialog = !this.dialog;
+      this.$refs.form.reset();
+      this.dialog = !this.dialog;
     }
   }
 };

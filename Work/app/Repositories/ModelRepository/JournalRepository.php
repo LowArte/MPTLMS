@@ -15,6 +15,7 @@ class JournalRepository extends BaseRepository
 
     public function getJournalById($id)
     {
+        Debugbar::info($id);
         $columns = ['id','journal', 'discip_id', 'group_id', 'isClose'];
         $result = $this->startCondition()
                         ->select($columns)
@@ -38,13 +39,14 @@ class JournalRepository extends BaseRepository
             }   
             $res['teachers'] = $teach;
         }
-        Debugbar::info($result);
         return $result;
     }
 
+    
+
     public function getJournalByGroupId($id)
     {
-        $columns = ['id','journal', 'discip_id', 'group_id', 'isClose'];
+        $columns = ['id', 'journal', 'discip_id', 'group_id', 'isClose'];
         $result = $this->startCondition()
                         ->select($columns)
                         ->where('group_id', $id)
@@ -62,11 +64,14 @@ class JournalRepository extends BaseRepository
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
             $assosiation = $assosiations->where("journal_id",$res['id'])->all();
             $teach = [];
+            $teach_id = [];
 
             foreach($assosiation as $ass){
+                array_push($teach_id, $ass['teacher_id']);
                 array_push($teach,$teachers->where("id",$ass['teacher_id'])->first()->full_name);
             }   
             $res['teachers'] = $teach;
+            $res['teachers_id'] = $teach_id;
         }
         return $result;
     }

@@ -15,13 +15,32 @@ class CreateJournalModification extends BaseModification
 
     public function addJournalToDatabase($request)
     {
-        Debugbar::info($request);
+        switch ($request['isClose']) 
+        {
+            case 2:
+                $request['journal'] = json_encode(['2' => []]);
+                break;
+            case 1:
+                $request['journal'] = json_encode(['1' => []]);
+                break;
+            case 0:
+                $request['journal'] = json_encode(['1' => [], '2' => []]);
+                break;
+            default:
+                $request['journal'] = json_encode([]);
+                break;
+        }
         $journal = new Model();
         $journal->fill($request);
         $result = $journal->save();
         
         if($result)
+        {
+            $createAssociationModification = app(CreateAssociationModification::class);
+            foreach($request['teachers'] as $value)
+                $createAssociationModification->addAssociationToDatabase(['journal_id' => $journal->id, 'teacher_id' => $value]);
             return $journal->id;
+        }
         return  false;
-    }
+    } 
 }
