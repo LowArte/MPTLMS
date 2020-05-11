@@ -21,8 +21,19 @@ class AssociationRepository extends BaseRepository
 
     public function getAssociationTeacher($teacher_id)
     {
-        $columns = ['id', 'group_id', 'teacher_id', 'discip_id'];
-        $result = $this->startCondition()->where('teacher_id', $teacher_id)->select($columns)->get();
+        $columns = ['journals.id', 'discip_id', 'journals.group_id', 'group_name', 'curs', 'isClose'];
+        $result = $this->startCondition()
+                        ->join('journals', 'journal_id', '=', 'journals.id')
+                        ->join('groups', 'journals.group_id', '=', 'groups.id')
+                        ->select($columns)
+                        ->where('teacher_id', $teacher_id)
+                        ->get();
+
+        $disiplineBufferRepository = app(DisciplineBufferRepository::class);
+        $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
+        foreach($result as $res){
+            $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
+        }
         return $result;
     }
 

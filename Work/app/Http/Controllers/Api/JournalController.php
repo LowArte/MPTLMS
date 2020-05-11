@@ -39,7 +39,8 @@ class JournalController extends BaseController
             return response()->json(500);
     }
     
-    public function edit(Request $request,UpdateJournalModification $updateJournalModification){
+    public function edit(Request $request,UpdateJournalModification $updateJournalModification)
+    {
         $data = $request->all();
         $data['journal'] = json_encode($data['journal']);
         
@@ -52,10 +53,32 @@ class JournalController extends BaseController
         }
     }
 
-    //Закрытие/Открытие журнала
-    public function editClose($id, $close, UpdateJournalModification $updateJournalModification)
+    public function editJournalAssociation(Request $request,UpdateJournalModification $updateJournalModification)
     {
-        $result = $updateJournalModification->updateJournalCloseInDatabase($id, $close);
+        $data = $request->all();        
+        $result = $updateJournalModification->updateJournalAssociationInDatabase($data);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
+    }
+
+    //Закрытие/Открытие журнала
+    public function editClose($journal_id, UpdateJournalModification $updateJournalModification)
+    {
+        $result = $updateJournalModification->updateJournalCloseInDatabase($journal_id);
+        if($result)
+            return response()->json(200);
+        else
+            return response()->json(500);
+    }
+
+    //Закрытие/Открытие журнала
+    public function editCloseAll($group_id, UpdateJournalModification $updateJournalModification)
+    {
+        $result = $updateJournalModification->updateJournalCloseAllInDatabase($group_id);
         if($result)
             return response()->json(200);
         else

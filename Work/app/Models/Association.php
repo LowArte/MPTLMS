@@ -8,7 +8,7 @@ use Panoscape\History\HasHistories;
 
 class Association extends Model
 {
-    use SoftDeletes,HasHistories;
+    use HasHistories;
 
     public function getModelLabel()
     {

@@ -70,8 +70,7 @@ class ApiRoutes
 
             Route::get('students_by_group_id/{group_id}', 'Api\StudentController@getStudentsByGroupId')->name('students_by_group_id');
             
-            Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForStudentByGroup_Id')->name('association_for_teacher');
-            Route::get('association_for_student/{group_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_student');
+            Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_teacher');
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -141,8 +140,10 @@ class ApiRoutes
 
             Route::post('notificications','Api\NotificationsController@edit')->name('notificications');
 
-            Route::post('journal_close/{journal_id}/{isClose}','Api\JournalController@editClose')->name('journal_close');
+            Route::post('journal_close/{journal_id}','Api\JournalController@editClose')->name('journal_close');
+            Route::post('journal_close_groups/{group_id}','Api\JournalController@editCloseAll')->name('journal_close_groups');
             Route::post('journal','Api\JournalController@edit')->name('journal');
+            Route::post('journal_association','Api\JournalController@editJournalAssociation')->name('journal');
         });
 
          /**
