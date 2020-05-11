@@ -12,7 +12,7 @@ class Schedule extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Расписания";
     }
     public $timestamps = true;
 

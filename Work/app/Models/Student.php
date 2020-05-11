@@ -12,7 +12,7 @@ class Student extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Студентов";
     }
     public $timestamps = true;
 

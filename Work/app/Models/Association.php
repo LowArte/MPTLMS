@@ -12,7 +12,7 @@ class Association extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Ассоциации";
     }
     public $timestamps = true;
 

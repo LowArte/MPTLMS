@@ -12,7 +12,7 @@ class Feedback extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Обращений пользователя";
     }
     public $timestamps = true;
 

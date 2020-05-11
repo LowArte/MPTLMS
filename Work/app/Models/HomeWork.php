@@ -12,7 +12,7 @@ class HomeWork extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Домашних заданий";
     }
     public $timestamps = true;
 

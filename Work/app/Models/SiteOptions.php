@@ -13,7 +13,7 @@ class SiteOptions extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Настроек сервера";
     }
 
     protected $hidden = [

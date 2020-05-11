@@ -12,7 +12,7 @@ class DisciplineBuffer extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Системы дисциплин";
     }
     public $timestamps = true;
 

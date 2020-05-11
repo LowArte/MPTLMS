@@ -8,12 +8,8 @@ use Panoscape\History\HasHistories;
 
 class Notifications extends Model
 {
-    use SoftDeletes,HasHistories;
+    use SoftDeletes;
 
-    public function getModelLabel()
-    {
-        return $this->display_name;
-    }
     public $timestamps = true;
 
     protected $hidden = [

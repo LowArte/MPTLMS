@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         ConfigServiceProvider::class,
+        Panoscape\History\HistoryServiceProvider::class,
 
         /*
          * Package Service Providers...

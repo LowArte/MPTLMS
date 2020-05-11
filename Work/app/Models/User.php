@@ -67,7 +67,7 @@ class User extends Authenticatable
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Пользователей";
     }
 
     public function getFullNameAttribute(){

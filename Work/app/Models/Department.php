@@ -13,7 +13,7 @@ class Department extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Специальностей";
     }
 
     protected $cascadeDeletes = ['groups'];
