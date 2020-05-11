@@ -12,7 +12,7 @@ class UsersPost extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Ролей";
     }
 
     public $timestamps = true;

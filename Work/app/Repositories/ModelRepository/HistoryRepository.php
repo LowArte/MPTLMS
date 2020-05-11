@@ -2,6 +2,7 @@
 
 namespace App\Repositories\ModelRepository;
 
+use Debugbar;
 use Panoscape\History\History as Model;
 
 class HistoryRepository extends BaseRepository
@@ -13,9 +14,11 @@ class HistoryRepository extends BaseRepository
 
     public function getHistory()
     {
-        
-        $result = $this->startCondition()->first();
-        $result->load("user");
+        $result = $this->startCondition()->get();
+        // foreach($result as $res){
+        //     $res['user'] = $res->user();
+        //     $res['model'] = $res->model();
+        // }
         return $result;
     }
 

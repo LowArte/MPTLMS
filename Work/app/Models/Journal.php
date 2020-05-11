@@ -12,7 +12,7 @@ class Journal extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Журналов";
     }
     public $timestamps = true;
 

@@ -16,7 +16,7 @@ class CreateHistoryTables extends Migration
         Schema::create('model_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->morphs('model');
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('user_type')->nullable();
             $table->string('message');
             $table->text('meta')->nullable();

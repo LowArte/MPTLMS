@@ -12,7 +12,7 @@ class Certificates extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Справок";
     }
     
     public $timestamps = true;

@@ -6,6 +6,7 @@ use App\Helpers\TemporaryFiles\TemporaryFileFactory;
 use App\Repositories\ModelRepository\DepartmentRepository;
 use App\Repositories\ModelRepository\GroupRepository;
 use App\Repositories\ModelRepository\UserRepository;
+use Debugbar;
 use \PhpOffice\PhpSpreadsheet\IOFactory;
 use Str;
 
@@ -22,7 +23,6 @@ class ExcerptImport
         $groups_collection = collect($groupsRepository->getGroups());
         $array_groups_subgects = [];
         $teachers = $userRepository->getTeachersFIO();
-
 
         foreach ($files as $file) {
             $temp_file->newTemporaryFile($file);

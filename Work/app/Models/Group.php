@@ -14,7 +14,7 @@ class Group extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Групп";
     }
     public $timestamps = true;
 

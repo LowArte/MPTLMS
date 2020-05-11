@@ -12,7 +12,7 @@ class CallSchedule extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Расписания звонков";
     }
     
     public $timestamps = true;

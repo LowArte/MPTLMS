@@ -12,7 +12,7 @@ class Places extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Мест проведения";
     }
 
     protected $fillable  = [

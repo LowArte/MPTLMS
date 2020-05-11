@@ -14,7 +14,7 @@ class News extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Новостей";
     }
 
     protected $cascadeDeletes = ['likes'];

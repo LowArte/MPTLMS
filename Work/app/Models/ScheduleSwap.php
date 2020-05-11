@@ -12,7 +12,7 @@ class ScheduleSwap extends Model
 
     public function getModelLabel()
     {
-        return $this->display_name;
+        return "Замен";
     }
     public $timestamps = true;
 

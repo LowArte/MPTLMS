@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.38 on 2020-05-10 11:40:46.
+ * Generated for Laravel 5.8.38 on 2020-05-11 17:35:46.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14628,6 +14628,18 @@ namespace Illuminate\Support {
  
 }
 
+namespace Panoscape\History { 
+
+    /**
+     * 
+     *
+     */ 
+    class History {
+         
+    }
+ 
+}
+
 namespace Barryvdh\Debugbar { 
 
     /**
@@ -18536,6 +18548,12 @@ namespace  {
     class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
+ 
+}
+
+namespace App\Models { 
+
+    class History extends \Panoscape\History\History {}
  
 }
 

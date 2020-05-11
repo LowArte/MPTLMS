@@ -13,13 +13,13 @@ return [
     |
     */
 
-    'created' => 'Добавлена :model :label',
+    'created' => '创建:model :label',
 
-    'updating' => 'Изменена :model :label',
+    'updating' => '更新:model :label',
 
-    'deleting' => 'Удалена :model :label',
+    'deleting' => '删除:model :label',
 
-    'restored' => 'Востановлена :model :label',
+    'restored' => '恢复:model :label',
 
     //you may added your own model name language line here
     'models' => [
