@@ -15,13 +15,18 @@ export default {
     async [actions.SET_GROUPS_SUBJECTS] ({ commit, state }, data) {
         if(!state.groups_subgects_list.contains(data.result)) {
             let result = await api_journal.getJournalsByGroupId(data.result);
-            console.log(result)
             if(result)
                 await commit(types.ADD_CACHE_GROUPS_SUBJECTS,{id: data.result, result: result});
             else
                 return undefined;
         } else {
             commit(types.ADD_ID_CACHE_GROUPS_SUBJECTS, data.result);
+        }
+    },
+    async [actions.CREATE_JOURNAL] ({ commit, state }, data) {
+        if (await api_journal.saveJournal(data.data)) {
+            let result = await api_journal.getJournalsByGroupId(data.result);
+            await commit(types.ADD_CACHE_GROUPS_SUBJECTS,{id: data.result, result: result});
         }
     }
 }

@@ -48,7 +48,18 @@ class PostUserSeeder extends Seeder
                                     "path" => "js/views/administrator-f/PanelControl"
                                 ],
                                 "default" => true,
-
+                            ],
+                            [
+                                "id" => uniqid(),
+                                "text" => "История системы",
+                                "component" => [
+                                    "info" => [
+                                        "name" => "История системы",
+                                        "url" => "history"
+                                    ],
+                                    "path" => "js/views/history-f/History"
+                                ],
+                                "default" => true,
                             ]
                         ]
                     ],
@@ -665,6 +676,10 @@ class PostUserSeeder extends Seeder
                                         [
                                             "url" => "journal/:group_id",
                                             "path" => "js/views/journal-f/JournalOfSubjects"
+                                        ],
+                                        [
+                                            "url" => "group_journal/:journal_id",
+                                            "path" => "js/views/journal-f/Journal"
                                         ]
                                     ],
                                     "path" => "js/views/journal-f/JournalUnit"

@@ -20,9 +20,16 @@ class Schedule extends Model
         'created_at', 'deleted_at', 'updated_at'
     ];
 
+
+
     protected $fillable  = [
         'schedule','group_id'
     ];
+
+    public function group()
+    {
+        return $this->hasOne(Group::class,"id","group_id");
+    }
     
     public function __construct($attributes = array())
     {

@@ -4,7 +4,7 @@ namespace App\Modifications\Create;
 
 use App\Models\ScheduleSwap as Model;
 use App\Modifications\BaseModification;
-use App\Repositories\ModelRepository\DisciplineRepository;
+use App\Repositories\ModelRepository\DisciplineBufferRepository;
 use App\Repositories\ModelRepository\ScheduleRepository;
 use App\Repositories\ModelRepository\UserRepository;
 use Debugbar;
@@ -29,10 +29,10 @@ class CreateScheduleSwapModification extends BaseModification
     public function addParsedScheduleSwapToDatabase($request)
     {
         $scheduleRepository = app(ScheduleRepository::class);
-        $disciplineRepository = app(DisciplineRepository::class);
+        $disciplineRepository = app(DisciplineBufferRepository::class);
         $userRepository = app(UserRepository::class);
         $schedules = $scheduleRepository->getSchedulesWithGroup();
-        $disciplines = $disciplineRepository->getDisciplines();
+        $disciplines = $disciplineRepository->getDisciplineBufferRepositoryDataLast();
         $teachers = $userRepository->getTeachersFIO();
         $datas = [];
         $result = [];
@@ -40,7 +40,6 @@ class CreateScheduleSwapModification extends BaseModification
             foreach ($swapdays as $swap) {
                 preg_match("/[А-яЁ0-9]{1,4}-\d{1,2}-\d{1,2}/u", $swap["group"], $group);
                 $schedule = $schedules->where("group.group_name", $group[0])->first();
-
                 $valid = true;
                 $teacherValid = true;
                 $disciplineValid = true;
@@ -60,11 +59,14 @@ class CreateScheduleSwapModification extends BaseModification
                             $teacherValid = false;
                             break;
                         }
-                        $discipline = $disciplines->where("discipline_name", $swapData["lesson"])->first();
+                        $discipline = $disciplines->where("discip_name", $swapData['lesson'])
+                                                  ->where('curs', $schedule->group->curs)
+                                                  ->where('department', $schedule->group->department_id)
+                                                  ->first();
                         if ($discipline) {
                             array_push($swapDatas, [
                                 "caselesson" => $swapData["caselesson"],
-                                "lesson" => $discipline->id,
+                                "lesson" => $discipline['id'],
                                 "teacher" => $teachers_data
                             ]);
                             continue;

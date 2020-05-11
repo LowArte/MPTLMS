@@ -15,6 +15,7 @@ class CreateJournalModification extends BaseModification
 
     public function addJournalToDatabase($request)
     {
+        Debugbar::info($request);
         $journal = new Model();
         $journal->fill($request);
         $result = $journal->save();

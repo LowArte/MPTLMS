@@ -48,7 +48,7 @@ class User extends Authenticatable
         'deleted_at' => 'datetime',
     ];
 
-    protected $appends = ['full_name','full_name_inverted'];
+    protected $appends = ['full_name','full_name_inverted','not_short_fio'];
 
     public function post()
     {
@@ -73,6 +73,11 @@ class User extends Authenticatable
     public function getFullNameAttribute(){
         $thirdName = $this->thirdName ? ".".mb_substr($this->thirdName, 0, 1, "UTF-8").". " : ". ";
         return mb_substr($this->name, 0, 1, "UTF-8").$thirdName.$this->secName;
+    }
+
+    public function getNotShortFioAttribute(){
+       
+        return "{$this->secName} {$this->name} {$this->thirdName}";
     }
 
     public function getFullNameInvertedAttribute(){

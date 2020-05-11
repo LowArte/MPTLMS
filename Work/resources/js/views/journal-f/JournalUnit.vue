@@ -66,6 +66,10 @@ export default {
       {
         url: "journal/:group_id",
         path: "js/views/journal-f/JournalOfSubjects"
+      },
+      {
+        url: "group_journal/:journal_id",
+        path: "js/views/journal-f/Journal"
       }
     ]
   },

@@ -26,6 +26,7 @@ class ApiRoutes
             Route::get('discipline_buffer_data/{dbName}','Api\DisciplineBufferController@getDisciplineBufferData')->name('discipline_buffer');
 
             Route::get('options', 'Api\SiteOptionsController@getSiteOptions')->name('options');
+            Route::get('history', 'Api\HistoryController@getHistory')->name('options');
 
             Route::get('departments_for_combobox','Api\DepartmentController@getDepartmentsForCombobox')->name('departments_for_combobox');
             Route::get('departments','Api\DepartmentController@getDepartments')->name('departments');
@@ -64,7 +65,10 @@ class ApiRoutes
             Route::get('notificications/{user_id}', 'Api\NotificationsController@getNotificationsForUser')->name('notificications');
             
             Route::get('journals', 'Api\JournalController@getJournals')->name('journals');
+            Route::get('journals_by_id/{journal_id}', 'Api\JournalController@getJournalsById')->name('journals_by_id');
             Route::get('journals_by_group_id/{group_id}', 'Api\JournalController@getJournalsByGroupId')->name('journals_by_group_id');
+
+            Route::get('students_by_group_id/{group_id}', 'Api\StudentController@getStudentsByGroupId')->name('students_by_group_id');
             
             Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForStudentByGroup_Id')->name('association_for_teacher');
             Route::get('association_for_student/{group_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_student');
@@ -96,6 +100,8 @@ class ApiRoutes
             Route::post('user','Api\UserController@save')->name('user');      
 
             Route::post('place','Api\PlaceController@save')->name('place');
+
+            Route::post('swap_schedule','Api\ParserController@save')->name('swap_schedule');
 
             Route::post('notificications_for_user','Api\NotificationsController@saveForUser')->name('notificications_for_user');
             Route::post('notificications_for_user_group','Api\NotificationsController@saveForUserGroup')->name('notificications_for_user_group');
@@ -161,8 +167,10 @@ class ApiRoutes
             
             Route::post('send_email_certificate_cancel','Api\CertificateController@cancel')->name('send_email_certificate_cancel');           
             Route::post('send_email_certificate_access','Api\CertificateController@access')->name('send_email_certificate_access'); 
-            
+
             Route::post('load_excel_titles','Api\JournalController@parseExcel')->name('load_excel_titles');
+
+            Route::post('swap_schedule_parse','Api\ParserController@swap_schedule_parse')->name('swap_schedule_parse');
 
             Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');            
         });

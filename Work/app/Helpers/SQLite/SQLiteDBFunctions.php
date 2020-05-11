@@ -36,7 +36,7 @@ class SQLiteDBFunctions
         $departments = $departmentRepository->getDepartmentsForComboBox();
         $curRes = ["id" => 0];
         while ($res = $results->fetchArray(1)) {
-            if($curRes['id'] != $res['department']){
+            if ($curRes['id'] != $res['department']) {
                 $curRes = $departments->where("id", $res['department'])->first();
             }
             $res['dep_name_full'] =  $curRes->dep_name_full;
@@ -57,7 +57,7 @@ class SQLiteDBFunctions
         $departments = $departmentRepository->getDepartmentsForComboBox();
         $curRes = ["id" => 0];
         while ($res = $results->fetchArray(1)) {
-            if($curRes['id'] != $res['department']){
+            if ($curRes['id'] != $res['department']) {
                 $curRes = $departments->where("id", $res['department'])->first();
             }
             $res['dep_name_full'] =  $curRes->dep_name_full;
@@ -88,17 +88,18 @@ class SQLiteDBFunctions
         $stmt->bindValue(':department', $data['department']);
         $stmt->bindValue(':curs', $data['curs']);
         $result = $stmt->execute();
-        if($result){
+        if ($result) {
             return true;
         }
         return false;
     }
 
-    public function deleteData($id){
+    public function deleteData($id)
+    {
         $stmt = $this->db->prepare("DELETE FROM disciplines WHERE id=:id");
         $stmt->bindValue(':id', $id);
         $result = $stmt->execute();
-        if($result){
+        if ($result) {
             return true;
         }
         return false;
@@ -107,17 +108,38 @@ class SQLiteDBFunctions
 
     public function insertFullDataAndReturnModifaedArray(?array &$data)
     {
+        $temp = $this->getData();
         foreach ($data as $key => $dat) {
-            foreach ($dat as $key2=>$dis)
-            {
-                $stmt = $this->db->prepare("INSERT INTO disciplines (department,discip_name, discip_hours_first,discip_hours_second,curs) VALUES (:department, :discip_name, :discip_hours_first, :discip_hours_second,:curs)");
-                $stmt->bindValue(':discip_name', $dis['discip_name']);
-                $stmt->bindValue(':discip_hours_first', $dis['discip_hours_first'], SQLITE3_INTEGER);
-                $stmt->bindValue(':discip_hours_second', $dis['discip_hours_second'], SQLITE3_INTEGER);
-                $stmt->bindValue(':department', $key);
-                $stmt->bindValue(':curs', $dis['curs']);
-                $stmt->execute();
-                $data[$key][$key2]['id'] = $this->db->lastInsertRowID();
+            foreach ($dat as $key2 => $dis) {
+                $check = $temp
+                        ->where("discip_name",$dis['discip_name'])
+                        ->where("discip_hours_first",$dis['discip_hours_first'])
+                        ->where("discip_hours_second",$dis['discip_hours_second'])
+                        ->where("department",$key)
+                        ->where("curs",$dis['curs'])
+                        ->first();
+                if(!$check)
+                {
+                    $stmt = $this->db->prepare("INSERT INTO disciplines (department,discip_name, discip_hours_first,discip_hours_second,curs) VALUES (:department, :discip_name, :discip_hours_first, :discip_hours_second,:curs)");
+                    $stmt->bindValue(':discip_name', $dis['discip_name']);
+                    $stmt->bindValue(':discip_hours_first', $dis['discip_hours_first'], SQLITE3_INTEGER);
+                    $stmt->bindValue(':discip_hours_second', $dis['discip_hours_second'], SQLITE3_INTEGER);
+                    $stmt->bindValue(':department', $key);
+                    $stmt->bindValue(':curs', $dis['curs']);
+                    $stmt->execute();
+                    $data[$key][$key2]['id'] = $this->db->lastInsertRowID();
+                    $temp->push([
+                        "discip_name" => $dis['discip_name'],
+                        "discip_hours_first" => $dis['discip_hours_first'], 
+                        "discip_hours_second" => $dis['discip_hours_second'], 
+                        "department" => $key, 
+                        "curs"=>$dis['curs'],
+                        "id"=>$this->db->lastInsertRowID()
+                    ]);
+                }
+                else{
+                    $data[$key][$key2]['id'] = $check['id'];
+                }
             }
         }
     }

@@ -283,4 +283,11 @@ class ScheduleRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->where('group_id', $group_id)->toBase()->first()->id;
         return $result;
     }
+
+    public function getSchedulesWithGroup()
+    {
+        $columns = ['id', 'group_id'];
+        $result = $this->startCondition()->with("group:id,group_name,department_id,curs")->select($columns)->get();
+        return $result;
+    }
 }

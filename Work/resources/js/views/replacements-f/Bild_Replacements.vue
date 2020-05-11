@@ -16,6 +16,7 @@
                     v-spacer
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
             v-content.pa-1
+              c-parser
               router-link(class='nounderline' to="replacements") 
                 v-btn(color="accent" text block dark) Замены
         v-layout.row.wrap(v-if="date_week != 0")
@@ -66,6 +67,7 @@
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог Да/Нет
+import Parser_C from "@/js/components/parser-f/Parser"; //Парсер замен
 
 import api_department from "@/js/api/department"; //Расписания звонков
 import api_replacement from "@/js/api/replacement"; //api замен
@@ -84,7 +86,8 @@ export default {
   //*Подключение вспомогательных компонентов
   mixins: [withSnackbar, withOverlayLoading],
   components: {
-    "c-comfirm-dialog": ConfirmDialog_C
+    "c-comfirm-dialog": ConfirmDialog_C,
+    "c-parser" : Parser_C
   },
 
   computed: {

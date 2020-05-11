@@ -1,15 +1,24 @@
 <template lang="pug">
     v-dialog(v-model="dialog" persistent max-width="600px" v-if="item" )
         v-card
-            v-system-bar(dark color="primary")
-                span Новый журнал
-            v-progress-linear(:active="loading" :indeterminate="loading" absolute bottom color="success")
-            v-card-title {{item.group_name}}
-            v-card-text
+            v-system-bar(color="white")
+              span Новый журнал группы {{item.group_name}}
+            v-progress-linear(:active="loading" :indeterminate="loading" absolute top  color="success") 
+            v-card-text.pt-2
+                v-alert(v-if="alert" type="error"  border="left" elevation="3" colored-border color="red") Тиакой журнал уже существует.
                 v-form(ref="form")
-                    v-autocomplete(v-model="journal.teachers" label="Преподаватели" :items="teachers_combo" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
-                    v-autocomplete(dack v-model="journal.discip_id"  label="Дисциплина" :rules="DiscipRules" outlined dense :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discipline_name')
-                    v-autocomplete(dack v-model="journal.isClose"  label="Семестры" :rules="SemesterRules" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name')
+                    v-autocomplete(:disabled="loading" v-model="journal.teachers" label="Преподаватели" :rules="[TeacherRules.required]" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
+                      template(v-slot:selection="data")
+                        v-chip.ma-1(small dense label color="blue-grey lighten-4") 
+                          span {{ !data.item.fullFio ? 'Нет данных для выбора' : data.item.fullFio }}
+                    v-autocomplete(:disabled="loading" v-model="journal.discip_id"  label="Дисциплина" :rules="DiscipRules" outlined dense :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' clearable)
+                      template(v-slot:selection="data")
+                        v-chip.ma-1(small dense label color="blue-grey lighten-4") 
+                          span {{ !data.item ? 'Нет данных для выбора' : data.item.discip_name }}
+                    v-autocomplete(:disabled="loading" v-model="journal.isClose"  label="Семестры" :rules="[SemesterRules.required]" outlined dense :items="semesters" no-data-text="Нет данных" item-value='id' item-text='name' clearable)
+                      template(v-slot:selection="data")
+                        v-chip.ma-1(small dense label color="blue-grey lighten-4") 
+                          span {{ !data.item ? 'Нет данных для выбора' : data.item.name }}
             v-card-actions
                 v-btn(small text dark color="red" @click="dialog = !dialog") отмена
                 v-spacer
@@ -45,14 +54,19 @@ export default {
   mixins: [withOverlayLoading, withSnackbar],
 
   computed: {
-    ...mapGetters(["disciplines_combo", "teachers_combo"])
+    ...mapGetters(["disciplines_combo", "teachers_combo", "groups_journal"])
   },
   data() {
     return {
       dialog: false,
       item: null,
+      alert: false,
       loading: false,
-      semesters: [{id: 0, name: "Два семестра"}, {id: 1, name: "Только первый семестр"}, {id: 2, name: "Только второй семестр"}],
+      semesters: [
+        { id: 0, name: "Два семестра" },
+        { id: 1, name: "Только первый семестр" },
+        { id: 2, name: "Только второй семестр" }
+      ],
       journal: {
         //Объект для создания журнала (Отправить в бэк на сохранение)
         isClose: null,
@@ -65,13 +79,18 @@ export default {
           return !!value || "Преподаватель не указан";
         }
       },
-      DiscipRules: [v => !!v ||  "Дисциплина не указана"],
-      SemesterRules: [v => !!v ||  "Семестры не указаны"]
+      DiscipRules: [v => !!v || "Дисциплина не указана"],
+      SemesterRules: {
+        required: value => {
+          return !!value || "Семестр не указан";
+        }
+      }
     };
   },
 
   methods: {
-    async pop(item) {
+    async pop(item) 
+    {
       console.log(item);
       this.dialog = true;
       this.loading = !this.loading;
@@ -84,7 +103,10 @@ export default {
       );
       this.$store.commit(
         mutations.SET_DISCIPLINES_COMBO,
-        await api_discipline.getDisciplines({"curs":item.curs, "department_id": item.department_id})
+        await api_discipline.getDisciplines({
+          curs: item.curs,
+          department_id: item.department_id
+        })
       );
       this.closeLoading("Получение данных");
       this.loading = !this.loading;
@@ -92,12 +114,29 @@ export default {
         this.resolve = resolve;
       });
     },
+
+    //Сохранение нового журнала
     async saveJournal() {
-      //Сохранение нового журнала
+      
       if (this.$refs.form.validate()) {
-        this.dialog = false;
-        this.resolve(this.journal);
+        
+        if (!this.fingJournal()) 
+        {
+          this.dialog = false;
+          this.alert = false;
+          this.resolve(this.journal);
+        } else this.alert = this.fingJournal()
       } else this.showError("Валидация не пройдена");
+    },
+
+    async fingJournal() {
+      this.groups_journal.forEach(element => {
+        if(element.discip_id == this.journal.discip_id) {
+          return true
+        } else {
+          return false
+        }
+      });
     }
   }
 };

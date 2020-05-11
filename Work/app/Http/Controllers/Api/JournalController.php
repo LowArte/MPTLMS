@@ -12,15 +12,21 @@ use Debugbar;
 
 class JournalController extends BaseController
 { 
+    /***
+     * Получение журнала по id
+     */
+    public function getJournalsById($id, JournalRepository $journalRepository)
+    {
+        $journal = $journalRepository->getJournalById($id);
+        return response()->json(compact('journal'));
+    }
     /**
-     * Получение журнала по id группы
+     * Получение журналов по id группы
      * @return JSON
      */
     public function getJournalsByGroupId($id, JournalRepository $journalRepository)
     {
-        Debugbar::info($id);
         $journals = $journalRepository->getJournalByGroupId($id);
-        Debugbar::info($journals);
         return response()->json(compact('journals'));
     }    
 
@@ -35,13 +41,6 @@ class JournalController extends BaseController
     
     public function edit(Request $request,UpdateJournalModification $updateJournalModification){
         $data = $request->all();
-        if(array_key_exists('0', $data['journal']))
-        {
-            $delete_keys = array('0');
-            $data['journal'] = array_diff_key($data['journal'], array_flip($delete_keys));
-            $data['titles'] = array_diff_key($data['titles'], array_flip($delete_keys));
-        }
-        $data['titles'] = json_encode($data['titles']);
         $data['journal'] = json_encode($data['journal']);
         
         $result = $updateJournalModification->updateJournalInDatabase($data);
@@ -52,6 +51,7 @@ class JournalController extends BaseController
             return response()->json(500);
         }
     }
+
     //Закрытие/Открытие журнала
     public function editClose($id, $close, UpdateJournalModification $updateJournalModification)
     {

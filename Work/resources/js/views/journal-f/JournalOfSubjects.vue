@@ -1,14 +1,16 @@
 <template lang="pug">
     v-content.ma-0.pa-0
         v-layout.column.wrap
+          c-comfirm-dialog(ref="qwestion")
           v-flex.pa-3
               v-card.mx-auto(raised max-width="920px" min-width="300px")
                 v-card-title(v-if="groups_journal.length > 0 && getCursAndDepId") {{getCursAndDepId.group_name}}
                 v-card-text В данном разделе вы можете создавать новые журналы для группы, а так же закрывать или открывать доступ к журналам для преподавателей.
                 v-card-actions
                   v-btn(small text dark color="success" @click="createJournal()") новый журнал
-                  v-btn(small text dark color="red" @click="createJournal()") закрыть все
+                  v-btn(small text dark color="red" @click="cloaseAllJournal()") закрыть все
                 c-create-journal-dialog(ref='create')
+                c-edit-journal-dialog(ref='edit')
                 v-progress-linear(:active="loading" :indeterminate="loading" absolute bottom color="success")
           div(v-if="groups_subgects")
             div(v-if="groups_subgects.length > 0")
@@ -33,7 +35,7 @@
                             v-icon(small) mdi-lock
                           v-list-item-content
                             v-list-item-title Закрыть
-                        v-list-item(@click="")
+                        v-list-item(@click="editJournal(item)")
                           v-list-item-icon
                             v-icon(small) mdi-lead-pencil
                           v-list-item-content
@@ -44,7 +46,7 @@
                       br
                       small {{item.teachers.join(" / ")}}
                     v-col(class="shrink")
-                        v-btn(small text dark color="success" @click="getJournalForGroupOfSubject(item.journal_id)") открыть
+                        v-btn(small text dark color="success" @click="getJournalForGroupOfSubject(item.id)") открыть
             v-flex.pa-3.pt-1(v-else)
               v-alert.mx-auto(border="left" elevation="3" type="warning"  max-width="920px" min-width="300px")
                 span Для группы нет ни одного журнала. Чтобы тут отобразились журналы, создайте их или загрузите соответствующие выписки из учебного плана.
@@ -57,6 +59,8 @@
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 import CreateJournalDialog_С from "@/js/components/journal-f/CreateJournalDialog";
+import EditJournalDialog_С from "@/js/components/journal-f/EditJournalDialog";
+import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 
 //?----------------------------------------------
 //!           Vuex
@@ -68,7 +72,9 @@ export default {
   mixins: [withSnackbar, withOverlayLoading],
 
   components: {
-    "c-create-journal-dialog": CreateJournalDialog_С
+    "c-comfirm-dialog": confirmDialog_C,
+    "c-create-journal-dialog": CreateJournalDialog_С,
+    "c-edit-journal-dialog": EditJournalDialog_С
   },
   watch: {
     "$route.params.group_id": async function(group_id) {
@@ -79,8 +85,8 @@ export default {
     }
   },
   async beforeMount() {
-    if(this.groups_journal.length == 0)
-      await this.$store.dispatch(actions.SET_JOURNALS_GROUPS)
+    if (this.groups_journal.length == 0)
+      await this.$store.dispatch(actions.SET_JOURNALS_GROUPS);
     this.showLoading("Получение данных");
     await this.$store.dispatch(actions.SET_GROUPS_SUBJECTS, {
       context: this,
@@ -93,8 +99,7 @@ export default {
     getCursAndDepId: function() {
       let group = null;
       this.groups_journal.forEach(element => {
-        if(element.group_id == this.$route.params.group_id)
-          group = element;            
+        if (element.group_id == this.$route.params.group_id) group = element;
       });
       return group;
     }
@@ -107,15 +112,39 @@ export default {
   },
 
   methods: {
-    async closeJournal(item) {},
+    async closeJournal(item) {
+      //закрыть журнал
+    },
 
-    async createJournal() {
-      await this.$refs.create.pop(this.getCursAndDepId).then(() => {});
+    async createJournal() 
+    {
+      let res = await this.$refs.create.pop(this.getCursAndDepId).then(res => { return res; });
+      if (res) 
+        //this.$store.dispatch(actions.EDIT_SPECIALITIE, {data: result, result: this.$route.params.group_id});
+        if(await api_journal.saveJournal(res))
+          this.showMessage("Выполнено!");
+      else
+        this.showInfo("Действие было отменено пользователем!");
       this.$refs.create.$refs.form.reset();
     },
 
-    async getJournalForGroupOfSubject(id) {
+    async editJournal(item) {
+      await this.$refs.edit.pop(item).then(() => {});
+      this.$refs.edit.$refs.form.reset();
+    },
+    //editJournal
+    async cloaseAllJournal() {
+      await this.$refs.qwestion.pop().then(result => {
+        if (result) {
+          this.showInfo("Журналы заблокированы");
+        } else {
+          this.showInfo("Действие было отменено пользователем");
+        }
+      });
+    },
 
+    async getJournalForGroupOfSubject(id) {
+      this.$router.push("/" + this.user.post.slug + "/group_journal/" + id);
     }
   }
 };

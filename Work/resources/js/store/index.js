@@ -18,6 +18,7 @@ import сertificate from './modules/сertificate'
 import notifications from './modules/notifications'
 import foundation from './modules/foundation'
 import journals from './modules/journals'
+import history from './modules/history'
 
 Vue.use(Vuex)
 
@@ -42,7 +43,8 @@ export default new Vuex.Store({
     сertificate,
     notifications,
     foundation,
-    journals
+    journals,
+    history
   },
   strict: debug
 })

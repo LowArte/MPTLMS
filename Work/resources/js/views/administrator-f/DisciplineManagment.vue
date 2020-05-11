@@ -99,6 +99,7 @@ export default {
     },
 
     async LoadFile() {
+      this.showLoading("Загрузка и обработка файлов");
       var res = await this.$refs.upload_dialog.pop().then(res => {
         return res;
       });
@@ -109,6 +110,7 @@ export default {
           this.loadData();
         } else this.showError("Произошла ошибка при загрузке!");
       } else this.showInfo("Действие отменено пользователем!");
+      this.closeLoading("Загрузка и обработка файлов");
     }
   }
 };
