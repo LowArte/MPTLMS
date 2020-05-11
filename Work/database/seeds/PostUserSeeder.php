@@ -347,13 +347,18 @@ class PostUserSeeder extends Seeder
                                         "name" => "Успеваемость",
                                         "url" => "journal"
                                     ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "group_journal/:journal_id",
+                                            "path" => "js/views/journal-f/JournalReadOnly"
+                                        ]
+                                    ],
                                     "path" => "js/views/journal-f/JournalStudent"
                                 ],
                             ],
                             [
                                 "id" => uniqid(),
                                 "text" => "Домашнее задание",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Домашнее задание",

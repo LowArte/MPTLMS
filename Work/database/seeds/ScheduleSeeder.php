@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Group;
-use App\Models\Teacher;
+use App\Models\User;
 use App\Models\Discipline;
 
 class ScheduleSeeder extends Seeder
@@ -24,7 +24,7 @@ class ScheduleSeeder extends Seeder
      */
     public function run()
     {
-        $teachers = Teacher::get();
+        $teachers = User::where("post_id", 3)->get();
         $disciplines = Discipline::get();
         //$les = array('TeacherChisl' => [1], 'LessonChisl' => [1], 'chisl' => true, 'TeacherZnam' => [1], 'LessonZnam' => [2], 'classroom' =>'');
         //$lessons = array($les);

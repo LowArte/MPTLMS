@@ -106,11 +106,11 @@ export default {
             if(this.isTeacher)
             {
               res['swap']['oldteacher'].forEach(element => {
-                if(element == this.user.teacher.id)
+                if(element == this.user.id)
                   checkTeacher = true;
               });
               res['swap']['teacher'].forEach(element => {
-                if(element == this.user.teacher.id)
+                if(element == this.user.id)
                   checkTeacher = true;
               });
 
@@ -174,9 +174,7 @@ export default {
     if(this.user.post_id == 3)
       this.isTeacher = true;
     this.showLoading("Получение замен");
-    this.replacements = await api_replacement.getReplacements()
-    for (var i = 0; i < this.replacements.length; i++) 
-        this.replacements[i]["swap"] = JSON.parse(this.replacements[i]["swap"]);
+    await this.Update();
     this.closeLoading("Получение замен");
     this.getDepartments();
     
@@ -186,6 +184,13 @@ export default {
 //?----------------------------------------------
 //!           Методы страницы
 //?----------------------------------------------
+    async Update()
+    {
+      let items = await api_replacement.getReplacements()
+      for (var i = 0; i < items.length; i++) 
+        items[i]["swap"] = JSON.parse(items[i]["swap"]);
+      this.replacements = items;
+    },
     //*Получение отделений для выпадающего списка
     async getDepartments()
     {
@@ -285,6 +290,7 @@ export default {
       {
         if(api_replacement.deleteReplacement(id))
         {
+          await this.Update();
           this.showMessage("Замена удалена!");
           this.changeFilter();
         }

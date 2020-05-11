@@ -183,7 +183,7 @@ export default {
   async beforeMount()
   {
     this.showLoading("Получение данных");
-    await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.teacher.id, date: this.days[new Date().getDay()]});
+    await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.id, date: this.days[new Date().getDay()]});
     if(!this.tieacher_timetable) this.showError("Данные не получены!");
     this.closeLoading("Получение данных");
   },
@@ -218,16 +218,16 @@ export default {
       if(!this.allTabel) {
         this.allTabel = true;
         await this.$forceUpdate();
-        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE_FULL, this.user.teacher.id);
+        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE_FULL, this.user.id);
       }
       else {
         this.allTabel = false;
         await this.$forceUpdate();
-        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.teacher.id, date: this.days[new Date().getDay()]});
+        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.id, date: this.days[new Date().getDay()]});
       }
       if(!this.tieacher_timetable) this.showError("Данные не получены!");
       this.closeLoading("Получение данных");
     }
   }
 }
-</script>
+</script>+

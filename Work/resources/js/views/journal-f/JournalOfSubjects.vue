@@ -19,11 +19,11 @@
                   v-system-bar.pl-0(color="white")
                     div(v-if="item.teachers.length == 0")
                       v-icon(color="red") mdi-alert
-                      span отсутсвует преподаватель
+                      span отсутствует преподаватель
                     v-tooltip(bottom)
                       template(v-slot:activator="{ on }")
                         v-icon(v-if="item.teachers.length != 0"  small v-on="on") {{item.isClose == null ?  'mdi-lock' : 'mdi-clock'}}
-                      span {{item.isClose == null ?  'Журнал закрыт' : 'Журнал досрупен для преподавателей'}} 
+                      span {{item.isClose == null ?  'Журнал закрыт' : 'Журнал доступен для преподавателей'}} 
                     v-spacer
                     v-menu(bottom origin="center center" transition="slide-y-transition")
                       template(v-slot:activator="{ on }")

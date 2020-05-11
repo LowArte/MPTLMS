@@ -5,7 +5,7 @@
               span Новый журнал группы {{item.group_name}}
             v-progress-linear(:active="loading" :indeterminate="loading" absolute top  color="success") 
             v-card-text.pt-2
-                v-alert(v-if="alert" type="error"  border="left" elevation="3" colored-border color="red") Тиакой журнал уже существует.
+                v-alert(v-if="alert" type="error"  border="left" elevation="3" colored-border color="red") Такой журнал уже существует.
                 v-form(ref="form")
                     v-autocomplete(:disabled="loading" v-model="journal.teachers" label="Преподаватели" :rules="[TeacherRules.required]" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
                       template(v-slot:selection="data")

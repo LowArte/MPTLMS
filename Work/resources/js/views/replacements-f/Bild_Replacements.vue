@@ -53,7 +53,7 @@
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-2.mt-2(v-model="replacement.caselesson" :rules="numberLessonRules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
                             v-switch(v-model="cancel" color="primary" inset label="Отменить занятие!")
-                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" no-data-text="Нет данных" :rules="[DiscipRules.required]" label="Дисциплины" :items="disciplines_combo" item-text='discipline_name' item-value="id" small-chips chips multiple)
+                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" no-data-text="Нет данных" :rules="[DiscipRules.required]" label="Дисциплины" :items="disciplines_combo" item-text='discip_name' item-value="id" small-chips chips multiple)
                             v-autocomplete(v-if="!cancel" v-model="replacement.teacher" no-data-text="Нет данных" :rules="[TeacherRules.required]" label="Преподаватели" :items="teachers_combo" item-text='fullFio' item-value="id" small-chips chips multiple)
                         v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
@@ -170,13 +170,8 @@ export default {
     //*Получение всех дисциплин
     async getDisciplines()
     {
-      this.showLoading("Получение дисциплин");
-      if(this.disciplines_combo == null)
-      {
-        let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
-        this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
-      }
-      this.closeLoading("Получение дисциплин");
+      let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
+      this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
     },
 
     //*Получение отделений для выпадающего списка
@@ -336,7 +331,7 @@ export default {
         } 
         else 
         {
-          if (this.isChisl() == 0) {
+          if (this.isChisl == 0) {
             this.replacement.oldlesson = this.schedule_bild[number].LessonChisl;
             this.replacement.oldteacher = this.schedule_bild[number].TeacherChisl;
           } 

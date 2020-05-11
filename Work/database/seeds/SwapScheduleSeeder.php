@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Schedule;
-use App\Models\Teacher;
+use App\Models\User;
 
 use function GuzzleHttp\json_encode;
 
@@ -16,7 +16,7 @@ class SwapScheduleSeeder extends Seeder
     public function run()
     {
         $schedule = Schedule::get();
-        $teachers = Teacher::get();
+        $teachers = User::where("post_id", 3)->get();
         $data = array();
         for ($i = 0; $i < count($schedule); $i++)
             array_push(
