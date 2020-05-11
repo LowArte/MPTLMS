@@ -66,7 +66,6 @@ export default {
     combo_groups: function() {
       if (!this.groups_combo) return undefined;
       this.selected_group = this.groups_combo[0];
-      console.log(this.groups_combo)
       return this.groups_combo;
     },
     //*Получение четности недели

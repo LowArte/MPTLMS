@@ -75,7 +75,6 @@ export default {
     this.showLoading("Получение данных");
     await this.$store.dispatch(actions.SET_JOURNAL_TEACHER, this.user.id);
     this.closeLoading("Получение данных");
-    console.log(this.teacher_journals);
   },
   //?----------------------------------------------
   //!           Методы страницы

@@ -87,7 +87,6 @@ export default {
   methods: {
     async pop(item) 
     {
-      console.log(item);
       this.dialog = true;
       this.loading = !this.loading;
       this.item = item;

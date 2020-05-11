@@ -99,18 +99,13 @@ export default {
     "$route.params.journal_id": async function(journal_id) {
       if(journal_id)
       {
-        console.log(journal_id);
-        this.journal = null;
-        await this.$forceUpdate();
         let journal = await api_journal.getJournalById(journal_id);
-        console.log(journal);
         if(journal)
         {
           this.journal = journal;
           this.journal = this.journal[0];
           if(this.journal)
           {
-            this.journal.journal = JSON.parse(this.journal.journal);
             let students = await api_student.getStudentsByGroupId(this.journal.group_id);
             this.journal.students = students;
           }
@@ -147,7 +142,6 @@ export default {
 
   async beforeMount() 
   {
-    console.log(this.$route.params.journal_id);
     let journal = await api_journal.getJournalById(this.$route.params.journal_id);
     this.journal = journal;
     if(journal)
@@ -155,7 +149,6 @@ export default {
       this.journal = this.journal[0];
       if(this.journal)
       {
-        this.journal.journal = JSON.parse(this.journal.journal);
         let students = await api_student.getStudentsByGroupId(this.journal.group_id);
         this.journal.students = students;
       }

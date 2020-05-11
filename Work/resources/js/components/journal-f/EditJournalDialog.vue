@@ -81,7 +81,6 @@ export default {
 
   methods: {
     async pop(item) {
-      console.log(item);
       this.loading = true;
       this.dialog = !this.dialog;
       this.showLoading("Получение данных");
@@ -89,9 +88,7 @@ export default {
         mutations.SET_TEACHERS_COMBO,
         await api_teacher.getTeachers()
       );
-      console.log(this.teachers_combo)
       this.item = JSON.parse(JSON.stringify(item));
-      console.log(this.item);
       this.closeLoading("Получение данных");
       this.loading = !this.loading;
       return new Promise((resolve, reject) => {

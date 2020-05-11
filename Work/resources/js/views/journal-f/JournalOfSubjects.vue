@@ -97,7 +97,6 @@ export default {
       context: this,
       result: this.$route.params.group_id
     });
-    console.log(this.groups_subgects);
     this.closeLoading("Получение данных");
   },
   computed: {
@@ -154,7 +153,7 @@ export default {
             data: result,
             result: this.$route.params.group_id
           });
-          this.showInfo("Журналы заблокированы");
+          this.showMessage("Выполнено!");
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

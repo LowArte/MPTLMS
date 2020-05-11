@@ -15,7 +15,6 @@ class JournalRepository extends BaseRepository
 
     public function getJournalById($id)
     {
-        Debugbar::info($id);
         $columns = ['id','journal', 'discip_id', 'group_id', 'isClose'];
         $result = $this->startCondition()
                         ->select($columns)
@@ -30,6 +29,7 @@ class JournalRepository extends BaseRepository
         $assosiations = $assosiationRepositroy->getAssociation();
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res){
+            $res['journal'] = json_decode($res['journal']);
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
             $assosiation = $assosiations->where("journal_id",$res['id'])->all();
             $teach = [];
@@ -61,6 +61,7 @@ class JournalRepository extends BaseRepository
         $assosiations = $assosiationRepositroy->getAssociation();
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res){
+            $res['journal'] = json_decode($res['journal']);
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
             $assosiation = $assosiations->where("journal_id",$res['id'])->all();
             $teach = [];

@@ -33,7 +33,6 @@ export default {
     //!----------------------------------------
     getDisciplines(data) 
     {
-        console.log(data);
         return axios.get('/api/getters/get_disciplines/', { params: {...data}})
         .then(res => {return res.data.disciplines;})
         .catch(() => {return undefined;});

@@ -67,12 +67,10 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "assignment",
                         "text" => "Расписания",
-
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное расписание",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Учебное расписание",
@@ -496,28 +494,28 @@ class PostUserSeeder extends Seeder
                                     "info" => [
                                         "name" => "Успеваемость",
                                         "url" => "journal",
-                                        "dop_com" => [
-                                            [
-                                                "url" => "group_journal/:journal_id",
-                                                "path" => "js/views/journal-f/Journal"
-                                            ]
-                                        ],
                                     ],
+                                    "dop_com" => [
+                                        [
+                                            "url" => "group_journal/:journal_id",
+                                            "path" => "js/views/journal-f/Journal"
+                                        ]
+                                    ],
+                                    "path" => "js/views/journal-f/JournalTeacher"
                                 ],
-                                "path" => "js/views/journal-f/JournalTeacher"
                             ],
-                        ],
-                        [
-                            "id" => uniqid(),
-                            "text" => "Домашнее задание",
-                            "component" => [
-                                "info" => [
-                                    "name" => "Домашнее задание",
-                                    "url" => "homework_teacher"
+                            [
+                                "id" => uniqid(),
+                                "text" => "Домашнее задание",
+                                "component" => [
+                                    "info" => [
+                                        "name" => "Домашнее задание",
+                                        "url" => "homework_teacher"
+                                    ],
+                                    "path" => "js/views/homework-f/HomeWorkTeacher"
                                 ],
-                                "path" => "js/views/homework-f/HomeWorkTeacher"
-                            ],
-                        ]
+                            ]
+                        ], 
                     ],
                     [
                         "id" => uniqid(),
@@ -585,7 +583,6 @@ class PostUserSeeder extends Seeder
                                     "info" => [
                                         "name" => "Учебное расписание",
                                         "url" => "timetable",
-
                                     ],
                                     "dop_com" => [
                                         [
@@ -604,7 +601,6 @@ class PostUserSeeder extends Seeder
                                     "info" => [
                                         "name" => "Замены расписания",
                                         "url" => "replacements",
-
                                     ],
                                     "dop_com" => [
                                         [
