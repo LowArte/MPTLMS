@@ -2,7 +2,7 @@
 
 namespace App\Repositories\ModelRepository;
 
-use App\Models\Teacher as Model;
+use App\Models\User as Model;
 
 class TeacherRepository extends BaseRepository
 {
@@ -12,8 +12,9 @@ class TeacherRepository extends BaseRepository
 
     public function getTeachersWithFio()
     {
-        $result = $this->startCondition()->join('users', 'teachers.user_id', '=', 'users.id')
-                        ->selectRaw("`teachers`.id as teacher_id,`users`.id as id, CONCAT(users.secName, ' ', users.name, ' ',  users.thirdName) as fullFio")
+        $result = $this->startCondition()
+                        ->where("post_id", 3)
+                        ->selectRaw("`users`.id, CONCAT(users.secName, ' ', users.name, ' ',  users.thirdName) as fullFio")
                         ->toBase()
                         ->get();      
         return $result;

@@ -60,11 +60,6 @@ class User extends Authenticatable
         return $this->hasOne(Student::class,'user_id','id');
     }
 
-    public function teacher()
-    {
-        return $this->hasOne(Teacher::class,'user_id','id');
-    }
-
     public function getModelLabel()
     {
         return "Пользователей";

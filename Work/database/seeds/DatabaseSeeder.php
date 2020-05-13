@@ -38,7 +38,6 @@ class DatabaseSeeder  extends Seeder
         
         //Формирование данный для особых пользователей
         $this->call([
-            TeachersSeeder::class,
             StudentsSeeder::class
         ]);
         //Формирование расписаний и замен

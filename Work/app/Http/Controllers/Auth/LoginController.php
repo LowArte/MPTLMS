@@ -27,7 +27,6 @@ class LoginController extends Controller
 
         $user->load("post");
         $user->load("student");
-        $user->load("teacher");
         if($user->student)
         {
             $user->student->load("group:id,group_name,curs,department_id");
@@ -69,7 +68,6 @@ class LoginController extends Controller
         }
         $user->load("post");
         $user->load("student");
-        $user->load("teacher");
         if($user->student)
         {
             $user->student->load("group:id,group_name,curs,department_id");
