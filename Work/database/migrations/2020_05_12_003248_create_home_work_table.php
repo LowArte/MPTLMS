@@ -17,10 +17,25 @@ class CreateHomeWorkTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->json('info');
+            $table->smallInteger('type');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
+
+    /*
+        поле info 
+        Обязательно title и text date[tema, text] date_end
+
+
+        поле type
+        0 - Просто новость
+        1 - домашнее задание
+        2 - повременное домашнее задание // info создавать из дат
+        3 - Курсовой проект
+        4 - Дипломная работы
+        5 - Экзамен
+    */
 
     /**
      * Reverse the migrations.

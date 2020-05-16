@@ -578,12 +578,10 @@ class PostUserSeeder extends Seeder
                         "id" => uniqid(),
                         "icon" => "assignment",
                         "text" => "Расписания",
-
                         "children" => [
                             [
                                 "id" => uniqid(),
                                 "text" => "Учебное расписание",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Учебное расписание",
@@ -658,6 +656,7 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "text" => "Учебные журналы",
+                        "icon" => "dashboard",
                         "component" => [
                             "info" => [
                                 "name" => "Журнал учебной части",
