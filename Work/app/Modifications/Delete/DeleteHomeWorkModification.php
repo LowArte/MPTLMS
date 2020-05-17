@@ -10,8 +10,8 @@ class DeleteHomeWorkModification extends BaseModification
         return Model::class;
     }
 
-    public function deleteHomeWorkFromDatabase($id){
-        $result = $this->startCondition()->find($id)->delete();
+    public function deleteHomeWorkFromDatabase($homework_id){
+        $result = $this->startCondition()->find($homework_id)->delete();
         return $result;
     }
 }

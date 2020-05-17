@@ -8,7 +8,7 @@ v-content.ma-0.pa-2
         v-system-bar(dark color="info")
           span(style="color: white;") Фильтры
         v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-        v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
+        v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
         v-content.pa-1
           router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_timetable'") 
             v-btn(color="accent" text block dark) Конструктор расписания      
@@ -134,6 +134,7 @@ export default {
     return {
       selected_department: null,
       selected_group: null,
+      groups: null,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
       schedule: null,
       start: true
@@ -220,7 +221,8 @@ export default {
       {
         this.showLoading("Получение расписания");
         schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id);
-        schedule["group_id"] = this.selected_group.id;
+        if(schedule)
+          schedule["group_id"] = this.selected_group.id;
         this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
         this.closeLoading("Получение расписания");
       } 
@@ -254,6 +256,7 @@ export default {
           }
         }
         this.start = false;
+        this.groups = this.combo_groups;
         if(this.selected_group)
           this.group_change();
       }

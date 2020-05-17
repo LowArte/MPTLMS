@@ -138,7 +138,7 @@ export default {
             data: result,
             result: this.$route.params.group_id
           });
-          this.showInfo("Журналы заблокированы");
+          this.showInfo("Журналы созданы");
         } else {
           this.showInfo("Действие было отменено пользователем");
         }

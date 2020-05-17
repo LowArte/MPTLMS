@@ -21,6 +21,7 @@ class CreateAssociationUsersHomeWorkTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('home_work_id')->references('id')->on('home_work');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

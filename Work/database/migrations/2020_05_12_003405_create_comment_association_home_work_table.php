@@ -20,6 +20,7 @@ class CreateCommentAssociationHomeWorkTable extends Migration
             $table->foreign('comment_id')->references('id')->on('comment_home_work');
             $table->foreign('ass_hw_id')->references('id')->on('association_home_work');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

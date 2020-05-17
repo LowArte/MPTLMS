@@ -19,6 +19,7 @@ import notifications from './modules/notifications'
 import foundation from './modules/foundation'
 import journals from './modules/journals'
 import history from './modules/history'
+import homework from './modules/homework'
 
 Vue.use(Vuex)
 
@@ -44,7 +45,8 @@ export default new Vuex.Store({
     notifications,
     foundation,
     journals,
-    history
+    history,
+    homework
   },
   strict: debug
 })

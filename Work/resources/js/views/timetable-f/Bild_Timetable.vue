@@ -6,7 +6,7 @@
           v-system-bar(dark color="info")
             span(style="color: white;") Фильтры
           v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-          v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
+          v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
           v-content.pa-1
             router-link(class='nounderline' :to="'timetable'") 
               v-btn(color="accent" text block dark) Расписание      
@@ -94,6 +94,7 @@ export default {
       },
       selected_department: null,
       selected_group: null,
+      groups: null,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
       schedule: null
     }
@@ -188,6 +189,7 @@ export default {
 
       if (this.combo_groups) 
       {
+        this.groups = this.combo_groups;
         this.selected_group = this.combo_groups[0];
         this.group_change();
       }

@@ -6,7 +6,7 @@
             v-system-bar(dark color="info")
               span(style="color: white;") Фильтры
             v-combobox.ma-1(label="Специальность" @change="department_change" no-data-text="Нет данных" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-            v-combobox.ma-1(label="Группа" item-text="group_name" no-data-text="Нет данных" :items="combo_groups" @change="caseDate()" v-model="selected_group")
+            v-combobox.ma-1(label="Группа" item-text="group_name" no-data-text="Нет данных" :items="groups" @change="caseDate()" v-model="selected_group")
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                 template(v-slot:activator="{ on }")
                   v-content.pa-2
@@ -131,6 +131,7 @@ export default {
         oldlesson: [],
         oldteacher: []
       },
+      groups: null,
       schedule: null, //Расписание выбранного дня
       schedule_bild: null, //Расписание выбранного дня
       selected_department: null,
@@ -279,6 +280,7 @@ export default {
 
       if (this.combo_groups) 
       {
+        this.groups = this.combo_groups;
         this.selected_group = this.combo_groups[0];
         this.group_change();
       }

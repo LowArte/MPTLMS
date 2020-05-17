@@ -20,6 +20,7 @@ class CreateHomeWorkTable extends Migration
             $table->smallInteger('type');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

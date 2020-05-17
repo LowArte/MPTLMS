@@ -8,7 +8,7 @@
                     v-system-bar(dark color="info")
                         span(style="color: white;") Фильтры
                     v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-                    v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="combo_groups" v-model="selected_group")
+                    v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
                     v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                         template(v-slot:activator="{ on }")
                             v-content.pa-2
@@ -117,6 +117,7 @@ export default {
             checkAllDate: false,
             checkAllGroup: false,
             start: true,
+            groups: null,
             dateDialog: {
                 model: false,
                 date: new Date().toISOString().substr(0, 10)
@@ -173,6 +174,7 @@ export default {
 
             if (this.combo_groups) 
             {
+                this.groups = this.combo_groups;
                 if(this.start && this.user.post_id == 2)
                 {
                     for (let index = 0; index < this.combo_groups.length; index++) 

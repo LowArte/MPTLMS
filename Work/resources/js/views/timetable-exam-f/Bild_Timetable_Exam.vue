@@ -6,7 +6,7 @@
             v-card-text
                 v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
                 v-form.mx-3.mt-2(ref="form")
-                    v-autocomplete(dense label="Группа" :rules="groupRules" :items="combo_groups" no-data-text="Нет данных" item-text="group_name" item-value="id" v-model="exam.group_id")
+                    v-autocomplete(dense label="Группа" :rules="groupRules" :items="groups" no-data-text="Нет данных" item-text="group_name" item-value="id" v-model="exam.group_id")
                     v-text-field(
                         v-model="exam.info.exam"
                         :rules="nameExamRules"
@@ -87,6 +87,7 @@ export default {
             item: null,
             mask: "##:##-##:##", //Маска расписания экзамена
             resolve: null,
+            groups: null,
             exam:{
                 id: null,
                 date:null,

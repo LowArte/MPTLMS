@@ -2,16 +2,12 @@
     v-dialog(v-model="dialog" persistent max-width="600px" v-if="item" )
         v-card
             v-system-bar(color="white")
-              span Новый журнал группы {{item.group_name}}
+              span Новое задание для групп {{item.group_name}}
             v-progress-linear(:active="loading" :indeterminate="loading" absolute top  color="success") 
             v-card-text.pt-2
-                v-alert(v-if="alert" type="error"  border="left" elevation="3" colored-border color="red") Такой журнал уже существует.
                 v-form(ref="form")
                     v-autocomplete(:disabled="loading" v-model="journal.teachers" label="Преподаватели" :rules="[TeacherRules.required]" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
-                      template(v-slot:selection="data")
-                        v-chip.ma-1(small dense label color="blue-grey lighten-4") 
-                          span {{ !data.item.fullFio ? 'Нет данных для выбора' : data.item.fullFio }}
-                    v-autocomplete(:disabled="loading" v-model="journal.discip_id"  label="Дисциплина" :rules="DiscipRules" outlined dense :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' clearable)
+                    v-autocomplete(:disabled="loading" v-model="journal.discip_id"  label="Группы" :rules="DiscipRules" outlined dense :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' clearable)
                       template(v-slot:selection="data")
                         v-chip.ma-1(small dense label color="blue-grey lighten-4") 
                           span {{ !data.item ? 'Нет данных для выбора' : data.item.discip_name }}
@@ -115,12 +111,12 @@ export default {
       
       if (this.$refs.form.validate()) {
         
-        if (!this.fingJournal()) 
-        {
+        /* if (!this.fingJournal()) 
+        { */
           this.dialog = false;
           this.alert = false;
           this.resolve(this.journal);
-        } else this.alert = this.fingJournal();
+        /* } else this.alert = this.fingJournal() */
       } else this.showError("Валидация не пройдена");
     },
 

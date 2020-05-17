@@ -32,6 +32,7 @@ class AssociationRepository extends BaseRepository
         $disiplineBufferRepository = app(DisciplineBufferRepository::class);
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res){
+            Debugbar::info($disciplines->where("id",$res['discip_id'])->first());
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
         }
         return $result;

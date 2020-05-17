@@ -21,6 +21,7 @@ class CreateCommentHomeWorkTable extends Migration
             $table->unsignedBigInteger('to_user_id');
             $table->foreign('to_user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

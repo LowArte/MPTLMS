@@ -71,6 +71,8 @@ class ApiRoutes
             Route::get('students_by_group_id/{group_id}', 'Api\StudentController@getStudentsByGroupId')->name('students_by_group_id');
             
             Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_teacher');
+
+            Route::get('homework_by_teacher_id/{teacher_id}', 'Api\HomeWorkController@getHomeWorkTeacher')->name('homework_by_teacher_id');
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -111,6 +113,8 @@ class ApiRoutes
             Route::post('journals', 'Api\JournalController@save')->name('journals');
 
             Route::post('association', 'Api\AssociationController@save')->name('association');
+
+            Route::post('homework', 'Api\HomeWorkController@save')->name('homework');
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -144,6 +148,8 @@ class ApiRoutes
             Route::post('journal_close_groups/{group_id}','Api\JournalController@editCloseAll')->name('journal_close_groups');
             Route::post('journal','Api\JournalController@edit')->name('journal');
             Route::post('journal_association','Api\JournalController@editJournalAssociation')->name('journal');
+            
+            Route::post('homework', 'Api\HomeWorkController@edit')->name('homework');
         });
 
          /**
@@ -195,7 +201,9 @@ class ApiRoutes
 
             Route::post('place/{place_id}','Api\PlaceController@delete')->name('place');
 
-            Route::post('user/{user_id}/{post_id}','Api\UserController@delete')->name('user');      
+            Route::post('user/{user_id}/{post_id}','Api\UserController@delete')->name('user');    
+            
+            Route::post('homework/{homework_id}', 'Api\HomeWorkController@delete')->name('homework');
         });
     }
 }
