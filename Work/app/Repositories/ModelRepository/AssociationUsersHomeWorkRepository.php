@@ -32,6 +32,7 @@ class AssociationUsersHomeWorkRepository extends BaseRepository
             $value['info'] = json_decode($value['info']);
             $value['title'] = $value['info']->title;
             $value['text'] = $value['info']->text;
+            $value['dates_homework'] = $value['info']->date;
             if(isset($value['info']))
                 unset($value['info']);
 

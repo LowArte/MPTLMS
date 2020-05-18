@@ -37,7 +37,7 @@
                                 v-list-item-subtitle Тип задания: {{types[item.type]}}
                                 v-list-item-subtitle Группы: {{item.groups.length == 0 ? 'Ошибка' : item.groups.join(', ')}}
                                 v-list-item-subtitle.my-2 Дата создания: {{item.date}}
-                                v-list-item-subtitle Автор: {{item.teacher_admin}}
+                                v-list-item-subtitle(v-if="item.teacher_admin") Автор: {{item.teacher_admin}}
                               v-list-item-action
                                 v-btn(icon @click="goToHomeworck(item.id)")
                                   v-icon mdi-chevron-right          
@@ -46,29 +46,33 @@
                 v-col
                   v-sheet(height="64")
                     v-toolbar( flat color="white")
-                      v-btn(outlined small class="mr-4" color="orange darken-1" @click="setToday") СЕГОДНЯ
+                      v-btn(outlined small class="mr-4" color="orange darken-1" @click="setToday") ТЕКУЩИЙ МЕСЯЦ
                       v-btn(fab text small color="orange darken-1" @click="prev")
                         v-icon(small) mdi-chevron-left
                       v-toolbar-title {{ title }}
                       v-btn(fab text small color="orange darken-1" @click="next")
                         v-icon(small) mdi-chevron-right
-                      v-spacer
-                      v-menu(bottom right)
-                        template(v-slot:activator="{ on }")
-                          v-btn(outlined small color="orange darken-1" v-on="on")
-                            span {{typeToLabel[type]}}
-                            v-icon(right) mdi-menu-down
-                        v-list
-                          v-list-item(@click="type = 'day'")
-                            v-list-item-title День
-                          v-list-item(@click="type = 'week'")
-                            v-list-item-title Неделя
-                          v-list-item(@click="type = 'month'")
-                            v-list-item-title Месяц
-                          v-list-item(@click="type = '4day'")
-                            v-list-item-title 4 дня
                   v-sheet(height="600")
-                    v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6, 0]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @click:more="viewDay" @click:date="viewDay" @change="updateRange")
+                    v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6, 0]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @change="updateRange")
+                    v-menu(v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x)
+                      v-card(:color="selectedEvent.color + ' lighten-5'" min-width="350px" flat)
+                        v-system-bar(:color="selectedEvent.color" dark)
+                          small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёк' : 'Задание в процессе'}}
+                        v-card-text(v-if="selectedEvent.details")
+                          small(v-html="selectedEvent.details.name")
+                          br
+                          span(v-html="selectedEvent.details.full_text")
+                          v-divider
+                          span(v-html="selectedEvent.details.title") 
+                          br
+                          span(v-html="selectedEvent.details.text")
+                        v-card-text(v-else)
+                          small(v-html="selectedEvent.name")
+                          br
+                          span(v-if="selectedEvent.details" v-html="selectedEvent.details.full_text")
+                        v-card-actions
+                          v-btn(text small block color="secondary" @click="selectedOpen = false") закрыть
+                          
 </template>
 
 <script>
@@ -84,7 +88,8 @@ import CreateHomeWorkDialog_С from "@/js/components/home-work-f/CreateHomeWorkD
 import api_homework from "@/js/api/homework";
 import api_student from "@/js/api/student";
 import api_department from "@/js/api/department"; //Отделения
-import api_teacher from "@/js/api/teacher"; //Отделения
+import api_teacher from "@/js/api/teacher"; //Преподователи
+import api_place from "@/js/api/place"; //Места проведения
 //?----------------------------------------------
 //!           Vuex
 //?----------------------------------------------
@@ -123,17 +128,9 @@ export default {
       types: [
         "Новость",
         "Домашнее задание",
-        "Повременное домашнее задание",
-        "Курсовой проект",
-        "Дипломная работы",
+        "Поэтапное задание",
         "Экзамен"
       ],
-      typeToLabel: {
-        month: "Месяц",
-        week: "Неделя",
-        day: "День",
-        "4day": "4 дня"
-      },
       focus: null,
       type: "month",
       start: null,
@@ -144,23 +141,13 @@ export default {
       selectedOpen: false,
       events: [],
       colors: [
-        "blue",
         "indigo",
         "deep-purple",
         "cyan",
+        "teal",
         "green",
-        "orange",
-        "grey darken-1"
-      ],
-      names: [
-        "Meeting",
-        "Holiday",
-        "PTO",
-        "Travel",
-        "Event",
-        "Birthday",
-        "Conference",
-        "Party"
+        "deep-orange",
+        "blue-grey"
       ]
     };
   },
@@ -171,7 +158,8 @@ export default {
       "groups_combo",
       "user",
       "teachers_combo",
-      "homework_list"
+      "homework_list",
+      "places"
     ]),
     title() {
       const { start, end } = this;
@@ -192,11 +180,6 @@ export default {
       switch (this.type) {
         case "month":
           return `${startMonth} ${startYear}`;
-        case "week":
-        case "4day":
-          return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
-        case "day":
-          return `${startMonth} ${startDay} ${startYear}`;
       }
       return "";
     },
@@ -230,6 +213,13 @@ export default {
       this.$store.commit(mutations.SET_TEACHERS_COMBO, items);
     }
 
+    //Получение мест проведения
+    if(this.places == null)
+    {
+        let items = await api_place.getPlaces();
+        this.$store.commit(mutations.SET_PLACES_FULL, items)
+    }
+
     //Получение данных
     await this.$store.dispatch(actions.ADD_CACHE_HOMEWORK, {
       context: this,
@@ -257,10 +247,6 @@ export default {
     },
     async goToHomeworck(homework_id) {
       console.log(homework_id);
-    },
-    viewDay({ date }) {
-      this.focus = date;
-      this.type = "day";
     },
     getEventColor(event) {
       return event.color;
@@ -296,23 +282,37 @@ export default {
       const min = new Date(`${start.date}T00:00:00`);
       const max = new Date(`${end.date}T23:59:59`);
       const days = (max.getTime() - min.getTime()) / 86400000;
-      const eventCount = this.rnd(days, days + 20);
+      
+      let homework_list = JSON.parse(JSON.stringify(this.homework_list));
+      console.log(homework_list);
+      homework_list.forEach(element => {
+        if(element.type == 2) {
+          element.dates_homework_keys = Object.keys(element.dates_homework);
+          console.log(element.dates_homework_keys);
+          element.dates_homework_keys.forEach(element_date => {
+            element.dates_homework[element_date].title
+            events.push({
+              name: element.title,
+              start: this.formatDate(new Date(element_date), false),
+              end: this.formatDate(new Date(element_date), false),
+              color: this.formatDate(new Date(element_date), false) <= new Date() ? 'red' : this.colors[this.rnd(0, this.colors.length - 1)] ,
+              details: {full_text: element.text, title: element.dates_homework[element_date].title, text: element.dates_homework[element_date].text}
+            });
+          });
+        }
+        else
+        {
+          events.push({
+            name: element.title,
+            start: this.formatDate(new Date(element.dates_homework), false),
+            end: this.formatDate(new Date(element.dates_homework), false),
+            color:  this.formatDate(new Date(element.dates_homework), false) <= new Date() ? 'red' : this.colors[this.rnd(0, this.colors.length - 1)],
+            details: {full_text: element.text, title: null, text: null}
+          });
+        }
 
-      for (let i = 0; i < eventCount; i++) {
-        const allDay = this.rnd(0, 3) === 0;
-        const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-        const first = new Date(firstTimestamp - (firstTimestamp % 900000));
-        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-        const second = new Date(first.getTime() + secondTimestamp);
-
-        events.push({
-          name: this.homework_list[this.rnd(0, this.homework_list.length - 1)].title,
-          start: this.formatDate(first, !allDay),
-          end: this.formatDate(second, !allDay),
-          color: this.colors[this.rnd(0, this.colors.length - 1)]
-        });
-      }
-
+      });
+      console.log(events);
       this.start = start;
       this.end = end;
       this.events = events;
@@ -328,7 +328,7 @@ export default {
     formatDate(a, withTime) {
       return withTime
         ? `${a.getFullYear()}-${a.getMonth() +
-            1}-${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
+            1} - ${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
         : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`;
     }
   }

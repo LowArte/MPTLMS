@@ -362,9 +362,9 @@ class PostUserSeeder extends Seeder
                                 "component" => [
                                     "info" => [
                                         "name" => "Домашнее задание",
-                                        "url" => "homework"
+                                        "url" => "homework_student"
                                     ],
-                                    "path" => "js/views/homework-f/HomeWork"
+                                    "path" => "js/views/homework-f/HomeWorkStudent"
                                 ],
                             ]
                         ],
