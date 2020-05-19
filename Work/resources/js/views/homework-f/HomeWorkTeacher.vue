@@ -24,23 +24,23 @@
               v-layout.row.wrap(v-if="homework_list")
                 v-flex
                   v-alert.mx-auto.my-2(v-if="!homework_list" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
-                  v-card.mx-auto.pa-2(nav dense max-width="1024px" min-width="300px")
+                  v-card.mx-auto.pa-1(flat max-width="1024px" min-width="300px")
                     v-data-iterator(:items="homework_list" :search="search" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
                       template(v-slot:default="props")
                         v-list
                           v-list-item-group(v-model="selected_item" color="orange darken-1")
-                            v-list-item(v-for="(item, index) in props.items" :key="item.id")
-                              v-list-item-icon
-                                v-icon mdi-bookshelf
-                              v-list-item-content
-                                v-list-item-title(v-text="item.title")
-                                v-list-item-subtitle Тип задания: {{types[item.type]}}
-                                v-list-item-subtitle Группы: {{item.groups.length == 0 ? 'Ошибка' : item.groups.join(', ')}}
-                                v-list-item-subtitle.my-2 Дата создания: {{item.date}}
-                                v-list-item-subtitle(v-if="item.teacher_admin") Автор: {{item.teacher_admin}}
-                              v-list-item-action
-                                v-btn(icon @click="goToHomeworck(item.id)")
-                                  v-icon mdi-chevron-right          
+                            v-card.mx-auto
+                              v-list-item(v-for="(item, index) in props.items" :key="item.id")
+                                v-list-item-icon
+                                  v-icon mdi-bookshelf
+                                v-list-item-content
+                                  v-list-item-title(v-text="item.title")
+                                  v-list-item-subtitle Тип задания: {{types[item.type]}}
+                                  v-list-item-subtitle Группы: {{item.groups.length == 0 ? 'Ошибка' : item.groups.join(', ')}}
+                                  v-list-item-subtitle(v-if="item.teacher_admin") Автор: {{item.teacher_admin}}
+                                v-list-item-action
+                                  v-btn(icon @click="goToHomeworck(item.id)")
+                                    v-icon mdi-chevron-right          
             v-tab-item
               v-row(class="fill-height")
                 v-col
@@ -53,19 +53,18 @@
                       v-btn(fab text small color="orange darken-1" @click="next")
                         v-icon(small) mdi-chevron-right
                   v-sheet(height="600")
-                    v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6, 0]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @change="updateRange")
+                    v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @change="updateRange")
                     v-menu(v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x)
-                      v-card(:color="selectedEvent.color + ' lighten-5'" min-width="350px" flat)
+                      v-card(min-width="320px" max-width="320px" flat)
                         v-system-bar(:color="selectedEvent.color" dark)
                           small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёк' : 'Задание в процессе'}}
-                        v-card-text(v-if="selectedEvent.details")
-                          small(v-html="selectedEvent.details.name")
+                        span.title.px-4.mt-2(v-if="selectedEvent.details" :color="selectedEvent.color") {{selectedEvent.name}}
+                        v-card-text.pt-1(v-if="selectedEvent.details")
+                          span {{selectedEvent.details.full_text}}
+                          v-divider.my-2
+                          span.py-0(:color="selectedEvent.color") {{selectedEvent.details.title}}
                           br
-                          span(v-html="selectedEvent.details.full_text")
-                          v-divider
-                          span(v-html="selectedEvent.details.title") 
-                          br
-                          span(v-html="selectedEvent.details.text")
+                          small.py-0 {{selectedEvent.details.text}}
                         v-card-text(v-else)
                           small(v-html="selectedEvent.name")
                           br
@@ -111,10 +110,9 @@ export default {
     name: "Домашнее задание",
     url: "homework_teacher",
     dop_com: [
-      //!Прописать путь до вывода подробностей об задании
       {
-        url: "journal/:group_id",
-        path: "js/views/journal-f/JournalOfSubjects"
+        url: "homework/:homework_id",
+        path: "js/views/homework-f/HomeWorkShowTeacher"
       }
     ]
   },
@@ -167,16 +165,7 @@ export default {
         return "";
       }
       const startMonth = this.monthFormatter(start);
-      const endMonth = this.monthFormatter(end);
-      const suffixMonth = startMonth === endMonth ? "" : endMonth;
-
       const startYear = start.year;
-      const endYear = end.year;
-      const suffixYear = startYear === endYear ? "" : endYear;
-
-      const startDay = start.day + this.nth(start.day);
-      const endDay = end.day + this.nth(end.day);
-
       switch (this.type) {
         case "month":
           return `${startMonth} ${startYear}`;
@@ -236,17 +225,14 @@ export default {
       var res = await this.$refs.create.pop().then(result => {
         if (result) {
           return result;
-          //await api_homework.saveHomeWork(result);
-          //!this.$store.dispatch(actions.CREATE_JOURNAL, {data: result, result: this.$route.params.group_id}); Создание журнала
           this.showInfo("Домашнее задание сделано!");
         } else this.showInfo("Действие было отменено пользователем");
       });
-
       if (res) await api_homework.saveHomeWork(res);
       this.$refs.create.$refs.form.reset();
     },
     async goToHomeworck(homework_id) {
-      console.log(homework_id);
+      this.$router.push("/" + this.user.post.slug + "/homework/" + homework_id);
     },
     getEventColor(event) {
       return event.color;
@@ -278,19 +264,14 @@ export default {
     },
     updateRange({ start, end }) {
       const events = [];
-
       const min = new Date(`${start.date}T00:00:00`);
       const max = new Date(`${end.date}T23:59:59`);
       const days = (max.getTime() - min.getTime()) / 86400000;
-      
       let homework_list = JSON.parse(JSON.stringify(this.homework_list));
-      console.log(homework_list);
       homework_list.forEach(element => {
         if(element.type == 2) {
           element.dates_homework_keys = Object.keys(element.dates_homework);
-          console.log(element.dates_homework_keys);
           element.dates_homework_keys.forEach(element_date => {
-            element.dates_homework[element_date].title
             events.push({
               name: element.title,
               start: this.formatDate(new Date(element_date), false),
@@ -310,9 +291,7 @@ export default {
             details: {full_text: element.text, title: null, text: null}
           });
         }
-
       });
-      console.log(events);
       this.start = start;
       this.end = end;
       this.events = events;

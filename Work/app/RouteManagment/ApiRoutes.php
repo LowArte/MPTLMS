@@ -73,6 +73,9 @@ class ApiRoutes
             Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_teacher');
 
             Route::get('homework_by_teacher_id/{teacher_id}', 'Api\HomeWorkController@getHomeWorkTeacher')->name('homework_by_teacher_id');
+            Route::get('homework_by_group_id/{group_id}', 'Api\AssociationHomeWorkController@getHomeWorkByGroupId')->name('homework_by_group_id');
+            Route::get('homework_by_id/{homework_id}', 'Api\HomeWorkController@getHomeWorkById')->name('homework_by_id');
+            Route::get('homework_exam', 'Api\AssociationHomeWorkController@getHomeWorkExam')->name('homework_exam');            
         });
         /**
          * Методы отвечаюшие за добавление общих данных

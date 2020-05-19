@@ -4,37 +4,20 @@
             v-system-bar
                 span Формирование экзамена
             v-card-text
-                v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-                v-form.mx-3.mt-2(ref="form")
-                    v-autocomplete(dense label="Группа" :rules="groupRules" :items="groups" no-data-text="Нет данных" item-text="group_name" item-value="id" v-model="exam.group_id")
-                    v-text-field(
-                        v-model="exam.info.exam"
-                        :rules="nameExamRules"
-                        label="Название экзамена")
-                    v-dialog(ref="dateDialog" v-model="model" :return-value.sync="exam.date" persistent width="290px")
-                        template(v-slot:activator="{ on }")
-                            v-text-field(v-model="exam.date" :rules="dateRules" label="Дата" readonly v-on="on")
-                        v-date-picker(v-model="exam.date" scrollable :first-day-of-week="1" locale="ru-Ru")
-                            v-btn(text color="primary" @click="model = false") Отмены
-                            v-spacer
-                            v-btn(text color="primary" @click="$refs.dateDialog.save(exam.date);") Принять
-                    v-autocomplete(v-model="exam.info.teacher" label="Преподаватели" :items="teachers_combo" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
-                    v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
-                        v-model="exam.info.time"
-                        v-mask="mask"
-                        :rules="timeRules"
-                        label="Начало/конец экзамена")
-                    v-autocomplete(v-model="exam.place_id" label="Места проведения" :items="places" :rules="PlaceRules" no-data-text="Нет данных" item-value='id' item-text='place_name')
-                    v-text-field(
-                        v-model="exam.info.classroom"
-                        :rules="classroomRules"
-                        label="Кабинет")
- 
+                v-form(ref="form")
+                    v-autocomplete.mt-2(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-value="id" item-text="dep_name_full" :items="specialities" v-model="selected_department_id" :rules="DepartmentRules")
+                    v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id" :label="'Группы (' + homework.groups_id.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupRules.required]")
+                    v-autocomplete(:disabled="loading" v-model="homework.user_id" label="Преподаватель" :rules="TeacherRules" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio')
+                    v-text-field(outlined dense v-model="homework.info.title" label="Название экзамена" :rules="TitleRules")
+                    v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание" :row-height="24" :rows="3")
+                    v-date-picker.mb-3(:min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                    v-autocomplete(outlined dense v-model="homework.info.place_id" label="Место проведения" :rules="PlacesRules" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
+                    v-text-field(outlined dense v-model="homework.info.classroom" label="Кабинет")
             v-card-actions
                 v-btn(color="accent darken-1" text @click="cancelExam") Отмена
                 v-spacer
                 v-btn(v-if="item == null" color="info darken-1" text @click="SaveExam") Сохранить       
-                v-btn(v-else color="info darken-1" text @click="SaveExam") Редактировать       
+                v-btn(v-else color="info darken-1" text @click="SaveExam") Редактировать
 </template>
 
 <script>
@@ -72,56 +55,54 @@ export default {
     },
     computed: {
         ...mapGetters(["specialities", "groups_combo", "user", "teachers_combo", "places"]),
-        combo_groups: function() {
-            if (!this.groups_combo) return undefined;
-            this.exam.group_id = this.groups_combo[0].id;
-            return this.groups_combo;
-        },
     },
 
     data() {
         return {
             dialog: false,
-            selected_department: null,
-            schedule: null,
             item: null,
-            mask: "##:##-##:##", //Маска расписания экзамена
             resolve: null,
+            dialog: false,
+            drop_menu_date_picker_event_tow: false,
+            dates_homework: [],
+            item: null,
             groups: null,
-            exam:{
-                id: null,
-                date:null,
-                info:{
-                    time: null,
-                    exam: null,
-                    teacher: [],
+            selected_department_id: null,
+            loading: false,
+            homework: {
+                user_id: null,
+                groups_id: [],
+                teachers: [],
+                info: {
+                    title: null,
+                    text: null,
+                    date: null,
+                    place_id: null,
                     classroom: null
                 },
-                group_id: null,
-                place_id:null
+                type: 3
             },
             model: false,
-            groupRules: [v => !!v || "Группа не указана!"],
-            dateRules: [v => !!v || "Дата не указана!"],
-            timeRules: [v => /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) || "Не соответствует формату времени"],
-            classroomRules: [
-                v => !!v || "Поле не должно оставаться пустым",
-                v =>
-                /^[A-Z && А-Я && a-z && а-я && 0-9 && / && -]*$/.test(v) ||
-                "Только буквы, целочисленные значения (0-9) или символы ( / -)"
+            DepartmentRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
             ],
-            nameExamRules: [
-                v => !!v || "Поле не должно оставаться пустым",
-                v =>
-                /^[A-Z && А-Я && a-z && а-я && 0-9 && / && -]*$/.test(v) ||
-                "Только буквы, целочисленные значения (0-9) или символы ( / -)"
+            TitleRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
             ],
-            TeacherRules: {
+            TextRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
+            ],
+            PlacesRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
+            ],
+            GroupRules: {
                 required: value => {
-                    return !!value.length || "Преподаватель не указан!";
-                },
+                return !!value.length || "Данное поле не должно оставаться пустым";
+                }
             },
-            PlaceRules: [v => !!v || "Место проведения не указано!"],
+            TeacherRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
+            ],
         }
     },
 
@@ -136,11 +117,12 @@ export default {
 //?----------------------------------------------
 //!           Методы страницы
 //?----------------------------------------------
-        pop(item) {
+        pop(item) 
+        {
             if(item)
             {
-                this.item = item;
-                this.exam = JSON.parse(JSON.stringify(item));
+                let items = item;
+                this.homework = JSON.parse(JSON.stringify(items));
             }
             this.dialog = true;
             return new Promise((resolve, reject) => {
@@ -159,7 +141,7 @@ export default {
 
             if (this.specialities) 
             {
-                this.selected_department = this.specialities[0];
+                this.selected_department_id = this.specialities[0].id;
                 this.department_change();
             }
         },
@@ -197,8 +179,9 @@ export default {
             await this.$store.dispatch(actions.ADD_CACHE_GROUP_DATA, 
             {
                 context: this,
-                result: this.selected_department.id
+                result: this.selected_department_id
             });
+            this.groups = this.groups_combo;
             this.closeLoading("Получение групп");
         },
 
@@ -206,14 +189,21 @@ export default {
         {
             if(this.$refs.form.validate())
             {   
-                await this.resolve(JSON.parse(JSON.stringify(this.exam)));
+                await this.resolve(JSON.parse(JSON.stringify(this.homework)));
                 this.dialog = false;
                 this.$refs.form.reset();
-                this.exam.info = {
-                    time: null,
-                    exam: null,
-                    teacher: [],
-                    classroom: null
+                this.homework.info = {
+                    user_id: null,
+                    groups_id: [],
+                    teachers: [],
+                    info: {
+                        title: null,
+                        text: null,
+                        date: null,
+                        place_id: null,
+                        classroom: null
+                    },
+                    type: 3
                 };
             }
             else
@@ -224,12 +214,18 @@ export default {
         {
             this.dialog = false;
             this.$refs.form.reset();
-            this.exam.info = {
-                id: null,
-                time: null,
-                exam: null,
-                teacher: [],
-                classroom: null
+            this.homework.info = {
+                user_id: null,
+                groups_id: [],
+                teachers: [],
+                info: {
+                    title: null,
+                    text: null,
+                    date: null,
+                    place_id: null,
+                    classroom: null
+                },
+                type: 3
             };
         }
     }

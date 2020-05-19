@@ -12,16 +12,28 @@ use Debugbar;
 class AssociationHomeWorkController extends BaseController
 { 
     /**
-     * get AssociationHomeWorkController from database
+     * Группа
      * @return JSON
      */
-    public function getAssociationHomeWork(AssociationHomeWorkRepository $associationhomeworkRepository)
+    public function getHomeWorkByGroupId($group_id, AssociationHomeWorkRepository $associationHomeWorkRepository)
     {
-        $associationhomeworkRepository = $associationhomeworkRepository->getAssociationHomeWork();
-        return response()->json(compact('associationhomeworkRepository'));
+        $home_works = $associationHomeWorkRepository->getHomeWorkByGroupId($group_id);
+        usort($home_works, function($a, $b) {return strcmp($b->date, $a->date);});
+        return response()->json(compact('home_works'));
     }
 
-    public function save(Request $request,CreateAssociationHomeWorkModification $createAssociationHomeWorkModification){
+    /**
+     * Получение расписания экзаменов
+     * @return JSON
+     */
+    public function getHomeWorkExam(AssociationHomeWorkRepository $associationHomeWorkRepository)
+    {
+        $exams = $associationHomeWorkRepository->getHomeWorkExam();
+        return response()->json(compact('exams'));
+    }
+
+    public function save(Request $request,CreateAssociationHomeWorkModification $createAssociationHomeWorkModification)
+    {
         $data = $request->all();
         $id = $createAssociationHomeWorkModification->addAssociationHomeWorkToDatabase($data);
         if($id){

@@ -10,6 +10,18 @@ class HomeWorkRepository extends BaseRepository
         return Model::class;
     }
 
+    public function getHomeWorkById($homework_id)
+    {
+        $columns = ['id', 'info', 'type', 'created_at as date'];
+        $result = $this->startCondition()
+                        ->where('id', $homework_id)
+                        ->select($columns)
+                        ->first();
+        $result = json_decode($result);
+        $result->info = json_decode($result->info);
+        return $result;
+    }
+
     public function getHomeWorkTeacher($user_id)
     {
         $columns = ['id', 'info', 'type', 'created_at as date'];

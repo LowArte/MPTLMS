@@ -24,6 +24,11 @@ class HomeWork extends Model
     protected $fillable  = [
         'user_id','info','type'
     ];
+
+    public function homework()
+    {
+        return $this->hasOne(HomeWork::class,'id','homework_id');
+    }
     
     public function __construct($attributes = array())
     {

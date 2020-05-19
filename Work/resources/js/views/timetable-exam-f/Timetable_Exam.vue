@@ -28,20 +28,18 @@
                             v-system-bar(dark color="accent")
                                 span(style="color: white;") Группа: {{exam.group_name}} 
                                 v-spacer
-                                span(style="color: white;") Дата: {{exam.date}}
-                            v-simple-table(v-if="user != null && user.post_id != null")
+                                span(style="color: white;") Дата: {{exam.info.date}}
+                            v-simple-table
                                 thead
-                                    tr(v-if="user != null && user.post_id != null")
-                                        th.text-left Время
+                                    tr
                                         th.text-left Экзамен
-                                        th.text-left Преподаватели
+                                        th.text-left Преподаватель
                                         th.text-left Место проведения / кабинет
                                         th.text-left(v-if="user.post_id == 1 || user.post_id == 4") Действие
                                 tbody
-                                    tr(v-if="user != null && user.post_id != null")
-                                        td {{ exam.info.time }}
-                                        td {{ exam.info.exam }}
-                                        td {{ exam.info.teachersFullName.join(' / ') }}
+                                    tr
+                                        td {{ exam.info.title }}
+                                        td {{ exam.teacher_admin }}
                                         td {{ exam.place_name }} / {{exam.info.classroom}}
                                         td(v-if="user.post_id == 1 || user.post_id == 4")
                                             v-icon.small(@click="deleteExam(exam['id'])") delete   
@@ -55,11 +53,12 @@
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
-import bildDialog_C from "@/js/views/timetable-exam-f/Bild_Timetable_Exam";
+import bildDialog_C from "@/js/components/timetable-exam-f/Bild_Timetable_Exam";
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог Да/Нет
 
 import api_department from "@/js/api/department"; //Отделения
-import api_schedule_exam from "@/js/api/scheduleExam"; //Отделения
+import api_schedule_exam from "@/js/api/scheduleExam"; //Раписание экзаменов
+import api_homework from "@/js/api/homework"; //Домашняя работа
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
@@ -99,9 +98,9 @@ export default {
                     return true;
                 if(this.checkAllDate && res.group_id == this.selected_group.id)
                     return true;
-                if(res.date == this.dateDialog.date && this.checkAllGroup)
+                if(res.info.date == this.dateDialog.date && this.checkAllGroup)
                     return true;
-                if(res.date == this.dateDialog.date && res.group_id == this.selected_group.id)
+                if(res.info.date == this.dateDialog.date && res.group_id == this.selected_group.id)
                     return true;
                 return false;
             });
@@ -156,7 +155,9 @@ export default {
 
         async refresh()
         {
-            this.schedule = await api_schedule_exam.getScheduleExam();
+            let item = await api_homework.getHomeWorkExams();
+            console.log(item);
+            this.schedule = item;
         },
 //?----------------------------------------------
 //!           Методы компонентов
@@ -195,10 +196,11 @@ export default {
         },
 
         async addExam()
-        {  var res = await this.$refs.bild.pop(null).then(res => {return res;});
+        {  
+            var res = await this.$refs.bild.pop(null).then(res => {return res;});
             if(res)
             {
-                if(await api_schedule_exam.saveScheduleExam(res))
+                if(await api_homework.saveHomeWork(res))
                 {
                     this.showMessage("Сохранено!");
                     this.refresh();
@@ -210,7 +212,7 @@ export default {
 
         async editExam(item)
         {
-            var res = await this.$refs.bild.pop(item).then(res => {return res;});
+            /*var res = await this.$refs.bild.pop(item).then(res => {return res;});
             if(res)
             {
                 if(await api_schedule_exam.editScheduleExam(res))
@@ -220,18 +222,18 @@ export default {
                 }
             }
             else 
-                this.showInfo("Действие было отменено пользователем!");
+                this.showInfo("Действие было отменено пользователем!");*/
         },
 
         async deleteExam(id)
         {
             if(await this.$refs.qwestion.pop().then(res => { return res;}))
             {
-                if(await api_schedule_exam.deleteScheduleExam(id))
+                /*if(await api_schedule_exam.deleteScheduleExam(id))
                 {
                     this.showMessage("Выполнено!");
                     this.refresh();
-                }
+                }*/
             }
             else 
                 this.showInfo("Действие было отменено");
