@@ -229,7 +229,10 @@ class ScheduleRepository extends BaseRepository
                             {
                                 $checkTeacher = true;
                                 array_push($schedule_teacher[$day][$keyLesson]['GroupChisl'], $schedule->group_name);
-                                $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()['discip_name'];
+                                if(count($lesson->LessonChisl) == 1)
+                                    $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[0])->first()['discip_name'];
+                                else
+                                    $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()['discip_name'];
                                 array_push($schedule_teacher[$day][$keyLesson]['LessonChisl'], $foundDiscipline);
                                 array_push($schedule_teacher[$day][$keyLesson]['PlaceChisl'], $current['place']->place_name);
                                 array_push($schedule_teacher[$day][$keyLesson]['TimeChisl'], $current['schedule']->$keyLesson);
@@ -247,7 +250,10 @@ class ScheduleRepository extends BaseRepository
                                     $checkTeacher = true;
                                     $schedule_teacher[$day][$keyLesson]['chisl'] = true;
                                     array_push($schedule_teacher[$day][$keyLesson]['GroupZnam'], $schedule->group_name);
-                                    $foundDiscipline = $disciplines->where("id",$lesson->LessonChisl[$keyTeacher])->first()['discip_name'];
+                                    if(count($lesson->LessonZnam) == 1)
+                                        $foundDiscipline = $disciplines->where("id",$lesson->LessonZnam[0])->first()['discip_name'];
+                                    else
+                                        $foundDiscipline = $disciplines->where("id",$lesson->LessonZnam[$keyTeacher])->first()['discip_name'];
                                     array_push($schedule_teacher[$day][$keyLesson]['LessonZnam'], $foundDiscipline);
                                     array_push($schedule_teacher[$day][$keyLesson]['PlaceZnam'], $current['place']->place_name);
                                     array_push($schedule_teacher[$day][$keyLesson]['TimeZnam'], $current['schedule']->$keyLesson);

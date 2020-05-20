@@ -27,7 +27,17 @@ class HomeWork extends Model
 
     public function homework()
     {
-        return $this->hasOne(HomeWork::class,'id','homework_id');
+        return $this->hasOne(HomeWork::class,'id','home_work_id');
+    }
+
+    public function associationHomework()
+    {
+        return $this->hasMany(AssociationHomeWork::class,'home_work_id', 'id');
+    }
+
+    public function associationUserHomework()
+    {
+        return $this->hasMany(AssociationUsersHomeWork::class,'home_work_id','id');
     }
     
     public function __construct($attributes = array())

@@ -107,7 +107,7 @@ export default {
       if (res) {
         if (await api_discipline.loadDiscipline(res)) {
           this.showMessage("Файл загружен!");
-          this.loadData();
+          await this.loadData();
         } else this.showError("Произошла ошибка при загрузке!");
       } else this.showInfo("Действие отменено пользователем!");
       this.closeLoading("Загрузка и обработка файлов");

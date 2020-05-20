@@ -7,7 +7,7 @@ use App\Repositories\ModelRepository\TeacherRepository;
 class TeacherController extends BaseController
 { 
     /**
-     * get teachers from database
+     * Получение преподавателей
      * @return JSON
      */
     public function getTeachers(TeacherRepository $teacherRepository)

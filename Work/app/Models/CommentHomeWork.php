@@ -22,7 +22,7 @@ class CommentHomeWork extends Model
     ];
 
     protected $fillable  = [
-        'comment','user_id', 'type'
+        'comment','user_id', 'home_work_id'
     ];
 
     public function __construct($attributes = array())

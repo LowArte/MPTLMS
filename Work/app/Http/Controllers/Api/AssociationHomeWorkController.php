@@ -18,7 +18,6 @@ class AssociationHomeWorkController extends BaseController
     public function getHomeWorkByGroupId($group_id, AssociationHomeWorkRepository $associationHomeWorkRepository)
     {
         $home_works = $associationHomeWorkRepository->getHomeWorkByGroupId($group_id);
-        usort($home_works, function($a, $b) {return strcmp($b->date, $a->date);});
         return response()->json(compact('home_works'));
     }
 

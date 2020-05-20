@@ -27,7 +27,7 @@ class AssociationUsersHomeWorkRepository extends BaseRepository
         $teachers = $teacherRepository->getTeachersFIO();
         foreach($result as $key => $value)
         {
-            $result[$key]['teacher_admin'] = $teachers->where("id",$value['user_id'])->first()->full_name;
+            $result[$key]['teacher_admin'] = $teachers->where("id",$value['user_id'])->first()->full_name_inverted;
 
             $value['info'] = json_decode($value['info']);
             $value['title'] = $value['info']->title;
@@ -36,7 +36,7 @@ class AssociationUsersHomeWorkRepository extends BaseRepository
             if(isset($value['info']))
                 unset($value['info']);
 
-            $value['groups'] = $associationHomeWork->where("homework_id",$value->id);
+            $value['groups'] = $associationHomeWork->where("home_work_id",$value->id);
             $groups = [];
             foreach($value['groups'] as $group)
                 array_push($groups, $group['group']['group_name']);

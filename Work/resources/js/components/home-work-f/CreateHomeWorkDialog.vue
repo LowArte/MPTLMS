@@ -1,5 +1,6 @@
 <template lang="pug">
     v-dialog(v-model="dialog" persistent fullscreen hide-overlay)
+        c-load-file-dialog-homework(ref="load_file_dialog")
         v-card(scrollable)
             v-system-bar(color="white")
               span Конструктор задания
@@ -14,27 +15,28 @@
                   v-autocomplete(outlined dense @change="type_change" item-value="id" item-text="name" :items="types" v-model="homework.type" label="Тип задания")
                   v-text-field(outlined dense v-model="homework.info.title" label="Название (основное)" :rules="TitleRules")
                   v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание (основное)" :row-height="24" :rows="3")
+                  v-card-actions
+                    v-btn(text color="orange darken-1" @click="loadFile()") Прикрепить документы
+                  c-file-fotage(:_files='files')
                   v-item-group
                     v-item(v-if="homework.type == 1")
-                        v-date-picker( :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
                     v-item(v-if="homework.type == 2")
                       div
                         v-menu(ref="multi_homework" v-model="drop_menu_date_picker_event_tow" :close-on-content-click="false" transition="scale-transition" offset-y min-width="290px")
                           template(v-slot:activator="{ on }")
                             v-combobox(outlined dense v-model="dates_homework" multiple chips small-chips label="Даты этапов выполнения работы" prepend-icon="event" readonly v-on="on")
-                          v-date-picker(:min='new Date().toISOString().substr(0, 10)' multiple v-model="dates_homework" no-title :first-day-of-week="1" locale="ru-Ru")
-                            v-btn(text color="primary" @click="drop_menu_date_picker = !drop_menu_date_picker") Отмена
+                          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' multiple v-model="dates_homework" no-title :first-day-of-week="1" locale="ru-Ru")
+                            v-btn(text color="primary" @click="drop_menu_date_picker_event_tow = !drop_menu_date_picker_event_tow") Отмена
                             v-btn(text color="orange darken-1" @click="changeDateForTypeTwo(dates_homework)") Применить
                         div(v-for="(item, date) in homework.info.date" :key="date")
                           v-card.pa-2.ma-3(outlined :elevation="0")
                             span {{date}}
                             v-text-field(outlined dense v-model="item.title" :rules="InsideTileRules" label="Название этапа")
                             v-textarea(outlined v-model="item.text" :rules="InsideTextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание этапа" :row-height="24" :rows="3")
-                            v-card-actions
-                              v-btn(text color="orange darken-1") Прикрепить документы
                     v-item(v-if="homework.type == 3")
                       div
-                        v-date-picker.mb-3(:min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
                         v-autocomplete(outlined dense v-model="homework.info.place_id" label="Место проведения" :rules="PlacesRules" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
                         v-text-field(outlined dense v-model="homework.info.classroom" label="Кабинет")
             v-card-actions
@@ -50,6 +52,8 @@
 //?----------------------------------------------
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 import withSnackbar from "@/js/components/mixins/withSnackbar";
+import FileFotageComponent_С from "@/js/components/home-work-f/FileFotageComponent";
+import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
 
 //?----------------------------------------------
 //!           Vuex
@@ -61,6 +65,7 @@ import * as actions from "@/js/store/action-types";
 //?----------------------------------------------
 //!           api
 //?----------------------------------------------
+import api_homework from "@/js/api/homework";
 
 export default {
   //?----------------------------------------------
@@ -68,6 +73,11 @@ export default {
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withOverlayLoading, withSnackbar],
+
+  components: {
+    "c-file-fotage": FileFotageComponent_С,
+    "c-load-file-dialog-homework": LoadFileDialogHomework_С
+  },
 
   computed: {
     ...mapGetters([
@@ -87,6 +97,7 @@ export default {
   },
   data() {
     return {
+      files: [],
       dialog: false,
       drop_menu_date_picker_event_tow: false,
       dates_homework: [],
@@ -195,34 +206,30 @@ export default {
         this.homework.info.date[element] = { title: null, text: null };
       });
     },
+
+    async loadFile() {
+      await this.$refs.load_file_dialog.pop().then(result => {
+        if (result) {
+          result.files.forEach(element => {
+            this.files.push(element.name);
+          });
+          this.showLoading("Загрузка");
+          if (api_homework.loadFiles(result.main)) {
+              this.showMessage("Файл(ы) загружен");
+          } else this.showError("Произошла ошибка при загрузке");
+          this.closeLoading("Загрузка");
+        } else {
+          this.showInfo("Действие отменено пользователем!");
+        }
+      });
+      this.showInfo("В разработке!");
+    },
     //?----------------------------------------------
     //!           Дополнительные методы
     //?----------------------------------------------
     //Сортировка по дате
     sortByDate(arr) {
       return arr.sort((a, b) => (a > b ? 1 : -1));
-    },
-
-    blockSundey()
-    {
-      let dateSundey = [];
-      let thisDate = new Date();
-      let i = 0;
-      for (let index = 0; index < 360; index++) 
-      {
-        if(new Date(thisDate).getDay() == 0)
-        {
-          dateSundey.push(new Date(thisDate).toISOString().substr(0, 10));
-          console.log(dateSundey);
-        }
-
-        if(dateSundey.length == 0)
-          thisDate.setDate(new Date(thisDate).getDate()+1);
-        else
-          thisDate.setDate(new Date(thisDate).getDate()+7);
-        
-      }
-      return dateSundey;
     }
   }
 };

@@ -54,8 +54,6 @@ class ApiRoutes
             Route::get('schedule_teacher/{teacher_id}', 'Api\ScheduleController@getScheduleTeacher')->name('schedule_teacher');
             Route::get('schedule_bild_show_day_by_teacher_id/{teacher_id}/{day}', 'Api\ScheduleController@getScheduleBildShowDayByTeacherId')->name('schedule_bild_show_day_by_teacher_id');
             Route::get('schedule_day_teachers/{chsil}/{day}', 'Api\ScheduleController@getTeachersForScheduleDay')->name('schedule_day_teachers');
-            
-            Route::get('schedule_exams', 'Api\ScheduleExamsController@getScheduleExams')->name('schedule_exams');
 
             Route::get('get_call_schedule', 'Api\CallscheduleController@getCallSchedule')->name('get_call_schedule');
             Route::get('get_call_schedule_for_panel', 'Api\CallscheduleController@getCallScheduleForPanel')->name('get_call_schedule_for_panel');
@@ -71,11 +69,14 @@ class ApiRoutes
             Route::get('students_by_group_id/{group_id}', 'Api\StudentController@getStudentsByGroupId')->name('students_by_group_id');
             
             Route::get('association_for_teacher/{teacher_id}', 'Api\AssociationController@getAssociationForTeacher')->name('association_for_teacher');
+            Route::get('association_teacher_discip', 'Api\AssociationController@getAssociationTeacherDiscip')->name('association_teacher_discip');
 
             Route::get('homework_by_teacher_id/{teacher_id}', 'Api\HomeWorkController@getHomeWorkTeacher')->name('homework_by_teacher_id');
             Route::get('homework_by_group_id/{group_id}', 'Api\AssociationHomeWorkController@getHomeWorkByGroupId')->name('homework_by_group_id');
-            Route::get('homework_by_id/{homework_id}', 'Api\HomeWorkController@getHomeWorkById')->name('homework_by_id');
-            Route::get('homework_exam', 'Api\AssociationHomeWorkController@getHomeWorkExam')->name('homework_exam');            
+            Route::get('homework_teacher_by_id/{home_work_id}/{user_id}', 'Api\HomeWorkController@getHomeWorkTeacherById')->name('homework_by_id');
+            Route::get('homework_exam', 'Api\AssociationHomeWorkController@getHomeWorkExam')->name('homework_exam');  
+        
+            Route::get('homework_comment/{home_work_id}', 'Api\CommentHomeWorkController@getCommentHomeWork')->name('homework_comment');  
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -92,8 +93,6 @@ class ApiRoutes
             Route::post('group','Api\GroupController@save')->name('group');
 
             Route::post('discipline_buffer_data/{dbName}','Api\DisciplineBufferController@save')->name('discipline_buffer_data');
-
-            Route::post('schedule_exam','Api\ScheduleExamsController@save')->name('schedule_exam');
             
             Route::post('feedback','Api\FeedbackController@save')->name('feedback');
 
@@ -118,6 +117,8 @@ class ApiRoutes
             Route::post('association', 'Api\AssociationController@save')->name('association');
 
             Route::post('homework', 'Api\HomeWorkController@save')->name('homework');
+
+            Route::post('homework_comment', 'Api\CommentHomeWorkController@save')->name('homework_comment');
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -128,8 +129,6 @@ class ApiRoutes
 
             Route::post('schedule/{group_id}', 'Api\ScheduleController@edit')->name('schedule');   
             Route::post('schedule_classroom/', 'Api\ScheduleController@editClassroom')->name('schedule_classroom');   
-            
-            Route::post('schedule_exam','Api\ScheduleExamsController@edit')->name('schedule_exam');
 
             Route::post('department','Api\DepartmentController@edit')->name('department');
 
@@ -153,6 +152,7 @@ class ApiRoutes
             Route::post('journal_association','Api\JournalController@editJournalAssociation')->name('journal');
             
             Route::post('homework', 'Api\HomeWorkController@edit')->name('homework');
+            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');        
         });
 
          /**
@@ -190,8 +190,6 @@ class ApiRoutes
         Route::name('delete.')->prefix('delete')->group(function () {
             Route::post('replacement/{group_id}', 'Api\ReplacementController@delete')->name('replacement');
 
-            Route::post('schedule_exam/{id}','Api\ScheduleExamsController@delete')->name('schedule_exam');
-
             Route::post('department/{department_id}','Api\DepartmentController@delete')->name('department');
 
             Route::post('post/{post_id}','Api\PostController@delete')->name('post');
@@ -206,7 +204,7 @@ class ApiRoutes
 
             Route::post('user/{user_id}/{post_id}','Api\UserController@delete')->name('user');    
             
-            Route::post('homework/{homework_id}', 'Api\HomeWorkController@delete')->name('homework');
+            Route::post('homework/{home_work_id}', 'Api\HomeWorkController@delete')->name('homework');
         });
     }
 }

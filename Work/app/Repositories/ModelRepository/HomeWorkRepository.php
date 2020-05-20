@@ -3,22 +3,52 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\HomeWork as Model;
-
 class HomeWorkRepository extends BaseRepository
 {
     protected function getModelClass(){
         return Model::class;
     }
 
-    public function getHomeWorkById($homework_id)
+    public function getHomeWorkTeacherById($home_work_id, $user_id)
     {
-        $columns = ['id', 'info', 'type', 'created_at as date'];
+        $columns = ['id', 'user_id', 'info', 'type', 'created_at as date'];
         $result = $this->startCondition()
-                        ->where('id', $homework_id)
+                        ->where('id', $home_work_id)
+                        ->with('associationHomework:id,home_work_id,group_id,home_work_access')
+                        ->with('associationUserHomework:home_work_id,user_id')
                         ->select($columns)
                         ->first();
-        $result = json_decode($result);
-        $result->info = json_decode($result->info);
+
+        //Получение ассоциаций домашних заданий
+        $groupRepository = app(GroupRepository::class);
+        $groups = $groupRepository->getGroups();
+
+        $userRepository = app(UserRepository::class);
+        $users = $userRepository->getFullRuFIO();
+
+        $associationRepository = app(AssociationRepository::class);
+
+        if($result)
+        {
+            $result = json_decode($result);
+            $result->info = json_decode($result->info);
+            $journals = [];
+
+            if($result->association_homework)
+                foreach($result->association_homework as $homework)
+                {
+                    $homework->group_name = $groups->where("id",$homework->group_id)->first()->group_name;
+                    $journal = $associationRepository->getAssociationAndJournalByGroupAndUserId($homework->group_id, $user_id);
+                    if($journal)
+                        foreach($journal as $item)
+                            array_push($journals, $item);
+                }
+
+            if($result->association_user_homework)
+                foreach($result->association_user_homework as $user)
+                    $user->full_fio = $users->where("id",$user->user_id)->first()->fullFio;
+            $result->journals = $journals;
+        }
         return $result;
     }
 
@@ -44,7 +74,7 @@ class HomeWorkRepository extends BaseRepository
                 unset($value['info']);
 
             $groups = [];
-            foreach($associationHomeWork->where("homework_id",$value->id) as $group)
+            foreach($associationHomeWork->where("home_work_id",$value->id) as $group)
                 array_push($groups, $group['group']['group_name']);
             
             $value['groups'] = $groups;

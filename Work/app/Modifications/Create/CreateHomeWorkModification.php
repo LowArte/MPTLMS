@@ -21,11 +21,11 @@ class CreateHomeWorkModification extends BaseModification
         {
             $createAssociationHomeWorkModification = app(CreateAssociationHomeWorkModification::class);
             foreach($request['groups_id'] as $value)
-                $createAssociationHomeWorkModification->addAssociationHomeWorkToDatabase(['homework_id' => $homework->id, 'group_id' => $value, 'home_work_access' => json_encode(array())]);
+                $createAssociationHomeWorkModification->addAssociationHomeWorkToDatabase(['home_work_id' => $homework->id, 'group_id' => $value, 'home_work_access' => json_encode(array())]);
 
                 $сreateAssociationUsersHomeWorkModification = app(CreateAssociationUsersHomeWorkModification::class);
                 foreach($request['teachers'] as $value)
-                    $сreateAssociationUsersHomeWorkModification->addAssociationUsersHomeWorkToDatabase(['home_work_id' => $homework->id, 'user_id' => $value, 'access' => 0]);
+                    $сreateAssociationUsersHomeWorkModification->addAssociationUsersHomeWorkToDatabase(['home_work_id' => $homework->id, 'user_id' => $value]);
             return $homework->id;
         }
         return  false;

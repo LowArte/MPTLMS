@@ -17,21 +17,12 @@ class CreateAssociationUsersHomeWorkTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('home_work_id');
-            $table->smallInteger('access');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('home_work_id')->references('id')->on('home_work');
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
-    /*
-        поле access 
-        0 - только чтение
-        1 - только чтение и пользование
-        2 - редактирование
-        3 - админ задания
-    */
 
     /**
      * Reverse the migrations.

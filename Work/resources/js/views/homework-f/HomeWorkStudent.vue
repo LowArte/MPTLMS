@@ -39,7 +39,7 @@ export default {
     url: "homework_student",
     dop_com: [
       {
-        url: "homework/:homework_id",
+        url: "homework/:home_work_id",
         path: "js/views/homework-f/HomeWorkShowStudent"
       }
     ]

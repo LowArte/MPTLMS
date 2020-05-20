@@ -81,6 +81,8 @@
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import CreateHomeWorkDialog_С from "@/js/components/home-work-f/CreateHomeWorkDialog";
+import Notification from "@/js/plugins/NotificationsHelpers";
+
 //?----------------------------------------------
 //!           Подключение api
 //?----------------------------------------------
@@ -101,7 +103,7 @@ export default {
   //!           Преднастройка
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
-  mixins: [withSnackbar, withOverlayLoading],
+  mixins: [withSnackbar, withOverlayLoading, Notification],
   components: {
     "c-create-homework-dialog": CreateHomeWorkDialog_С
   },
@@ -111,7 +113,7 @@ export default {
     url: "homework_teacher",
     dop_com: [
       {
-        url: "homework/:homework_id",
+        url: "homework/:home_work_id",
         path: "js/views/homework-f/HomeWorkShowTeacher"
       }
     ]
@@ -123,12 +125,7 @@ export default {
       selected_item: null,
       search: null,
       homework: null,
-      types: [
-        "Новость",
-        "Домашнее задание",
-        "Поэтапное задание",
-        "Экзамен"
-      ],
+      types: ["Новость", "Домашнее задание", "Поэтапное задание", "Экзамен"],
       focus: null,
       type: "month",
       start: null,
@@ -203,10 +200,9 @@ export default {
     }
 
     //Получение мест проведения
-    if(this.places == null)
-    {
-        let items = await api_place.getPlaces();
-        this.$store.commit(mutations.SET_PLACES_FULL, items)
+    if (this.places == null) {
+      let items = await api_place.getPlaces();
+      this.$store.commit(mutations.SET_PLACES_FULL, items);
     }
 
     //Получение данных
@@ -225,14 +221,31 @@ export default {
       var res = await this.$refs.create.pop().then(result => {
         if (result) {
           return result;
-          this.showInfo("Домашнее задание сделано!");
         } else this.showInfo("Действие было отменено пользователем");
       });
-      if (res) await api_homework.saveHomeWork(res);
+      if (res) {
+        console.log(res);
+        if (await api_homework.saveHomeWork(res)) {
+          this.showMessage("Домашнее задание сделано");
+          this.showMessage("Рассылаем уведомления");
+          res.groups_id.forEach(element => {
+            this.addMessageForUserGroup(element, {
+              icon: "mdi-android-messages",
+              title: "Новое задание",
+              subtitle:
+                "Вам назначено новое задание. Чтобы ознакомится с ним подробнее перейдите в соотвествующий раздел.",
+              done: false
+            });
+          });
+        } else this.showError("Произошла ошибка");
+      }
+
       this.$refs.create.$refs.form.reset();
     },
-    async goToHomeworck(homework_id) {
-      this.$router.push("/" + this.user.post.slug + "/homework/" + homework_id);
+    async goToHomeworck(home_work_id) {
+      this.$router.push(
+        "/" + this.user.post.slug + "/homework/" + home_work_id
+      );
     },
     getEventColor(event) {
       return event.color;
@@ -269,26 +282,35 @@ export default {
       const days = (max.getTime() - min.getTime()) / 86400000;
       let homework_list = JSON.parse(JSON.stringify(this.homework_list));
       homework_list.forEach(element => {
-        if(element.type == 2) {
+        if (element.type == 2) {
           element.dates_homework_keys = Object.keys(element.dates_homework);
           element.dates_homework_keys.forEach(element_date => {
             events.push({
               name: element.title,
               start: this.formatDate(new Date(element_date), false),
               end: this.formatDate(new Date(element_date), false),
-              color: this.formatDate(new Date(element_date), false) <= new Date() ? 'red' : this.colors[this.rnd(0, this.colors.length - 1)] ,
-              details: {full_text: element.text, title: element.dates_homework[element_date].title, text: element.dates_homework[element_date].text}
+              color:
+                this.formatDate(new Date(element_date), false) <= new Date()
+                  ? "red"
+                  : this.colors[this.rnd(0, this.colors.length - 1)],
+              details: {
+                full_text: element.text,
+                title: element.dates_homework[element_date].title,
+                text: element.dates_homework[element_date].text
+              }
             });
           });
-        }
-        else
-        {
+        } else {
           events.push({
             name: element.title,
             start: this.formatDate(new Date(element.dates_homework), false),
             end: this.formatDate(new Date(element.dates_homework), false),
-            color:  this.formatDate(new Date(element.dates_homework), false) <= new Date() ? 'red' : this.colors[this.rnd(0, this.colors.length - 1)],
-            details: {full_text: element.text, title: null, text: null}
+            color:
+              this.formatDate(new Date(element.dates_homework), false) <=
+              new Date()
+                ? "red"
+                : this.colors[this.rnd(0, this.colors.length - 1)],
+            details: { full_text: element.text, title: null, text: null }
           });
         }
       });

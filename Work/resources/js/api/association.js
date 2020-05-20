@@ -46,6 +46,17 @@ export default {
         .then(res => {return res.data.association;})
         .catch(() => {return undefined;});
     },
+    //*Получение ассоциаций между преподавателем и дисциплиной
+    //! Комментарий ---------------------------
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getAssociationTeacherDiscip() 
+    {
+        return axios.get('/api/getters/association_teacher_discip')
+        .then(res => {return res.data.associations;})
+        .catch(() => {return undefined;});
+    },
+    
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------

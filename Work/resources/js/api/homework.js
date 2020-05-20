@@ -54,9 +54,9 @@ export default {
     //? Возвращается полная таблица данных JSON формата
     //! Требование ----------------------------
     //!----------------------------------------
-    getHomeWorkById(homework_id)
+    getHomeWorkTeacherById(home_work_id, user_id)
     {
-        return axios.get('/api/getters/homework_by_id/' + homework_id)
+        return axios.get('/api/getters/homework_teacher_by_id/' + home_work_id + '/' + user_id)
         .then(res => {return res.data.home_work;})
         .catch(() => {return undefined});
     },
@@ -86,7 +86,7 @@ export default {
     {
         return axios.post('/api/save/homework', data)
         .then(() => {return true;})
-        .catch(() => {return undefined});
+        .catch(() => {return false;});
     },
     //*Редактирование домашнего задания преподавателем
     //! Комментарий ---------------------------
@@ -97,7 +97,18 @@ export default {
     {
         return axios.post('/api/edit/homework', data)
         .then(() => {return true;})
-        .catch(() => {return undefined});
+        .catch(() => {return false;});
+    },
+    //*Редактирование домашнего задания преподавателем
+    //! Комментарий ---------------------------
+    //? Реализуется редактирование данных в таблице *HOMEWORK* (Домашние задания)
+    //! Требование ----------------------------
+    //!----------------------------------------
+    editAccess(data)
+    {
+        return axios.post('/api/edit/homework_access', data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
     },
     //*Удаление домашнего задания преподавателем
     //! Комментарий ---------------------------
@@ -106,8 +117,46 @@ export default {
     //!----------------------------------------
     deleteHomeWork(id)
     {
-        return axios.post('/api/edit/homework/' + id)
+        return axios.post('/api/delete/homework/' + id)
         .then(() => {return true;})
         .catch(() => {return undefined});
-    }
+    },
+
+    //*----------------------------------------
+    //!         Загрузка файлов
+    //*----------------------------------------
+    loadDiscipline(file) 
+    {
+        return axios.post('/api/functions/load_documents', file, 
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(() => { return true; })
+        .catch(() => {  return false; });
+    },
+
+
+    //*----------------------------------------
+    //!         Комментарии
+    //*----------------------------------------
+    //*----------------------------------------
+    //!         Получение данных
+    //*----------------------------------------
+    getComment(home_work_id)
+    {
+        return axios.get('/api/getters/homework_comment/' + home_work_id)
+        .then(res => {return res.data.comments;})
+        .catch(() => {return false;});
+    },
+    //*----------------------------------------
+    //!         Работа с данными
+    //*----------------------------------------
+    saveComment(data)
+    {
+        return axios.post('/api/save/homework_comment/', data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
 }

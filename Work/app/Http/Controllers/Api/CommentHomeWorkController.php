@@ -15,16 +15,17 @@ class CommentHomeWorkController extends BaseController
      * get CommentHomeWorkController from database
      * @return JSON
      */
-    public function getCommentHomeWork(CommentHomeWorkRepository $commenthomeworkRepository)
+    public function getCommentHomeWork($home_work_id, CommentHomeWorkRepository $commenthomeworkRepository)
     {
-        $commenthomeworkRepository = $commenthomeworkRepository->getCommentHomeWork();
-        return response()->json(compact('commenthomeworkRepository'));
+        $comments = $commenthomeworkRepository->getCommentHomeWork($home_work_id);
+        return response()->json(compact('comments'));
     }
 
     public function save(Request $request,CreateCommentHomeWorkModification $createCommentHomeWorkModification){
         $data = $request->all();
         $id = $createCommentHomeWorkModification->addCommentHomeWorkToDatabase($data);
-        if($id){
+        if($id)
+        {
             return response()->json(compact("id"),200);
         }
         else{

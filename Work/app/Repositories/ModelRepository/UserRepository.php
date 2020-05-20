@@ -3,7 +3,7 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\User as Model;
-use Illuminate\Support\Facades\DB;
+use App\Models\Student as StudentModel;
 use Debugbar;
 
 class UserRepository extends BaseRepository
@@ -17,7 +17,7 @@ class UserRepository extends BaseRepository
         $result = $this->startCondition()->select($columns)->with('post:id,name')->get();
         foreach ($result as $value)
             if($value->post_id == 2)
-                $value->student = DB::table('students')->where('user_id', '=', $value->id)->first();
+                $value->student = StudentModel::where('user_id', '=', $value->id)->first();
                 
         return $result;
     }
@@ -38,6 +38,15 @@ class UserRepository extends BaseRepository
     {
         $columns = ['id', 'name', 'secName', 'thirdName'];
         $result = $this->startCondition()->select($columns)->where('post_id', 3)->get();
+        return $result;
+    }
+
+    public function getFullRuFIO()
+    {
+        $result = $this->startCondition()
+                        ->selectRaw("`users`.id, CONCAT(users.secName, ' ', users.name, ' ',  users.thirdName) as fullFio")
+                        ->toBase()
+                        ->get();      
         return $result;
     }
 }

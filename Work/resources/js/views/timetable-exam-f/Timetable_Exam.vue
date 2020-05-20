@@ -8,15 +8,15 @@
                     v-system-bar(dark color="info")
                         span(style="color: white;") Фильтры
                     v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-                    v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
+                    v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" item-text="group_name" :items="groups" v-model="selected_group")
                     v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                         template(v-slot:activator="{ on }")
                             v-content.pa-2
                                 v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
-                        v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker(:min='new Date().toISOString().substr(0, 10)' v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                             v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                             v-spacer
-                            v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
+                            v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date);") Принять
                     v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" block label="Экзамены для всех групп")
                     v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" block label="Экзамены на все даты")
                     v-content.pa-1(v-if="user != null && user.post_id != null")
@@ -42,8 +42,7 @@
                                         td {{ exam.teacher_admin }}
                                         td {{ exam.place_name }} / {{exam.info.classroom}}
                                         td(v-if="user.post_id == 1 || user.post_id == 4")
-                                            v-icon.small(@click="deleteExam(exam['id'])") delete   
-                                            v-icon.small(@click="editExam(exam)") edit
+                                            v-icon.small(@click="deleteExam(exam['id'])") delete
     
 </template>
 
@@ -57,7 +56,6 @@ import bildDialog_C from "@/js/components/timetable-exam-f/Bild_Timetable_Exam";
 import ConfirmDialog_C from "@/js/components/expention-f/ConfirmDialog"; //Диалог Да/Нет
 
 import api_department from "@/js/api/department"; //Отделения
-import api_schedule_exam from "@/js/api/scheduleExam"; //Раписание экзаменов
 import api_homework from "@/js/api/homework"; //Домашняя работа
 
 import { mapGetters } from "vuex";
@@ -156,7 +154,6 @@ export default {
         async refresh()
         {
             let item = await api_homework.getHomeWorkExams();
-            console.log(item);
             this.schedule = item;
         },
 //?----------------------------------------------
@@ -190,8 +187,6 @@ export default {
                 else
                     this.selected_group = this.combo_groups[0];
                 this.start = false;
-                if(this.selected_group)
-                    this.group_change();
             }
         },
 
@@ -210,45 +205,23 @@ export default {
                 this.showInfo("Действие было отменено пользователем!");
         },
 
-        async editExam(item)
+        async deleteExam(id)
         {
-            /*var res = await this.$refs.bild.pop(item).then(res => {return res;});
-            if(res)
+            this.showInfo("Экзамен удалится у всех привязанных групп!");
+            let res = await this.$refs.qwestion.pop().then(res => { return res; });
+            if (res) 
             {
-                if(await api_schedule_exam.editScheduleExam(res))
+                if(await api_homework.deleteHomeWork(id))
                 {
                     this.showMessage("Выполнено!");
                     this.refresh();
                 }
+                else
+                this.showError("Произошла ошибка");
             }
-            else 
-                this.showInfo("Действие было отменено пользователем!");*/
+            else
+                this.showInfo("Действие было отменено пользователем");
         },
-
-        async deleteExam(id)
-        {
-            if(await this.$refs.qwestion.pop().then(res => { return res;}))
-            {
-                /*if(await api_schedule_exam.deleteScheduleExam(id))
-                {
-                    this.showMessage("Выполнено!");
-                    this.refresh();
-                }*/
-            }
-            else 
-                this.showInfo("Действие было отменено");
-        },
-
-        //*Получение расписания при изменении выбранной группы
-        async group_change() 
-        {
-        
-        },
-
-        async caseDate()
-        {
-            
-        }
     }
 }
 </script>

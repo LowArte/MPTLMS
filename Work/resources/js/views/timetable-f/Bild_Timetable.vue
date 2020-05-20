@@ -7,6 +7,7 @@
             span(style="color: white;") Фильтры
           v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
           v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
+          v-switch.mx-3.mt-2(v-model="detailMode" color="primary" inset label="Режим детального редактирования")
           v-content.pa-1
             router-link(class='nounderline' :to="'timetable'") 
               v-btn(color="accent" text block dark) Расписание      
@@ -21,12 +22,16 @@
                 v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
                   v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
                   v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Числитель
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины" :items="disciplines_combo" item-value='id' item-text='discip_name' small-chips chips multiple)
-                  v-autocomplete(v-if="schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="teachers_combo" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" @change="schedule[day_key][lesson_key]['TeacherChisl'] = []" label="Дисциплины" :items="disciplines_combo" item-value='id' item-text='discip_name' small-chips chips multiple)
+                  v-autocomplete(v-if="detailMode" @change="schedule[day_key][lesson_key]['TeacherChisl'] = []" v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины (Детальное редактирование)" :items="schedule[day_key][lesson_key]['LessonChisl']" multiple no-data-text="Нет данных")
+                  v-autocomplete(v-if="schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="getTeacherAssoc(schedule[day_key][lesson_key]['LessonChisl'])" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
+                  v-autocomplete(v-if="detailMode && schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели (Детальное редактирование)" :items="schedule[day_key][lesson_key]['TeacherChisl']" multiple no-data-text="Нет данных")
                   v-switch(v-model="schedule[day_key][lesson_key].chisl" color="primary" inset label="Числитель/Знаменатель")
                   v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Знаменатель
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" label="Дисциплины" :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' small-chips chips multiple)
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели" :rules="[TeacherRules.required]" no-data-text="Нет данных" :items="teachers_combo" item-value='id' item-text='fullFio' small-chips chips multiple)
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" @change="schedule[day_key][lesson_key]['TeacherZnam'] = []" label="Дисциплины" :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' small-chips chips multiple)
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="detailMode && schedule[day_key][lesson_key].chisl" label="Дисциплины (Детальное редактирование)" :items="schedule[day_key][lesson_key]['LessonZnam']" multiple no-data-text="Нет данных")
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели" :rules="[TeacherRules.required]" no-data-text="Нет данных" :items="getTeacherAssoc(schedule[day_key][lesson_key]['LessonZnam'])" item-value='id' item-text='fullFio' small-chips chips multiple)
+                  v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="detailMode && schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели (Детальное редактирование)" :items="schedule[day_key][lesson_key]['TeacherZnam']" multiple no-data-text="Нет данных")
           v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 
@@ -50,6 +55,7 @@ import api_schedule from "@/js/api/schedule"; //Api расписания
 import api_place from "@/js/api/place"; //Api мест проведений
 import api_teacher from "@/js/api/teacher"; //Api преподавателей
 import api_discipline from "@/js/api/discipline"; //Api дисциплин
+import api_association from "@/js/api/association"; //Api ассоциаций
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
@@ -76,7 +82,7 @@ export default {
       var now = new Date().getTime();
       var week = Math.round((now - today) / (1000 * 60 * 60 * 24 * 7));
       return week % 2;
-    }
+    },
   },
 
   data() {
@@ -94,23 +100,45 @@ export default {
       },
       selected_department: null,
       selected_group: null,
+      association: null,
       groups: null,
+      detailMode: false,
       days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
       schedule: null
     }
   },
 
-  beforeMount()
+  async beforeMount()
   {
+    this.getTeachers();
     this.getDepartments();
     this.getPlaces();
-    this.getTeachers();
   },
 
   methods: {
 //?----------------------------------------------
 //!           Методы страницы
 //?----------------------------------------------
+    getTeacherAssoc(discip)
+    {
+      if(!this.association || !this.teachers_combo || !discip) return undefined;
+      if(discip.length == 0) return undefined;
+      let teachers = [];
+      this.teachers_combo.filter(res => {
+          discip.forEach(dis => {
+            this.association.forEach(as => {
+              if(as.discip_id == dis && res.id == as.teacher_id)
+              {
+                teachers.push(res);
+                return true;
+              }
+              return false;
+          });
+        });
+      });
+      return teachers;
+    },
+    
     //Получение всех преподавателей
     async getTeachers()
     {
@@ -120,6 +148,9 @@ export default {
         let items = await api_teacher.getTeachers();
         this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
       }
+      
+      let assoc = await api_association.getAssociationTeacherDiscip();
+      this.association = assoc;
       this.closeLoading("Получение преподавателей");
     },
 
@@ -200,8 +231,8 @@ export default {
     {
       this.showLoading("Получение расписания");
       this.schedule = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
+      await this.getDisciplines();
       this.closeLoading("Получение расписания");
-      this.getDisciplines();
     },
   }
 };

@@ -11,7 +11,7 @@
                   v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
                       v-icon(small v-on="on") {{item.isClose == null ?  'mdi-lock' : 'mdi-clock'}}
-                    span {{item.isClose == null ?  'Журнал закрыт' : 'Журнал досрупен'}} 
+                    span {{item.isClose == null ?  'Журнал закрыт' : 'Журнал доступен'}} 
                 v-row(align="center")
                   v-col(class="grow")
                     span {{item.discipline}}

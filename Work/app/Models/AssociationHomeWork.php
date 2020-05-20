@@ -22,8 +22,13 @@ class AssociationHomeWork extends Model
     ];
 
     protected $fillable  = [
-        'homework_id','group_id','home_work_access'
+        'home_work_id','group_id','home_work_access'
     ];
+
+    public function homework()
+    {
+        return $this->hasOne(HomeWork::class,'id','home_work_id');
+    }
 
     public function group()
     {

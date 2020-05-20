@@ -22,7 +22,7 @@ class AssociationUsersHomeWork extends Model
     ];
 
     protected $fillable  = [
-        'user_id','home_work_id','access'
+        'user_id','home_work_id'
     ];
 
     public function __construct($attributes = array())

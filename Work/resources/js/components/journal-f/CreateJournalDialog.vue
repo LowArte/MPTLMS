@@ -115,7 +115,7 @@ export default {
       
       if (this.$refs.form.validate()) {
         
-        if (!this.fingJournal()) 
+        if (this.fingJournal()) 
         {
           this.dialog = false;
           this.alert = false;
@@ -125,7 +125,8 @@ export default {
     },
 
     async fingJournal() {
-      this.groups_journal.forEach(element => {
+      this.groups_journal.forEach(element => 
+      {
         if(element.discip_id == this.journal.discip_id) {
           return true
         } else {

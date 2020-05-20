@@ -42,8 +42,6 @@ class JournalRepository extends BaseRepository
         return $result;
     }
 
-    
-
     public function getJournalByGroupId($id)
     {
         $columns = ['id', 'journal', 'discip_id', 'group_id', 'isClose'];

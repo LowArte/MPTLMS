@@ -10,10 +10,17 @@ class CommentHomeWorkRepository extends BaseRepository
         return Model::class;
     }
 
-    public function getCommentHomeWork()
+    public function getCommentHomeWork($home_work_id)
     {
-        $columns = [];
-        $result = $this->startCondition()->select($columns)->get();
+        $columns = ["comment", "user_id", 'home_work_id'];
+        $result = $this->startCondition()
+                        ->where('home_work_id', $home_work_id)
+                        ->select($columns)
+                        ->get();
+        $userRepository = app(UserRepository::class);
+        $users = $userRepository->getFullRuFIO();
+        foreach($result as $value)
+            $value['full_fio'] = $users->where("id",$value->user_id)->first()->fullFio;
         return $result;
     }
 }

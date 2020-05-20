@@ -11,7 +11,7 @@
                 template(v-slot:activator="{ on }")
                   v-content.pa-2
                     v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
-                v-date-picker(v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
+                v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-spacer
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
@@ -53,8 +53,8 @@
                         v-form(ref="BildReplacement")
                             v-select.pa-0.mb-2.mt-2(v-model="replacement.caselesson" :rules="numberLessonRules" label="Пара" :items="lessons" @change="caseLesson(replacement.caselesson)")
                             v-switch(v-model="cancel" color="primary" inset label="Отменить занятие!")
-                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" no-data-text="Нет данных" :rules="[DiscipRules.required]" label="Дисциплины" :items="disciplines_combo" item-text='discip_name' item-value="id" small-chips chips multiple)
-                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" no-data-text="Нет данных" :rules="[TeacherRules.required]" label="Преподаватели" :items="teachers_combo" item-text='fullFio' item-value="id" small-chips chips multiple)
+                            v-autocomplete.mt-0.pt-2(v-if="!cancel" v-model="replacement.lesson" no-data-text="Нет данных" :rules="[DiscipRules.required]" label="Дисциплины" @change="replacement.teacher = []" :items="disciplines_combo" item-text='discip_name' item-value="id" small-chips chips multiple)
+                            v-autocomplete(v-if="!cancel" v-model="replacement.teacher" no-data-text="Нет данных" :rules="[TeacherRules.required]" label="Преподаватели" :items="getTeacherAssoc(replacement.lesson)" item-text='fullFio' item-value="id" small-chips chips multiple)
                         v-card-text.pa-2.wrap.text-black(v-if="replacement.oldlesson != '' && replacement.oldlesson != null") Замена для {{replacement.caselesson}} пары
                         v-btn.mb-2.mt-1.justify-center(color="accent" block dark @click="sendQuery") Принять
                         v-divider
@@ -74,6 +74,7 @@ import api_replacement from "@/js/api/replacement"; //api замен
 import api_schedule from "@/js/api/schedule"; //Api расписания
 import api_teacher from "@/js/api/teacher"; //Api преподавателей
 import api_discipline from "@/js/api/discipline"; //Api дисциплин
+import api_association from "@/js/api/association"; //Api ассоциаций
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
@@ -132,6 +133,7 @@ export default {
         oldteacher: []
       },
       groups: null,
+      association: null,
       schedule: null, //Расписание выбранного дня
       schedule_bild: null, //Расписание выбранного дня
       selected_department: null,
@@ -156,6 +158,26 @@ export default {
 //?----------------------------------------------
 //!           Методы страницы
 //?----------------------------------------------
+    getTeacherAssoc(discip)
+    {
+      if(!this.association || !this.teachers_combo || !discip) return undefined;
+      if(discip.length == 0) return undefined;
+      let teachers = [];
+      this.teachers_combo.filter(res => {
+          discip.forEach(dis => {
+            this.association.forEach(as => {
+              if(as.discip_id == dis && res.id == as.teacher_id)
+              {
+                teachers.push(res);
+                return true;
+              }
+              return false;
+          });
+        });
+      });
+      return teachers;
+    },
+
     //*Получение всех преподавателей
     async getTeachers()
     {
@@ -165,6 +187,8 @@ export default {
         let items = await api_teacher.getTeachers();
         this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
       }
+      let assoc = await api_association.getAssociationTeacherDiscip();
+      this.association = assoc;
       this.closeLoading("Получение преподавателей");
     },
 

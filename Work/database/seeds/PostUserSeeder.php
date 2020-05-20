@@ -32,6 +32,31 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Уведомления",
+                        "icon" => "mdi-bell",
+                        "component" => [
+                            "info" => [
+                                "name" => "Уведомления",
+                                "url" => "notifications"
+                            ],
+                            "path" => "js/views/notifications-f/NotificationsPage"
+                        ],
+                        "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "icon" => "whatshot",
+                        "text" => "Новости",
+                        "component" => [
+                            "info" => [
+                                "name" => "Лента новостей",
+                                "url" => "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "settings_brightness",
                         "text" => "Панель управления",
                         "default" => true,
@@ -271,6 +296,31 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Уведомления",
+                        "icon" => "mdi-bell",
+                        "component" => [
+                            "info" => [
+                                "name" => "Уведомления",
+                                "url" => "notifications"
+                            ],
+                            "path" => "js/views/notifications-f/NotificationsPage"
+                        ],
+                        "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "icon" => "whatshot",
+                        "text" => "Новости",
+                        "component" => [
+                            "info" => [
+                                "name" => "Лента новостей",
+                                "url" => "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "portrait",
                         "text" => "Мой профиль",
                         "component" => [
@@ -279,19 +329,6 @@ class PostUserSeeder extends Seeder
                                 "url" => "profile"
                             ],
                             "path" => "js/views/account-card-f/AccountCard"
-                        ],
-                    ],
-                    [
-                        "id" => uniqid(),
-                        "icon" => "whatshot",
-                        "text" => "Новости",
-
-                        "component" => [
-                            "info" => [
-                                "name" => "Лента новостей",
-                                "url" => "news"
-                            ],
-                            "path" => "js/views/news-f/NewsFeed"
                         ],
                     ],
                     [
@@ -360,7 +397,7 @@ class PostUserSeeder extends Seeder
                                     ],
                                     "dop_com" => [
                                         [
-                                            "url" => "homework/:homework_id",
+                                            "url" => "homework/:home_work_id",
                                             "path" => "js/views/homework-f/HomeWorkShowStudent"
                                         ]
                                     ],
@@ -432,6 +469,31 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Уведомления",
+                        "icon" => "mdi-bell",
+                        "component" => [
+                            "info" => [
+                                "name" => "Уведомления",
+                                "url" => "notifications"
+                            ],
+                            "path" => "js/views/notifications-f/NotificationsPage"
+                        ],
+                        "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "icon" => "whatshot",
+                        "text" => "Новости",
+                        "component" => [
+                            "info" => [
+                                "name" => "Лента новостей",
+                                "url" => "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "school",
                         "text" => "Учебные процесс",
                         "children" => [
@@ -484,7 +546,7 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
-                        "icon" => "class",
+                        "icon" => "dashboard",
                         "text" => "Учебные журналы",
                         "component" => [
                             "info" => [
@@ -511,8 +573,12 @@ class PostUserSeeder extends Seeder
                             ],
                             "dop_com" => [
                                 [
-                                    "url" => "homework/:homework_id",
+                                    "url" => "homework/:home_work_id",
                                     "path" => "js/views/homework-f/HomeWorkShowTeacher"
+                                ],
+                                [
+                                    "url" => "group_journal/:journal_id",
+                                    "path" => "js/views/journal-f/Journal"
                                 ]
                             ],
                             "path" => "js/views/homework-f/HomeWorkTeacher"
@@ -549,6 +615,31 @@ class PostUserSeeder extends Seeder
                             "path" => "js/views/homes-f/DefaultHome"
                         ],
                         "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "text" => "Уведомления",
+                        "icon" => "mdi-bell",
+                        "component" => [
+                            "info" => [
+                                "name" => "Уведомления",
+                                "url" => "notifications"
+                            ],
+                            "path" => "js/views/notifications-f/NotificationsPage"
+                        ],
+                        "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "icon" => "whatshot",
+                        "text" => "Новости",
+                        "component" => [
+                            "info" => [
+                                "name" => "Лента новостей",
+                                "url" => "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],
                     ],
                     [
                         "id" => uniqid(),
@@ -699,6 +790,31 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Уведомления",
+                        "icon" => "mdi-bell",
+                        "component" => [
+                            "info" => [
+                                "name" => "Уведомления",
+                                "url" => "notifications"
+                            ],
+                            "path" => "js/views/notifications-f/NotificationsPage"
+                        ],
+                        "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
+                        "icon" => "whatshot",
+                        "text" => "Новости",
+                        "component" => [
+                            "info" => [
+                                "name" => "Лента новостей",
+                                "url" => "news"
+                            ],
+                            "path" => "js/views/news-f/NewsFeed"
+                        ],
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "library_books",
                         "text" => "Заказанные справки",
                         "component" => [
@@ -788,6 +904,19 @@ class PostUserSeeder extends Seeder
                     ],
                     [
                         "id" => uniqid(),
+                        "text" => "Уведомления",
+                        "icon" => "mdi-bell",
+                        "component" => [
+                            "info" => [
+                                "name" => "Уведомления",
+                                "url" => "notifications"
+                            ],
+                            "path" => "js/views/notifications-f/NotificationsPage"
+                        ],
+                        "default" => true,
+                    ],
+                    [
+                        "id" => uniqid(),
                         "icon" => "whatshot",
                         "text" => "Новости",
                         "component" => [
@@ -796,7 +925,7 @@ class PostUserSeeder extends Seeder
                                 "url" => "news"
                             ],
                             "path" => "js/views/news-f/NewsFeed"
-                        ]
+                        ],
                     ],
                     [
                         "id" => uniqid(),

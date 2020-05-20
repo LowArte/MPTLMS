@@ -12,7 +12,7 @@
                         v-dialog(ref="dialog" v-model="label" :return-value.sync="date" persistent width="290px")
                             template( v-slot:activator="{ on }")
                                 v-text-field(dense outlined v-model="date" label="Дата" prepend-icon="event" readonly v-on="on")
-                            v-date-picker( v-model="date" scrollable :first-day-of-week="1" locale="ru-Ru")
+                            v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" v-model="date" scrollable :first-day-of-week="1" locale="ru-Ru")
                                 v-spacer
                                 v-btn(text color="primary" @click="label = !label") отмена
                                 v-btn(text color="primary" @click="$refs.dialog.save(date)") выбрать

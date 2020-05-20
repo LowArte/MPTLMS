@@ -21,6 +21,14 @@ class AssociationController extends BaseController
         return response()->json(compact('association'));
     }
     /**
+     * Получение доступных ассоциаций между преподователем и дисциплиной
+     */
+    public function getAssociationTeacherDiscip(AssociationRepository $associationRepository)
+    {
+        $associations = $associationRepository->getAssociationTeacherDiscip();
+        return response()->json(compact('associations'));
+    }
+    /**
      * Получить актуальные журналы и ассоциации
      * @return JSON
      */
