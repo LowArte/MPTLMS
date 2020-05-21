@@ -20,7 +20,7 @@
                   v-card(max-width="640" min-width="300")
                     v-card-text Данный ресурс предоставляет вам возможности назначения групп на различные виды заданий, такие как курсовые, дипломные и домашние работы.
                     v-card-actions.px-4.pb-0.pt-7
-                      v-text-field.single-line.hide-details(label="Поиск по заголовкам" v-model="search" dense outlined prepend-inner-icon="search" clearable :disabled="!homework_list ? true : false")
+                      v-text-field.single-line.hide-details(label="Поиск" v-model="search" dense outlined prepend-inner-icon="search" clearable :disabled="!homework_list ? true : false")
               v-layout.row.wrap(v-if="homework_list")
                 v-flex
                   v-alert.mx-auto.my-2(v-if="!homework_list" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
@@ -52,10 +52,10 @@
                       v-toolbar-title {{ title }}
                       v-btn(fab text small color="orange darken-1" @click="next")
                         v-icon(small) mdi-chevron-right
-                  v-sheet(height="600")
+                  v-sheet(height="920")
                     v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @change="updateRange")
                     v-menu(v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x)
-                      v-card(min-width="320px" max-width="320px" flat)
+                      v-card(min-width="300px" max-width="320px" flat)
                         v-system-bar(:color="selectedEvent.color" dark)
                           small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёк' : 'Задание в процессе'}}
                         span.title.px-4.mt-2(v-if="selectedEvent.details" :color="selectedEvent.color") {{selectedEvent.name}}
@@ -224,8 +224,17 @@ export default {
         } else this.showInfo("Действие было отменено пользователем");
       });
       if (res) {
-        console.log(res);
-        if (await api_homework.saveHomeWork(res)) {
+        let api_result = await api_homework.saveHomeWork(res);
+        if (api_result) 
+        {
+          if(res.documents)
+          {
+            if(await api_homework.loadDocuments({documents: res.documents, homework_id: api_result}))
+              this.showMessage("Файл(ы) загружены успешно!");
+            else
+              this.showError("Файл(ы) не загружен(ы)!");
+          }
+
           this.showMessage("Домашнее задание сделано");
           this.showMessage("Рассылаем уведомления");
           res.groups_id.forEach(element => {
@@ -237,7 +246,9 @@ export default {
               done: false
             });
           });
-        } else this.showError("Произошла ошибка");
+        } 
+        else 
+          this.showError("Произошла ошибка");
       }
 
       this.$refs.create.$refs.form.reset();
@@ -331,7 +342,7 @@ export default {
         ? `${a.getFullYear()}-${a.getMonth() +
             1} - ${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
         : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`;
-    }
+    },
   }
 };
 </script>

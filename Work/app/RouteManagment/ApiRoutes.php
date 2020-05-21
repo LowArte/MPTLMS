@@ -119,6 +119,7 @@ class ApiRoutes
             Route::post('homework', 'Api\HomeWorkController@save')->name('homework');
 
             Route::post('homework_comment', 'Api\CommentHomeWorkController@save')->name('homework_comment');
+            Route::post('load_documents_homework/{home_work_id}', 'Api\HomeWorkDocumentController@save')->name('load_documents_homework');      
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -152,7 +153,7 @@ class ApiRoutes
             Route::post('journal_association','Api\JournalController@editJournalAssociation')->name('journal');
             
             Route::post('homework', 'Api\HomeWorkController@edit')->name('homework');
-            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');        
+            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');   
         });
 
          /**
@@ -182,7 +183,9 @@ class ApiRoutes
 
             Route::post('swap_schedule_parse','Api\ParserController@swap_schedule_parse')->name('swap_schedule_parse');
 
-            Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');            
+            Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');
+            
+            Route::get('download_document_by_id/{document_id}', 'Api\HomeWorkDocumentController@getDocument')->name('load_discipline');          
         });
         /**
          * Методы отвечающие за удаление общих данных
@@ -205,6 +208,8 @@ class ApiRoutes
             Route::post('user/{user_id}/{post_id}','Api\UserController@delete')->name('user');    
             
             Route::post('homework/{home_work_id}', 'Api\HomeWorkController@delete')->name('homework');
+
+            Route::post('homework_document/{document_id}', 'Api\HomeWorkDocumentController@delete')->name('homework');
         });
     }
 }

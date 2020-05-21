@@ -47,14 +47,21 @@ class AssociationHomeWorkRepository extends BaseRepository
                         ->where('group_id', $group_id)
                         ->select($columns)
                         ->get();
+        $teacherRepository = app(UserRepository::class);
+        $teachers = $teacherRepository->getTeachersFIO();
 
+        $placeRepository = app(PlaceRepository::class);
+        $places = $placeRepository->getPlaces();
         foreach($result as $value)
         {
             $value['info'] = json_decode($value['info']);
             if($value['info'])
             {
+                $value['teacher_admin'] = $teachers->where("id",$value['user_id'])->first()->full_name_inverted;
                 $value['title'] = $value['info']->title;
                 $value['text'] = $value['info']->text;
+                if($value['info']->place_id)
+                    $value['place_name'] = $places->where("id", $value['info']->place_id)->first()->place_name;
                 $value['dates_homework'] = $value['info']->date;
                 if(isset($value['homework']))
                     unset($value['homework']);

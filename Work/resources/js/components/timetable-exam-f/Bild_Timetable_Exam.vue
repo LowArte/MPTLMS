@@ -30,7 +30,7 @@ import { mask } from "vue-the-mask"; //Маска
 
 import api_department from "@/js/api/department"; //Отделения
 import api_teacher from "@/js/api/teacher"; //Api преподавателей
-import api_place from "@/js/api/place"; //Api преподавателей
+import api_place from "@/js/api/place"; //Api мест проведения
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";

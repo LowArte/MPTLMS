@@ -85,7 +85,7 @@ export default {
     saveHomeWork(data)
     {
         return axios.post('/api/save/homework', data)
-        .then(() => {return true;})
+        .then(res => {return res.data.id;})
         .catch(() => {return false;});
     },
     //*Редактирование домашнего задания преподавателем
@@ -121,13 +121,24 @@ export default {
         .then(() => {return true;})
         .catch(() => {return undefined});
     },
+    //*Удаление документа
+    //! Комментарий ---------------------------
+    //? Реализуется удаление данных в таблице *HOMEWORK* (Домашние задания)
+    //! Требование ----------------------------
+    //!----------------------------------------
+    deleteDocument(document_id)
+    {
+        return axios.post('/api/delete/homework_document/' + document_id)
+        .then(() => {return true;})
+        .catch(() => {return undefined});
+    },
 
     //*----------------------------------------
     //!         Загрузка файлов
     //*----------------------------------------
-    loadDiscipline(file) 
+    loadDocuments(data) 
     {
-        return axios.post('/api/functions/load_documents', file, 
+        return axios.post('/api/save/load_documents_homework/' + data.homework_id, data.documents, 
         {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -135,6 +146,20 @@ export default {
         })
         .then(() => { return true; })
         .catch(() => {  return false; });
+    },
+    //Скачивание файла
+    downloadDocument(document_id) {
+        return axios({
+                url: '/api/functions/download_document_by_id/' + document_id,
+                method: 'GET',
+                responseType: 'blob',
+            })
+        .then((res) => {
+            return res.data;
+        })
+        .catch(() => {
+            return undefined;
+        });
     },
 
 

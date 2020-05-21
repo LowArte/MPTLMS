@@ -6,11 +6,15 @@ use App\Modifications\Create\CreateHomeWorkModification;
 use App\Modifications\Delete\DeleteHomeWorkModification;
 use App\Modifications\Delete\DeleteAssociationHomeWorkModification;
 use App\Modifications\Delete\DeleteAssociationUsersHomeWorkModification;
+use App\Modifications\Delete\DeleteHomeWorkDocumentModification;
 use App\Modifications\Update\UpdateHomeWorkModification;
 use App\Modifications\Update\UpdateAssociationHomeWorkModification;
 use App\Modifications\Update\UpdateAssociationUsersHomeWorkModification;
 use App\Repositories\ModelRepository\HomeWorkRepository;
 use App\Repositories\ModelRepository\AssociationUsersHomeWorkRepository;
+use App\Repositories\ModelRepository\HomeWorkDocumentRepository;
+use App\Helpers\HomeworkFiles\HomeworkFileFactory;
+
 use Illuminate\Http\Request;
 
 use Debugbar;
@@ -38,9 +42,12 @@ class HomeWorkController extends BaseController
      * Получение задания по id 
      * @return JSON
      */
-    public function getHomeWorkTeacherById($home_work_id, $user_id, HomeWorkRepository $homeworkRepository, AssociationUsersHomeWorkRepository $associationUsersHomeWorkRepository)
+    public function getHomeWorkTeacherById($home_work_id, $user_id, HomeWorkRepository $homeworkRepository, AssociationUsersHomeWorkRepository $associationUsersHomeWorkRepository, HomeWorkDocumentRepository $homeworkdocumentRepository)
     {
         $home_work = $homeworkRepository->getHomeWorkTeacherById($home_work_id, $user_id);
+        $documents = $homeworkdocumentRepository->getHomeWorkDocument($home_work_id);
+        if($documents)
+            $home_work->documents = $documents;
         return response()->json(compact('home_work'));
     }
 
@@ -76,9 +83,11 @@ class HomeWorkController extends BaseController
             return response()->json(500);
     }
 
-    public function delete($home_work_id, DeleteHomeWorkModification $deleteHomeWorkModification, DeleteAssociationHomeWorkModification $deleteAssociationHomeWorkModification, DeleteAssociationUsersHomeWorkModification $deleteAssociationUsersHomeWorkModification){
+    public function delete($home_work_id, DeleteHomeWorkModification $deleteHomeWorkModification, DeleteAssociationHomeWorkModification $deleteAssociationHomeWorkModification, DeleteAssociationUsersHomeWorkModification $deleteAssociationUsersHomeWorkModification, HomeworkFileFactory $homeworkFileFactory, DeleteHomeWorkDocumentModification $deleteHomeWorkDocumentModification){
         $deleteAssociationHomeWorkModification->deleteAssociationHomeWorkById($home_work_id);
         $deleteAssociationUsersHomeWorkModification->deleteAssociationUserHomeWorkById($home_work_id);
+        $deleteHomeWorkDocumentModification->deleteHomeWorkByIdDocument($home_work_id);
+        $homeworkFileFactory->deleteHomeworkRepository($home_work_id);
         $result = $deleteHomeWorkModification->deleteHomeWorkFromDatabase($home_work_id);
         if($result==true)
             return response()->json(200);

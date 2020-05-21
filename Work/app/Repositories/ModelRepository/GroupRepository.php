@@ -22,26 +22,6 @@ class GroupRepository extends BaseRepository
                         ->select($columns)
                         ->with('child:id,group_name')
                         ->get();
-        /*$columns = ['associations.id', 'teacher_id', 'group_id', 'discip_id', 'journals.isClose', 'journals.id as journal_id'];
-
-        $teachersRepository = app(TeacherRepository::class);
-        $teachers = $teachersRepository->getTeachersWithFio();
-        $disciplineRepository = app(DisciplineRepository::class);
-        $disciplines = $disciplineRepository->getDisciplines();
-
-        foreach($result as $value)
-        {
-            $value->association = AssociationModel::where('group_id', $value->group_id)
-                                                    ->select($columns)
-                                                    ->leftJoin('journals', 'associations.id', '=', 'journals.association_id')
-                                                    ->get();
-            foreach($value->association as $assoctiation)
-            {
-                $assoctiation->teacher = $teachers->where("id",$assoctiation->teacher_id)->first()->fullFio;
-                $assoctiation->discip = $disciplines->where("id",$assoctiation->discip_id)->first()->discipline_name;
-            }
-        }*/
-
         return $result;
     }
 

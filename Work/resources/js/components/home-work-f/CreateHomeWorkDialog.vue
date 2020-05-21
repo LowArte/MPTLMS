@@ -5,7 +5,7 @@
             v-system-bar(color="white")
               span Конструктор задания
               v-spacer
-              v-btn(text dark x-small color="orange darken-1" @click="dialog = !dialog") отмена
+              v-btn(text dark x-small color="orange darken-1" @click="cancel()") отмена
             v-progress-linear(:active="loading" :indeterminate="loading" absolute top  color="orange darken-1") 
             v-card-text.pt-2
                 v-form(ref="form")
@@ -17,7 +17,25 @@
                   v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание (основное)" :row-height="24" :rows="3")
                   v-card-actions
                     v-btn(text color="orange darken-1" @click="loadFile()") Прикрепить документы
-                  c-file-fotage(:_files='files')
+                    v-btn(small text color="red" @click="deleteFileInQwee()") Очистить документы
+                  v-layout.row.wrap(v-if="files")
+                    v-flex(v-if="files.length > 0")
+                      v-layout.column.wrap
+                        v-card.pa-2.mx-auto(flat min-width="300px")
+                          v-data-iterator(:items="files" hide-default-footer no-data-text="")
+                            template(v-slot:default="props")
+                              v-layout.column.wrap
+                                div.pa-3(class="order-1 d-flex flex-wrap justify-start")
+                                  div.ma-2(class="order-0 d-flex justify-start" v-for="(file, index) in props.items" :key="index")
+                                    v-card.mx-auto.my-2.pa-0(outlined :elevation="0" width="300px")
+                                      v-list.pa-0(dense flat)
+                                        v-list-item-group
+                                          v-list-item
+                                            v-list-item-avatar
+                                              v-icon(:color="getIconColor(file)") {{getIconWithExtention(file)}}
+                                            v-list-item-content
+                                              v-list-item-title {{getFileName(file)}}
+                                              v-list-item-subtitle(v-if="getExt(file) == '.bat'") Вредоносный файл
                   v-item-group
                     v-item(v-if="homework.type == 1")
                         v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
@@ -41,7 +59,7 @@
                         v-text-field(outlined dense v-model="homework.info.classroom" label="Кабинет")
             v-card-actions
                 v-spacer
-                v-btn(small text dark color="orange darken-1" @click="dialog = !dialog") отмена
+                v-btn(small text dark color="orange darken-1" @click="cancel()") отмена
                 v-btn(small text dark color="success" @click="saveHomeWork" :loading="loading" :disabled="loading") сохранить
                 
 </template>
@@ -52,7 +70,6 @@
 //?----------------------------------------------
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 import withSnackbar from "@/js/components/mixins/withSnackbar";
-import FileFotageComponent_С from "@/js/components/home-work-f/FileFotageComponent";
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
 
 //?----------------------------------------------
@@ -75,7 +92,6 @@ export default {
   mixins: [withOverlayLoading, withSnackbar],
 
   components: {
-    "c-file-fotage": FileFotageComponent_С,
     "c-load-file-dialog-homework": LoadFileDialogHomework_С
   },
 
@@ -115,6 +131,7 @@ export default {
         user_id: null,
         groups_id: [],
         teachers: [],
+        documents: null,
         info: {
           title: null,
           text: null,
@@ -155,7 +172,6 @@ export default {
   methods: {
     async pop() {
       this.dialog = true;
-
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
@@ -167,6 +183,7 @@ export default {
         this.dialog = false;
         this.alert = false;
         this.homework.user_id = this.user.id;
+        this.files = [];
         this.resolve(this.homework);
       } else this.showError("Валидация не пройдена");
     },
@@ -208,21 +225,18 @@ export default {
     },
 
     async loadFile() {
+      this.files = [];
+      this.homework.documents = null;
       await this.$refs.load_file_dialog.pop().then(result => {
         if (result) {
           result.files.forEach(element => {
             this.files.push(element.name);
           });
-          this.showLoading("Загрузка");
-          if (api_homework.loadFiles(result.main)) {
-              this.showMessage("Файл(ы) загружен");
-          } else this.showError("Произошла ошибка при загрузке");
-          this.closeLoading("Загрузка");
+          this.homework.documents = result.main;
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
-      this.showInfo("В разработке!");
     },
     //?----------------------------------------------
     //!           Дополнительные методы
@@ -230,6 +244,148 @@ export default {
     //Сортировка по дате
     sortByDate(arr) {
       return arr.sort((a, b) => (a > b ? 1 : -1));
+    },
+    getIconWithExtention(file) {
+      switch (this.getExt(file)) {
+        case ".xlsx": {
+          return "mdi-file-excel";
+          break;
+        }
+        case ".xls": {
+          return "mdi-microsoft-excel";
+          break;
+        }
+        case ".docx": {
+          return "mdi-file-word";
+          break;
+        }
+        case ".doc": {
+          return "mdi-microsoft-word";
+          break;
+        }
+        case ".odt": {
+          return "mdi-file-code";
+          break;
+        }
+        case ".ppt":
+        case ".pptx": {
+          return "mdi-file-powerpoint";
+          break;
+        }
+        case ".pdf": {
+          return "mdi-file-pdf";
+          break;
+        }
+        case ".txt": {
+          return "mdi-file-document";
+          break;
+        }
+        case ".bat": {
+          return "mdi-shield-alert";
+          break;
+        }
+        case ".zip":
+        case ".7z":
+        case ".gz":
+        case ".gzip":
+        case ".jar":
+        case ".rar":
+        case ".tar":
+        case ".tar-gz":
+        case ".tgz":
+        case ".zipx": {
+          return "mdi-zip-box";
+          break;
+        }
+        default: {
+          return "mdi-file-question";
+          break;
+        }
+      }
+    },
+    getIconColor(file) {
+      switch (this.getExt(file)) {
+        case ".xlsx":
+        case ".xls": {
+          return "green";
+          break;
+        }
+        case ".doc":
+        case ".docx":
+        case ".odt": {
+          return "blue accent-4";
+          break;
+        }
+        case ".ppt":
+        case ".pptx": {
+          return "deep-orange";
+          break;
+        }
+        case ".bat":
+        case ".pdf": {
+          return "red";
+          break;
+        }
+        case ".txt": {
+          return "blue-grey";
+          break;
+        }
+        case ".zip":
+        case ".7z":
+        case ".gz":
+        case ".gzip":
+        case ".jar":
+        case ".rar":
+        case ".tar":
+        case ".tar-gz":
+        case ".tgz":
+        case ".zipx": {
+          return "indigo";
+          break;
+        }
+        default: {
+          return "grey darken-2";
+          break;
+        }
+      }
+    },
+    getExt(file) {
+      let basename = file.split(/[\\/]/).pop();
+      let pos = basename.lastIndexOf(".");
+      if (basename === "" || pos < 1) return "";
+      return basename.slice(pos);
+    },
+    getFileName(file) {
+      return file.split("\\").pop();
+    },
+    //Скачивание документа
+    async download(item) {
+      let file = await api_homework.downloadDocument(item.id);
+      if (file) FileDownload(file, item.name);
+      else this.showError("Ошибка скачивания!");
+    },
+    deleteFileInQwee() {
+      this.files = [];
+      this.homework.documents = null;
+    },
+    cancel() {
+      this.dialog = !this.dialog;
+      this.$refs.form.reset();
+      this.alert = false;
+      this.files = [];
+      this.homework = {
+        user_id: null,
+        groups_id: [],
+        teachers: [],
+        documents: null,
+        info: {
+          title: null,
+          text: null,
+          date: null,
+          place_id: null,
+          classroom: null
+        }
+      };
     }
   }
 };

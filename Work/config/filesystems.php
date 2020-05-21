@@ -53,6 +53,11 @@ return [
             'root' => storage_path('databases'),
         ],
 
+        'homework'=>[
+            'driver' => 'local',
+            'root' => storage_path('homework'),
+        ],
+
         'temp'=>[
             'driver' => 'local',
             'root' => storage_path('temp'),
