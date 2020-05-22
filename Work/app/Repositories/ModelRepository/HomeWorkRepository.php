@@ -3,6 +3,8 @@
 namespace App\Repositories\ModelRepository;
 
 use App\Models\HomeWork as Model;
+use Debugbar;
+
 class HomeWorkRepository extends BaseRepository
 {
     protected function getModelClass(){
@@ -32,6 +34,9 @@ class HomeWorkRepository extends BaseRepository
         $placeRepository = app(PlaceRepository::class);
         $places = $placeRepository->getPlaces();
 
+        $studentsRepository = app(StudentRepository::class);
+        $students = $studentsRepository->getStudents();
+
         if($result)
         {
             $result = json_decode($result);
@@ -44,6 +49,7 @@ class HomeWorkRepository extends BaseRepository
                 foreach($result->association_homework as $homework)
                 {
                     $homework->home_work_access = json_decode($homework->home_work_access);
+                    $homework->students = $students->where("group_id", $homework->group_id);
                     $homework->group_name = $groups->where("id",$homework->group_id)->first()->group_name;
                     $journal = $associationRepository->getAssociationAndJournalByGroupAndUserId($homework->group_id, $user_id);
                     if($journal)

@@ -30,7 +30,6 @@ class UpdateAssociationHomeWorkModification extends BaseModification
         foreach($associations as $association) //Удаление групп
         {
             $check = false;
-            Debugbar::info($data);
             foreach($data['groups'] as $group)
                 if($association->group_id == $group)
                     $check = true;
@@ -48,7 +47,7 @@ class UpdateAssociationHomeWorkModification extends BaseModification
                     $check = true;
             
             if($check == false)
-                $createAssociationModification->addAssociationHomeWorkToDatabase(['home_work_id' => $data['home_work_id'], 'group_id' => $group, 'home_work_access' => json_encode(array())]);
+               $createAssociationModification->addAssociationHomeWorkToDatabase(['home_work_id' => $data['home_work_id'], 'group_id' => $group, 'home_work_access' => json_encode([])]);
         }
     }
 }

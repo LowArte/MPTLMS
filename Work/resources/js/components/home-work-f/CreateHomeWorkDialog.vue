@@ -10,7 +10,8 @@
             v-card-text.pt-2
                 v-form(ref="form")
                   v-autocomplete(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-value="id" item-text="dep_name_full" :items="specialities" v-model="selected_department_id" :rules="DepartmentRules")
-                  v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id" :label="'Группы (' + homework.groups_id.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupRules.required]")
+                  v-autocomplete(v-if="homework.type != 3" :disabled="selected_department_id ? false : true" v-model="homework.groups_id" :label="'Группы (' + homework.groups_id.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupsRules.required]")
+                  v-autocomplete(v-if="homework.type == 3" :disabled="selected_department_id ? false : true" v-model="homework.groups_id[0]" label="Группа" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="GroupRules")
                   v-autocomplete(:disabled="loading" v-model="homework.teachers" label="Соавторы" outlined dense :items="getTeacher" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
                   v-autocomplete(outlined dense @change="type_change" item-value="id" item-text="name" :items="types" v-model="homework.type" label="Тип задания")
                   v-text-field(outlined dense v-model="homework.info.title" label="Название (основное)" :rules="TitleRules")
@@ -55,6 +56,11 @@
                     v-item(v-if="homework.type == 3")
                       div
                         v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
+                          v-model="homework.info.time"
+                          v-mask="mask"
+                          :rules="timeRules"
+                          label="Начало/конец экзамена")
                         v-autocomplete(outlined dense v-model="homework.info.place_id" label="Место проведения" :rules="PlacesRules" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
                         v-text-field(outlined dense v-model="homework.info.classroom" label="Кабинет")
             v-card-actions
@@ -71,6 +77,7 @@
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 import withSnackbar from "@/js/components/mixins/withSnackbar";
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
+import { mask } from "vue-the-mask"; //Маска
 
 //?----------------------------------------------
 //!           Vuex
@@ -136,6 +143,7 @@ export default {
           title: null,
           text: null,
           date: null,
+          time: null,
           place_id: null,
           classroom: null
         },
@@ -159,11 +167,15 @@ export default {
       PlacesRules: [
         value => !!value || "Данное поле не должно оставаться пустым"
       ],
-      GroupRules: {
+      timeRules: [v => /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) || "Не соответствует формату времени"],
+      GroupsRules: {
         required: value => {
           return !!value.length || "Данное поле не должно оставаться пустым";
         }
-      }
+      },
+      GroupRules: [
+        value => !!value || "Данное поле не должно оставаться пустым"
+      ],
     };
   },
   //?----------------------------------------------
@@ -184,6 +196,13 @@ export default {
         this.alert = false;
         this.homework.user_id = this.user.id;
         this.files = [];
+        if(this.homework.type == 3 && this.homework.groups_id.length > 0)
+        {
+          let group = this.homework.groups_id[0];
+          this.homework.groups_id = [];
+          this.homework.groups_id.push(group);
+        }
+
         this.resolve(this.homework);
       } else this.showError("Валидация не пройдена");
     },
@@ -382,6 +401,7 @@ export default {
           title: null,
           text: null,
           date: null,
+          time: null,
           place_id: null,
           classroom: null
         }

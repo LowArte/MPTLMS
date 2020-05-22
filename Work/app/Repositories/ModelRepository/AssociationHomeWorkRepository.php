@@ -70,6 +70,34 @@ class AssociationHomeWorkRepository extends BaseRepository
         
         return json_decode($result);
     }
+    //Получение задания для студента
+    public function getHomeWorkStudentById($home_work_id, $group_id, $student_id)
+    {
+        $columns = ['home_work_id', 'home_work_access', 'home_work.user_id', 'info', 'type', 'home_work.created_at as date'];
+        $result = $this->startCondition()
+                        ->join('home_work', 'home_work_id', '=', 'home_work.id')
+                        ->where([['home_work_id', $home_work_id],['group_id', $group_id]])
+                        ->select($columns)
+                        ->first();
+
+        $userRepository = app(UserRepository::class);
+        $users = $userRepository->getFullRuFIO();
+        $result->teacher_admin = $users->where("id",$result->user_id)->first()->fullFio;
+
+        $placeRepository = app(PlaceRepository::class);
+        $places = $placeRepository->getPlaces();
+
+        $result->home_work_access = json_decode($result->home_work_access);
+
+        if($result)
+        {
+            $result = json_decode($result);
+            $result->info = json_decode($result->info);
+            if($result->info->place_id)
+                $result->info->place_name = $places->where("id", $result->info->place_id)->first()->place_name;
+        }
+        return $result;
+    }
 
     public function getAssociationHomeWorkByHomeWorkId($home_work)
     {
@@ -79,8 +107,6 @@ class AssociationHomeWorkRepository extends BaseRepository
                         ->with("group:id,group_name")
                         ->select($columns)
                         ->get();
-
-        
         return $result;
     }
 
@@ -90,9 +116,7 @@ class AssociationHomeWorkRepository extends BaseRepository
         $result = $this->startCondition()
                         ->with("group:id,group_name")
                         ->select($columns)
-                        ->get();
-
-        
+                        ->get();        
         return $result;
     }
 }

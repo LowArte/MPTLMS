@@ -7,7 +7,7 @@
         v-card(v-if="homework" flat)
           v-tabs(v-model="tabs" centered slider-color="orange darken-1")
             v-tab Задание
-            v-tab Прогресс выполнения задания
+            v-tab Прогресс
             v-tab Доступ
             v-tab Журналы
             v-tab Комментарии
@@ -17,7 +17,7 @@
                 div.pa-3(class="order-1 d-flex flex-wrap justify-center")
                   div.ma-2(class="d-flex justify-end")
                     div
-                      v-card(width="420" min-width="300")
+                      v-card(max-width="420" min-width="300")
                         v-card-title Инструменты
                         v-card-text Тут отображаются доступные вам инструменты для работы с данным ресурсом
                         v-card-actions
@@ -31,18 +31,21 @@
                     v-card.pa-2(v-if="!editable" width="420" min-width="300")
                       v-text-field(outlined dense v-model="homework.info.title" label="Заголовок" :rules="TitleRules")
                       v-textarea.mt-3(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Сопроводительные текст" :row-height="18" :rows="3")
-                      v-autocomplete(outlined dense v-model="homework.info.place_id" label="Место проведения" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
+                      v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.time" label="Время проведения" :rules="TitleRules")
+                      v-autocomplete(v-if="homework.type == 3" outlined dense v-model="homework.info.place_id" label="Место проведения" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
                       v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.classroom" label="Кабинет")
                     v-card(v-else width="420" min-width="300")
                       v-card-title.py-0 {{homework.info.title}}
                       v-card-text.py-1 {{homework.info.text}}
+                      v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
                       v-card-text.py-1(v-if="homework.type == 3") Место: {{homework.info.place_name}}
+                      v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
                       v-card-text.py-1(v-if="homework.type == 3") Кабинет: {{homework.info.classroom}}
                       v-card-text.py-1 Создано: {{homework.date}}
                 v-layout.row.wrap
                   v-flex
                     v-layout.column.wrap
-                      v-card.pa-2.mx-auto(width="850px" min-width="300px")
+                      v-card.pa-2.mx-auto(max-width="850px" min-width="300px")
                         v-card-title Прикреплённые материалы
                         v-data-iterator(:items="homework.documents" hide-default-footer no-data-text="")
                           template(v-slot:default="props")
@@ -65,7 +68,7 @@
                                               v-icon(small) mdi-download
                 v-layout.row.wrap(v-if="homework && homework.type == 2")
                   v-flex
-                    v-card.mx-auto.pa-1(flat width="850px" min-width="300px")
+                    v-card.mx-auto.pa-1(flat max-width="850px" min-width="300px")
                       v-stepper.pb-2.pt-2(v-model="steps_count" vertical)
                         span.pa-3.mt-2(v-if="!editable" style="color: red") Внимание: Активен режим редактирования
                         div(v-for="(item, index, i) in homework.info.date" :key="index")
@@ -75,7 +78,7 @@
                         v-card-actions(v-if="!editable")
                           v-btn(small text color="success" @click="editHomework()") Сохранить изменения
             v-tab-item.pt-2
-              v-card.mx-auto(flat width="850px" min-width="300px")
+              v-card.mx-auto(flat max-width="850px" min-width="300px")
                 v-expansion-panels.pa-0            
                   v-expansion-panel.pa-0(v-for="(item, index) in homework.association_homework" :key="index")
                     v-expansion-panel-header.px-2.py-0 Группа: {{item.group_name}}             
@@ -85,32 +88,35 @@
               div 
                 v-layout.row.wrap
                   v-flex
-                    v-card.mx-auto.pa-2(width="850px" min-width="300px")
+                    v-card.mx-auto.pa-2(max-width="850px" min-width="300px")
                       v-form(ref="access")
-                        v-card-title Инструменты
+                        v-card-title Инструменты 
                         v-autocomplete(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-value="id" item-text="dep_name_full" :items="specialities" v-model="selected_department_id" :rules="DepartmentRules")
-                        v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework_groups" :label="'Группы (' + homework_groups.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupRules.required]")
+                        v-autocomplete(v-if="homework.type != 3" :disabled="selected_department_id ? false : true" v-model="homework_groups" :label="'Группы (' + homework_groups.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupsRules.required]")
+                        v-autocomplete(v-if="homework.type == 3" :disabled="selected_department_id ? false : true" v-model="homework_groups[0]" label="Группа" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="GroupRules")
                         v-autocomplete(:disabled="loading" v-model="coauthors" label="Соавторы" outlined dense :items="getTeacher" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
                         v-card-actions
                           v-spacer
                           v-btn(small text color="success" @click="accessSave()") Сохранить
-                div.pa-3(class="order-1 d-flex flex-wrap justify-center")
-                  div.ma-2(class="d-flex justify-end")
-                    v-card(width="416px" min-width="300px")
-                      v-card-title Соавторы
-                      v-list.pa-0(dense disabled flat)
-                        v-list-item-group
-                          v-list-item(v-for="(item, index) in homework.association_user_homework" :key="index")
-                            v-list-item-content
-                              v-list-item-title {{item.full_fio}}
-                  div.ma-2(class="order-0 d-flex justify-start")
-                    v-card(width="416px" min-width="300px")
-                      v-card-title Группы
-                      v-list.pa-0(dense disabled flat)
-                        v-list-item-group
-                          v-list-item(v-for="(item, index) in homework.association_homework" :key="index")
-                            v-list-item-content
-                              v-list-item-title {{item.group_name}}
+                div.pa-3(v-if="homework.association_user_homework" class="order-1 d-flex flex-wrap justify-center")
+                  div.ma-2(class="d-flex justify-start")
+                    div
+                      v-card(max-width="420px" min-width="300px" v-if="homework.association_user_homework.length > 0")
+                        v-card-title Соавторы
+                        v-list.pa-0(dense disabled flat)
+                          v-list-item-group
+                            v-list-item(v-for="(item, index) in homework.association_user_homework" :key="index")
+                              v-list-item-content
+                                v-list-item-title {{item.full_fio}}
+                  div.ma-2(v-if="homework.association_homework" class="order-0 d-flex justify-start")
+                    div
+                      v-card(max-width="420px" min-width="300px" v-if="homework.association_homework.length > 0")
+                        v-card-title Группы
+                        v-list.pa-0(dense disabled flat)
+                          v-list-item-group
+                            v-list-item(v-for="(item, index) in homework.association_homework" :key="index")
+                              v-list-item-content
+                                v-list-item-title {{item.group_name}}
             v-tab-item
                 div(v-if="homework.journals.length > 0")
                   v-flex.pa-3.mt-2
@@ -164,6 +170,7 @@ import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //З�
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 import FileDownload from "js-file-download"; //Библиотека для скачивания файлов
+import { mask } from "vue-the-mask"; //Маска
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
 
 //?----------------------------------------------
@@ -226,7 +233,6 @@ export default {
       this.selected_department_id = this.specialities[0].id;
       this.department_change();
     }
-
     //Получение групп
     if (this.specialities) {
       if (this.specialities.length > 0) {
@@ -274,11 +280,14 @@ export default {
       DepartmentRules: [
         value => !!value || "Данное поле не должно оставаться пустым"
       ],
-      GroupRules: {
+      GroupsRules: {
         required: value => {
           return !!value.length || "Данное поле не должно оставаться пустым";
         }
       },
+      GroupRules: [
+        value => !!value || "Данное поле не должно оставаться пустым"
+      ],
       TitleRules: [
         value => !!value || "Данное поле не должно оставаться пустым"
       ],
@@ -303,15 +312,12 @@ export default {
       let id = this.$route.params.home_work_id;
       if (id) {
         let data = await api_homework.getHomeWorkTeacherById(id, this.user.id);
-        this.homework = null;
         this.homework = data;
-        if (this.homework) {
+        if (this.homework) 
+        {
           this.coauthors = [];
           await this.homework.association_user_homework.forEach(coauthor => {
-            this.coauthors.push({
-              id: coauthor.user_id,
-              fullFio: coauthor.full_fio
-            });
+            this.coauthors.push(coauthor.user_id);
           });
 
           this.homework_groups = [];
@@ -381,6 +387,13 @@ export default {
     //Сохранение доступа
     async accessSave() {
       if (this.$refs.access.validate()) {
+        if(this.homework.type == 3 && this.homework_groups.length > 0)
+        {
+          let group = this.homework_groups[0];
+          this.homework_groups = [];
+          this.homework_groups.push(group);
+        }
+
         if (
           await api_homework.editAccess({
             groups: this.homework_groups,

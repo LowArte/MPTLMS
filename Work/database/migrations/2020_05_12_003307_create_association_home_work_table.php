@@ -24,25 +24,6 @@ class CreateAssociationHomeWorkTable extends Migration
             $table->softDeletes();
         });
     }
-    /*
-    {
-        1 {
-            text: string
-            links: [],
-            files: [],
-            isChecked: 0
-
-        }
-        
-            json home_work_access
-            0 - Сдано
-            1 - Не сдано
-            2 - Сдано с опозданием
-            3 - Возвращено
-            4 - Ожидается
-        
-    }*/
-
     /**
      * Reverse the migrations.
      *

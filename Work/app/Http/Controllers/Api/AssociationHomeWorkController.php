@@ -12,13 +12,23 @@ use Debugbar;
 class AssociationHomeWorkController extends BaseController
 { 
     /**
-     * Группа
+     * Возвращает задания для группы
      * @return JSON
      */
     public function getHomeWorkByGroupId($group_id, AssociationHomeWorkRepository $associationHomeWorkRepository)
     {
         $home_works = $associationHomeWorkRepository->getHomeWorkByGroupId($group_id);
         return response()->json(compact('home_works'));
+    }
+
+    /**
+     * Возвращает задание для группы и конкретного студента
+     * @return JSON
+     */
+    public function getHomeWorkStudentById($home_work_id, $group_id, $student_id, AssociationHomeWorkRepository $associationHomeWorkRepository)
+    {
+        $home_work = $associationHomeWorkRepository->getHomeWorkStudentById($home_work_id, $group_id, $student_id);
+        return response()->json(compact('home_work'));
     }
 
     /**

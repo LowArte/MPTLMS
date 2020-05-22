@@ -60,6 +60,18 @@ export default {
         .then(res => {return res.data.home_work;})
         .catch(() => {return undefined});
     },
+    //*Получение задания по id
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *HOMEWORK* (Домашние задания)
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getHomeWorkStudentById(home_work_id, group_id, student_id)
+    {
+        return axios.get('/api/getters/homework_student_by_id/' + home_work_id + '/' + group_id + '/' + student_id)
+        .then(res => {return res.data.home_work;})
+        .catch(() => {return undefined});
+    },
     //*Получение экзаменов по id группы
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *HOMEWORK* (Домашние задания)

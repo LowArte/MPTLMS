@@ -23,10 +23,10 @@ class JournalRepository extends BaseRepository
                         ->get();
         $disiplineBufferRepository = app(DisciplineBufferRepository::class);
         $teacherRepository = app(UserRepository::class);
-        $assosiationRepositroy = app(AssociationRepository::class);
+        $assosiationRepository = app(AssociationRepository::class);
 
         $teachers = $teacherRepository->getTeachersFIO();
-        $assosiations = $assosiationRepositroy->getAssociation();
+        $assosiations = $assosiationRepository->getAssociation();
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res){
             $res['journal'] = json_decode($res['journal']);

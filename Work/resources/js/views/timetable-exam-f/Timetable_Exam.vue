@@ -33,12 +33,14 @@
                                 thead
                                     tr
                                         th.text-left Экзамен
+                                        th.text-left Время проведения
                                         th.text-left Преподаватель
                                         th.text-left Место проведения / кабинет
                                         th.text-left(v-if="user.post_id == 1 || user.post_id == 4") Действие
                                 tbody
                                     tr
                                         td {{ exam.info.title }}
+                                        td {{ exam.info.time }}
                                         td {{ exam.teacher_admin }}
                                         td {{ exam.place_name }} / {{exam.info.classroom}}
                                         td(v-if="user.post_id == 1 || user.post_id == 4")

@@ -4,6 +4,7 @@ namespace App\Modifications\Create;
 
 use App\Models\AssociationUsersHomeWork as Model;
 use App\Modifications\BaseModification;
+use Debugbar;
 
 
 class CreateAssociationUsersHomeWorkModification extends BaseModification
@@ -14,6 +15,7 @@ class CreateAssociationUsersHomeWorkModification extends BaseModification
 
     public function addAssociationUsersHomeWorkToDatabase($request)
     {
+        Debugbar::info($request);
         $associationusershomework = new Model();
         $associationusershomework->fill($request);
         $result = $associationusershomework->save();
