@@ -24,7 +24,7 @@
               v-layout.column.wrap
                 v-flex(v-if="!homework_list && loading == true")
                   v-alert.mx-auto.my-2(v-if="!homework_list.length > 0" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
-                v-flex(v-if="homework_list  && loading == true")
+                v-flex(v-if="homework_list && loading == true")
                   v-card.mx-auto.pa-1(flat max-width="1024px" min-width="300px")
                     v-data-iterator(:items="homework_list" :search="search" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
                       template(v-slot:default="props")
@@ -163,7 +163,7 @@ export default {
       if (!start || !end) {
         return "";
       }
-      const startMonth = this.monthFormatter(start);
+      const startMonth = this.monthFormatter(start); //CACHE_HOMEWORK_UPDATE
       const startYear = start.year;
       switch (this.type) {
         case "month":
@@ -229,14 +229,16 @@ export default {
       });
       if (res) {
         let api_result = await api_homework.saveHomeWork(res);
-        if (api_result) 
-        {
-          if(res.documents)
-          {
-            if(await api_homework.loadDocuments({documents: res.documents, homework_id: api_result}))
+        if (api_result) {
+          if (res.documents) {
+            if (
+              await api_homework.loadDocuments({
+                documents: res.documents,
+                homework_id: api_result
+              })
+            )
               this.showMessage("Файл(ы) загружены успешно!");
-            else
-              this.showError("Файл(ы) не загружен(ы)!");
+            else this.showError("Файл(ы) не загружен(ы)!");
           }
 
           this.showMessage("Домашнее задание сделано");
@@ -250,12 +252,16 @@ export default {
               done: false
             });
           });
-        } 
-        else 
-          this.showError("Произошла ошибка");
+        } else this.showError("Произошла ошибка");
       }
 
       this.$refs.create.$refs.form.reset();
+      this.loading = false;
+      await this.$store.dispatch(actions.CACHE_HOMEWORK_UPDATE, {
+        context: this,
+        id: this.user.id
+      });
+      this.loading = true;
     },
     async goToHomeworck(home_work_id) {
       this.$router.push(
@@ -346,7 +352,7 @@ export default {
         ? `${a.getFullYear()}-${a.getMonth() +
             1} - ${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
         : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`;
-    },
+    }
   }
 };
 </script>

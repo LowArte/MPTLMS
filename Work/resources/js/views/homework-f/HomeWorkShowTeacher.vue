@@ -42,11 +42,11 @@
                       v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
                       v-card-text.py-1(v-if="homework.type == 3") Кабинет: {{homework.info.classroom}}
                       v-card-text.py-1 Создано: {{homework.date}}
-                v-layout.row.wrap
-                  v-flex
+                v-layout.row.wrap(v-if="homework.documents")
+                  v-flex(v-if="homework.documents.length > 0")
                     v-layout.column.wrap
                       v-card.pa-2.mx-auto(max-width="850px" min-width="300px")
-                        v-card-title Прикреплённые материалы
+                        v-card-title Материалы
                         v-data-iterator(:items="homework.documents" hide-default-footer no-data-text="")
                           template(v-slot:default="props")
                             v-layout.row.wrap(v-if="homework.documents")
@@ -81,9 +81,8 @@
               v-card.mx-auto(flat max-width="850px" min-width="300px")
                 v-expansion-panels.pa-0            
                   v-expansion-panel.pa-0(v-for="(item, index) in homework.association_homework" :key="index")
-                    v-expansion-panel-header.px-2.py-0 Группа: {{item.group_name}}             
-                    v-expansion-panel-content.px-0.mx-0(v-if="item.home_work_access.length > 0") {{item.home_work_access}}
-                    v-expansion-panel-content.px-0.mx-0(v-else) Студенты еще не загрузили свои работы
+                    v-expansion-panel-header.px-2.py-0 Группа: {{item.group_name}}  
+                    v-expansion-panel-content.px-0.mx-0(v-for="(Student, index_stud) in item.students" :key="index_stud") {{Student.fullFio}}
             v-tab-item.pt-2
               div 
                 v-layout.row.wrap
@@ -257,7 +256,7 @@ export default {
     }
     this.closeLoading("Получение данных");
 
-    let timerId = setInterval(() => this.updateComment(), 10000);
+    //let timerId = setInterval(() => this.updateComment(), 10000);
   },
 
   data() {

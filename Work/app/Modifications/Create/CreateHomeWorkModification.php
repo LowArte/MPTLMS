@@ -21,7 +21,7 @@ class CreateHomeWorkModification extends BaseModification
         {
             $createAssociationHomeWorkModification = app(CreateAssociationHomeWorkModification::class);
             foreach($request['groups_id'] as $value)
-                $createAssociationHomeWorkModification->addAssociationHomeWorkToDatabase(['home_work_id' => $homework->id, 'group_id' => $value, 'home_work_access' => json_encode(array())]);
+                $createAssociationHomeWorkModification->addAssociationHomeWorkToDatabase(['home_work_id' => $homework->id, 'group_id' => $value]);
 
                 $сreateAssociationUsersHomeWorkModification = app(CreateAssociationUsersHomeWorkModification::class);
                 foreach($request['teachers'] as $value)

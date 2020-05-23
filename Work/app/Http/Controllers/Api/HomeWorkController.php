@@ -83,11 +83,18 @@ class HomeWorkController extends BaseController
             return response()->json(500);
     }
 
-    public function delete($home_work_id, DeleteHomeWorkModification $deleteHomeWorkModification, DeleteAssociationHomeWorkModification $deleteAssociationHomeWorkModification, DeleteAssociationUsersHomeWorkModification $deleteAssociationUsersHomeWorkModification, HomeworkFileFactory $homeworkFileFactory, DeleteHomeWorkDocumentModification $deleteHomeWorkDocumentModification){
+    public function delete($home_work_id, 
+        DeleteHomeWorkModification $deleteHomeWorkModification, 
+        DeleteAssociationHomeWorkModification $deleteAssociationHomeWorkModification, 
+        DeleteAssociationUsersHomeWorkModification $deleteAssociationUsersHomeWorkModification, 
+        HomeworkFileFactory $homeworkFileFactory, 
+        DeleteHomeWorkDocumentModification $deleteHomeWorkDocumentModification)
+    {
         $deleteAssociationHomeWorkModification->deleteAssociationHomeWorkById($home_work_id);
         $deleteAssociationUsersHomeWorkModification->deleteAssociationUserHomeWorkById($home_work_id);
         $deleteHomeWorkDocumentModification->deleteHomeWorkByIdDocument($home_work_id);
         $homeworkFileFactory->deleteHomeworkRepository($home_work_id);
+
         $result = $deleteHomeWorkModification->deleteHomeWorkFromDatabase($home_work_id);
         if($result==true)
             return response()->json(200);

@@ -77,7 +77,7 @@ class ApiRoutes
             Route::get('homework_exam', 'Api\AssociationHomeWorkController@getHomeWorkExam')->name('homework_exam');  
         
             Route::get('homework_comment/{home_work_id}', 'Api\CommentHomeWorkController@getCommentHomeWork')->name('homework_comment'); 
-            Route::get('homework_student_by_id/{home_work_id}/{group_id}/{student_id}', 'Api\AssociationHomeWorkController@getHomeWorkStudentById')->name('homework_student'); 
+            Route::get('homework_student_by_id/{home_work_id}/{group_id}/{student_id}', 'Api\AssociationHomeWorkController@getHomeWorkStudentById')->name('homework_student_by_id'); 
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -121,6 +121,10 @@ class ApiRoutes
 
             Route::post('homework_comment', 'Api\CommentHomeWorkController@save')->name('homework_comment');
             Route::post('load_documents_homework/{home_work_id}', 'Api\HomeWorkDocumentController@save')->name('load_documents_homework');      
+
+            Route::post('load_homework_student_documents/{home_work_id}/{home_work_student_id}/{student_id}', 'Api\HomeWorkStudentDocumentController@save')->name('load_documents_homework');      
+            
+            Route::post('homework_student', 'Api\HomeWorkStudentController@save')->name('homework_student');        
         });
         /**
          * Методы отвечаюшие за изменения общих данных

@@ -41,7 +41,7 @@ class AssociationHomeWorkRepository extends BaseRepository
 
     public function getHomeWorkByGroupId($group_id)
     {
-        $columns = ['association_home_work.id as assoc_id', 'home_work.id', 'user_id', 'info', 'type', 'home_work.created_at as date', 'home_work_id', 'group_id', 'home_work_access'];
+        $columns = ['association_home_work.id as assoc_id', 'home_work.id', 'user_id', 'info', 'type', 'home_work.created_at as date', 'home_work_id', 'group_id'];
         $result = $this->startCondition()
                         ->join('home_work', 'home_work_id', '=', 'home_work.id')
                         ->where('group_id', $group_id)
@@ -73,7 +73,7 @@ class AssociationHomeWorkRepository extends BaseRepository
     //Получение задания для студента
     public function getHomeWorkStudentById($home_work_id, $group_id, $student_id)
     {
-        $columns = ['home_work_id', 'home_work_access', 'home_work.user_id', 'info', 'type', 'home_work.created_at as date'];
+        $columns = ['association_home_work.id as association_home_work_id', 'home_work_id', 'home_work.user_id', 'info', 'type', 'home_work.created_at as date'];
         $result = $this->startCondition()
                         ->join('home_work', 'home_work_id', '=', 'home_work.id')
                         ->where([['home_work_id', $home_work_id],['group_id', $group_id]])
@@ -82,15 +82,13 @@ class AssociationHomeWorkRepository extends BaseRepository
 
         $userRepository = app(UserRepository::class);
         $users = $userRepository->getFullRuFIO();
-        $result->teacher_admin = $users->where("id",$result->user_id)->first()->fullFio;
 
         $placeRepository = app(PlaceRepository::class);
         $places = $placeRepository->getPlaces();
 
-        $result->home_work_access = json_decode($result->home_work_access);
-
         if($result)
         {
+            $result->teacher_admin = $users->where("id",$result->user_id)->first()->fullFio;
             $result = json_decode($result);
             $result->info = json_decode($result->info);
             if($result->info->place_id)
@@ -101,7 +99,7 @@ class AssociationHomeWorkRepository extends BaseRepository
 
     public function getAssociationHomeWorkByHomeWorkId($home_work)
     {
-        $columns = ['id', 'home_work_id', 'group_id', 'home_work_access'];
+        $columns = ['id', 'home_work_id', 'group_id'];
         $result = $this->startCondition()
                         ->where('home_work_id', $home_work)
                         ->with("group:id,group_name")
@@ -112,7 +110,7 @@ class AssociationHomeWorkRepository extends BaseRepository
 
     public function getAssociationHomeWork()
     {
-        $columns = ['id', 'home_work_id', 'group_id', 'home_work_access'];
+        $columns = ['id', 'home_work_id', 'group_id'];
         $result = $this->startCondition()
                         ->with("group:id,group_name")
                         ->select($columns)

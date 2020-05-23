@@ -17,7 +17,6 @@ class CreateAssociationHomeWorkTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('home_work_id');
             $table->unsignedBigInteger('group_id');
-            $table->json('home_work_access');
             $table->foreign('home_work_id')->references('id')->on('home_work');
             $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();

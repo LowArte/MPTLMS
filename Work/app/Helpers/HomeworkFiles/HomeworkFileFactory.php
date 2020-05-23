@@ -8,7 +8,7 @@ use Storage;
 use Str;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Moscow');
 
 class HomeworkFileFactory {
 

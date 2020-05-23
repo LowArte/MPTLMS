@@ -32,5 +32,11 @@ export default {
         } else {
             commit(types.ADD_ID_CACHE_HOMEWORK, data.id);
         }
+    },
+
+    async [actions.CACHE_HOMEWORK_UPDATE] ({ commit, state }, data) {
+        let result = await api_homework.getHomeWorkByTeacherId(data.id);
+        await commit(types.CLEAR_CACHE_GROUP);
+        await commit(types.ADD_CACHE_HOMEWORK,{id: data.id, result: result});
     }, 
 }

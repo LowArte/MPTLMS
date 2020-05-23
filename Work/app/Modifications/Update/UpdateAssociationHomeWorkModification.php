@@ -14,9 +14,16 @@ class UpdateAssociationHomeWorkModification extends BaseModification
         return Model::class;
     }
 
+    public function updateAssociationHomeWorkStudentInDatabase($data)
+    {
+        if($result)
+            return $associationhomework->id;
+        return  false;
+    }
+
     public function updateAssociationHomeWorkInDatabase($data)
     {
-        $associationhomework = $this->startCondition()->find($data['id']);
+        $associationhomework = $this->startCondition()->find($data['association_id']);
         $associationhomework->fill($data);
         $result = $associationhomework->save();
         if($result)
@@ -47,7 +54,7 @@ class UpdateAssociationHomeWorkModification extends BaseModification
                     $check = true;
             
             if($check == false)
-               $createAssociationModification->addAssociationHomeWorkToDatabase(['home_work_id' => $data['home_work_id'], 'group_id' => $group, 'home_work_access' => json_encode([])]);
+               $createAssociationModification->addAssociationHomeWorkToDatabase(['home_work_id' => $data['home_work_id'], 'group_id' => $group]);
         }
     }
 }

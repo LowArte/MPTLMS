@@ -126,6 +126,7 @@ export default {
       dates_homework: [],
       item: null,
       groups: null,
+      mask: "##:##-##:##",
       selected_department_id: null,
       loading: false,
       types: [

@@ -20,7 +20,7 @@ class DisciplineBufferController extends BaseController
     {
         $data = request()->file();
         $disciplineBuffer = new DisciplineBuffer();
-        $disciplineBuffer->db_name = "db_for_" . date("Y");
+        $disciplineBuffer->db_name = "db_for_" . date('Y_m_d_H_i_s');
         $imp = new ExcerptImport();
         $result = $imp->getExcert($data);
         $db = new SQLiteDBFunctions($disciplineBuffer->db_name);

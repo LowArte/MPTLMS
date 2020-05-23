@@ -16,12 +16,11 @@ class HomeWorkRepository extends BaseRepository
         $columns = ['id', 'user_id', 'info', 'type', 'created_at as date'];
         $result = $this->startCondition()
                         ->where('id', $home_work_id)
-                        ->with('associationHomework:id,home_work_id,group_id,home_work_access')
+                        ->with('associationHomework:id,home_work_id,group_id')
                         ->with('associationUserHomework:home_work_id,user_id')
                         ->select($columns)
                         ->orderBy('id', 'desc')
                         ->first();
-
         //Получение ассоциаций домашних заданий
         $groupRepository = app(GroupRepository::class);
         $groups = $groupRepository->getGroups();
@@ -48,7 +47,6 @@ class HomeWorkRepository extends BaseRepository
             if($result->association_homework)
                 foreach($result->association_homework as $homework)
                 {
-                    $homework->home_work_access = json_decode($homework->home_work_access);
                     $homework->students = $students->where("group_id", $homework->group_id);
                     $homework->group_name = $groups->where("id",$homework->group_id)->first()->group_name;
                     $journal = $associationRepository->getAssociationAndJournalByGroupAndUserId($homework->group_id, $user_id);

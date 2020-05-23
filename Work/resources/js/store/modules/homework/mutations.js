@@ -7,5 +7,8 @@ export default {
     },
     [types.ADD_ID_CACHE_HOMEWORK](state, id) {
         state.homework_list.addId(id);
+    },
+    [types.CLEAR_CACHE_GROUP](state) {
+        state.homework_list = new CacheData()
     }
 }

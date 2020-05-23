@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomeWorkStudentDocumentsTable extends Migration
+class CreateHomeWorkStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateHomeWorkStudentDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_work_student_documents', function (Blueprint $table) {
+        Schema::create('home_work_students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('home_work_student_id');
-            $table->text('path');
-            $table->text('name');
-            $table->foreign('home_work_student_id')->references('id')->on('home_work_students');
+            $table->unsignedBigInteger('association_home_work_id');
+            $table->unsignedBigInteger('student_id');
+            $table->json('info');
+            $table->foreign('association_home_work_id')->references('id')->on('association_home_work');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,6 @@ class CreateHomeWorkStudentDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_work_student_documents');
+        Schema::dropIfExists('home_work_students');
     }
 }

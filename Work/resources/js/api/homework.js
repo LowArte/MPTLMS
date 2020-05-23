@@ -196,4 +196,29 @@ export default {
         .then(() => {return true;})
         .catch(() => {return false;});
     },
+
+    //*----------------------------------------
+    //!         Студент
+    //*----------------------------------------
+    //*----------------------------------------
+    //!         Работа с данными
+    //*----------------------------------------
+    saveHomeworkStudent(data)
+    {
+        return axios.post('/api/save/homework_student', data)
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
+    },
+    //Загрузка файлов
+    loadHomeworkStudentDocuments(home_work_id, home_work_student_id, student_id, files)
+    {
+        return axios.post('/api/save/load_homework_student_documents/' + home_work_id + '/' + home_work_student_id + '/' + student_id, files, 
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
 }
