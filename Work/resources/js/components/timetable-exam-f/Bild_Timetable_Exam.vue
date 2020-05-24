@@ -6,7 +6,7 @@
             v-card-text
                 v-form(ref="form")
                     v-autocomplete.mt-2(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-value="id" item-text="dep_name_full" :items="specialities" v-model="selected_department_id" :rules="DepartmentRules")
-                    v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id[0]" :label="'Группа'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="[GroupRules.required]")
+                    v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id[0]" label="Группа" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="GroupRules")
                     v-autocomplete(:disabled="loading" v-model="homework.user_id" label="Преподаватель" :rules="TeacherRules" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio')
                     v-text-field(outlined dense v-model="homework.info.title" label="Название экзамена" :rules="TitleRules")
                     v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание" :row-height="24" :rows="3")
@@ -103,18 +103,16 @@ export default {
                 value => !!value || "Данное поле не должно оставаться пустым"
             ],
             timeRules: [v => /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) || "Не соответствует формату времени"],
-            GroupRules: {
-                required: value => {
-                return !!value.length || "Данное поле не должно оставаться пустым";
-                }
-            },
+            GroupRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
+            ],
             TeacherRules: [
                 value => !!value || "Данное поле не должно оставаться пустым"
             ],
         }
     },
 
-    beforeMount()
+    async beforeMount()
     {
         this.getDepartments();
         this.getTeachers();
@@ -125,13 +123,8 @@ export default {
 //?----------------------------------------------
 //!           Методы страницы
 //?----------------------------------------------
-        pop(item) 
+        pop() 
         {
-            if(item)
-            {
-                let items = item;
-                this.homework = JSON.parse(JSON.stringify(items));
-            }
             this.dialog = true;
             return new Promise((resolve, reject) => {
                 this.resolve = resolve;

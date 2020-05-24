@@ -1,7 +1,7 @@
 <template lang="pug">
 v-content.ma-0.pa-1
   v-layout.column.wrap
-    v-data-iterator(:items="feedback" :search="search" :sort-by="sortBy.toLowerCase()" hide-default-footer no-data-text="" no-results-text="")
+    v-data-iterator(:items="feedback" :items-per-page.sync="feedback.length" :search="search" :sort-by="sortBy.toLowerCase()" hide-default-footer no-data-text="" no-results-text="")
       template(v-slot:header)
         v-toolbar(dense floating)
           v-text-field(hide-details v-model="search" prepend-icon="search" single-line label="ФИО")

@@ -209,6 +209,13 @@ export default {
         .then(res => {return res.data.id;})
         .catch(() => {return false;});
     },
+    //Редактирование данных
+    editHomeworkStudent(data)
+    {
+        return axios.post('/api/edit/homework_student', data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
     //Загрузка файлов
     loadHomeworkStudentDocuments(home_work_id, home_work_student_id, student_id, files)
     {
@@ -220,5 +227,19 @@ export default {
         })
         .then(() => {return true;})
         .catch(() => {return false;});
+    },
+    //Скачивание файла
+    downloadStudentDocument(document_id) {
+        return axios({
+                url: '/api/functions/download_student_document_by_id/' + document_id,
+                method: 'GET',
+                responseType: 'blob',
+            })
+        .then((res) => {
+            return res.data;
+        })
+        .catch(() => {
+            return undefined;
+        });
     },
 }

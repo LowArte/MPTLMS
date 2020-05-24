@@ -45,6 +45,7 @@ class AssociationHomeWorkRepository extends BaseRepository
         $result = $this->startCondition()
                         ->join('home_work', 'home_work_id', '=', 'home_work.id')
                         ->where('group_id', $group_id)
+                        ->orderBy('id', 'desc')
                         ->select($columns)
                         ->get();
         $teacherRepository = app(UserRepository::class);

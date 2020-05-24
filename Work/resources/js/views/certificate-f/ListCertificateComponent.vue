@@ -1,7 +1,7 @@
 <template lang="pug">
 v-content.ma-0.pa-1
   v-layout.column.wrap
-    v-data-iterator(:items="сertificate" :search="search" :sort-by="sortBy.toLowerCase()" hide-default-footer no-data-text="" no-results-text="")
+    v-data-iterator(:items="сertificate" :search="search" :items-per-page.sync="сertificate.length" :sort-by="sortBy.toLowerCase()" hide-default-footer no-data-text="" no-results-text="")
       template(v-slot:header)
         v-toolbar(dense floating)
           v-text-field(hide-details v-model="search" prepend-icon="search" single-line label="ФИО")
@@ -21,7 +21,7 @@ v-content.ma-0.pa-1
                 kbd email: {{item.email}}
               div.body-2.mb-1.px-4.py-1 
                 kbd Тема: {{item.type}}
-              v-card-text.pt-0 Сообщение: {{item.certificates_data.text}}
+              v-card-text.pt-0(v-for="(info,i) in Object.keys(item.certificates_data)" :key="i") {{info}} : {{item.certificates_data[info]}}
 </template>
 
 <script>

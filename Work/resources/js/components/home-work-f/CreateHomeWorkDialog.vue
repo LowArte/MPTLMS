@@ -23,7 +23,7 @@
                     v-flex(v-if="files.length > 0")
                       v-layout.column.wrap
                         v-card.pa-2.mx-auto(flat min-width="300px")
-                          v-data-iterator(:items="files" hide-default-footer no-data-text="")
+                          v-data-iterator(:items="files" hide-default-footer :items-per-page.sync="files.length" no-data-text="")
                             template(v-slot:default="props")
                               v-layout.column.wrap
                                 div.pa-3(class="order-1 d-flex flex-wrap justify-start")
@@ -39,13 +39,13 @@
                                               v-list-item-subtitle(v-if="getExt(file) == '.bat'") Вредоносный файл
                   v-item-group
                     v-item(v-if="homework.type == 1")
-                        v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' :rules="DateRules" full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
                     v-item(v-if="homework.type == 2")
                       div
                         v-menu(ref="multi_homework" v-model="drop_menu_date_picker_event_tow" :close-on-content-click="false" transition="scale-transition" offset-y min-width="290px")
                           template(v-slot:activator="{ on }")
                             v-combobox(outlined dense v-model="dates_homework" multiple chips small-chips label="Даты этапов выполнения работы" prepend-icon="event" readonly v-on="on")
-                          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' multiple v-model="dates_homework" no-title :first-day-of-week="1" locale="ru-Ru")
+                          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :rules="DateRules" :min='new Date().toISOString().substr(0, 10)' multiple v-model="dates_homework" no-title :first-day-of-week="1" locale="ru-Ru")
                             v-btn(text color="primary" @click="drop_menu_date_picker_event_tow = !drop_menu_date_picker_event_tow") Отмена
                             v-btn(text color="orange darken-1" @click="changeDateForTypeTwo(dates_homework)") Применить
                         div(v-for="(item, date) in homework.info.date" :key="date")
@@ -55,7 +55,7 @@
                             v-textarea(outlined v-model="item.text" :rules="InsideTextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание этапа" :row-height="24" :rows="3")
                     v-item(v-if="homework.type == 3")
                       div
-                        v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' :rules="DateRules" full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
                         v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
                           v-model="homework.info.time"
                           v-mask="mask"
@@ -77,6 +77,7 @@
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 import withSnackbar from "@/js/components/mixins/withSnackbar";
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
+import FilesHelpres from "@/js/plugins/FilesHelpres"
 import { mask } from "vue-the-mask"; //Маска
 
 //?----------------------------------------------
@@ -96,7 +97,7 @@ export default {
   //!           Преднастройка
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
-  mixins: [withOverlayLoading, withSnackbar],
+  mixins: [withOverlayLoading, withSnackbar, FilesHelpres],
 
   components: {
     "c-load-file-dialog-homework": LoadFileDialogHomework_С
@@ -168,7 +169,19 @@ export default {
       PlacesRules: [
         value => !!value || "Данное поле не должно оставаться пустым"
       ],
-      timeRules: [v => /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) || "Не соответствует формату времени"],
+      DateRules: [
+        value => !!value || "Данное поле не должно оставаться пустым"
+      ],
+      DatesRules: {
+        required: value => {
+          return !!value.length || "Данное поле не должно оставаться пустым";
+        }
+      },
+      timeRules: [
+        v =>
+          /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) ||
+          "Не соответствует формату времени"
+      ],
       GroupsRules: {
         required: value => {
           return !!value.length || "Данное поле не должно оставаться пустым";
@@ -176,7 +189,7 @@ export default {
       },
       GroupRules: [
         value => !!value || "Данное поле не должно оставаться пустым"
-      ],
+      ]
     };
   },
   //?----------------------------------------------
@@ -185,6 +198,7 @@ export default {
   methods: {
     async pop() {
       this.dialog = true;
+      this.homework.documents = null;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
@@ -192,13 +206,25 @@ export default {
 
     //Сохранение нового журнала
     async saveHomeWork() {
-      if (this.$refs.form.validate()) {
+      let dateCheck = true;
+      if (this.homework.type != 0) {
+        if (this.homework.type == 2 && this.dates_homework) {
+          if (this.dates_homework.length == 0) {
+            dateCheck = false;
+            this.showError("Валидация не пройдена");
+          }
+        } else if (!this.homework.info.date) {
+          dateCheck = false;
+          this.showError("Валидация не пройдена");
+        }
+      }
+
+      if (this.$refs.form.validate() && dateCheck) {
         this.dialog = false;
         this.alert = false;
         this.homework.user_id = this.user.id;
         this.files = [];
-        if(this.homework.type == 3 && this.homework.groups_id.length > 0)
-        {
+        if (this.homework.type == 3 && this.homework.groups_id.length > 0) {
           let group = this.homework.groups_id[0];
           this.homework.groups_id = [];
           this.homework.groups_id.push(group);
@@ -264,119 +290,6 @@ export default {
     //Сортировка по дате
     sortByDate(arr) {
       return arr.sort((a, b) => (a > b ? 1 : -1));
-    },
-    getIconWithExtention(file) {
-      switch (this.getExt(file)) {
-        case ".xlsx": {
-          return "mdi-file-excel";
-          break;
-        }
-        case ".xls": {
-          return "mdi-microsoft-excel";
-          break;
-        }
-        case ".docx": {
-          return "mdi-file-word";
-          break;
-        }
-        case ".doc": {
-          return "mdi-microsoft-word";
-          break;
-        }
-        case ".odt": {
-          return "mdi-file-code";
-          break;
-        }
-        case ".ppt":
-        case ".pptx": {
-          return "mdi-file-powerpoint";
-          break;
-        }
-        case ".pdf": {
-          return "mdi-file-pdf";
-          break;
-        }
-        case ".txt": {
-          return "mdi-file-document";
-          break;
-        }
-        case ".bat": {
-          return "mdi-shield-alert";
-          break;
-        }
-        case ".zip":
-        case ".7z":
-        case ".gz":
-        case ".gzip":
-        case ".jar":
-        case ".rar":
-        case ".tar":
-        case ".tar-gz":
-        case ".tgz":
-        case ".zipx": {
-          return "mdi-zip-box";
-          break;
-        }
-        default: {
-          return "mdi-file-question";
-          break;
-        }
-      }
-    },
-    getIconColor(file) {
-      switch (this.getExt(file)) {
-        case ".xlsx":
-        case ".xls": {
-          return "green";
-          break;
-        }
-        case ".doc":
-        case ".docx":
-        case ".odt": {
-          return "blue accent-4";
-          break;
-        }
-        case ".ppt":
-        case ".pptx": {
-          return "deep-orange";
-          break;
-        }
-        case ".bat":
-        case ".pdf": {
-          return "red";
-          break;
-        }
-        case ".txt": {
-          return "blue-grey";
-          break;
-        }
-        case ".zip":
-        case ".7z":
-        case ".gz":
-        case ".gzip":
-        case ".jar":
-        case ".rar":
-        case ".tar":
-        case ".tar-gz":
-        case ".tgz":
-        case ".zipx": {
-          return "indigo";
-          break;
-        }
-        default: {
-          return "grey darken-2";
-          break;
-        }
-      }
-    },
-    getExt(file) {
-      let basename = file.split(/[\\/]/).pop();
-      let pos = basename.lastIndexOf(".");
-      if (basename === "" || pos < 1) return "";
-      return basename.slice(pos);
-    },
-    getFileName(file) {
-      return file.split("\\").pop();
     },
     //Скачивание документа
     async download(item) {

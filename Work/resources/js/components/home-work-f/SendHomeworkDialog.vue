@@ -1,5 +1,5 @@
 <template lang="pug">
-    v-dialog(v-model="dialog" max-width="640")
+    v-dialog(v-model="dialog" persistent max-width="640")
         v-card
             v-card-title(color="warrning darken-1" class="headline") Сдача задания
             v-card-text Ваше задание будет загружено в личный кабинет и будет ожидать оценки от преподавателя, выдавшего задание.
@@ -59,41 +59,91 @@ export default {
       linksRules: [
         value =>
           !!value || "Данное поле не должно оставаться пустым, либо удалите его"
-      ],
+      ]
     };
   },
   methods: {
     pop() {
       this.dialog = !this.dialog;
       this.select = 1;
+      this.links = [];
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
     },
     send() {
-      if (this.select != 4) {
-        if (this.$refs.form.validate()) {
-          let formData = new FormData();
-          for (let i = 0; i < this.files.length; i++)
-            formData.append("file" + i, this.files[i]);
-          this.resolve({
-            links: this.links,
-            files: formData,
-            text: this.text
-          });
-          this.dialog = false;
-          this.$refs.form.reset();
-        } else this.showError("Укажите корректно поля");
-      } else {
-        if (this.text != null) {
-          this.resolve({
-            links: this.links,
-            files: this.files,
-            text: this.text
-          });
-          this.dialog = false;
-          this.$refs.form.reset();
-        } else this.showError("Нельзя отправить пустое задание");
+      switch (this.select) {
+        case 1: {
+          if (this.$refs.form.validate())
+            if (this.files)
+              if (this.files.length > 0) {
+                let formData = new FormData();
+                for (let i = 0; i < this.files.length; i++)
+                  formData.append("file" + i, this.files[i]);
+                this.resolve({
+                  links: null,
+                  files: formData,
+                  text: this.text
+                });
+                this.dialog = !this.dialog;
+                this.$refs.form.reset();
+              } else this.showError("Нельзя отправить пустое задание");
+            else this.showError("Нельзя отправить пустое задание");
+          break;
+        }
+        case 2: {
+          if (this.$refs.form.validate())
+            if (this.links.length > 0) {
+              this.resolve({
+                links: this.links,
+                files: null,
+                text: this.text
+              });
+              this.dialog = !this.dialog;
+              this.links = [];
+              this.$refs.form.reset();
+            } else this.showError("Нельзя отправить пустое задание");
+          break;
+        }
+        case 3: {
+          if (this.$refs.form.validate())
+            if (this.files)
+              if (this.files.length > 0)
+                if (this.links.length > 0) {
+                  let formData = new FormData();
+                  for (let i = 0; i < this.files.length; i++)
+                    formData.append("file" + i, this.files[i]);
+                  this.resolve({
+                    links: this.links,
+                    files: formData,
+                    text: this.text
+                  });
+                  this.dialog = !this.dialog;
+                  this.links = [];
+                  this.$refs.form.reset();
+                } else this.showError("Нельзя отправить пустое задание");
+              else this.showError("Нельзя отправить пустое задание");
+            else this.showError("Нельзя отправить пустое задание");
+          else this.showError("Нельзя отправить пустое задание");
+          break;
+        }
+        case 4: {
+          if (this.text != null) {
+            this.resolve({
+              links: null,
+              files: null,
+              text: this.text
+            });
+            this.dialog = !this.dialog;
+            this.$refs.form.reset();
+          } else this.showError("Нельзя отправить пустое задание");
+          break;
+        }
+
+        default: {
+          this.showError("Выберете один из доступных вариантов сдачи работы");
+          break;
+        }
       }
     },
     calcel() {

@@ -3,25 +3,11 @@
         v-layout.column.wrap
             v-flex
                 v-card(min-width="300px" v-if="user != null && user.post_id != null")
-                    v-system-bar(dark :color="isChisl ? 'info' : 'accent'")
-                        span Доступные действия
-                    v-autocomplete.pa-3.pt-4(outlined dense v-model="teacher_id" label="Преподаватели" :items="teachers_combo" @change="teacher_change()" no-data-text="Нет данных" item-value='id' item-text='fullFio')
-                    v-card-actions
-                        v-btn(text color="primary") редактор
-                        v-btn(text color="primary") обновить данные
+                  v-autocomplete.pa-3.pt-4(outlined dense v-model="teacher_id" label="Преподаватели" :items="teachers_combo" @change="teacher_change()" no-data-text="Нет данных" item-value='id' item-text='fio')
             v-chip.ma-1(min-width="300px" label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
         v-layout.row.wrap
-            v-flex(v-if="teachers_combo")
-                v-card.mx-auto(min-width="300px" max-width="620px")
-                    v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
-                        span Преподаватели
-                    v-alert.ma-2(type="warning" border="left" dense colored-border elevation="2") В данном списке представлены преподаватели, у которых имеются пары на {{days[(new Date()).getDay() + 1].toLowerCase()}}
-                    v-list(nav flat dense v-if="teachers_day")
-                      v-list-item(v-for="(item, index) in teachers_day" :key="index" @click="listChange(item.id)")
-                          v-list-item-content
-                              v-list-item-title {{item.fio}} 
             v-flex(v-if="schedule")
-                v-card.mx-auto(min-width="300px" max-width="620px")
+                v-card.mx-auto(min-width="300px")
                     v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
                         span {{days[(new Date()).getDay() + 1]}}
                         v-spacer
@@ -38,7 +24,8 @@
                                             v-card.pa-0.ma-0.mb-3(flat v-if="index != 'Place'") 
                                                 v-card-title.pl-1.py-1 {{item.time}} • {{item.classroom ? item.classroom : "НУ"}}
                                                 v-card-text.pl-1.pb-1 {{item.LessonZnam.join(" / ")}}
-                                                v-text-field.mt-3(solo clearable dense label="Номер аудитории" v-model="schedule[i].bild[index].classroom" @change="item.classroom = schedule[i].bild[index].classroom")
+                                                v-card-text.pl-1.pb-1 {{item.TeacherZnam.join(" / ")}}
+                                                v-text-field.mt-3(solo clearable dense label="Номер аудитории" :disabled="access(schedule[i].bild[index])" v-model="schedule[i].bild[index].classroom" @change="item.classroom = schedule[i].bild[index].classroom")
                     v-expansion-panels(v-else flat popout)
                         v-expansion-panel.pa-1(v-for="(groups, i) in schedule" :key="i")
                             v-expansion-panel-header {{groups.group_name}}
@@ -50,7 +37,8 @@
                                             v-card.pa-0.ma-0.mb-3(flat v-if="index != 'Place'") 
                                                 v-card-title.pl-1.py-1 {{item.time}} • {{item.classroom ? item.classroom : "НУ"}}
                                                 v-card-text.pl-1.pb-1 {{item.LessonChisl.join(" / ")}}
-                                                v-text-field.mt-3(solo clearable dense label="Номер аудитории" v-model="schedule[i].bild[index].classroom" @change="item.classroom = schedule[i].bild[index].classroom")
+                                                v-card-text.pl-1.pb-1 {{item.TeacherChisl.join(" / ")}}
+                                                v-text-field.mt-3(solo clearable dense label="Номер аудитории" :disabled="access(schedule[i].bild[index])" v-model="schedule[i].bild[index].classroom" @change="item.classroom = schedule[i].bild[index].classroom")
                     v-card-actions
                         v-btn(block text color="success" @click="sendQuery()" :loading="loading") сохранить          
 </template>
@@ -121,10 +109,6 @@ export default {
         teacher_id: this.teacher_id,
         day: this.day
       });
-      this.teachers_day = await api_schedule.getTeachersForScheduleDay({
-        chisl: this.isChisl,
-        day: this.day
-      });
       this.closeLoading("Получение расписания");
     },
 
@@ -161,11 +145,34 @@ export default {
       if (this.teachers_combo == null)
         await this.$store.commit(
           mutations.SET_TEACHERS_COMBO,
-          await api_teacher.getTeachers()
+          await api_schedule.getTeachersForScheduleDay({
+            chisl: this.isChisl,
+            day: this.day
+          })
         );
       this.teacher_id = this.teachers_combo[0].id;
       this.teacher_change();
       this.closeLoading("Получение преподавателей");
+    },
+    //Проверка доступа
+    access(item)
+    {
+      let check = false;
+      if(this.isChisl)
+      {
+        item.TeacherZnam.forEach(el => {
+          if(el == this.teacher_id)
+            check = true;
+        });
+      }
+      else
+      {
+        item.TeacherChisl.forEach(el => {
+          if(el == this.teacher_id)
+            check = true;
+        });
+      }
+      return !check;
     }
   }
 };

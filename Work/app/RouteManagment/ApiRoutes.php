@@ -158,7 +158,8 @@ class ApiRoutes
             Route::post('journal_association','Api\JournalController@editJournalAssociation')->name('journal');
             
             Route::post('homework', 'Api\HomeWorkController@edit')->name('homework');
-            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');   
+            Route::post('homework_student', 'Api\HomeWorkStudentController@edit')->name('homework_student');
+            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');
         });
 
          /**
@@ -190,7 +191,8 @@ class ApiRoutes
 
             Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');
             
-            Route::get('download_document_by_id/{document_id}', 'Api\HomeWorkDocumentController@getDocument')->name('load_discipline');          
+            Route::get('download_document_by_id/{document_id}', 'Api\HomeWorkDocumentController@getDocument')->name('download_document_by_id');          
+            Route::get('download_student_document_by_id/{document_id}', 'Api\HomeWorkStudentDocumentController@getDocument')->name('download_student_document_by_id');          
         });
         /**
          * Методы отвечающие за удаление общих данных

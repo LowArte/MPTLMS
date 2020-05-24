@@ -1,7 +1,7 @@
 <template lang="pug">
 v-content.ma-0.pa-0
-    v-layout.column.wrap
-        v-data-iterator(:items="items.info" hide-default-footer no-data-text="" no-results-text="")
+    v-layout.column.wrap(v-if="items.info")
+        v-data-iterator(:items="items.info" :items-per-page.sync="items.info.length" hide-default-footer no-data-text="" no-results-text="")
             template(v-slot:header)
                 v-toolbar(dense floating :elevation="0" color="boring" )
                     v-btn.ma-0.mx-2(small text color="accent" @click="acceptAll")

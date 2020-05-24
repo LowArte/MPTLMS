@@ -194,7 +194,7 @@ export default {
 
         async addExam()
         {  
-            var res = await this.$refs.bild.pop(null).then(res => {return res;});
+            var res = await this.$refs.bild.pop().then(res => {return res;});
             if(res)
             {
                 if(await api_homework.saveHomeWork(res))
@@ -209,7 +209,6 @@ export default {
 
         async deleteExam(id)
         {
-            this.showInfo("Экзамен удалится у всех привязанных групп!");
             let res = await this.$refs.qwestion.pop().then(res => { return res; });
             if (res) 
             {

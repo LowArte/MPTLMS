@@ -8,7 +8,7 @@ v-content(max-width="816px").ma-0.pa-0
                 v-tab Задание
                 v-tab Прогресс
                 v-tab Комментарии
-            v-tabs-items(v-model="tabs")
+            v-tabs-items.mt-2(v-model="tabs")
                 v-tab-item
                     v-layout.column.wrap
                         v-flex
@@ -16,38 +16,67 @@ v-content(max-width="816px").ma-0.pa-0
                                 v-card-title {{homework.info.title}}
                                 v-card-text {{homework.info.text}}
                                 v-card-actions(v-if="homework.type != 2")
-                                    v-btn(text small color="orange darken-1" @click="sendHomework(null)") Сдать
+                                    v-btn(:disabled="homework.info.state == 1 ? true : homework.info.state == 2 ? true : false" text small color="orange darken-1" @click="sendHomework(null)") {{homework.info.state == 1 ? 'Рассматривается' : homework.info.state == 2 ? 'Одобрено' : 'Сдать'}} 
                         v-flex(v-if="homework.documents")
-                            v-card.pa-2.mx-auto(max-width="850px" min-width="300px" v-if="homework.documents.length > 0")
-                                v-card-title Материалы
-                                v-data-iterator(:items="homework.documents" hide-default-footer no-data-text="")
-                                    template(v-slot:default="props")
-                                        v-layout.row.wrap
-                                            div.pa-3(class="order-1 d-flex flex-wrap justify-start")
-                                                div.ma-2(class="order-0 d-flex justify-start" v-for="(file, index) in homework.documents" :key="index")
-                                                    v-card.mx-auto.my-2.pa-0(outlined :elevation="0" width="300px")
-                                                        v-list.pa-0(dense flat)
-                                                            v-list-item-group
-                                                                v-list-item
-                                                                    v-list-item-avatar
-                                                                        v-icon(:color="getIconColor(file.name)") {{getIconWithExtention(file.name)}}
-                                                                    v-list-item-content
-                                                                        v-list-item-title {{getFileName(file.name)}}
-                                                                        v-list-item-subtitle(v-if="getExt(file.name) == '.bat'") Вредоносный файл
-                                                                    v-list-item-action
-                                                                        v-btn(small @click="download(file)" icon)
-                                                                            v-icon(small) mdi-download
+                          v-card.pa-2.mx-auto(max-width="850px" min-width="300px" v-if="homework.documents.length > 0")
+                            v-card-title Материалы
+                            v-data-iterator(:items="homework.documents" :items-per-page.sync="homework.documents.length" hide-default-footer no-data-text="")
+                              template(v-slot:default="props")
+                                v-layout.row.wrap
+                                  div.pa-3(class="order-1 d-flex flex-wrap justify-start")
+                                    div.ma-2(class="order-0 d-flex justify-start" v-for="(file, index) in homework.documents" :key="index")
+                                      v-card.mx-auto.my-2.pa-0(outlined :elevation="0" width="300px")
+                                        v-list.pa-0(dense flat)
+                                          v-list-item-group
+                                            v-list-item
+                                              v-list-item-avatar
+                                                v-icon(:color="getIconColor(file.name)") {{getIconWithExtention(file.name)}}
+                                              v-list-item-content
+                                                v-list-item-title {{getFileName(file.name)}}
+                                                v-list-item-subtitle(v-if="getExt(file.name) == '.bat'") Вредоносный файл
+                                              v-list-item-action
+                                                v-btn(small @click="downloadTeacher(file)" icon)
+                                                  v-icon(small) mdi-download
                         v-flex
-                            v-card.mx-auto(v-if="homework && homework.type == 2" flat max-width="850px" min-width="300px")
-                                v-stepper.pb-2.pt-2(v-model="steps_count" vertical)
-                                    div(v-for="(item, index, i) in homework.info.date" :key="index")
-                                        v-stepper-step(color="orange darken-1"  :step="i + 1" :complete="new Date(index) < new Date().toISOString().substr(0, 10) ? true : false" @click="steps_count = i + 1") {{item.title}} | {{index}}
-                                            v-stepper-content.ma-0.pa-0(:step="i + 1") 
-                                                v-card-text {{item.text}}
-                                                v-card-actions
-                                                    v-spacer
-                                                    v-btn(small text color="orange darken-1" @click="sendHomework(i + 1)") Сдать
+                          v-card.mx-auto(v-if="homework && homework.type == 2" flat max-width="850px" min-width="300px")
+                            v-stepper.pb-2.pt-2(v-model="steps_count" vertical)
+                              div(v-for="(item, index, i) in homework.info.date" :key="index")
+                                v-stepper-step(color="orange darken-1"  :step="i + 1" :complete="new Date(index) < new Date().toISOString().substr(0, 10) ? true : false" @click="steps_count = i + 1") {{item.title}} | {{index}}
+                                  v-stepper-content.ma-0.pa-0(:step="i + 1") 
+                                    v-card-text {{item.text}}
+                                    v-card-actions
+                                      v-spacer
+                                      v-btn(small text color="orange darken-1" @click="sendHomework(i + 1)") Сдать
                 v-tab-item
+                  v-layout.column.wrap(v-if="homework")
+                    v-flex(v-for="(item, index) in homework.home_work_student" :key="index")
+                      v-card.pa-2.mx-auto(flat max-width="850px" min-width="300px")
+                        v-card-title.font-weight-light.headline.pb-2(style="color: #FB8C00") {{item.date}} {{item.info.step ? '| Этап ' + item.info.step : ''}} ({{ item.info.state == 1 ? 'Рассматривается' : item.info.state == 2 ? 'Отклонено' : item.info.state == 3 ? 'Принято': ''}})
+                        v-divider 
+                        v-card-text(v-if="item.info.text") {{item.info.text}}
+                        v-layout.row.wrap
+                          v-flex(v-if="item.info.links")
+                            v-card.pa-2(min-width="300px" v-if="item.info.links.length > 0" outlined)
+                              v-card-title.font-weight-light.body-1.pb-2 Ссылки
+                              v-card-text.py-1(v-for="(link, index) in item.info.links" :key="index")
+                                a.text-truncate(:href="link") {{link}}
+                          v-flex(v-if="item.documents")
+                            v-card.pa-2(min-width="300px" outlined v-if="Object.keys(item.documents).length > 0")
+                              v-card-title.font-weight-light.body-1.pb-2 Файлы
+                              div.pa-3(class="order-1 d-flex flex-wrap justify-start")
+                                div.ma-2(class="order-0 d-flex justify-start" v-for="(file, index) in item.documents" :key="index")
+                                  v-card.mx-auto.my-2.pa-0(outlined :elevation="0" width="300px")
+                                    v-list.pa-0(dense flat)
+                                      v-list-item-group
+                                        v-list-item
+                                          v-list-item-avatar
+                                            v-icon(:color="getIconColor(file.name)") {{getIconWithExtention(file.name)}}
+                                          v-list-item-content
+                                            v-list-item-title {{getFileName(file.name)}}
+                                            v-list-item-subtitle(v-if="getExt(file.name) == '.bat'") Вредоносный файл
+                                          v-list-item-action
+                                            v-btn(small @click="downloadStudent(file)" icon)
+                                              v-icon(small) mdi-download
                 v-tab-item
                     div.pa-3(class="order-1 d-flex flex-wrap justify-center")
                         v-card.pa-4(flat width="850px" min-width="300px")
@@ -69,8 +98,6 @@ v-content(max-width="816px").ma-0.pa-0
                                 v-card-actions.pt-0
                                     v-spacer
                                     v-btn(small text color="orange darken-1" @click="sendComment") отправить
-            p Домашка
-            p {{homework}}
 </template>
 
 <script>
@@ -83,6 +110,7 @@ import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
 import FileDownload from "js-file-download"; //Библиотека для скачивания файлов
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
 import SendHomeworkDialog_C from "@/js/components/home-work-f/SendHomeworkDialog";
+import FilesHelpres from "@/js/plugins/FilesHelpres"
 
 //?----------------------------------------------
 //!           Подключение api
@@ -101,7 +129,7 @@ export default {
   //!           Преднастройка
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
-  mixins: [withSnackbar, withOverlayLoading],
+  mixins: [withOverlayLoading, withSnackbar, FilesHelpres],
   watch: {
     "$route.params.home_work_id": async function(home_work_id) {
       this.update();
@@ -109,7 +137,7 @@ export default {
   },
 
   components: {
-    "send-homework-dialog": SendHomeworkDialog_C,
+    "send-homework-dialog": SendHomeworkDialog_C
   },
 
   computed: {
@@ -133,13 +161,14 @@ export default {
     this.showLoading("Получение данных");
     await this.update();
     this.closeLoading("Получение данных");
-    //let timerId = setInterval(() => this.updateComment(), 10000);
+    let timerId = setInterval(() => this.updateComment(), 10000);
   },
 
   methods: {
     async update() {
       let id = this.$route.params.home_work_id;
-      if (id) {
+      if (id) 
+      {
         let data = await api_homework.getHomeWorkStudentById(
           id,
           this.user.student.group_id,
@@ -175,152 +204,44 @@ export default {
       let res = await this.$refs.sendHomeworkDialog.pop().then(res => {
         return res;
       });
-
-      if(res)
-      {
+      if (res) {
         res.state = 1;
         res.step = id;
         let documents = res.files;
         delete res.files;
-
-        let homework_student_id = await api_homework.saveHomeworkStudent({association_home_work_id: this.homework.association_home_work_id, student_id: this.user.student.id, info: res});
-        if(homework_student_id)
-        {
-          console.log(homework_student_id);
-          this.showMessage("Ваш ответ сохранен!");
-
-          console.log(documents);
-          if(documents)
-          {
-            if(await api_homework.loadHomeworkStudentDocuments(this.$route.params.home_work_id, homework_student_id, this.user.student.id, documents))
-              this.showInfo("Файлы загружены!");
-            else
-              this.showError("Файлы не были загружены!");
+        let homework_student_id = await api_homework.saveHomeworkStudent({
+          association_home_work_id: this.homework.association_home_work_id,
+          student_id: this.user.student.id,
+          info: res
+        });
+        if (homework_student_id) {
+          this.showMessage("Ваш ответ сохранен");
+          if (documents) {
+            if (
+              await api_homework.loadHomeworkStudentDocuments(
+                this.$route.params.home_work_id,
+                homework_student_id,
+                this.user.student.id,
+                documents
+              )
+            ) 
+            {
+              this.showInfo("Файлы загружены");
+            } else this.showError("Файлы не были загружены");
           }
-        }
-        else
-          this.showError("Ошибка выполнения!");
-        //this.update();
-      }
-      else
-        this.showInfo("Отменено пользователем!");
+        } else this.showError("Ошибка выполнения");
+        this.update();
+      } else this.showInfo("Отменено пользователем");
+    },
+    
+    async downloadTeacher(item) {
+      let file = await api_homework.downloadDocument(item.id);
+      if (file) FileDownload(file, item.name);
+      else this.showError("Ошибка скачивания");
     },
 
-    getIconWithExtention(file) {
-      switch (this.getExt(file)) {
-        case ".xlsx": {
-          return "mdi-file-excel";
-          break;
-        }
-        case ".xls": {
-          return "mdi-microsoft-excel";
-          break;
-        }
-        case ".docx": {
-          return "mdi-file-word";
-          break;
-        }
-        case ".doc": {
-          return "mdi-microsoft-word";
-          break;
-        }
-        case ".odt": {
-          return "mdi-file-code";
-          break;
-        }
-        case ".ppt":
-        case ".pptx": {
-          return "mdi-file-powerpoint";
-          break;
-        }
-        case ".pdf": {
-          return "mdi-file-pdf";
-          break;
-        }
-        case ".txt": {
-          return "mdi-file-document";
-          break;
-        }
-        case ".bat": {
-          return "mdi-shield-alert";
-          break;
-        }
-        case ".zip":
-        case ".7z":
-        case ".gz":
-        case ".gzip":
-        case ".jar":
-        case ".rar":
-        case ".tar":
-        case ".tar-gz":
-        case ".tgz":
-        case ".zipx": {
-          return "mdi-zip-box";
-          break;
-        }
-        default: {
-          return "mdi-file-question";
-          break;
-        }
-      }
-    },
-    getIconColor(file) {
-      switch (this.getExt(file)) {
-        case ".xlsx":
-        case ".xls": {
-          return "green";
-          break;
-        }
-        case ".doc":
-        case ".docx":
-        case ".odt": {
-          return "blue accent-4";
-          break;
-        }
-        case ".ppt":
-        case ".pptx": {
-          return "deep-orange";
-          break;
-        }
-        case ".bat":
-        case ".pdf": {
-          return "red";
-          break;
-        }
-        case ".txt": {
-          return "blue-grey";
-          break;
-        }
-        case ".zip":
-        case ".7z":
-        case ".gz":
-        case ".gzip":
-        case ".jar":
-        case ".rar":
-        case ".tar":
-        case ".tar-gz":
-        case ".tgz":
-        case ".zipx": {
-          return "indigo";
-          break;
-        }
-        default: {
-          return "grey darken-2";
-          break;
-        }
-      }
-    },
-    getExt(file) {
-      let basename = file.split(/[\\/]/).pop();
-      let pos = basename.lastIndexOf(".");
-      if (basename === "" || pos < 1) return "";
-      return basename.slice(pos);
-    },
-    getFileName(file) {
-      return file.split("\\").pop();
-    },
-    async download(item) {
-      let file = await api_homework.downloadDocument(item.id);
+    async downloadStudent(item) {
+      let file = await api_homework.downloadStudentDocument(item.id);
       if (file) FileDownload(file, item.name);
       else this.showError("Ошибка скачивания");
     }

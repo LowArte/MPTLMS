@@ -26,7 +26,7 @@
                   v-alert.mx-auto.my-2(v-if="!homework_list.length > 0" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
                 v-flex(v-if="homework_list && loading == true")
                   v-card.mx-auto.pa-1(flat max-width="1024px" min-width="300px")
-                    v-data-iterator(:items="homework_list" :search="search" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
+                    v-data-iterator(:items="homework_list" :search="search" :items-per-page.sync="homework_list.length" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
                       template(v-slot:default="props")
                         v-list
                           v-list-item-group(v-model="selected_item" color="orange darken-1")
@@ -246,7 +246,7 @@ export default {
           res.groups_id.forEach(element => {
             this.addMessageForUserGroup(element, {
               icon: "mdi-android-messages",
-              title: "Новое задание",
+              title: "Новое задание от (" + this.user.secName + " " + this.user.name + " " + this.user.thirdName + ")",
               subtitle:
                 "Вам назначено новое задание. Чтобы ознакомится с ним подробнее перейдите в соотвествующий раздел.",
               done: false
@@ -263,6 +263,7 @@ export default {
       });
       this.loading = true;
     },
+
     async goToHomeworck(home_work_id) {
       this.$router.push(
         "/" + this.user.post.slug + "/homework/" + home_work_id

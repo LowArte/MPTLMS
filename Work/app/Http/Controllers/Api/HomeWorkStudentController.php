@@ -36,6 +36,8 @@ class HomeWorkStudentController extends BaseController
     
     public function edit(Request $request,UpdateHomeWorkStudentModification $updateHomeWorkStudentModification){
         $data = $request->all();
+        if($data)
+            $data['info'] = json_encode($data['info']);
         $result = $updateHomeWorkStudentModification->updateHomeWorkStudentInDatabase($data);
         if($result){
             return response()->json(200);

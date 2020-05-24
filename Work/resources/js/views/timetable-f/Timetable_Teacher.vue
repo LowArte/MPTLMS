@@ -10,6 +10,7 @@ v-content.ma-0.pa-2
         v-card-actions
           v-btn(block text color="primary" dark @click="getFull") {{allTabel ? "Расписание на сегодня" : "Расписание на неделю"}}
     v-chip.ma-1(label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
+    //-Вывод полного расписания на сегодня
     v-flex(v-if="!allTabel")
       v-card(v-if="tieacher_timetable")
         v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
@@ -65,6 +66,7 @@ v-content.ma-0.pa-2
                     v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
                   v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
                     v-card-text.pb-1.pl-1 Отсутствует
+    //-Вывод полного расписания на неделю
     v-flex(v-if="allTabel")
       v-layout.row.wrap(v-if="tieacher_timetable")
         v-flex(v-for="(itemt, day_i) in tieacher_timetable" :key="day_i")

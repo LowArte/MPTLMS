@@ -2,6 +2,7 @@
   v-content(max-width="816px").ma-0.pa-0
     c-comfirm-dialog(ref="qwestion")
     c-load-file-dialog-homework(ref="load_file_dialog")
+    c-show-homework-dialog(ref="editHomeworkStudent")
     v-layout.column.wrap
       v-flex
         v-card(v-if="homework" flat)
@@ -28,26 +29,27 @@
                           v-btn(icon small :color="!editable ? 'red' : 'grey darken-1'" @click="edit()")
                             v-icon edit
                   div.ma-2(class="order-0 d-flex justify-start")
-                    v-card.pa-2(v-if="!editable" width="420" min-width="300")
-                      v-text-field(outlined dense v-model="homework.info.title" label="Заголовок" :rules="TitleRules")
-                      v-textarea.mt-3(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Сопроводительные текст" :row-height="18" :rows="3")
-                      v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.time" label="Время проведения" :rules="TitleRules")
-                      v-autocomplete(v-if="homework.type == 3" outlined dense v-model="homework.info.place_id" label="Место проведения" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
-                      v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.classroom" label="Кабинет")
-                    v-card(v-else width="420" min-width="300")
-                      v-card-title.py-0 {{homework.info.title}}
-                      v-card-text.py-1 {{homework.info.text}}
-                      v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
-                      v-card-text.py-1(v-if="homework.type == 3") Место: {{homework.info.place_name}}
-                      v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
-                      v-card-text.py-1(v-if="homework.type == 3") Кабинет: {{homework.info.classroom}}
-                      v-card-text.py-1 Создано: {{homework.date}}
+                    div
+                      v-card.pa-2(v-if="!editable" width="420" min-width="300")
+                        v-text-field(outlined dense v-model="homework.info.title" label="Заголовок" :rules="TitleRules")
+                        v-textarea.mt-3(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Сопроводительные текст" :row-height="18" :rows="3")
+                        v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.time" label="Время проведения" :rules="TitleRules")
+                        v-autocomplete(v-if="homework.type == 3" outlined dense v-model="homework.info.place_id" label="Место проведения" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
+                        v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.classroom" label="Кабинет")
+                      v-card(v-else width="420" min-width="300")
+                        v-card-title {{homework.info.title}}
+                        v-card-text.py-1 {{homework.info.text}}
+                        v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
+                        v-card-text.py-1(v-if="homework.type == 3") Место: {{homework.info.place_name}}
+                        v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
+                        v-card-text.py-1(v-if="homework.type == 3") Кабинет: {{homework.info.classroom}}
+                        v-card-text.py-1 Создано: {{homework.date}}
                 v-layout.row.wrap(v-if="homework.documents")
                   v-flex(v-if="homework.documents.length > 0")
                     v-layout.column.wrap
                       v-card.pa-2.mx-auto(max-width="850px" min-width="300px")
                         v-card-title Материалы
-                        v-data-iterator(:items="homework.documents" hide-default-footer no-data-text="")
+                        v-data-iterator(:items="homework.documents" :items-per-page.sync="Object.keys(homework.documents).length" hide-default-footer no-data-text="")
                           template(v-slot:default="props")
                             v-layout.row.wrap(v-if="homework.documents")
                               div.pa-3(class="order-1 d-flex flex-wrap justify-start")
@@ -81,8 +83,16 @@
               v-card.mx-auto(flat max-width="850px" min-width="300px")
                 v-expansion-panels.pa-0            
                   v-expansion-panel.pa-0(v-for="(item, index) in homework.association_homework" :key="index")
-                    v-expansion-panel-header.px-2.py-0 Группа: {{item.group_name}}  
-                    v-expansion-panel-content.px-0.mx-0(v-for="(Student, index_stud) in item.students" :key="index_stud") {{Student.fullFio}}
+                    v-expansion-panel-header.px-4.py-0 Группа: {{item.group_name}}  
+                    v-expansion-panel-content.px-0.mx-0()
+                      v-list.pa-0(dense rounded flat)
+                        v-list-item-group
+                          v-list-item(v-for="(student, index_stud) in item.students" :key="index_stud" @click="openProgressStudent(student, item.id)")
+                            v-list-item-icon
+                              v-icon(color="orange darken-1") mdi-account
+                            v-list-item-content 
+                              v-list-item-title {{student.fullFio}}
+                              v-list-item-subtitle(v-if="student.homework") Кол-во работ: {{student.homework.length > 0 ? Object.keys(student.homework).length : 'отсутствуют'}}
             v-tab-item.pt-2
               div 
                 v-layout.row.wrap
@@ -168,9 +178,12 @@
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import confirmDialog_C from "@/js/components/expention-f/ConfirmDialog";
-import FileDownload from "js-file-download"; //Библиотека для скачивания файлов
 import { mask } from "vue-the-mask"; //Маска
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
+import ShowStudentHomeworkDialog_С from "@/js/components/home-work-f/ShowStudentHomework";
+import FilesHelpres from "@/js/plugins/FilesHelpres"
+import FileDownload from "js-file-download"; //Библиотека для скачивания файлов
+
 
 //?----------------------------------------------
 //!           Подключение api
@@ -192,7 +205,7 @@ export default {
   //!           Преднастройка
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
-  mixins: [withSnackbar, withOverlayLoading],
+  mixins: [withOverlayLoading, withSnackbar, FilesHelpres],
   post_name: {
     name: "Домашнее задание",
     url: "homework/:home_work_id"
@@ -200,7 +213,8 @@ export default {
 
   components: {
     "c-comfirm-dialog": confirmDialog_C,
-    "c-load-file-dialog-homework": LoadFileDialogHomework_С
+    "c-load-file-dialog-homework": LoadFileDialogHomework_С,
+    "c-show-homework-dialog": ShowStudentHomeworkDialog_С
   },
 
   watch: {
@@ -210,7 +224,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["user", "specialities", "groups_combo", "teachers_combo", "places"]),
+    ...mapGetters([
+      "user",
+      "specialities",
+      "groups_combo",
+      "teachers_combo",
+      "places"
+    ]),
     getTeacher() {
       if (!this.teachers_combo) return undefined;
       let teacher = this.teachers_combo.filter(res => {
@@ -243,10 +263,9 @@ export default {
     }
 
     //Получение мест проведения
-    if(this.places == null)
-    {
-        let places = await api_place.getPlaces();
-        this.$store.commit(mutations.SET_PLACES_FULL, places)
+    if (this.places == null) {
+      let places = await api_place.getPlaces();
+      this.$store.commit(mutations.SET_PLACES_FULL, places);
     }
 
     //Получение преподавателей
@@ -255,7 +274,6 @@ export default {
       this.$store.commit(mutations.SET_TEACHERS_COMBO, items);
     }
     this.closeLoading("Получение данных");
-
     //let timerId = setInterval(() => this.updateComment(), 10000);
   },
 
@@ -312,8 +330,7 @@ export default {
       if (id) {
         let data = await api_homework.getHomeWorkTeacherById(id, this.user.id);
         this.homework = data;
-        if (this.homework) 
-        {
+        if (this.homework) {
           this.coauthors = [];
           await this.homework.association_user_homework.forEach(coauthor => {
             this.coauthors.push(coauthor.user_id);
@@ -328,6 +345,7 @@ export default {
         this.updateComment();
       }
     },
+    //Обновление комментариев
     async updateComment() {
       let data = await api_homework.getComment(this.$route.params.home_work_id);
       this.comments = data;
@@ -383,11 +401,17 @@ export default {
         this.showError("Укажите корректно поля");
       }
     },
+    //Редактирование данных
+    async openProgressStudent(student, association_home_work_id)
+    {
+      student.association_home_work_id = association_home_work_id;
+      await this.$refs.editHomeworkStudent.pop(student).then(res => { return res; });
+      this.update();
+    },
     //Сохранение доступа
     async accessSave() {
       if (this.$refs.access.validate()) {
-        if(this.homework.type == 3 && this.homework_groups.length > 0)
-        {
+        if (this.homework.type == 3 && this.homework_groups.length > 0) {
           let group = this.homework_groups[0];
           this.homework_groups = [];
           this.homework_groups.push(group);
@@ -421,119 +445,6 @@ export default {
       this.loading = false;
     },
 
-    getIconWithExtention(file) {
-      switch (this.getExt(file)) {
-        case ".xlsx": {
-          return "mdi-file-excel";
-          break;
-        }
-        case ".xls": {
-          return "mdi-microsoft-excel";
-          break;
-        }
-        case ".docx": {
-          return "mdi-file-word";
-          break;
-        }
-        case ".doc": {
-          return "mdi-microsoft-word";
-          break;
-        }
-        case ".odt": {
-          return "mdi-file-code";
-          break;
-        }
-        case ".ppt":
-        case ".pptx": {
-          return "mdi-file-powerpoint";
-          break;
-        }
-        case ".pdf": {
-          return "mdi-file-pdf";
-          break;
-        }
-        case ".txt": {
-          return "mdi-file-document";
-          break;
-        }
-        case ".bat": {
-          return "mdi-shield-alert";
-          break;
-        }
-        case ".zip":
-        case ".7z":
-        case ".gz":
-        case ".gzip":
-        case ".jar":
-        case ".rar":
-        case ".tar":
-        case ".tar-gz":
-        case ".tgz":
-        case ".zipx": {
-          return "mdi-zip-box";
-          break;
-        }
-        default: {
-          return "mdi-file-question";
-          break;
-        }
-      }
-    },
-    getIconColor(file) {
-      switch (this.getExt(file)) {
-        case ".xlsx":
-        case ".xls": {
-          return "green";
-          break;
-        }
-        case ".doc":
-        case ".docx":
-        case ".odt": {
-          return "blue accent-4";
-          break;
-        }
-        case ".ppt":
-        case ".pptx": {
-          return "deep-orange";
-          break;
-        }
-        case ".bat":
-        case ".pdf": {
-          return "red";
-          break;
-        }
-        case ".txt": {
-          return "blue-grey";
-          break;
-        }
-        case ".zip":
-        case ".7z":
-        case ".gz":
-        case ".gzip":
-        case ".jar":
-        case ".rar":
-        case ".tar":
-        case ".tar-gz":
-        case ".tgz":
-        case ".zipx": {
-          return "indigo";
-          break;
-        }
-        default: {
-          return "grey darken-2";
-          break;
-        }
-      }
-    },
-    getExt(file) {
-      let basename = file.split(/[\\/]/).pop();
-      let pos = basename.lastIndexOf(".");
-      if (basename === "" || pos < 1) return "";
-      return basename.slice(pos);
-    },
-    getFileName(file) {
-      return file.split("\\").pop();
-    },
     //Скачивание документа
     async download(item) {
       let file = await api_homework.downloadDocument(item.id);
@@ -549,22 +460,27 @@ export default {
     },
 
     async loadFile() {
-      let res = await this.$refs.load_file_dialog.pop().then(res => { return res; });
+      let res = await this.$refs.load_file_dialog.pop().then(res => {
+        return res;
+      });
       if (res) {
         {
-          if(res.main)
-          {
-            if(await api_homework.loadDocuments({documents: res.main, homework_id: this.$route.params.home_work_id}))
+          if (res.main) {
+            if (
+              await api_homework.loadDocuments({
+                documents: res.main,
+                homework_id: this.$route.params.home_work_id
+              })
+            )
               this.showMessage("Файл(ы) загружены успешно!");
-            else
-              this.showError("Файл(ы) не загружен(ы)!");
+            else this.showError("Файл(ы) не загружен(ы)!");
           }
         }
         this.update();
       } else {
         this.showInfo("Действие отменено пользователем");
       }
-    }
+    },
   }
 };
 </script>

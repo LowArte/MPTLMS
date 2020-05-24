@@ -36,6 +36,8 @@ class HomeWorkRepository extends BaseRepository
         $studentsRepository = app(StudentRepository::class);
         $students = $studentsRepository->getStudents();
 
+        $homeWorkStudentRepository = app(HomeWorkStudentRepository::class);
+
         if($result)
         {
             $result = json_decode($result);
@@ -48,6 +50,10 @@ class HomeWorkRepository extends BaseRepository
                 foreach($result->association_homework as $homework)
                 {
                     $homework->students = $students->where("group_id", $homework->group_id);
+                    $students_homeworks = $homeWorkStudentRepository->getHomeWorkStudent($homework->id);
+                    foreach($homework->students as $student)
+                        $student->homework = $students_homeworks->where('student_id', $student->id);
+
                     $homework->group_name = $groups->where("id",$homework->group_id)->first()->group_name;
                     $journal = $associationRepository->getAssociationAndJournalByGroupAndUserId($homework->group_id, $user_id);
                     if($journal)

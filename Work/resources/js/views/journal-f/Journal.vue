@@ -64,7 +64,8 @@
                                 tr
                                     td Дат: {{journal.journal[selected_semester].length}}
                                     td 
-                                    td Итого: {{journal.journal[selected_semester].length * 2}} ч.        
+                                    td(v-if="selected_semester == 1") Итого: {{journal.journal[selected_semester].length * 2}} ч. / {{journal.discipline_info.discip_hours_first}} ч.       
+                                    td(v-if="selected_semester == 2") Итого: {{journal.journal[selected_semester].length * 2}} ч. / {{journal.discipline_info.discip_hours_second}} ч.        
 </template> 
 
 <script>

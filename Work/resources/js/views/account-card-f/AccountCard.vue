@@ -116,7 +116,7 @@ export default {
 
     async beforeMount()
     {   
-        this.curs = this.user.student.curs; 
+        this.curs = this.user.student.group.curs; 
         await this.getNotifications();
         this.items = JSON.parse(JSON.stringify(this.notifications));
     },
