@@ -1,7 +1,5 @@
 <template lang="pug">
   div
-    div
-      v-btn(small text @click="back") назад 
     c-crud-form(ref='crud' :_funcK_back="back" :_floodArray="this.flood" :_func_update="update" :_func_init="init" :_func_add="add" :_func_edit="edit" :_func_remove="remove" :_headers="headers" :_title="'Дисциплины'")
     c-comfirm-dialog(ref="qwestion")
     c-add-dialog(ref='new')

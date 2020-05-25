@@ -56,22 +56,20 @@
                   v-sheet(height="920")
                     v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @change="updateRange")
                     v-menu(v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x)
-                      v-card(min-width="300px" max-width="320px" flat)
-                        v-system-bar(:color="selectedEvent.color" dark)
-                          small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёк' : 'Задание в процессе'}}
-                        span.title.px-4.mt-2(v-if="selectedEvent.details" :color="selectedEvent.color") {{selectedEvent.name}}
+                      v-card(min-width="300px" max-width="420px" flat)
+                        v-system-bar(:color="new Date(selectedEvent.end) <= new Date() ? 'red' : selectedEvent.color" dark)
+                          small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёкает' : new Date(selectedEvent.end) < new Date() ? 'Сдать с опозданием' : 'Задание в процессе'}}
+                        v-card-title.pb-0.text-truncate(v-if="selectedEvent.details") {{selectedEvent.name}}
                         v-card-text.pt-1(v-if="selectedEvent.details")
-                          span {{selectedEvent.details.full_text}}
-                          v-divider.my-2
-                          span.py-0(:color="selectedEvent.color") {{selectedEvent.details.title}}
-                          br
-                          small.py-0 {{selectedEvent.details.text}}
+                          v-card-text.pa-0(v-if="selectedEvent.details.full_text") {{selectedEvent.details.full_text}}
+                          v-divider.my-2(v-if="selectedEvent.details.title && selectedEvent.details.text")
+                          v-card-title.pa-0(v-if="selectedEvent.details.title") {{selectedEvent.details.title}}
+                          v-card-text.pa-0(v-if="selectedEvent.details.text") {{selectedEvent.details.text}}
                         v-card-text(v-else)
-                          small(v-html="selectedEvent.name")
-                          br
-                          span(v-if="selectedEvent.details" v-html="selectedEvent.details.full_text")
+                          v-card-text.pa-0(v-html="selectedEvent.name")
+                          v-card-text.pa-0(v-if="selectedEvent.details" v-html="selectedEvent.details.full_text")
                         v-card-actions
-                          v-btn(text small block color="secondary" @click="selectedOpen = false") закрыть
+                          v-btn(text small block color="secondary" @click="goToHomeworck(selectedEvent.id)") к заданию
                           
 </template>
 
@@ -308,6 +306,7 @@ export default {
           element.dates_homework_keys = Object.keys(element.dates_homework);
           element.dates_homework_keys.forEach(element_date => {
             events.push({
+              id: element.id,
               name: element.title,
               start: this.formatDate(new Date(element_date), false),
               end: this.formatDate(new Date(element_date), false),
@@ -324,6 +323,7 @@ export default {
           });
         } else {
           events.push({
+            id: element.id,
             name: element.title,
             start: this.formatDate(new Date(element.dates_homework), false),
             end: this.formatDate(new Date(element.dates_homework), false),

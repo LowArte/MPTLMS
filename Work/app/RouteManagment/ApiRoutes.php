@@ -59,6 +59,7 @@ class ApiRoutes
             Route::get('get_call_schedule_for_panel', 'Api\CallscheduleController@getCallScheduleForPanel')->name('get_call_schedule_for_panel');
             
             Route::get('replacements', 'Api\ReplacementController@getReplacements')->name('replacements');
+            Route::get('replacements_check_teacher/{teacher_id}', 'Api\ReplacementController@getCheckTeacherReplacement')->name('replacements_check_teacher');
 
             Route::get('notificications/{user_id}', 'Api\NotificationsController@getNotificationsForUser')->name('notificications');
             

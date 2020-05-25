@@ -96,8 +96,6 @@ class CreateScheduleSwapModification extends BaseModification
                 $result[$swap["group"]]["group"] = $groupValid;
             }
         }
-        Debugbar::info($datas);
-        // Model::insert($datas);
         return $result;
     }
 }

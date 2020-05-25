@@ -15,7 +15,6 @@ class CreateNewsModification extends BaseModification
 
     public function addNewsToDatabase($request)
     {
-        Debugbar::info($request);
         $news = new Model();
         $news->fill($request);
         $result = $news->save();

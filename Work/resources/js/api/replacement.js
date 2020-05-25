@@ -39,6 +39,14 @@ export default {
         .then(res => {return res.data.replacements;})
         .catch(() => {return undefined;});
     },
+    //Проверка замены для преподавателя
+    getCheckTeacherReplacement(teacher_id) 
+    {
+        return axios.get('/api/getters/replacements_check_teacher/' + teacher_id)
+        .then(res => {return res.data.check;})
+        .catch(() => {return undefined;});
+    },
+
     //*----------------------------------------
     //!         Работа с данными
     //*----------------------------------------

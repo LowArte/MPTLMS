@@ -30,24 +30,23 @@
                             v-icon edit
                   div.ma-2(class="order-0 d-flex justify-start")
                     div
-                      v-card.pa-2(v-if="!editable" width="420" min-width="300")
+                      v-card.pa-2(v-if="!editable" max-width="420" min-width="300")
                         v-text-field(outlined dense v-model="homework.info.title" label="Заголовок" :rules="TitleRules")
                         v-textarea.mt-3(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Сопроводительные текст" :row-height="18" :rows="3")
                         v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.time" label="Время проведения" :rules="TitleRules")
                         v-autocomplete(v-if="homework.type == 3" outlined dense v-model="homework.info.place_id" label="Место проведения" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
                         v-text-field(v-if="homework.type == 3" outlined dense v-model="homework.info.classroom" label="Кабинет")
-                      v-card(v-else width="420" min-width="300")
+                      v-card.pb-1(v-else max-width="420" min-width="300")
                         v-card-title {{homework.info.title}}
                         v-card-text.py-1 {{homework.info.text}}
                         v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
                         v-card-text.py-1(v-if="homework.type == 3") Место: {{homework.info.place_name}}
-                        v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
                         v-card-text.py-1(v-if="homework.type == 3") Кабинет: {{homework.info.classroom}}
                         v-card-text.py-1 Создано: {{homework.date}}
-                v-layout.row.wrap(v-if="homework.documents")
+                div(v-if="homework.documents")
                   v-flex(v-if="homework.documents.length > 0")
-                    v-layout.column.wrap
-                      v-card.pa-2.mx-auto(max-width="850px" min-width="300px")
+                    v-layout.row.wrap
+                      v-card.mx-auto(max-width="850px" min-width="300px")
                         v-card-title Материалы
                         v-data-iterator(:items="homework.documents" :items-per-page.sync="Object.keys(homework.documents).length" hide-default-footer no-data-text="")
                           template(v-slot:default="props")
@@ -143,6 +142,10 @@
                           span {{item.discipline}}
                           br
                           small {{item.group_name}}
+                          br
+                          small I семестр {{item.discipline_info.discip_hours_first}}
+                          br
+                          small II семестр {{item.discipline_info.discip_hours_second}}
                         v-col(class="shrink")
                             v-btn(small text color="success" @click="goJournal(item.id)" :disabled="item.isClose == null") открыть
                 v-flex.pa-3.pt-1(v-else)

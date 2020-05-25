@@ -16,7 +16,6 @@ class SiteOptionsController extends BaseController
     public function getSiteOptions(SiteOptionsRepository $siteOptionsRepository)
     {
         $siteOptions = $siteOptionsRepository->getOptionsForPanelControl();
-        Debugbar::info($siteOptions);
         return response()->json(compact('siteOptions'));
     }
     /**
@@ -26,8 +25,6 @@ class SiteOptionsController extends BaseController
     public function setOptions(Request $request,UpdateSiteOptionsModification $updateSiteOptions)
     {
         $data = $request->all();
-
-        Debugbar::info($data);
 
         $result =  $updateSiteOptions->updatePanelControlOptions($data['id'],$data['value']);
 

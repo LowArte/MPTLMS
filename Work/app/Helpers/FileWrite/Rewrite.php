@@ -62,7 +62,6 @@ class Rewrite
 
                 $array = $array[$part];
             }
-            Debugbar::info($array);
             $actualValue = $array;
            
             if ($actualValue != $expectedValue) {
@@ -78,7 +77,6 @@ class Rewrite
         $result = $contents;
 
         foreach ($newValues as $path => $value) {
-            Debugbar::info($value);
             $result = $this->parseContentValue($result, $path, $value);
         }
 
@@ -206,8 +204,6 @@ class Rewrite
 
         // The target value to be replaced ($3)
         $expression[] = '(?:[aA][rR]{2}[aA][yY]\(|[\[])([^\]|)]*)[\]|)]';
-
-        Debugbar::info($expression);
 
         return '/' . implode('', $expression) . '/';
     }

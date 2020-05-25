@@ -25,7 +25,6 @@ export default {
     this.showLoading("Получение истории");
     if(!this.history)
       await this.$store.dispatch(actions.SET_HISTORY)
-    console.log(this.history)
     this.closeLoading("Получение истории");
   }
 };

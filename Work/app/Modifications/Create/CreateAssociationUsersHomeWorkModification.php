@@ -15,7 +15,6 @@ class CreateAssociationUsersHomeWorkModification extends BaseModification
 
     public function addAssociationUsersHomeWorkToDatabase($request)
     {
-        Debugbar::info($request);
         $associationusershomework = new Model();
         $associationusershomework->fill($request);
         $result = $associationusershomework->save();

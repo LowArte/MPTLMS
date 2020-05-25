@@ -25,10 +25,10 @@
                 v-layout.row.wrap(filterSchedule)
                     v-flex(v-for="(exam,exam_index) in filterSchedule" :key="exam_index")
                         v-card.mx-auto(min-width="300")
-                            v-system-bar(dark color="accent")
-                                span(style="color: white;") Группа: {{exam.group_name}} 
+                            v-system-bar
+                                span Группа: {{exam.group_name}} 
                                 v-spacer
-                                span(style="color: white;") Дата: {{exam.info.date}}
+                                span Дата: {{exam.info.date}}
                             v-simple-table
                                 thead
                                     tr

@@ -334,7 +334,7 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "icon" => "school",
-                        "text" => "Учебные процесс",
+                        "text" => "Учебный процесс",
                         "children" => [
                             [
                                 "id" => uniqid(),
@@ -495,7 +495,7 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "icon" => "school",
-                        "text" => "Учебные процесс",
+                        "text" => "Учебный процесс",
                         "children" => [
                             [
                                 "id" => uniqid(),
@@ -522,7 +522,6 @@ class PostUserSeeder extends Seeder
                             [
                                 "id" => uniqid(),
                                 "text" => "Изменения в расписании",
-
                                 "component" => [
                                     "info" => [
                                         "name" => "Изменения в расписании",

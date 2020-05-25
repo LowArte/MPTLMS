@@ -22,6 +22,13 @@ class ReplacementController extends BaseController
         return response()->json(compact('replacements'));
     }
 
+    //Проверка на замену для преподавателя
+    public function getCheckTeacherReplacement($teacher_id, ReplacementRepository $replacementRepository)
+    {
+        $check = $replacementRepository->checkTeacherReplacement($teacher_id);
+        return response()->json(compact('check'));
+    }
+
     /**
      * Сохранение замены
      * @param id schedule id

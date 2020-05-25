@@ -70,8 +70,6 @@ class FileWriter
     {
         $contents = file_get_contents($path);
         $vars = eval('?>'.$contents);
-        
-        Debugbar::info($vars);
 
         $keys = explode('.', $key);
 

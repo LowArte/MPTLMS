@@ -27,10 +27,10 @@ v-content.ma-0.pa-2
   v-layout.row.wrap(v-for="(groups_key, groups_index) in arrgroups" :key="groups_index")
       v-flex(v-for="(date_key, date_index) in date[groups_index]" :key="date_index")
         v-card.mx-auto(min-width="300")
-          v-system-bar(dark color="accent")
-            span(style="color: white;") Группа: {{groups_key}} 
+          v-system-bar
+            span Группа: {{groups_key}} 
             v-spacer
-            span(style="color: white;") Дата: {{date_key}}
+            span Дата: {{date_key}}
           v-simple-table(v-if="user != null && user.post_id != null")
               thead(v-if="user != null && user.post_id != null")
                   tr

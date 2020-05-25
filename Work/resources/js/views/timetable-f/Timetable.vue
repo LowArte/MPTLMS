@@ -11,9 +11,15 @@ v-content.ma-0.pa-2
         v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
         v-content.pa-1
           router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_timetable'") 
-            v-btn(color="accent" text block dark) Конструктор расписания      
-    v-chip.ma-1(v-if="isChisl != 0" label color="info") Знаменатель
-    v-chip.ma-1(v-else label color="accent") Числитель
+            v-btn(:color="isColor" text block dark) Конструктор расписания
+      v-alert.mt-2(v-if="checkReplacement && user.post.id == 3" outlined prominent type="error" elevation="0") 
+        v-row(align="center")
+          v-col(class="grow") Внимание: для вас имеются изменения в расписании.
+          v-col(class="shrink")
+            router-link(class='nounderline' :to="'/' + user.post.slug + '/replacements'")
+              v-btn(icon)
+                v-icon mdi-chevron-right
+    v-chip.ma-1(min-width="300px" label dark :color="isColor") {{!isChisl ? "Числитель" : "Знаменатель"}}
     v-flex
       v-layout.row.wrap
         v-flex(v-for="(day_key,day_index) in days" :key="day_index" v-if="schedule != null")
@@ -27,18 +33,18 @@ v-content.ma-0.pa-2
                   v-container.pa-0.ma-0(v-if="lesson.chisl == false && lesson_index != 'Place'") <!--Прорисовка обычной пары-->
                     v-container.pa-0.ma-0(v-if="lesson.LessonChisl.length > 0")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
-                      v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
+                      v-card-title(:class="isColor + '--text'").pa-0.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                       v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl.join(" / ")}} 
                       v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                   v-container.pa-0.ma-0(v-else-if="lesson_index != 'Place'") <!--Прорисовка числителя/знаменателя-->
                     v-container.pa-0.ma-0(v-if="isChisl == 0 && (lesson.LessonChisl.length > 0 || lesson.LessonZnam.length > 0)")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                       div(v-if="lesson.LessonChisl.length > 0")
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
+                        v-card-title(:class="isColor + '--text'").pa-0.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black {{lesson.LessonChisl.join(" / ")}} 
                         v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherChisl.join(" / ") }}
                       div(v-else)
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
+                        v-card-title(:class="isColor + '--text'").pa-0.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black Занятия по числителю отсутствует
                       v-expansion-panels.pa-0(style="z-index: initial;")                    
                         v-expansion-panel.pa-0
@@ -51,11 +57,11 @@ v-content.ma-0.pa-2
                     v-container.pa-0.ma-0(v-else-if="lesson.LessonChisl.length > 0 || lesson.LessonZnam.length > 0")
                       v-divider.ma-0.pa-0(v-if="lesson_index != 1")
                       div(v-if="lesson.LessonZnam.length > 0")
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
+                        v-card-title(:class="isColor + '--text'").pa-0.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black {{lesson.LessonZnam.join(" / ")}} 
                         v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam.join(" / ") }}
                       div(v-else)
-                        v-card-title.pa-0.accent--text.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
+                        v-card-title(:class="isColor + '--text'").pa-0.font-weight-light.text-truncate {{lesson.time}} {{lesson.classroom ? ' • ' + lesson.classroom : ""}}
                         v-card-text.pa-0.wrap.text-black Занятия по знаменателю отсутствует
                       v-expansion-panels.pa-0(style="z-index: initial;")                    
                         v-expansion-panel.pa-0
@@ -79,41 +85,41 @@ v-content.ma-0.pa-2
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
-import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
+import PanelControl_C from "@/js/components/expention-f/Panel"; //Панель для вывода расписания
 
 import api_call_schedule from "@/js/api/callSchedule"; //Расписания звонков
 import api_department from "@/js/api/department"; //Отделения
 import api_schedule from "@/js/api/schedule"; //Api расписания
+import api_replacement from "@/js/api/replacement"; //Замены
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 export default {
-//?----------------------------------------------
-//!           Преднастройка
-//?----------------------------------------------
+  //?----------------------------------------------
+  //!           Преднастройка
+  //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withSnackbar, withOverlayLoading],
   components: {
-    c_panel_control: PanelControl_C,
+    c_panel_control: PanelControl_C
   },
   //*Вычисляемые свойства
   post_name: {
     name: "Учебное расписание",
-    url: "timetable", 
+    url: "timetable",
     dop_com: [
       {
-        url:"bild_timetable",
-        path:"js/views/timetable-f/Bild_Timetable"
-      }   
+        url: "bild_timetable",
+        path: "js/views/timetable-f/Bild_Timetable"
+      }
     ]
   },
 
   computed: {
     ...mapGetters(["specialities", "groups_combo", "user", "timetable_full"]),
-    
-    combo_groups: function() 
-    {
+
+    combo_groups: function() {
       if (!this.groups_combo) return undefined;
       this.selected_group = this.groups_combo[0];
       return this.groups_combo;
@@ -127,6 +133,10 @@ export default {
       var now = new Date().getTime();
       var week = Math.round((now - today) / (1000 * 60 * 60 * 24 * 7));
       return week % 2;
+    },
+
+    isColor: function() {
+      return this.isChisl ? "cobalt" : "alizarin";
     }
   },
 
@@ -134,34 +144,44 @@ export default {
     return {
       selected_department: null,
       selected_group: null,
+      checkReplacement: false,
       groups: null,
-      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
+      days: [
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+      ], //Дни недели
       schedule: null,
       start: true
-    }
+    };
   },
 
-  beforeMount()
-  {
+  async beforeMount() {
     this.getDepartments();
+    this.checkReplacement = await api_replacement.getCheckTeacherReplacement(
+      this.user.id
+    );
   },
 
-  mounted()
-  {
+  mounted() {
     this.getCallScheduleForPanel();
   },
 
   methods: {
-//?----------------------------------------------
-//!           Методы страницы
-//?----------------------------------------------
+    //?----------------------------------------------
+    //!           Методы страницы
+    //?----------------------------------------------
     //*Получение панели с расписанием
     async getCallScheduleForPanel() {
       this.showLoading("Получение расписания звонков");
-      this.$refs.panel.loadData(await api_call_schedule.getCallScheduleForPanel());
+      this.$refs.panel.loadData(
+        await api_call_schedule.getCallScheduleForPanel()
+      );
 
-      if(this.call_schedule == null)
-      {
+      if (this.call_schedule == null) {
         var timeTable = await api_call_schedule.getCallSchedule();
         await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
       }
@@ -169,8 +189,7 @@ export default {
     },
 
     //*Получение отделений для выпадающего списка
-    async getDepartments()
-    {
+    async getDepartments() {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
         let items = await api_department.getDepartments();
@@ -178,12 +197,10 @@ export default {
         this.closeLoading("Получение отделений");
       }
 
-      if (this.specialities) 
-      {
-        if(this.start && this.user.post_id == 2)
+      if (this.specialities) {
+        if (this.start && this.user.post_id == 2)
           this.selected_department = this.user.student.group.department;
-        else
-          this.selected_department = this.specialities[0];
+        else this.selected_department = this.specialities[0];
         this.department_change();
       }
     },
@@ -191,15 +208,15 @@ export default {
     //*Парсировка данных для вывода, перевод массивов с данными в строки для вывода
     parseSchedule() {
       var tag = 0;
-      for (var i = 0; i < this.days.length; i++) 
-      {
-        for (var j = 1; j <= 7; j++) 
-        {
-          if (this.schedule[this.days[i]][j]["LessonChisl"].length == 0 && this.schedule[this.days[i]][j]["LessonZnam"].length == 0)
+      for (var i = 0; i < this.days.length; i++) {
+        for (var j = 1; j <= 7; j++) {
+          if (
+            this.schedule[this.days[i]][j]["LessonChisl"].length == 0 &&
+            this.schedule[this.days[i]][j]["LessonZnam"].length == 0
+          )
             tag++;
 
-          if (tag >= 7) 
-          {
+          if (tag >= 7) {
             this.schedule[this.days[i]][1]["LessonChisl"] = "Домашнее обучение";
             this.schedule[this.days[i]][1]["time"] = "Весь день";
             this.schedule[this.days[i]]["Place"].place_name = "Дом";
@@ -209,47 +226,43 @@ export default {
       }
     },
 
-    async schedules() 
-    {
+    async schedules() {
       if (this.selected_group == null) return undefined;
       let schedule = this.timetable_full.filter(res => {
         if (res.group_id == this.selected_group.id) return true;
         else return false;
       })[0];
 
-      if (!schedule) 
-      {
+      if (!schedule) {
         this.showLoading("Получение расписания");
-        schedule = await api_schedule.getScheduleByGroupId(this.selected_group.id);
-        if(schedule)
-          schedule["group_id"] = this.selected_group.id;
+        schedule = await api_schedule.getScheduleByGroupId(
+          this.selected_group.id
+        );
+        if (schedule) schedule["group_id"] = this.selected_group.id;
         this.$store.commit(mutations.SET_TIMETABLE_FULL, schedule);
         this.closeLoading("Получение расписания");
-      } 
+      }
       return schedule;
     },
-//?----------------------------------------------
-//!           Методы компонентов
-//?----------------------------------------------
+    //?----------------------------------------------
+    //!           Методы компонентов
+    //?----------------------------------------------
     //Получение группы при изменении отделения
-    async department_change() 
-    {
+    async department_change() {
       this.showLoading("Получение групп");
-      await this.$store.dispatch(actions.ADD_CACHE_GROUP_DATA, 
-      {
+      await this.$store.dispatch(actions.ADD_CACHE_GROUP_DATA, {
         context: this,
         result: this.selected_department.id
       });
       this.closeLoading("Получение групп");
 
-      if (this.combo_groups) 
-      {
-        if(this.start && this.user.post_id == 2)
-        {
-          for (let index = 0; index < this.combo_groups.length; index++) 
-          {
-            if(this.combo_groups[index].id == this.user.student.group.id || this.combo_groups[index].child_id == this.user.student.group.id)
-            {
+      if (this.combo_groups) {
+        if (this.start && this.user.post_id == 2) {
+          for (let index = 0; index < this.combo_groups.length; index++) {
+            if (
+              this.combo_groups[index].id == this.user.student.group.id ||
+              this.combo_groups[index].child_id == this.user.student.group.id
+            ) {
               this.selected_group = this.combo_groups[index];
               index = this.combo_groups.length;
             }
@@ -257,18 +270,15 @@ export default {
         }
         this.start = false;
         this.groups = this.combo_groups;
-        if(this.selected_group)
-          this.group_change();
+        if (this.selected_group) this.group_change();
       }
     },
 
     //*Получение расписания при изменении выбранной группы
-    async group_change() 
-    {
+    async group_change() {
       this.schedule = await JSON.parse(JSON.stringify(await this.schedules()));
-      if (this.schedule) 
-        this.parseSchedule();
-    },
+      if (this.schedule) this.parseSchedule();
+    }
   }
-}
+};
 </script>

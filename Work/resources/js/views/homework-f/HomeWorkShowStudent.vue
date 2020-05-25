@@ -15,6 +15,9 @@ v-content(max-width="816px").ma-0.pa-0
                             v-card.pa-2.mx-auto(max-width="850px" min-width="300px")
                                 v-card-title {{homework.info.title}}
                                 v-card-text {{homework.info.text}}
+                                v-card-text.py-1(v-if="homework.type == 3") Время: {{homework.info.time}}
+                                v-card-text.py-1(v-if="homework.type == 3") Место: {{homework.info.place_name}}
+                                v-card-text.py-1(v-if="homework.type == 3") Кабинет: {{homework.info.classroom}}
                                 v-card-actions(v-if="homework.type != 2")
                                     v-btn(:disabled="homework.info.state == 1 ? true : homework.info.state == 2 ? true : false" text small color="orange darken-1" @click="sendHomework(null)") {{homework.info.state == 1 ? 'Рассматривается' : homework.info.state == 2 ? 'Одобрено' : 'Сдать'}} 
                         v-flex(v-if="homework.documents")

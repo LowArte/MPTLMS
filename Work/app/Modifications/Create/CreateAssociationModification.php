@@ -15,7 +15,6 @@ class CreateAssociationModification extends BaseModification
 
     public function addAssociationToDatabase($request)
     {
-        Debugbar::info($request);
         $association = new Model();
         $association->fill($request);
         $result = $association->save();
