@@ -306,20 +306,14 @@ export default {
       {
         this.groups = this.combo_groups;
         this.selected_group = this.combo_groups[0];
-        this.group_change();
+        this.caseDate();
       }
-    },
-
-    //*Получение расписания при изменении выбранной группы
-    async group_change() 
-    {
-      this.getDisciplines();
-      this.caseDate();
     },
 
     //*При выборе даты получать расписание выбранного дня, если воскресенье то за день
     async caseDate() 
     {
+      this.getDisciplines();
       this.showLoading("Получение расписания");
       this.date_week = new Date(this.dateDialog.date).getDay();
       if (this.date_week == 0) 
