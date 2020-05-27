@@ -40,21 +40,10 @@ class DatabaseSeeder  extends Seeder
         $this->call([
             StudentsSeeder::class
         ]);
-        //Формирование расписаний и замен
-        $this->call([           
-            ScheduleSeeder::class,
-            SwapScheduleSeeder::class,
-        ]);
         //Формирование тестовых данных обратной связи и заказа документов
         $this->call([           
             FeedbackSeeder::class,
             CertificateSeeder::class,
         ]);
-
-        // //Формирование журналов
-        // $this->call([
-        //     AssociationsSeeder::class,
-        //     JournalsSeeder::class,
-        // ]);
     }
 }

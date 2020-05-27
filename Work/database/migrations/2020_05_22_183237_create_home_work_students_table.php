@@ -19,6 +19,7 @@ class CreateHomeWorkStudentsTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->json('info');
             $table->foreign('association_home_work_id')->references('id')->on('association_home_work');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
             $table->softDeletes();
         });

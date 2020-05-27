@@ -23,6 +23,4 @@ abstract class BaseModification
     public function startCondition(){
         return clone $this->model;
     }
-
-
 }
