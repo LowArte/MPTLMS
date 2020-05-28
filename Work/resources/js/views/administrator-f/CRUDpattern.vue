@@ -57,7 +57,7 @@
                   v-icon.small(v-on="on" @click="reset_password(item)") mail_outline
                 span Отправить письмо на смену пароля
         v-layout.row.text-center.pa-2.ma-2
-            v-pagination(v-model="page" :length="pageCount")
+          v-pagination(v-model="page" :length="pageCount")
 </template>
 
 <script>

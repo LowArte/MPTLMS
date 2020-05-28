@@ -53,6 +53,11 @@ return [
             'root' => storage_path('databases'),
         ],
 
+        'news'=>[
+            'driver' => 'local',
+            'root' => storage_path('app/news'),
+        ],
+
         'temp'=>[
             'driver' => 'local',
             'root' => storage_path('temp'),

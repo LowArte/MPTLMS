@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Debugbar;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Panoscape\History\HasHistories;
