@@ -20,12 +20,13 @@
                   v-card(max-width="640" min-width="300")
                     v-card-text Данный ресурс предоставляет вам возможности назначения групп на различные виды заданий, такие как курсовые, дипломные и домашние работы.
                     v-card-actions.px-4.pb-0.pt-7
-                      v-text-field.single-line.hide-details(label="Поиск по заголовкам" v-model="search" dense outlined prepend-inner-icon="search" clearable :disabled="!homework_list ? true : false")
-              v-layout.row.wrap(v-if="homework_list")
-                v-flex
-                  v-alert.mx-auto.my-2(v-if="!homework_list" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
+                      v-text-field.single-line.hide-details(label="Поиск" v-model="search" dense outlined prepend-inner-icon="search" clearable :disabled="!homework_list ? true : false")
+              v-layout.column.wrap
+                v-flex(v-if="!homework_list && loading == true")
+                  v-alert.mx-auto.my-2(v-if="!homework_list.length > 0" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
+                v-flex(v-if="homework_list && loading == true")
                   v-card.mx-auto.pa-1(flat max-width="1024px" min-width="300px")
-                    v-data-iterator(:items="homework_list" :search="search" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
+                    v-data-iterator(:items="homework_list" :search="search" :items-per-page.sync="homework_list.length" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
                       template(v-slot:default="props")
                         v-list
                           v-list-item-group(v-model="selected_item" color="orange darken-1")
@@ -52,25 +53,23 @@
                       v-toolbar-title {{ title }}
                       v-btn(fab text small color="orange darken-1" @click="next")
                         v-icon(small) mdi-chevron-right
-                  v-sheet(height="600")
+                  v-sheet(height="920")
                     v-calendar(ref="calendar" locale="ru-Ru" :weekdays="[1, 2, 3, 4, 5, 6]" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :now="today" :type="type"  @click:event="showEvent" @change="updateRange")
                     v-menu(v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x)
-                      v-card(min-width="320px" max-width="320px" flat)
-                        v-system-bar(:color="selectedEvent.color" dark)
-                          small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёк' : 'Задание в процессе'}}
-                        span.title.px-4.mt-2(v-if="selectedEvent.details" :color="selectedEvent.color") {{selectedEvent.name}}
+                      v-card(min-width="300px" max-width="420px" flat)
+                        v-system-bar(:color="new Date(selectedEvent.end) <= new Date() ? 'red' : selectedEvent.color" dark)
+                          small {{new Date(selectedEvent.end) <= new Date() ? 'Период сдачи стёкает' : new Date(selectedEvent.end) < new Date() ? 'Сдать с опозданием' : 'Задание в процессе'}}
+                        v-card-title.pb-0.text-truncate(v-if="selectedEvent.details") {{selectedEvent.name}}
                         v-card-text.pt-1(v-if="selectedEvent.details")
-                          span {{selectedEvent.details.full_text}}
-                          v-divider.my-2
-                          span.py-0(:color="selectedEvent.color") {{selectedEvent.details.title}}
-                          br
-                          small.py-0 {{selectedEvent.details.text}}
+                          v-card-text.pa-0(v-if="selectedEvent.details.full_text") {{selectedEvent.details.full_text}}
+                          v-divider.my-2(v-if="selectedEvent.details.title && selectedEvent.details.text")
+                          v-card-title.pa-0(v-if="selectedEvent.details.title") {{selectedEvent.details.title}}
+                          v-card-text.pa-0(v-if="selectedEvent.details.text") {{selectedEvent.details.text}}
                         v-card-text(v-else)
-                          small(v-html="selectedEvent.name")
-                          br
-                          span(v-if="selectedEvent.details" v-html="selectedEvent.details.full_text")
+                          v-card-text.pa-0(v-html="selectedEvent.name")
+                          v-card-text.pa-0(v-if="selectedEvent.details" v-html="selectedEvent.details.full_text")
                         v-card-actions
-                          v-btn(text small block color="secondary" @click="selectedOpen = false") закрыть
+                          v-btn(text small block color="secondary" @click="goToHomeworck(selectedEvent.id)") к заданию
                           
 </template>
 
@@ -122,6 +121,7 @@ export default {
   data() {
     return {
       tabs: null,
+      loading: false,
       selected_item: null,
       search: null,
       homework: null,
@@ -161,7 +161,7 @@ export default {
       if (!start || !end) {
         return "";
       }
-      const startMonth = this.monthFormatter(start);
+      const startMonth = this.monthFormatter(start); //CACHE_HOMEWORK_UPDATE
       const startYear = start.year;
       switch (this.type) {
         case "month":
@@ -178,6 +178,7 @@ export default {
   },
 
   async beforeMount() {
+    this.loading = false;
     this.showLoading("Получение данных");
     //Получение отделений
     let items = await api_department.getDepartments();
@@ -211,6 +212,7 @@ export default {
       id: this.user.id
     });
     this.closeLoading("Получение данных");
+    this.loading = true;
   },
 
   //?----------------------------------------------
@@ -224,14 +226,25 @@ export default {
         } else this.showInfo("Действие было отменено пользователем");
       });
       if (res) {
-        console.log(res);
-        if (await api_homework.saveHomeWork(res)) {
+        let api_result = await api_homework.saveHomeWork(res);
+        if (api_result) {
+          if (res.documents) {
+            if (
+              await api_homework.loadDocuments({
+                documents: res.documents,
+                homework_id: api_result
+              })
+            )
+              this.showMessage("Файл(ы) загружены успешно!");
+            else this.showError("Файл(ы) не загружен(ы)!");
+          }
+
           this.showMessage("Домашнее задание сделано");
           this.showMessage("Рассылаем уведомления");
           res.groups_id.forEach(element => {
             this.addMessageForUserGroup(element, {
               icon: "mdi-android-messages",
-              title: "Новое задание",
+              title: "Новое задание от (" + this.user.secName + " " + this.user.name + " " + this.user.thirdName + ")",
               subtitle:
                 "Вам назначено новое задание. Чтобы ознакомится с ним подробнее перейдите в соотвествующий раздел.",
               done: false
@@ -241,7 +254,14 @@ export default {
       }
 
       this.$refs.create.$refs.form.reset();
+      this.loading = false;
+      await this.$store.dispatch(actions.CACHE_HOMEWORK_UPDATE, {
+        context: this,
+        id: this.user.id
+      });
+      this.loading = true;
     },
+
     async goToHomeworck(home_work_id) {
       this.$router.push(
         "/" + this.user.post.slug + "/homework/" + home_work_id
@@ -286,6 +306,7 @@ export default {
           element.dates_homework_keys = Object.keys(element.dates_homework);
           element.dates_homework_keys.forEach(element_date => {
             events.push({
+              id: element.id,
               name: element.title,
               start: this.formatDate(new Date(element_date), false),
               end: this.formatDate(new Date(element_date), false),
@@ -302,6 +323,7 @@ export default {
           });
         } else {
           events.push({
+            id: element.id,
             name: element.title,
             start: this.formatDate(new Date(element.dates_homework), false),
             end: this.formatDate(new Date(element.dates_homework), false),

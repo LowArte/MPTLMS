@@ -80,7 +80,6 @@ class ScheduleRepository extends BaseRepository
         $result = $this->startCondition()
                         ->join('groups', 'schedules.group_id', '=', 'groups.id')
                         ->select($columns)
-                        //->limit(7)
                         ->toBase()
                         ->get(); 
         $arrayScheduleDay = [];
@@ -188,6 +187,7 @@ class ScheduleRepository extends BaseRepository
         $result = $this->startCondition()
                         ->join('groups', 'schedules.group_id', '=', 'groups.id')
                         ->select($columns)
+                        //->limit(50)
                         ->toBase()
                         ->get(); 
         //Каркас для формирования расписания преподавателя

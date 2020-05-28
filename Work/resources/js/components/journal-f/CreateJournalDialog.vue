@@ -54,7 +54,7 @@ export default {
   mixins: [withOverlayLoading, withSnackbar],
 
   computed: {
-    ...mapGetters(["disciplines_combo", "teachers_combo", "groups_journal"])
+    ...mapGetters(["disciplines_combo", "teachers_combo", "groups_journal", 'groups_subgects'])
   },
   data() {
     return {
@@ -85,8 +85,7 @@ export default {
   },
 
   methods: {
-    async pop(item) 
-    {
+    async pop(item) {
       this.dialog = true;
       this.loading = !this.loading;
       this.item = item;
@@ -112,27 +111,24 @@ export default {
 
     //Сохранение нового журнала
     async saveJournal() {
-      
       if (this.$refs.form.validate()) {
-        
-        if (this.fingJournal()) 
-        {
+        if (this.fingJournal()) {
           this.dialog = false;
           this.alert = false;
-          this.resolve(this.journal);
-        } else this.alert = this.fingJournal();
+          await this.resolve(JSON.parse(JSON.stringify(this.journal)));
+          this.$refs.form.reset();
+        } else this.alert = true;
       } else this.showError("Валидация не пройдена");
     },
 
-    async fingJournal() {
-      this.groups_journal.forEach(element => 
-      {
-        if(element.discip_id == this.journal.discip_id) {
-          return true
-        } else {
-          return false
+    fingJournal() {
+      let check = true;
+      this.groups_subgects.forEach(element => {
+        if (element.discip_id == this.journal.discip_id && !this.journal.isClose) {
+          check = false;
         }
       });
+      return check;
     }
   }
 };

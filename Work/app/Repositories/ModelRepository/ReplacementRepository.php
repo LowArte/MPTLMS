@@ -63,4 +63,32 @@ class ReplacementRepository extends BaseRepository
         }
         return $result;
     }
+
+    //Проверка замен по Id преподавателя
+    public function checkTeacherReplacement($teacher_id)
+    {
+        $check = false;
+        $column = ['swap'];
+        $result = $this->startCondition()
+        ->select($column)
+        ->toBase()
+        ->get();
+
+        foreach($result as $item)
+        {
+            $item->swap = json_decode($item->swap);
+            foreach ($item->swap->teacher as $teacher) 
+            {
+                if($teacher == $teacher_id)
+                    $check = true;
+            }
+
+            foreach ($item->swap->oldteacher as $teacher) 
+            {
+                if($teacher == $teacher_id)
+                    $check = true;
+            }
+        }
+        return $check;
+    }
 }

@@ -19,18 +19,20 @@ class JournalRepository extends BaseRepository
         $result = $this->startCondition()
                         ->select($columns)
                         ->where('id', $id)
+                        ->orderBy('isClose', 'desc')
                         ->select($columns)
                         ->get();
         $disiplineBufferRepository = app(DisciplineBufferRepository::class);
         $teacherRepository = app(UserRepository::class);
-        $assosiationRepositroy = app(AssociationRepository::class);
+        $assosiationRepository = app(AssociationRepository::class);
 
         $teachers = $teacherRepository->getTeachersFIO();
-        $assosiations = $assosiationRepositroy->getAssociation();
+        $assosiations = $assosiationRepository->getAssociation();
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res){
             $res['journal'] = json_decode($res['journal']);
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
+            $res['discipline_info'] = $disciplines->where("id",$res['discip_id'])->first();
             $assosiation = $assosiations->where("journal_id",$res['id'])->all();
             $teach = [];
 
@@ -48,6 +50,7 @@ class JournalRepository extends BaseRepository
         $result = $this->startCondition()
                         ->select($columns)
                         ->where('group_id', $id)
+                        ->orderBy('isClose', 'desc')
                         ->select($columns)
                         ->get();
 
@@ -61,6 +64,7 @@ class JournalRepository extends BaseRepository
         foreach($result as $res){
             $res['journal'] = json_decode($res['journal']);
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
+            $res['discipline_info'] = $disciplines->where("id",$res['discip_id'])->first();
             $assosiation = $assosiations->where("journal_id",$res['id'])->all();
             $teach = [];
             $teach_id = [];

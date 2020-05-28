@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDisciplinesTable extends Migration
+class CreateHomeWorkDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateDisciplinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('disciplines', function (Blueprint $table) {
+        Schema::create('home_work_documents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('discipline_name');
+            $table->unsignedBigInteger('home_work_id');
+            $table->text('path');
+            $table->text('name');
+            $table->foreign('home_work_id')->references('id')->on('home_work');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +31,6 @@ class CreateDisciplinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('disciplines');
+        Schema::dropIfExists('home_work_documents');
     }
 }

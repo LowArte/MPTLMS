@@ -21,10 +21,15 @@ class StudentRepository extends BaseRepository
         return $result;
     }
 
-    public function getStudent()
+    public function getStudents()
     {
-        $columns = [];
-        $result = $this->startCondition()->select($columns)->get();
+        $columns = ['students.id','user_id','group_id'];
+        $result = $this->startCondition()
+                ->join('users', 'user_id', '=', 'users.id')
+                ->select($columns)
+                ->selectRaw("CONCAT(users.secName, ' ', users.name, ' ',  users.thirdName) as fullFio")
+                ->toBase()
+                ->get();
         return $result;
     }
 }

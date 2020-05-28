@@ -11,10 +11,10 @@ v-content.pa-0(v-if="user")
                         v-list-item-title.headline {{user.secName + " " + user.name + " " + user.thirdName}}
                         v-list-item-subtitle Должность: {{user.post.name}}
                 v-divider
-                v-card-text.pb-2.font-weight-bold Дата рождения: {{user.student.birthday}}
+                v-card-text.pb-2.font-weight-bold(v-if="user.student.birthday") Дата рождения: {{new Date(user.student.birthday).toISOString().substr(0, 10)}}
                 v-card-text.py-2.font-weight-bold Гендерный признак: {{user.student.gender}}
                 v-card-text.py-2.font-weight-bold E-mail: {{user.email}}
-                v-card-text.py-2.font-weight-bold Специальность: 09.02.03 Программирование в компьютерных системах
+                v-card-text.py-2.font-weight-bold Специальность: {{user.student.group.department.dep_name_full}}
                 v-card-text.py-2.font-weight-bold Группа: {{user.student.group.group_name}}
                 v-card-text.py-2.font-weight-bold Текущий курс
                 v-slider.mx-4(v-model="curs" :max="3" :tick-labels="labels"  disabled)
@@ -108,7 +108,6 @@ export default {
             curs: null,
             labels: ["1", "2", "3", "4"],
             show: false,
-            rating: 4.3,
             menu: false,
             items: []
         };
@@ -116,7 +115,7 @@ export default {
 
     async beforeMount()
     {   
-        this.curs = this.user.student.curs; 
+        this.curs = this.user.student.group.curs; 
         await this.getNotifications();
         this.items = JSON.parse(JSON.stringify(this.notifications));
     },

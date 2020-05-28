@@ -89,7 +89,7 @@ export default {
   methods: {
     async Update() {
       this.showLoading("Обновление данных");
-      this.loadData();
+      await this.loadData();
       this.closeLoading("Обновление данных");
     },
 
@@ -108,6 +108,7 @@ export default {
         if (await api_discipline.loadDiscipline(res)) {
           this.showMessage("Файл загружен!");
           await this.loadData();
+          this.showInfo("Завершено!");
         } else this.showError("Произошла ошибка при загрузке!");
       } else this.showInfo("Действие отменено пользователем!");
       this.closeLoading("Загрузка и обработка файлов");

@@ -36,7 +36,6 @@ class NewsController extends BaseController
     public function setLike(Request $request,CreateLikesModification $createLikesModification, DeleteLikesModification $deleteLikesModification, LikesRepository $likesRepository)
     {
         $data = $request->all();
-        Debugbar::info($likesRepository->getLikesForUser($data['new_id'], $data['user_id']));
         if($likesRepository->getLikesForUser($data['new_id'], $data['user_id']) == null)
             $result = $createLikesModification->addLikeToDatabase($data['new_id'], $data['user_id']);
         else

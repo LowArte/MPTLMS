@@ -6,13 +6,14 @@
                     v-combobox(:items="Object.keys(journal.journal)" v-model="selected_semester" label="Семестр" outlined dense)
         v-layout.row.wrap(v-if="selected_semester")
             v-flex
+              v-card.mx-auto(:elevation="4" min-width="300px")
                 v-simple-table(fixed-header)
                     template( v-slot:default)
                         thead(v-if="journal")
                             th(min-width="250px" class="text-left") ФИО
                             th(class="text-center" v-for="(item, j) in journal.journal[selected_semester]" :key="item.key") {{item.date}}
                         tbody(v-if="journal")
-                            tr(v-for="(item, i) in journal.students" :key="item.name" v-if="item.user.id == user.student.id")
+                            tr(v-for="(item, i) in journal.students" :key="i" v-if="item.id == user.student.id")
                                 td(min-width="250px" class="text-left" fixed) 
                                     div(min-width="250px") {{item.user.not_short_fio}}
                                 td(class="text-center" v-for="ozenka in journal.journal[selected_semester]" :key="journal.key")

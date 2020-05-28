@@ -33,7 +33,7 @@ export default {
     getJournalById(id) 
     {
         return axios.get('/api/getters/journals_by_id/' + id)
-        .then(res => {console.log(res.data); return res.data.journal;})
+        .then(res => {return res.data.journal;})
         .catch(() => {return undefined});
     },
     //*Получение учебных журналов

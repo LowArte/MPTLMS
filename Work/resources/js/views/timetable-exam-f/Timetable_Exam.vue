@@ -25,20 +25,22 @@
                 v-layout.row.wrap(filterSchedule)
                     v-flex(v-for="(exam,exam_index) in filterSchedule" :key="exam_index")
                         v-card.mx-auto(min-width="300")
-                            v-system-bar(dark color="accent")
-                                span(style="color: white;") Группа: {{exam.group_name}} 
+                            v-system-bar
+                                span Группа: {{exam.group_name}} 
                                 v-spacer
-                                span(style="color: white;") Дата: {{exam.info.date}}
+                                span Дата: {{exam.info.date}}
                             v-simple-table
                                 thead
                                     tr
                                         th.text-left Экзамен
+                                        th.text-left Время проведения
                                         th.text-left Преподаватель
                                         th.text-left Место проведения / кабинет
                                         th.text-left(v-if="user.post_id == 1 || user.post_id == 4") Действие
                                 tbody
                                     tr
                                         td {{ exam.info.title }}
+                                        td {{ exam.info.time }}
                                         td {{ exam.teacher_admin }}
                                         td {{ exam.place_name }} / {{exam.info.classroom}}
                                         td(v-if="user.post_id == 1 || user.post_id == 4")
@@ -192,7 +194,7 @@ export default {
 
         async addExam()
         {  
-            var res = await this.$refs.bild.pop(null).then(res => {return res;});
+            var res = await this.$refs.bild.pop().then(res => {return res;});
             if(res)
             {
                 if(await api_homework.saveHomeWork(res))
@@ -207,7 +209,6 @@ export default {
 
         async deleteExam(id)
         {
-            this.showInfo("Экзамен удалится у всех привязанных групп!");
             let res = await this.$refs.qwestion.pop().then(res => { return res; });
             if (res) 
             {

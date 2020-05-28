@@ -5,12 +5,12 @@
         v-card
           v-system-bar(dark color="info")
             span(style="color: white;") Фильтры
-          v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-          v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
+          v-combobox.mx-3.mt-6(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
+          v-combobox.mx-3.mt-2(outlined dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
           v-switch.mx-3.mt-2(v-model="detailMode" color="primary" inset label="Режим детального редактирования")
           v-content.pa-1
             router-link(class='nounderline' :to="'timetable'") 
-              v-btn(color="accent" text block dark) Расписание      
+              v-btn(outlined color="accent" text block dark) Расписание      
       v-divider.ma-0
       v-flex.ma-0.pa-0.row(v-if="schedule != null")
         v-form.ma-0.pa-0.grow(ref="BildTimetable")
@@ -22,16 +22,16 @@
                 v-card.pa-2(width='100%' outlined tile v-for="(lesson_key,lesson_index) in 7" :key="lesson_index") 
                   v-card-title.primary-title.pt-0.px-0 {{lesson_key}} пара
                   v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Числитель
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonChisl']" @change="schedule[day_key][lesson_key]['TeacherChisl'] = []" label="Дисциплины" :items="disciplines_combo" item-value='id' item-text='discip_name' small-chips chips multiple)
-                  v-autocomplete(v-if="detailMode" @change="schedule[day_key][lesson_key]['TeacherChisl'] = []" v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины (Детальное редактирование)" :items="schedule[day_key][lesson_key]['LessonChisl']" multiple no-data-text="Нет данных")
-                  v-autocomplete(v-if="schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="getTeacherAssoc(schedule[day_key][lesson_key]['LessonChisl'])" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
-                  v-autocomplete(v-if="detailMode && schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели (Детальное редактирование)" :items="schedule[day_key][lesson_key]['TeacherChisl']" multiple no-data-text="Нет данных")
+                  v-autocomplete(outlined dense v-model="schedule[day_key][lesson_key]['LessonChisl']" @change="schedule[day_key][lesson_key]['TeacherChisl'] = []" label="Дисциплины" :items="disciplines_combo" item-value='id' item-text='discip_name' small-chips chips multiple)
+                  v-autocomplete(outlined dense v-if="detailMode" @change="schedule[day_key][lesson_key]['TeacherChisl'] = []" v-model="schedule[day_key][lesson_key]['LessonChisl']" label="Дисциплины (Детальное редактирование)" :items="schedule[day_key][lesson_key]['LessonChisl']" multiple no-data-text="Нет данных")
+                  v-autocomplete(outlined dense v-if="schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели" :items="getTeacherAssoc(schedule[day_key][lesson_key]['LessonChisl'])" :rules="[TeacherRules.required]" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple)
+                  v-autocomplete(outlined dense v-if="detailMode && schedule[day_key][lesson_key]['LessonChisl'].length > 0" v-model="schedule[day_key][lesson_key]['TeacherChisl']" label="Преподаватели (Детальное редактирование)" :items="schedule[day_key][lesson_key]['TeacherChisl']" multiple no-data-text="Нет данных")
                   v-switch(v-model="schedule[day_key][lesson_key].chisl" color="primary" inset label="Числитель/Знаменатель")
                   v-card-title.pa-0.accent--text.font-weight-light.text-truncate(v-if="schedule[day_key][lesson_key].chisl") Знаменатель
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" @change="schedule[day_key][lesson_key]['TeacherZnam'] = []" label="Дисциплины" :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' small-chips chips multiple)
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="detailMode && schedule[day_key][lesson_key].chisl" label="Дисциплины (Детальное редактирование)" :items="schedule[day_key][lesson_key]['LessonZnam']" multiple no-data-text="Нет данных")
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели" :rules="[TeacherRules.required]" no-data-text="Нет данных" :items="getTeacherAssoc(schedule[day_key][lesson_key]['LessonZnam'])" item-value='id' item-text='fullFio' small-chips chips multiple)
-                  v-autocomplete(v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="detailMode && schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели (Детальное редактирование)" :items="schedule[day_key][lesson_key]['TeacherZnam']" multiple no-data-text="Нет данных")
+                  v-autocomplete(outlined dense v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="schedule[day_key][lesson_key].chisl" @change="schedule[day_key][lesson_key]['TeacherZnam'] = []" label="Дисциплины" :items="disciplines_combo" no-data-text="Нет данных" item-value='id' item-text='discip_name' small-chips chips multiple)
+                  v-autocomplete(outlined dense v-model="schedule[day_key][lesson_key]['LessonZnam']" v-if="detailMode && schedule[day_key][lesson_key].chisl" label="Дисциплины (Детальное редактирование)" :items="schedule[day_key][lesson_key]['LessonZnam']" multiple no-data-text="Нет данных")
+                  v-autocomplete(outlined dense v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели" :rules="[TeacherRules.required]" no-data-text="Нет данных" :items="getTeacherAssoc(schedule[day_key][lesson_key]['LessonZnam'])" item-value='id' item-text='fullFio' small-chips chips multiple)
+                  v-autocomplete(outlined dense v-model="schedule[day_key][lesson_key]['TeacherZnam']" v-if="detailMode && schedule[day_key][lesson_key].chisl && schedule[day_key][lesson_key]['LessonZnam'].length > 0" label="Преподаватели (Детальное редактирование)" :items="schedule[day_key][lesson_key]['TeacherZnam']" multiple no-data-text="Нет данных")
           v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") Принять
 </template>
 

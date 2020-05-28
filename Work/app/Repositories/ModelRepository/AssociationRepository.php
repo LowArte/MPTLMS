@@ -37,13 +37,17 @@ class AssociationRepository extends BaseRepository
                         ->join('journals', 'journal_id', '=', 'journals.id')
                         ->join('groups', 'journals.group_id', '=', 'groups.id')
                         ->select($columns)
+                        ->orderBy('isClose', 'desc')
                         ->where([['teacher_id', $user_id],['group_id', $group_id]])
                         ->get();
 
         $disiplineBufferRepository = app(DisciplineBufferRepository::class);
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res)
+        {
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
+            $res['discipline_info'] = $disciplines->where("id",$res['discip_id'])->first();
+        }
         return $result;
     }
 
@@ -54,13 +58,17 @@ class AssociationRepository extends BaseRepository
                         ->join('journals', 'journal_id', '=', 'journals.id')
                         ->join('groups', 'journals.group_id', '=', 'groups.id')
                         ->select($columns)
+                        ->orderBy('isClose', 'desc')
                         ->where('teacher_id', $teacher_id)
                         ->get();
 
         $disiplineBufferRepository = app(DisciplineBufferRepository::class);
         $disciplines = $disiplineBufferRepository->getDisciplineBufferRepositoryDataLast();
         foreach($result as $res)
+        {
             $res['discipline'] = $disciplines->where("id",$res['discip_id'])->first()['discip_name'];
+            $res['discipline_info'] = $disciplines->where("id",$res['discip_id'])->first();
+        }
         return $result;
     }
 }

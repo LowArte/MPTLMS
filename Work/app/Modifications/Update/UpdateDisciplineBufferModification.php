@@ -11,7 +11,6 @@ class UpdateDisciplineBufferModification
 
     public function updateDisciplineBufferInDatabase($dbName,$request)
     {
-        Debugbar::info($dbName);
         $db = new SQLiteDBFunctions($dbName);
         $result = $db->updateData($request);
         if($result)

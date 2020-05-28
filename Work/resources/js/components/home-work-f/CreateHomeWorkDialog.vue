@@ -5,28 +5,47 @@
             v-system-bar(color="white")
               span Конструктор задания
               v-spacer
-              v-btn(text dark x-small color="orange darken-1" @click="dialog = !dialog") отмена
+              v-btn(text dark x-small color="orange darken-1" @click="cancel()") отмена
             v-progress-linear(:active="loading" :indeterminate="loading" absolute top  color="orange darken-1") 
             v-card-text.pt-2
                 v-form(ref="form")
                   v-autocomplete(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-value="id" item-text="dep_name_full" :items="specialities" v-model="selected_department_id" :rules="DepartmentRules")
-                  v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id" :label="'Группы (' + homework.groups_id.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupRules.required]")
+                  v-autocomplete(v-if="homework.type != 3" :disabled="selected_department_id ? false : true" v-model="homework.groups_id" :label="'Группы (' + homework.groups_id.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupsRules.required]")
+                  v-autocomplete(v-if="homework.type == 3" :disabled="selected_department_id ? false : true" v-model="homework.groups_id[0]" label="Группа" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="GroupRules")
                   v-autocomplete(:disabled="loading" v-model="homework.teachers" label="Соавторы" outlined dense :items="getTeacher" no-data-text="Нет данных" item-value='id' item-text='fullFio' small-chips chips multiple clearable)
                   v-autocomplete(outlined dense @change="type_change" item-value="id" item-text="name" :items="types" v-model="homework.type" label="Тип задания")
                   v-text-field(outlined dense v-model="homework.info.title" label="Название (основное)" :rules="TitleRules")
                   v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание (основное)" :row-height="24" :rows="3")
                   v-card-actions
                     v-btn(text color="orange darken-1" @click="loadFile()") Прикрепить документы
-                  c-file-fotage(:_files='files')
+                    v-btn(small text color="red" @click="deleteFileInQwee()") Очистить документы
+                  v-layout.row.wrap(v-if="files")
+                    v-flex(v-if="files.length > 0")
+                      v-layout.column.wrap
+                        v-card.pa-2.mx-auto(flat min-width="300px")
+                          v-data-iterator(:items="files" hide-default-footer :items-per-page.sync="files.length" no-data-text="")
+                            template(v-slot:default="props")
+                              v-layout.column.wrap
+                                div.pa-3(class="order-1 d-flex flex-wrap justify-start")
+                                  div.ma-2(class="order-0 d-flex justify-start" v-for="(file, index) in props.items" :key="index")
+                                    v-card.mx-auto.my-2.pa-0(outlined :elevation="0" width="300px")
+                                      v-list.pa-0(dense flat)
+                                        v-list-item-group
+                                          v-list-item
+                                            v-list-item-avatar
+                                              v-icon(:color="getIconColor(file)") {{getIconWithExtention(file)}}
+                                            v-list-item-content
+                                              v-list-item-title {{getFileName(file)}}
+                                              v-list-item-subtitle(v-if="getExt(file) == '.bat'") Вредоносный файл
                   v-item-group
                     v-item(v-if="homework.type == 1")
-                        v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' :rules="DateRules" full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
                     v-item(v-if="homework.type == 2")
                       div
                         v-menu(ref="multi_homework" v-model="drop_menu_date_picker_event_tow" :close-on-content-click="false" transition="scale-transition" offset-y min-width="290px")
                           template(v-slot:activator="{ on }")
                             v-combobox(outlined dense v-model="dates_homework" multiple chips small-chips label="Даты этапов выполнения работы" prepend-icon="event" readonly v-on="on")
-                          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' multiple v-model="dates_homework" no-title :first-day-of-week="1" locale="ru-Ru")
+                          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :rules="DateRules" :min='new Date().toISOString().substr(0, 10)' multiple v-model="dates_homework" no-title :first-day-of-week="1" locale="ru-Ru")
                             v-btn(text color="primary" @click="drop_menu_date_picker_event_tow = !drop_menu_date_picker_event_tow") Отмена
                             v-btn(text color="orange darken-1" @click="changeDateForTypeTwo(dates_homework)") Применить
                         div(v-for="(item, date) in homework.info.date" :key="date")
@@ -36,12 +55,17 @@
                             v-textarea(outlined v-model="item.text" :rules="InsideTextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание этапа" :row-height="24" :rows="3")
                     v-item(v-if="homework.type == 3")
                       div
-                        v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' :rules="DateRules" full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                        v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
+                          v-model="homework.info.time"
+                          v-mask="mask"
+                          :rules="timeRules"
+                          label="Начало/конец экзамена")
                         v-autocomplete(outlined dense v-model="homework.info.place_id" label="Место проведения" :rules="PlacesRules" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
                         v-text-field(outlined dense v-model="homework.info.classroom" label="Кабинет")
             v-card-actions
                 v-spacer
-                v-btn(small text dark color="orange darken-1" @click="dialog = !dialog") отмена
+                v-btn(small text dark color="orange darken-1" @click="cancel()") отмена
                 v-btn(small text dark color="success" @click="saveHomeWork" :loading="loading" :disabled="loading") сохранить
                 
 </template>
@@ -52,8 +76,9 @@
 //?----------------------------------------------
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader";
 import withSnackbar from "@/js/components/mixins/withSnackbar";
-import FileFotageComponent_С from "@/js/components/home-work-f/FileFotageComponent";
 import LoadFileDialogHomework_С from "@/js/components/home-work-f/LoadFileDialogHomework";
+import FilesHelpres from "@/js/plugins/FilesHelpres"
+import { mask } from "vue-the-mask"; //Маска
 
 //?----------------------------------------------
 //!           Vuex
@@ -72,10 +97,9 @@ export default {
   //!           Преднастройка
   //?----------------------------------------------
   //*Подключение вспомогательных компонентов
-  mixins: [withOverlayLoading, withSnackbar],
+  mixins: [withOverlayLoading, withSnackbar, FilesHelpres],
 
   components: {
-    "c-file-fotage": FileFotageComponent_С,
     "c-load-file-dialog-homework": LoadFileDialogHomework_С
   },
 
@@ -103,6 +127,7 @@ export default {
       dates_homework: [],
       item: null,
       groups: null,
+      mask: "##:##-##:##",
       selected_department_id: null,
       loading: false,
       types: [
@@ -115,10 +140,12 @@ export default {
         user_id: null,
         groups_id: [],
         teachers: [],
+        documents: null,
         info: {
           title: null,
           text: null,
           date: null,
+          time: null,
           place_id: null,
           classroom: null
         },
@@ -142,11 +169,27 @@ export default {
       PlacesRules: [
         value => !!value || "Данное поле не должно оставаться пустым"
       ],
-      GroupRules: {
+      DateRules: [
+        value => !!value || "Данное поле не должно оставаться пустым"
+      ],
+      DatesRules: {
         required: value => {
           return !!value.length || "Данное поле не должно оставаться пустым";
         }
-      }
+      },
+      timeRules: [
+        v =>
+          /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) ||
+          "Не соответствует формату времени"
+      ],
+      GroupsRules: {
+        required: value => {
+          return !!value.length || "Данное поле не должно оставаться пустым";
+        }
+      },
+      GroupRules: [
+        value => !!value || "Данное поле не должно оставаться пустым"
+      ]
     };
   },
   //?----------------------------------------------
@@ -155,7 +198,7 @@ export default {
   methods: {
     async pop() {
       this.dialog = true;
-
+      this.homework.documents = null;
       return new Promise((resolve, reject) => {
         this.resolve = resolve;
       });
@@ -163,10 +206,30 @@ export default {
 
     //Сохранение нового журнала
     async saveHomeWork() {
-      if (this.$refs.form.validate()) {
+      let dateCheck = true;
+      if (this.homework.type != 0) {
+        if (this.homework.type == 2 && this.dates_homework) {
+          if (this.dates_homework.length == 0) {
+            dateCheck = false;
+            this.showError("Валидация не пройдена");
+          }
+        } else if (!this.homework.info.date) {
+          dateCheck = false;
+          this.showError("Валидация не пройдена");
+        }
+      }
+
+      if (this.$refs.form.validate() && dateCheck) {
         this.dialog = false;
         this.alert = false;
         this.homework.user_id = this.user.id;
+        this.files = [];
+        if (this.homework.type == 3 && this.homework.groups_id.length > 0) {
+          let group = this.homework.groups_id[0];
+          this.homework.groups_id = [];
+          this.homework.groups_id.push(group);
+        }
+
         this.resolve(this.homework);
       } else this.showError("Валидация не пройдена");
     },
@@ -208,21 +271,18 @@ export default {
     },
 
     async loadFile() {
+      this.files = [];
+      this.homework.documents = null;
       await this.$refs.load_file_dialog.pop().then(result => {
         if (result) {
           result.files.forEach(element => {
             this.files.push(element.name);
           });
-          this.showLoading("Загрузка");
-          if (api_homework.loadFiles(result.main)) {
-              this.showMessage("Файл(ы) загружен");
-          } else this.showError("Произошла ошибка при загрузке");
-          this.closeLoading("Загрузка");
+          this.homework.documents = result.main;
         } else {
           this.showInfo("Действие отменено пользователем!");
         }
       });
-      this.showInfo("В разработке!");
     },
     //?----------------------------------------------
     //!           Дополнительные методы
@@ -230,6 +290,36 @@ export default {
     //Сортировка по дате
     sortByDate(arr) {
       return arr.sort((a, b) => (a > b ? 1 : -1));
+    },
+    //Скачивание документа
+    async download(item) {
+      let file = await api_homework.downloadDocument(item.id);
+      if (file) FileDownload(file, item.name);
+      else this.showError("Ошибка скачивания!");
+    },
+    deleteFileInQwee() {
+      this.files = [];
+      this.homework.documents = null;
+    },
+    cancel() {
+      this.dialog = !this.dialog;
+      this.$refs.form.reset();
+      this.alert = false;
+      this.files = [];
+      this.homework = {
+        user_id: null,
+        groups_id: [],
+        teachers: [],
+        documents: null,
+        info: {
+          title: null,
+          text: null,
+          date: null,
+          time: null,
+          place_id: null,
+          classroom: null
+        }
+      };
     }
   }
 };

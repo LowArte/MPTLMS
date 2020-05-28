@@ -59,6 +59,7 @@ class ApiRoutes
             Route::get('get_call_schedule_for_panel', 'Api\CallscheduleController@getCallScheduleForPanel')->name('get_call_schedule_for_panel');
             
             Route::get('replacements', 'Api\ReplacementController@getReplacements')->name('replacements');
+            Route::get('replacements_check_teacher/{teacher_id}', 'Api\ReplacementController@getCheckTeacherReplacement')->name('replacements_check_teacher');
 
             Route::get('notificications/{user_id}', 'Api\NotificationsController@getNotificationsForUser')->name('notificications');
             
@@ -76,7 +77,8 @@ class ApiRoutes
             Route::get('homework_teacher_by_id/{home_work_id}/{user_id}', 'Api\HomeWorkController@getHomeWorkTeacherById')->name('homework_by_id');
             Route::get('homework_exam', 'Api\AssociationHomeWorkController@getHomeWorkExam')->name('homework_exam');  
         
-            Route::get('homework_comment/{home_work_id}', 'Api\CommentHomeWorkController@getCommentHomeWork')->name('homework_comment');  
+            Route::get('homework_comment/{home_work_id}', 'Api\CommentHomeWorkController@getCommentHomeWork')->name('homework_comment'); 
+            Route::get('homework_student_by_id/{home_work_id}/{group_id}/{student_id}', 'Api\AssociationHomeWorkController@getHomeWorkStudentById')->name('homework_student_by_id'); 
         });
         /**
          * Методы отвечаюшие за добавление общих данных
@@ -119,6 +121,11 @@ class ApiRoutes
             Route::post('homework', 'Api\HomeWorkController@save')->name('homework');
 
             Route::post('homework_comment', 'Api\CommentHomeWorkController@save')->name('homework_comment');
+            Route::post('load_documents_homework/{home_work_id}', 'Api\HomeWorkDocumentController@save')->name('load_documents_homework');      
+
+            Route::post('load_homework_student_documents/{home_work_id}/{home_work_student_id}/{student_id}', 'Api\HomeWorkStudentDocumentController@save')->name('load_documents_homework');      
+            
+            Route::post('homework_student', 'Api\HomeWorkStudentController@save')->name('homework_student');        
         });
         /**
          * Методы отвечаюшие за изменения общих данных
@@ -152,7 +159,8 @@ class ApiRoutes
             Route::post('journal_association','Api\JournalController@editJournalAssociation')->name('journal');
             
             Route::post('homework', 'Api\HomeWorkController@edit')->name('homework');
-            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');        
+            Route::post('homework_student', 'Api\HomeWorkStudentController@edit')->name('homework_student');
+            Route::post('homework_access', 'Api\HomeWorkController@editAccess')->name('homework_access');
         });
 
          /**
@@ -182,7 +190,10 @@ class ApiRoutes
 
             Route::post('swap_schedule_parse','Api\ParserController@swap_schedule_parse')->name('swap_schedule_parse');
 
-            Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');            
+            Route::post('load_discipline', 'Api\DisciplineBufferController@create')->name('load_discipline');
+            
+            Route::get('download_document_by_id/{document_id}', 'Api\HomeWorkDocumentController@getDocument')->name('download_document_by_id');          
+            Route::get('download_student_document_by_id/{document_id}', 'Api\HomeWorkStudentDocumentController@getDocument')->name('download_student_document_by_id');          
         });
         /**
          * Методы отвечающие за удаление общих данных
@@ -205,6 +216,8 @@ class ApiRoutes
             Route::post('user/{user_id}/{post_id}','Api\UserController@delete')->name('user');    
             
             Route::post('homework/{home_work_id}', 'Api\HomeWorkController@delete')->name('homework');
+
+            Route::post('homework_document/{document_id}', 'Api\HomeWorkDocumentController@delete')->name('homework');
         });
     }
 }

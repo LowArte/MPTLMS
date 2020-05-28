@@ -45,7 +45,6 @@ trait CascadeNullDeletes
                     $relat->{$value} = NULL;
                     $relat->save();
                 } else {
-                    Debugbar::info($value);
                     foreach ($model->{$relationship} as $child) {
                         $child->{$value} = NULL;
                         $child->save();

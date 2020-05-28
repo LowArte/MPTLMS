@@ -6,7 +6,7 @@
               v-card.mx-auto(raised  max-width="920px" min-width="300px")
                 v-card-text Тут реализуются ваши журналы, к которым у вас есть или был доступ в течении учебного года.
             v-flex.pa-3.pt-1(v-for="(item, index) in teacher_journals" :key="index")
-              v-alert.mx-auto.py-0.pt-1.pr-1(border="left" elevation="3" colored-border :color="item.isClose == null ? 'red' : item.isClose == 0 ? 'success' : 'yellow accent-4'"  max-width="920px" min-width="300px")
+              v-alert.mx-auto.py-0.pt-1.pr-1(v-if="item.isClose != null" border="left" elevation="3" colored-border :color="item.isClose == null ? 'red' : item.isClose == 0 ? 'success' : 'yellow accent-4'"  max-width="920px" min-width="300px")
                 v-system-bar.pl-0(color="white")
                   v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
@@ -17,6 +17,10 @@
                     span {{item.discipline}}
                     br
                     small {{item.group_name}}
+                    br
+                    small I семестр {{item.discipline_info.discip_hours_first}}
+                    br
+                    small II семестр {{item.discipline_info.discip_hours_second}}
                   v-col(class="shrink")
                       v-btn(small text color="success" @click="getJournalForGroupOfSubject(item.id)" :disabled="item.isClose == null") открыть
           v-flex.pa-3.pt-1(v-else)

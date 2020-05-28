@@ -12,7 +12,6 @@ class CreateDisciplineBufferModification
 
     public function addDisciplineBufferToDatabase($dbName,$request)
     {
-        Debugbar::info($dbName);
         $db = new SQLiteDBFunctions($dbName);
         $result = $db->insertData($request);
         return $result;

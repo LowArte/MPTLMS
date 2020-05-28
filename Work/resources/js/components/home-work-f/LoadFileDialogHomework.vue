@@ -39,10 +39,12 @@ export default {
           main: formData,
           files: this.file
       }
+      this.file = null;
       this.resolve(data);
     },
     clickNot() {
       this.dialog = false;
+      this.file = null;
       this.resolve(false);
     }
   }

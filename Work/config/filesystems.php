@@ -57,6 +57,10 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/news'),
         ],
+        'homework'=>[
+            'driver' => 'local',
+            'root' => storage_path('homework'),
+        ],
 
         'temp'=>[
             'driver' => 'local',

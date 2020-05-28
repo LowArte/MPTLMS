@@ -45,8 +45,8 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 import api_new from "@/js/api/new";
 
 export default {
+  mixins: [withSnackbar],
   data: () => ({
-    mixins: [withSnackbar],
     post: {
       title: null,
       text: null,

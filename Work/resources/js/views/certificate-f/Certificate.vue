@@ -12,6 +12,7 @@ v-card.mx-auto.pa-4.mt-2(height="auto" width="max")
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar";
 import * as actions from "@/js/store/action-types";
+import Notifications from "@/js/plugins/NotificationsHelpers";
 
 //?----------------------------------------------
 //!           Подключение Vuex
@@ -23,8 +24,7 @@ export default {
     name: "Справки",
     url: "certificate"
   },
-
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, Notifications],
 
   data: () => ({
     text: null,
@@ -45,7 +45,15 @@ export default {
         if (await this.$store.dispatch(actions.ADD_СERTIFICATE, {data: {"Текст": this.text}, type: "Справка"})) {
           this.$refs.form.reset();
           this.showInfo("Заявка на выдачу документа отправлена. Ожидайте сообщения на корпоративную почту.");
-        } else
+          this.addMessageForUserPost(5, {
+              icon: "mdi-android-messages",
+              title: "Заявка от (" + this.user.email + ")",
+              subtitle:
+                "Поступила заявка на получение справки. Чтобы ознакомится с ним подробнее перейдите в реестр документов.",
+              done: false
+            });
+        } 
+        else
           this.showError("Что-то полшло не так. Обратитесь в службу поддрежки. Спасибо.");
       }
       else 

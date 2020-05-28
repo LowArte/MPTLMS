@@ -17,32 +17,12 @@ class CreateAssociationHomeWorkTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('home_work_id');
             $table->unsignedBigInteger('group_id');
-            $table->json('home_work_access');
             $table->foreign('home_work_id')->references('id')->on('home_work');
             $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
             $table->softDeletes();
         });
     }
-    /*
-    {
-        1 {
-            text: string
-            links: [],
-            files: [],
-            isChecked: 0
-
-        }
-        
-            json home_work_access
-            0 - Сдано
-            1 - Не сдано
-            2 - Сдано с опозданием
-            3 - Возвращено
-            4 - Ожидается
-        
-    }*/
-
     /**
      * Reverse the migrations.
      *

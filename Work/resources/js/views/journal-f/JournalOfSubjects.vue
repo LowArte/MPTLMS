@@ -45,6 +45,10 @@
                       span {{item.discipline}}
                       br
                       small {{item.teachers.join(" / ")}}
+                      br
+                      small I семестр {{item.discipline_info.discip_hours_first}}
+                      br
+                      small II семестр {{item.discipline_info.discip_hours_second}}
                     v-col(class="shrink")
                         v-btn(small text dark color="success" @click="getJournalForGroupOfSubject(item.id)") открыть
             v-flex.pa-3.pt-1(v-else)

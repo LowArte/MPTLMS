@@ -51,6 +51,7 @@ v-card.mx-auto.pa-4(height="auto" width="max")
 import { mask } from "vue-the-mask";
 import api_cerificate from "@/js/api/certificate";
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //*Оповещения
+import Notifications from "@/js/plugins/NotificationsHelpers";
 
 export default {
   post_name: {
@@ -60,7 +61,7 @@ export default {
   directives: {
     mask
   },
-  mixins: [withSnackbar],
+  mixins: [withSnackbar, Notifications],
   data: vm => ({
     mask: "####",
     modelprogress: null,
@@ -106,6 +107,13 @@ export default {
           {
             this.showMessage("Заказано. Ожидайте выполнения");
             this.$refs.form.reset();
+            this.addMessageForUserPost(5, {
+              icon: "mdi-android-messages",
+              title: "Заявка от (" + this.user.email + ")",
+              subtitle:
+                "Поступила заявка на получение характеристики. Чтобы ознакомится с ним подробнее перейдите в реестр документов.",
+              done: false
+            });
           }
       }
       else 

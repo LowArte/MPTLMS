@@ -4,7 +4,7 @@
           div(v-if="groups_subgects")
             div(v-if="groups_subgects.length > 0")
               v-flex.pa-3.pt-1(v-if="item.teachers.length > 0" v-for="(item, index) in groups_subgects" :key="index")
-                v-alert.mx-auto.py-0.pt-1.pr-1(border="left" elevation="3" colored-border :color="item.isClose == null ? 'red' : item.isClose == 0 ? 'success' : 'yellow accent-4'"  max-width="920px" min-width="300px")
+                v-alert.mx-auto.py-0.pt-1.pr-1(v-if="item.isClose != null" border="left" elevation="3" colored-border :color="item.isClose == null ? 'red' : item.isClose == 0 ? 'success' : 'yellow accent-4'"  max-width="920px" min-width="300px")
                   v-system-bar.pl-0(color="white" v-if="item.isClose == null")
                     v-tooltip(bottom)
                       template(v-slot:activator="{ on }")

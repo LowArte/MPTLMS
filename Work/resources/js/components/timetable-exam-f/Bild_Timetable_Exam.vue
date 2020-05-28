@@ -6,11 +6,16 @@
             v-card-text
                 v-form(ref="form")
                     v-autocomplete.mt-2(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-value="id" item-text="dep_name_full" :items="specialities" v-model="selected_department_id" :rules="DepartmentRules")
-                    v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id" :label="'Группы (' + homework.groups_id.length + ')'" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' small-chips chips multiple item-text='group_name' clearable :rules="[GroupRules.required]")
+                    v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id[0]" label="Группа" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="GroupRules")
                     v-autocomplete(:disabled="loading" v-model="homework.user_id" label="Преподаватель" :rules="TeacherRules" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio')
                     v-text-field(outlined dense v-model="homework.info.title" label="Название экзамена" :rules="TitleRules")
                     v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание" :row-height="24" :rows="3")
                     v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
+                    v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
+                        v-model="homework.info.time"
+                        v-mask="mask"
+                        :rules="timeRules"
+                        label="Начало/конец экзамена")
                     v-autocomplete(outlined dense v-model="homework.info.place_id" label="Место проведения" :rules="PlacesRules" :items="places" no-data-text="Нет данных" item-value='id' item-text='place_name')
                     v-text-field(outlined dense v-model="homework.info.classroom" label="Кабинет")
             v-card-actions
@@ -30,7 +35,7 @@ import { mask } from "vue-the-mask"; //Маска
 
 import api_department from "@/js/api/department"; //Отделения
 import api_teacher from "@/js/api/teacher"; //Api преподавателей
-import api_place from "@/js/api/place"; //Api преподавателей
+import api_place from "@/js/api/place"; //Api мест проведения
 
 import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
@@ -62,6 +67,7 @@ export default {
             dialog: false,
             item: null,
             resolve: null,
+            mask: "##:##-##:##",
             dialog: false,
             drop_menu_date_picker_event_tow: false,
             dates_homework: [],
@@ -76,6 +82,7 @@ export default {
                 info: {
                     title: null,
                     text: null,
+                    time: null,
                     date: null,
                     place_id: null,
                     classroom: null
@@ -95,18 +102,17 @@ export default {
             PlacesRules: [
                 value => !!value || "Данное поле не должно оставаться пустым"
             ],
-            GroupRules: {
-                required: value => {
-                return !!value.length || "Данное поле не должно оставаться пустым";
-                }
-            },
+            timeRules: [v => /^([01]\d|2[0-3]):?([0-5]\d)-?([01]\d|2[0-3]):?([0-5]\d)$/.test(v) || "Не соответствует формату времени"],
+            GroupRules: [
+                value => !!value || "Данное поле не должно оставаться пустым"
+            ],
             TeacherRules: [
                 value => !!value || "Данное поле не должно оставаться пустым"
             ],
         }
     },
 
-    beforeMount()
+    async beforeMount()
     {
         this.getDepartments();
         this.getTeachers();
@@ -117,13 +123,8 @@ export default {
 //?----------------------------------------------
 //!           Методы страницы
 //?----------------------------------------------
-        pop(item) 
+        pop() 
         {
-            if(item)
-            {
-                let items = item;
-                this.homework = JSON.parse(JSON.stringify(items));
-            }
             this.dialog = true;
             return new Promise((resolve, reject) => {
                 this.resolve = resolve;

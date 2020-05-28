@@ -4,131 +4,24 @@ v-content.ma-0.pa-2
     v-flex
       c_panel_control(ref="panel")
     v-flex
-      v-card(v-if="user != null && user.post_id != null")
-        v-system-bar(dark color="info")
-          span(style="color: white;") Дополнительные возможности
-        v-card-actions
-          v-btn(block text color="primary" dark @click="getFull") {{allTabel ? "Расписание на сегодня" : "Расписание на неделю"}}
-    v-chip.ma-1(label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
-    v-flex(v-if="!allTabel")
-      v-card(v-if="tieacher_timetable")
-        v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
-          span {{days[(new Date()).getDay()]}} | Сегодня
-        div.ma-0.pa-0(v-for="(item, index1) in tieacher_timetable" v-if="item.GroupChisl")
-          v-card-title.ma-0.pa-0.pl-1 Занятие №{{index1}}
-          div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length > 0")
-            v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-            v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-            v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-          div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length == 0")
-            v-card-text.pl-1.py-1 Отсутствует
-          div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length > 0")
-            v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-            v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-            v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-          div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length == 0")
-            v-card-text.pl-1.py-1 Отсутствует
-          //-Числитель/Знаменатель
-          div.ma-0.pa-0(v-if="!isChisl && item.chisl")
-            v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-if="item.GroupChisl.length > 0")
-              div.overline.mb-0 Числитель | {{item.PlaceChisl.join(" / ")}}
-              v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-              v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
-            v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
-              div.overline.mb-0 Числитель | Отсутствует
-            v-expansion-panels.px-2(flat)
-              v-expansion-panel
-                v-expansion-panel-header.px-1
-                  div.overline.mb-0 Знаменатель
-                v-expansion-panel-content
-                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupZnam.length > 0")
-                    div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
-                    v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
-                    v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
-                    v-card-text.pb-1.pl-1 Отсутствует
-          div.ma-0.pa-0(v-if="isChisl  && item.chisl") 
-            v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5" v-if="item.GroupZnam.length > 0")
-              div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
-              v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}
-              v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-            v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
-              div.overline.mb-0 Знаменатель | Отсутствует
-            v-expansion-panels.px-2(flat)
-              v-expansion-panel
-                v-expansion-panel-header.px-1
-                  div.overline.mb-0 Числитель
-                v-expansion-panel-content
-                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupChisl.length > 0")
-                    div.overline.mb-0 {{item.PlaceChisl.join(" / ")}}
-                    v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.GroupChisl.join(" / ")}}
-                    v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
-                  v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
-                    v-card-text.pb-1.pl-1 Отсутствует
-    v-flex(v-if="allTabel")
-      v-layout.row.wrap(v-if="tieacher_timetable")
-        v-flex(v-for="(itemt, day_i) in tieacher_timetable" :key="day_i")
-          v-card.mx-auto(min-width="300px" max-width="320px" style="display: flex; flex-direction: column;")
-            v-system-bar(:color="isChisl ? 'info' : 'accent'" dark)
-              span {{day_i}}
-            div.ma-0.pa-0(v-for="(item, index1) in itemt" v-if="item.GroupChisl")
-              v-card-title.ma-0.pa-0.pl-1 Занятие №{{index1}}
-              div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length > 0")
-                v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-                v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-                v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-              div.ma-0.pa-0(v-if="!item.chisl && !isChisl && item.GroupChisl.length == 0")
-                v-card-text.pl-1.py-1 Отсутствует
-              div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length > 0")
-                v-chip.ma-2(label) {{item.PlaceChisl.join(" / ")}}
-                v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-                v-card-text.pl-1 {{item.LessonChisl.join(" / ")}}
-              div.ma-0.pa-0(v-if="!item.chisl && isChisl && item.GroupChisl.length == 0")
-                v-card-text.pl-1.py-1 Отсутствует
-              //-Числитель/Знаменатель
-              div.ma-0.pa-0(v-if="!isChisl && item.chisl")
-                v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-if="item.GroupChisl.length > 0")
-                  div.overline.mb-0 Числитель | {{item.PlaceChisl.join(" / ")}}
-                  v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupChisl.join(" / ")}}
-                  v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
-                v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
-                  div.overline.mb-0 Числитель | Отсутствует
-                v-expansion-panels.px-2(flat)
-                  v-expansion-panel
-                    v-expansion-panel-header.px-1
-                      div.overline.mb-0 Знаменатель
-                    v-expansion-panel-content
-                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupZnam.length > 0")
-                        div.overline.mb-0 {{item.PlaceZnam.join(" / ")}}
-                        v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.GroupZnam.join(" / ")}}
-                        v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
-                        v-card-text.pb-1.pl-1 Отсутствует
-              div.ma-0.pa-0(v-if="isChisl  && item.chisl") 
-                v-card.pa-1.ma-1.mb-3(outlined color="blue lighten-5" v-if="item.GroupZnam.length > 0")
-                  div.overline.mb-0 Знаменатель | {{item.PlaceZnam.join(" / ")}}
-                  v-card-title.pl-1.py-1 {{item.TimeZnam.join(" / ")}} • {{item.Classroom.join(" / ") ? item.Classroom.join(" / ") : "НУ"}} • {{item.GroupZnam.join(" / ")}}
-                  v-card-text.pb-1.pl-1 {{item.LessonZnam.join(" / ")}}
-                v-card.pa-1.ma-1.mb-3(outlined color="red lighten-5" v-else)
-                  div.overline.mb-0 Знаменатель | Отсутствует
-                v-expansion-panels.px-2(flat)
-                  v-expansion-panel
-                    v-expansion-panel-header.px-1
-                      div.overline.mb-0 Числитель
-                    v-expansion-panel-content
-                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-if="item.GroupChisl.length > 0")
-                        div.overline.mb-0 {{item.PlaceChisl.join(" / ")}}
-                        v-card-title.pl-1.py-1 {{item.TimeChisl.join(" / ")}} • {{item.GroupChisl.join(" / ")}}
-                        v-card-text.pb-1.pl-1 {{item.LessonChisl.join(" / ")}}
-                      v-card.pa-1.ma-1.mb-3(outlined color="boring" v-else)
-                        v-card-text.pb-1.pl-1 Отсутствует    
+      v-card.pa-2(min-width="300px")
+        v-alert(type="warning" elevation="3") Внимание: в данном разделе не учитываются изменения в расписании.
+        v-alert(v-if="checkReplacement" outlined prominent type="error" elevation="0") 
+          v-row(align="center")
+            v-col(class="grow") Внимание: для вас имеются изменения в расписании.
+            v-col(class="shrink")
+              router-link(class='nounderline' :to="'/' + user.post.slug + '/replacements'")
+                v-btn(icon)
+                  v-icon mdi-chevron-right
+        v-card-text В данном разделе вы можете отслеживать своё расписание учебных занятий. Имеется возможность просмотра как на текущий день, так и на всю предстоящую рабочую неделю.
+        v-card-actions.px-0
+          v-btn(block outlined :color="isColor" dark @click="getFull") {{allTabel ? "сегодня" : "неделя"}}
+    v-chip.ma-1(min-width="300px" label dark :color="isColor") {{!isChisl ? "Числитель" : "Знаменатель"}}
+    v-flex(v-if="!allTabel && timetable_by_day")
+      c-teacher-training-schedule-by-today(:_items="timetable_by_day")
+    v-flex(v-if="allTabel && timetable_by_week")
+      c-teacher-training-schedule-by-week(:_items="timetable_by_week")
 </template>
-
-<style>
-.v-expansion-panel-content__wrap {
-  padding: 0;
-}
-</style>
 
 <script>
 //?----------------------------------------------
@@ -136,28 +29,32 @@ v-content.ma-0.pa-2
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
-import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
+import PanelControl_C from "@/js/components/expention-f/Panel"; //Панель для вывода расписания
+import TeacherTrainingScheduleByToday_C from "@/js/components/timetable-f/TeacherTrainingScheduleByToday";
+import TeacherTrainingScheduleByWeek_C from "@/js/components/timetable-f/TeacherTrainingScheduleByWeek";
 
 import api_call_schedule from "@/js/api/callSchedule"; //Расписания звонков
+import api_replacement from "@/js/api/replacement"; //Замены
 
 import { mapGetters, mapMutations } from "vuex";
 import * as actions from "@/js/store/action-types";
 import * as mutations from "@/js/store/mutation-types";
 
-
 export default {
-//?----------------------------------------------
-//!           Преднастройка
-//?----------------------------------------------
+  //?----------------------------------------------
+  //!           Преднастройка
+  //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withSnackbar, withOverlayLoading],
   components: {
     c_panel_control: PanelControl_C,
+    "c-teacher-training-schedule-by-today": TeacherTrainingScheduleByToday_C,
+    "c-teacher-training-schedule-by-week": TeacherTrainingScheduleByWeek_C
   },
   //*Вычисляемые свойства
   post_name: {
     name: "Расписание",
-    url: "timetable_teacher", 
+    url: "timetable_teacher"
   },
 
   computed: {
@@ -172,24 +69,48 @@ export default {
       var week = Math.round((now - today) / (1000 * 60 * 60 * 24 * 7));
       return week % 2;
     },
+
+    isColor: function() {
+      return this.isChisl ? "cobalt" : "alizarin";
+    }
   },
 
   data() {
     return {
-      days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
-      allTabel: false
-    }
-  },
-  async beforeMount()
-  {
-    this.showLoading("Получение данных");
-    await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.id, date: this.days[new Date().getDay()]});
-    if(!this.tieacher_timetable) this.showError("Данные не получены!");
-    this.closeLoading("Получение данных");
+      allTabel: false,
+      checkReplacement: false,
+      timetable_by_day: null,
+      timetable_by_week: null,
+      days: [
+        "Воскресенье",
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+      ]
+    };
   },
 
-  mounted()
-  {
+  async beforeMount() {
+    this.showLoading("Загрузка");
+    await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {
+      id: this.user.id,
+      date: this.days[new Date().getDay()]
+    });
+    if (!this.tieacher_timetable)
+      this.showError(
+        "Что-то пошло не так во время получения вашео расписания. Возможно оно отсутсвует или имеются проблемы с данными."
+      );
+    this.timetable_by_day = this.tieacher_timetable;
+    this.closeLoading("Загрузка");
+    this.checkReplacement = await api_replacement.getCheckTeacherReplacement(
+      this.user.id
+    );
+  },
+
+  mounted() {
     this.getCallScheduleForPanel();
   },
 
@@ -198,13 +119,12 @@ export default {
     //!           Методы страницы
     //?----------------------------------------------
     //*Получение панели с расписанием
-    async getCallScheduleForPanel() 
-    {
-      
+    async getCallScheduleForPanel() {
       this.showLoading("Получение расписания звонков");
-      this.$refs.panel.loadData(await api_call_schedule.getCallScheduleForPanel());
-      if(this.call_schedule == null)
-      {
+      this.$refs.panel.loadData(
+        await api_call_schedule.getCallScheduleForPanel()
+      );
+      if (this.call_schedule == null) {
         var timeTable = await api_call_schedule.getCallSchedule();
         await this.$store.commit(mutations.SET_CALL_SCHEDULE, timeTable);
       }
@@ -214,20 +134,32 @@ export default {
     //!           Методы компонентов
     //?----------------------------------------------
     async getFull() {
-      this.showLoading("Получение данных");
-      if(!this.allTabel) {
+      this.showLoading("Загрузка");
+      if (!this.allTabel) {
         this.allTabel = true;
         await this.$forceUpdate();
-        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE_FULL, this.user.id);
-      }
-      else {
+        await this.$store.dispatch(
+          actions.SET_TEACHER_TIMETABLE_FULL,
+          this.user.id
+        );
+        this.timetable_by_week = null;
+        this.timetable_by_week = this.tieacher_timetable;
+      } else {
         this.allTabel = false;
         await this.$forceUpdate();
-        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {id: this.user.id, date: this.days[new Date().getDay()]});
+        await this.$store.dispatch(actions.SET_TEACHER_TIMETABLE, {
+          id: this.user.id,
+          date: this.days[new Date().getDay()]
+        });
+        this.timetable_by_day = null;
+        this.timetable_by_day = this.tieacher_timetable;
       }
-      if(!this.tieacher_timetable) this.showError("Данные не получены!");
-      this.closeLoading("Получение данных");
+      if (!this.tieacher_timetable)
+        this.showError(
+          "Что-то пошло не так во время получения вашео расписания. Возможно оно отсутсвует или имеются проблемы с данными."
+        );
+      this.closeLoading("Загрузка");
     }
   }
-}
-</script>+
+};
+</script>

@@ -17,7 +17,15 @@ class DeleteAssociationHomeWorkModification extends BaseModification
 
     public function deleteAssociationHomeWorkById($home_work_id)
     {
-        $result = $this->startCondition()->where('home_work_id', $home_work_id)->delete();
+        $result = $this->startCondition()
+                        ->where('home_work_id', $home_work_id)
+                        ->get();
+        $deleteHomeWorkStudentModification = app(DeleteHomeWorkStudentModification::class);
+        foreach($result as $value)
+        {
+            if($deleteHomeWorkStudentModification->deleteHomeWorkStudent($value->id))
+                $value->delete();
+        }
         return $result;
     }
 }

@@ -60,6 +60,18 @@ export default {
         .then(res => {return res.data.home_work;})
         .catch(() => {return undefined});
     },
+    //*Получение задания по id
+    //! Комментарий ---------------------------
+    //? Реализуется получение данных из таблицы *HOMEWORK* (Домашние задания)
+    //? Возвращается полная таблица данных JSON формата
+    //! Требование ----------------------------
+    //!----------------------------------------
+    getHomeWorkStudentById(home_work_id, group_id, student_id)
+    {
+        return axios.get('/api/getters/homework_student_by_id/' + home_work_id + '/' + group_id + '/' + student_id)
+        .then(res => {return res.data.home_work;})
+        .catch(() => {return undefined});
+    },
     //*Получение экзаменов по id группы
     //! Комментарий ---------------------------
     //? Реализуется получение данных из таблицы *HOMEWORK* (Домашние задания)
@@ -85,7 +97,7 @@ export default {
     saveHomeWork(data)
     {
         return axios.post('/api/save/homework', data)
-        .then(() => {return true;})
+        .then(res => {return res.data.id;})
         .catch(() => {return false;});
     },
     //*Редактирование домашнего задания преподавателем
@@ -121,13 +133,24 @@ export default {
         .then(() => {return true;})
         .catch(() => {return undefined});
     },
+    //*Удаление документа
+    //! Комментарий ---------------------------
+    //? Реализуется удаление данных в таблице *HOMEWORK* (Домашние задания)
+    //! Требование ----------------------------
+    //!----------------------------------------
+    deleteDocument(document_id)
+    {
+        return axios.post('/api/delete/homework_document/' + document_id)
+        .then(() => {return true;})
+        .catch(() => {return undefined});
+    },
 
     //*----------------------------------------
     //!         Загрузка файлов
     //*----------------------------------------
-    loadDiscipline(file) 
+    loadDocuments(data) 
     {
-        return axios.post('/api/functions/load_documents', file, 
+        return axios.post('/api/save/load_documents_homework/' + data.homework_id, data.documents, 
         {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -135,6 +158,20 @@ export default {
         })
         .then(() => { return true; })
         .catch(() => {  return false; });
+    },
+    //Скачивание файла
+    downloadDocument(document_id) {
+        return axios({
+                url: '/api/functions/download_document_by_id/' + document_id,
+                method: 'GET',
+                responseType: 'blob',
+            })
+        .then((res) => {
+            return res.data;
+        })
+        .catch(() => {
+            return undefined;
+        });
     },
 
 
@@ -158,5 +195,51 @@ export default {
         return axios.post('/api/save/homework_comment/', data)
         .then(() => {return true;})
         .catch(() => {return false;});
+    },
+
+    //*----------------------------------------
+    //!         Студент
+    //*----------------------------------------
+    //*----------------------------------------
+    //!         Работа с данными
+    //*----------------------------------------
+    saveHomeworkStudent(data)
+    {
+        return axios.post('/api/save/homework_student', data)
+        .then(res => {return res.data.id;})
+        .catch(() => {return false;});
+    },
+    //Редактирование данных
+    editHomeworkStudent(data)
+    {
+        return axios.post('/api/edit/homework_student', data)
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
+    //Загрузка файлов
+    loadHomeworkStudentDocuments(home_work_id, home_work_student_id, student_id, files)
+    {
+        return axios.post('/api/save/load_homework_student_documents/' + home_work_id + '/' + home_work_student_id + '/' + student_id, files, 
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(() => {return true;})
+        .catch(() => {return false;});
+    },
+    //Скачивание файла
+    downloadStudentDocument(document_id) {
+        return axios({
+                url: '/api/functions/download_student_document_by_id/' + document_id,
+                method: 'GET',
+                responseType: 'blob',
+            })
+        .then((res) => {
+            return res.data;
+        })
+        .catch(() => {
+            return undefined;
+        });
     },
 }
