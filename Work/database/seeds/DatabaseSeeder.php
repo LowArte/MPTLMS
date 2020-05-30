@@ -27,8 +27,7 @@ class DatabaseSeeder  extends Seeder
         ]);
         //Формирование вспомогательных данных
         $this->call([
-            SiteOptionsSeeder::class,
-            DesciplineSeeder::class,
+            SiteOptionsSeeder::class
         ]);
         //Формирование мест проведения занятий и расписания звонков
         $this->call([
@@ -39,6 +38,11 @@ class DatabaseSeeder  extends Seeder
         //Формирование данный для особых пользователей
         $this->call([
             StudentsSeeder::class
+        ]);
+        //Формирование расписаний и замен
+        $this->call([           
+            ScheduleSeeder::class,
+            SwapScheduleSeeder::class,
         ]);
         //Формирование тестовых данных обратной связи и заказа документов
         $this->call([           
