@@ -193,8 +193,11 @@ export default {
     //*Получение всех дисциплин
     async getDisciplines()
     {
-      let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
-      this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
+      if(this.selected_group)
+      {
+        let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
+        this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
+      }
     },
 
     //*Получение отделений для выпадающего списка
@@ -254,7 +257,7 @@ export default {
     //Парсировка данных для вывода, перевод массивов с данными в строки для вывода
     parseSchedule() 
     {
-      if (this.schedule != null) 
+      if (this.schedule) 
       {
         for (var j = 1; j <= 7; j++) 
         {
@@ -323,14 +326,16 @@ export default {
       } 
       else 
       {
-        this.schedule = await JSON.parse(JSON.stringify(await this.schedules()));
+        let sched = await this.schedules();
+        if(sched)
+          this.schedule = await JSON.parse(JSON.stringify(sched));
         if(this.schedule)
         {
             this.schedule = this.schedule[this.week[this.date_week]];
             this.parseSchedule();
         }
-
-        this.schedule_bild = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
+        if(this.selected_group)
+          this.schedule_bild = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
         if(this.schedule_bild)
             this.schedule_bild = this.schedule_bild[this.week[this.date_week]];
       }
