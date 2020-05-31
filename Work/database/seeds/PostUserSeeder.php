@@ -815,10 +815,10 @@ class PostUserSeeder extends Seeder
                     [
                         "id" => uniqid(),
                         "icon" => "library_books",
-                        "text" => "Заказанные справки",
+                        "text" => "Реестр заказа документов",
                         "component" => [
                             "info" => [
-                                "name" => "Заказанные справки",
+                                "name" => "Реестр заказанных документов",
                                 "url" => "listcertificate"
                             ],
                             "path" => "js/views/certificate-f/ListCertificateComponent"

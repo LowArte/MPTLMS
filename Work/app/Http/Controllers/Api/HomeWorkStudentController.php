@@ -13,7 +13,7 @@ use Debugbar;
 class HomeWorkStudentController extends BaseController
 { 
     /**
-     * get HomeWorkStudentController from database
+     * Получение домашнего заданя
      * @return JSON
      */
     public function getHomeWorkStudent(HomeWorkStudentRepository $homeworkstudentRepository)

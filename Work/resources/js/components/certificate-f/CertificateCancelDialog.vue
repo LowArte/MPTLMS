@@ -6,12 +6,12 @@ v-dialog(v-model="dialog" persistent max-width="600px")
   v-card
     v-system-bar
       small Отказ
-    v-form(ref="form" @submit.prevent="submit")
+    v-form(ref="form")
       v-textarea.ma-2(v-model="data.text" outlined :auto-grow='true' :counter='255 ? 255 : false' :rules="textRules" label="Напишите ответ пользователю" required)
       v-card-actions
         v-btn(color="info darken-1" text @click="cancel") Отменить
         v-spacer
-        v-btn(color="accent darken-1" text @click="overlay = !overlay" type="submit") Отправить 
+        v-btn(color="accent darken-1" text @click="apply()") Отправить 
       v-overlay(:absolute="true" :value="overlay")
         v-layout(row)
           v-progress-circular.mx-auto(indeterminate)
@@ -63,17 +63,26 @@ export default {
     }
   },
   methods: {
-    async submit() {
-      this.data.id = this._item.id;
-      this.data.to = this._item.email;
-      this.data.by = this.user.email;
-      if (await this.$store.dispatch(actions.CANCEL_СERTIFICATE, this.data)) {
-        this.showInfo("Уведомление об отказе отправлено");
-      } else {
-        this.showInfo(
-          "Что-то пошло не так. Обратитесь в службу поддержки. Спасибо."
-        );
+    async apply() {
+      this.overlay = true;
+      if(this.$refs.form.validate())
+      {
+        this.data.id = this._item.id;
+        this.data.to = this._item.email;
+        this.data.by = this.user.email;
+        if (await this.$store.dispatch(actions.CANCEL_СERTIFICATE, this.data)) {
+          this.showMessage("Уведомление об отказе отправлено");
+        } else {
+          this.showError(
+            "Что-то пошло не так. Обратитесь в службу поддержки. Спасибо."
+          );
+        }
       }
+      else
+        this.showInfo(
+            "Отменено пользователем"
+          );
+        this.overlay = false;
     },
     cancel() {
       this.dialog = false;
