@@ -4,11 +4,6 @@ v-content.ma-0.pa-2
         v-flex 
             v-card.mx-auto(outline)
                 v-system-bar
-                    span Упарвление новостной лентоый
-                v-card-text В данном разделе представлены быстрые дествия для работа с новостной лентой сайта
-                v-switch.shrink.ma-4(color="primary" value="primary" label="Закрыть ленту для посещения")
-            v-card.mx-auto(outline)
-                v-system-bar
                     span Карта пользователя
                 v-card-text В данном разделе представлены быстрые переходы к разделам сайта
                 v-card-actions

@@ -6,13 +6,11 @@ v-content.ma-0.pa-2
         v-system-bar
           span Обратная связь 
         v-form.pa-2(ref="form")
-          v-alert.my-2(border="left" dense type="warning")
+          v-alert.my-2(border='left' dense color='primary' dark)
             span Опишите проблему, с которой вы столкнулись как можно более подробно, чтобы наши специалисты могли решить её в кротчайшие сроки.
-          v-select.my-2(v-model="thematic" :rules="titleRules" :items="thematics" label="Тема")
-          v-textarea.my-2( v-model="modelmessage" :auto-grow="true" :clearable="false" :counter="255 ? 255 : false" :filled="false" :flat="true" :hint="'Описание проблемы'" :label="'Текст'"
-            :loading="false" :no-resize="false" :outlined="false" :persistent-hint="false" :placeholder="''" :rounded="false" :row-height="24" :rows="3" :shaped="false"
-            :single-line="false" :solo="false" :rules="messageRules")
-          v-btn.my-2(block class="white--text" color="accent" depressed @click="sendQuery") Отправить
+          v-select.my-2(outlined dense v-model="thematic" :rules="titleRules" :items="thematics" label="Тема")
+          v-textarea.my-2(outlined v-model="modelmessage" :auto-grow="true" :counter="255 ? 255 : false" :hint="'Описание проблемы'" :label="'Текст'" :loading="false" :no-resize="false" :persistent-hint="false" :row-height="24" :rows="3" :rules="messageRules")
+          v-btn.my-2(block class="white--text" color="blue" depressed @click="sendQuery") Отправить
 </template>
 
 <script>

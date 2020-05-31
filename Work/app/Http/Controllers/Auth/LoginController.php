@@ -24,6 +24,14 @@ class LoginController extends Controller
         {
             return response()->json(["profilactic"=>true], 200);
         }
+
+        if($user['post_id']==2)
+        {
+            $user->load('student');
+            if($user->student->group_id==null)
+            return response()->json([], 422);
+        }
+
         $user->load("post");
         
         $tokenResult = $user->createToken('Personal Access Token');
@@ -54,6 +62,12 @@ class LoginController extends Controller
         }
         if (!$user) {
             return response()->json(["success" => false], 200);
+        }
+        if($user['post_id']==2)
+        {
+            $user->load('student');
+            if($user->student->group_id==null)
+                return response()->json(["success" => false], 200);
         }
         $user->load("post");
         $user->load("student");

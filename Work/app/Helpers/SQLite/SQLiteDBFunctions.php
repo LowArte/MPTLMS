@@ -39,7 +39,8 @@ class SQLiteDBFunctions
             if ($curRes['id'] != $res['department']) {
                 $curRes = $departments->where("id", $res['department'])->first();
             }
-            $res['dep_name_full'] =  $curRes->dep_name_full;
+            if($curRes)
+                $res['dep_name_full'] =  $curRes->dep_name_full;
             $data->push($res);
         }
         return $data;

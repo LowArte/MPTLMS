@@ -1,12 +1,11 @@
 <template lang="pug">
 v-content.pa-0(v-if="user")
-    v-alert.my-2(border="left" dense type="warning")
-        span.subtitle-1(primary--text) Данный раздел может содержать ошибки, так как находится в процесссе разработки. Если найдёте какие-либо ошибки, сообщите нам. Спасибо!
     v-layout.row.wrap
         v-flex
             v-card.mx-auto
                 v-list-item(two-line)
                     v-list-item-avatar(color="grey darken-3")
+                        span(style="color: #fafafa;") {{user.secName[0]}}
                     v-list-item-content
                         v-list-item-title.headline {{user.secName + " " + user.name + " " + user.thirdName}}
                         v-list-item-subtitle Должность: {{user.post.name}}

@@ -5,17 +5,16 @@
           v-card.mx-auto(min-width="300")
             v-system-bar(dark color="info")
               span(style="color: white;") Фильтры
-            v-combobox.ma-1(label="Специальность" @change="department_change" no-data-text="Нет данных" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-            v-combobox.ma-1(label="Группа" item-text="group_name" no-data-text="Нет данных" :items="groups" @change="caseDate()" v-model="selected_group")
+            v-combobox.ma-1(outlined dense label="Специальность" @change="department_change" no-data-text="Нет данных" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
+            v-combobox.ma-1(outlined dense label="Группа" item-text="group_name" no-data-text="Нет данных" :items="groups" @change="caseDate()" v-model="selected_group")
             v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                 template(v-slot:activator="{ on }")
-                  v-content.pa-2
-                    v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
+                  v-text-field(outlined dense v-model="dateDialog.date" label="Дата" readonly v-on="on")
                 v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
                     v-btn(text color="primary" @click="dateDialog.model = false") Отмены
                     v-spacer
                     v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); caseDate()") Принять
-            v-content.pa-1
+            v-card-actions
               c-parser
               router-link(class='nounderline' to="replacements") 
                 v-btn(color="accent" text block dark) Замены
@@ -44,7 +43,6 @@
                                     v-card-text.pa-0.wrap.text-black(v-if="lesson.LessonZnam != ''") {{lesson.LessonZnam}} 
                                     v-card-text.pa-0.wrap.text-black(v-else) Дополнительное занятие 
                                     v-card-text.pa-0.pt-2.font-weight-light.wrap.caption {{ lesson.TeacherZnam }}
-            
             v-flex.my-2.ma-2.col
                 v-hover(v-slot:default='{ hover }')
                     v-card.mx-auto.pa-4.pb-0(:elevation='hover ? 12 : 6' min-width="265px")

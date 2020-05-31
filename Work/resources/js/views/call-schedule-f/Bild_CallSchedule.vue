@@ -78,13 +78,8 @@ export default {
     async getCallSchedule()
     {
       this.showLoading("Получение расписания");
-      if(this.call_schedule == null)
-      {
-        this.timeTable = await api_call_schedule.getCallSchedule();
-        await this.$store.commit(mutations.SET_CALL_SCHEDULE, JSON.parse(JSON.stringify(this.timeTable)));
-      }
-      else
-        this.timeTable = JSON.parse(JSON.stringify(this.call_schedule));
+      this.timeTable = await api_call_schedule.getCallSchedule();
+      await this.$store.commit(mutations.SET_CALL_SCHEDULE, JSON.parse(JSON.stringify(this.timeTable)));
       this.closeLoading("Получение расписания");
     },
 

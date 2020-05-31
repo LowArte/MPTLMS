@@ -75,9 +75,7 @@ export default {
       if(!this.history || !isNeedCheck)
       {
         await this.$store.dispatch(actions.SET_HISTORY)
-        console.log(this.history)
       }
-
       this.closeLoading("Получение истории");
     }
   }

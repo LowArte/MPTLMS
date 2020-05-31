@@ -22,8 +22,7 @@ mix.webpackConfig({
             extensions: ['.js', '.vue'],
             alias: {
                 '@': __dirname + '/resources',
-                '@img': __dirname + '/storage/app/public/images',
-                '@news': __dirname + '/storage/app/news',
+                '@img': __dirname + '/storage/app/public/images'
             }
         },
         module: {
@@ -54,4 +53,7 @@ mix.webpackConfig({
     }).js('resources/js/app.js', 'public/js')
     .vuetify('vuetify-loader')
     .sass('resources/sass/app.scss', 'public/css')
+    .options({
+        processCssUrls: false
+    })
     .sourceMaps()

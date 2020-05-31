@@ -217,7 +217,7 @@ export default {
             tag++;
 
           if (tag >= 7) {
-            this.schedule[this.days[i]][1]["LessonChisl"] = "Домашнее обучение";
+            this.schedule[this.days[i]][1]["LessonChisl"] = ["Домашнее обучение"];
             this.schedule[this.days[i]][1]["time"] = "Весь день";
             this.schedule[this.days[i]]["Place"].place_name = "Дом";
           }
@@ -276,7 +276,8 @@ export default {
 
     //*Получение расписания при изменении выбранной группы
     async group_change() {
-      this.schedule = await JSON.parse(JSON.stringify(await this.schedules()));
+      let sched = await JSON.parse(JSON.stringify(await this.schedules()));
+      this.schedule = sched;
       if (this.schedule) this.parseSchedule();
     }
   }

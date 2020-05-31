@@ -33,22 +33,29 @@ v-content.ma-0.pa-2
           v-simple-table(v-if="user != null && user.post_id != null")
               thead(v-if="user != null && user.post_id != null")
                   tr
-                    th.text-left №
-                    th.text-left Заменяемое
-                    th.text-left Заменено на
+                    th.text-left(width="65") №
+                    th.text-left.lesson Заменяемое
+                    th.text-left.lesson Заменено на
                     th.text-left(v-if="user.post_id == 1 || user.post_id == 4") Действие
               tbody(v-if="user != null && user.post_id != null")
                   tr(v-for="(replacement_key, replacement_index) in parseReplacements[groups_index][date_index]" :key="replacement_index")
-                      td {{ replacement_key['swap']['caselesson'] }}
-                      td(v-if="replacement_key['swap']['oldteacher'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }} ({{ replacement_key['swap']['oldteacher_name'].join(" / ") }})
-                      td(v-else-if="replacement_key['swap']['oldlesson'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }}
-                      td(v-else) Дополнительное занятие
-                      td(v-if="replacement_key['swap']['teacher'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }} ({{ replacement_key['swap']['teacher_name'].join(" / ") }})
-                      td(v-else-if="replacement_key['swap']['lesson'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }}
-                      td(v-else) Занятие отменено
-                      td(v-if="user.post_id == 1 || user.post_id == 4")
+                      td.text-left.lesson(width="65") {{ replacement_key['swap']['caselesson'] }}
+                      td.text-left.lesson(width="265" v-if="replacement_key['swap']['oldteacher'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }} ({{ replacement_key['swap']['oldteacher_name'].join(" / ") }})
+                      td.text-left.lesson(width="265" v-else-if="replacement_key['swap']['oldlesson'].length > 0") {{ replacement_key['swap']['oldlesson'].join(" / ") }}
+                      td.text-left.lesson(width="265" v-else) Дополнительное занятие
+                      td.text-left.lesson(width="265" v-if="replacement_key['swap']['teacher'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }} ({{ replacement_key['swap']['teacher_name'].join(" / ") }})
+                      td.text-left.lesson(width="265" v-else-if="replacement_key['swap']['lesson'].length > 0") {{ replacement_key['swap']['lesson'].join(" / ") }}
+                      td.text-left.lesson(width="265" v-else) Занятие отменено
+                      td(width="65" v-if="user.post_id == 1 || user.post_id == 4")
                         v-icon.small(@click="deleteItem(replacement_key['id'])") delete      
 </template>
+
+<style lang="scss" scoped>
+.lesson{
+  flex:1 1;
+  overflow:auto;
+}
+</style>
 
 <script>
 //?----------------------------------------------

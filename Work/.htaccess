@@ -1,0 +1,16 @@
+Options +FollowSymlinks
+Options -Indexes
+
+RewriteEngine On
+
+# For all URL starting with /css, /fonts, /images or /js
+RewriteCond %{REQUEST_URI} ^/?(css|fonts|images|js)(/.*)?$ [NC]
+RewriteRule ^.*$ public/%1/%2 [L]
+
+# Redirect all to the Application if not done already
+RewriteCond %{REQUEST_URI} !^/?public/index\.php [NC]
+RewriteCond %{REQUEST_URI} !^/?(css|fonts|img|js)(/.*)?$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} ^/?$ [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ public/index.php [NC,L]

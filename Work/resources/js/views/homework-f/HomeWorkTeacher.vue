@@ -26,7 +26,7 @@
                   v-alert.mx-auto.my-2(v-if="!homework_list.length > 0" type="warning" :elevation="2" max-width="1024px" min-width="300px") Внимание: некоторые функции не доступны, так как у вас нет ни одного задания.
                 v-flex(v-if="homework_list && loading == true")
                   v-card.mx-auto.pa-1(flat max-width="1024px" min-width="300px")
-                    v-data-iterator(:items="homework_list" :search="search" :items-per-page.sync="homework_list.length" hide-default-footer no-data-text='Данные по заданиям отсутствуют' no-results-text='Поиск не привёл к нахождению релевантного ответа')
+                    v-data-iterator(:items="homework_list" :search="search" :items-per-page.sync="homework_list.length" hide-default-footer no-data-text='' no-results-text='')
                       template(v-slot:default="props")
                         v-list
                           v-list-item-group(v-model="selected_item" color="orange darken-1")
@@ -70,7 +70,6 @@
                           v-card-text.pa-0(v-if="selectedEvent.details" v-html="selectedEvent.details.full_text")
                         v-card-actions
                           v-btn(text small block color="secondary" @click="goToHomeworck(selectedEvent.id)") к заданию
-                          
 </template>
 
 <script>

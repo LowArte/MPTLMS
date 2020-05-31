@@ -4,8 +4,8 @@ v-tabs(light mobile-break-point='0' grow)
   v-tab Характеристика
   v-tab-item.pa-4
     v-card(outline)
-      v-system-bar(color='info')
-        small(style='color: white;') Правила оформления заявки
+      v-system-bar
+        span Правила оформления заявки
       v-card-text
         div
           v-alert.my-2(border='left' dense type='info')

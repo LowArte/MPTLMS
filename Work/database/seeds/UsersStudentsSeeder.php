@@ -33,9 +33,9 @@ class UsersStudentsSeeder extends Seeder
         array_push($data,[
             'name'=>'Артём',
             'secName'=>"Борисов",
-            'thirdName'=>1,
+            'thirdName'=>2,
             'email'=>"p_a.i.borisov@mpt.ru",
-            'password' =>Hash::make("secret"),
+            'password' =>Hash::make("artem"),
             'disabled' =>false,
             'post_id' => 2
         ]);

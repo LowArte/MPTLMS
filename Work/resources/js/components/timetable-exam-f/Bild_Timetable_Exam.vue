@@ -9,9 +9,9 @@
                     v-autocomplete(:disabled="selected_department_id ? false : true" v-model="homework.groups_id[0]" label="Группа" :items="groups" outlined dense no-data-text="Нет данных" item-value='id' item-text='group_name' clearable :rules="GroupRules")
                     v-autocomplete(:disabled="loading" v-model="homework.user_id" label="Преподаватель" :rules="TeacherRules" outlined dense :items="teachers_combo" no-data-text="Нет данных" item-value='id' item-text='fullFio')
                     v-text-field(outlined dense v-model="homework.info.title" label="Название экзамена" :rules="TitleRules")
-                    v-textarea(outlined v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание" :row-height="24" :rows="3")
+                    v-textarea(outlined dense v-model="homework.info.text" :rules="TextRules" :auto-grow="true" :counter="255 ? 255 : false" flat :hint="'Не более 255 символов'" label="Описание" :row-height="24" :rows="3")
                     v-date-picker.mb-3(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' full-width v-model="homework.info.date" no-title :first-day-of-week="1" locale="ru-Ru")
-                    v-text-field(hint="(ЧЧ:ММ-ЧЧ:ММ)"
+                    v-text-field(outlined dense hint="(ЧЧ:ММ-ЧЧ:ММ)"
                         v-model="homework.info.time"
                         v-mask="mask"
                         :rules="timeRules"
