@@ -4,7 +4,7 @@ v-layout.row.wrap
         v-card.pb-2.mx-auto(v-if="table" max-width="320px" min-width="300px")
             v-system-bar
                 span {{index}}
-            div.ma-2(v-if="new Date().getDay() != 0")
+            div.ma-2
                 div(v-if="!isChisl")
                     div.ma-0.pa-0(v-for="(item, index) in table" :key="index")
                         div(v-if="item.GroupChisl.length > 0")
@@ -27,6 +27,11 @@ v-layout.row.wrap
                                                 v-card-title.py-1.pb-0.subtitle-1 {{item.TimeZnam[0]}} {{item.Classroom[0] ? '| ' + item.Classroom[0] : '| НУ'}}
                                                 v-card-text.py-0 Группа: {{item.GroupZnam[0]}}
                                                 v-card-text.py-0 {{item.LessonZnam[0]}}
+                        div(v-else)
+                          v-card.my-1(outlined)
+                            v-system-bar(color="alizarin lighten-5")
+                              span() Числитель - Пара №{{index}}
+                            v-skeleton-loader(loading type="list-item-three-line")
                 div(v-else)
                     div.ma-0.pa-0(v-for="(item, index) in table" :key="index")
                         div(v-if="item.GroupZnam.length > 0")
@@ -49,8 +54,11 @@ v-layout.row.wrap
                                                 v-card-title.py-1.pb-0.subtitle-1 {{item.TimeChisl[0]}} {{item.Classroom[0] ? '| ' + item.Classroom[0] : '| НУ'}}
                                                 v-card-text.py-0 Группа: {{item.GroupChisl[0]}}
                                                 v-card-text.py-0 {{item.LessonChisl[0]}}
-            div(v-else)
-                v-alert(type="warning" elevation="3") Внимание: сегодня выходной день - рассписание не было найдено. Чтобы посмотреть своё рассписание перейдите в решим "неделя", где будут отображены ваши учебные занятий.
+                        div(v-else)
+                          v-card.my-1(outlined)
+                            v-system-bar(color="cobalt lighten-5")
+                                span Знаменатель - Пара №{{index}}
+                            v-skeleton-loader(loading type="list-item-three-line")
 </template>
 
 <script>

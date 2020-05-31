@@ -16,6 +16,12 @@ class UpdatePostModification extends BaseModification
 
     public function updatePostInDatabase($data)
     {
+        Debugbar::info($data);
+        if($data['privilegies'])
+        {
+            $data['privilegies'][0]['component']['info']['url'] = "";
+        }
+        Debugbar::info($data);
         $post = $this->startCondition()->find($data['id']);
         try{
             $post->fill($data);

@@ -12,7 +12,7 @@ v-content.pa-0(v-if="user")
                         v-list-item-subtitle Должность: {{user.post.name}}
                 v-divider
                 v-card-text.pb-2.font-weight-bold(v-if="user.student.birthday") Дата рождения: {{new Date(user.student.birthday).toISOString().substr(0, 10)}}
-                v-card-text.py-2.font-weight-bold Гендерный признак: {{user.student.gender}}
+                v-card-text.py-2.font-weight-bold Пол: {{user.student.gender}}
                 v-card-text.py-2.font-weight-bold E-mail: {{user.email}}
                 v-card-text.py-2.font-weight-bold Специальность: {{user.student.group.department.dep_name_full}}
                 v-card-text.py-2.font-weight-bold Группа: {{user.student.group.group_name}}

@@ -2,8 +2,8 @@
     v-content.ma-0.pa-2
         v-layout.column.wrap
             v-flex
-                v-card(min-width="300px" v-if="user != null && user.post_id != null && teachers")
-                  v-autocomplete.pa-3.pt-4(outlined dense v-model="teacher_id" label="Преподаватели" :items="teachers" @change="teacher_change()" no-data-text="Нет данных" item-value='id' item-text='fio')
+                v-card(min-width="300px" v-if="user != null && user.post_id != null")
+                  v-autocomplete.pa-3.pt-4(outlined dense v-model="teacher_id" label="Преподаватели" :items="teachers_combo" @change="teacher_change()" no-data-text="Нет данных" item-value='id' item-text='fio')
             v-chip.ma-1(min-width="300px" label :color="isChisl ? 'info' : 'accent'") {{!isChisl ? "Числитель" : "Знаменатель"}}
         v-layout.row.wrap
             v-flex(v-if="schedule")
@@ -61,7 +61,7 @@ export default {
   //*Подключение вспомогательных компонентов
   mixins: [withSnackbar, withOverlayLoading],
   computed: {
-    ...mapGetters(["user"]),
+    ...mapGetters(["user", "teachers_combo"]),
 
     //*Получение четности недели
     isChisl: function() {
@@ -79,7 +79,6 @@ export default {
       teacher_id: null,
       loading: false,
       day: "Понедельник",
-      teachers: null,
       days: [
         "Воскресенье",
         "Понедельник",
@@ -143,16 +142,15 @@ export default {
     //Получение всех преподавателей
     async getTeachers() {
       this.showLoading("Получение преподавателей");
-      let item = await api_schedule.getTeachersForScheduleDay({
-          chisl: this.isChisl,
-          day: this.day
-        });
-      this.teachers = item;
-      if(this.teachers)
-      {
-        if(this.teachers.length > 0)
-          this.teacher_id = this.teachers[0].id;
-      }
+      if (this.teachers_combo == null)
+        await this.$store.commit(
+          mutations.SET_TEACHERS_COMBO,
+          await api_schedule.getTeachersForScheduleDay({
+            chisl: this.isChisl,
+            day: this.day
+          })
+        );
+      this.teacher_id = this.teachers_combo[0].id;
       this.teacher_change();
       this.closeLoading("Получение преподавателей");
     },

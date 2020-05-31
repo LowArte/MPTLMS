@@ -11,7 +11,7 @@
           v-text-field(v-model="item.name" label="Имя" readonly)
           v-text-field(v-model="item.thirdName" label="Отчество" readonly)
           v-text-field(v-model="item.email" label="Почта" readonly)
-          v-text-field(v-if="item.post_id == 2" v-model="item.student.gender" dense label="Гендерная принадлежность" readonly)
+          v-text-field(v-if="item.post_id == 2" v-model="item.student.gender" dense label="Пол" readonly)
           v-autocomplete(v-if="item.post_id == 2 && groups != null" v-model="item.student.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups" label='Группа' readonly)
           v-text-field(v-if="item.post_id == 2" v-model="item.student.type_of_financing" dense label='Вид финансирования' readonly)
       v-card-actions

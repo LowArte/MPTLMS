@@ -19,15 +19,11 @@
 
 <script>
 import SpecialitiesList_C from "@/js/components/information-page-f/SpecialtiesList";
-
+import loadImg from "@/js/plugins/loadImage";
 export default {
+  mixins: [loadImg],
   components: {
     "c-specialties-list": SpecialitiesList_C
   },
-  methods: {
-    loadImg: function(path) {
-      return require(`@img/${path}`);
-    }
-  }
 };
 </script>

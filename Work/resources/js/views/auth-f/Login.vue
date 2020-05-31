@@ -34,44 +34,39 @@ import ResetPasswordSheet_C from "@/js/components/auth-f/ResetPasswordSheet";
 
 
 export default {
-  mixins: [withSnackbar,loadImage],
-  data() {
-    return {
-      loading: false,
-      email: "",
-      password: "",
-      emailRules: [
-        v => !!v || "Поле должно быть заполнено корректно",
-        v =>
-          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          "Не соответствует формату почты"
-      ],
-      passwordRules: [v => !!v || "Поле должно быть заполнено корректно"]
-    };
-  },
-  components: {
-    "c-reset-password-sheet": ResetPasswordSheet_C
-  },
-  methods: {
-    async login() {
-      this.loading = true;
-      if (this.$refs.Login.validate()) {
-        let info = await api_user.login({
-          email: this.email,
-          password: this.password
-        });
-        if (typeof(info)!="string") {
-          this.$store.commit(mutations.SET_AUTH, info);
-          window.axios.defaults.headers.common["Authorization"] =
-            "Bearer " + info.token;
-          this.$router.addRoutes(info.items);
-          this.$router.push("/" + info.slug);
-        } 
-        else 
-          this.showError(info);
-      } else this.showError("Поля заполнены не корректно!");
-      this.loading = false;
+    mixins: [withSnackbar, loadImage],
+    data() {
+        return {
+            loading: false,
+            email: "",
+            password: "",
+            emailRules: [
+                v => !!v || "Поле должно быть заполнено корректно",
+                v =>
+                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+                "Не соответствует формату почты"
+            ],
+            passwordRules: [v => !!v || "Поле должно быть заполнено корректно"]
+        };
+    },
+    components: {
+        "c-reset-password-sheet": ResetPasswordSheet_C
+    },
+    methods: {
+        async login() {
+            this.loading = true;
+            if (this.$refs.Login.validate()) {
+                let info = await api_user.login({
+                    email: this.email,
+                    password: this.password
+                });
+                if (typeof(info) != "string") {
+                    location.href = '/' + info.slug; //Перезагрузка страницы
+                } else
+                    this.showError(info);
+            } else this.showError("Поля заполнены не корректно!");
+            this.loading = false;
+        }
     }
-  }
 };
 </script>

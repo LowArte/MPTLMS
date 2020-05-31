@@ -5,21 +5,20 @@
             c-bild-dialog(ref='bild')
             v-flex
                 v-card(v-if="user")
-                    v-system-bar(dark color="info")
-                        span(style="color: white;") Фильтры
-                    v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-                    v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" item-text="group_name" :items="groups" v-model="selected_group")
+                    v-system-bar
+                        span Фильтры
+                    v-combobox.mx-3.mt-6(dense outlined  label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
+                    v-combobox.mx-3.mt-2(dense outlined  label="Группа" no-data-text="Нет данных" item-text="group_name" :items="groups" v-model="selected_group")
                     v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
                         template(v-slot:activator="{ on }")
-                            v-content.pa-2
-                                v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
-                        v-date-picker(:min='new Date().toISOString().substr(0, 10)' v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
-                            v-btn(text color="primary" @click="dateDialog.model = false") Отмены
+                            v-text-field.mx-3(dense outlined v-model="dateDialog.date" label="Дата" readonly v-on="on")
+                        v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
+                            v-btn(text color="primary" @click="dateDialog.model = !dateDialog.model") Отмены
                             v-spacer
                             v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date);") Принять
                     v-switch.shrink.mx-3.my-2(dense v-model="checkAllGroup" color="primary" block label="Экзамены для всех групп")
                     v-switch.shrink.mx-3.my-2(dense v-model="checkAllDate" color="primary" block label="Экзамены на все даты")
-                    v-content.pa-1(v-if="user != null && user.post_id != null")
+                    v-card-actions(v-if="user != null && user.post_id != null")
                         v-btn(v-if="user.post_id == 1 || user.post_id == 4" color="accent" text block dark @click="addExam()") Добавить экзамен    
             v-flex
                 v-layout.row.wrap(filterSchedule)

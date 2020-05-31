@@ -40,7 +40,7 @@
                     v-date-picker(v-model="studentItem.birthday" scrollable :first-day-of-week="1" locale="ru-Ru")
                         v-btn(text color="primary" @click="dateDialog = false") Отмена
                         v-btn(text color="primary" @click="$refs.dateDialog.save(item.birthday);") Принять
-                  v-autocomplete.mt-3(v-if="item.post_id == 2" no-data-text="Нет данных" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Гендерная принадлежность")
+                  v-autocomplete.mt-3(v-if="item.post_id == 2" no-data-text="Нет данных" v-model="studentItem.gender" :items="gender" :rules="genderRules" dense label="Пол")
                   v-autocomplete(v-if="item.post_id == 2 && groups != null" v-model="studentItem.group_id" item-text="group_name" no-data-text="Нет данных" item-value="id" :items="groups" label='Группа')
                   v-autocomplete(:v-model="studentItem.financings" :items="financings" no-data-text="Нет данных" dense label='Вид финансирования')
                   v-card-actions

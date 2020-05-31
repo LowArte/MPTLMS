@@ -5,11 +5,11 @@ v-content.ma-0.pa-2
       c_panel_control(ref="panel")
     v-flex
       v-card(v-if="user != null && user.post_id != null")
-        v-system-bar(dark color="info")
-          span(style="color: white;") Фильтры
-        v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-        v-combobox.mx-3.mt-2(dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
-        v-content.pa-1
+        v-system-bar
+          span Фильтры
+        v-combobox.mx-3.mt-6(dense outlined label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
+        v-combobox.mx-3.mt-2(dense outlined label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
+        v-card-actions
           router-link(v-if="user.post_id == 1 || user.post_id == 4" class='nounderline' :to="'bild_timetable'") 
             v-btn(:color="isColor" text block dark) Конструктор расписания
       v-alert.mt-2(v-if="checkReplacement && user.post.id == 3" outlined prominent type="error" elevation="0") 
@@ -20,7 +20,7 @@ v-content.ma-0.pa-2
               v-btn(icon)
                 v-icon mdi-chevron-right
     v-chip.ma-1(min-width="300px" label dark :color="isColor") {{!isChisl ? "Числитель" : "Знаменатель"}}
-    v-flex
+    v-flex(v-if="schedule != null")
       v-layout.row.wrap
         v-flex(v-for="(day_key,day_index) in days" :key="day_index" v-if="schedule != null")
           v-card.mx-auto(min-width="300px" max-width="320px" style="display: flex; flex-direction: column;")

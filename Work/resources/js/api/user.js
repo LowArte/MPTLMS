@@ -141,16 +141,9 @@ export default {
         return axios.post('/login', data)
             .then(res => {
                 if (!res.data.profilactic) {
-                    const slug = res.data.user.post.slug;
-                    const items = this.makeRoutes(res.data.user.post.privilegies, slug, res.data.user.disabled);
-                    const user = res.data.user;
-                    const token = res.data.token;
                     return {
-                        items,
-                        slug,
-                        user,
-                        token
-                    }
+                        slug:res.data.slug
+                    };
                 }
                 return "Система находится в режиме профилактики!";
             })

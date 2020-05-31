@@ -27,7 +27,6 @@
                         v-spacer
                         span {{item}}
                 v-autocomplete(v-if='(!selected.children || selected.children.length==0) && !selected.default' return-object item-text='info.name' no-data-text="Нет данных" :items="files" v-model='selected.component' label="Компонент")
-                v-switch.mx-2(v-model="selected.menu" label='Показывать в меню' color='accent')
                 v-btn(v-if="!selected.default" @click="deleteItem(selected)") УДАЛИТЬ
         v-flex.ma-2.mb-0
           v-btn.mt-2.justify-center(color="accent" block dark @click="sendQuery") СОХРАНИТЬ               
@@ -164,10 +163,11 @@ export default {
     //! Отправляет запрос на сохранение изменений
     async sendQuery() 
     {
+      //console.log(this.selectedPost.privilegies);
       if(await api_user_post.setPostPrivilegies({id: this.selectedPost.id, privilegies: this.selectedPost.privilegies}))
         this.showMessage("Выполнено!");
       else
-        this.closeMessage("Произошла ошибка!");
+        this.showError("Произошла ошибка!");
     },
 
     //! Сканирует систему на компоненты и возврашает их

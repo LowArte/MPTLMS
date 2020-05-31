@@ -15,10 +15,15 @@ v-content.ma-0.pa-2
                   v-icon mdi-chevron-right
         v-card-text В данном разделе вы можете отслеживать своё расписание учебных занятий. Имеется возможность просмотра как на текущий день, так и на всю предстоящую рабочую неделю.
         v-card-actions.px-0
-          v-btn(block outlined :color="isColor" dark @click="getFull") {{allTabel ? "сегодня" : "неделя"}}
+          v-btn(block outlined :color="isColor" dark @click="getFull") {{!allTabel ? "сегодня" : "неделя"}}
     v-chip.ma-1(min-width="300px" label dark :color="isColor") {{!isChisl ? "Числитель" : "Знаменатель"}}
-    v-flex(v-if="!allTabel && timetable_by_day")
-      c-teacher-training-schedule-by-today(:_items="timetable_by_day")
+    v-flex(v-if="!allTabel")
+      div(v-if="new Date().getDay() != 0 && timetable_by_day")
+        c-teacher-training-schedule-by-today(:_items="timetable_by_day")
+      div(v-else)
+        v-alert(outlined prominent type="warning" elevation="0") 
+          v-row(align="center")
+            v-col(class="grow") Внимание: сегодня выходной день. Ваше расписание возможно отобразить только на неделю.
     v-flex(v-if="allTabel && timetable_by_week")
       c-teacher-training-schedule-by-week(:_items="timetable_by_week")
 </template>
@@ -101,7 +106,7 @@ export default {
     });
     if (!this.tieacher_timetable)
       this.showError(
-        "Что-то пошло не так во время получения вашео расписания. Возможно оно отсутсвует или имеются проблемы с данными."
+        "Что-то пошло не так во время получения вашего расписания. Возможно оно отсутсвует или имеются проблемы с доступом к данным."
       );
     this.timetable_by_day = this.tieacher_timetable;
     this.closeLoading("Загрузка");
@@ -156,7 +161,7 @@ export default {
       }
       if (!this.tieacher_timetable)
         this.showError(
-          "Что-то пошло не так во время получения вашео расписания. Возможно оно отсутсвует или имеются проблемы с данными."
+          "Что-то пошло не так во время получения вашего расписания. Возможно оно отсутсвует или имеются проблемы с доступом к данным."
         );
       this.closeLoading("Загрузка");
     }

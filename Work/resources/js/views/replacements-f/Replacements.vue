@@ -4,15 +4,14 @@ v-content.ma-0.pa-2
     c-comfirm-dialog(ref='qwestion')              
     v-flex
       v-card.mx-auto(min-width="300" v-if="user")
-        v-system-bar(dark color="info")
-          span(style="color: white;") Фильтры
-        v-combobox.mx-3.mt-6(dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
-        v-combobox.mx-3.my-2(dense label="Группа" no-data-text="Нет данных" @change="changeFilter()" item-text="group_name" :items="groups" v-model="selected_group")
+        v-system-bar
+          span Фильтры
+        v-combobox.mx-3.mt-6(dense outlined label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
+        v-combobox.mx-3.my-2(dense outlined label="Группа" no-data-text="Нет данных" @change="changeFilter()" item-text="group_name" :items="groups" v-model="selected_group")
         v-dialog(ref="dateDialog" v-model="dateDialog.model" :return-value.sync="dateDialog.date" persistent width="290px")
           template(v-slot:activator="{ on }")
-            v-content.pa-2
-              v-text-field(v-model="dateDialog.date" label="Дата" readonly v-on="on")
-          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
+            v-text-field.mx-3(dense outlined v-model="dateDialog.date" label="Дата" readonly v-on="on")
+          v-date-picker(:allowed-dates="val => new Date(val).getDay() != 0" :min='new Date().toISOString().substr(0, 10)' v-model="dateDialog.date" scrollable :first-day-of-week="1" locale="ru-Ru")
               v-btn(text color="primary" @click="dateDialog.model = false") Отмены
               v-spacer
               v-btn(text color="primary" @click="$refs.dateDialog.save(dateDialog.date); changeFilter()") Принять

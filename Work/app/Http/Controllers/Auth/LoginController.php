@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Repositories\ModelRepository\SiteOptionsRepository;
 use Illuminate\Http\Request;
+use Cookie;
 
 
 class LoginController extends Controller
@@ -19,29 +20,17 @@ class LoginController extends Controller
         $siteOptionsRepository = app(SiteOptionsRepository::class);
         $options = $siteOptionsRepository->getIsProfilactic();
         $user = auth()->user();
-
         if($options && $user['post_id']!=1)
         {
             return response()->json(["profilactic"=>true], 200);
         }
-
         $user->load("post");
-        $user->load("student");
-        if($user->student)
-        {
-            $user->student->load("group:id,group_name,curs,department_id");
-            $user->student->group->load("department:id,dep_name_full,studysperiod,qualification");
-        }
+        
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         $token->save();
 
-
-
-        return response()->json([
-            'user' => $user,
-            'token'=>$tokenResult->accessToken
-        ]);
+        return response()->json(["slug"=>$user->post->slug]);
     }
 
     public function logout()

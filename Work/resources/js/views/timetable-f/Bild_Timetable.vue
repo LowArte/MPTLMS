@@ -3,8 +3,8 @@
     v-layout.column.wrap()
       v-flex
         v-card
-          v-system-bar(dark color="info")
-            span(style="color: white;") Фильтры
+          v-system-bar
+            span Фильтры
           v-combobox.mx-3.mt-6(outlined dense label="Специальность" no-data-text="Нет данных" @change="department_change" item-text="dep_name_full" :items="specialities" v-model="selected_department" )
           v-combobox.mx-3.mt-2(outlined dense label="Группа" no-data-text="Нет данных" @change="group_change" item-text="group_name" :items="groups" v-model="selected_group")
           v-switch.mx-3.mt-2(v-model="detailMode" color="primary" inset label="Режим детального редактирования")
