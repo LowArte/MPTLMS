@@ -235,6 +235,7 @@ export default {
 
       if (!schedule) {
         this.showLoading("Получение расписания");
+        if(this.selected_group)
         schedule = await api_schedule.getScheduleByGroupId(
           this.selected_group.id
         );
