@@ -20,6 +20,7 @@ import foundation from './modules/foundation'
 import journals from './modules/journals'
 import history from './modules/history'
 import homework from './modules/homework'
+import news from './modules/news'
 
 Vue.use(Vuex)
 
@@ -46,7 +47,8 @@ export default new Vuex.Store({
     foundation,
     journals,
     history,
-    homework
+    homework,
+    news
   },
   strict: debug
 })

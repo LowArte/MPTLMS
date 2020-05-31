@@ -45,130 +45,121 @@ import withSnackbar from "@/js/components/mixins/withSnackbar";
 import api_new from "@/js/api/new";
 
 export default {
-  mixins: [withSnackbar],
-  data: () => ({
-    post: {
-      title: null,
-      text: null,
-      images: [
-        {
-          id:
-            Math.random()
-              .toString(36)
-              .substring(2, 15) +
-            Math.random()
-              .toString(36)
-              .substring(2, 15),
-          value: [],
-          identity: true
+    mixins: [withSnackbar],
+    data: () => ({
+        post: {
+            title: null,
+            text: null,
+            images: [{
+                id: Math.random()
+                    .toString(36)
+                    .substring(2, 15) +
+                    Math.random()
+                    .toString(36)
+                    .substring(2, 15),
+                value: [],
+                identity: true
+            }],
+            links: [{
+                id: Math.random()
+                    .toString(36)
+                    .substring(2, 15) +
+                    Math.random()
+                    .toString(36)
+                    .substring(2, 15),
+                value: [],
+                identity: true
+            }]
+        },
+        formHasErrors: false,
+        errorMessages: "",
+        titleRules: [value => !!value || "У записи должен быть заголовок"],
+        textRules: [value => !!value || "У записи должен быть текст"],
+        imageRules: [
+            value =>
+            !value ||
+            value.size < 5000000 ||
+            "Размер изображения не должен привышать 5 MB",
+            value => !value || value.identity || "Файл не является изображением",
+            value =>
+            !!value || "Поле не должно быть пустым, либо его необходимо удалить"
+        ],
+        linkRules: [
+            value =>
+            !!value || "Поле не должно быть пустым, либо его необходимо удалить"
+        ]
+    }),
+
+    methods: {
+        addFile() {
+            this.post.images.push({
+                id: Math.random()
+                    .toString(36)
+                    .substring(2, 15) +
+                    Math.random()
+                    .toString(36)
+                    .substring(2, 15),
+                value: [],
+                identity: true
+            });
+        },
+
+        addLink() {
+            this.post.links.push({
+                id: Math.random()
+                    .toString(36)
+                    .substring(2, 15) +
+                    Math.random()
+                    .toString(36)
+                    .substring(2, 15),
+                value: [],
+                identity: true
+            });
+        },
+
+        deleteFile(id) {
+            this.post.images.deleteById(id);
+        },
+
+        deleteLink(id) {
+            this.post.links.deleteById(id);
+        },
+
+        validateExt(item) {
+            if (item) {
+                if (item.name) {
+                    var extFile = item.name.substr(item.name.lastIndexOf(".") + 1, item.name.length).toLowerCase();
+
+                    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png")
+                        item.identity = true;
+                    else
+                        item.identity = false;
+                }
+            }
+        },
+
+        async submit() {
+            if (this.$refs.form.validate()) {
+                let formData = new FormData();
+                for (var i = 0; i < this.post.images.length; i++) {
+                    formData.append("images" + i, this.post.images[i].value);
+                }
+                formData.append("text", this.post.text)
+                formData.append("title", this.post.title)
+                let links = []
+                for (var i = 0; i < this.post.links.length; i++) {
+                    links.push({name:this.post.links[i].value})
+                }
+                formData.append("links", JSON.stringify(links))
+                if (await api_new.insertNews(formData))
+                    this.showMessage("Выполнено!");
+            } else
+                this.showError("Заполните корректно поля!");
+        },
+
+        clear() {
+            this.$refs.form.reset();
         }
-      ],
-      links: [
-        {
-          id:
-            Math.random()
-              .toString(36)
-              .substring(2, 15) +
-            Math.random()
-              .toString(36)
-              .substring(2, 15),
-          value: [],
-          identity: true
-        }
-      ]
-    },
-    formHasErrors: false,
-    errorMessages: "",
-    titleRules: [value => !!value || "У записи должен быть заголовок"],
-    textRules: [value => !!value || "У записи должен быть текст"],
-    imageRules: [
-      value =>
-        !value ||
-        value.size < 5000000 ||
-        "Размер изображения не должен привышать 5 MB",
-      value => !value || value.identity || "Файл не является изображением",
-      value =>
-        !!value || "Поле не должно быть пустым, либо его необходимо удалить"
-    ],
-    linkRules: [
-      value =>
-        !!value || "Поле не должно быть пустым, либо его необходимо удалить"
-    ]
-  }),
-
-  methods: 
-  {
-    addFile() 
-    {
-      this.post.images.push({
-        id:
-          Math.random()
-            .toString(36)
-            .substring(2, 15) +
-          Math.random()
-            .toString(36)
-            .substring(2, 15),
-        value: [],
-        identity: true
-      });
-    },
-
-    addLink() 
-    {
-      this.post.links.push({
-        id:
-          Math.random()
-            .toString(36)
-            .substring(2, 15) +
-          Math.random()
-            .toString(36)
-            .substring(2, 15),
-        value: [],
-        identity: true
-      });
-    },
-
-    deleteFile(id) 
-    {
-      this.post.images.deleteById(id);
-    },
-
-    deleteLink(id) 
-    {
-      this.post.links.deleteById(id);
-    },
-
-    validateExt(item) 
-    {
-      if (item) 
-      {
-        if (item.name) 
-        {
-          var extFile = item.name.substr(item.name.lastIndexOf(".") + 1, item.name.length).toLowerCase();
-  
-          if (extFile == "jpg" || extFile == "jpeg" || extFile == "png")
-            item.identity = true;
-          else 
-            item.identity = false;
-        }
-      }
-    },
-
-    async submit() 
-    {
-      if (this.$refs.form.validate())
-      {
-        if(await api_new.insertNews(this.post))
-          this.showMessage("Выполнено!");
-      }
-      else
-        this.showError("Заполните корректно поля!");
-    },
-
-    clear() 
-    {
-      this.$refs.form.reset();
     }
-  }
 };
 </script>

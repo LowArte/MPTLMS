@@ -316,6 +316,12 @@ class PostUserSeeder extends Seeder
                                 "name" => "Лента новостей",
                                 "url" => "news"
                             ],
+                            "dop_com" => [
+                                [
+                                    "url" => "news/:news_id",
+                                    "path" => "js/components/news-f/NewsOnePage"
+                                ]
+                            ],
                             "path" => "js/views/news-f/NewsFeed"
                         ],
                     ],
@@ -489,6 +495,12 @@ class PostUserSeeder extends Seeder
                                 "name" => "Лента новостей",
                                 "url" => "news"
                             ],
+                            "dop_com" => [
+                                [
+                                    "url" => "news/:news_id",
+                                    "path" => "js/components/news-f/NewsOnePage"
+                                ]
+                            ],
                             "path" => "js/views/news-f/NewsFeed"
                         ],
                     ],
@@ -636,6 +648,12 @@ class PostUserSeeder extends Seeder
                             "info" => [
                                 "name" => "Лента новостей",
                                 "url" => "news"
+                            ],
+                            "dop_com" => [
+                                [
+                                    "url" => "news/:news_id",
+                                    "path" => "js/components/news-f/NewsOnePage"
+                                ]
                             ],
                             "path" => "js/views/news-f/NewsFeed"
                         ],
@@ -809,6 +827,12 @@ class PostUserSeeder extends Seeder
                                 "name" => "Лента новостей",
                                 "url" => "news"
                             ],
+                            "dop_com" => [
+                                [
+                                    "url" => "news/:news_id",
+                                    "path" => "js/components/news-f/NewsOnePage"
+                                ]
+                            ],
                             "path" => "js/views/news-f/NewsFeed"
                         ],
                     ],
@@ -922,6 +946,12 @@ class PostUserSeeder extends Seeder
                             "info" => [
                                 "name" => "Лента новостей",
                                 "url" => "news"
+                            ],
+                            "dop_com" => [
+                                [
+                                    "url" => "news/:news_id",
+                                    "path" => "js/components/news-f/NewsOnePage"
+                                ]
                             ],
                             "path" => "js/views/news-f/NewsFeed"
                         ],

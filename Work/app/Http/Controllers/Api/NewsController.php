@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modifications\Create\CreateNewsModification;
 use App\Modifications\Delete\DeleteNewsModification;
 use App\Modifications\Create\CreateLikesModification;
+use App\Modifications\Create\CreateNewsCommentsModification;
 use App\Modifications\Delete\DeleteLikesModification;
 use App\Modifications\Update\UpdateNewsModification;
 use App\Repositories\ModelRepository\NewsRepository;
@@ -57,7 +58,8 @@ class NewsController extends BaseController
     public function save(Request $request,CreateNewsModification $createNewsModification)
     {
         $data = $request->all();
-        $id = $createNewsModification->addNewsToDatabase($data);
+        $files = $request->file();
+        $id = $createNewsModification->addNewsToDatabase($data,$files);
         if($id){
             return response()->json(compact("id"),200);
         }
@@ -95,6 +97,25 @@ class NewsController extends BaseController
         $result = $deleteNewsModification->deleteNewsFromDatabase($id);
         if($result){
             return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
+    }
+
+    /**
+     * Добавление комментария
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addComment($id,Request $request,CreateNewsCommentsModification $createNewsCommentsModification)
+    {
+        $data = $request->all();
+        $comment = $createNewsCommentsModification->addCommentToDatabase($data,$id);
+        if($comment){
+            $comment->load("user");
+            return response()->json(compact("comment"),200);
         }
         else{
             return response()->json(500);

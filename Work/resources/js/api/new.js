@@ -58,8 +58,12 @@ export default {
     //? Реализуется добавление данных в таблицу *NEWS* (Новости)
     //! Требование ----------------------------
     //!----------------------------------------
-    insertNews(data) {
-        return axios.post('/api/save/news', data)
+    insertNews(post) {
+        return axios.post('/api/save/news', post,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
         .then(() => {return true;})
         .catch(() => {return false;});
     },
@@ -95,6 +99,17 @@ export default {
     {
         return axios.post('/api/functions/set_like', data)
         .then(res => {return res.data.count;})
+        .catch(() => {return null;});
+    },
+    //*Комментарий к записи
+    //! Комментарий ---------------------------
+    //? Реализуется установка флага отметки новости
+    //! Требование ----------------------------
+    //!----------------------------------------
+    addComment(data,id) 
+    {
+        return axios.post('/api/functions/add_comment/'+id, data)
+        .then((res) => {return res.data.comment;})
         .catch(() => {return null;});
     },
 }

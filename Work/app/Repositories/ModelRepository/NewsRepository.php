@@ -15,8 +15,9 @@ class NewsRepository extends BaseRepository
 
     public function getNews($user_id)
     {
-        $columns = ['id','title','text','images','links'];
+        $columns = ['id','title','text','images','links','created_at'];
         $result = $this->startCondition()
+                        ->with(["comments","comments.user"])
                         ->select($columns)
                         ->get();
         foreach($result as $value)
@@ -27,6 +28,7 @@ class NewsRepository extends BaseRepository
             else
                 $value['isLike'] = false;
         }
+        Debugbar::info($result);
         return $result;
     }
 }

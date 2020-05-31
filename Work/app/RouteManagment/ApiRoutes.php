@@ -168,6 +168,8 @@ class ApiRoutes
          */
         Route::name('functions.')->prefix('functions')->group(function () {
             Route::post('set_like','Api\NewsController@setLike')->name('set_like'); 
+            
+            Route::post('add_comment/{news_id}','Api\NewsController@addComment')->name('add_comment'); 
 
             Route::post('send_feedback_email_answer','Api\FeedbackController@sendEmail')->name('send_feedback_email_answer');
             
