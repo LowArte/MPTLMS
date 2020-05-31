@@ -15,8 +15,8 @@ class CreateHistoryTables extends Migration
     {
         Schema::create('model_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->morphs('model');
-            $table->morphs('user');
+            $table->nullableMorphs('model');
+            $table->nullableMorphs('user');
             $table->string('message');
             $table->text('meta')->nullable();
             $table->timestamp('performed_at');

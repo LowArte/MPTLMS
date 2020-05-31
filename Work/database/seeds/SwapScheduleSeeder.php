@@ -26,9 +26,9 @@ class SwapScheduleSeeder extends Seeder
                     "schedule_id" => $schedule[$i]->id,
                     "swap" =>  json_encode(array(
                         "caselesson" => "1",
-                        "lesson" => [rand(1,30)],
+                        "lesson" => [rand(1,20)],
                         "teacher" => [$teachers[rand(0, count($teachers)-1)]->id],
-                        "oldlesson" => [rand(1,30)],
+                        "oldlesson" => [rand(1,20)],
                         "oldteacher" => [$teachers[rand(0, count($teachers)-1)]->id]
                     )),
                     "created_at" => "2020-02-22 00:00:00"
