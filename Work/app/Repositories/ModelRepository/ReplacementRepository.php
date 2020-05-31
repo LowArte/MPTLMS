@@ -21,7 +21,7 @@ class ReplacementRepository extends BaseRepository
 
         $disciplineRepository = app(DisciplineBufferRepository::class);
         $disciplines = $disciplineRepository->getDisciplineBufferRepositoryDataLast();
-        
+        Debugbar::info($disciplines);
         $result = $this->startCondition()
         ->join('schedules', 'schedule_swaps.schedule_id', '=', 'schedules.id')
         ->join('groups', 'schedules.group_id', '=', 'groups.id')
@@ -34,6 +34,7 @@ class ReplacementRepository extends BaseRepository
             $item->swap = json_decode($item->swap);
             if(count((array)$item->swap->lesson)!=0){
                 for($i=0;$i<count((array)$item->swap->lesson);$i++){
+                    Debugbar::info($item->swap->lesson);
                     $foundDiscipline = $disciplines->where("id", $item->swap->lesson[$i])->first();
                     if($foundDiscipline)
                         $item->swap->lesson[$i] =  $foundDiscipline['discip_name'];

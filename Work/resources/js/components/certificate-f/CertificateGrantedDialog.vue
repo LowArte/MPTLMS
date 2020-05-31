@@ -12,7 +12,7 @@ v-card.mx-auto(min-width="300px" max-width="480px")
     kbd Тема: {{item.type}}
   v-card-text.pt-0(v-for="(info,i) in Object.keys(item.certificates_data)" :key="i") {{info}} : {{item.certificates_data[info]}}
   v-card-actions
-    v-btn(block small color="success" @click="sendEmailDone()") одобрить
+    v-btn(block small color="success" @click="sendEmailDone()") Выполнить
   c-comfirm-dialog(ref='qwestion')
 </template>
 
