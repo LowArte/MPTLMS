@@ -10,10 +10,10 @@ class ScheduleSeeder extends Seeder
     public function getLesson($teachers)
     {
         $arr = array('TeacherChisl' => [$teachers[rand(0, count($teachers)-1)]->id], 
-        'LessonChisl' => [rand(1,30)], 
+        'LessonChisl' => [rand(1,20)], 
         'chisl' => rand(0,1), 
         'TeacherZnam' => [$teachers[rand(0, count($teachers)-1)]->id], 
-        'LessonZnam' => [rand(1,30)], 
+        'LessonZnam' => [rand(1,20)], 
         'classroom' =>'');
         return $arr;
     }
