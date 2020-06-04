@@ -22,7 +22,7 @@ class PlacesManagementAddTest extends TestCase
         );
 
         $place['id'] = -1;
-        $place['name'] = "Жопа мира";
+        $place['name'] = "мир1";
 
         $response = $this->call('POST', '/api/admin/place_management/save/', array(
             'place' =>  $place,

@@ -23,7 +23,7 @@ class PlacesManagementEditTest extends TestCase
         );
 
         $place['id'] = Places::orderBy('id', 'desc')->first()->id;
-        $place['name'] = "Жопа мира2";
+        $place['name'] = "мир2";
 
         $response = $this->call('POST', '/api/admin/place_management/edit/'.$place['id'], array(
             'place' =>  $place,
