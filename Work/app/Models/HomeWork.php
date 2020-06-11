@@ -11,6 +11,8 @@ class HomeWork extends Model
 {
     use SoftDeletes, HasHistories, CascadeNullDeletes;
 
+    protected $table = 'home_work';
+
     public function getModelLabel()
     {
         return $this->display_name;

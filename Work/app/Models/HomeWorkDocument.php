@@ -11,6 +11,8 @@ class HomeWorkDocument extends Model
 {
     use HasHistories;
 
+    protected $table = 'home_work_documents';
+
     public function getModelLabel()
     {
         return $this->display_name;

@@ -75,27 +75,7 @@ export default {
 
         filterSchedule: function() {
             if (!this.schedule) return undefined;
-            return this.schedule.filter(res => {
-                if (res.bild) {
-                  
-                    console.log(res.bild);
-                    let bild = Object.keys(res.bild).filter(key => {
-                        if(key == 'Place') return false              
-                        let element = res.bild[key]
-                        if (this.isChisl)
-                            if (element.TeacherChisl)
-                                if (element.TeacherChisl.filter(teach => teach == this.teacher_id).length != 0)
-                                    return true
-                        else
-                        if (element.TeacherZnam)
-                            if (element.TeacherZnam.filter(teach => teach == this.teacher_id).length != 0)
-                                return true
-                        return false
-                    });
-                    return bild.length != 0;
-                }
-                return false
-            })
+            return this.schedule;
         }
     },
 

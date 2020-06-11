@@ -47,7 +47,7 @@
 //?----------------------------------------------
 import withSnackbar from "@/js/components/mixins/withSnackbar"; //Всплывающее сообщение
 import withOverlayLoading from "@/js/components/mixins/withOverlayLoader"; //Загрузка
-import PanelControl_C from '@/js/components/expention-f/Panel'; //Панель для вывода расписания
+import PanelControl_C from "@/js/components/expention-f/Panel"; //Панель для вывода расписания
 
 import api_call_schedule from "@/js/api/callSchedule"; //Расписания звонков
 import api_department from "@/js/api/department"; //Отделения
@@ -61,14 +61,20 @@ import { mapGetters } from "vuex";
 import * as mutations from "@/js/store/mutation-types";
 import * as actions from "@/js/store/action-types";
 export default {
-//?----------------------------------------------
-//!           Преднастройка
-//?----------------------------------------------
+  //?----------------------------------------------
+  //!           Преднастройка
+  //?----------------------------------------------
   //*Подключение вспомогательных компонентов
   mixins: [withSnackbar, withOverlayLoading],
-  
+
   computed: {
-    ...mapGetters(["specialities", "groups_combo", "teachers_combo", "disciplines_combo", "places_combo"]),
+    ...mapGetters([
+      "specialities",
+      "groups_combo",
+      "teachers_combo",
+      "disciplines_combo",
+      "places_combo"
+    ]),
     combo_groups: function() {
       if (!this.groups_combo) return undefined;
       this.selected_group = this.groups_combo[0];
@@ -82,102 +88,104 @@ export default {
       var now = new Date().getTime();
       var week = Math.round((now - today) / (1000 * 60 * 60 * 24 * 7));
       return week % 2;
-    },
+    }
   },
 
   data() {
     return {
       loaded: false,
       TeacherRules: {
-          required: value => {
-              return !!value.length || "Преподаватель не указан!";
-          },
+        required: value => {
+          return !!value.length || "Преподаватель не указан!";
+        }
       },
       DiscipRules: {
-          required: value => {
-              return !!value.length || "Дисциплина не указана!";
-          },
+        required: value => {
+          return !!value.length || "Дисциплина не указана!";
+        }
       },
       selected_department: null,
       selected_group: null,
       association: null,
       groups: null,
       detailMode: false,
-      days: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], //Дни недели
+      days: [
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+      ], //Дни недели
       schedule: null
-    }
+    };
   },
 
-  async beforeMount()
-  {
+  async beforeMount() {
     this.getTeachers();
     this.getDepartments();
     this.getPlaces();
   },
 
   methods: {
-//?----------------------------------------------
-//!           Методы страницы
-//?----------------------------------------------
-    getTeacherAssoc(discip)
-    {
-      if(!this.association || !this.teachers_combo || !discip) return undefined;
-      if(discip.length == 0) return undefined;
+    //?----------------------------------------------
+    //!           Методы страницы
+    //?----------------------------------------------
+    getTeacherAssoc(discip) {
+      if (!this.association || !this.teachers_combo || !discip)
+        return undefined;
+      if (discip.length == 0) return undefined;
       let teachers = [];
       this.teachers_combo.filter(res => {
-          discip.forEach(dis => {
-            this.association.forEach(as => {
-              if(as.discip_id == dis && res.id == as.teacher_id)
-              {
-                teachers.push(res);
-                return true;
-              }
-              return false;
+        discip.forEach(dis => {
+          this.association.forEach(as => {
+            if (as.discip_id == dis && res.id == as.teacher_id) {
+              teachers.push(res);
+              return true;
+            }
+            return false;
           });
         });
       });
       return teachers;
     },
-    
+
     //Получение всех преподавателей
-    async getTeachers()
-    {
+    async getTeachers() {
       this.showLoading("Получение преподавателей");
-      if(this.teachers_combo == null)
-      {
+      if (this.teachers_combo == null) {
         let items = await api_teacher.getTeachers();
-        this.$store.commit(mutations.SET_TEACHERS_COMBO, items)
+        this.$store.commit(mutations.SET_TEACHERS_COMBO, items);
       }
-      
+
       let assoc = await api_association.getAssociationTeacherDiscip();
       this.association = assoc;
       this.closeLoading("Получение преподавателей");
     },
 
     //Получение всех дисциплин
-    async getDisciplines()
-    {
+    async getDisciplines() {
       this.showLoading("Получение дисциплин");
-      let items = await api_discipline.getDisciplines({"curs": this.selected_group.curs, "department_id": this.selected_department.id});
-      this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items)
+      let items = await api_discipline.getDisciplines({
+        curs: this.selected_group.curs,
+        department_id: this.selected_department.id
+      });
+      this.$store.commit(mutations.SET_DISCIPLINES_COMBO, items);
       this.closeLoading("Получение дисциплин");
     },
 
     //Получение мест проведений
-    async getPlaces()
-    {
+    async getPlaces() {
       this.showLoading("Получение мест проведения");
-      if(this.places_combo == null)
-      {
+      if (this.places_combo == null) {
         let items = await api_place.getPlaces();
-        this.$store.commit(mutations.SET_PLACES_COMBO, items)
+        this.$store.commit(mutations.SET_PLACES_COMBO, items);
       }
       this.closeLoading("Получение мест проведения");
     },
 
     //*Получение отделений для выпадающего списка
-    async getDepartments()
-    {
+    async getDepartments() {
       if (!this.specialities) {
         this.showLoading("Получение отделений");
         let items = await api_department.getDepartments();
@@ -185,41 +193,37 @@ export default {
         this.closeLoading("Получение отделений");
       }
 
-      if (this.specialities) 
-      {
+      if (this.specialities) {
         this.selected_department = this.specialities[0];
         this.department_change();
       }
     },
 
     //Отправка учебного расписания на сохранение
-    async sendQuery()
-    {
-      if (this.$refs.BildTimetable.validate())
-      {
-        if(await api_schedule.editSchedule({group_id: this.selected_group.id, schedule: this.schedule}))
+    async sendQuery() {
+      if (this.$refs.BildTimetable.validate()) {
+        if (
+          await api_schedule.editSchedule({
+            group_id: this.selected_group.id,
+            schedule: this.schedule
+          })
+        )
           this.showMessage("Выполнено!");
-      }
-      else
-        this.showError('Поля заполнены не корректно!');
+      } else this.showError("Поля заполнены не корректно!");
     },
 
-//?----------------------------------------------
-//!           Методы компонентов
-//?----------------------------------------------
+    //?----------------------------------------------
+    //!           Методы компонентов
+    //?----------------------------------------------
     //Получение группы при изменении отделения
-    async department_change() 
-    {
+    async department_change() {
       this.showLoading("Получение групп");
-      await this.$store.dispatch(actions.ADD_CACHE_GROUP_DATA, 
-      {
+      await this.$store.dispatch(actions.ADD_CACHE_GROUP_DATA, {
         context: this,
         result: this.selected_department.id
       });
       this.closeLoading("Получение групп");
-
-      if (this.combo_groups) 
-      {
+      if (this.combo_groups) {
         this.groups = this.combo_groups;
         this.selected_group = this.combo_groups[0];
         this.group_change();
@@ -227,13 +231,14 @@ export default {
     },
 
     //*Получение расписания при изменении выбранной группы
-    async group_change() 
-    {
+    async group_change() {
       this.showLoading("Получение расписания");
-      this.schedule = await api_schedule.getScheduleBildByGroupId(this.selected_group.id);
-      await this.getDisciplines();
+      if (this.selected_group) {
+        this.schedule = await api_schedule.getScheduleBildByGroupId( this.selected_group.id );
+        await this.getDisciplines();
+      }
       this.closeLoading("Получение расписания");
-    },
+    }
   }
 };
 </script>

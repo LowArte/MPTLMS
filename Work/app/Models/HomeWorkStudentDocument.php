@@ -10,6 +10,8 @@ class HomeWorkStudentDocument extends Model
 {
     use HasHistories;
 
+    protected $table = 'home_work_student_documents';
+
     public function getModelLabel()
     {
         return $this->display_name;

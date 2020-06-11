@@ -11,6 +11,8 @@ class AssociationUsersHomeWork extends Model
 {
     use SoftDeletes, HasHistories, CascadeNullDeletes;
 
+    protected $table = 'association_users_home_work';
+
     public function getModelLabel()
     {
         return $this->display_name;

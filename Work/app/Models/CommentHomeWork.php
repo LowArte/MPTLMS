@@ -11,6 +11,8 @@ class CommentHomeWork extends Model
 {
     use SoftDeletes, HasHistories, CascadeNullDeletes;
 
+    protected $table = 'comment_home_work';
+
     public function getModelLabel()
     {
         return $this->display_name;

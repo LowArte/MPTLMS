@@ -26,11 +26,14 @@ class HomeWorkDocumentController extends BaseController
     }
 
     public function save($home_work_id, Request $request, CreateHomeWorkDocumentModification $createHomeWorkDocumentModification){
+        Debugbar::info($request);
+        Debugbar::info($home_work_id);
         $data = request()->file();
         foreach ($data as $file) {
+            Debugbar::info($file);
+            Debugbar::info($file->getClientOriginalName());
             $file_name = $file->getClientOriginalName();
             $path = Storage::disk('homework')->putFile('./'.$home_work_id.'/exstraction', $file);
-            
             $createHomeWorkDocumentModification->addHomeWorkDocumentToDatabase([
                 'home_work_id' => $home_work_id,
                 'path' => $path,

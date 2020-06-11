@@ -4,6 +4,7 @@ namespace App\Helpers\SQLite;
 
 use App\Repositories\ModelRepository\DepartmentRepository;
 use Debugbar;
+use Exception;
 use Storage;
 
 class SQLiteDBFunctions
@@ -48,23 +49,28 @@ class SQLiteDBFunctions
 
     public function getDataFiltered($filter)
     {
-        $query = "SELECT * FROM disciplines WHERE department = :department and curs = :curs;";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':department', $filter['department_id']);
-        $stmt->bindValue(':curs', $filter['curs']);
-        $results = $stmt->execute();
-        $data = collect();
-        $departmentRepository = app(DepartmentRepository::class);
-        $departments = $departmentRepository->getDepartmentsForComboBox();
-        $curRes = ["id" => 0];
-        while ($res = $results->fetchArray(1)) {
-            if ($curRes['id'] != $res['department']) {
-                $curRes = $departments->where("id", $res['department'])->first();
+        try{
+            $query = "SELECT * FROM disciplines WHERE department = :department and curs = :curs;";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':department', $filter['department_id']);
+            $stmt->bindValue(':curs', $filter['curs']);
+            $results = $stmt->execute();
+            $data = collect();
+            $departmentRepository = app(DepartmentRepository::class);
+            $departments = $departmentRepository->getDepartmentsForComboBox();
+            $curRes = ["id" => 0];
+            while ($res = $results->fetchArray(1)) {
+                if ($curRes['id'] != $res['department']) {
+                    $curRes = $departments->where("id", $res['department'])->first();
+                }
+                $res['dep_name_full'] =  $curRes->dep_name_full;
+                $data->push($res);
             }
-            $res['dep_name_full'] =  $curRes->dep_name_full;
-            $data->push($res);
+            return $data;
         }
-        return $data;
+        catch(Exception $e){
+            Debugbar::info($e);
+        }      
     }
 
     public function insertData($data)

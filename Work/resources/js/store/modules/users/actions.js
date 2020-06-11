@@ -4,6 +4,7 @@ import * as actions from '../../action-types'
 export default{
     async [actions.ADD_USER]({ commit, state }, data) {
         let result = await api_user.saveUser(data.result, data.context);
+        console.log(result);
         if (result) {
             data.result.id = result;
             commit(actions.ADD_USER,data.result)

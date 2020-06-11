@@ -179,7 +179,7 @@ export default {
         if (com.default.post_name) {
           items.push({
             info: com.default.post_name,
-            path: "js/views" + key.replace(".", "")
+            path: "js/views" + key.replace(".","").replace(".vue", "")
           });
         }
       });
