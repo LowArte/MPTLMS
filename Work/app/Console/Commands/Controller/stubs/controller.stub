@@ -1,0 +1,55 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Modifications\Create\CreateDummyModelNameModification;
+use App\Modifications\Delete\DeleteDummyModelNameModification;
+use App\Modifications\Update\UpdateDummyModelNameModification;
+use App\Repositories\ModelRepository\DummyModelNameRepository;
+use Illuminate\Http\Request;
+
+use Debugbar;
+class DummyClass extends BaseController
+{ 
+    /**
+     * get DummyClass from database
+     * @return JSON
+     */
+    public function getDummyModelName(DummyModelNameRepository $DummyModelVariableNameRepository)
+    {
+        $DummyModelVariableNameRepository = $DummyModelVariableNameRepository->getDummyModelName();
+        return response()->json(compact('DummyModelVariableNameRepository'));
+    }
+
+    public function save(Request $request,CreateDummyModelNameModification $createDummyModelNameModification){
+        $data = $request->all();
+        $id = $createDummyModelNameModification->addDummyModelNameToDatabase($data);
+        if($id){
+            return response()->json(compact("id"),200);
+        }
+        else{
+            return response()->json(500);
+        }
+    }
+    
+    public function edit(Request $request,UpdateDummyModelNameModification $updateDummyModelNameModification){
+        $data = $request->all();
+        $result = $updateDummyModelNameModification->updateDummyModelNameInDatabase($data);
+        if($result){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
+    }
+
+    public function delete($id,DeleteDummyModelNameModification $deleteDummyModelNameModification){
+        $result = $deleteDummyModelNameModification->deleteDummyModelNameFromDatabase($id);
+        if($result==true){
+            return response()->json(200);
+        }
+        else{
+            return response()->json(500);
+        }
+    }
+}

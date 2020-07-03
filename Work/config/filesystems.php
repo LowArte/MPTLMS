@@ -42,17 +42,33 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+        ],
+        'db'=>[
+            'driver' => 'local',
+            'root' => storage_path('databases'),
+        ],
+        'news'=>[
+            'driver' => 'local',
+            'root' => storage_path('app/public/news'),
+            'visibility' => 'public',
+            'url' => env('APP_URL').'/storage',
+        ],
+        'homework'=>[
+            'driver' => 'local',
+            'root' => storage_path('homework'),
+        ],
+
+        'temp'=>[
+            'driver' => 'local',
+            'root' => storage_path('temp'),
         ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
         ],
 
         's3' => [

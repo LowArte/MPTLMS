@@ -1,20 +1,35 @@
 Work/vendor/
 Work/node_modules/
 Work/npm-debug.log
+Work/public
+
+Work/package-lock.json
+Work/package.json
 
 # Laravel 4 specific
 Work/bootstrap/compiled.php
-Work/app/storage/
 
 # Laravel 5 & Lumen specific
-Work/public/storage
-Work/public/hot
-Work/storage/*.key
 .env.*.php
 .env.php
 .env
 Homestead.yaml
 Homestead.json
 
+Work/storage/debugbar
+Work/storage/framework
+Work/storage/logs
+
+Work/storage/*.key
+
+Work/package-lock.json
+
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
+
+Work/package-lock.json
+Work/package.json
+Work/public/0.js
+Work/public/js/app.js
+Work/.phpstorm.meta.php
+Work/_ide_helper.php

@@ -1,0 +1,17 @@
+<?php
+
+namespace DummyNamespace;
+use DummyFullModelClass as Model;
+use App\Modifications\BaseModification;
+
+class DummyClass extends BaseModification
+{
+    protected function getModelClass(){
+        return Model::class;
+    }
+
+    public function deleteDummyModelFromDatabase($id){
+        $result = $this->startCondition()->find($id)->delete();
+        return $result;
+    }
+}

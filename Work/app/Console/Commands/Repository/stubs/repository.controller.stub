@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass extends BaseRepository
+{
+    public function getData()
+    {
+        $columns = [];
+        $result = $this->startCondition()->select($columns)->get();
+        return $result;
+    }
+}

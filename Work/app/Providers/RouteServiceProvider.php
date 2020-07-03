@@ -16,6 +16,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
 
+
+    public static function GetHOME(){
+        $slug = auth()->user()->post->slug;
+        return '/'.$slug.'/home';
+    }
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -23,8 +29,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
